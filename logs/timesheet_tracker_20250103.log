@@ -118,3 +118,10 @@ hours
 2025-01-03 19:56:30,195 - TimesheetTracker - INFO - Processing 167 rows from CSV file
 2025-01-03 19:56:30,204 - TimesheetTracker - ERROR - Error processing row 98: could not convert string to float: ''
 2025-01-03 19:56:30,204 - TimesheetTracker - ERROR - Error processing timesheet: could not convert string to float: ''
+2025-01-03 19:57:42,758 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 19:57:45,185 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 19:57:56,233 - TimesheetTracker - INFO - Processing timesheet upload: Hours Tracker.csv
+2025-01-03 19:57:56,233 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-03 19:57:56,237 - TimesheetTracker - INFO - Processing 167 rows from CSV file
+2025-01-03 19:57:56,255 - TimesheetTracker - ERROR - Error processing row 165: invalid literal for int() with base 10: ''
+2025-01-03 19:57:56,255 - TimesheetTracker - ERROR - Error processing timesheet: invalid literal for int() with base 10: ''
