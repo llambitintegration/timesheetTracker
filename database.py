@@ -12,6 +12,23 @@ if DATABASE_URL.startswith('postgresql://'):
 engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
+def verify_database():
+    try:
+        # Try connecting to the database
+        with engine.connect() as conn:
+            # Check if tables exist
+            for table in models.Base.metadata.tables:
+                if not engine.dialect.has_table(conn, table):
+                    logger.warning(f"Table {table} does not exist")
+                    return False
+        return True
+    except Exception as e:
+        logger.error(f"Database verification failed: {str(e)}")
+        return False
+
+# Initialize database connection
+verify_database()
+
 def get_db():
     db = SessionLocal()
     logger.debug("Database session created")

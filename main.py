@@ -22,6 +22,26 @@ def read_root():
     return {
         "message": "Welcome to Timesheet Management API",
         "documentation": "/docs",
+
+@app.post("/init-db/")
+async def initialize_database(db: Session = Depends(database.get_db)):
+    logger.info("Initializing database")
+    try:
+        # Create all tables
+        models.Base.metadata.create_all(bind=database.engine)
+        
+        # Run Alembic migrations
+        from alembic.config import Config
+        from alembic import command
+        alembic_cfg = Config("alembic.ini")
+        command.upgrade(alembic_cfg, "head")
+        
+        logger.info("Database initialized successfully")
+        return {"status": "success", "message": "Database initialized"}
+    except Exception as e:
+        logger.error(f"Database initialization failed: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
         "redoc": "/redoc"
     }
 
