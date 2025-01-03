@@ -31,3 +31,12 @@ hours
 2025-01-03 17:59:22,762 - TimesheetTracker - INFO - Root endpoint accessed
 2025-01-03 17:59:37,117 - TimesheetTracker - INFO - Root endpoint accessed
 2025-01-03 17:59:45,372 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-03 18:02:20,124 - TimesheetTracker - ERROR - Database verification failed: name 'models' is not defined
+2025-01-03 18:02:20,217 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 18:02:24,248 - TimesheetTracker - ERROR - Database verification failed: name 'models' is not defined
+2025-01-03 18:02:24,336 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 18:02:24,366 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-03 18:02:25,561 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-03 18:02:27,304 - TimesheetTracker - ERROR - Database verification failed: name 'models' is not defined
+2025-01-03 18:02:27,391 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 18:02:28,432 - TimesheetTracker - INFO - Root endpoint accessed
