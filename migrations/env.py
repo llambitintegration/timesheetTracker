@@ -73,8 +73,16 @@ def run_migrations_online() -> None:
             logger.info("Beginning migration transaction")
             logger.debug("Running migrations with target metadata tables: " + 
                       ", ".join([t.name for t in target_metadata.tables.values()]))
-            context.run_migrations()
-            logger.info("Migrations completed successfully")
+            logger.debug("Migration configuration: " + 
+                      str({key: value for key, value in context.config.attributes.items() 
+                          if not key.startswith('_')}))
+            try:
+                context.run_migrations()
+                logger.info("Migrations completed successfully")
+            except Exception as e:
+                logger.error(f"Migration failed: {str(e)}")
+                logger.debug("Migration error details:", exc_info=True)
+                raise
 
 if context.is_offline_mode():
     run_migrations_offline()

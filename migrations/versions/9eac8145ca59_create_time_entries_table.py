@@ -19,7 +19,11 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
+    from utils.logger import Logger
+    logger = Logger().get_logger()
+    
     # Create customers table first
+    logger.debug("Creating customers table")
     op.create_table('customers',
         sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
         sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=True),
@@ -34,7 +38,7 @@ def upgrade() -> None:
         sa.UniqueConstraint('name')
     )
 
-    # Create project_managers table
+    logger.debug("Creating project_managers table")
     op.create_table('project_managers',
         sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
         sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=True),
@@ -46,7 +50,7 @@ def upgrade() -> None:
         sa.UniqueConstraint('email')
     )
 
-    # Create projects table
+    logger.debug("Creating projects table")
     op.create_table('projects',
         sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
         sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=True),
@@ -64,7 +68,7 @@ def upgrade() -> None:
         sa.ForeignKeyConstraint(['project_manager'], ['project_managers.name'], ondelete='CASCADE')
     )
 
-    # Create time_entries table with foreign key constraints
+    logger.debug("Creating time_entries table")
     op.create_table('time_entries',
         sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
         sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=True),
