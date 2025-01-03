@@ -5,6 +5,8 @@ from datetime import datetime
 
 def parse_csv(file) -> List[schemas.TimeEntryCreate]:
     df = pd.read_csv(file)
+    if df.empty:
+        raise ValueError("Empty CSV file")
     entries = []
 
     for _, row in df.iterrows():

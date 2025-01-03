@@ -274,3 +274,20 @@ def get_monthly_report(
     results = query.all()
     logger.info(f"Generated monthly report with {len(results)} entries")
     return results
+def create_time_entry(db: Session, entry: schemas.TimeEntryCreate) -> models.TimeEntry:
+    """Create a new time entry using service."""
+    from services.time_entry_service import TimeEntryService
+    service = TimeEntryService(db)
+    return service.create_time_entry(entry)
+
+def get_time_entries(
+    db: Session,
+    project_id: Optional[str] = None,
+    customer_name: Optional[str] = None,
+    skip: int = 0,
+    limit: int = 100
+) -> List[models.TimeEntry]:
+    """Get time entries using service."""
+    from services.time_entry_service import TimeEntryService
+    service = TimeEntryService(db)
+    return service.get_time_entries(project_id, customer_name, skip, limit)

@@ -1,3 +1,4 @@
 
-# Services package will be populated as services are added
-__all__ = []
+from .time_entry_service import TimeEntryService
+
+__all__ = ['TimeEntryService']
