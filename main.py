@@ -16,6 +16,15 @@ from logger import Logger
 logger = Logger().get_logger()
 app = FastAPI(title="Timesheet Management API")
 
+@app.get("/")
+def read_root():
+    logger.info("Root endpoint accessed")
+    return {
+        "message": "Welcome to Timesheet Management API",
+        "documentation": "/docs",
+        "redoc": "/redoc"
+    }
+
 # Create database tables
 models.Base.metadata.create_all(bind=database.engine)
 logger.info("Database tables created successfully")
