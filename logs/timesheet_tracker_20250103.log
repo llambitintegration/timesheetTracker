@@ -269,3 +269,15 @@ month
 
 (Background on this error at: https://sqlalche.me/e/20/e3q8)
 2025-01-03 22:56:27,631 - TimesheetTracker - INFO - Running database migrations
+2025-01-03 22:58:06,576 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-03 22:58:06,577 - TimesheetTracker - INFO - Verifying database connection and schema: postgresql+psycopg2://timesheetDatabase_owner:imz1MH3OjLef@ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-03 22:58:07,810 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-03 22:58:07,871 - TimesheetTracker - WARNING - Table customers does not exist
+2025-01-03 22:58:07,892 - TimesheetTracker - WARNING - Database verification failed - schema may need initialization
+2025-01-03 22:58:09,266 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-03 22:58:15,486 - TimesheetTracker - DEBUG - Database session created
+2025-01-03 22:58:15,487 - TimesheetTracker - INFO - Initializing database
+2025-01-03 22:58:15,487 - TimesheetTracker - INFO - Verifying database connection and schema: postgresql+psycopg2://timesheetDatabase_owner:imz1MH3OjLef@ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-03 22:58:15,526 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-03 22:58:15,569 - TimesheetTracker - WARNING - Table customers does not exist
+2025-01-03 22:58:15,635 - TimesheetTracker - INFO - Running database migrations
