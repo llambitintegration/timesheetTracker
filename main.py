@@ -19,24 +19,13 @@ load_dotenv()
 
 @app.on_event("startup")
 async def startup_event():
-    """Initialize database on startup"""
-    logger.info("Initializing database on startup")
+    """Verify database connection on startup"""
+    logger.info("Verifying database connection on startup")
     try:
-        # Run Alembic migrations
-        from alembic.config import Config
-        from alembic import command
-
-        logger.info("Running database migrations")
-        alembic_cfg = Config("alembic.ini")
-        command.upgrade(alembic_cfg, "head")
-        logger.info("Database migrations completed")
-
-        # Verify database connection and schema
         if not verify_database():
-            raise Exception("Database verification failed")
-
+            logger.warning("Database verification failed - schema may need initialization")
     except Exception as e:
-        logger.error(f"Error initializing database: {str(e)}")
+        logger.error(f"Error verifying database: {str(e)}")
         raise
 
 @app.get("/")
@@ -144,14 +133,23 @@ def read_project(project_id: str, db: Session = Depends(get_db)):
     return project
 
 @app.post("/init-db/")
-async def initialize_database(db: Session = Depends(get_db)):
+async def initialize_database(force: bool = False, db: Session = Depends(get_db)):
+    """Initialize database and run migrations"""
     logger.info("Initializing database")
     try:
-        # Create all tables
-        #Base.metadata.create_all(bind=database.engine) #Removed as migrations handle this.
+        if not force and verify_database():
+            return {"status": "success", "message": "Database already initialized"}
 
-        # Run Alembic migrations - This is now handled in startup_event
+        from alembic.config import Config
+        from alembic import command
 
+        logger.info("Running database migrations")
+        alembic_cfg = Config("alembic.ini")
+        command.upgrade(alembic_cfg, "head")
+        
+        if not verify_database():
+            raise Exception("Database verification failed after migration")
+            
         logger.info("Database initialized successfully")
         return {"status": "success", "message": "Database initialized"}
     except Exception as e:
