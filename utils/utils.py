@@ -12,8 +12,10 @@ def parse_csv(file) -> List[schemas.TimeEntryCreate]:
     logger.info("Starting CSV parsing")
     logger.debug("Reading CSV file into pandas DataFrame")
     
-    # Read the file content and create DataFrame
+    # Read the file content and create DataFrame, dropping empty rows
     df = pd.read_csv(file, keep_default_na=False)
+    df = df.dropna(how='all')  # Remove rows that are all empty
+    df = df.reset_index(drop=True)  # Reset index after dropping rows
     
     if df.empty:
         logger.error("Empty CSV file received")
