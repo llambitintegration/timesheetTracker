@@ -4,6 +4,7 @@ from typing import List
 from database import schemas
 from datetime import datetime
 from utils.logger import Logger
+import csv
 
 logger = Logger().get_logger()
 
@@ -12,7 +13,7 @@ def parse_csv(file) -> List[schemas.TimeEntryCreate]:
     logger.debug("Reading CSV file into pandas DataFrame")
     
     # Read the file content into a string buffer
-    content = file.file.read().decode('utf-8')
+    content = csv.reader(file)
     
     # Use pandas to read from the string buffer
     import io
