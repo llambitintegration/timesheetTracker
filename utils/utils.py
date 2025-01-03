@@ -76,10 +76,15 @@ def parse_csv(file) -> List[schemas.TimeEntryCreate]:
             hours = clean_numeric_value(row.get('Hours', 0))
             week_number = validate_week_number(row.get('Week Number'))
             month = validate_month(row.get('Month'))
-
+            customer = row.get('Customer', '').strip()
+            
             if hours <= 0:
                 logger.warning(f"Skipping row {index + 1} due to invalid hours: {hours}")
                 continue
+                
+            # Replace empty or dash customer with None
+            if not customer or customer == '-':
+                customer = None
 
             entry = schemas.TimeEntryCreate(
                 week_number=week_number,

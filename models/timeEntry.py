@@ -10,7 +10,7 @@ class TimeEntry(BaseModel):
     month = Column(String, nullable=False)
     category = Column(String, nullable=False)
     subcategory = Column(String, nullable=False)
-    customer = Column(String, ForeignKey('customers.name', ondelete='SET NULL'), nullable=True)
+    customer = Column(String, nullable=True)
     project = Column(String, ForeignKey('projects.project_id', ondelete='SET NULL'), nullable=True)
     task_description = Column(String)
     hours = Column(Float, nullable=False)
