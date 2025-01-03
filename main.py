@@ -4,10 +4,10 @@ from typing import List, Optional
 from datetime import datetime, timedelta
 import calendar
 
-from database import schemas, crud
-from database.database import get_db, init_database
+from database import schemas, crud, get_db, verify_database, engine
 from utils.logger import Logger
 from utils import utils
+from models import TimeEntry
 
 logger = Logger().get_logger()
 app = FastAPI(title="Timesheet Management API")
@@ -17,7 +17,19 @@ async def startup_event():
     """Initialize database on startup"""
     logger.info("Initializing database on startup")
     try:
-        init_database()
+        # Run Alembic migrations
+        from alembic.config import Config
+        from alembic import command
+
+        logger.info("Running database migrations")
+        alembic_cfg = Config("alembic.ini")
+        command.upgrade(alembic_cfg, "head")
+        logger.info("Database migrations completed")
+
+        # Verify database connection and schema
+        if not verify_database():
+            raise Exception("Database verification failed")
+
     except Exception as e:
         logger.error(f"Error initializing database: {str(e)}")
         raise
@@ -58,17 +70,17 @@ async def upload_timesheet(
         raise HTTPException(status_code=400, detail=str(e))
 
 @app.post("/customers/", response_model=schemas.Customer)
-def create_customer(customer: schemas.CustomerCreate, db: Session = Depends(database.get_db)):
+def create_customer(customer: schemas.CustomerCreate, db: Session = Depends(get_db)):
     logger.info(f"Creating new customer: {customer.name}")
     return crud.create_customer(db, customer)
 
 @app.get("/customers/", response_model=List[schemas.Customer])
-def read_customers(skip: int = 0, limit: int = 100, db: Session = Depends(database.get_db)):
+def read_customers(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     logger.info(f"Fetching customers with skip={skip}, limit={limit}")
     return crud.get_customers(db, skip=skip, limit=limit)
 
 @app.get("/customers/{name}", response_model=schemas.Customer)
-def read_customer(name: str, db: Session = Depends(database.get_db)):
+def read_customer(name: str, db: Session = Depends(get_db)):
     logger.info(f"Fetching customer: {name}")
     customer = crud.get_customer(db, name)
     if customer is None:
@@ -79,18 +91,18 @@ def read_customer(name: str, db: Session = Depends(database.get_db)):
 @app.post("/project-managers/", response_model=schemas.ProjectManager)
 def create_project_manager(
     project_manager: schemas.ProjectManagerCreate,
-    db: Session = Depends(database.get_db)
+    db: Session = Depends(get_db)
 ):
     logger.info(f"Creating new project manager: {project_manager.name}")
     return crud.create_project_manager(db, project_manager)
 
 @app.get("/project-managers/", response_model=List[schemas.ProjectManager])
-def read_project_managers(skip: int = 0, limit: int = 100, db: Session = Depends(database.get_db)):
+def read_project_managers(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     logger.info(f"Fetching project managers with skip={skip}, limit={limit}")
     return crud.get_project_managers(db, skip=skip, limit=limit)
 
 @app.get("/project-managers/{name}", response_model=schemas.ProjectManager)
-def read_project_manager(name: str, db: Session = Depends(database.get_db)):
+def read_project_manager(name: str, db: Session = Depends(get_db)):
     logger.info(f"Fetching project manager: {name}")
     project_manager = crud.get_project_manager(db, name)
     if project_manager is None:
@@ -99,7 +111,7 @@ def read_project_manager(name: str, db: Session = Depends(database.get_db)):
     return project_manager
 
 @app.post("/projects/", response_model=schemas.Project)
-def create_project(project: schemas.ProjectCreate, db: Session = Depends(database.get_db)):
+def create_project(project: schemas.ProjectCreate, db: Session = Depends(get_db)):
     logger.info(f"Creating new project: {project.project_id}")
     return crud.create_project(db, project)
 
@@ -109,7 +121,7 @@ def read_projects(
     project_manager_name: Optional[str] = None,
     skip: int = 0,
     limit: int = 100,
-    db: Session = Depends(database.get_db)
+    db: Session = Depends(get_db)
 ):
     logger.info(
         f"Fetching projects with customer={customer_name}, "
@@ -118,7 +130,7 @@ def read_projects(
     return crud.get_projects(db, customer_name, project_manager_name, skip, limit)
 
 @app.get("/projects/{project_id}", response_model=schemas.Project)
-def read_project(project_id: str, db: Session = Depends(database.get_db)):
+def read_project(project_id: str, db: Session = Depends(get_db)):
     logger.info(f"Fetching project: {project_id}")
     project = crud.get_project(db, project_id)
     if project is None:
@@ -127,18 +139,14 @@ def read_project(project_id: str, db: Session = Depends(database.get_db)):
     return project
 
 @app.post("/init-db/")
-async def initialize_database(db: Session = Depends(database.get_db)):
+async def initialize_database(db: Session = Depends(get_db)):
     logger.info("Initializing database")
     try:
         # Create all tables
-        Base.metadata.create_all(bind=database.engine)
-        
-        # Run Alembic migrations
-        from alembic.config import Config
-        from alembic import command
-        alembic_cfg = Config("alembic.ini")
-        command.upgrade(alembic_cfg, "head")
-        
+        #Base.metadata.create_all(bind=database.engine) #Removed as migrations handle this.
+
+        # Run Alembic migrations - This is now handled in startup_event
+
         logger.info("Database initialized successfully")
         return {"status": "success", "message": "Database initialized"}
     except Exception as e:
@@ -147,7 +155,7 @@ async def initialize_database(db: Session = Depends(database.get_db)):
 
 
 @app.post("/time-entries/", response_model=schemas.TimeEntry)
-def create_time_entry(entry: schemas.TimeEntryCreate, db: Session = Depends(database.get_db)):
+def create_time_entry(entry: schemas.TimeEntryCreate, db: Session = Depends(get_db)):
     logger.info("Creating new time entry")
     return crud.create_time_entry(db, entry)
 
@@ -157,13 +165,13 @@ def read_time_entries(
     customer_name: Optional[str] = None,
     skip: int = 0,
     limit: int = 100,
-    db: Session = Depends(database.get_db)
+    db: Session = Depends(get_db)
 ):
     logger.info(f"Fetching time entries with project={project_id}, customer={customer_name}")
     return crud.get_time_entries(db, project_id, customer_name, skip, limit)
 
 @app.get("/time-entries/{entry_id}", response_model=schemas.TimeEntry)
-def read_time_entry(entry_id: int, db: Session = Depends(database.get_db)):
+def read_time_entry(entry_id: int, db: Session = Depends(get_db)):
     logger.info(f"Fetching time entry: {entry_id}")
     entry = crud.get_time_entry(db, entry_id)
     if entry is None:
@@ -175,7 +183,7 @@ def read_time_entry(entry_id: int, db: Session = Depends(database.get_db)):
 def update_time_entry(
     entry_id: int,
     entry: schemas.TimeEntryUpdate,
-    db: Session = Depends(database.get_db)
+    db: Session = Depends(get_db)
 ):
     logger.info(f"Updating time entry: {entry_id}")
     updated_entry = crud.update_time_entry(db, entry_id, entry)
@@ -185,7 +193,7 @@ def update_time_entry(
     return updated_entry
 
 @app.delete("/time-entries/{entry_id}")
-def delete_time_entry(entry_id: int, db: Session = Depends(database.get_db)):
+def delete_time_entry(entry_id: int, db: Session = Depends(get_db)):
     logger.info(f"Deleting time entry: {entry_id}")
     success = crud.delete_time_entry(db, entry_id)
     if not success:
@@ -197,7 +205,7 @@ def delete_time_entry(entry_id: int, db: Session = Depends(database.get_db)):
 def get_weekly_report(
     date: datetime = Query(default=None),
     project_id: Optional[str] = None,
-    db: Session = Depends(database.get_db)
+    db: Session = Depends(get_db)
 ):
     logger.info(f"Generating weekly report for date={date}, project={project_id}")
     if date is None:
@@ -244,7 +252,7 @@ def get_monthly_report(
     year: int = Query(...),
     month: int = Query(...),
     project_id: Optional[str] = None,
-    db: Session = Depends(database.get_db)
+    db: Session = Depends(get_db)
 ):
     logger.info(f"Generating monthly report for {year}-{month}, project={project_id}")
     query = db.query(

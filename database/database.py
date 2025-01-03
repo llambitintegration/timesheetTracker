@@ -1,12 +1,21 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import os
+from dotenv import load_dotenv
 from utils.logger import Logger
 from models.baseModel import Base
 
+# Load environment variables
+load_dotenv()
+
 logger = Logger().get_logger()
 
-DATABASE_URL = os.getenv('DATABASE_URL', 'sqlite:///./timesheet.db')
+# Get database URL from environment with proper error handling
+DATABASE_URL = os.getenv('DATABASE_URL')
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL environment variable is not set")
+
+# Ensure proper PostgreSQL driver
 if DATABASE_URL.startswith('postgresql://'):
     DATABASE_URL = DATABASE_URL.replace('postgresql://', 'postgresql+psycopg2://')
 
