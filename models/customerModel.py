@@ -6,8 +6,8 @@ class Customer(BaseModel):
     __tablename__ = "customers"
 
     name = Column(String, unique=True, nullable=False)
-    contact_email = Column(String, unique=True, nullable=False)
-    industry = Column(String, nullable=False)
+    contact_email = Column(String, unique=True)
+    industry = Column(String)
     status = Column(String, default='active')
     address = Column(String)
     phone = Column(String)
