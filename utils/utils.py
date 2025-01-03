@@ -32,6 +32,13 @@ def parse_csv(file) -> List[schemas.TimeEntryCreate]:
 
         try:
             logger.debug(f"Creating TimeEntryCreate object for row {index + 1}")
+            # Handle empty or invalid hours values
+            try:
+                hours = float(row['Hours']) if row['Hours'] != '' else 0.0
+            except (ValueError, TypeError):
+                logger.warning(f"Invalid hours value in row {index + 1}, setting to 0")
+                hours = 0.0
+
             entry = schemas.TimeEntryCreate(
                 week_number=int(row['Week Number']),
                 month=str(row['Month']),
@@ -40,7 +47,7 @@ def parse_csv(file) -> List[schemas.TimeEntryCreate]:
                 customer=str(row['Customer']) if not pd.isna(row['Customer']) else None,
                 project=str(row['Project']) if not pd.isna(row['Project']) else None,
                 task_description=str(row['Task Description']) if not pd.isna(row['Task Description']) else None,
-                hours=float(row['Hours'])
+                hours=hours
             )
             entries.append(entry)
             logger.debug(f"Successfully processed row {index + 1}")
@@ -73,6 +80,13 @@ def parse_csv(file) -> List[schemas.TimeEntryCreate]:
 
         try:
             logger.debug(f"Creating TimeEntryCreate object for row {index + 1}")
+            # Handle empty or invalid hours values
+            try:
+                hours = float(row['Hours']) if row['Hours'] != '' else 0.0
+            except (ValueError, TypeError):
+                logger.warning(f"Invalid hours value in row {index + 1}, setting to 0")
+                hours = 0.0
+
             entry = schemas.TimeEntryCreate(
                 week_number=int(row['Week Number']),
                 month=str(row['Month']),
@@ -81,7 +95,7 @@ def parse_csv(file) -> List[schemas.TimeEntryCreate]:
                 customer=str(row['Customer']) if not pd.isna(row['Customer']) else None,
                 project=str(row['Project']) if not pd.isna(row['Project']) else None,
                 task_description=str(row['Task Description']) if not pd.isna(row['Task Description']) else None,
-                hours=float(row['Hours'])
+                hours=hours
             )
             entries.append(entry)
             logger.debug(f"Successfully processed row {index + 1}")
@@ -111,6 +125,13 @@ def parse_excel(file) -> List[schemas.TimeEntryCreate]:
 
         try:
             logger.debug(f"Creating TimeEntryCreate object for row {index + 1}")
+            # Handle empty or invalid hours values
+            try:
+                hours = float(row['Hours']) if row['Hours'] != '' else 0.0
+            except (ValueError, TypeError):
+                logger.warning(f"Invalid hours value in row {index + 1}, setting to 0")
+                hours = 0.0
+
             entry = schemas.TimeEntryCreate(
                 week_number=int(row['Week Number']),
                 month=str(row['Month']),
@@ -119,7 +140,7 @@ def parse_excel(file) -> List[schemas.TimeEntryCreate]:
                 customer=str(row['Customer']) if not pd.isna(row['Customer']) else None,
                 project=str(row['Project']) if not pd.isna(row['Project']) else None,
                 task_description=str(row['Task Description']) if not pd.isna(row['Task Description']) else None,
-                hours=float(row['Hours'])
+                hours=hours
             )
             entries.append(entry)
             logger.debug(f"Successfully processed row {index + 1}")
