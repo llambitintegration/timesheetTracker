@@ -8,5 +8,3 @@ class ProjectManager(BaseModel):
 
     name = Column(String, unique=True, nullable=False)
     email = Column(String, unique=True, nullable=False)
-    department = Column(String, nullable=False)
-    status = Column(String, default='active')
