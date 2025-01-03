@@ -1,6 +1,6 @@
 
 from sqlalchemy import Column, Integer, String, Float, ForeignKey
-from models.models import BaseModel
+from models.baseModel import BaseModel
 
 class TimeEntry(BaseModel):
     """Time entry model for tracking hours"""
