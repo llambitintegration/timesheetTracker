@@ -39,8 +39,15 @@ def parse_csv(file) -> List[schemas.TimeEntryCreate]:
                 logger.warning(f"Invalid hours value in row {index + 1}, setting to 0")
                 hours = 0.0
 
+            # Handle empty or invalid week numbers
+            try:
+                week_number = int(row['Week Number']) if row['Week Number'] != '' else 0
+            except (ValueError, TypeError):
+                logger.warning(f"Invalid week number in row {index + 1}, setting to 0")
+                week_number = 0
+                
             entry = schemas.TimeEntryCreate(
-                week_number=int(row['Week Number']),
+                week_number=week_number,
                 month=str(row['Month']),
                 category=str(row['Category']) if not pd.isna(row['Category']) else "Other",
                 subcategory=str(row['Subcategory']) if not pd.isna(row['Subcategory']) else "General",
@@ -87,8 +94,15 @@ def parse_csv(file) -> List[schemas.TimeEntryCreate]:
                 logger.warning(f"Invalid hours value in row {index + 1}, setting to 0")
                 hours = 0.0
 
+            # Handle empty or invalid week numbers
+            try:
+                week_number = int(row['Week Number']) if row['Week Number'] != '' else 0
+            except (ValueError, TypeError):
+                logger.warning(f"Invalid week number in row {index + 1}, setting to 0")
+                week_number = 0
+                
             entry = schemas.TimeEntryCreate(
-                week_number=int(row['Week Number']),
+                week_number=week_number,
                 month=str(row['Month']),
                 category=str(row['Category']) if not pd.isna(row['Category']) else "Other",
                 subcategory=str(row['Subcategory']) if not pd.isna(row['Subcategory']) else "General",
@@ -132,8 +146,15 @@ def parse_excel(file) -> List[schemas.TimeEntryCreate]:
                 logger.warning(f"Invalid hours value in row {index + 1}, setting to 0")
                 hours = 0.0
 
+            # Handle empty or invalid week numbers
+            try:
+                week_number = int(row['Week Number']) if row['Week Number'] != '' else 0
+            except (ValueError, TypeError):
+                logger.warning(f"Invalid week number in row {index + 1}, setting to 0")
+                week_number = 0
+                
             entry = schemas.TimeEntryCreate(
-                week_number=int(row['Week Number']),
+                week_number=week_number,
                 month=str(row['Month']),
                 category=str(row['Category']) if not pd.isna(row['Category']) else "Other",
                 subcategory=str(row['Subcategory']) if not pd.isna(row['Subcategory']) else "General",
