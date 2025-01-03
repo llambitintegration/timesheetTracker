@@ -3,14 +3,22 @@ from datetime import datetime, timedelta
 import calendar
 from typing import List, Optional
 import models, schemas
+from logger import Logger
+
+logger = Logger().get_logger()
 
 # Customer operations
 def create_customer(db: Session, customer: schemas.CustomerCreate):
-    db_customer = models.Customer(**customer.dict())
-    db.add(db_customer)
-    db.commit()
-    db.refresh(db_customer)
-    return db_customer
+    try:
+        db_customer = models.Customer(**customer.dict())
+        db.add(db_customer)
+        db.commit()
+        db.refresh(db_customer)
+        logger.info(f"Successfully created customer: {customer.name}")
+        return db_customer
+    except Exception as e:
+        logger.error(f"Error creating customer {customer.name}: {str(e)}")
+        raise
 
 def get_customer(db: Session, name: str):
     return db.query(models.Customer).filter(models.Customer.name == name).first()

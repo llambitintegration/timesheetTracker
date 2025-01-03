@@ -1,6 +1,9 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import os
+from logger import Logger
+
+logger = Logger().get_logger()
 
 DATABASE_URL = os.getenv('DATABASE_URL')
 
@@ -9,7 +12,9 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 def get_db():
     db = SessionLocal()
+    logger.debug("Database session created")
     try:
         yield db
     finally:
         db.close()
+        logger.debug("Database session closed")
