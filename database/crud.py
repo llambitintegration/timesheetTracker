@@ -5,7 +5,7 @@ import calendar
 from typing import List, Optional
 import models
 from . import schemas
-from logger import Logger
+from utils.logger import Logger
 
 logger = Logger().get_logger()
 
