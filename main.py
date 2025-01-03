@@ -8,7 +8,7 @@ import pandas as pd
 
 import crud
 import models
-import schemas
+from database import schemas
 import database
 import utils
 from logger import Logger
