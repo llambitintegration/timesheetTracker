@@ -251,3 +251,21 @@ month
 2025-01-03 22:50:51,658 - TimesheetTracker - INFO - Running database migrations
 2025-01-03 22:51:50,378 - TimesheetTracker - INFO - Initializing database on startup
 2025-01-03 22:51:50,442 - TimesheetTracker - INFO - Running database migrations
+2025-01-03 22:54:25,097 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-03 22:54:25,097 - TimesheetTracker - INFO - Verifying database connection and schema: postgresql+psycopg2://neondb_owner:4z8SdivLbBQK@ep-orange-scene-a49hsza0.us-east-1.aws.neon.tech/neondb?sslmode=require
+2025-01-03 22:54:25,420 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-03 22:54:26,814 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-03 22:55:56,058 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-03 22:55:56,058 - TimesheetTracker - INFO - Verifying database connection and schema: postgresql+psycopg2://timesheetDatabase_owner:imz1MH3OjLef@ep-polished-snowflake-a846vhb3.eastus2-pooler.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-03 22:55:56,169 - TimesheetTracker - ERROR - Database verification failed: (psycopg2.OperationalError) could not translate host name "ep-polished-snowflake-a846vhb3.eastus2-pooler.azure.neon.tech" to address: Name or service not known
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-01-03 22:55:56,169 - TimesheetTracker - WARNING - Database verification failed - schema may need initialization
+2025-01-03 22:55:58,684 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-03 22:56:27,479 - TimesheetTracker - DEBUG - Database session created
+2025-01-03 22:56:27,480 - TimesheetTracker - INFO - Initializing database
+2025-01-03 22:56:27,481 - TimesheetTracker - INFO - Verifying database connection and schema: postgresql+psycopg2://timesheetDatabase_owner:imz1MH3OjLef@ep-polished-snowflake-a846vhb3.eastus2-pooler.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-03 22:56:27,580 - TimesheetTracker - ERROR - Database verification failed: (psycopg2.OperationalError) could not translate host name "ep-polished-snowflake-a846vhb3.eastus2-pooler.azure.neon.tech" to address: Name or service not known
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-01-03 22:56:27,631 - TimesheetTracker - INFO - Running database migrations
