@@ -188,3 +188,6 @@ month
 2025-01-03 20:07:31,157 - TimesheetTracker - INFO - Processing 167 rows from CSV file
 2025-01-03 20:07:31,179 - TimesheetTracker - INFO - Successfully created 167 time entries from CSV
 2025-01-03 20:07:31,179 - TimesheetTracker - ERROR - Error processing timesheet: module 'crud' has no attribute 'create_time_entries'
+2025-01-03 20:11:09,354 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 20:11:16,432 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 20:11:17,320 - TimesheetTracker - INFO - Root endpoint accessed

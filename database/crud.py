@@ -1,4 +1,3 @@
-
 from sqlalchemy.orm import Session
 from datetime import datetime, timedelta
 import calendar
@@ -124,14 +123,6 @@ def get_projects(
     return projects
 
 # Time Entry operations
-def create_time_entries(db: Session, entry: schemas.TimeEntryCreate) -> models.TimeEntry:
-    """Create a new time entry using TimeEntryService."""
-    logger.debug("Initializing TimeEntryService for single entry creation")
-    from services.time_entry_service import TimeEntryService
-    service = TimeEntryService(db)
-    logger.info(f"Creating time entry for {entry.customer} - {entry.project}")
-    return service.create_time_entry(entry)
-
 def create_time_entries(db: Session, entries: List[schemas.TimeEntryCreate]) -> List[models.TimeEntry]:
     """Create multiple time entries using TimeEntryService."""
     logger.debug("Initializing TimeEntryService for bulk entry creation")
@@ -139,6 +130,14 @@ def create_time_entries(db: Session, entries: List[schemas.TimeEntryCreate]) -> 
     service = TimeEntryService(db)
     logger.info(f"Creating {len(entries)} time entries in bulk")
     return service.create_many_entries(entries)
+
+def create_time_entry(db: Session, entry: schemas.TimeEntryCreate) -> models.TimeEntry:
+    """Create a new time entry using TimeEntryService."""
+    logger.debug("Initializing TimeEntryService for single entry creation")
+    from services.time_entry_service import TimeEntryService
+    service = TimeEntryService(db)
+    logger.info(f"Creating time entry for {entry.customer} - {entry.project}")
+    return service.create_time_entry(entry)
 
 def get_time_entry(db: Session, entry_id: int) -> Optional[models.TimeEntry]:
     """Retrieve a time entry by ID."""
@@ -158,20 +157,10 @@ def get_time_entries(
     skip: int = 0,
     limit: int = 100
 ) -> List[models.TimeEntry]:
-    """Retrieve time entries with optional filtering and pagination."""
-    logger.debug(
-        f"Fetching time entries with filters: project={project_id}, "
-        f"customer={customer_name}, skip={skip}, limit={limit}"
-    )
-    query = db.query(models.TimeEntry)
-    if project_id:
-        query = query.filter(models.TimeEntry.project == project_id)
-    if customer_name:
-        query = query.filter(models.TimeEntry.customer == customer_name)
-    
-    entries = query.offset(skip).limit(limit).all()
-    logger.info(f"Retrieved {len(entries)} time entries")
-    return entries
+    """Get time entries using service."""
+    from services.time_entry_service import TimeEntryService
+    service = TimeEntryService(db)
+    return service.get_time_entries(project_id, customer_name, skip, limit)
 
 def update_time_entry(
     db: Session,
@@ -273,20 +262,3 @@ def get_monthly_report(
     results = query.all()
     logger.info(f"Generated monthly report with {len(results)} entries")
     return results
-def create_time_entry(db: Session, entry: schemas.TimeEntryCreate) -> models.TimeEntry:
-    """Create a new time entry using service."""
-    from services.time_entry_service import TimeEntryService
-    service = TimeEntryService(db)
-    return service.create_time_entry(entry)
-
-def get_time_entries(
-    db: Session,
-    project_id: Optional[str] = None,
-    customer_name: Optional[str] = None,
-    skip: int = 0,
-    limit: int = 100
-) -> List[models.TimeEntry]:
-    """Get time entries using service."""
-    from services.time_entry_service import TimeEntryService
-    service = TimeEntryService(db)
-    return service.get_time_entries(project_id, customer_name, skip, limit)
