@@ -126,24 +126,29 @@ def get_projects(
 # Time Entry operations
 def create_time_entry(db: Session, entry: schemas.TimeEntryCreate) -> models.TimeEntry:
     """Create a new time entry using TimeEntryService."""
+    logger.debug("Initializing TimeEntryService for single entry creation")
     from services.time_entry_service import TimeEntryService
     service = TimeEntryService(db)
+    logger.info(f"Creating time entry for {entry.customer} - {entry.project}")
     return service.create_time_entry(entry)
 
 def create_time_entries(db: Session, entries: List[schemas.TimeEntryCreate]) -> List[models.TimeEntry]:
     """Create multiple time entries using TimeEntryService."""
+    logger.debug("Initializing TimeEntryService for bulk entry creation")
     from services.time_entry_service import TimeEntryService
     service = TimeEntryService(db)
+    logger.info(f"Creating {len(entries)} time entries in bulk")
     return service.create_many_entries(entries)
 
 def get_time_entry(db: Session, entry_id: int) -> Optional[models.TimeEntry]:
     """Retrieve a time entry by ID."""
-    logger.debug(f"Attempting to fetch time entry: {entry_id}")
+    logger.debug(f"Executing database query for time entry ID: {entry_id}")
     entry = db.query(models.TimeEntry).filter(models.TimeEntry.id == entry_id).first()
     if entry:
-        logger.info(f"Found time entry: {entry_id}")
+        logger.info(f"Successfully retrieved time entry [{entry_id}]: {entry.customer} - {entry.project}")
+        logger.debug(f"Entry details: {entry.hours} hours, Week {entry.week_number}, {entry.month}")
     else:
-        logger.info(f"No time entry found with ID: {entry_id}")
+        logger.warning(f"Time entry ID {entry_id} not found in database")
     return entry
 
 def get_time_entries(

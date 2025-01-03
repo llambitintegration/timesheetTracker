@@ -10,42 +10,63 @@ logger = Logger().get_logger()
 class TimeEntryService:
     def __init__(self, db: Session):
         self.db = db
+        logger.debug("TimeEntryService initialized with database session")
         
     def create_time_entry(self, entry: schemas.TimeEntryCreate) -> TimeEntry:
         """Create a new time entry."""
         try:
-            logger.debug(f"Creating time entry with data: {entry.dict()}")
+            logger.debug(f"Starting creation of time entry with data: {entry.dict()}")
             entry_dict = entry.dict()
+            
+            logger.debug("Validating and setting default categories")
             if not entry_dict.get('category'):
+                logger.info("No category provided, defaulting to 'Other'")
                 entry_dict['category'] = 'Other'
             if not entry_dict.get('subcategory'):
+                logger.info("No subcategory provided, defaulting to 'General'")
                 entry_dict['subcategory'] = 'General'
                 
+            logger.debug("Creating TimeEntry model instance")
             db_entry = TimeEntry(**entry_dict)
+            
+            logger.debug("Adding entry to database session")
             self.db.add(db_entry)
+            
+            logger.debug("Committing transaction")
             self.db.commit()
+            
+            logger.debug("Refreshing database entry")
             self.db.refresh(db_entry)
-            logger.info(f"Successfully created time entry for {entry.customer} - {entry.project}")
+            
+            logger.info(f"Successfully created time entry [{db_entry.id}] for {entry.customer} - {entry.project} ({entry.hours} hours)")
             return db_entry
         except Exception as e:
             logger.error(f"Error creating time entry: {str(e)}")
+            logger.debug("Rolling back transaction")
             self.db.rollback()
             raise
 
     def create_many_entries(self, entries: List[schemas.TimeEntryCreate]) -> List[TimeEntry]:
         """Create multiple time entries in a single transaction."""
         created_entries = []
+        logger.info(f"Beginning bulk creation of {len(entries)} time entries")
         try:
-            for entry in entries:
+            for idx, entry in enumerate(entries, 1):
+                logger.debug(f"Processing entry {idx}/{len(entries)}")
                 db_entry = TimeEntry(**entry.dict())
                 self.db.add(db_entry)
                 created_entries.append(db_entry)
+                logger.debug(f"Added entry {idx} to session: {entry.customer} - {entry.project}")
             
+            logger.debug("Committing all entries to database")
             self.db.commit()
-            logger.info(f"Successfully created {len(created_entries)} time entries")
+            
+            total_hours = sum(entry.hours for entry in entries)
+            logger.info(f"Successfully created {len(created_entries)} time entries (Total: {total_hours} hours)")
             return created_entries
         except Exception as e:
-            logger.error(f"Error creating multiple time entries: {str(e)}")
+            logger.error(f"Error during bulk creation: {str(e)}")
+            logger.debug("Rolling back transaction")
             self.db.rollback()
             raise
 
@@ -57,9 +78,17 @@ class TimeEntryService:
         limit: int = 100
     ) -> List[TimeEntry]:
         """Retrieve time entries with filters."""
+        logger.debug(f"Retrieving time entries with filters: project_id={project_id}, customer={customer_name}")
         query = self.db.query(TimeEntry)
+        
         if project_id:
+            logger.debug(f"Applying project filter: {project_id}")
             query = query.filter(TimeEntry.project == project_id)
         if customer_name:
+            logger.debug(f"Applying customer filter: {customer_name}")
             query = query.filter(TimeEntry.customer == customer_name)
-        return query.offset(skip).limit(limit).all()
+            
+        logger.debug(f"Applying pagination: skip={skip}, limit={limit}")
+        results = query.offset(skip).limit(limit).all()
+        logger.info(f"Retrieved {len(results)} time entries")
+        return results
