@@ -77,3 +77,7 @@ hours
 2025-01-03 19:50:34,459 - TimesheetTracker - ERROR - Error processing timesheet: 'SpooledTemporaryFile' object has no attribute 'file'
 2025-01-03 19:51:02,706 - TimesheetTracker - INFO - Database tables created successfully
 2025-01-03 19:51:20,760 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 19:52:12,367 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 19:52:35,296 - TimesheetTracker - INFO - Processing timesheet upload: Hours Tracker.csv
+2025-01-03 19:52:35,297 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-03 19:52:35,297 - TimesheetTracker - ERROR - Error processing timesheet: 'SpooledTemporaryFile' object has no attribute 'file'
