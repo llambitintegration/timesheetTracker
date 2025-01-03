@@ -21,7 +21,7 @@ class Logger:
         self.logger = logging.getLogger('TimesheetTracker')
 
         # Get log level from environment variable, default to INFO
-        log_level = os.getenv('LOG_LEVEL', 'INFO').upper()
+        log_level = os.getenv('LOG_LEVEL', 'DEBUG').upper()
         self.logger.setLevel(getattr(logging, log_level))
 
         # Create logs directory if it doesn't exist
