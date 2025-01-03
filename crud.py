@@ -4,6 +4,60 @@ import calendar
 from typing import List, Optional
 import models, schemas
 
+# Customer operations
+def create_customer(db: Session, customer: schemas.CustomerCreate):
+    db_customer = models.Customer(**customer.dict())
+    db.add(db_customer)
+    db.commit()
+    db.refresh(db_customer)
+    return db_customer
+
+def get_customer(db: Session, name: str):
+    return db.query(models.Customer).filter(models.Customer.name == name).first()
+
+def get_customers(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.Customer).offset(skip).limit(limit).all()
+
+# Project Manager operations
+def create_project_manager(db: Session, project_manager: schemas.ProjectManagerCreate):
+    db_project_manager = models.ProjectManager(**project_manager.dict())
+    db.add(db_project_manager)
+    db.commit()
+    db.refresh(db_project_manager)
+    return db_project_manager
+
+def get_project_manager(db: Session, name: str):
+    return db.query(models.ProjectManager).filter(models.ProjectManager.name == name).first()
+
+def get_project_managers(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.ProjectManager).offset(skip).limit(limit).all()
+
+# Project operations
+def create_project(db: Session, project: schemas.ProjectCreate):
+    db_project = models.Project(**project.dict())
+    db.add(db_project)
+    db.commit()
+    db.refresh(db_project)
+    return db_project
+
+def get_project(db: Session, project_id: str):
+    return db.query(models.Project).filter(models.Project.project_id == project_id).first()
+
+def get_projects(
+    db: Session,
+    customer_name: Optional[str] = None,
+    project_manager_name: Optional[str] = None,
+    skip: int = 0,
+    limit: int = 100
+):
+    query = db.query(models.Project)
+    if customer_name:
+        query = query.filter(models.Project.customer_name == customer_name)
+    if project_manager_name:
+        query = query.filter(models.Project.project_manager_name == project_manager_name)
+    return query.offset(skip).limit(limit).all()
+
+# Time Entry operations
 def create_time_entry(db: Session, entry: schemas.TimeEntryCreate):
     db_entry = models.TimeEntry(**entry.dict())
     db.add(db_entry)
@@ -16,13 +70,16 @@ def get_time_entry(db: Session, entry_id: int):
 
 def get_time_entries(
     db: Session,
-    employee_id: Optional[str] = None,
+    project_id: Optional[str] = None,
+    customer_name: Optional[str] = None,
     skip: int = 0,
     limit: int = 100
 ):
     query = db.query(models.TimeEntry)
-    if employee_id:
-        query = query.filter(models.TimeEntry.employee_id == employee_id)
+    if project_id:
+        query = query.filter(models.TimeEntry.project_id == project_id)
+    if customer_name:
+        query = query.filter(models.TimeEntry.customer_name == customer_name)
     return query.offset(skip).limit(limit).all()
 
 def update_time_entry(db: Session, entry_id: int, entry: schemas.TimeEntryUpdate):

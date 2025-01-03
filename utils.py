@@ -1,23 +1,27 @@
 import pandas as pd
 from typing import List
 import schemas
+import calendar
+from datetime import datetime
 
 def parse_excel(file) -> List[schemas.TimeEntryCreate]:
     df = pd.read_excel(file)
     entries = []
 
-    required_columns = ['employee_id', 'project', 'task', 'hours', 'date']
+    required_columns = ['week_number', 'month', 'category', 'subcategory', 'customer_name', 'project_id', 'task_description', 'hours']
     if not all(col in df.columns for col in required_columns):
         raise ValueError("Missing required columns in the Excel file")
 
     for _, row in df.iterrows():
         entry = schemas.TimeEntryCreate(
-            employee_id=str(row['employee_id']),
-            project=str(row['project']),
-            task=str(row['task']),
-            hours=float(row['hours']),
-            date=pd.to_datetime(row['date']),
-            description=str(row.get('description', ''))
+            week_number=int(row['week_number']),
+            month=str(row['month']),
+            category=str(row['category']),
+            subcategory=str(row['subcategory']),
+            customer_name=str(row['customer_name']),
+            project_id=str(row['project_id']),
+            task_description=str(row.get('task_description', '')),
+            hours=float(row['hours'])
         )
         entries.append(entry)
     return entries
@@ -26,18 +30,20 @@ def parse_csv(file) -> List[schemas.TimeEntryCreate]:
     df = pd.read_csv(file)
     entries = []
 
-    required_columns = ['employee_id', 'project', 'task', 'hours', 'date']
+    required_columns = ['week_number', 'month', 'category', 'subcategory', 'customer_name', 'project_id', 'task_description', 'hours']
     if not all(col in df.columns for col in required_columns):
         raise ValueError("Missing required columns in the CSV file")
 
     for _, row in df.iterrows():
         entry = schemas.TimeEntryCreate(
-            employee_id=str(row['employee_id']),
-            project=str(row['project']),
-            task=str(row['task']),
-            hours=float(row['hours']),
-            date=pd.to_datetime(row['date']),
-            description=str(row.get('description', ''))
+            week_number=int(row['week_number']),
+            month=str(row['month']),
+            category=str(row['category']),
+            subcategory=str(row['subcategory']),
+            customer_name=str(row['customer_name']),
+            project_id=str(row['project_id']),
+            task_description=str(row.get('task_description', '')),
+            hours=float(row['hours'])
         )
         entries.append(entry)
     return entries

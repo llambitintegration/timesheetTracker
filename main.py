@@ -1,7 +1,8 @@
 from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, Query
 from sqlalchemy.orm import Session
 from typing import List, Optional
-from datetime import datetime
+from datetime import datetime, timedelta
+import calendar
 import pandas as pd
 
 import crud, models, schemas, database, utils
@@ -11,6 +12,61 @@ app = FastAPI(title="Timesheet Management API")
 # Create database tables
 models.Base.metadata.create_all(bind=database.engine)
 
+# Customer endpoints
+@app.post("/customers/", response_model=schemas.Customer)
+def create_customer(customer: schemas.CustomerCreate, db: Session = Depends(database.get_db)):
+    return crud.create_customer(db, customer)
+
+@app.get("/customers/", response_model=List[schemas.Customer])
+def read_customers(skip: int = 0, limit: int = 100, db: Session = Depends(database.get_db)):
+    return crud.get_customers(db, skip=skip, limit=limit)
+
+@app.get("/customers/{name}", response_model=schemas.Customer)
+def read_customer(name: str, db: Session = Depends(database.get_db)):
+    customer = crud.get_customer(db, name)
+    if customer is None:
+        raise HTTPException(status_code=404, detail="Customer not found")
+    return customer
+
+# Project Manager endpoints
+@app.post("/project-managers/", response_model=schemas.ProjectManager)
+def create_project_manager(project_manager: schemas.ProjectManagerCreate, db: Session = Depends(database.get_db)):
+    return crud.create_project_manager(db, project_manager)
+
+@app.get("/project-managers/", response_model=List[schemas.ProjectManager])
+def read_project_managers(skip: int = 0, limit: int = 100, db: Session = Depends(database.get_db)):
+    return crud.get_project_managers(db, skip=skip, limit=limit)
+
+@app.get("/project-managers/{name}", response_model=schemas.ProjectManager)
+def read_project_manager(name: str, db: Session = Depends(database.get_db)):
+    project_manager = crud.get_project_manager(db, name)
+    if project_manager is None:
+        raise HTTPException(status_code=404, detail="Project Manager not found")
+    return project_manager
+
+# Project endpoints
+@app.post("/projects/", response_model=schemas.Project)
+def create_project(project: schemas.ProjectCreate, db: Session = Depends(database.get_db)):
+    return crud.create_project(db, project)
+
+@app.get("/projects/", response_model=List[schemas.Project])
+def read_projects(
+    customer_name: Optional[str] = None,
+    project_manager_name: Optional[str] = None,
+    skip: int = 0,
+    limit: int = 100,
+    db: Session = Depends(database.get_db)
+):
+    return crud.get_projects(db, customer_name, project_manager_name, skip, limit)
+
+@app.get("/projects/{project_id}", response_model=schemas.Project)
+def read_project(project_id: str, db: Session = Depends(database.get_db)):
+    project = crud.get_project(db, project_id)
+    if project is None:
+        raise HTTPException(status_code=404, detail="Project not found")
+    return project
+
+# Time Entry endpoints
 @app.post("/upload/", response_model=List[schemas.TimeEntry])
 async def upload_timesheet(
     file: UploadFile = File(...),
@@ -34,21 +90,18 @@ async def upload_timesheet(
         raise HTTPException(status_code=400, detail=str(e))
 
 @app.post("/time-entries/", response_model=schemas.TimeEntry)
-def create_time_entry(
-    entry: schemas.TimeEntryCreate,
-    db: Session = Depends(database.get_db)
-):
+def create_time_entry(entry: schemas.TimeEntryCreate, db: Session = Depends(database.get_db)):
     return crud.create_time_entry(db, entry)
 
 @app.get("/time-entries/", response_model=List[schemas.TimeEntry])
 def read_time_entries(
-    employee_id: Optional[str] = None,
+    project_id: Optional[str] = None,
+    customer_name: Optional[str] = None,
     skip: int = 0,
     limit: int = 100,
     db: Session = Depends(database.get_db)
 ):
-    entries = crud.get_time_entries(db, employee_id, skip, limit)
-    return entries
+    return crud.get_time_entries(db, project_id, customer_name, skip, limit)
 
 @app.get("/time-entries/{entry_id}", response_model=schemas.TimeEntry)
 def read_time_entry(entry_id: int, db: Session = Depends(database.get_db)):
@@ -78,19 +131,36 @@ def delete_time_entry(entry_id: int, db: Session = Depends(database.get_db)):
 @app.get("/reports/weekly", response_model=schemas.WeeklyReport)
 def get_weekly_report(
     date: datetime = Query(default=None),
-    employee_id: Optional[str] = None,
+    project_id: Optional[str] = None,
     db: Session = Depends(database.get_db)
 ):
     if date is None:
         date = datetime.now()
 
-    results, week_start, week_end = crud.get_weekly_report(db, employee_id, date)
+    week_start = date - timedelta(days=date.weekday())
+    week_end = week_start + timedelta(days=6)
+
+    query = db.query(
+        models.TimeEntry.project_id,
+        models.TimeEntry.customer_name,
+        db.func.sum(models.TimeEntry.hours).label('total_hours')
+    ).filter(
+        models.TimeEntry.week_number == week_start.isocalendar()[1]
+    ).group_by(
+        models.TimeEntry.project_id,
+        models.TimeEntry.customer_name
+    )
+
+    if project_id:
+        query = query.filter(models.TimeEntry.project_id == project_id)
+
+    results = query.all()
 
     entries = [
         schemas.ReportEntry(
-            employee_id=r.employee_id,
+            employee_id=r.customer_name,
             total_hours=float(r.total_hours),
-            project=r.project,
+            project=r.project_id,
             period=f"{week_start.date()} to {week_end.date()}"
         )
         for r in results
@@ -109,16 +179,30 @@ def get_weekly_report(
 def get_monthly_report(
     year: int = Query(...),
     month: int = Query(...),
-    employee_id: Optional[str] = None,
+    project_id: Optional[str] = None,
     db: Session = Depends(database.get_db)
 ):
-    results = crud.get_monthly_report(db, employee_id, year, month)
+    query = db.query(
+        models.TimeEntry.project_id,
+        models.TimeEntry.customer_name,
+        db.func.sum(models.TimeEntry.hours).label('total_hours')
+    ).filter(
+        models.TimeEntry.month == calendar.month_name[month]
+    ).group_by(
+        models.TimeEntry.project_id,
+        models.TimeEntry.customer_name
+    )
+
+    if project_id:
+        query = query.filter(models.TimeEntry.project_id == project_id)
+
+    results = query.all()
 
     entries = [
         schemas.ReportEntry(
-            employee_id=r.employee_id,
+            employee_id=r.customer_name,
             total_hours=float(r.total_hours),
-            project=r.project,
+            project=r.project_id,
             period=f"{year}-{month:02d}"
         )
         for r in results

@@ -1,32 +1,71 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, EmailStr
 from datetime import datetime
 from typing import Optional, List
 
+class CustomerBase(BaseModel):
+    name: str
+    location: str
+
+class CustomerCreate(CustomerBase):
+    pass
+
+class Customer(CustomerBase):
+    class Config:
+        from_attributes = True
+
+class ProjectManagerBase(BaseModel):
+    name: str
+    email: str = Field(..., pattern=r'^[\w\.-]+@[\w\.-]+\.\w+$')
+
+class ProjectManagerCreate(ProjectManagerBase):
+    pass
+
+class ProjectManager(ProjectManagerBase):
+    class Config:
+        from_attributes = True
+
+class ProjectBase(BaseModel):
+    project_id: str
+    customer_name: str
+    location: str
+    project_manager_name: str
+    project_type: str
+
+class ProjectCreate(ProjectBase):
+    pass
+
+class Project(ProjectBase):
+    class Config:
+        from_attributes = True
+
 class TimeEntryBase(BaseModel):
-    employee_id: str
-    project: str
-    task: str
+    week_number: int = Field(..., ge=1, le=53)
+    month: str = Field(..., pattern=r'^(January|February|March|April|May|June|July|August|September|October|November|December)$')
+    category: str
+    subcategory: str
+    customer_name: str
+    project_id: str
+    task_description: Optional[str] = None
     hours: float = Field(..., gt=0, le=24)
-    date: datetime
-    description: Optional[str] = None
 
 class TimeEntryCreate(TimeEntryBase):
     pass
 
 class TimeEntry(TimeEntryBase):
     id: int
-    created_at: datetime
-    updated_at: datetime
 
     class Config:
         from_attributes = True
 
 class TimeEntryUpdate(BaseModel):
-    project: Optional[str] = None
-    task: Optional[str] = None
+    week_number: Optional[int] = Field(None, ge=1, le=53)
+    month: Optional[str] = Field(None, pattern=r'^(January|February|March|April|May|June|July|August|September|October|November|December)$')
+    category: Optional[str] = None
+    subcategory: Optional[str] = None
+    customer_name: Optional[str] = None
+    project_id: Optional[str] = None
+    task_description: Optional[str] = None
     hours: Optional[float] = Field(None, gt=0, le=24)
-    date: Optional[datetime] = None
-    description: Optional[str] = None
 
 class ReportEntry(BaseModel):
     employee_id: str
