@@ -51,7 +51,7 @@ class TimeEntryBase(BaseModel):
     customer: Optional[str] = None
     project: Optional[str] = None
     task_description: Optional[str] = None
-    hours: float = Field(..., gt=0, le=24)
+    hours: float = Field(..., ge=0, le=24)
 
 class TimeEntryCreate(TimeEntryBase):
     pass
