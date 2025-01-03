@@ -22,6 +22,8 @@ def read_root():
     return {
         "message": "Welcome to Timesheet Management API",
         "documentation": "/docs",
+        "redoc": "/redoc"
+    }
 
 @app.post("/init-db/")
 async def initialize_database(db: Session = Depends(database.get_db)):
@@ -41,9 +43,6 @@ async def initialize_database(db: Session = Depends(database.get_db)):
     except Exception as e:
         logger.error(f"Database initialization failed: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
-
-        "redoc": "/redoc"
-    }
 
 # Create database tables
 models.Base.metadata.create_all(bind=database.engine)
