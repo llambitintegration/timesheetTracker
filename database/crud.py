@@ -125,22 +125,16 @@ def get_projects(
 
 # Time Entry operations
 def create_time_entry(db: Session, entry: schemas.TimeEntryCreate) -> models.TimeEntry:
-    """Create a new time entry."""
-    try:
-        logger.debug(f"Creating time entry with data: {entry.dict()}")
-        db_entry = models.TimeEntry(**entry.dict())
-        db.add(db_entry)
-        db.commit()
-        db.refresh(db_entry)
-        logger.info(
-            f"Successfully created time entry for {entry.customer} - "
-            f"{entry.project} ({entry.hours} hours)"
-        )
-        return db_entry
-    except Exception as e:
-        logger.error(f"Error creating time entry: {str(e)}")
-        db.rollback()
-        raise
+    """Create a new time entry using TimeEntryService."""
+    from services.time_entry_service import TimeEntryService
+    service = TimeEntryService(db)
+    return service.create_time_entry(entry)
+
+def create_time_entries(db: Session, entries: List[schemas.TimeEntryCreate]) -> List[models.TimeEntry]:
+    """Create multiple time entries using TimeEntryService."""
+    from services.time_entry_service import TimeEntryService
+    service = TimeEntryService(db)
+    return service.create_many_entries(entries)
 
 def get_time_entry(db: Session, entry_id: int) -> Optional[models.TimeEntry]:
     """Retrieve a time entry by ID."""

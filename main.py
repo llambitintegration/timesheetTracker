@@ -136,11 +136,10 @@ async def upload_timesheet(
             logger.error(f"Unsupported file format: {file.filename}")
             raise HTTPException(status_code=400, detail="Unsupported file format")
 
-        created_entries = []
-        for entry in entries:
-            created_entry = crud.create_time_entry(db, entry)
-            created_entries.append(created_entry)
+        if not entries:
+            raise HTTPException(status_code=400, detail="No valid entries found in file")
 
+        created_entries = crud.create_time_entries(db, entries)
         logger.info(f"Successfully created {len(created_entries)} time entries")
         return created_entries
     except Exception as e:

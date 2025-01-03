@@ -15,7 +15,13 @@ class TimeEntryService:
         """Create a new time entry."""
         try:
             logger.debug(f"Creating time entry with data: {entry.dict()}")
-            db_entry = TimeEntry(**entry.dict())
+            entry_dict = entry.dict()
+            if not entry_dict.get('category'):
+                entry_dict['category'] = 'Other'
+            if not entry_dict.get('subcategory'):
+                entry_dict['subcategory'] = 'General'
+                
+            db_entry = TimeEntry(**entry_dict)
             self.db.add(db_entry)
             self.db.commit()
             self.db.refresh(db_entry)
@@ -23,6 +29,23 @@ class TimeEntryService:
             return db_entry
         except Exception as e:
             logger.error(f"Error creating time entry: {str(e)}")
+            self.db.rollback()
+            raise
+
+    def create_many_entries(self, entries: List[schemas.TimeEntryCreate]) -> List[TimeEntry]:
+        """Create multiple time entries in a single transaction."""
+        created_entries = []
+        try:
+            for entry in entries:
+                db_entry = TimeEntry(**entry.dict())
+                self.db.add(db_entry)
+                created_entries.append(db_entry)
+            
+            self.db.commit()
+            logger.info(f"Successfully created {len(created_entries)} time entries")
+            return created_entries
+        except Exception as e:
+            logger.error(f"Error creating multiple time entries: {str(e)}")
             self.db.rollback()
             raise
 
