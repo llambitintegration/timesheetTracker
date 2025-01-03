@@ -27,6 +27,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 def verify_database():
     """Verify database connection and schema"""
+    logger.info(f"Verifying database connection and schema: {DATABASE_URL}")
     try:
         with engine.connect() as conn:
             logger.info("Successfully connected to database")
