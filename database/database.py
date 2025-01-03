@@ -2,6 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import os
 from utils.logger import Logger
+import models
 
 logger = Logger().get_logger()
 

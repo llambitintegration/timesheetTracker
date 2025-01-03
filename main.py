@@ -11,7 +11,7 @@ import models
 from database import schemas
 import database
 import utils
-from logger import Logger
+from utils.logger import Logger
 
 logger = Logger().get_logger()
 app = FastAPI(title="Timesheet Management API")

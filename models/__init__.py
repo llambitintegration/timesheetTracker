@@ -1,15 +1,8 @@
 
 from .baseModel import Base, BaseModel
 from .customerModel import Customer
-from .projectModel import Project
 from .projectManagerModel import ProjectManager
+from .projectModel import Project
 from .timeEntry import TimeEntry
 
-__all__ = [
-    'Base',
-    'BaseModel',
-    'Customer',
-    'Project',
-    'ProjectManager',
-    'TimeEntry'
-]
+__all__ = ['Base', 'BaseModel', 'Customer', 'ProjectManager', 'Project', 'TimeEntry']
