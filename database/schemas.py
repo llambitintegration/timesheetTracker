@@ -1,6 +1,6 @@
 
 from pydantic import BaseModel, Field, ConfigDict
-from typing import Optional
+from typing import Optional, List
 from datetime import datetime
 from models.timeEntry import TimeEntry as TimeEntryModel
 from models.customerModel import Customer as CustomerModel

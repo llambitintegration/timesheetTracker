@@ -41,3 +41,14 @@ hours
 2025-01-03 18:02:27,391 - TimesheetTracker - INFO - Database tables created successfully
 2025-01-03 18:02:28,432 - TimesheetTracker - INFO - Root endpoint accessed
 2025-01-03 19:26:26,460 - TimesheetTracker - ERROR - Database verification failed: name 'models' is not defined
+2025-01-03 19:31:43,427 - TimesheetTracker - WARNING - Table customers does not exist
+2025-01-03 19:31:55,296 - TimesheetTracker - WARNING - Table customers does not exist
+2025-01-03 19:32:30,895 - TimesheetTracker - WARNING - Table customers does not exist
+2025-01-03 19:32:43,931 - TimesheetTracker - WARNING - Table customers does not exist
+2025-01-03 19:32:44,214 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 19:33:49,195 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 19:34:05,354 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 19:34:46,777 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 19:34:47,499 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-03 19:35:45,928 - TimesheetTracker - INFO - Processing timesheet upload: Hours Tracker.csv
+2025-01-03 19:35:45,944 - TimesheetTracker - ERROR - Error processing timesheet: module 'crud' has no attribute 'create_time_entry'
