@@ -155,3 +155,15 @@ month
 month
   String should match pattern '^(January|February|March|April|May|June|July|August|September|October|November|December)$' [type=string_pattern_mismatch, input_value='', input_type=str]
     For further information visit https://errors.pydantic.dev/2.10/v/string_pattern_mismatch
+2025-01-03 20:02:55,994 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 20:03:13,228 - TimesheetTracker - INFO - Processing timesheet upload: Hours Tracker.csv
+2025-01-03 20:03:13,228 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-03 20:03:13,231 - TimesheetTracker - INFO - Processing 167 rows from CSV file
+2025-01-03 20:03:13,245 - TimesheetTracker - ERROR - Error processing row 165: 1 validation error for TimeEntryCreate
+month
+  String should match pattern '^(January|February|March|April|May|June|July|August|September|October|November|December)$' [type=string_pattern_mismatch, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.10/v/string_pattern_mismatch
+2025-01-03 20:03:13,245 - TimesheetTracker - ERROR - Error processing timesheet: 1 validation error for TimeEntryCreate
+month
+  String should match pattern '^(January|February|March|April|May|June|July|August|September|October|November|December)$' [type=string_pattern_mismatch, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.10/v/string_pattern_mismatch
