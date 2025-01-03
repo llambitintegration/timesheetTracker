@@ -67,11 +67,17 @@ def get_projects(
 
 # Time Entry operations
 def create_time_entry(db: Session, entry: schemas.TimeEntryCreate):
-    db_entry = models.TimeEntry(**entry.dict())
-    db.add(db_entry)
-    db.commit()
-    db.refresh(db_entry)
-    return db_entry
+    try:
+        db_entry = models.TimeEntry(**entry.dict())
+        db.add(db_entry)
+        db.commit()
+        db.refresh(db_entry)
+        logger.info(f"Successfully created time entry for {entry.customer} - {entry.project}")
+        return db_entry
+    except Exception as e:
+        db.rollback()
+        logger.error(f"Error creating time entry: {str(e)}")
+        raise
 
 def get_time_entry(db: Session, entry_id: int):
     return db.query(models.TimeEntry).filter(models.TimeEntry.id == entry_id).first()
