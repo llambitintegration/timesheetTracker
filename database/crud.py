@@ -124,7 +124,7 @@ def get_projects(
     return projects
 
 # Time Entry operations
-def create_time_entry(db: Session, entry: schemas.TimeEntryCreate) -> models.TimeEntry:
+def create_time_entries(db: Session, entry: schemas.TimeEntryCreate) -> models.TimeEntry:
     """Create a new time entry using TimeEntryService."""
     logger.debug("Initializing TimeEntryService for single entry creation")
     from services.time_entry_service import TimeEntryService

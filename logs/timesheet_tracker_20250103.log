@@ -167,3 +167,24 @@ month
 month
   String should match pattern '^(January|February|March|April|May|June|July|August|September|October|November|December)$' [type=string_pattern_mismatch, input_value='', input_type=str]
     For further information visit https://errors.pydantic.dev/2.10/v/string_pattern_mismatch
+2025-01-03 20:05:13,999 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 20:05:26,442 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 20:05:30,584 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 20:05:45,581 - TimesheetTracker - INFO - Processing timesheet upload: Hours Tracker.csv
+2025-01-03 20:05:45,581 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-03 20:05:45,585 - TimesheetTracker - INFO - Processing 167 rows from CSV file
+2025-01-03 20:05:45,602 - TimesheetTracker - INFO - Successfully created 167 time entries from CSV
+2025-01-03 20:05:45,602 - TimesheetTracker - ERROR - Error processing timesheet: module 'crud' has no attribute 'create_time_entries'
+2025-01-03 20:06:14,378 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 20:06:31,865 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 20:06:43,520 - TimesheetTracker - INFO - Processing timesheet upload: Hours Tracker.csv
+2025-01-03 20:06:43,520 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-03 20:06:43,523 - TimesheetTracker - INFO - Processing 167 rows from CSV file
+2025-01-03 20:06:43,541 - TimesheetTracker - INFO - Successfully created 167 time entries from CSV
+2025-01-03 20:06:43,541 - TimesheetTracker - ERROR - Error processing timesheet: module 'crud' has no attribute 'create_time_entries'
+2025-01-03 20:07:25,644 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 20:07:31,153 - TimesheetTracker - INFO - Processing timesheet upload: Hours Tracker.csv
+2025-01-03 20:07:31,153 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-03 20:07:31,157 - TimesheetTracker - INFO - Processing 167 rows from CSV file
+2025-01-03 20:07:31,179 - TimesheetTracker - INFO - Successfully created 167 time entries from CSV
+2025-01-03 20:07:31,179 - TimesheetTracker - ERROR - Error processing timesheet: module 'crud' has no attribute 'create_time_entries'
