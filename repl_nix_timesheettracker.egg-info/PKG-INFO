@@ -1,0 +1,18 @@
+Metadata-Version: 2.1
+Name: repl-nix-timesheettracker
+Version: 0.1.0
+Summary: Add your description here
+Requires-Python: >=3.11
+Requires-Dist: alembic>=1.14.0
+Requires-Dist: crud>=0.1
+Requires-Dist: datasetrising>=1.0.4
+Requires-Dist: fastapi>=0.115.6
+Requires-Dist: logger>=1.4
+Requires-Dist: openpyxl>=3.1.5
+Requires-Dist: pandas>=2.2.3
+Requires-Dist: psycopg2-binary>=2.9.10
+Requires-Dist: pydantic>=2.10.4
+Requires-Dist: python-multipart>=0.0.20
+Requires-Dist: schemas>=0.7.1
+Requires-Dist: sqlalchemy>=2.0.36
+Requires-Dist: uvicorn>=0.34.0

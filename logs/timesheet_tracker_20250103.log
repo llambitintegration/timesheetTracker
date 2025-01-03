@@ -40,3 +40,4 @@ hours
 2025-01-03 18:02:27,304 - TimesheetTracker - ERROR - Database verification failed: name 'models' is not defined
 2025-01-03 18:02:27,391 - TimesheetTracker - INFO - Database tables created successfully
 2025-01-03 18:02:28,432 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-03 19:26:26,460 - TimesheetTracker - ERROR - Database verification failed: name 'models' is not defined
