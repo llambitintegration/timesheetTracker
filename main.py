@@ -1,20 +1,26 @@
-
 from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, Query
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from datetime import datetime, timedelta
 import calendar
-import pandas as pd
 
-import crud
-import models
-from database import schemas
-import database
-import utils
+from database import schemas, crud
+from database.database import get_db, init_database
 from utils.logger import Logger
+from utils import utils
 
 logger = Logger().get_logger()
 app = FastAPI(title="Timesheet Management API")
+
+@app.on_event("startup")
+async def startup_event():
+    """Initialize database on startup"""
+    logger.info("Initializing database on startup")
+    try:
+        init_database()
+    except Exception as e:
+        logger.error(f"Error initializing database: {str(e)}")
+        raise
 
 @app.get("/")
 def read_root():
@@ -25,30 +31,32 @@ def read_root():
         "redoc": "/redoc"
     }
 
-@app.post("/init-db/")
-async def initialize_database(db: Session = Depends(database.get_db)):
-    logger.info("Initializing database")
+@app.post("/upload/", response_model=List[schemas.TimeEntry])
+async def upload_timesheet(
+    file: UploadFile = File(...),
+    db: Session = Depends(get_db)
+):
+    """Upload and process timesheet file"""
+    logger.info(f"Processing timesheet upload: {file.filename}")
     try:
-        # Create all tables
-        models.Base.metadata.create_all(bind=database.engine)
-        
-        # Run Alembic migrations
-        from alembic.config import Config
-        from alembic import command
-        alembic_cfg = Config("alembic.ini")
-        command.upgrade(alembic_cfg, "head")
-        
-        logger.info("Database initialized successfully")
-        return {"status": "success", "message": "Database initialized"}
+        if file.filename.endswith('.xlsx'):
+            entries = utils.parse_excel(file.file)
+        elif file.filename.endswith('.csv'):
+            entries = utils.parse_csv(file.file)
+        else:
+            logger.error(f"Unsupported file format: {file.filename}")
+            raise HTTPException(status_code=400, detail="Unsupported file format")
+
+        if not entries:
+            raise HTTPException(status_code=400, detail="No valid entries found in file")
+
+        created_entries = crud.create_time_entries(db, entries)
+        logger.info(f"Successfully created {len(created_entries)} time entries")
+        return created_entries
     except Exception as e:
-        logger.error(f"Database initialization failed: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.error(f"Error processing timesheet: {str(e)}")
+        raise HTTPException(status_code=400, detail=str(e))
 
-# Create database tables
-models.Base.metadata.create_all(bind=database.engine)
-logger.info("Database tables created successfully")
-
-# Customer endpoints
 @app.post("/customers/", response_model=schemas.Customer)
 def create_customer(customer: schemas.CustomerCreate, db: Session = Depends(database.get_db)):
     logger.info(f"Creating new customer: {customer.name}")
@@ -68,7 +76,6 @@ def read_customer(name: str, db: Session = Depends(database.get_db)):
         raise HTTPException(status_code=404, detail="Customer not found")
     return customer
 
-# Project Manager endpoints
 @app.post("/project-managers/", response_model=schemas.ProjectManager)
 def create_project_manager(
     project_manager: schemas.ProjectManagerCreate,
@@ -91,7 +98,6 @@ def read_project_manager(name: str, db: Session = Depends(database.get_db)):
         raise HTTPException(status_code=404, detail="Project Manager not found")
     return project_manager
 
-# Project endpoints
 @app.post("/projects/", response_model=schemas.Project)
 def create_project(project: schemas.ProjectCreate, db: Session = Depends(database.get_db)):
     logger.info(f"Creating new project: {project.project_id}")
@@ -120,31 +126,25 @@ def read_project(project_id: str, db: Session = Depends(database.get_db)):
         raise HTTPException(status_code=404, detail="Project not found")
     return project
 
-# Time Entry endpoints
-@app.post("/upload/", response_model=List[schemas.TimeEntry])
-async def upload_timesheet(
-    file: UploadFile = File(...),
-    db: Session = Depends(database.get_db)
-):
-    logger.info(f"Processing timesheet upload: {file.filename}")
+@app.post("/init-db/")
+async def initialize_database(db: Session = Depends(database.get_db)):
+    logger.info("Initializing database")
     try:
-        if file.filename.endswith('.xlsx'):
-            entries = utils.parse_excel(file.file)
-        elif file.filename.endswith('.csv'):
-            entries = utils.parse_csv(file.file)
-        else:
-            logger.error(f"Unsupported file format: {file.filename}")
-            raise HTTPException(status_code=400, detail="Unsupported file format")
-
-        if not entries:
-            raise HTTPException(status_code=400, detail="No valid entries found in file")
-
-        created_entries = crud.create_time_entries(db, entries)
-        logger.info(f"Successfully created {len(created_entries)} time entries")
-        return created_entries
+        # Create all tables
+        Base.metadata.create_all(bind=database.engine)
+        
+        # Run Alembic migrations
+        from alembic.config import Config
+        from alembic import command
+        alembic_cfg = Config("alembic.ini")
+        command.upgrade(alembic_cfg, "head")
+        
+        logger.info("Database initialized successfully")
+        return {"status": "success", "message": "Database initialized"}
     except Exception as e:
-        logger.error(f"Error processing timesheet: {str(e)}")
-        raise HTTPException(status_code=400, detail=str(e))
+        logger.error(f"Database initialization failed: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 @app.post("/time-entries/", response_model=schemas.TimeEntry)
 def create_time_entry(entry: schemas.TimeEntryCreate, db: Session = Depends(database.get_db)):

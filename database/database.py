@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import os
 from utils.logger import Logger
-import models
+from models.baseModel import Base
 
 logger = Logger().get_logger()
 
@@ -14,23 +14,32 @@ engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 def verify_database():
+    """Verify database connection and schema"""
     try:
-        # Try connecting to the database
         with engine.connect() as conn:
-            # Check if tables exist
-            for table in models.Base.metadata.tables:
-                if not engine.dialect.has_table(conn, table):
-                    logger.warning(f"Table {table} does not exist")
+            logger.info("Successfully connected to database")
+            for table in Base.metadata.sorted_tables:
+                if not engine.dialect.has_table(conn, table.name):
+                    logger.warning(f"Table {table.name} does not exist")
                     return False
-        return True
+            return True
     except Exception as e:
         logger.error(f"Database verification failed: {str(e)}")
         return False
 
-# Initialize database connection
-verify_database()
+def init_database():
+    """Initialize database schema"""
+    try:
+        logger.info("Initializing database tables")
+        Base.metadata.create_all(bind=engine)
+        logger.info("Database tables created successfully")
+        return True
+    except Exception as e:
+        logger.error(f"Failed to initialize database: {str(e)}")
+        return False
 
 def get_db():
+    """Get database session"""
     db = SessionLocal()
     logger.debug("Database session created")
     try:

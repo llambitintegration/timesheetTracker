@@ -191,3 +191,33 @@ month
 2025-01-03 20:11:09,354 - TimesheetTracker - INFO - Database tables created successfully
 2025-01-03 20:11:16,432 - TimesheetTracker - INFO - Database tables created successfully
 2025-01-03 20:11:17,320 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-03 20:11:32,030 - TimesheetTracker - INFO - Processing timesheet upload: Hours Tracker.csv
+2025-01-03 20:11:32,030 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-03 20:11:32,034 - TimesheetTracker - INFO - Processing 167 rows from CSV file
+2025-01-03 20:11:32,044 - TimesheetTracker - WARNING - Skipping row 98 due to invalid hours: 0
+2025-01-03 20:11:32,048 - TimesheetTracker - WARNING - Skipping row 126 due to invalid hours: 0.0
+2025-01-03 20:11:32,049 - TimesheetTracker - WARNING - Skipping row 130 due to invalid hours: 0.0
+2025-01-03 20:11:32,049 - TimesheetTracker - WARNING - Skipping row 131 due to invalid hours: 0.0
+2025-01-03 20:11:32,050 - TimesheetTracker - WARNING - Skipping row 136 due to invalid hours: 0.0
+2025-01-03 20:11:32,050 - TimesheetTracker - WARNING - Skipping row 137 due to invalid hours: 0.0
+2025-01-03 20:11:32,051 - TimesheetTracker - WARNING - Skipping row 142 due to invalid hours: 0.0
+2025-01-03 20:11:32,052 - TimesheetTracker - WARNING - Skipping row 145 due to invalid hours: 0.0
+2025-01-03 20:11:32,052 - TimesheetTracker - WARNING - Skipping row 146 due to invalid hours: 0.0
+2025-01-03 20:11:32,052 - TimesheetTracker - WARNING - Skipping row 147 due to invalid hours: 0.0
+2025-01-03 20:11:32,054 - TimesheetTracker - WARNING - Skipping row 162 due to invalid hours: 0.0
+2025-01-03 20:11:32,055 - TimesheetTracker - WARNING - Skipping row 165 due to invalid hours: 0
+2025-01-03 20:11:32,055 - TimesheetTracker - WARNING - Skipping row 166 due to invalid hours: 0
+2025-01-03 20:11:32,055 - TimesheetTracker - WARNING - Skipping row 167 due to invalid hours: 0
+2025-01-03 20:11:32,055 - TimesheetTracker - INFO - Successfully created 153 time entries from CSV
+2025-01-03 20:11:32,055 - TimesheetTracker - ERROR - Error processing timesheet: module 'crud' has no attribute 'create_time_entries'
+2025-01-03 20:22:49,542 - TimesheetTracker - INFO - Initializing database tables
+2025-01-03 20:22:50,043 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 20:22:50,074 - TimesheetTracker - INFO - Initializing database on startup
+2025-01-03 20:23:43,988 - TimesheetTracker - INFO - Initializing database tables
+2025-01-03 20:23:44,425 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 20:23:44,455 - TimesheetTracker - INFO - Initializing database on startup
+2025-01-03 20:23:44,455 - TimesheetTracker - INFO - Initializing database tables
+2025-01-03 20:23:44,596 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 20:24:16,987 - TimesheetTracker - INFO - Initializing database on startup
+2025-01-03 20:24:16,989 - TimesheetTracker - INFO - Initializing database tables
+2025-01-03 20:24:17,449 - TimesheetTracker - INFO - Database tables created successfully
