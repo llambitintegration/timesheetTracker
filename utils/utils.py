@@ -49,14 +49,14 @@ def parse_csv(file) -> List[schemas.TimeEntryCreate]:
                 week_number = 0
                 
             entry = schemas.TimeEntryCreate(
-                week_number=week_number,
-                month=str(row['Month']),
-                category=str(row['Category']) if not pd.isna(row['Category']) else "Other",
-                subcategory=str(row['Subcategory']) if not pd.isna(row['Subcategory']) else "General",
-                customer=str(row['Customer']) if not pd.isna(row['Customer']) else None,
-                project=str(row['Project']) if not pd.isna(row['Project']) else None,
-                task_description=str(row['Task Description']) if not pd.isna(row['Task Description']) else None,
-                hours=hours
+                week_number=week_number if not pd.isna(row['Week Number']) else 0,
+                month=str(row['Month']) if not pd.isna(row['Month']) and row['Month'] != '' else "January",
+                category=str(row['Category']) if not pd.isna(row['Category']) and row['Category'] != '' else "Other",
+                subcategory=str(row['Subcategory']) if not pd.isna(row['Subcategory']) and row['Subcategory'] != '' else "General",
+                customer=str(row['Customer']) if not pd.isna(row['Customer']) and row['Customer'] != '' else None,
+                project=str(row['Project']) if not pd.isna(row['Project']) and row['Project'] != '' else None,
+                task_description=str(row['Task Description']) if not pd.isna(row['Task Description']) and row['Task Description'] != '' else None,
+                hours=hours if not pd.isna(row['Hours']) else 0.0
             )
             entries.append(entry)
             logger.debug(f"Successfully processed row {index + 1}")
@@ -104,14 +104,14 @@ def parse_csv(file) -> List[schemas.TimeEntryCreate]:
                 week_number = 0
                 
             entry = schemas.TimeEntryCreate(
-                week_number=week_number,
-                month=str(row['Month']),
-                category=str(row['Category']) if not pd.isna(row['Category']) else "Other",
-                subcategory=str(row['Subcategory']) if not pd.isna(row['Subcategory']) else "General",
-                customer=str(row['Customer']) if not pd.isna(row['Customer']) else None,
-                project=str(row['Project']) if not pd.isna(row['Project']) else None,
-                task_description=str(row['Task Description']) if not pd.isna(row['Task Description']) else None,
-                hours=hours
+                week_number=week_number if not pd.isna(row['Week Number']) else 0,
+                month=str(row['Month']) if not pd.isna(row['Month']) and row['Month'] != '' else "January",
+                category=str(row['Category']) if not pd.isna(row['Category']) and row['Category'] != '' else "Other",
+                subcategory=str(row['Subcategory']) if not pd.isna(row['Subcategory']) and row['Subcategory'] != '' else "General",
+                customer=str(row['Customer']) if not pd.isna(row['Customer']) and row['Customer'] != '' else None,
+                project=str(row['Project']) if not pd.isna(row['Project']) and row['Project'] != '' else None,
+                task_description=str(row['Task Description']) if not pd.isna(row['Task Description']) and row['Task Description'] != '' else None,
+                hours=hours if not pd.isna(row['Hours']) else 0.0
             )
             entries.append(entry)
             logger.debug(f"Successfully processed row {index + 1}")
@@ -156,14 +156,14 @@ def parse_excel(file) -> List[schemas.TimeEntryCreate]:
                 week_number = 0
                 
             entry = schemas.TimeEntryCreate(
-                week_number=week_number,
-                month=str(row['Month']),
-                category=str(row['Category']) if not pd.isna(row['Category']) else "Other",
-                subcategory=str(row['Subcategory']) if not pd.isna(row['Subcategory']) else "General",
-                customer=str(row['Customer']) if not pd.isna(row['Customer']) else None,
-                project=str(row['Project']) if not pd.isna(row['Project']) else None,
-                task_description=str(row['Task Description']) if not pd.isna(row['Task Description']) else None,
-                hours=hours
+                week_number=week_number if not pd.isna(row['Week Number']) else 0,
+                month=str(row['Month']) if not pd.isna(row['Month']) and row['Month'] != '' else "January",
+                category=str(row['Category']) if not pd.isna(row['Category']) and row['Category'] != '' else "Other",
+                subcategory=str(row['Subcategory']) if not pd.isna(row['Subcategory']) and row['Subcategory'] != '' else "General",
+                customer=str(row['Customer']) if not pd.isna(row['Customer']) and row['Customer'] != '' else None,
+                project=str(row['Project']) if not pd.isna(row['Project']) and row['Project'] != '' else None,
+                task_description=str(row['Task Description']) if not pd.isna(row['Task Description']) and row['Task Description'] != '' else None,
+                hours=hours if not pd.isna(row['Hours']) else 0.0
             )
             entries.append(entry)
             logger.debug(f"Successfully processed row {index + 1}")
