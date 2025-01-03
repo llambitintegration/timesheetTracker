@@ -1,21 +1,48 @@
+
 from pydantic import BaseModel, Field
 from typing import Optional, List
 from datetime import datetime
 
+# Customer schemas
 class CustomerBase(BaseModel):
     name: str
-    email: Optional[str] = None
-    phone: Optional[str] = None
+    location: str
 
 class CustomerCreate(CustomerBase):
     pass
 
 class Customer(CustomerBase):
-    id: int
-
     class Config:
         from_attributes = True
 
+# Project Manager schemas
+class ProjectManagerBase(BaseModel):
+    name: str
+    email: str
+
+class ProjectManagerCreate(ProjectManagerBase):
+    pass
+
+class ProjectManager(ProjectManagerBase):
+    class Config:
+        from_attributes = True
+
+# Project schemas
+class ProjectBase(BaseModel):
+    project_id: str
+    customer_name: str
+    location: str
+    project_manager_name: str
+    project_type: str
+
+class ProjectCreate(ProjectBase):
+    pass
+
+class Project(ProjectBase):
+    class Config:
+        from_attributes = True
+
+# Time Entry schemas
 class TimeEntryBase(BaseModel):
     week_number: int = Field(..., ge=1, le=53)
     month: str = Field(..., pattern=r'^(January|February|March|April|May|June|July|August|September|October|November|December)$')
