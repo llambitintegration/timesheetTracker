@@ -431,3 +431,723 @@ month
 2025-01-03 23:03:21,858 - TimesheetTracker - DEBUG - Alembic config loaded from: alembic.ini
 2025-01-03 23:03:21,859 - TimesheetTracker - DEBUG - Script location: migrations
 2025-01-03 23:03:21,859 - TimesheetTracker - INFO - Starting migration process
+2025-01-03 23:04:20,683 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-03 23:04:20,684 - TimesheetTracker - INFO - Verifying database connection and schema: postgresql+psycopg2://timesheetDatabase_owner:imz1MH3OjLef@ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-03 23:04:20,991 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-03 23:04:20,991 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-03 23:04:20,992 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-03 23:04:20,992 - TimesheetTracker - INFO - Checking 4 tables in schema
+2025-01-03 23:04:20,992 - TimesheetTracker - DEBUG - Verifying table: customers
+2025-01-03 23:04:21,036 - TimesheetTracker - WARNING - Table customers does not exist
+2025-01-03 23:04:21,036 - TimesheetTracker - DEBUG - Verifying table: project_managers
+2025-01-03 23:04:21,056 - TimesheetTracker - WARNING - Table project_managers does not exist
+2025-01-03 23:04:21,056 - TimesheetTracker - DEBUG - Verifying table: projects
+2025-01-03 23:04:21,076 - TimesheetTracker - WARNING - Table projects does not exist
+2025-01-03 23:04:21,076 - TimesheetTracker - DEBUG - Verifying table: time_entries
+2025-01-03 23:04:21,095 - TimesheetTracker - WARNING - Table time_entries does not exist
+2025-01-03 23:04:21,095 - TimesheetTracker - WARNING - Missing tables: customers, project_managers, projects, time_entries
+2025-01-03 23:04:21,115 - TimesheetTracker - WARNING - Database verification failed - schema may need initialization
+2025-01-03 23:04:21,358 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-03 23:04:46,140 - TimesheetTracker - DEBUG - Database session created
+2025-01-03 23:04:46,141 - TimesheetTracker - INFO - Initializing database
+2025-01-03 23:04:46,141 - TimesheetTracker - INFO - Verifying database connection and schema: postgresql+psycopg2://timesheetDatabase_owner:imz1MH3OjLef@ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-03 23:04:46,162 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-03 23:04:46,163 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-03 23:04:46,163 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-03 23:04:46,163 - TimesheetTracker - INFO - Checking 4 tables in schema
+2025-01-03 23:04:46,163 - TimesheetTracker - DEBUG - Verifying table: customers
+2025-01-03 23:04:46,203 - TimesheetTracker - WARNING - Table customers does not exist
+2025-01-03 23:04:46,203 - TimesheetTracker - DEBUG - Verifying table: project_managers
+2025-01-03 23:04:46,222 - TimesheetTracker - WARNING - Table project_managers does not exist
+2025-01-03 23:04:46,222 - TimesheetTracker - DEBUG - Verifying table: projects
+2025-01-03 23:04:46,242 - TimesheetTracker - WARNING - Table projects does not exist
+2025-01-03 23:04:46,242 - TimesheetTracker - DEBUG - Verifying table: time_entries
+2025-01-03 23:04:46,262 - TimesheetTracker - WARNING - Table time_entries does not exist
+2025-01-03 23:04:46,262 - TimesheetTracker - WARNING - Missing tables: customers, project_managers, projects, time_entries
+2025-01-03 23:04:46,325 - TimesheetTracker - INFO - Running database migrations
+2025-01-03 23:04:46,326 - TimesheetTracker - DEBUG - Alembic config loaded from: alembic.ini
+2025-01-03 23:04:46,326 - TimesheetTracker - DEBUG - Script location: migrations
+2025-01-03 23:04:46,326 - TimesheetTracker - INFO - Starting migration process
+2025-01-03 23:05:36,281 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-03 23:05:36,281 - TimesheetTracker - INFO - Verifying database connection and schema: postgresql+psycopg2://timesheetDatabase_owner:imz1MH3OjLef@ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-03 23:05:36,601 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-03 23:05:36,602 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-03 23:05:36,602 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-03 23:05:36,602 - TimesheetTracker - INFO - Checking 4 tables in schema
+2025-01-03 23:05:36,602 - TimesheetTracker - DEBUG - Verifying table: customers
+2025-01-03 23:05:36,645 - TimesheetTracker - DEBUG - Table customers exists with columns: ['name', 'contact_email', 'industry', 'status', 'address', 'phone', 'id', 'created_at', 'updated_at']
+2025-01-03 23:05:36,647 - TimesheetTracker - DEBUG - Verifying table: project_managers
+2025-01-03 23:05:36,667 - TimesheetTracker - DEBUG - Table project_managers exists with columns: ['name', 'email', 'id', 'created_at', 'updated_at']
+2025-01-03 23:05:36,668 - TimesheetTracker - DEBUG - Verifying table: projects
+2025-01-03 23:05:36,688 - TimesheetTracker - DEBUG - Table projects exists with columns: ['project_id', 'name', 'location', 'description', 'customer', 'project_manager', 'status', 'id', 'created_at', 'updated_at']
+2025-01-03 23:05:36,688 - TimesheetTracker - DEBUG - Verifying table: time_entries
+2025-01-03 23:05:36,708 - TimesheetTracker - DEBUG - Table time_entries exists with columns: ['week_number', 'month', 'category', 'subcategory', 'customer', 'project', 'task_description', 'hours', 'created_at', 'updated_at', 'id']
+2025-01-03 23:05:36,708 - TimesheetTracker - INFO - Found tables: customers, project_managers, projects, time_entries
+2025-01-03 23:05:36,708 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-03 23:05:38,019 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-03 23:05:46,226 - TimesheetTracker - DEBUG - Database session created
+2025-01-03 23:05:46,227 - TimesheetTracker - INFO - Processing timesheet upload: Hours Tracker.csv
+2025-01-03 23:05:46,227 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-03 23:05:46,227 - TimesheetTracker - DEBUG - Reading CSV file into pandas DataFrame
+2025-01-03 23:05:46,231 - TimesheetTracker - INFO - Processing 167 rows from CSV file
+2025-01-03 23:05:46,231 - TimesheetTracker - DEBUG - Processing row 1/167
+2025-01-03 23:05:46,232 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-03 23:05:46,232 - TimesheetTracker - DEBUG - Processing row 2/167
+2025-01-03 23:05:46,232 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-03 23:05:46,232 - TimesheetTracker - DEBUG - Processing row 3/167
+2025-01-03 23:05:46,232 - TimesheetTracker - DEBUG - Successfully processed row 3
+2025-01-03 23:05:46,233 - TimesheetTracker - DEBUG - Processing row 4/167
+2025-01-03 23:05:46,233 - TimesheetTracker - DEBUG - Successfully processed row 4
+2025-01-03 23:05:46,233 - TimesheetTracker - DEBUG - Processing row 5/167
+2025-01-03 23:05:46,233 - TimesheetTracker - DEBUG - Successfully processed row 5
+2025-01-03 23:05:46,233 - TimesheetTracker - DEBUG - Processing row 6/167
+2025-01-03 23:05:46,234 - TimesheetTracker - DEBUG - Successfully processed row 6
+2025-01-03 23:05:46,234 - TimesheetTracker - DEBUG - Processing row 7/167
+2025-01-03 23:05:46,234 - TimesheetTracker - DEBUG - Successfully processed row 7
+2025-01-03 23:05:46,234 - TimesheetTracker - DEBUG - Processing row 8/167
+2025-01-03 23:05:46,234 - TimesheetTracker - DEBUG - Successfully processed row 8
+2025-01-03 23:05:46,235 - TimesheetTracker - DEBUG - Processing row 9/167
+2025-01-03 23:05:46,235 - TimesheetTracker - DEBUG - Successfully processed row 9
+2025-01-03 23:05:46,235 - TimesheetTracker - DEBUG - Processing row 10/167
+2025-01-03 23:05:46,235 - TimesheetTracker - DEBUG - Successfully processed row 10
+2025-01-03 23:05:46,235 - TimesheetTracker - DEBUG - Processing row 11/167
+2025-01-03 23:05:46,235 - TimesheetTracker - DEBUG - Successfully processed row 11
+2025-01-03 23:05:46,236 - TimesheetTracker - DEBUG - Processing row 12/167
+2025-01-03 23:05:46,236 - TimesheetTracker - DEBUG - Successfully processed row 12
+2025-01-03 23:05:46,236 - TimesheetTracker - DEBUG - Processing row 13/167
+2025-01-03 23:05:46,236 - TimesheetTracker - DEBUG - Successfully processed row 13
+2025-01-03 23:05:46,237 - TimesheetTracker - DEBUG - Processing row 14/167
+2025-01-03 23:05:46,237 - TimesheetTracker - DEBUG - Successfully processed row 14
+2025-01-03 23:05:46,237 - TimesheetTracker - DEBUG - Processing row 15/167
+2025-01-03 23:05:46,237 - TimesheetTracker - DEBUG - Successfully processed row 15
+2025-01-03 23:05:46,237 - TimesheetTracker - DEBUG - Processing row 16/167
+2025-01-03 23:05:46,238 - TimesheetTracker - DEBUG - Successfully processed row 16
+2025-01-03 23:05:46,238 - TimesheetTracker - DEBUG - Processing row 17/167
+2025-01-03 23:05:46,238 - TimesheetTracker - DEBUG - Successfully processed row 17
+2025-01-03 23:05:46,238 - TimesheetTracker - DEBUG - Processing row 18/167
+2025-01-03 23:05:46,239 - TimesheetTracker - DEBUG - Successfully processed row 18
+2025-01-03 23:05:46,239 - TimesheetTracker - DEBUG - Processing row 19/167
+2025-01-03 23:05:46,239 - TimesheetTracker - DEBUG - Successfully processed row 19
+2025-01-03 23:05:46,239 - TimesheetTracker - DEBUG - Processing row 20/167
+2025-01-03 23:05:46,240 - TimesheetTracker - DEBUG - Successfully processed row 20
+2025-01-03 23:05:46,240 - TimesheetTracker - DEBUG - Processing row 21/167
+2025-01-03 23:05:46,240 - TimesheetTracker - DEBUG - Successfully processed row 21
+2025-01-03 23:05:46,241 - TimesheetTracker - DEBUG - Processing row 22/167
+2025-01-03 23:05:46,241 - TimesheetTracker - DEBUG - Successfully processed row 22
+2025-01-03 23:05:46,241 - TimesheetTracker - DEBUG - Processing row 23/167
+2025-01-03 23:05:46,242 - TimesheetTracker - DEBUG - Successfully processed row 23
+2025-01-03 23:05:46,242 - TimesheetTracker - DEBUG - Processing row 24/167
+2025-01-03 23:05:46,242 - TimesheetTracker - DEBUG - Successfully processed row 24
+2025-01-03 23:05:46,242 - TimesheetTracker - DEBUG - Processing row 25/167
+2025-01-03 23:05:46,243 - TimesheetTracker - DEBUG - Successfully processed row 25
+2025-01-03 23:05:46,243 - TimesheetTracker - DEBUG - Processing row 26/167
+2025-01-03 23:05:46,243 - TimesheetTracker - DEBUG - Successfully processed row 26
+2025-01-03 23:05:46,243 - TimesheetTracker - DEBUG - Processing row 27/167
+2025-01-03 23:05:46,244 - TimesheetTracker - DEBUG - Successfully processed row 27
+2025-01-03 23:05:46,244 - TimesheetTracker - DEBUG - Processing row 28/167
+2025-01-03 23:05:46,245 - TimesheetTracker - DEBUG - Successfully processed row 28
+2025-01-03 23:05:46,245 - TimesheetTracker - DEBUG - Processing row 29/167
+2025-01-03 23:05:46,245 - TimesheetTracker - DEBUG - Successfully processed row 29
+2025-01-03 23:05:46,246 - TimesheetTracker - DEBUG - Processing row 30/167
+2025-01-03 23:05:46,246 - TimesheetTracker - DEBUG - Successfully processed row 30
+2025-01-03 23:05:46,246 - TimesheetTracker - DEBUG - Processing row 31/167
+2025-01-03 23:05:46,246 - TimesheetTracker - DEBUG - Successfully processed row 31
+2025-01-03 23:05:46,247 - TimesheetTracker - DEBUG - Processing row 32/167
+2025-01-03 23:05:46,247 - TimesheetTracker - DEBUG - Successfully processed row 32
+2025-01-03 23:05:46,247 - TimesheetTracker - DEBUG - Processing row 33/167
+2025-01-03 23:05:46,247 - TimesheetTracker - DEBUG - Successfully processed row 33
+2025-01-03 23:05:46,248 - TimesheetTracker - DEBUG - Processing row 34/167
+2025-01-03 23:05:46,248 - TimesheetTracker - DEBUG - Successfully processed row 34
+2025-01-03 23:05:46,248 - TimesheetTracker - DEBUG - Processing row 35/167
+2025-01-03 23:05:46,248 - TimesheetTracker - DEBUG - Successfully processed row 35
+2025-01-03 23:05:46,248 - TimesheetTracker - DEBUG - Processing row 36/167
+2025-01-03 23:05:46,248 - TimesheetTracker - DEBUG - Successfully processed row 36
+2025-01-03 23:05:46,249 - TimesheetTracker - DEBUG - Processing row 37/167
+2025-01-03 23:05:46,249 - TimesheetTracker - DEBUG - Successfully processed row 37
+2025-01-03 23:05:46,249 - TimesheetTracker - DEBUG - Processing row 38/167
+2025-01-03 23:05:46,249 - TimesheetTracker - DEBUG - Successfully processed row 38
+2025-01-03 23:05:46,250 - TimesheetTracker - DEBUG - Processing row 39/167
+2025-01-03 23:05:46,250 - TimesheetTracker - DEBUG - Successfully processed row 39
+2025-01-03 23:05:46,250 - TimesheetTracker - DEBUG - Processing row 40/167
+2025-01-03 23:05:46,251 - TimesheetTracker - DEBUG - Successfully processed row 40
+2025-01-03 23:05:46,251 - TimesheetTracker - DEBUG - Processing row 41/167
+2025-01-03 23:05:46,251 - TimesheetTracker - DEBUG - Successfully processed row 41
+2025-01-03 23:05:46,251 - TimesheetTracker - DEBUG - Processing row 42/167
+2025-01-03 23:05:46,252 - TimesheetTracker - DEBUG - Successfully processed row 42
+2025-01-03 23:05:46,252 - TimesheetTracker - DEBUG - Processing row 43/167
+2025-01-03 23:05:46,252 - TimesheetTracker - DEBUG - Successfully processed row 43
+2025-01-03 23:05:46,252 - TimesheetTracker - DEBUG - Processing row 44/167
+2025-01-03 23:05:46,253 - TimesheetTracker - DEBUG - Successfully processed row 44
+2025-01-03 23:05:46,253 - TimesheetTracker - DEBUG - Processing row 45/167
+2025-01-03 23:05:46,253 - TimesheetTracker - DEBUG - Successfully processed row 45
+2025-01-03 23:05:46,254 - TimesheetTracker - DEBUG - Processing row 46/167
+2025-01-03 23:05:46,254 - TimesheetTracker - DEBUG - Successfully processed row 46
+2025-01-03 23:05:46,254 - TimesheetTracker - DEBUG - Processing row 47/167
+2025-01-03 23:05:46,254 - TimesheetTracker - DEBUG - Successfully processed row 47
+2025-01-03 23:05:46,255 - TimesheetTracker - DEBUG - Processing row 48/167
+2025-01-03 23:05:46,255 - TimesheetTracker - DEBUG - Successfully processed row 48
+2025-01-03 23:05:46,255 - TimesheetTracker - DEBUG - Processing row 49/167
+2025-01-03 23:05:46,255 - TimesheetTracker - DEBUG - Successfully processed row 49
+2025-01-03 23:05:46,256 - TimesheetTracker - DEBUG - Processing row 50/167
+2025-01-03 23:05:46,256 - TimesheetTracker - DEBUG - Successfully processed row 50
+2025-01-03 23:05:46,256 - TimesheetTracker - DEBUG - Processing row 51/167
+2025-01-03 23:05:46,256 - TimesheetTracker - DEBUG - Successfully processed row 51
+2025-01-03 23:05:46,257 - TimesheetTracker - DEBUG - Processing row 52/167
+2025-01-03 23:05:46,257 - TimesheetTracker - DEBUG - Successfully processed row 52
+2025-01-03 23:05:46,257 - TimesheetTracker - DEBUG - Processing row 53/167
+2025-01-03 23:05:46,258 - TimesheetTracker - DEBUG - Successfully processed row 53
+2025-01-03 23:05:46,258 - TimesheetTracker - DEBUG - Processing row 54/167
+2025-01-03 23:05:46,258 - TimesheetTracker - DEBUG - Successfully processed row 54
+2025-01-03 23:05:46,258 - TimesheetTracker - DEBUG - Processing row 55/167
+2025-01-03 23:05:46,259 - TimesheetTracker - DEBUG - Successfully processed row 55
+2025-01-03 23:05:46,259 - TimesheetTracker - DEBUG - Processing row 56/167
+2025-01-03 23:05:46,259 - TimesheetTracker - DEBUG - Successfully processed row 56
+2025-01-03 23:05:46,259 - TimesheetTracker - DEBUG - Processing row 57/167
+2025-01-03 23:05:46,259 - TimesheetTracker - DEBUG - Successfully processed row 57
+2025-01-03 23:05:46,260 - TimesheetTracker - DEBUG - Processing row 58/167
+2025-01-03 23:05:46,260 - TimesheetTracker - DEBUG - Successfully processed row 58
+2025-01-03 23:05:46,260 - TimesheetTracker - DEBUG - Processing row 59/167
+2025-01-03 23:05:46,260 - TimesheetTracker - DEBUG - Successfully processed row 59
+2025-01-03 23:05:46,261 - TimesheetTracker - DEBUG - Processing row 60/167
+2025-01-03 23:05:46,261 - TimesheetTracker - DEBUG - Successfully processed row 60
+2025-01-03 23:05:46,261 - TimesheetTracker - DEBUG - Processing row 61/167
+2025-01-03 23:05:46,261 - TimesheetTracker - DEBUG - Successfully processed row 61
+2025-01-03 23:05:46,262 - TimesheetTracker - DEBUG - Processing row 62/167
+2025-01-03 23:05:46,262 - TimesheetTracker - DEBUG - Successfully processed row 62
+2025-01-03 23:05:46,262 - TimesheetTracker - DEBUG - Processing row 63/167
+2025-01-03 23:05:46,263 - TimesheetTracker - DEBUG - Successfully processed row 63
+2025-01-03 23:05:46,263 - TimesheetTracker - DEBUG - Processing row 64/167
+2025-01-03 23:05:46,263 - TimesheetTracker - DEBUG - Successfully processed row 64
+2025-01-03 23:05:46,264 - TimesheetTracker - DEBUG - Processing row 65/167
+2025-01-03 23:05:46,264 - TimesheetTracker - DEBUG - Successfully processed row 65
+2025-01-03 23:05:46,265 - TimesheetTracker - DEBUG - Processing row 66/167
+2025-01-03 23:05:46,265 - TimesheetTracker - DEBUG - Successfully processed row 66
+2025-01-03 23:05:46,265 - TimesheetTracker - DEBUG - Processing row 67/167
+2025-01-03 23:05:46,265 - TimesheetTracker - DEBUG - Successfully processed row 67
+2025-01-03 23:05:46,266 - TimesheetTracker - DEBUG - Processing row 68/167
+2025-01-03 23:05:46,266 - TimesheetTracker - DEBUG - Successfully processed row 68
+2025-01-03 23:05:46,266 - TimesheetTracker - DEBUG - Processing row 69/167
+2025-01-03 23:05:46,266 - TimesheetTracker - DEBUG - Successfully processed row 69
+2025-01-03 23:05:46,266 - TimesheetTracker - DEBUG - Processing row 70/167
+2025-01-03 23:05:46,267 - TimesheetTracker - DEBUG - Successfully processed row 70
+2025-01-03 23:05:46,267 - TimesheetTracker - DEBUG - Processing row 71/167
+2025-01-03 23:05:46,267 - TimesheetTracker - DEBUG - Successfully processed row 71
+2025-01-03 23:05:46,267 - TimesheetTracker - DEBUG - Processing row 72/167
+2025-01-03 23:05:46,267 - TimesheetTracker - DEBUG - Successfully processed row 72
+2025-01-03 23:05:46,268 - TimesheetTracker - DEBUG - Processing row 73/167
+2025-01-03 23:05:46,268 - TimesheetTracker - DEBUG - Successfully processed row 73
+2025-01-03 23:05:46,268 - TimesheetTracker - DEBUG - Processing row 74/167
+2025-01-03 23:05:46,269 - TimesheetTracker - DEBUG - Successfully processed row 74
+2025-01-03 23:05:46,269 - TimesheetTracker - DEBUG - Processing row 75/167
+2025-01-03 23:05:46,269 - TimesheetTracker - DEBUG - Successfully processed row 75
+2025-01-03 23:05:46,269 - TimesheetTracker - DEBUG - Processing row 76/167
+2025-01-03 23:05:46,270 - TimesheetTracker - DEBUG - Successfully processed row 76
+2025-01-03 23:05:46,270 - TimesheetTracker - DEBUG - Processing row 77/167
+2025-01-03 23:05:46,270 - TimesheetTracker - DEBUG - Successfully processed row 77
+2025-01-03 23:05:46,270 - TimesheetTracker - DEBUG - Processing row 78/167
+2025-01-03 23:05:46,271 - TimesheetTracker - DEBUG - Successfully processed row 78
+2025-01-03 23:05:46,271 - TimesheetTracker - DEBUG - Processing row 79/167
+2025-01-03 23:05:46,271 - TimesheetTracker - DEBUG - Successfully processed row 79
+2025-01-03 23:05:46,271 - TimesheetTracker - DEBUG - Processing row 80/167
+2025-01-03 23:05:46,272 - TimesheetTracker - DEBUG - Successfully processed row 80
+2025-01-03 23:05:46,272 - TimesheetTracker - DEBUG - Processing row 81/167
+2025-01-03 23:05:46,272 - TimesheetTracker - DEBUG - Successfully processed row 81
+2025-01-03 23:05:46,272 - TimesheetTracker - DEBUG - Processing row 82/167
+2025-01-03 23:05:46,272 - TimesheetTracker - DEBUG - Successfully processed row 82
+2025-01-03 23:05:46,273 - TimesheetTracker - DEBUG - Processing row 83/167
+2025-01-03 23:05:46,273 - TimesheetTracker - DEBUG - Successfully processed row 83
+2025-01-03 23:05:46,273 - TimesheetTracker - DEBUG - Processing row 84/167
+2025-01-03 23:05:46,273 - TimesheetTracker - DEBUG - Successfully processed row 84
+2025-01-03 23:05:46,273 - TimesheetTracker - DEBUG - Processing row 85/167
+2025-01-03 23:05:46,274 - TimesheetTracker - DEBUG - Successfully processed row 85
+2025-01-03 23:05:46,274 - TimesheetTracker - DEBUG - Processing row 86/167
+2025-01-03 23:05:46,274 - TimesheetTracker - DEBUG - Successfully processed row 86
+2025-01-03 23:05:46,274 - TimesheetTracker - DEBUG - Processing row 87/167
+2025-01-03 23:05:46,274 - TimesheetTracker - DEBUG - Successfully processed row 87
+2025-01-03 23:05:46,275 - TimesheetTracker - DEBUG - Processing row 88/167
+2025-01-03 23:05:46,275 - TimesheetTracker - DEBUG - Successfully processed row 88
+2025-01-03 23:05:46,275 - TimesheetTracker - DEBUG - Processing row 89/167
+2025-01-03 23:05:46,275 - TimesheetTracker - DEBUG - Successfully processed row 89
+2025-01-03 23:05:46,275 - TimesheetTracker - DEBUG - Processing row 90/167
+2025-01-03 23:05:46,276 - TimesheetTracker - DEBUG - Successfully processed row 90
+2025-01-03 23:05:46,276 - TimesheetTracker - DEBUG - Processing row 91/167
+2025-01-03 23:05:46,276 - TimesheetTracker - DEBUG - Successfully processed row 91
+2025-01-03 23:05:46,276 - TimesheetTracker - DEBUG - Processing row 92/167
+2025-01-03 23:05:46,277 - TimesheetTracker - DEBUG - Successfully processed row 92
+2025-01-03 23:05:46,277 - TimesheetTracker - DEBUG - Processing row 93/167
+2025-01-03 23:05:46,277 - TimesheetTracker - DEBUG - Successfully processed row 93
+2025-01-03 23:05:46,277 - TimesheetTracker - DEBUG - Processing row 94/167
+2025-01-03 23:05:46,277 - TimesheetTracker - DEBUG - Successfully processed row 94
+2025-01-03 23:05:46,277 - TimesheetTracker - DEBUG - Processing row 95/167
+2025-01-03 23:05:46,277 - TimesheetTracker - DEBUG - Successfully processed row 95
+2025-01-03 23:05:46,278 - TimesheetTracker - DEBUG - Processing row 96/167
+2025-01-03 23:05:46,278 - TimesheetTracker - DEBUG - Successfully processed row 96
+2025-01-03 23:05:46,278 - TimesheetTracker - DEBUG - Processing row 97/167
+2025-01-03 23:05:46,278 - TimesheetTracker - DEBUG - Successfully processed row 97
+2025-01-03 23:05:46,278 - TimesheetTracker - DEBUG - Processing row 98/167
+2025-01-03 23:05:46,278 - TimesheetTracker - WARNING - Skipping row 98 due to invalid hours: 0
+2025-01-03 23:05:46,279 - TimesheetTracker - DEBUG - Processing row 99/167
+2025-01-03 23:05:46,279 - TimesheetTracker - DEBUG - Successfully processed row 99
+2025-01-03 23:05:46,279 - TimesheetTracker - DEBUG - Processing row 100/167
+2025-01-03 23:05:46,279 - TimesheetTracker - DEBUG - Successfully processed row 100
+2025-01-03 23:05:46,279 - TimesheetTracker - DEBUG - Processing row 101/167
+2025-01-03 23:05:46,279 - TimesheetTracker - DEBUG - Successfully processed row 101
+2025-01-03 23:05:46,279 - TimesheetTracker - DEBUG - Processing row 102/167
+2025-01-03 23:05:46,280 - TimesheetTracker - DEBUG - Successfully processed row 102
+2025-01-03 23:05:46,280 - TimesheetTracker - DEBUG - Processing row 103/167
+2025-01-03 23:05:46,280 - TimesheetTracker - DEBUG - Successfully processed row 103
+2025-01-03 23:05:46,280 - TimesheetTracker - DEBUG - Processing row 104/167
+2025-01-03 23:05:46,280 - TimesheetTracker - DEBUG - Successfully processed row 104
+2025-01-03 23:05:46,280 - TimesheetTracker - DEBUG - Processing row 105/167
+2025-01-03 23:05:46,281 - TimesheetTracker - DEBUG - Successfully processed row 105
+2025-01-03 23:05:46,281 - TimesheetTracker - DEBUG - Processing row 106/167
+2025-01-03 23:05:46,281 - TimesheetTracker - DEBUG - Successfully processed row 106
+2025-01-03 23:05:46,281 - TimesheetTracker - DEBUG - Processing row 107/167
+2025-01-03 23:05:46,282 - TimesheetTracker - DEBUG - Successfully processed row 107
+2025-01-03 23:05:46,282 - TimesheetTracker - DEBUG - Processing row 108/167
+2025-01-03 23:05:46,282 - TimesheetTracker - DEBUG - Successfully processed row 108
+2025-01-03 23:05:46,283 - TimesheetTracker - DEBUG - Processing row 109/167
+2025-01-03 23:05:46,283 - TimesheetTracker - DEBUG - Successfully processed row 109
+2025-01-03 23:05:46,283 - TimesheetTracker - DEBUG - Processing row 110/167
+2025-01-03 23:05:46,283 - TimesheetTracker - DEBUG - Successfully processed row 110
+2025-01-03 23:05:46,283 - TimesheetTracker - DEBUG - Processing row 111/167
+2025-01-03 23:05:46,284 - TimesheetTracker - DEBUG - Successfully processed row 111
+2025-01-03 23:05:46,284 - TimesheetTracker - DEBUG - Processing row 112/167
+2025-01-03 23:05:46,284 - TimesheetTracker - DEBUG - Successfully processed row 112
+2025-01-03 23:05:46,284 - TimesheetTracker - DEBUG - Processing row 113/167
+2025-01-03 23:05:46,285 - TimesheetTracker - DEBUG - Successfully processed row 113
+2025-01-03 23:05:46,285 - TimesheetTracker - DEBUG - Processing row 114/167
+2025-01-03 23:05:46,285 - TimesheetTracker - DEBUG - Successfully processed row 114
+2025-01-03 23:05:46,285 - TimesheetTracker - DEBUG - Processing row 115/167
+2025-01-03 23:05:46,286 - TimesheetTracker - DEBUG - Successfully processed row 115
+2025-01-03 23:05:46,286 - TimesheetTracker - DEBUG - Processing row 116/167
+2025-01-03 23:05:46,286 - TimesheetTracker - DEBUG - Successfully processed row 116
+2025-01-03 23:05:46,286 - TimesheetTracker - DEBUG - Processing row 117/167
+2025-01-03 23:05:46,287 - TimesheetTracker - DEBUG - Successfully processed row 117
+2025-01-03 23:05:46,287 - TimesheetTracker - DEBUG - Processing row 118/167
+2025-01-03 23:05:46,287 - TimesheetTracker - DEBUG - Successfully processed row 118
+2025-01-03 23:05:46,287 - TimesheetTracker - DEBUG - Processing row 119/167
+2025-01-03 23:05:46,287 - TimesheetTracker - DEBUG - Successfully processed row 119
+2025-01-03 23:05:46,288 - TimesheetTracker - DEBUG - Processing row 120/167
+2025-01-03 23:05:46,288 - TimesheetTracker - DEBUG - Successfully processed row 120
+2025-01-03 23:05:46,288 - TimesheetTracker - DEBUG - Processing row 121/167
+2025-01-03 23:05:46,288 - TimesheetTracker - DEBUG - Successfully processed row 121
+2025-01-03 23:05:46,289 - TimesheetTracker - DEBUG - Processing row 122/167
+2025-01-03 23:05:46,289 - TimesheetTracker - DEBUG - Successfully processed row 122
+2025-01-03 23:05:46,289 - TimesheetTracker - DEBUG - Processing row 123/167
+2025-01-03 23:05:46,289 - TimesheetTracker - DEBUG - Successfully processed row 123
+2025-01-03 23:05:46,289 - TimesheetTracker - DEBUG - Processing row 124/167
+2025-01-03 23:05:46,290 - TimesheetTracker - DEBUG - Successfully processed row 124
+2025-01-03 23:05:46,290 - TimesheetTracker - DEBUG - Processing row 125/167
+2025-01-03 23:05:46,290 - TimesheetTracker - DEBUG - Successfully processed row 125
+2025-01-03 23:05:46,290 - TimesheetTracker - DEBUG - Processing row 126/167
+2025-01-03 23:05:46,291 - TimesheetTracker - WARNING - Skipping row 126 due to invalid hours: 0.0
+2025-01-03 23:05:46,291 - TimesheetTracker - DEBUG - Processing row 127/167
+2025-01-03 23:05:46,291 - TimesheetTracker - DEBUG - Successfully processed row 127
+2025-01-03 23:05:46,291 - TimesheetTracker - DEBUG - Processing row 128/167
+2025-01-03 23:05:46,292 - TimesheetTracker - DEBUG - Successfully processed row 128
+2025-01-03 23:05:46,292 - TimesheetTracker - DEBUG - Processing row 129/167
+2025-01-03 23:05:46,292 - TimesheetTracker - DEBUG - Successfully processed row 129
+2025-01-03 23:05:46,292 - TimesheetTracker - DEBUG - Processing row 130/167
+2025-01-03 23:05:46,292 - TimesheetTracker - WARNING - Skipping row 130 due to invalid hours: 0.0
+2025-01-03 23:05:46,293 - TimesheetTracker - DEBUG - Processing row 131/167
+2025-01-03 23:05:46,293 - TimesheetTracker - WARNING - Skipping row 131 due to invalid hours: 0.0
+2025-01-03 23:05:46,293 - TimesheetTracker - DEBUG - Processing row 132/167
+2025-01-03 23:05:46,293 - TimesheetTracker - DEBUG - Successfully processed row 132
+2025-01-03 23:05:46,294 - TimesheetTracker - DEBUG - Processing row 133/167
+2025-01-03 23:05:46,294 - TimesheetTracker - DEBUG - Successfully processed row 133
+2025-01-03 23:05:46,294 - TimesheetTracker - DEBUG - Processing row 134/167
+2025-01-03 23:05:46,295 - TimesheetTracker - DEBUG - Successfully processed row 134
+2025-01-03 23:05:46,295 - TimesheetTracker - DEBUG - Processing row 135/167
+2025-01-03 23:05:46,295 - TimesheetTracker - DEBUG - Successfully processed row 135
+2025-01-03 23:05:46,296 - TimesheetTracker - DEBUG - Processing row 136/167
+2025-01-03 23:05:46,296 - TimesheetTracker - WARNING - Skipping row 136 due to invalid hours: 0.0
+2025-01-03 23:05:46,297 - TimesheetTracker - DEBUG - Processing row 137/167
+2025-01-03 23:05:46,297 - TimesheetTracker - WARNING - Skipping row 137 due to invalid hours: 0.0
+2025-01-03 23:05:46,297 - TimesheetTracker - DEBUG - Processing row 138/167
+2025-01-03 23:05:46,298 - TimesheetTracker - DEBUG - Successfully processed row 138
+2025-01-03 23:05:46,298 - TimesheetTracker - DEBUG - Processing row 139/167
+2025-01-03 23:05:46,298 - TimesheetTracker - DEBUG - Successfully processed row 139
+2025-01-03 23:05:46,298 - TimesheetTracker - DEBUG - Processing row 140/167
+2025-01-03 23:05:46,298 - TimesheetTracker - DEBUG - Successfully processed row 140
+2025-01-03 23:05:46,298 - TimesheetTracker - DEBUG - Processing row 141/167
+2025-01-03 23:05:46,299 - TimesheetTracker - DEBUG - Successfully processed row 141
+2025-01-03 23:05:46,299 - TimesheetTracker - DEBUG - Processing row 142/167
+2025-01-03 23:05:46,299 - TimesheetTracker - WARNING - Skipping row 142 due to invalid hours: 0.0
+2025-01-03 23:05:46,299 - TimesheetTracker - DEBUG - Processing row 143/167
+2025-01-03 23:05:46,299 - TimesheetTracker - DEBUG - Successfully processed row 143
+2025-01-03 23:05:46,299 - TimesheetTracker - DEBUG - Processing row 144/167
+2025-01-03 23:05:46,300 - TimesheetTracker - DEBUG - Successfully processed row 144
+2025-01-03 23:05:46,300 - TimesheetTracker - DEBUG - Processing row 145/167
+2025-01-03 23:05:46,300 - TimesheetTracker - WARNING - Skipping row 145 due to invalid hours: 0.0
+2025-01-03 23:05:46,300 - TimesheetTracker - DEBUG - Processing row 146/167
+2025-01-03 23:05:46,300 - TimesheetTracker - WARNING - Skipping row 146 due to invalid hours: 0.0
+2025-01-03 23:05:46,300 - TimesheetTracker - DEBUG - Processing row 147/167
+2025-01-03 23:05:46,301 - TimesheetTracker - WARNING - Skipping row 147 due to invalid hours: 0.0
+2025-01-03 23:05:46,301 - TimesheetTracker - DEBUG - Processing row 148/167
+2025-01-03 23:05:46,301 - TimesheetTracker - DEBUG - Successfully processed row 148
+2025-01-03 23:05:46,301 - TimesheetTracker - DEBUG - Processing row 149/167
+2025-01-03 23:05:46,302 - TimesheetTracker - DEBUG - Successfully processed row 149
+2025-01-03 23:05:46,302 - TimesheetTracker - DEBUG - Processing row 150/167
+2025-01-03 23:05:46,302 - TimesheetTracker - DEBUG - Successfully processed row 150
+2025-01-03 23:05:46,302 - TimesheetTracker - DEBUG - Processing row 151/167
+2025-01-03 23:05:46,303 - TimesheetTracker - DEBUG - Successfully processed row 151
+2025-01-03 23:05:46,303 - TimesheetTracker - DEBUG - Processing row 152/167
+2025-01-03 23:05:46,303 - TimesheetTracker - DEBUG - Successfully processed row 152
+2025-01-03 23:05:46,303 - TimesheetTracker - DEBUG - Processing row 153/167
+2025-01-03 23:05:46,303 - TimesheetTracker - DEBUG - Successfully processed row 153
+2025-01-03 23:05:46,304 - TimesheetTracker - DEBUG - Processing row 154/167
+2025-01-03 23:05:46,304 - TimesheetTracker - DEBUG - Successfully processed row 154
+2025-01-03 23:05:46,304 - TimesheetTracker - DEBUG - Processing row 155/167
+2025-01-03 23:05:46,305 - TimesheetTracker - DEBUG - Successfully processed row 155
+2025-01-03 23:05:46,305 - TimesheetTracker - DEBUG - Processing row 156/167
+2025-01-03 23:05:46,305 - TimesheetTracker - DEBUG - Successfully processed row 156
+2025-01-03 23:05:46,305 - TimesheetTracker - DEBUG - Processing row 157/167
+2025-01-03 23:05:46,305 - TimesheetTracker - DEBUG - Successfully processed row 157
+2025-01-03 23:05:46,305 - TimesheetTracker - DEBUG - Processing row 158/167
+2025-01-03 23:05:46,305 - TimesheetTracker - DEBUG - Successfully processed row 158
+2025-01-03 23:05:46,305 - TimesheetTracker - DEBUG - Processing row 159/167
+2025-01-03 23:05:46,306 - TimesheetTracker - DEBUG - Successfully processed row 159
+2025-01-03 23:05:46,306 - TimesheetTracker - DEBUG - Processing row 160/167
+2025-01-03 23:05:46,306 - TimesheetTracker - DEBUG - Successfully processed row 160
+2025-01-03 23:05:46,306 - TimesheetTracker - DEBUG - Processing row 161/167
+2025-01-03 23:05:46,306 - TimesheetTracker - DEBUG - Successfully processed row 161
+2025-01-03 23:05:46,306 - TimesheetTracker - DEBUG - Processing row 162/167
+2025-01-03 23:05:46,307 - TimesheetTracker - WARNING - Skipping row 162 due to invalid hours: 0.0
+2025-01-03 23:05:46,307 - TimesheetTracker - DEBUG - Processing row 163/167
+2025-01-03 23:05:46,307 - TimesheetTracker - DEBUG - Successfully processed row 163
+2025-01-03 23:05:46,307 - TimesheetTracker - DEBUG - Processing row 164/167
+2025-01-03 23:05:46,307 - TimesheetTracker - DEBUG - Successfully processed row 164
+2025-01-03 23:05:46,307 - TimesheetTracker - DEBUG - Processing row 165/167
+2025-01-03 23:05:46,308 - TimesheetTracker - WARNING - Skipping row 165 due to invalid hours: 0
+2025-01-03 23:05:46,308 - TimesheetTracker - DEBUG - Processing row 166/167
+2025-01-03 23:05:46,308 - TimesheetTracker - WARNING - Skipping row 166 due to invalid hours: 0
+2025-01-03 23:05:46,308 - TimesheetTracker - DEBUG - Processing row 167/167
+2025-01-03 23:05:46,308 - TimesheetTracker - WARNING - Skipping row 167 due to invalid hours: 0
+2025-01-03 23:05:46,308 - TimesheetTracker - INFO - Successfully created 153 time entries from CSV
+2025-01-03 23:05:46,308 - TimesheetTracker - DEBUG - Total hours recorded: 341.0
+2025-01-03 23:05:46,308 - TimesheetTracker - DEBUG - Initializing TimeEntryService for bulk entry creation
+2025-01-03 23:05:46,309 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-03 23:05:46,309 - TimesheetTracker - INFO - Creating 153 time entries in bulk
+2025-01-03 23:05:46,309 - TimesheetTracker - INFO - Beginning bulk creation of 153 time entries
+2025-01-03 23:05:46,309 - TimesheetTracker - DEBUG - Processing entry 1/153
+2025-01-03 23:05:46,314 - TimesheetTracker - DEBUG - Added entry 1 to session: - - -
+2025-01-03 23:05:46,314 - TimesheetTracker - DEBUG - Processing entry 2/153
+2025-01-03 23:05:46,314 - TimesheetTracker - DEBUG - Added entry 2 to session: - - -
+2025-01-03 23:05:46,314 - TimesheetTracker - DEBUG - Processing entry 3/153
+2025-01-03 23:05:46,314 - TimesheetTracker - DEBUG - Added entry 3 to session: - - -
+2025-01-03 23:05:46,314 - TimesheetTracker - DEBUG - Processing entry 4/153
+2025-01-03 23:05:46,314 - TimesheetTracker - DEBUG - Added entry 4 to session: - - -
+2025-01-03 23:05:46,314 - TimesheetTracker - DEBUG - Processing entry 5/153
+2025-01-03 23:05:46,316 - TimesheetTracker - DEBUG - Added entry 5 to session: - - -
+2025-01-03 23:05:46,316 - TimesheetTracker - DEBUG - Processing entry 6/153
+2025-01-03 23:05:46,316 - TimesheetTracker - DEBUG - Added entry 6 to session: - - -
+2025-01-03 23:05:46,316 - TimesheetTracker - DEBUG - Processing entry 7/153
+2025-01-03 23:05:46,316 - TimesheetTracker - DEBUG - Added entry 7 to session: - - -
+2025-01-03 23:05:46,316 - TimesheetTracker - DEBUG - Processing entry 8/153
+2025-01-03 23:05:46,317 - TimesheetTracker - DEBUG - Added entry 8 to session: - - -
+2025-01-03 23:05:46,317 - TimesheetTracker - DEBUG - Processing entry 9/153
+2025-01-03 23:05:46,317 - TimesheetTracker - DEBUG - Added entry 9 to session: - - -
+2025-01-03 23:05:46,317 - TimesheetTracker - DEBUG - Processing entry 10/153
+2025-01-03 23:05:46,318 - TimesheetTracker - DEBUG - Added entry 10 to session: - - -
+2025-01-03 23:05:46,318 - TimesheetTracker - DEBUG - Processing entry 11/153
+2025-01-03 23:05:46,318 - TimesheetTracker - DEBUG - Added entry 11 to session: - - -
+2025-01-03 23:05:46,318 - TimesheetTracker - DEBUG - Processing entry 12/153
+2025-01-03 23:05:46,318 - TimesheetTracker - DEBUG - Added entry 12 to session: - - -
+2025-01-03 23:05:46,318 - TimesheetTracker - DEBUG - Processing entry 13/153
+2025-01-03 23:05:46,318 - TimesheetTracker - DEBUG - Added entry 13 to session: - - -
+2025-01-03 23:05:46,318 - TimesheetTracker - DEBUG - Processing entry 14/153
+2025-01-03 23:05:46,319 - TimesheetTracker - DEBUG - Added entry 14 to session: - - -
+2025-01-03 23:05:46,319 - TimesheetTracker - DEBUG - Processing entry 15/153
+2025-01-03 23:05:46,319 - TimesheetTracker - DEBUG - Added entry 15 to session: - - -
+2025-01-03 23:05:46,319 - TimesheetTracker - DEBUG - Processing entry 16/153
+2025-01-03 23:05:46,319 - TimesheetTracker - DEBUG - Added entry 16 to session: - - -
+2025-01-03 23:05:46,319 - TimesheetTracker - DEBUG - Processing entry 17/153
+2025-01-03 23:05:46,319 - TimesheetTracker - DEBUG - Added entry 17 to session: - - -
+2025-01-03 23:05:46,320 - TimesheetTracker - DEBUG - Processing entry 18/153
+2025-01-03 23:05:46,320 - TimesheetTracker - DEBUG - Added entry 18 to session: - - -
+2025-01-03 23:05:46,320 - TimesheetTracker - DEBUG - Processing entry 19/153
+2025-01-03 23:05:46,320 - TimesheetTracker - DEBUG - Added entry 19 to session: - - -
+2025-01-03 23:05:46,320 - TimesheetTracker - DEBUG - Processing entry 20/153
+2025-01-03 23:05:46,320 - TimesheetTracker - DEBUG - Added entry 20 to session: - - -
+2025-01-03 23:05:46,320 - TimesheetTracker - DEBUG - Processing entry 21/153
+2025-01-03 23:05:46,321 - TimesheetTracker - DEBUG - Added entry 21 to session: - - -
+2025-01-03 23:05:46,321 - TimesheetTracker - DEBUG - Processing entry 22/153
+2025-01-03 23:05:46,321 - TimesheetTracker - DEBUG - Added entry 22 to session: - - -
+2025-01-03 23:05:46,321 - TimesheetTracker - DEBUG - Processing entry 23/153
+2025-01-03 23:05:46,321 - TimesheetTracker - DEBUG - Added entry 23 to session: - - -
+2025-01-03 23:05:46,321 - TimesheetTracker - DEBUG - Processing entry 24/153
+2025-01-03 23:05:46,322 - TimesheetTracker - DEBUG - Added entry 24 to session: - - -
+2025-01-03 23:05:46,322 - TimesheetTracker - DEBUG - Processing entry 25/153
+2025-01-03 23:05:46,322 - TimesheetTracker - DEBUG - Added entry 25 to session: - - -
+2025-01-03 23:05:46,322 - TimesheetTracker - DEBUG - Processing entry 26/153
+2025-01-03 23:05:46,322 - TimesheetTracker - DEBUG - Added entry 26 to session: - - -
+2025-01-03 23:05:46,322 - TimesheetTracker - DEBUG - Processing entry 27/153
+2025-01-03 23:05:46,322 - TimesheetTracker - DEBUG - Added entry 27 to session: - - -
+2025-01-03 23:05:46,323 - TimesheetTracker - DEBUG - Processing entry 28/153
+2025-01-03 23:05:46,323 - TimesheetTracker - DEBUG - Added entry 28 to session: - - -
+2025-01-03 23:05:46,323 - TimesheetTracker - DEBUG - Processing entry 29/153
+2025-01-03 23:05:46,323 - TimesheetTracker - DEBUG - Added entry 29 to session: - - -
+2025-01-03 23:05:46,323 - TimesheetTracker - DEBUG - Processing entry 30/153
+2025-01-03 23:05:46,323 - TimesheetTracker - DEBUG - Added entry 30 to session: - - -
+2025-01-03 23:05:46,323 - TimesheetTracker - DEBUG - Processing entry 31/153
+2025-01-03 23:05:46,324 - TimesheetTracker - DEBUG - Added entry 31 to session: - - -
+2025-01-03 23:05:46,324 - TimesheetTracker - DEBUG - Processing entry 32/153
+2025-01-03 23:05:46,324 - TimesheetTracker - DEBUG - Added entry 32 to session: - - -
+2025-01-03 23:05:46,324 - TimesheetTracker - DEBUG - Processing entry 33/153
+2025-01-03 23:05:46,324 - TimesheetTracker - DEBUG - Added entry 33 to session: - - -
+2025-01-03 23:05:46,324 - TimesheetTracker - DEBUG - Processing entry 34/153
+2025-01-03 23:05:46,324 - TimesheetTracker - DEBUG - Added entry 34 to session: - - -
+2025-01-03 23:05:46,325 - TimesheetTracker - DEBUG - Processing entry 35/153
+2025-01-03 23:05:46,325 - TimesheetTracker - DEBUG - Added entry 35 to session: - - -
+2025-01-03 23:05:46,325 - TimesheetTracker - DEBUG - Processing entry 36/153
+2025-01-03 23:05:46,325 - TimesheetTracker - DEBUG - Added entry 36 to session: - - -
+2025-01-03 23:05:46,325 - TimesheetTracker - DEBUG - Processing entry 37/153
+2025-01-03 23:05:46,325 - TimesheetTracker - DEBUG - Added entry 37 to session: - - -
+2025-01-03 23:05:46,325 - TimesheetTracker - DEBUG - Processing entry 38/153
+2025-01-03 23:05:46,325 - TimesheetTracker - DEBUG - Added entry 38 to session: - - -
+2025-01-03 23:05:46,325 - TimesheetTracker - DEBUG - Processing entry 39/153
+2025-01-03 23:05:46,325 - TimesheetTracker - DEBUG - Added entry 39 to session: - - -
+2025-01-03 23:05:46,326 - TimesheetTracker - DEBUG - Processing entry 40/153
+2025-01-03 23:05:46,326 - TimesheetTracker - DEBUG - Added entry 40 to session: - - -
+2025-01-03 23:05:46,326 - TimesheetTracker - DEBUG - Processing entry 41/153
+2025-01-03 23:05:46,326 - TimesheetTracker - DEBUG - Added entry 41 to session: - - -
+2025-01-03 23:05:46,326 - TimesheetTracker - DEBUG - Processing entry 42/153
+2025-01-03 23:05:46,326 - TimesheetTracker - DEBUG - Added entry 42 to session: - - -
+2025-01-03 23:05:46,326 - TimesheetTracker - DEBUG - Processing entry 43/153
+2025-01-03 23:05:46,327 - TimesheetTracker - DEBUG - Added entry 43 to session: - - -
+2025-01-03 23:05:46,327 - TimesheetTracker - DEBUG - Processing entry 44/153
+2025-01-03 23:05:46,327 - TimesheetTracker - DEBUG - Added entry 44 to session: - - -
+2025-01-03 23:05:46,327 - TimesheetTracker - DEBUG - Processing entry 45/153
+2025-01-03 23:05:46,327 - TimesheetTracker - DEBUG - Added entry 45 to session: - - -
+2025-01-03 23:05:46,327 - TimesheetTracker - DEBUG - Processing entry 46/153
+2025-01-03 23:05:46,327 - TimesheetTracker - DEBUG - Added entry 46 to session: - - -
+2025-01-03 23:05:46,327 - TimesheetTracker - DEBUG - Processing entry 47/153
+2025-01-03 23:05:46,327 - TimesheetTracker - DEBUG - Added entry 47 to session: - - -
+2025-01-03 23:05:46,328 - TimesheetTracker - DEBUG - Processing entry 48/153
+2025-01-03 23:05:46,328 - TimesheetTracker - DEBUG - Added entry 48 to session: - - -
+2025-01-03 23:05:46,328 - TimesheetTracker - DEBUG - Processing entry 49/153
+2025-01-03 23:05:46,328 - TimesheetTracker - DEBUG - Added entry 49 to session: - - -
+2025-01-03 23:05:46,328 - TimesheetTracker - DEBUG - Processing entry 50/153
+2025-01-03 23:05:46,328 - TimesheetTracker - DEBUG - Added entry 50 to session: - - -
+2025-01-03 23:05:46,328 - TimesheetTracker - DEBUG - Processing entry 51/153
+2025-01-03 23:05:46,328 - TimesheetTracker - DEBUG - Added entry 51 to session: - - -
+2025-01-03 23:05:46,328 - TimesheetTracker - DEBUG - Processing entry 52/153
+2025-01-03 23:05:46,329 - TimesheetTracker - DEBUG - Added entry 52 to session: - - -
+2025-01-03 23:05:46,329 - TimesheetTracker - DEBUG - Processing entry 53/153
+2025-01-03 23:05:46,329 - TimesheetTracker - DEBUG - Added entry 53 to session: - - -
+2025-01-03 23:05:46,329 - TimesheetTracker - DEBUG - Processing entry 54/153
+2025-01-03 23:05:46,329 - TimesheetTracker - DEBUG - Added entry 54 to session: - - -
+2025-01-03 23:05:46,329 - TimesheetTracker - DEBUG - Processing entry 55/153
+2025-01-03 23:05:46,329 - TimesheetTracker - DEBUG - Added entry 55 to session: - - -
+2025-01-03 23:05:46,329 - TimesheetTracker - DEBUG - Processing entry 56/153
+2025-01-03 23:05:46,330 - TimesheetTracker - DEBUG - Added entry 56 to session: - - -
+2025-01-03 23:05:46,330 - TimesheetTracker - DEBUG - Processing entry 57/153
+2025-01-03 23:05:46,330 - TimesheetTracker - DEBUG - Added entry 57 to session: - - -
+2025-01-03 23:05:46,330 - TimesheetTracker - DEBUG - Processing entry 58/153
+2025-01-03 23:05:46,330 - TimesheetTracker - DEBUG - Added entry 58 to session: - - -
+2025-01-03 23:05:46,330 - TimesheetTracker - DEBUG - Processing entry 59/153
+2025-01-03 23:05:46,330 - TimesheetTracker - DEBUG - Added entry 59 to session: - - -
+2025-01-03 23:05:46,330 - TimesheetTracker - DEBUG - Processing entry 60/153
+2025-01-03 23:05:46,330 - TimesheetTracker - DEBUG - Added entry 60 to session: - - -
+2025-01-03 23:05:46,330 - TimesheetTracker - DEBUG - Processing entry 61/153
+2025-01-03 23:05:46,331 - TimesheetTracker - DEBUG - Added entry 61 to session: - - -
+2025-01-03 23:05:46,331 - TimesheetTracker - DEBUG - Processing entry 62/153
+2025-01-03 23:05:46,331 - TimesheetTracker - DEBUG - Added entry 62 to session: - - -
+2025-01-03 23:05:46,331 - TimesheetTracker - DEBUG - Processing entry 63/153
+2025-01-03 23:05:46,331 - TimesheetTracker - DEBUG - Added entry 63 to session: - - -
+2025-01-03 23:05:46,331 - TimesheetTracker - DEBUG - Processing entry 64/153
+2025-01-03 23:05:46,331 - TimesheetTracker - DEBUG - Added entry 64 to session: - - -
+2025-01-03 23:05:46,332 - TimesheetTracker - DEBUG - Processing entry 65/153
+2025-01-03 23:05:46,332 - TimesheetTracker - DEBUG - Added entry 65 to session: - - -
+2025-01-03 23:05:46,332 - TimesheetTracker - DEBUG - Processing entry 66/153
+2025-01-03 23:05:46,332 - TimesheetTracker - DEBUG - Added entry 66 to session: - - -
+2025-01-03 23:05:46,332 - TimesheetTracker - DEBUG - Processing entry 67/153
+2025-01-03 23:05:46,332 - TimesheetTracker - DEBUG - Added entry 67 to session: - - -
+2025-01-03 23:05:46,333 - TimesheetTracker - DEBUG - Processing entry 68/153
+2025-01-03 23:05:46,333 - TimesheetTracker - DEBUG - Added entry 68 to session: - - -
+2025-01-03 23:05:46,333 - TimesheetTracker - DEBUG - Processing entry 69/153
+2025-01-03 23:05:46,333 - TimesheetTracker - DEBUG - Added entry 69 to session: - - -
+2025-01-03 23:05:46,333 - TimesheetTracker - DEBUG - Processing entry 70/153
+2025-01-03 23:05:46,333 - TimesheetTracker - DEBUG - Added entry 70 to session: - - -
+2025-01-03 23:05:46,333 - TimesheetTracker - DEBUG - Processing entry 71/153
+2025-01-03 23:05:46,333 - TimesheetTracker - DEBUG - Added entry 71 to session: - - -
+2025-01-03 23:05:46,333 - TimesheetTracker - DEBUG - Processing entry 72/153
+2025-01-03 23:05:46,334 - TimesheetTracker - DEBUG - Added entry 72 to session: - - -
+2025-01-03 23:05:46,334 - TimesheetTracker - DEBUG - Processing entry 73/153
+2025-01-03 23:05:46,334 - TimesheetTracker - DEBUG - Added entry 73 to session: - - -
+2025-01-03 23:05:46,334 - TimesheetTracker - DEBUG - Processing entry 74/153
+2025-01-03 23:05:46,334 - TimesheetTracker - DEBUG - Added entry 74 to session: - - -
+2025-01-03 23:05:46,334 - TimesheetTracker - DEBUG - Processing entry 75/153
+2025-01-03 23:05:46,334 - TimesheetTracker - DEBUG - Added entry 75 to session: - - -
+2025-01-03 23:05:46,334 - TimesheetTracker - DEBUG - Processing entry 76/153
+2025-01-03 23:05:46,334 - TimesheetTracker - DEBUG - Added entry 76 to session: - - -
+2025-01-03 23:05:46,335 - TimesheetTracker - DEBUG - Processing entry 77/153
+2025-01-03 23:05:46,335 - TimesheetTracker - DEBUG - Added entry 77 to session: - - -
+2025-01-03 23:05:46,335 - TimesheetTracker - DEBUG - Processing entry 78/153
+2025-01-03 23:05:46,335 - TimesheetTracker - DEBUG - Added entry 78 to session: - - -
+2025-01-03 23:05:46,335 - TimesheetTracker - DEBUG - Processing entry 79/153
+2025-01-03 23:05:46,335 - TimesheetTracker - DEBUG - Added entry 79 to session: - - -
+2025-01-03 23:05:46,335 - TimesheetTracker - DEBUG - Processing entry 80/153
+2025-01-03 23:05:46,335 - TimesheetTracker - DEBUG - Added entry 80 to session: - - -
+2025-01-03 23:05:46,335 - TimesheetTracker - DEBUG - Processing entry 81/153
+2025-01-03 23:05:46,336 - TimesheetTracker - DEBUG - Added entry 81 to session: - - -
+2025-01-03 23:05:46,336 - TimesheetTracker - DEBUG - Processing entry 82/153
+2025-01-03 23:05:46,337 - TimesheetTracker - DEBUG - Added entry 82 to session: - - -
+2025-01-03 23:05:46,337 - TimesheetTracker - DEBUG - Processing entry 83/153
+2025-01-03 23:05:46,337 - TimesheetTracker - DEBUG - Added entry 83 to session: - - -
+2025-01-03 23:05:46,337 - TimesheetTracker - DEBUG - Processing entry 84/153
+2025-01-03 23:05:46,337 - TimesheetTracker - DEBUG - Added entry 84 to session: ECOLAB - Project Magic Bullet
+2025-01-03 23:05:46,337 - TimesheetTracker - DEBUG - Processing entry 85/153
+2025-01-03 23:05:46,337 - TimesheetTracker - DEBUG - Added entry 85 to session: - - -
+2025-01-03 23:05:46,337 - TimesheetTracker - DEBUG - Processing entry 86/153
+2025-01-03 23:05:46,338 - TimesheetTracker - DEBUG - Added entry 86 to session: - - -
+2025-01-03 23:05:46,338 - TimesheetTracker - DEBUG - Processing entry 87/153
+2025-01-03 23:05:46,338 - TimesheetTracker - DEBUG - Added entry 87 to session: - - -
+2025-01-03 23:05:46,338 - TimesheetTracker - DEBUG - Processing entry 88/153
+2025-01-03 23:05:46,338 - TimesheetTracker - DEBUG - Added entry 88 to session: - - -
+2025-01-03 23:05:46,339 - TimesheetTracker - DEBUG - Processing entry 89/153
+2025-01-03 23:05:46,339 - TimesheetTracker - DEBUG - Added entry 89 to session: - - -
+2025-01-03 23:05:46,339 - TimesheetTracker - DEBUG - Processing entry 90/153
+2025-01-03 23:05:46,339 - TimesheetTracker - DEBUG - Added entry 90 to session: - - -
+2025-01-03 23:05:46,339 - TimesheetTracker - DEBUG - Processing entry 91/153
+2025-01-03 23:05:46,339 - TimesheetTracker - DEBUG - Added entry 91 to session: - - -
+2025-01-03 23:05:46,340 - TimesheetTracker - DEBUG - Processing entry 92/153
+2025-01-03 23:05:46,340 - TimesheetTracker - DEBUG - Added entry 92 to session: - - -
+2025-01-03 23:05:46,340 - TimesheetTracker - DEBUG - Processing entry 93/153
+2025-01-03 23:05:46,340 - TimesheetTracker - DEBUG - Added entry 93 to session: - - -
+2025-01-03 23:05:46,340 - TimesheetTracker - DEBUG - Processing entry 94/153
+2025-01-03 23:05:46,341 - TimesheetTracker - DEBUG - Added entry 94 to session: - - -
+2025-01-03 23:05:46,341 - TimesheetTracker - DEBUG - Processing entry 95/153
+2025-01-03 23:05:46,341 - TimesheetTracker - DEBUG - Added entry 95 to session: - - -
+2025-01-03 23:05:46,342 - TimesheetTracker - DEBUG - Processing entry 96/153
+2025-01-03 23:05:46,342 - TimesheetTracker - DEBUG - Added entry 96 to session: - - -
+2025-01-03 23:05:46,342 - TimesheetTracker - DEBUG - Processing entry 97/153
+2025-01-03 23:05:46,342 - TimesheetTracker - DEBUG - Added entry 97 to session: Hiland Dairy - Wichita KS
+2025-01-03 23:05:46,342 - TimesheetTracker - DEBUG - Processing entry 98/153
+2025-01-03 23:05:46,342 - TimesheetTracker - DEBUG - Added entry 98 to session: - - -
+2025-01-03 23:05:46,342 - TimesheetTracker - DEBUG - Processing entry 99/153
+2025-01-03 23:05:46,342 - TimesheetTracker - DEBUG - Added entry 99 to session: - - -
+2025-01-03 23:05:46,342 - TimesheetTracker - DEBUG - Processing entry 100/153
+2025-01-03 23:05:46,343 - TimesheetTracker - DEBUG - Added entry 100 to session: - - -
+2025-01-03 23:05:46,344 - TimesheetTracker - DEBUG - Processing entry 101/153
+2025-01-03 23:05:46,344 - TimesheetTracker - DEBUG - Added entry 101 to session: - - -
+2025-01-03 23:05:46,344 - TimesheetTracker - DEBUG - Processing entry 102/153
+2025-01-03 23:05:46,344 - TimesheetTracker - DEBUG - Added entry 102 to session: - - -
+2025-01-03 23:05:46,344 - TimesheetTracker - DEBUG - Processing entry 103/153
+2025-01-03 23:05:46,344 - TimesheetTracker - DEBUG - Added entry 103 to session: - - -
+2025-01-03 23:05:46,344 - TimesheetTracker - DEBUG - Processing entry 104/153
+2025-01-03 23:05:46,345 - TimesheetTracker - DEBUG - Added entry 104 to session: - - -
+2025-01-03 23:05:46,345 - TimesheetTracker - DEBUG - Processing entry 105/153
+2025-01-03 23:05:46,345 - TimesheetTracker - DEBUG - Added entry 105 to session: - - -
+2025-01-03 23:05:46,345 - TimesheetTracker - DEBUG - Processing entry 106/153
+2025-01-03 23:05:46,345 - TimesheetTracker - DEBUG - Added entry 106 to session: - - -
+2025-01-03 23:05:46,345 - TimesheetTracker - DEBUG - Processing entry 107/153
+2025-01-03 23:05:46,345 - TimesheetTracker - DEBUG - Added entry 107 to session: - - -
+2025-01-03 23:05:46,345 - TimesheetTracker - DEBUG - Processing entry 108/153
+2025-01-03 23:05:46,345 - TimesheetTracker - DEBUG - Added entry 108 to session: - - -
+2025-01-03 23:05:46,346 - TimesheetTracker - DEBUG - Processing entry 109/153
+2025-01-03 23:05:46,346 - TimesheetTracker - DEBUG - Added entry 109 to session: - - -
+2025-01-03 23:05:46,346 - TimesheetTracker - DEBUG - Processing entry 110/153
+2025-01-03 23:05:46,346 - TimesheetTracker - DEBUG - Added entry 110 to session: - - -
+2025-01-03 23:05:46,346 - TimesheetTracker - DEBUG - Processing entry 111/153
+2025-01-03 23:05:46,346 - TimesheetTracker - DEBUG - Added entry 111 to session: - - -
+2025-01-03 23:05:46,346 - TimesheetTracker - DEBUG - Processing entry 112/153
+2025-01-03 23:05:46,346 - TimesheetTracker - DEBUG - Added entry 112 to session: - - -
+2025-01-03 23:05:46,346 - TimesheetTracker - DEBUG - Processing entry 113/153
+2025-01-03 23:05:46,346 - TimesheetTracker - DEBUG - Added entry 113 to session: - - -
+2025-01-03 23:05:46,347 - TimesheetTracker - DEBUG - Processing entry 114/153
+2025-01-03 23:05:46,347 - TimesheetTracker - DEBUG - Added entry 114 to session: - - -
+2025-01-03 23:05:46,347 - TimesheetTracker - DEBUG - Processing entry 115/153
+2025-01-03 23:05:46,347 - TimesheetTracker - DEBUG - Added entry 115 to session: - - -
+2025-01-03 23:05:46,347 - TimesheetTracker - DEBUG - Processing entry 116/153
+2025-01-03 23:05:46,347 - TimesheetTracker - DEBUG - Added entry 116 to session: Dr Pepper Snapple - Aspers PA
+2025-01-03 23:05:46,347 - TimesheetTracker - DEBUG - Processing entry 117/153
+2025-01-03 23:05:46,347 - TimesheetTracker - DEBUG - Added entry 117 to session: ECOLAB - iTrends
+2025-01-03 23:05:46,347 - TimesheetTracker - DEBUG - Processing entry 118/153
+2025-01-03 23:05:46,347 - TimesheetTracker - DEBUG - Added entry 118 to session: Hiland Dairy - Wichita KS
+2025-01-03 23:05:46,347 - TimesheetTracker - DEBUG - Processing entry 119/153
+2025-01-03 23:05:46,348 - TimesheetTracker - DEBUG - Added entry 119 to session: - - -
+2025-01-03 23:05:46,348 - TimesheetTracker - DEBUG - Processing entry 120/153
+2025-01-03 23:05:46,348 - TimesheetTracker - DEBUG - Added entry 120 to session: - - -
+2025-01-03 23:05:46,348 - TimesheetTracker - DEBUG - Processing entry 121/153
+2025-01-03 23:05:46,350 - TimesheetTracker - DEBUG - Added entry 121 to session: - - -
+2025-01-03 23:05:46,350 - TimesheetTracker - DEBUG - Processing entry 122/153
+2025-01-03 23:05:46,351 - TimesheetTracker - DEBUG - Added entry 122 to session: - - -
+2025-01-03 23:05:46,351 - TimesheetTracker - DEBUG - Processing entry 123/153
+2025-01-03 23:05:46,351 - TimesheetTracker - DEBUG - Added entry 123 to session: Hiland Dairy - Wichita KS
+2025-01-03 23:05:46,351 - TimesheetTracker - DEBUG - Processing entry 124/153
+2025-01-03 23:05:46,352 - TimesheetTracker - DEBUG - Added entry 124 to session: Dr Pepper Snapple - Aspers PA
+2025-01-03 23:05:46,352 - TimesheetTracker - DEBUG - Processing entry 125/153
+2025-01-03 23:05:46,352 - TimesheetTracker - DEBUG - Added entry 125 to session: Hiland Dairy - Wichita KS
+2025-01-03 23:05:46,352 - TimesheetTracker - DEBUG - Processing entry 126/153
+2025-01-03 23:05:46,352 - TimesheetTracker - DEBUG - Added entry 126 to session: Dr Pepper Snapple - Aspers PA
+2025-01-03 23:05:46,352 - TimesheetTracker - DEBUG - Processing entry 127/153
+2025-01-03 23:05:46,352 - TimesheetTracker - DEBUG - Added entry 127 to session: Hiland Dairy - Wichita KS
+2025-01-03 23:05:46,352 - TimesheetTracker - DEBUG - Processing entry 128/153
+2025-01-03 23:05:46,352 - TimesheetTracker - DEBUG - Added entry 128 to session: Hiland Dairy - Wichita KS
+2025-01-03 23:05:46,352 - TimesheetTracker - DEBUG - Processing entry 129/153
+2025-01-03 23:05:46,353 - TimesheetTracker - DEBUG - Added entry 129 to session: Dr Pepper Snapple - Aspers PA
+2025-01-03 23:05:46,353 - TimesheetTracker - DEBUG - Processing entry 130/153
+2025-01-03 23:05:46,353 - TimesheetTracker - DEBUG - Added entry 130 to session: - - -
+2025-01-03 23:05:46,353 - TimesheetTracker - DEBUG - Processing entry 131/153
+2025-01-03 23:05:46,353 - TimesheetTracker - DEBUG - Added entry 131 to session: - - -
+2025-01-03 23:05:46,353 - TimesheetTracker - DEBUG - Processing entry 132/153
+2025-01-03 23:05:46,354 - TimesheetTracker - DEBUG - Added entry 132 to session: Hiland Dairy - Wichita KS
+2025-01-03 23:05:46,354 - TimesheetTracker - DEBUG - Processing entry 133/153
+2025-01-03 23:05:46,354 - TimesheetTracker - DEBUG - Added entry 133 to session: Project Magic Bullet - ECOLAB
+2025-01-03 23:05:46,354 - TimesheetTracker - DEBUG - Processing entry 134/153
+2025-01-03 23:05:46,354 - TimesheetTracker - DEBUG - Added entry 134 to session: Country Pure - Ellington CT
+2025-01-03 23:05:46,354 - TimesheetTracker - DEBUG - Processing entry 135/153
+2025-01-03 23:05:46,354 - TimesheetTracker - DEBUG - Added entry 135 to session: - - -
+2025-01-03 23:05:46,354 - TimesheetTracker - DEBUG - Processing entry 136/153
+2025-01-03 23:05:46,354 - TimesheetTracker - DEBUG - Added entry 136 to session: Dr Pepper Snapple - Aspers PA
+2025-01-03 23:05:46,354 - TimesheetTracker - DEBUG - Processing entry 137/153
+2025-01-03 23:05:46,355 - TimesheetTracker - DEBUG - Added entry 137 to session: - - -
+2025-01-03 23:05:46,355 - TimesheetTracker - DEBUG - Processing entry 138/153
+2025-01-03 23:05:46,355 - TimesheetTracker - DEBUG - Added entry 138 to session: - - -
+2025-01-03 23:05:46,355 - TimesheetTracker - DEBUG - Processing entry 139/153
+2025-01-03 23:05:46,355 - TimesheetTracker - DEBUG - Added entry 139 to session: - - -
+2025-01-03 23:05:46,355 - TimesheetTracker - DEBUG - Processing entry 140/153
+2025-01-03 23:05:46,355 - TimesheetTracker - DEBUG - Added entry 140 to session: Country Pure - Ellington CT
+2025-01-03 23:05:46,355 - TimesheetTracker - DEBUG - Processing entry 141/153
+2025-01-03 23:05:46,355 - TimesheetTracker - DEBUG - Added entry 141 to session: - - -
+2025-01-03 23:05:46,355 - TimesheetTracker - DEBUG - Processing entry 142/153
+2025-01-03 23:05:46,355 - TimesheetTracker - DEBUG - Added entry 142 to session: - - -
+2025-01-03 23:05:46,356 - TimesheetTracker - DEBUG - Processing entry 143/153
+2025-01-03 23:05:46,356 - TimesheetTracker - DEBUG - Added entry 143 to session: Dr Pepper Snapple - Aspers PA
+2025-01-03 23:05:46,356 - TimesheetTracker - DEBUG - Processing entry 144/153
+2025-01-03 23:05:46,357 - TimesheetTracker - DEBUG - Added entry 144 to session: - - -
+2025-01-03 23:05:46,357 - TimesheetTracker - DEBUG - Processing entry 145/153
+2025-01-03 23:05:46,357 - TimesheetTracker - DEBUG - Added entry 145 to session: - - -
+2025-01-03 23:05:46,357 - TimesheetTracker - DEBUG - Processing entry 146/153
+2025-01-03 23:05:46,357 - TimesheetTracker - DEBUG - Added entry 146 to session: Hiland Dairy - Wichita KS
+2025-01-03 23:05:46,357 - TimesheetTracker - DEBUG - Processing entry 147/153
+2025-01-03 23:05:46,357 - TimesheetTracker - DEBUG - Added entry 147 to session: - - -
+2025-01-03 23:05:46,357 - TimesheetTracker - DEBUG - Processing entry 148/153
+2025-01-03 23:05:46,357 - TimesheetTracker - DEBUG - Added entry 148 to session: Country Pure - Ellington CT
+2025-01-03 23:05:46,357 - TimesheetTracker - DEBUG - Processing entry 149/153
+2025-01-03 23:05:46,358 - TimesheetTracker - DEBUG - Added entry 149 to session: - - -
+2025-01-03 23:05:46,358 - TimesheetTracker - DEBUG - Processing entry 150/153
+2025-01-03 23:05:46,358 - TimesheetTracker - DEBUG - Added entry 150 to session: - - -
+2025-01-03 23:05:46,358 - TimesheetTracker - DEBUG - Processing entry 151/153
+2025-01-03 23:05:46,358 - TimesheetTracker - DEBUG - Added entry 151 to session: - - -
+2025-01-03 23:05:46,358 - TimesheetTracker - DEBUG - Processing entry 152/153
+2025-01-03 23:05:46,358 - TimesheetTracker - DEBUG - Added entry 152 to session:  - 
+2025-01-03 23:05:46,358 - TimesheetTracker - DEBUG - Processing entry 153/153
+2025-01-03 23:05:46,358 - TimesheetTracker - DEBUG - Added entry 153 to session:  - 
+2025-01-03 23:05:46,358 - TimesheetTracker - DEBUG - Committing all entries to database
+2025-01-03 23:05:46,483 - TimesheetTracker - ERROR - Error during bulk creation: (psycopg2.errors.ForeignKeyViolation) insert or update on table "time_entries" violates foreign key constraint "time_entries_customer_fkey"
+DETAIL:  Key (customer)=(-) is not present in table "customers".
+
+[SQL: INSERT INTO time_entries (week_number, month, category, subcategory, customer, project, task_description, hours, updated_at) SELECT p0::INTEGER, p1::VARCHAR, p2::VARCHAR, p3::VARCHAR, p4::VARCHAR, p5::VARCHAR, p6::VARCHAR, p7::FLOAT, p8::TIMESTAMP WI ... 27594 characters truncated ... r) ORDER BY sen_counter RETURNING time_entries.created_at, time_entries.id, time_entries.id AS id__1]
+[parameters: {'category__0': 'Other', 'project__0': '-', 'week_number__0': 41, 'month__0': 'October', 'task_description__0': 'New hire orientation', 'customer__0': '-', 'subcategory__0': 'Other Training', 'updated_at__0': None, 'hours__0': 6.0, 'category__1': 'Other', 'project__1': '-', 'week_number__1': 41, 'month__1': 'October', 'task_description__1': 'Andrew<>Joseph', 'customer__1': '-', 'subcategory__1': 'Other Training', 'updated_at__1': None, 'hours__1': 2.0, 'category__2': 'Other', 'project__2': '-', 'week_number__2': 41, 'month__2': 'October', 'task_description__2': 'Andrew<>Joseph', 'customer__2': '-', 'subcategory__2': 'Other Training', 'updated_at__2': None, 'hours__2': 2.0, 'category__3': 'Other', 'project__3': '-', 'week_number__3': 41, 'month__3': 'October', 'task_description__3': 'I-9 Meeting', 'customer__3': '-', 'subcategory__3': 'Info/File Management', 'updated_at__3': None, 'hours__3': 1.0, 'category__4': 'Other', 'project__4': '-', 'week_number__4': 41, 'month__4': 'October', 'task_description__4': 'Workday Safety Training', 'customer__4': '-', 'subcategory__4': 'Safety Training/Reporting', 'updated_at__4': None, 'hours__4': 5.0, 'category__5': 'Other', 'project__5': '-', 'week_number__5': 41, 'month__5': 'October', 'task_description__5': 'IT Ticket Support' ... 1277 parameters truncated ... 'task_description__147': 'Site review, troubleshooting', 'customer__147': 'Country Pure', 'subcategory__147': 'General', 'updated_at__147': None, 'hours__147': 3.0, 'category__148': 'Other', 'project__148': '-', 'week_number__148': 48, 'month__148': 'November', 'task_description__148': 'VMWare troubleshooting', 'customer__148': '-', 'subcategory__148': 'PC Upgrades/Support', 'updated_at__148': None, 'hours__148': 2.0, 'category__149': 'Other', 'project__149': '-', 'week_number__149': 48, 'month__149': 'November', 'task_description__149': 'Self study', 'customer__149': '-', 'subcategory__149': 'Other Training', 'updated_at__149': None, 'hours__149': 2.0, 'category__150': 'Other', 'project__150': '-', 'week_number__150': 48, 'month__150': 'November', 'task_description__150': 'Document generation tool', 'customer__150': '-', 'subcategory__150': 'PC Upgrades/Support', 'updated_at__150': None, 'hours__150': 1.0, 'category__151': 'Other', 'project__151': '', 'week_number__151': 48, 'month__151': 'November', 'task_description__151': 'Thanksgiving', 'customer__151': '', 'subcategory__151': 'Holidays', 'updated_at__151': None, 'hours__151': 8.0, 'category__152': 'Other', 'project__152': '', 'week_number__152': 48, 'month__152': 'November', 'task_description__152': 'Thanksgiving', 'customer__152': '', 'subcategory__152': 'Holidays', 'updated_at__152': None, 'hours__152': 8.0}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-01-03 23:05:46,483 - TimesheetTracker - DEBUG - Rolling back transaction
+2025-01-03 23:05:46,484 - TimesheetTracker - ERROR - Error processing timesheet: (psycopg2.errors.ForeignKeyViolation) insert or update on table "time_entries" violates foreign key constraint "time_entries_customer_fkey"
+DETAIL:  Key (customer)=(-) is not present in table "customers".
+
+[SQL: INSERT INTO time_entries (week_number, month, category, subcategory, customer, project, task_description, hours, updated_at) SELECT p0::INTEGER, p1::VARCHAR, p2::VARCHAR, p3::VARCHAR, p4::VARCHAR, p5::VARCHAR, p6::VARCHAR, p7::FLOAT, p8::TIMESTAMP WI ... 27594 characters truncated ... r) ORDER BY sen_counter RETURNING time_entries.created_at, time_entries.id, time_entries.id AS id__1]
+[parameters: {'category__0': 'Other', 'project__0': '-', 'week_number__0': 41, 'month__0': 'October', 'task_description__0': 'New hire orientation', 'customer__0': '-', 'subcategory__0': 'Other Training', 'updated_at__0': None, 'hours__0': 6.0, 'category__1': 'Other', 'project__1': '-', 'week_number__1': 41, 'month__1': 'October', 'task_description__1': 'Andrew<>Joseph', 'customer__1': '-', 'subcategory__1': 'Other Training', 'updated_at__1': None, 'hours__1': 2.0, 'category__2': 'Other', 'project__2': '-', 'week_number__2': 41, 'month__2': 'October', 'task_description__2': 'Andrew<>Joseph', 'customer__2': '-', 'subcategory__2': 'Other Training', 'updated_at__2': None, 'hours__2': 2.0, 'category__3': 'Other', 'project__3': '-', 'week_number__3': 41, 'month__3': 'October', 'task_description__3': 'I-9 Meeting', 'customer__3': '-', 'subcategory__3': 'Info/File Management', 'updated_at__3': None, 'hours__3': 1.0, 'category__4': 'Other', 'project__4': '-', 'week_number__4': 41, 'month__4': 'October', 'task_description__4': 'Workday Safety Training', 'customer__4': '-', 'subcategory__4': 'Safety Training/Reporting', 'updated_at__4': None, 'hours__4': 5.0, 'category__5': 'Other', 'project__5': '-', 'week_number__5': 41, 'month__5': 'October', 'task_description__5': 'IT Ticket Support' ... 1277 parameters truncated ... 'task_description__147': 'Site review, troubleshooting', 'customer__147': 'Country Pure', 'subcategory__147': 'General', 'updated_at__147': None, 'hours__147': 3.0, 'category__148': 'Other', 'project__148': '-', 'week_number__148': 48, 'month__148': 'November', 'task_description__148': 'VMWare troubleshooting', 'customer__148': '-', 'subcategory__148': 'PC Upgrades/Support', 'updated_at__148': None, 'hours__148': 2.0, 'category__149': 'Other', 'project__149': '-', 'week_number__149': 48, 'month__149': 'November', 'task_description__149': 'Self study', 'customer__149': '-', 'subcategory__149': 'Other Training', 'updated_at__149': None, 'hours__149': 2.0, 'category__150': 'Other', 'project__150': '-', 'week_number__150': 48, 'month__150': 'November', 'task_description__150': 'Document generation tool', 'customer__150': '-', 'subcategory__150': 'PC Upgrades/Support', 'updated_at__150': None, 'hours__150': 1.0, 'category__151': 'Other', 'project__151': '', 'week_number__151': 48, 'month__151': 'November', 'task_description__151': 'Thanksgiving', 'customer__151': '', 'subcategory__151': 'Holidays', 'updated_at__151': None, 'hours__151': 8.0, 'category__152': 'Other', 'project__152': '', 'week_number__152': 48, 'month__152': 'November', 'task_description__152': 'Thanksgiving', 'customer__152': '', 'subcategory__152': 'Holidays', 'updated_at__152': None, 'hours__152': 8.0}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-01-03 23:05:46,487 - TimesheetTracker - DEBUG - Database session closed
