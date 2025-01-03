@@ -56,3 +56,5 @@ hours
 2025-01-03 19:37:21,139 - TimesheetTracker - INFO - Root endpoint accessed
 2025-01-03 19:38:09,919 - TimesheetTracker - INFO - Processing timesheet upload: Hours Tracker.csv
 2025-01-03 19:38:09,937 - TimesheetTracker - ERROR - Error processing timesheet: module 'crud' has no attribute 'create_time_entry'
+2025-01-03 19:39:39,837 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 19:39:40,322 - TimesheetTracker - INFO - Root endpoint accessed
