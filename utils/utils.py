@@ -13,8 +13,7 @@ def parse_csv(file) -> List[schemas.TimeEntryCreate]:
     logger.debug("Reading CSV file into pandas DataFrame")
     
     # Read the file content and create DataFrame
-    content = file.read().decode('utf-8')
-    df = pd.read_csv(pd.StringIO(content))
+    df = pd.read_csv(file, keep_default_na=False)
     
     if df.empty:
         logger.error("Empty CSV file received")

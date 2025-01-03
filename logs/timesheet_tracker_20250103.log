@@ -81,3 +81,40 @@ hours
 2025-01-03 19:52:35,296 - TimesheetTracker - INFO - Processing timesheet upload: Hours Tracker.csv
 2025-01-03 19:52:35,297 - TimesheetTracker - INFO - Starting CSV parsing
 2025-01-03 19:52:35,297 - TimesheetTracker - ERROR - Error processing timesheet: 'SpooledTemporaryFile' object has no attribute 'file'
+2025-01-03 19:53:16,839 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 19:53:19,222 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 19:53:21,999 - TimesheetTracker - INFO - Processing timesheet upload: Hours Tracker.csv
+2025-01-03 19:53:22,000 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-03 19:53:22,000 - TimesheetTracker - ERROR - Error processing timesheet: module 'pandas' has no attribute 'StringIO'
+2025-01-03 19:53:36,233 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 19:53:38,630 - TimesheetTracker - INFO - Processing timesheet upload: Hours Tracker.csv
+2025-01-03 19:53:38,630 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-03 19:53:38,630 - TimesheetTracker - ERROR - Error processing timesheet: module 'pandas' has no attribute 'StringIO'
+2025-01-03 19:53:51,053 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 19:53:55,334 - TimesheetTracker - INFO - Processing timesheet upload: Hours Tracker.csv
+2025-01-03 19:53:55,334 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-03 19:53:55,334 - TimesheetTracker - ERROR - Error processing timesheet: module 'pandas' has no attribute 'StringIO'
+2025-01-03 19:54:20,016 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 19:54:31,078 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 19:54:33,806 - TimesheetTracker - INFO - Processing timesheet upload: Hours Tracker.csv
+2025-01-03 19:54:33,806 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-03 19:54:33,806 - TimesheetTracker - ERROR - Error processing timesheet: 'function' object has no attribute 'empty'
+2025-01-03 19:55:47,023 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 19:55:51,680 - TimesheetTracker - INFO - Processing timesheet upload: Hours Tracker.csv
+2025-01-03 19:55:51,681 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-03 19:55:51,683 - TimesheetTracker - ERROR - Error processing timesheet: [Errno 2] No such file or directory: 'test.csv'
+2025-01-03 19:56:10,745 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 19:56:13,426 - TimesheetTracker - INFO - Processing timesheet upload: Hours Tracker.csv
+2025-01-03 19:56:13,427 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-03 19:56:13,430 - TimesheetTracker - ERROR - Error processing timesheet: cannot access local variable 'df' where it is not associated with a value
+2025-01-03 19:56:27,525 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 19:56:27,557 - TimesheetTracker - INFO - Processing timesheet upload: Hours Tracker.csv
+2025-01-03 19:56:27,557 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-03 19:56:27,560 - TimesheetTracker - INFO - Processing 167 rows from CSV file
+2025-01-03 19:56:27,569 - TimesheetTracker - ERROR - Error processing row 98: could not convert string to float: ''
+2025-01-03 19:56:27,569 - TimesheetTracker - ERROR - Error processing timesheet: could not convert string to float: ''
+2025-01-03 19:56:30,193 - TimesheetTracker - INFO - Processing timesheet upload: Hours Tracker.csv
+2025-01-03 19:56:30,193 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-03 19:56:30,195 - TimesheetTracker - INFO - Processing 167 rows from CSV file
+2025-01-03 19:56:30,204 - TimesheetTracker - ERROR - Error processing row 98: could not convert string to float: ''
+2025-01-03 19:56:30,204 - TimesheetTracker - ERROR - Error processing timesheet: could not convert string to float: ''
