@@ -5,12 +5,16 @@ description = "Add your description here"
 requires-python = ">=3.11"
 dependencies = [
     "alembic>=1.14.0",
+    "crud>=0.1",
+    "datasetrising>=1.0.4",
     "fastapi>=0.115.6",
+    "logger>=1.4",
     "openpyxl>=3.1.5",
     "pandas>=2.2.3",
     "psycopg2-binary>=2.9.10",
     "pydantic>=2.10.4",
     "python-multipart>=0.0.20",
+    "schemas>=0.7.1",
     "sqlalchemy>=2.0.36",
     "uvicorn>=0.34.0",
 ]
