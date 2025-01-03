@@ -2,6 +2,20 @@ from pydantic import BaseModel, Field
 from typing import Optional, List
 from datetime import datetime
 
+class CustomerBase(BaseModel):
+    name: str
+    email: Optional[str] = None
+    phone: Optional[str] = None
+
+class CustomerCreate(CustomerBase):
+    pass
+
+class Customer(CustomerBase):
+    id: int
+
+    class Config:
+        from_attributes = True
+
 class TimeEntryBase(BaseModel):
     week_number: int = Field(..., ge=1, le=53)
     month: str = Field(..., pattern=r'^(January|February|March|April|May|June|July|August|September|October|November|December)$')
