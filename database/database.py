@@ -15,9 +15,6 @@ DATABASE_URL = os.getenv('DATABASE_URL')
 if not DATABASE_URL:
     raise ValueError("DATABASE_URL environment variable is not set")
 
-# Use Neon connection pooler
-DATABASE_URL = DATABASE_URL.replace('.azure.neon.tech', '-pooler.azure.neon.tech')
-
 # Ensure proper PostgreSQL driver
 if DATABASE_URL.startswith('postgresql://'):
     DATABASE_URL = DATABASE_URL.replace('postgresql://', 'postgresql+psycopg2://')
