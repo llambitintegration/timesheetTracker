@@ -233,3 +233,9 @@ month
 2025-01-03 20:42:50,133 - TimesheetTracker - INFO - Running database migrations
 2025-01-03 20:43:02,423 - TimesheetTracker - INFO - Initializing database on startup
 2025-01-03 20:43:02,468 - TimesheetTracker - INFO - Running database migrations
+2025-01-03 20:46:08,430 - TimesheetTracker - INFO - Initializing database on startup
+2025-01-03 20:46:08,684 - TimesheetTracker - INFO - Running database migrations
+2025-01-03 20:46:20,793 - TimesheetTracker - INFO - Initializing database on startup
+2025-01-03 20:46:20,838 - TimesheetTracker - INFO - Running database migrations
+2025-01-03 20:46:33,668 - TimesheetTracker - INFO - Initializing database on startup
+2025-01-03 20:46:33,728 - TimesheetTracker - INFO - Running database migrations

@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey
+from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime
+from sqlalchemy.sql import func
 from models.baseModel import BaseModel
 
 class TimeEntry(BaseModel):
@@ -13,3 +14,5 @@ class TimeEntry(BaseModel):
     project = Column(String, ForeignKey('projects.project_id', ondelete='SET NULL'), nullable=True)
     task_description = Column(String)
     hours = Column(Float, nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
