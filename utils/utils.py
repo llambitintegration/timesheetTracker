@@ -8,9 +8,9 @@ from utils.logger import Logger
 logger = Logger().get_logger()
 
 def parse_csv(file) -> List[schemas.TimeEntryCreate]:
-    logger.info(f"Starting CSV parsing for file: {file.filename}")
+    logger.info("Starting CSV parsing")
     logger.debug("Reading CSV file into pandas DataFrame")
-    df = pd.read_csv(file)
+    df = pd.read_csv(file.file)
     
     if df.empty:
         logger.error("Empty CSV file received")
@@ -50,9 +50,9 @@ def parse_csv(file) -> List[schemas.TimeEntryCreate]:
     return entries
 
 def parse_excel(file) -> List[schemas.TimeEntryCreate]:
-    logger.info(f"Starting Excel parsing for file: {file.filename}")
+    logger.info("Starting Excel parsing")
     logger.debug("Reading Excel file into pandas DataFrame")
-    df = pd.read_excel(file)
+    df = pd.read_excel(file.file)
     
     entries = []
     logger.info(f"Processing {len(df)} rows from Excel file")
