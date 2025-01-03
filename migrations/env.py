@@ -54,35 +54,52 @@ def run_migrations_online() -> None:
     """Run migrations in 'online' mode."""
     from utils.logger import Logger
     logger = Logger().get_logger()
+    import sys
     
-    logger.info("Setting up database connection for migrations")
-    connectable = engine_from_config(
-        config.get_section(config.config_ini_section),
-        prefix="sqlalchemy.",
-        poolclass=pool.NullPool,
-    )
-
-    with connectable.connect() as connection:
-        logger.info("Configuring Alembic context")
-        context.configure(
-            connection=connection,
-            target_metadata=target_metadata
+    try:
+        logger.info("Checking target metadata")
+        if not target_metadata:
+            logger.error("No target metadata found")
+            sys.exit(1)
+            
+        logger.info(f"Found {len(target_metadata.tables)} tables in metadata")
+        for table in target_metadata.tables.values():
+            logger.info(f"Table in metadata: {table.name}")
+            
+        logger.info("Setting up database connection for migrations")
+        connectable = engine_from_config(
+            config.get_section(config.config_ini_section),
+            prefix="sqlalchemy.",
+            poolclass=pool.NullPool,
         )
 
-        with context.begin_transaction():
-            logger.info("Beginning migration transaction")
-            logger.debug("Running migrations with target metadata tables: " + 
-                      ", ".join([t.name for t in target_metadata.tables.values()]))
-            logger.debug("Migration configuration: " + 
-                      str({key: value for key, value in context.config.attributes.items() 
-                          if not key.startswith('_')}))
-            try:
-                context.run_migrations()
-                logger.info("Migrations completed successfully")
-            except Exception as e:
-                logger.error(f"Migration failed: {str(e)}")
-                logger.debug("Migration error details:", exc_info=True)
-                raise
+        with connectable.connect() as connection:
+            logger.info("Testing database connection")
+            connection.execute("SELECT 1")
+            logger.info("Database connection successful")
+            
+            logger.info("Configuring Alembic context")
+            context.configure(
+                connection=connection,
+                target_metadata=target_metadata,
+                version_table='alembic_version'
+            )
+
+            with context.begin_transaction():
+                logger.info("Beginning migration transaction")
+                logger.info("Running migrations with target metadata tables: " + 
+                          ", ".join([t.name for t in target_metadata.tables.values()]))
+                try:
+                    context.run_migrations()
+                    logger.info("Migrations completed successfully")
+                except Exception as e:
+                    logger.error(f"Migration failed: {str(e)}")
+                    logger.error("Migration error details:", exc_info=True)
+                    raise
+    except Exception as e:
+        logger.error(f"Migration setup failed: {str(e)}")
+        logger.error("Setup error details:", exc_info=True)
+        raise
 
 if context.is_offline_mode():
     run_migrations_offline()
