@@ -1,6 +1,6 @@
 import pandas as pd
 from typing import List
-import schemas
+from database import schemas
 from datetime import datetime
 
 def parse_csv(file) -> List[schemas.TimeEntryCreate]:
