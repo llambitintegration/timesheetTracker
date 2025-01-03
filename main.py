@@ -56,9 +56,9 @@ async def upload_timesheet(
     """Upload and process timesheet file"""
     logger.info(f"Processing timesheet upload: {file.filename}")
     try:
-        if file.filename && file.filename.endswith('.xlsx'):
+        if file.filename.endswith('.xlsx'):
             entries = utils.parse_excel(file.file)
-        elif file.filename && file.filename.endswith('.csv'):
+        elif file.filename.endswith('.csv'):
             entries = utils.parse_csv(file.file)
         else:
             logger.error(f"Unsupported file format: {file.filename}")
