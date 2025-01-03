@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 import calendar
 from typing import List, Optional
 import models
-import schemas
+from . import schemas
 from logger import Logger
 
 logger = Logger().get_logger()
