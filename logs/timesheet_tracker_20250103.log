@@ -1,0 +1,17 @@
+2025-01-03 16:43:46,130 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 16:44:10,905 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 16:44:11,238 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-03 16:44:15,366 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-03 16:48:54,748 - TimesheetTracker - INFO - Processing timesheet upload: Hours Tracker.csv
+2025-01-03 16:48:54,885 - TimesheetTracker - ERROR - Error processing timesheet: 1 validation error for TimeEntryCreate
+hours
+  Input should be greater than 0 [type=greater_than, input_value=0.0, input_type=float]
+    For further information visit https://errors.pydantic.dev/2.10/v/greater_than
+2025-01-03 16:49:36,104 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 16:49:36,419 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-03 16:49:36,463 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-03 16:49:51,586 - TimesheetTracker - INFO - Processing timesheet upload: Hours Tracker.csv
+2025-01-03 16:50:09,436 - TimesheetTracker - INFO - Successfully created 163 time entries
+2025-01-03 16:58:08,688 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 16:58:09,577 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-03 16:58:10,432 - TimesheetTracker - INFO - Root endpoint accessed
