@@ -52,6 +52,10 @@ def run_migrations_offline() -> None:
 
 def run_migrations_online() -> None:
     """Run migrations in 'online' mode."""
+    from utils.logger import Logger
+    logger = Logger().get_logger()
+    
+    logger.info("Setting up database connection for migrations")
     connectable = engine_from_config(
         config.get_section(config.config_ini_section),
         prefix="sqlalchemy.",
@@ -59,13 +63,18 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
+        logger.info("Configuring Alembic context")
         context.configure(
             connection=connection,
             target_metadata=target_metadata
         )
 
         with context.begin_transaction():
+            logger.info("Beginning migration transaction")
+            logger.debug("Running migrations with target metadata tables: " + 
+                      ", ".join([t.name for t in target_metadata.tables.values()]))
             context.run_migrations()
+            logger.info("Migrations completed successfully")
 
 if context.is_offline_mode():
     run_migrations_offline()
