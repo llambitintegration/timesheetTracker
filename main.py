@@ -47,6 +47,15 @@ def read_root():
         "redoc": "/redoc"
     }
 
+@app.post("/time-entries/upload", response_model=List[schemas.TimeEntry])
+async def upload_timesheet_entries(
+    entries: List[schemas.TimeEntryCreate],
+    db: Session = Depends(get_db)
+):
+    """Upload multiple time entries directly."""
+    logger.info(f"Processing {len(entries)} time entries")
+    return crud.create_time_entries(db, entries)
+
 @app.post("/upload/", response_model=List[schemas.TimeEntry])
 async def upload_timesheet(
     file: UploadFile = File(...),
