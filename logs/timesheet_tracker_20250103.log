@@ -125,3 +125,33 @@ hours
 2025-01-03 19:57:56,237 - TimesheetTracker - INFO - Processing 167 rows from CSV file
 2025-01-03 19:57:56,255 - TimesheetTracker - ERROR - Error processing row 165: invalid literal for int() with base 10: ''
 2025-01-03 19:57:56,255 - TimesheetTracker - ERROR - Error processing timesheet: invalid literal for int() with base 10: ''
+2025-01-03 19:58:35,732 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 19:58:40,132 - TimesheetTracker - INFO - Processing timesheet upload: Hours Tracker.csv
+2025-01-03 19:58:40,132 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-03 19:58:40,135 - TimesheetTracker - INFO - Processing 167 rows from CSV file
+2025-01-03 19:58:40,161 - TimesheetTracker - ERROR - Error processing row 165: 2 validation errors for TimeEntryCreate
+week_number
+  Input should be greater than or equal to 1 [type=greater_than_equal, input_value=0, input_type=int]
+    For further information visit https://errors.pydantic.dev/2.10/v/greater_than_equal
+month
+  String should match pattern '^(January|February|March|April|May|June|July|August|September|October|November|December)$' [type=string_pattern_mismatch, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.10/v/string_pattern_mismatch
+2025-01-03 19:58:40,161 - TimesheetTracker - ERROR - Error processing timesheet: 2 validation errors for TimeEntryCreate
+week_number
+  Input should be greater than or equal to 1 [type=greater_than_equal, input_value=0, input_type=int]
+    For further information visit https://errors.pydantic.dev/2.10/v/greater_than_equal
+month
+  String should match pattern '^(January|February|March|April|May|June|July|August|September|October|November|December)$' [type=string_pattern_mismatch, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.10/v/string_pattern_mismatch
+2025-01-03 20:00:15,904 - TimesheetTracker - INFO - Database tables created successfully
+2025-01-03 20:00:19,194 - TimesheetTracker - INFO - Processing timesheet upload: Hours Tracker.csv
+2025-01-03 20:00:19,194 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-03 20:00:19,197 - TimesheetTracker - INFO - Processing 167 rows from CSV file
+2025-01-03 20:00:19,211 - TimesheetTracker - ERROR - Error processing row 165: 1 validation error for TimeEntryCreate
+month
+  String should match pattern '^(January|February|March|April|May|June|July|August|September|October|November|December)$' [type=string_pattern_mismatch, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.10/v/string_pattern_mismatch
+2025-01-03 20:00:19,212 - TimesheetTracker - ERROR - Error processing timesheet: 1 validation error for TimeEntryCreate
+month
+  String should match pattern '^(January|February|March|April|May|June|July|August|September|October|November|December)$' [type=string_pattern_mismatch, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.10/v/string_pattern_mismatch

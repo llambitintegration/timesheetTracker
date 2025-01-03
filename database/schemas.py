@@ -18,7 +18,7 @@ class BaseSchema(BaseModel):
 # Time Entry Schemas
 class TimeEntryBase(BaseSchema):
     """Base schema for time entries"""
-    week_number: int = Field(..., ge=1, le=53)
+    week_number: int = Field(..., ge=0, le=53)
     month: str = Field(..., pattern=r'^(January|February|March|April|May|June|July|August|September|October|November|December)$')
     category: str
     subcategory: str
