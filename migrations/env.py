@@ -30,6 +30,9 @@ if database_url:
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
+logging.getLogger('alembic.runtime.migration').setLevel(logging.INFO)
+logging.getLogger('alembic.autogenerate').setLevel(logging.INFO)
+
 # add your model's MetaData object here
 # for 'autogenerate' support
 target_metadata = Base.metadata

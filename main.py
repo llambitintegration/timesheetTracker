@@ -145,8 +145,19 @@ async def initialize_database(force: bool = False, db: Session = Depends(get_db)
 
         logger.info("Running database migrations")
         alembic_cfg = Config("alembic.ini")
-        command.upgrade(alembic_cfg, "head")
+        logger.debug(f"Alembic config loaded from: {alembic_cfg.config_file_name}")
+        logger.debug(f"Script location: {alembic_cfg.get_main_option('script_location')}")
         
+        try:
+            logger.info("Starting migration process")
+            command.upgrade(alembic_cfg, "head")
+            logger.info("Migration completed successfully")
+        except Exception as migration_error:
+            logger.error(f"Migration failed: {str(migration_error)}")
+            logger.exception("Migration stack trace:")
+            raise
+            
+        logger.info("Verifying database state after migration")
         if not verify_database():
             raise Exception("Database verification failed after migration")
             

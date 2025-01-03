@@ -27,14 +27,36 @@ def verify_database():
     logger.info(f"Verifying database connection and schema: {DATABASE_URL}")
     try:
         with engine.connect() as conn:
+            logger.info(f"Database driver: {engine.driver}")
+            logger.info(f"Database dialect: {engine.dialect.name}")
             logger.info("Successfully connected to database")
-            for table in Base.metadata.sorted_tables:
+            
+            tables = list(Base.metadata.sorted_tables)
+            logger.info(f"Checking {len(tables)} tables in schema")
+            
+            existing_tables = []
+            missing_tables = []
+            
+            for table in tables:
+                logger.debug(f"Verifying table: {table.name}")
                 if not engine.dialect.has_table(conn, table.name):
+                    missing_tables.append(table.name)
                     logger.warning(f"Table {table.name} does not exist")
-                    return False
+                else:
+                    existing_tables.append(table.name)
+                    logger.debug(f"Table {table.name} exists with columns: {[c.name for c in table.columns]}")
+            
+            if existing_tables:
+                logger.info(f"Found tables: {', '.join(existing_tables)}")
+            if missing_tables:
+                logger.warning(f"Missing tables: {', '.join(missing_tables)}")
+                return False
+            
+            logger.info("Database verification completed successfully")
             return True
     except Exception as e:
         logger.error(f"Database verification failed: {str(e)}")
+        logger.exception("Stack trace:")
         return False
 
 def init_database():
