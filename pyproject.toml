@@ -3,6 +3,13 @@ name = "repl-nix-timesheettracker"
 version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.11"
+packages = [
+    { include = "database" },
+    { include = "models" },
+    { include = "services" },
+    { include = "migrations" },
+    { include = "utils" }
+]
 dependencies = [
     "alembic>=1.14.0",
     "crud>=0.1",
