@@ -10,7 +10,13 @@ logger = Logger().get_logger()
 def parse_csv(file) -> List[schemas.TimeEntryCreate]:
     logger.info("Starting CSV parsing")
     logger.debug("Reading CSV file into pandas DataFrame")
-    df = pd.read_csv(file.file)
+    
+    # Read the file content into a string buffer
+    content = file.file.read().decode('utf-8')
+    
+    # Use pandas to read from the string buffer
+    import io
+    df = pd.read_csv(io.StringIO(content))
     
     if df.empty:
         logger.error("Empty CSV file received")
