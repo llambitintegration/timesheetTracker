@@ -90,3 +90,31 @@ class ProjectCreate(ProjectBase):
 class Project(ProjectBase):
     class Config:
         orm_model = ProjectModel
+
+
+class ReportEntry(BaseModel):
+    """Schema for report entries"""
+    total_hours: float
+    category: str
+    project: str
+    period: str
+
+    model_config = ConfigDict(from_attributes=True)
+
+class WeeklyReport(BaseModel):
+    """Schema for weekly reports"""
+    entries: List[ReportEntry]
+    total_hours: float
+    week_number: int
+    month: str
+
+    model_config = ConfigDict(from_attributes=True)
+
+class MonthlyReport(BaseModel):
+    """Schema for monthly reports"""
+    entries: List[ReportEntry]
+    total_hours: float
+    month: int
+    year: int
+
+    model_config = ConfigDict(from_attributes=True)
