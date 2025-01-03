@@ -1,15 +1,9 @@
+
 [project]
 name = "repl-nix-timesheettracker"
 version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.11"
-packages = [
-    { include = "database" },
-    { include = "models" },
-    { include = "services" },
-    { include = "migrations" },
-    { include = "utils" }
-]
 dependencies = [
     "alembic>=1.14.0",
     "crud>=0.1",
@@ -24,4 +18,13 @@ dependencies = [
     "schemas>=0.7.1",
     "sqlalchemy>=2.0.36",
     "uvicorn>=0.34.0",
+]
+
+[tool.setuptools]
+packages = [
+    "database",
+    "models",
+    "services",
+    "migrations",
+    "utils"
 ]
