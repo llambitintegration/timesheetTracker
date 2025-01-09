@@ -152,18 +152,41 @@ def read_project(project_id: str, db: Session = Depends(get_db)):
 @app.post("/init-db/")
 async def initialize_database(force: bool = False, db: Session = Depends(get_db)):
     """Initialize database and run migrations"""
-    logger.info("Initializing database")
+    logger.info("Starting database initialization process")
     try:
+        # First verify current database state
+        logger.info("Checking current database state")
         if not force and verify_database():
+            logger.info("Database already initialized and verified")
             return {"status": "success", "message": "Database already initialized"}
 
         from alembic.config import Config
         from alembic import command
+        from alembic.runtime.migration import MigrationContext
+        from sqlalchemy import text
 
-        logger.info("Running database migrations")
+        # Test database connection first
+        logger.info("Testing database connection")
+        try:
+            db.execute(text("SELECT 1"))
+            logger.info("Database connection successful")
+        except Exception as conn_error:
+            logger.error(f"Database connection failed: {str(conn_error)}")
+            raise HTTPException(
+                status_code=500,
+                detail=f"Database connection failed: {str(conn_error)}"
+            )
+
+        logger.info("Loading Alembic configuration")
         alembic_cfg = Config("alembic.ini")
         logger.debug(f"Alembic config loaded from: {alembic_cfg.config_file_name}")
         logger.debug(f"Script location: {alembic_cfg.get_main_option('script_location')}")
+
+        # Check current migration state
+        with engine.connect() as connection:
+            context = MigrationContext.configure(connection)
+            current_rev = context.get_current_revision()
+            logger.info(f"Current migration revision: {current_rev or 'None'}")
 
         try:
             logger.info("Starting migration process")
@@ -172,18 +195,38 @@ async def initialize_database(force: bool = False, db: Session = Depends(get_db)
         except Exception as migration_error:
             logger.error(f"Migration failed: {str(migration_error)}")
             logger.exception("Migration stack trace:")
-            raise
+            raise HTTPException(
+                status_code=500,
+                detail=f"Migration failed: {str(migration_error)}"
+            )
 
+        # Verify database state after migration
         logger.info("Verifying database state after migration")
         if not verify_database():
-            raise Exception("Database verification failed after migration")
+            error_msg = "Database verification failed after migration"
+            logger.error(error_msg)
+            raise HTTPException(status_code=500, detail=error_msg)
 
-        logger.info("Database initialized successfully")
-        return {"status": "success", "message": "Database initialized"}
+        logger.info("Database initialization completed successfully")
+        return {
+            "status": "success",
+            "message": "Database initialized and verified",
+            "details": {
+                "tables_created": [
+                    "customers",
+                    "project_managers",
+                    "projects",
+                    "time_entries"
+                ]
+            }
+        }
+    except HTTPException:
+        raise
     except Exception as e:
-        logger.error(f"Database initialization failed: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
-
+        error_msg = f"Database initialization failed: {str(e)}"
+        logger.error(error_msg)
+        logger.exception("Initialization error stack trace:")
+        raise HTTPException(status_code=500, detail=error_msg)
 
 @app.post("/time-entries/", response_model=schemas.TimeEntry)
 def create_time_entry(entry: schemas.TimeEntryCreate, db: Session = Depends(get_db)):
