@@ -30,12 +30,14 @@ def parse_date(date_value) -> datetime.date:
         if isinstance(date_value, datetime):
             return date_value.date()
         elif isinstance(date_value, str):
-            # Try different date formats
-            for fmt in ['%m/%d/%y', '%Y-%m-%d', '%m/%d/%Y']:
+            # Try different date formats starting with the one from Excel (MM/DD/YY)
+            for fmt in ['%m/%d/%y', '%Y-%m-%d', '%m/%d/%Y', '%d-%m-%Y', '%Y/%m/%d']:
                 try:
                     return datetime.strptime(date_value, fmt).date()
                 except ValueError:
                     continue
+            # If none of the formats work, try pandas to_datetime as fallback
+            return pd.to_datetime(date_value).date()
         raise ValueError(f"Could not parse date: {date_value}")
     except Exception as e:
         logger.warning(f"Error parsing date '{date_value}': {str(e)}")
@@ -95,7 +97,7 @@ def parse_csv(file) -> List[schemas.TimeEntryCreate]:
             hours = clean_numeric_value(row.get('Hours', 0))
             week_number = validate_week_number(row.get('Week Number'))
             month = validate_month(row.get('Month'))
-            customer = row.get('Customer', '').strip()
+            customer = clean_string_value(row.get('Customer', ''))
             entry_date = parse_date(row.get('Date'))
 
             if hours <= 0:
@@ -131,10 +133,12 @@ def parse_csv(file) -> List[schemas.TimeEntryCreate]:
     return entries
 
 def parse_excel(file) -> List[schemas.TimeEntryCreate]:
-    """Parse Excel file using the same validation as CSV."""
+    """Parse Excel file with enhanced date handling."""
     logger.info("Starting Excel parsing")
     logger.debug("Reading Excel file into pandas DataFrame")
-    df = pd.read_excel(file)
+
+    # Read Excel file with explicit date parsing
+    df = pd.read_excel(file, parse_dates=['Date'])
 
     # Convert Excel to CSV format and use the same parsing logic
     df.to_csv('temp.csv', index=False)

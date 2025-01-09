@@ -224,6 +224,26 @@ def get_time_entries_by_week(
     logger.info(f"Fetching time entries for week {week_number} of {year}")
     return crud.get_time_entries_by_week(db, week_number, year, project_id)
 
+@app.get("/time-entries/by-date/{date}", response_model=List[schemas.TimeEntry])
+def get_time_entries_by_date(
+    date: date,
+    db: Session = Depends(get_db)
+):
+    """
+    Get all time entries for a specific date.
+    Date format: YYYY-MM-DD
+    """
+    logger.info(f"Fetching time entries for date: {date}")
+    try:
+        entries = crud.get_time_entries_by_date(db, date)
+        if not entries:
+            logger.info(f"No entries found for date: {date}")
+            return []
+        logger.info(f"Found {len(entries)} entries for date: {date}")
+        return entries
+    except Exception as e:
+        logger.error(f"Error fetching time entries for date {date}: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/reports/weekly", response_model=schemas.WeeklyReport)
 def get_weekly_report(

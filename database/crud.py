@@ -266,19 +266,11 @@ def get_monthly_report(
     return results
 
 def get_time_entries_by_date(db: Session, query_date: date) -> List[models.TimeEntry]:
-    """
-    Retrieve all time entries for a specific date.
-    Uses the created_at timestamp for filtering.
-    """
+    """Retrieve all time entries for a specific date."""
     logger.debug(f"Executing database query for time entries on date: {query_date}")
 
-    # Convert date to datetime range for the entire day
-    start_datetime = datetime.combine(query_date, datetime.min.time())
-    end_datetime = datetime.combine(query_date, datetime.max.time())
-
     entries = db.query(models.TimeEntry).filter(
-        models.TimeEntry.created_at >= start_datetime,
-        models.TimeEntry.created_at <= end_datetime
+        models.TimeEntry.date == query_date
     ).order_by(models.TimeEntry.created_at.asc()).all()
 
     if entries:
@@ -289,12 +281,6 @@ def get_time_entries_by_date(db: Session, query_date: date) -> List[models.TimeE
         logger.info(f"No time entries found for date {query_date}")
 
     return entries
-
-try:
-    from . import schemas
-except ImportError:
-    print("Error importing schemas.  Make sure schemas.py is in the same directory.")
-    exit(1)
 
 def get_time_summaries(
     db: Session,
@@ -381,3 +367,9 @@ def get_time_entries_by_week(
     last_day = first_day + timedelta(days=6)
 
     return get_time_summaries(db, first_day, last_day, project_id)
+
+try:
+    from . import schemas
+except ImportError:
+    print("Error importing schemas.  Make sure schemas.py is in the same directory.")
+    exit(1)
