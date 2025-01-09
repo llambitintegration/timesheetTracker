@@ -78,10 +78,16 @@ def init_database():
         logger.info("Initializing database tables")
         # Import all models to ensure they're registered with metadata
         from models import Customer, ProjectManager, Project, TimeEntry
-
-        # Create all tables
-        Base.metadata.create_all(bind=engine)
-        logger.info("Database tables created successfully")
+        
+        inspector = inspect(engine)
+        existing_tables = inspector.get_table_names()
+        
+        if not existing_tables:
+            # Create all tables only if none exist
+            Base.metadata.create_all(bind=engine)
+            logger.info("Database tables created successfully")
+        else:
+            logger.info("Tables already exist, skipping creation")
         return True
     except Exception as e:
         logger.error(f"Failed to initialize database: {str(e)}")
