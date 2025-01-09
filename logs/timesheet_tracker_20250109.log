@@ -12276,3 +12276,131 @@ DETAIL:  Key (customer)=(Project Magic Bullet) is not present in table "customer
 [parameters: {'category__0': 'Other', 'week_number__0': 41, 'updated_at__0': None, 'month__0': 'October', 'project__0': 'Unassigned', 'task_description__0': 'New hire orientation', 'customer__0': 'Unassigned', 'hours__0': 6.0, 'subcategory__0': 'Other Training', 'date__0': datetime.date(2024, 10, 7), 'category__1': 'Other', 'week_number__1': 41, 'updated_at__1': None, 'month__1': 'October', 'project__1': 'Unassigned', 'task_description__1': 'Andrew<>Joseph', 'customer__1': 'Unassigned', 'hours__1': 2.0, 'subcategory__1': 'Other Training', 'date__1': datetime.date(2024, 10, 7), 'category__2': 'Other', 'week_number__2': 41, 'updated_at__2': None, 'month__2': 'October', 'project__2': 'Unassigned', 'task_description__2': 'Andrew<>Joseph', 'customer__2': 'Unassigned', 'hours__2': 2.0, 'subcategory__2': 'Other Training', 'date__2': datetime.date(2024, 10, 8), 'category__3': 'Other', 'week_number__3': 41, 'updated_at__3': None, 'month__3': 'October', 'project__3': 'Unassigned', 'task_description__3': 'I-9 Meeting', 'customer__3': 'Unassigned', 'hours__3': 1.0, 'subcategory__3': 'Info/File Management', 'date__3': datetime.date(2024, 10, 8), 'category__4': 'Other', 'week_number__4': 41, 'updated_at__4': None, 'month__4': 'October', 'project__4': 'Unassigned', 'task_description__4': 'Workday Safety Training', 'customer__4': 'Unassigned', 'hours__4': 5.0, 'subcategory__4': 'Safety Training/Reporting', 'date__4': datetime.date(2024, 10, 8) ... 1430 parameters truncated ... 'category__148': 'Other', 'week_number__148': 48, 'updated_at__148': None, 'month__148': 'November', 'project__148': 'Unassigned', 'task_description__148': 'VMWare troubleshooting', 'customer__148': 'Unassigned', 'hours__148': 2.0, 'subcategory__148': 'Pc Upgrades/Support', 'date__148': datetime.date(2024, 11, 27), 'category__149': 'Other', 'week_number__149': 48, 'updated_at__149': None, 'month__149': 'November', 'project__149': 'Unassigned', 'task_description__149': 'Self study', 'customer__149': 'Unassigned', 'hours__149': 2.0, 'subcategory__149': 'Other Training', 'date__149': datetime.date(2024, 11, 27), 'category__150': 'Other', 'week_number__150': 48, 'updated_at__150': None, 'month__150': 'November', 'project__150': 'Unassigned', 'task_description__150': 'Document generation tool', 'customer__150': 'Unassigned', 'hours__150': 1.0, 'subcategory__150': 'Pc Upgrades/Support', 'date__150': datetime.date(2024, 11, 27), 'category__151': 'Other', 'week_number__151': 48, 'updated_at__151': None, 'month__151': 'November', 'project__151': 'Unassigned', 'task_description__151': 'Thanksgiving', 'customer__151': 'Unassigned', 'hours__151': 8.0, 'subcategory__151': 'Holidays', 'date__151': datetime.date(2024, 11, 28), 'category__152': 'Other', 'week_number__152': 48, 'updated_at__152': None, 'month__152': 'November', 'project__152': 'Unassigned', 'task_description__152': 'Thanksgiving', 'customer__152': 'Unassigned', 'hours__152': 8.0, 'subcategory__152': 'Holidays', 'date__152': datetime.date(2024, 11, 29)}]
 (Background on this error at: https://sqlalche.me/e/20/gkpj)
 2025-01-09 20:48:54,582 - TimesheetTracker - DEBUG - Database session closed
+2025-01-09 20:54:45,966 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 20:54:46,770 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-09 20:54:46,770 - TimesheetTracker - DEBUG - Reading CSV file into pandas DataFrame
+2025-01-09 20:54:46,773 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 20:54:46,774 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 20:54:46,775 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 20:54:46,775 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 20:54:46,775 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 20:54:46,776 - TimesheetTracker - INFO - Successfully created 2 time entries from CSV
+2025-01-09 20:54:46,776 - TimesheetTracker - DEBUG - Total hours recorded: 8.0
+2025-01-09 20:54:46,780 - TimesheetTracker - WARNING - Error parsing date 'invalid_date': Unknown datetime string format, unable to parse: invalid_date, at position 0
+2025-01-09 20:54:46,782 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-09 20:54:46,783 - TimesheetTracker - DEBUG - Reading CSV file into pandas DataFrame
+2025-01-09 20:54:46,784 - TimesheetTracker - ERROR - Empty CSV file received
+2025-01-09 20:54:46,840 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-09 20:54:46,840 - TimesheetTracker - DEBUG - Reading CSV file into pandas DataFrame
+2025-01-09 20:54:46,842 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 20:54:46,843 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 20:54:46,843 - TimesheetTracker - WARNING - Skipping row 1 due to invalid hours: -1.0
+2025-01-09 20:55:38,694 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 20:55:39,020 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-09 20:55:39,021 - TimesheetTracker - DEBUG - Reading CSV file into pandas DataFrame
+2025-01-09 20:55:39,024 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 20:55:39,024 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 20:55:39,025 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 20:55:39,026 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 20:55:39,026 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 20:55:39,026 - TimesheetTracker - INFO - Successfully created 2 time entries from CSV
+2025-01-09 20:55:39,026 - TimesheetTracker - DEBUG - Total hours recorded: 8.0
+2025-01-09 20:55:39,031 - TimesheetTracker - WARNING - Error parsing date 'invalid_date': Unknown datetime string format, unable to parse: invalid_date, at position 0
+2025-01-09 20:55:39,033 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-09 20:55:39,033 - TimesheetTracker - DEBUG - Reading CSV file into pandas DataFrame
+2025-01-09 20:55:39,035 - TimesheetTracker - ERROR - Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 20:55:39,037 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-09 20:55:39,037 - TimesheetTracker - DEBUG - Reading CSV file into pandas DataFrame
+2025-01-09 20:55:39,039 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 20:55:39,039 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 20:55:39,039 - TimesheetTracker - WARNING - Skipping row 1 due to invalid hours: -1.0
+2025-01-09 20:56:37,411 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 20:56:37,962 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-09 20:56:37,962 - TimesheetTracker - DEBUG - Reading CSV file into pandas DataFrame
+2025-01-09 20:56:37,965 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 20:56:37,966 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 20:56:37,969 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 20:56:37,969 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 20:56:37,970 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 20:56:37,970 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 20:56:37,976 - TimesheetTracker - WARNING - Error parsing date 'invalid_date': Unknown datetime string format, unable to parse: invalid_date, at position 0
+2025-01-09 20:56:37,982 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-09 20:56:37,982 - TimesheetTracker - DEBUG - Reading CSV file into pandas DataFrame
+2025-01-09 20:56:37,985 - TimesheetTracker - ERROR - Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 20:56:37,986 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-09 20:56:37,987 - TimesheetTracker - DEBUG - Reading CSV file into pandas DataFrame
+2025-01-09 20:56:37,989 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 20:56:37,989 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 20:56:37,989 - TimesheetTracker - WARNING - Skipping row 1 due to invalid hours: -1.0
+2025-01-09 20:56:37,989 - TimesheetTracker - INFO - Successfully processed 0 valid entries from CSV
+2025-01-09 20:58:29,678 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 20:58:29,953 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-09 20:58:29,954 - TimesheetTracker - DEBUG - Reading CSV file into pandas DataFrame
+2025-01-09 20:58:29,957 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 20:58:29,958 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 20:58:29,959 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 20:58:29,959 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 20:58:29,959 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 20:58:29,959 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 20:58:29,964 - TimesheetTracker - WARNING - Error parsing date 'invalid_date': Unknown datetime string format, unable to parse: invalid_date, at position 0
+2025-01-09 20:58:29,966 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-09 20:58:29,966 - TimesheetTracker - DEBUG - Reading CSV file into pandas DataFrame
+2025-01-09 20:58:29,968 - TimesheetTracker - ERROR - Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 20:58:29,969 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-09 20:58:29,969 - TimesheetTracker - DEBUG - Reading CSV file into pandas DataFrame
+2025-01-09 20:58:29,971 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 20:58:29,972 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 20:58:29,972 - TimesheetTracker - WARNING - Skipping row 1 due to invalid hours: -1.0
+2025-01-09 20:58:29,972 - TimesheetTracker - INFO - Successfully processed 0 valid entries from CSV
+2025-01-09 20:58:50,312 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 20:58:50,631 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-09 20:58:50,631 - TimesheetTracker - DEBUG - Reading CSV file into pandas DataFrame
+2025-01-09 20:58:50,635 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 20:58:50,635 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 20:58:50,636 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 20:58:50,636 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 20:58:50,636 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 20:58:50,637 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 20:58:50,641 - TimesheetTracker - WARNING - Error parsing date 'invalid_date': Unknown datetime string format, unable to parse: invalid_date, at position 0
+2025-01-09 20:58:50,643 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-09 20:58:50,644 - TimesheetTracker - DEBUG - Reading CSV file into pandas DataFrame
+2025-01-09 20:58:50,645 - TimesheetTracker - ERROR - Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 20:58:50,646 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-09 20:58:50,646 - TimesheetTracker - DEBUG - Reading CSV file into pandas DataFrame
+2025-01-09 20:58:50,648 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 20:58:50,649 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 20:58:50,649 - TimesheetTracker - WARNING - Skipping row 1 due to invalid hours: -1.0
+2025-01-09 20:58:50,649 - TimesheetTracker - INFO - Successfully processed 0 valid entries from CSV
+2025-01-09 20:59:33,386 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 20:59:33,687 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-09 20:59:33,688 - TimesheetTracker - DEBUG - Reading CSV file into pandas DataFrame
+2025-01-09 20:59:33,691 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 20:59:33,692 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 20:59:33,692 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 20:59:33,693 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 20:59:33,693 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 20:59:33,693 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 20:59:33,697 - TimesheetTracker - WARNING - Error parsing date 'invalid_date': Unknown datetime string format, unable to parse: invalid_date, at position 0
+2025-01-09 20:59:33,701 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-09 20:59:33,701 - TimesheetTracker - DEBUG - Reading CSV file into pandas DataFrame
+2025-01-09 20:59:33,702 - TimesheetTracker - ERROR - Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 20:59:33,704 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-09 20:59:33,704 - TimesheetTracker - DEBUG - Reading CSV file into pandas DataFrame
+2025-01-09 20:59:33,705 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 20:59:33,706 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 20:59:33,706 - TimesheetTracker - WARNING - Skipping row 1 due to invalid hours: -1.0
+2025-01-09 20:59:33,706 - TimesheetTracker - INFO - Successfully processed 0 valid entries from CSV
+2025-01-09 20:59:33,709 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-09 20:59:33,709 - TimesheetTracker - DEBUG - Reading CSV file into pandas DataFrame
+2025-01-09 20:59:33,711 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 20:59:33,711 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 20:59:33,711 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 20:59:33,712 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 20:59:33,712 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 20:59:33,712 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 20:59:33,714 - TimesheetTracker - INFO - Starting CSV parsing
+2025-01-09 20:59:33,714 - TimesheetTracker - DEBUG - Reading CSV file into pandas DataFrame
+2025-01-09 20:59:33,715 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 20:59:33,715 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 20:59:33,716 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 20:59:33,716 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV

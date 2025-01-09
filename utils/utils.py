@@ -98,22 +98,25 @@ def parse_csv(file) -> List:
     logger.info("Starting CSV parsing")
     logger.debug("Reading CSV file into pandas DataFrame")
 
-    # Read the file content and create DataFrame
+    # Check for required columns first
+    required_columns = ['Week Number', 'Hours', 'Customer', 'Project', 'Date']
     df = pd.read_csv(file, keep_default_na=False)
-    df = df.dropna(how='all')  # Remove rows that are all empty
+    missing_columns = [col for col in required_columns if col not in df.columns]
+    if missing_columns:
+        error_msg = f"Missing required columns: {', '.join(missing_columns)}"
+        logger.error(error_msg)
+        raise ValueError(error_msg)
+
+    # Remove rows that are all empty and reset index
+    df = df.dropna(how='all')
     df = df.reset_index(drop=True)
 
     if df.empty:
-        logger.error("Empty CSV file received")
-        raise ValueError("Empty CSV file")
+        logger.warning("No valid entries found in CSV file")
+        return []
 
     entries = []
     logger.info(f"Processing {len(df)} rows from CSV file")
-
-    required_columns = ['Week Number', 'Hours', 'Customer', 'Project', 'Date']
-    missing_columns = [col for col in required_columns if col not in df.columns]
-    if missing_columns:
-        raise ValueError(f"Missing required columns: {', '.join(missing_columns)}")
 
     for index, row in df.iterrows():
         logger.debug(f"Processing row {index + 1}/{len(df)}")
@@ -121,17 +124,16 @@ def parse_csv(file) -> List:
         try:
             # Clean and validate data
             hours = clean_numeric_value(row.get('Hours', 0))
+            if hours <= 0 or hours > 24:
+                logger.warning(f"Skipping row {index + 1} due to invalid hours: {hours}")
+                continue
+
             week_number = validate_week_number(row.get('Week Number'))
             month = validate_month(row.get('Month'))
             customer = clean_string_value(row.get('Customer', ''))
             entry_date = parse_date(row.get('Date'))
 
-            if hours <= 0:
-                logger.warning(f"Skipping row {index + 1} due to invalid hours: {hours}")
-                continue
-
             # Clean up customer value and handle special cases
-            customer = clean_string_value(row.get('Customer', ''))
             if not customer or customer.strip() in ['-', '', 'None', None]:
                 customer = 'Unassigned'
 
@@ -140,10 +142,10 @@ def parse_csv(file) -> List:
                 month=month,
                 category=clean_string_value(row.get('Category'), "Other", "category"),
                 subcategory=clean_string_value(row.get('Subcategory'), "General", "subcategory"),
-                customer=clean_string_value(row.get('Customer'), "Unassigned"),
+                customer=customer,
                 project=clean_string_value(row.get('Project'), "Unassigned", "project"),
                 task_description=clean_string_value(row.get('Task Description'), ""),
-                hours=max(min(clean_numeric_value(row.get('Hours', 0)), 24), 0),
+                hours=hours,
                 date=entry_date
             )
             entries.append(entry)
@@ -152,11 +154,7 @@ def parse_csv(file) -> List:
             logger.error(f"Error processing row {index + 1}: {str(e)}")
             continue
 
-    if not entries:
-        raise ValueError("No valid entries found after processing")
-
-    logger.info(f"Successfully created {len(entries)} time entries from CSV")
-    logger.debug(f"Total hours recorded: {sum(entry.hours for entry in entries)}")
+    logger.info(f"Successfully processed {len(entries)} valid entries from CSV")
     return entries
 
 def parse_excel(file) -> List:
