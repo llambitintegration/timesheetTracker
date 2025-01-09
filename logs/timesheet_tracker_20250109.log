@@ -22142,3 +22142,16 @@ DETAIL:  Failing row contains (154, 2025-01-09, 2, January, string, string, Unas
 2025-01-09 22:47:35,680 - TimesheetTracker - DEBUG - Committing transaction
 2025-01-09 22:47:35,691 - TimesheetTracker - DEBUG - Refreshing database entry
 2025-01-09 22:47:35,692 - TimesheetTracker - INFO - Successfully created time entry [1] for Unassigned - Unassigned (8.0 hours)
+2025-01-09 22:49:28,544 - TimesheetTracker - DEBUG - Database session created
+2025-01-09 22:49:28,548 - TimesheetTracker - INFO - Creating new customer: newerCustomer
+2025-01-09 22:49:28,549 - TimesheetTracker - DEBUG - CustomerService initialized with database session
+2025-01-09 22:49:28,549 - TimesheetTracker - DEBUG - Starting creation of customer with data: {'id': 0, 'created_at': datetime.datetime(2025, 1, 9, 22, 49, 12, 595000, tzinfo=TzInfo(UTC)), 'updated_at': datetime.datetime(2025, 1, 9, 22, 49, 12, 595000, tzinfo=TzInfo(UTC)), 'name': 'newerCustomer', 'contact_email': 'string', 'industry': 'string', 'status': 'active', 'address': 'string', 'phone': 'string'}
+2025-01-09 22:49:28,616 - TimesheetTracker - DEBUG - Adding customer to database session
+2025-01-09 22:49:28,739 - TimesheetTracker - INFO - Successfully created customer: newerCustomer
+2025-01-09 22:49:28,764 - TimesheetTracker - DEBUG - Database session closed
+2025-01-09 22:50:38,360 - TimesheetTracker - DEBUG - Database session created
+2025-01-09 22:50:38,366 - TimesheetTracker - INFO - Updating customer: newerCustomer
+2025-01-09 22:50:38,366 - TimesheetTracker - DEBUG - CustomerService initialized with database session
+2025-01-09 22:50:38,366 - TimesheetTracker - DEBUG - Attempting to update customer newerCustomer with data: {'id': 0, 'created_at': datetime.datetime(2025, 1, 9, 22, 50, 17, 859000, tzinfo=TzInfo(UTC)), 'updated_at': datetime.datetime(2025, 1, 9, 22, 50, 17, 859000, tzinfo=TzInfo(UTC)), 'name': 'newestCustomer', 'contact_email': 'string', 'industry': 'string', 'status': 'inactive', 'address': 'string', 'phone': 'string'}
+2025-01-09 22:50:38,536 - TimesheetTracker - INFO - Successfully updated customer: newerCustomer
+2025-01-09 22:50:38,557 - TimesheetTracker - DEBUG - Database session closed
