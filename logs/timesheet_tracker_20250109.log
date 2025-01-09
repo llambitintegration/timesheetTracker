@@ -1210,3 +1210,85 @@ sqlalchemy.exc.ProgrammingError: (psycopg2.errors.DuplicateColumn) column "creat
 2025-01-09 19:48:37,656 - TimesheetTracker - DEBUG - Script location: migrations
 2025-01-09 19:48:37,855 - TimesheetTracker - INFO - Current migration revision: None
 2025-01-09 19:48:37,880 - TimesheetTracker - INFO - Starting migration process
+2025-01-09 19:49:52,814 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 19:49:52,991 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 19:49:52,991 - TimesheetTracker - INFO - Verifying database connection and schema: postgresql+psycopg2://timesheetDatabase_owner:imz1MH3OjLef@ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 19:49:53,328 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 19:49:53,328 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 19:49:53,328 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 19:49:53,328 - TimesheetTracker - INFO - Checking 4 tables in schema
+2025-01-09 19:49:53,328 - TimesheetTracker - DEBUG - Verifying table: customers
+2025-01-09 19:49:53,353 - TimesheetTracker - WARNING - Table customers does not exist
+2025-01-09 19:49:53,354 - TimesheetTracker - DEBUG - Verifying table: project_managers
+2025-01-09 19:49:53,374 - TimesheetTracker - WARNING - Table project_managers does not exist
+2025-01-09 19:49:53,374 - TimesheetTracker - DEBUG - Verifying table: projects
+2025-01-09 19:49:53,394 - TimesheetTracker - WARNING - Table projects does not exist
+2025-01-09 19:49:53,395 - TimesheetTracker - DEBUG - Verifying table: time_entries
+2025-01-09 19:49:53,415 - TimesheetTracker - WARNING - Table time_entries does not exist
+2025-01-09 19:49:53,415 - TimesheetTracker - WARNING - Missing tables: customers, project_managers, projects, time_entries
+2025-01-09 19:49:53,434 - TimesheetTracker - WARNING - Database verification failed - schema may need initialization
+2025-01-09 19:49:54,645 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 19:49:54,710 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 19:50:01,837 - TimesheetTracker - INFO - Starting database migration process
+2025-01-09 19:50:01,839 - TimesheetTracker - INFO - Using database URL: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 19:50:01,840 - TimesheetTracker - INFO - Checking target metadata
+2025-01-09 19:50:01,841 - TimesheetTracker - INFO - Found 4 tables in metadata
+2025-01-09 19:50:01,843 - TimesheetTracker - INFO - Table in metadata: customers
+2025-01-09 19:50:01,844 - TimesheetTracker - DEBUG - Columns in customers:
+2025-01-09 19:50:01,845 - TimesheetTracker - DEBUG -   - name (VARCHAR)
+2025-01-09 19:50:01,846 - TimesheetTracker - DEBUG -   - contact_email (VARCHAR)
+2025-01-09 19:50:01,847 - TimesheetTracker - DEBUG -   - industry (VARCHAR)
+2025-01-09 19:50:01,848 - TimesheetTracker - DEBUG -   - status (VARCHAR)
+2025-01-09 19:50:01,849 - TimesheetTracker - DEBUG -   - address (VARCHAR)
+2025-01-09 19:50:01,849 - TimesheetTracker - DEBUG -   - phone (VARCHAR)
+2025-01-09 19:50:01,849 - TimesheetTracker - DEBUG -   - id (INTEGER)
+2025-01-09 19:50:01,849 - TimesheetTracker - DEBUG -   - created_at (DATETIME)
+2025-01-09 19:50:01,849 - TimesheetTracker - DEBUG -   - updated_at (DATETIME)
+2025-01-09 19:50:01,850 - TimesheetTracker - INFO - Table in metadata: project_managers
+2025-01-09 19:50:01,850 - TimesheetTracker - DEBUG - Columns in project_managers:
+2025-01-09 19:50:01,850 - TimesheetTracker - DEBUG -   - name (VARCHAR)
+2025-01-09 19:50:01,850 - TimesheetTracker - DEBUG -   - email (VARCHAR)
+2025-01-09 19:50:01,850 - TimesheetTracker - DEBUG -   - id (INTEGER)
+2025-01-09 19:50:01,850 - TimesheetTracker - DEBUG -   - created_at (DATETIME)
+2025-01-09 19:50:01,850 - TimesheetTracker - DEBUG -   - updated_at (DATETIME)
+2025-01-09 19:50:01,850 - TimesheetTracker - INFO - Table in metadata: projects
+2025-01-09 19:50:01,850 - TimesheetTracker - DEBUG - Columns in projects:
+2025-01-09 19:50:01,850 - TimesheetTracker - DEBUG -   - project_id (VARCHAR)
+2025-01-09 19:50:01,851 - TimesheetTracker - DEBUG -   - name (VARCHAR)
+2025-01-09 19:50:01,851 - TimesheetTracker - DEBUG -   - location (VARCHAR)
+2025-01-09 19:50:01,851 - TimesheetTracker - DEBUG -   - description (VARCHAR)
+2025-01-09 19:50:01,851 - TimesheetTracker - DEBUG -   - customer (VARCHAR)
+2025-01-09 19:50:01,851 - TimesheetTracker - DEBUG -   - project_manager (VARCHAR)
+2025-01-09 19:50:01,851 - TimesheetTracker - DEBUG -   - status (VARCHAR)
+2025-01-09 19:50:01,851 - TimesheetTracker - DEBUG -   - id (INTEGER)
+2025-01-09 19:50:01,851 - TimesheetTracker - DEBUG -   - created_at (DATETIME)
+2025-01-09 19:50:01,851 - TimesheetTracker - DEBUG -   - updated_at (DATETIME)
+2025-01-09 19:50:01,851 - TimesheetTracker - INFO - Table in metadata: time_entries
+2025-01-09 19:50:01,852 - TimesheetTracker - DEBUG - Columns in time_entries:
+2025-01-09 19:50:01,862 - TimesheetTracker - DEBUG -   - week_number (INTEGER)
+2025-01-09 19:50:01,863 - TimesheetTracker - DEBUG -   - month (VARCHAR)
+2025-01-09 19:50:01,863 - TimesheetTracker - DEBUG -   - category (VARCHAR)
+2025-01-09 19:50:01,863 - TimesheetTracker - DEBUG -   - subcategory (VARCHAR)
+2025-01-09 19:50:01,863 - TimesheetTracker - DEBUG -   - customer (VARCHAR)
+2025-01-09 19:50:01,864 - TimesheetTracker - DEBUG -   - project (VARCHAR)
+2025-01-09 19:50:01,864 - TimesheetTracker - DEBUG -   - task_description (VARCHAR)
+2025-01-09 19:50:01,864 - TimesheetTracker - DEBUG -   - hours (FLOAT)
+2025-01-09 19:50:01,864 - TimesheetTracker - DEBUG -   - date (DATE)
+2025-01-09 19:50:01,865 - TimesheetTracker - DEBUG -   - created_at (DATETIME)
+2025-01-09 19:50:01,865 - TimesheetTracker - DEBUG -   - updated_at (DATETIME)
+2025-01-09 19:50:01,866 - TimesheetTracker - DEBUG -   - id (INTEGER)
+2025-01-09 19:50:01,866 - TimesheetTracker - INFO - Setting up database connection for migrations
+2025-01-09 19:50:02,213 - TimesheetTracker - INFO - Testing database connection
+2025-01-09 19:50:02,257 - TimesheetTracker - INFO - Database connection successful
+2025-01-09 19:50:02,258 - TimesheetTracker - INFO - Configuring Alembic context
+2025-01-09 19:50:02,259 - TimesheetTracker - INFO - Beginning migration transaction
+2025-01-09 19:50:02,266 - TimesheetTracker - INFO - Running migrations with target metadata tables: customers, project_managers, projects, time_entries
+2025-01-09 19:50:02,367 - TimesheetTracker - INFO - Starting to create customers table
+2025-01-09 19:50:02,415 - TimesheetTracker - INFO - Successfully created customers table
+2025-01-09 19:50:02,416 - TimesheetTracker - INFO - Starting to create project_managers table
+2025-01-09 19:50:02,444 - TimesheetTracker - INFO - Successfully created project_managers table
+2025-01-09 19:50:02,444 - TimesheetTracker - INFO - Starting to create projects table
+2025-01-09 19:50:02,473 - TimesheetTracker - INFO - Successfully created projects table
+2025-01-09 19:50:02,473 - TimesheetTracker - INFO - Starting to create time_entries table
+2025-01-09 19:50:02,501 - TimesheetTracker - INFO - Successfully created time_entries table
+2025-01-09 19:50:02,610 - TimesheetTracker - INFO - Migrations completed successfully
