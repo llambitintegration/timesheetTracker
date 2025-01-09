@@ -2,16 +2,14 @@ from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, Query
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List, Optional
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 import calendar
 from dotenv import load_dotenv
-
 
 from database import schemas, crud, get_db, verify_database, engine
 from utils.logger import Logger
 from utils import utils
 from models import TimeEntry
-
 
 logger = Logger().get_logger()
 app = FastAPI(title="Timesheet Management API")
@@ -166,7 +164,7 @@ async def initialize_database(force: bool = False, db: Session = Depends(get_db)
         alembic_cfg = Config("alembic.ini")
         logger.debug(f"Alembic config loaded from: {alembic_cfg.config_file_name}")
         logger.debug(f"Script location: {alembic_cfg.get_main_option('script_location')}")
-        
+
         try:
             logger.info("Starting migration process")
             command.upgrade(alembic_cfg, "head")
@@ -175,11 +173,11 @@ async def initialize_database(force: bool = False, db: Session = Depends(get_db)
             logger.error(f"Migration failed: {str(migration_error)}")
             logger.exception("Migration stack trace:")
             raise
-            
+
         logger.info("Verifying database state after migration")
         if not verify_database():
             raise Exception("Database verification failed after migration")
-            
+
         logger.info("Database initialized successfully")
         return {"status": "success", "message": "Database initialized"}
     except Exception as e:
@@ -320,6 +318,27 @@ def get_monthly_report(
         month=month,
         year=year
     )
+
+@app.get("/time-entries/by-date/{date}", response_model=List[schemas.TimeEntry])
+def get_time_entries_by_date(
+    date: date,
+    db: Session = Depends(get_db)
+):
+    """
+    Get all time entries for a specific date.
+    Date format: YYYY-MM-DD
+    """
+    logger.info(f"Fetching time entries for date: {date}")
+    try:
+        entries = crud.get_time_entries_by_date(db, date)
+        if not entries:
+            logger.info(f"No entries found for date: {date}")
+            return []
+        logger.info(f"Found {len(entries)} entries for date: {date}")
+        return entries
+    except Exception as e:
+        logger.error(f"Error fetching time entries for date {date}: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
     import uvicorn

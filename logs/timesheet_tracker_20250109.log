@@ -1,0 +1,72 @@
+2025-01-09 18:47:03,525 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 18:47:03,525 - TimesheetTracker - INFO - Verifying database connection and schema: postgresql+psycopg2://timesheetDatabase_owner:imz1MH3OjLef@ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 18:47:03,919 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 18:47:03,919 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 18:47:03,919 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 18:47:03,919 - TimesheetTracker - INFO - Checking 4 tables in schema
+2025-01-09 18:47:03,919 - TimesheetTracker - DEBUG - Verifying table: customers
+2025-01-09 18:47:03,970 - TimesheetTracker - DEBUG - Table customers exists with columns: ['name', 'contact_email', 'industry', 'status', 'address', 'phone', 'id', 'created_at', 'updated_at']
+2025-01-09 18:47:03,971 - TimesheetTracker - DEBUG - Verifying table: project_managers
+2025-01-09 18:47:03,995 - TimesheetTracker - DEBUG - Table project_managers exists with columns: ['name', 'email', 'id', 'created_at', 'updated_at']
+2025-01-09 18:47:03,995 - TimesheetTracker - DEBUG - Verifying table: projects
+2025-01-09 18:47:04,015 - TimesheetTracker - DEBUG - Table projects exists with columns: ['project_id', 'name', 'location', 'description', 'customer', 'project_manager', 'status', 'id', 'created_at', 'updated_at']
+2025-01-09 18:47:04,015 - TimesheetTracker - DEBUG - Verifying table: time_entries
+2025-01-09 18:47:04,035 - TimesheetTracker - DEBUG - Table time_entries exists with columns: ['week_number', 'month', 'category', 'subcategory', 'customer', 'project', 'task_description', 'hours', 'created_at', 'updated_at', 'id']
+2025-01-09 18:47:04,036 - TimesheetTracker - INFO - Found tables: customers, project_managers, projects, time_entries
+2025-01-09 18:47:04,037 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 18:47:07,411 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 18:48:38,900 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 18:48:38,900 - TimesheetTracker - INFO - Verifying database connection and schema: postgresql+psycopg2://timesheetDatabase_owner:imz1MH3OjLef@ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 18:48:39,256 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 18:48:39,256 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 18:48:39,256 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 18:48:39,257 - TimesheetTracker - INFO - Checking 4 tables in schema
+2025-01-09 18:48:39,257 - TimesheetTracker - DEBUG - Verifying table: customers
+2025-01-09 18:48:39,302 - TimesheetTracker - DEBUG - Table customers exists with columns: ['name', 'contact_email', 'industry', 'status', 'address', 'phone', 'id', 'created_at', 'updated_at']
+2025-01-09 18:48:39,302 - TimesheetTracker - DEBUG - Verifying table: project_managers
+2025-01-09 18:48:39,322 - TimesheetTracker - DEBUG - Table project_managers exists with columns: ['name', 'email', 'id', 'created_at', 'updated_at']
+2025-01-09 18:48:39,322 - TimesheetTracker - DEBUG - Verifying table: projects
+2025-01-09 18:48:39,342 - TimesheetTracker - DEBUG - Table projects exists with columns: ['project_id', 'name', 'location', 'description', 'customer', 'project_manager', 'status', 'id', 'created_at', 'updated_at']
+2025-01-09 18:48:39,342 - TimesheetTracker - DEBUG - Verifying table: time_entries
+2025-01-09 18:48:39,362 - TimesheetTracker - DEBUG - Table time_entries exists with columns: ['week_number', 'month', 'category', 'subcategory', 'customer', 'project', 'task_description', 'hours', 'created_at', 'updated_at', 'id']
+2025-01-09 18:48:39,362 - TimesheetTracker - INFO - Found tables: customers, project_managers, projects, time_entries
+2025-01-09 18:48:39,362 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 18:52:06,033 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 18:52:06,035 - TimesheetTracker - INFO - Verifying database connection and schema: postgresql+psycopg2://timesheetDatabase_owner:imz1MH3OjLef@ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 18:52:06,351 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 18:52:06,351 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 18:52:06,352 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 18:52:06,352 - TimesheetTracker - INFO - Checking 4 tables in schema
+2025-01-09 18:52:06,352 - TimesheetTracker - DEBUG - Verifying table: customers
+2025-01-09 18:52:06,396 - TimesheetTracker - DEBUG - Table customers exists with columns: ['name', 'contact_email', 'industry', 'status', 'address', 'phone', 'id', 'created_at', 'updated_at']
+2025-01-09 18:52:06,396 - TimesheetTracker - DEBUG - Verifying table: project_managers
+2025-01-09 18:52:06,415 - TimesheetTracker - DEBUG - Table project_managers exists with columns: ['name', 'email', 'id', 'created_at', 'updated_at']
+2025-01-09 18:52:06,416 - TimesheetTracker - DEBUG - Verifying table: projects
+2025-01-09 18:52:06,435 - TimesheetTracker - DEBUG - Table projects exists with columns: ['project_id', 'name', 'location', 'description', 'customer', 'project_manager', 'status', 'id', 'created_at', 'updated_at']
+2025-01-09 18:52:06,437 - TimesheetTracker - DEBUG - Verifying table: time_entries
+2025-01-09 18:52:06,456 - TimesheetTracker - DEBUG - Table time_entries exists with columns: ['week_number', 'month', 'category', 'subcategory', 'customer', 'project', 'task_description', 'hours', 'created_at', 'updated_at', 'id']
+2025-01-09 18:52:06,457 - TimesheetTracker - INFO - Found tables: customers, project_managers, projects, time_entries
+2025-01-09 18:52:06,457 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 18:52:09,609 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 18:52:09,609 - TimesheetTracker - INFO - Verifying database connection and schema: postgresql+psycopg2://timesheetDatabase_owner:imz1MH3OjLef@ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 18:52:09,938 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 18:52:09,939 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 18:52:09,939 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 18:52:09,940 - TimesheetTracker - INFO - Checking 4 tables in schema
+2025-01-09 18:52:09,940 - TimesheetTracker - DEBUG - Verifying table: customers
+2025-01-09 18:52:09,987 - TimesheetTracker - DEBUG - Table customers exists with columns: ['name', 'contact_email', 'industry', 'status', 'address', 'phone', 'id', 'created_at', 'updated_at']
+2025-01-09 18:52:09,987 - TimesheetTracker - DEBUG - Verifying table: project_managers
+2025-01-09 18:52:10,007 - TimesheetTracker - DEBUG - Table project_managers exists with columns: ['name', 'email', 'id', 'created_at', 'updated_at']
+2025-01-09 18:52:10,008 - TimesheetTracker - DEBUG - Verifying table: projects
+2025-01-09 18:52:10,030 - TimesheetTracker - DEBUG - Table projects exists with columns: ['project_id', 'name', 'location', 'description', 'customer', 'project_manager', 'status', 'id', 'created_at', 'updated_at']
+2025-01-09 18:52:10,030 - TimesheetTracker - DEBUG - Verifying table: time_entries
+2025-01-09 18:52:10,050 - TimesheetTracker - DEBUG - Table time_entries exists with columns: ['week_number', 'month', 'category', 'subcategory', 'customer', 'project', 'task_description', 'hours', 'created_at', 'updated_at', 'id']
+2025-01-09 18:52:10,051 - TimesheetTracker - INFO - Found tables: customers, project_managers, projects, time_entries
+2025-01-09 18:52:10,052 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 18:52:11,227 - TimesheetTracker - DEBUG - Database session created
+2025-01-09 18:52:11,228 - TimesheetTracker - INFO - Fetching time entries for date: 2025-01-09
+2025-01-09 18:52:11,228 - TimesheetTracker - DEBUG - Executing database query for time entries on date: 2025-01-09
+2025-01-09 18:52:11,331 - TimesheetTracker - INFO - No time entries found for date 2025-01-09
+2025-01-09 18:52:11,331 - TimesheetTracker - INFO - No entries found for date: 2025-01-09
+2025-01-09 18:52:11,352 - TimesheetTracker - DEBUG - Database session closed
+2025-01-09 18:52:12,665 - TimesheetTracker - INFO - Root endpoint accessed

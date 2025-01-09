@@ -1,0 +1,36 @@
+2025-01-04 00:18:06,862 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-04 00:18:06,863 - TimesheetTracker - INFO - Verifying database connection and schema: postgresql+psycopg2://timesheetDatabase_owner:imz1MH3OjLef@ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-04 00:18:08,057 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-04 00:18:08,057 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-04 00:18:08,057 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-04 00:18:08,057 - TimesheetTracker - INFO - Checking 4 tables in schema
+2025-01-04 00:18:08,057 - TimesheetTracker - DEBUG - Verifying table: customers
+2025-01-04 00:18:08,127 - TimesheetTracker - DEBUG - Table customers exists with columns: ['name', 'contact_email', 'industry', 'status', 'address', 'phone', 'id', 'created_at', 'updated_at']
+2025-01-04 00:18:08,127 - TimesheetTracker - DEBUG - Verifying table: project_managers
+2025-01-04 00:18:08,152 - TimesheetTracker - DEBUG - Table project_managers exists with columns: ['name', 'email', 'id', 'created_at', 'updated_at']
+2025-01-04 00:18:08,153 - TimesheetTracker - DEBUG - Verifying table: projects
+2025-01-04 00:18:08,173 - TimesheetTracker - DEBUG - Table projects exists with columns: ['project_id', 'name', 'location', 'description', 'customer', 'project_manager', 'status', 'id', 'created_at', 'updated_at']
+2025-01-04 00:18:08,174 - TimesheetTracker - DEBUG - Verifying table: time_entries
+2025-01-04 00:18:08,194 - TimesheetTracker - DEBUG - Table time_entries exists with columns: ['week_number', 'month', 'category', 'subcategory', 'customer', 'project', 'task_description', 'hours', 'created_at', 'updated_at', 'id']
+2025-01-04 00:18:08,195 - TimesheetTracker - INFO - Found tables: customers, project_managers, projects, time_entries
+2025-01-04 00:18:08,195 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-04 00:29:13,711 - TimesheetTracker - DEBUG - Database session created
+2025-01-04 00:29:13,711 - TimesheetTracker - INFO - Fetching time entries with project=None, customer=None
+2025-01-04 00:29:13,715 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-04 00:29:13,717 - TimesheetTracker - DEBUG - Retrieving time entries with filters: project_id=None, customer=None
+2025-01-04 00:29:13,721 - TimesheetTracker - DEBUG - Applying pagination: skip=0, limit=100
+2025-01-04 00:29:14,765 - TimesheetTracker - INFO - Retrieved 100 time entries
+2025-01-04 00:29:14,788 - TimesheetTracker - DEBUG - Database session closed
+2025-01-04 00:29:15,341 - TimesheetTracker - DEBUG - Database session created
+2025-01-04 00:29:15,353 - TimesheetTracker - INFO - Creating new time entry
+2025-01-04 00:29:15,354 - TimesheetTracker - DEBUG - Initializing TimeEntryService for single entry creation
+2025-01-04 00:29:15,355 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-04 00:29:15,360 - TimesheetTracker - INFO - Creating time entry for Test Customer - API Testing
+2025-01-04 00:29:15,361 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': None, 'created_at': None, 'updated_at': None, 'week_number': 1, 'month': 'January', 'category': 'Development', 'subcategory': 'Frontend', 'customer': 'Test Customer', 'project': 'API Testing', 'task_description': 'Testing API connection', 'hours': 1.5}
+2025-01-04 00:29:15,365 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-04 00:29:15,365 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-04 00:29:15,368 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-04 00:29:15,369 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-04 00:29:15,462 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-04 00:29:15,536 - TimesheetTracker - INFO - Successfully created time entry [153] for Test Customer - API Testing (1.5 hours)
+2025-01-04 00:29:15,568 - TimesheetTracker - DEBUG - Database session closed

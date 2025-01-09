@@ -1,11 +1,12 @@
 from sqlalchemy.orm import Session
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 import calendar
 from typing import List, Optional
 import models
 from . import schemas
 from utils.logger import Logger
 from utils.utils import parse_csv, parse_excel
+from sqlalchemy import func
 
 logger = Logger().get_logger()
 
@@ -263,3 +264,28 @@ def get_monthly_report(
     results = query.all()
     logger.info(f"Generated monthly report with {len(results)} entries")
     return results
+
+def get_time_entries_by_date(db: Session, query_date: date) -> List[models.TimeEntry]:
+    """
+    Retrieve all time entries for a specific date.
+    Uses the created_at timestamp for filtering.
+    """
+    logger.debug(f"Executing database query for time entries on date: {query_date}")
+
+    # Convert date to datetime range for the entire day
+    start_datetime = datetime.combine(query_date, datetime.min.time())
+    end_datetime = datetime.combine(query_date, datetime.max.time())
+
+    entries = db.query(models.TimeEntry).filter(
+        models.TimeEntry.created_at >= start_datetime,
+        models.TimeEntry.created_at <= end_datetime
+    ).order_by(models.TimeEntry.created_at.asc()).all()
+
+    if entries:
+        logger.info(f"Found {len(entries)} time entries for date {query_date}")
+        for entry in entries:
+            logger.debug(f"Entry: {entry.customer} - {entry.project} ({entry.hours} hours)")
+    else:
+        logger.info(f"No time entries found for date {query_date}")
+
+    return entries
