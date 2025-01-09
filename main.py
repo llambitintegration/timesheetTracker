@@ -14,6 +14,7 @@ from database import schemas, crud, get_db, verify_database, engine
 from utils.logger import Logger
 from utils import utils
 from models import TimeEntry
+from services.customer_service import CustomerService
 
 logger = Logger().get_logger()
 app = FastAPI(title="Timesheet Management API")
@@ -86,22 +87,51 @@ async def upload_timesheet(
 
 @app.post("/customers/", response_model=schemas.Customer)
 def create_customer(customer: schemas.CustomerCreate, db: Session = Depends(get_db)):
-    logger.info(f"Creating new customer: {customer.name}")
-    return crud.create_customer(db, customer)
+    """Create a new customer using CustomerService"""
+    try:
+        logger.info(f"Creating new customer: {customer.name}")
+        service = CustomerService(db)
+        return service.create_customer(customer)
+    except ValueError as e:
+        logger.warning(f"Customer creation failed: {str(e)}")
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        logger.error(f"Error creating customer: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
 
 @app.get("/customers/", response_model=List[schemas.Customer])
 def read_customers(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    """Get all customers using CustomerService"""
     logger.info(f"Fetching customers with skip={skip}, limit={limit}")
-    return crud.get_customers(db, skip=skip, limit=limit)
+    service = CustomerService(db)
+    return service.get_all_customers(skip=skip, limit=limit)
 
 @app.get("/customers/{name}", response_model=schemas.Customer)
 def read_customer(name: str, db: Session = Depends(get_db)):
+    """Get a specific customer by name using CustomerService"""
     logger.info(f"Fetching customer: {name}")
-    customer = crud.get_customer(db, name)
+    service = CustomerService(db)
+    customer = service.get_customer(name)
     if customer is None:
         logger.warning(f"Customer not found: {name}")
         raise HTTPException(status_code=404, detail="Customer not found")
     return customer
+
+@app.patch("/customers/{name}", response_model=schemas.Customer)
+def update_customer(name: str, customer_update: schemas.CustomerUpdate, db: Session = Depends(get_db)):
+    """Update a customer using CustomerService"""
+    try:
+        logger.info(f"Updating customer: {name}")
+        service = CustomerService(db)
+        updated_customer = service.update_customer(name, customer_update)
+        if updated_customer is None:
+            logger.warning(f"Customer not found: {name}")
+            raise HTTPException(status_code=404, detail="Customer not found")
+        return updated_customer
+    except Exception as e:
+        logger.error(f"Error updating customer: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
 
 @app.post("/project-managers/", response_model=schemas.ProjectManager)
 def create_project_manager(

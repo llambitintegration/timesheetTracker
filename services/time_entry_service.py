@@ -22,6 +22,10 @@ class TimeEntryService:
             logger.debug(f"Starting creation of time entry with data: {entry.model_dump()}")
             entry_dict = entry.model_dump()
 
+            # Calculate week number and month from date
+            entry_dict['week_number'] = TimeEntry.get_week_number(entry_dict['date'])
+            entry_dict['month'] = TimeEntry.get_month_name(entry_dict['date'])
+
             # Validate customer exists and get normalized name
             customer_name = None
             if entry_dict.get('customer'):
@@ -53,6 +57,10 @@ class TimeEntryService:
             if not entry_dict.get('subcategory'):
                 logger.info("No subcategory provided, defaulting to 'General'")
                 entry_dict['subcategory'] = 'General'
+
+            # Set default hours if not provided
+            if not entry_dict.get('hours'):
+                entry_dict['hours'] = 0.0
 
             logger.debug("Creating TimeEntry model instance")
             db_entry = TimeEntry(**entry_dict)

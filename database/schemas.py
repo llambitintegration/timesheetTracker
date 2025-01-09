@@ -81,6 +81,15 @@ class CustomerBase(BaseSchema):
 class CustomerCreate(CustomerBase):
     pass
 
+class CustomerUpdate(BaseSchema):
+    """Schema for updating customers"""
+    name: Optional[str] = None
+    contact_email: Optional[str] = None
+    industry: Optional[str] = None
+    status: Optional[str] = Field(None, pattern="^(active|inactive)$")
+    address: Optional[str] = None
+    phone: Optional[str] = None
+
 class Customer(CustomerBase):
     class Config:
         orm_model = CustomerModel

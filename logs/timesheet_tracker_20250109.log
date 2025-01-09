@@ -18847,3 +18847,306 @@ DETAIL:  Key (customer)=(string) is not present in table "customers".
 2025-01-09 22:00:54,941 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
 2025-01-09 22:00:55,021 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
 2025-01-09 22:00:55,021 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 22:03:53,371 - TimesheetTracker - DEBUG - Database session created
+2025-01-09 22:03:53,378 - TimesheetTracker - INFO - Creating new time entry
+2025-01-09 22:03:53,378 - TimesheetTracker - DEBUG - Initializing TimeEntryService for single entry creation
+2025-01-09 22:03:53,380 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 22:03:53,380 - TimesheetTracker - INFO - Creating time entry for string - string
+2025-01-09 22:03:53,381 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': 0, 'created_at': datetime.datetime(2025, 1, 9, 22, 3, 42, 385000, tzinfo=TzInfo(UTC)), 'updated_at': datetime.datetime(2025, 1, 9, 22, 3, 42, 385000, tzinfo=TzInfo(UTC)), 'week_number': 53, 'month': 'July', 'category': 'string', 'subcategory': 'string', 'customer': 'string', 'project': 'string', 'task_description': 'string', 'hours': 24.0, 'date': datetime.date(2025, 1, 9)}
+2025-01-09 22:03:53,450 - TimesheetTracker - INFO - Customer string not found, defaulting to Unassigned
+2025-01-09 22:03:53,450 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 22:03:53,450 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 22:03:53,451 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 22:03:53,451 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 22:03:53,498 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 22:03:53,560 - TimesheetTracker - INFO - Successfully created time entry [0] for Unassigned - Unassigned (24.0 hours)
+2025-01-09 22:03:53,585 - TimesheetTracker - DEBUG - Database session closed
+2025-01-09 22:11:22,207 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 22:11:22,260 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 22:11:22,261 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 22:11:22,679 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 22:11:22,680 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 22:11:22,680 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 22:11:22,961 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 22:11:22,962 - TimesheetTracker - INFO - Expected tables: customers, projects, project_managers, time_entries
+2025-01-09 22:11:23,127 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 22:11:23,205 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 22:11:23,282 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 22:11:23,361 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 22:11:23,362 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 22:11:40,665 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 22:11:40,704 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 22:11:40,704 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 22:11:41,070 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 22:11:41,070 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 22:11:41,070 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 22:11:41,284 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 22:11:41,285 - TimesheetTracker - INFO - Expected tables: projects, time_entries, project_managers, customers
+2025-01-09 22:11:41,428 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 22:11:41,507 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 22:11:41,585 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 22:11:41,664 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 22:11:41,664 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 22:12:09,274 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 22:12:09,314 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 22:12:09,314 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 22:12:09,659 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 22:12:09,659 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 22:12:09,659 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 22:12:09,875 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 22:12:09,876 - TimesheetTracker - INFO - Expected tables: projects, customers, time_entries, project_managers
+2025-01-09 22:12:10,030 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 22:12:10,108 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 22:12:10,188 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 22:12:10,267 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 22:12:10,267 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 22:12:11,455 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 22:12:11,937 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 22:12:12,235 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 22:12:12,236 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 22:12:12,239 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 22:12:12,239 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 22:12:12,240 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 22:12:12,240 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 22:12:12,240 - TimesheetTracker - DEBUG - Validation issues detected in row 1, using defaults
+2025-01-09 22:12:12,240 - TimesheetTracker - DEBUG - Processed row 1 - customer: Unassigned, project: Unassigned
+2025-01-09 22:12:12,241 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 22:12:12,242 - TimesheetTracker - DEBUG - Processed row 2 - customer: ECOLAB, project: Project_Magic_Bullet
+2025-01-09 22:12:12,242 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 22:12:12,242 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 22:12:12,246 - TimesheetTracker - WARNING - Error parsing date 'invalid_date': Unknown datetime string format, unable to parse: invalid_date, at position 0
+2025-01-09 22:12:12,249 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 22:12:12,249 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 22:12:12,251 - TimesheetTracker - DEBUG - Successfully read CSV with 2 columns
+2025-01-09 22:12:12,251 - TimesheetTracker - ERROR - Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 22:12:12,251 - TimesheetTracker - ERROR - CSV structure validation failed: Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 22:12:12,253 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 22:12:12,253 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 22:12:12,254 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 22:12:12,254 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 22:12:12,255 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 22:12:12,255 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 22:12:12,255 - TimesheetTracker - WARNING - Skipping row 1 due to invalid hours: -1.0
+2025-01-09 22:12:12,256 - TimesheetTracker - INFO - Successfully processed 0 valid entries from CSV
+2025-01-09 22:12:12,257 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 22:12:12,257 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 22:12:12,258 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 22:12:12,258 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 22:12:12,259 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 22:12:12,259 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 22:12:12,260 - TimesheetTracker - DEBUG - Validation issues detected in row 1, using defaults
+2025-01-09 22:12:12,260 - TimesheetTracker - DEBUG - Processed row 1 - customer: Unassigned, project: Unassigned
+2025-01-09 22:12:12,260 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 22:12:12,260 - TimesheetTracker - DEBUG - Validation issues detected in row 2, using defaults
+2025-01-09 22:12:12,260 - TimesheetTracker - DEBUG - Processed row 2 - customer: Unassigned, project: Unassigned
+2025-01-09 22:12:12,261 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 22:12:12,261 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 22:12:12,262 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 22:12:12,262 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 22:12:12,264 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 22:12:12,264 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 22:12:12,264 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 22:12:12,265 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 22:12:12,265 - TimesheetTracker - DEBUG - Processed row 1 - customer: Test & Co., project: Project_123
+2025-01-09 22:12:12,265 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 22:12:12,265 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 22:12:12,267 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 22:12:12,267 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 22:12:12,268 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 22:12:12,268 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 22:12:12,269 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 22:12:12,269 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 22:12:12,269 - TimesheetTracker - DEBUG - Validation issues detected in row 1, using defaults
+2025-01-09 22:12:12,269 - TimesheetTracker - DEBUG - Processed row 1 - customer: Unassigned, project: Unassigned
+2025-01-09 22:12:12,270 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 22:12:12,270 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 22:12:12,297 - TimesheetTracker - DEBUG - Starting database reference validation
+2025-01-09 22:12:12,302 - TimesheetTracker - DEBUG - Processed entry: customer=ECOLAB, project=Project_Magic_Bullet
+2025-01-09 22:12:12,303 - TimesheetTracker - WARNING - Validation failed for entry. Using defaults: customer=Unassigned, project=Unassigned
+2025-01-09 22:12:12,304 - TimesheetTracker - DEBUG - Processed entry: customer=Unassigned, project=Unassigned
+2025-01-09 22:12:12,330 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 22:12:12,330 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 22:12:12,332 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 22:12:12,332 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 22:12:12,333 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 22:12:12,333 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 22:12:12,333 - TimesheetTracker - DEBUG - Validation issues detected in row 1, using defaults
+2025-01-09 22:12:12,334 - TimesheetTracker - DEBUG - Processed row 1 - customer: Unassigned, project: Unassigned
+2025-01-09 22:12:12,334 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 22:12:12,334 - TimesheetTracker - DEBUG - Validation issues detected in row 2, using defaults
+2025-01-09 22:12:12,334 - TimesheetTracker - DEBUG - Processed row 2 - customer: Unassigned, project: Unassigned
+2025-01-09 22:12:12,335 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 22:12:12,335 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 22:12:12,354 - TimesheetTracker - DEBUG - Starting database reference validation
+2025-01-09 22:12:12,355 - TimesheetTracker - WARNING - Validation failed for entry. Using defaults: customer=Unassigned, project=Unassigned
+2025-01-09 22:12:12,355 - TimesheetTracker - DEBUG - Processed entry: customer=Unassigned, project=Unassigned
+2025-01-09 22:12:12,356 - TimesheetTracker - WARNING - Validation failed for entry. Using defaults: customer=Unassigned, project=Unassigned
+2025-01-09 22:12:12,356 - TimesheetTracker - DEBUG - Processed entry: customer=Unassigned, project=Unassigned
+2025-01-09 22:12:12,357 - TimesheetTracker - DEBUG - Converting empty/invalid customer name to Unassigned
+2025-01-09 22:12:12,358 - TimesheetTracker - DEBUG - Converting empty/invalid customer name to Unassigned
+2025-01-09 22:12:12,358 - TimesheetTracker - DEBUG - Converting empty/invalid customer name to Unassigned
+2025-01-09 22:12:12,358 - TimesheetTracker - DEBUG - Converting empty/invalid customer name to Unassigned
+2025-01-09 22:12:12,359 - TimesheetTracker - DEBUG - Converting empty/invalid project ID to Unassigned
+2025-01-09 22:12:12,359 - TimesheetTracker - DEBUG - Converting empty/invalid project ID to Unassigned
+2025-01-09 22:12:12,359 - TimesheetTracker - DEBUG - Converting empty/invalid project ID to Unassigned
+2025-01-09 22:12:12,359 - TimesheetTracker - DEBUG - Converting empty/invalid project ID to Unassigned
+2025-01-09 22:12:28,912 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 22:12:28,953 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 22:12:28,954 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 22:12:29,294 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 22:12:29,294 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 22:12:29,294 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 22:12:29,501 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 22:12:29,502 - TimesheetTracker - INFO - Expected tables: time_entries, projects, customers, project_managers
+2025-01-09 22:12:29,637 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 22:12:29,717 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 22:12:29,795 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 22:12:29,873 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 22:12:29,873 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 22:12:31,090 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 22:13:04,367 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 22:13:45,643 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 22:13:50,885 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 22:14:28,890 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 22:14:29,185 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 22:14:29,319 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 22:14:29,327 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 22:14:29,688 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 22:14:29,694 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 22:14:29,696 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 22:14:29,905 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 22:14:29,906 - TimesheetTracker - INFO - Expected tables: customers, time_entries, project_managers, projects
+2025-01-09 22:14:30,062 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 22:14:30,145 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 22:14:30,226 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 22:14:30,311 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 22:14:30,311 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 22:14:30,400 - TimesheetTracker - DEBUG - CustomerService initialized with database session
+2025-01-09 22:14:30,401 - TimesheetTracker - DEBUG - Starting creation of customer with data: {'id': None, 'created_at': None, 'updated_at': None, 'name': 'Test Customer', 'contact_email': 'test@example.com', 'industry': 'Technology', 'status': 'active', 'address': None, 'phone': None}
+2025-01-09 22:14:30,425 - TimesheetTracker - DEBUG - Adding customer to database session
+2025-01-09 22:14:30,426 - TimesheetTracker - ERROR - Error creating customer: models.customerModel.Customer() argument after ** must be a mapping, not Customer
+2025-01-09 22:14:30,648 - TimesheetTracker - DEBUG - CustomerService initialized with database session
+2025-01-09 22:14:30,648 - TimesheetTracker - DEBUG - Starting creation of customer with data: {'id': None, 'created_at': None, 'updated_at': None, 'name': 'Duplicate Test', 'contact_email': 'duplicate@test.com', 'industry': None, 'status': 'active', 'address': None, 'phone': None}
+2025-01-09 22:14:30,650 - TimesheetTracker - DEBUG - Adding customer to database session
+2025-01-09 22:14:30,650 - TimesheetTracker - ERROR - Error creating customer: models.customerModel.Customer() argument after ** must be a mapping, not Customer
+2025-01-09 22:14:30,692 - TimesheetTracker - DEBUG - CustomerService initialized with database session
+2025-01-09 22:14:30,693 - TimesheetTracker - DEBUG - Starting creation of customer with data: {'id': None, 'created_at': None, 'updated_at': None, 'name': 'Get Test', 'contact_email': 'get@test.com', 'industry': None, 'status': 'active', 'address': None, 'phone': None}
+2025-01-09 22:14:30,695 - TimesheetTracker - DEBUG - Adding customer to database session
+2025-01-09 22:14:30,695 - TimesheetTracker - ERROR - Error creating customer: models.customerModel.Customer() argument after ** must be a mapping, not Customer
+2025-01-09 22:14:30,734 - TimesheetTracker - DEBUG - CustomerService initialized with database session
+2025-01-09 22:14:30,734 - TimesheetTracker - DEBUG - Attempting to fetch customer with name: NonexistentCustomer
+2025-01-09 22:14:30,737 - TimesheetTracker - INFO - No customer found with name: NonexistentCustomer
+2025-01-09 22:14:30,756 - TimesheetTracker - DEBUG - CustomerService initialized with database session
+2025-01-09 22:14:30,756 - TimesheetTracker - DEBUG - Starting creation of customer with data: {'id': None, 'created_at': None, 'updated_at': None, 'name': 'Test Customer 0', 'contact_email': 'test0@example.com', 'industry': None, 'status': 'active', 'address': None, 'phone': None}
+2025-01-09 22:14:30,757 - TimesheetTracker - DEBUG - Adding customer to database session
+2025-01-09 22:14:30,757 - TimesheetTracker - ERROR - Error creating customer: models.customerModel.Customer() argument after ** must be a mapping, not Customer
+2025-01-09 22:14:30,791 - TimesheetTracker - DEBUG - CustomerService initialized with database session
+2025-01-09 22:14:30,792 - TimesheetTracker - DEBUG - Starting creation of customer with data: {'id': None, 'created_at': None, 'updated_at': None, 'name': 'Update Test', 'contact_email': 'update@test.com', 'industry': 'Old Industry', 'status': 'active', 'address': None, 'phone': None}
+2025-01-09 22:14:30,793 - TimesheetTracker - DEBUG - Adding customer to database session
+2025-01-09 22:14:30,793 - TimesheetTracker - ERROR - Error creating customer: models.customerModel.Customer() argument after ** must be a mapping, not Customer
+2025-01-09 22:14:30,824 - TimesheetTracker - DEBUG - CustomerService initialized with database session
+2025-01-09 22:14:30,824 - TimesheetTracker - DEBUG - Attempting to update customer NonexistentCustomer with data: {'industry': 'New Industry'}
+2025-01-09 22:14:30,825 - TimesheetTracker - WARNING - Customer not found: NonexistentCustomer
+2025-01-09 22:14:31,570 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 22:14:36,000 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 22:14:36,111 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 22:14:36,112 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 22:14:36,468 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 22:14:36,469 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 22:14:36,469 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 22:14:36,692 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 22:14:36,692 - TimesheetTracker - INFO - Expected tables: customers, projects, project_managers, time_entries
+2025-01-09 22:14:36,870 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 22:14:36,951 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 22:14:37,036 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 22:14:37,124 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 22:14:37,125 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 22:14:38,403 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 22:14:38,925 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 22:15:10,601 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 22:15:10,657 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 22:15:10,657 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 22:15:11,005 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 22:15:11,005 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 22:15:11,005 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 22:15:11,285 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 22:15:11,286 - TimesheetTracker - INFO - Expected tables: project_managers, time_entries, projects, customers
+2025-01-09 22:15:11,419 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 22:15:11,499 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 22:15:11,577 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 22:15:11,655 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 22:15:11,655 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 22:15:13,880 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 22:15:14,179 - TimesheetTracker - DEBUG - CustomerService initialized with database session
+2025-01-09 22:15:14,179 - TimesheetTracker - DEBUG - Starting creation of customer with data: {'id': None, 'created_at': None, 'updated_at': None, 'name': 'Test Customer', 'contact_email': 'test@example.com', 'industry': 'Technology', 'status': 'active', 'address': None, 'phone': None}
+2025-01-09 22:15:14,189 - TimesheetTracker - DEBUG - Adding customer to database session
+2025-01-09 22:15:14,205 - TimesheetTracker - INFO - Successfully created customer: Test Customer
+2025-01-09 22:15:14,223 - TimesheetTracker - DEBUG - CustomerService initialized with database session
+2025-01-09 22:15:14,223 - TimesheetTracker - DEBUG - Starting creation of customer with data: {'id': None, 'created_at': None, 'updated_at': None, 'name': 'Duplicate Test', 'contact_email': 'duplicate@test.com', 'industry': None, 'status': 'active', 'address': None, 'phone': None}
+2025-01-09 22:15:14,224 - TimesheetTracker - DEBUG - Adding customer to database session
+2025-01-09 22:15:14,239 - TimesheetTracker - INFO - Successfully created customer: Duplicate Test
+2025-01-09 22:15:14,239 - TimesheetTracker - DEBUG - Starting creation of customer with data: {'id': None, 'created_at': None, 'updated_at': None, 'name': 'Duplicate Test', 'contact_email': 'duplicate@test.com', 'industry': None, 'status': 'active', 'address': None, 'phone': None}
+2025-01-09 22:15:14,240 - TimesheetTracker - WARNING - Customer with name Duplicate Test already exists
+2025-01-09 22:15:14,240 - TimesheetTracker - ERROR - Error creating customer: Customer with name Duplicate Test already exists
+2025-01-09 22:15:14,259 - TimesheetTracker - DEBUG - CustomerService initialized with database session
+2025-01-09 22:15:14,260 - TimesheetTracker - DEBUG - Starting creation of customer with data: {'id': None, 'created_at': None, 'updated_at': None, 'name': 'Get Test', 'contact_email': 'get@test.com', 'industry': None, 'status': 'active', 'address': None, 'phone': None}
+2025-01-09 22:15:14,261 - TimesheetTracker - DEBUG - Adding customer to database session
+2025-01-09 22:15:14,278 - TimesheetTracker - INFO - Successfully created customer: Get Test
+2025-01-09 22:15:14,279 - TimesheetTracker - DEBUG - Attempting to fetch customer with name: Get Test
+2025-01-09 22:15:14,279 - TimesheetTracker - INFO - Found customer: Get Test
+2025-01-09 22:15:14,300 - TimesheetTracker - DEBUG - CustomerService initialized with database session
+2025-01-09 22:15:14,300 - TimesheetTracker - DEBUG - Attempting to fetch customer with name: NonexistentCustomer
+2025-01-09 22:15:14,301 - TimesheetTracker - INFO - No customer found with name: NonexistentCustomer
+2025-01-09 22:15:14,319 - TimesheetTracker - DEBUG - CustomerService initialized with database session
+2025-01-09 22:15:14,319 - TimesheetTracker - DEBUG - Starting creation of customer with data: {'id': None, 'created_at': None, 'updated_at': None, 'name': 'Test Customer 0', 'contact_email': 'test0@example.com', 'industry': None, 'status': 'active', 'address': None, 'phone': None}
+2025-01-09 22:15:14,320 - TimesheetTracker - DEBUG - Adding customer to database session
+2025-01-09 22:15:14,336 - TimesheetTracker - INFO - Successfully created customer: Test Customer 0
+2025-01-09 22:15:14,337 - TimesheetTracker - DEBUG - Starting creation of customer with data: {'id': None, 'created_at': None, 'updated_at': None, 'name': 'Test Customer 1', 'contact_email': 'test1@example.com', 'industry': None, 'status': 'active', 'address': None, 'phone': None}
+2025-01-09 22:15:14,337 - TimesheetTracker - DEBUG - Adding customer to database session
+2025-01-09 22:15:14,352 - TimesheetTracker - INFO - Successfully created customer: Test Customer 1
+2025-01-09 22:15:14,352 - TimesheetTracker - DEBUG - Starting creation of customer with data: {'id': None, 'created_at': None, 'updated_at': None, 'name': 'Test Customer 2', 'contact_email': 'test2@example.com', 'industry': None, 'status': 'active', 'address': None, 'phone': None}
+2025-01-09 22:15:14,353 - TimesheetTracker - DEBUG - Adding customer to database session
+2025-01-09 22:15:14,366 - TimesheetTracker - INFO - Successfully created customer: Test Customer 2
+2025-01-09 22:15:14,366 - TimesheetTracker - DEBUG - Fetching customers with offset=0, limit=100
+2025-01-09 22:15:14,370 - TimesheetTracker - INFO - Retrieved 3 customers
+2025-01-09 22:15:14,370 - TimesheetTracker - DEBUG - Fetching customers with offset=0, limit=2
+2025-01-09 22:15:14,371 - TimesheetTracker - INFO - Retrieved 2 customers
+2025-01-09 22:15:14,371 - TimesheetTracker - DEBUG - Fetching customers with offset=2, limit=2
+2025-01-09 22:15:14,371 - TimesheetTracker - INFO - Retrieved 1 customers
+2025-01-09 22:15:14,387 - TimesheetTracker - DEBUG - CustomerService initialized with database session
+2025-01-09 22:15:14,387 - TimesheetTracker - DEBUG - Starting creation of customer with data: {'id': None, 'created_at': None, 'updated_at': None, 'name': 'Update Test', 'contact_email': 'update@test.com', 'industry': 'Old Industry', 'status': 'active', 'address': None, 'phone': None}
+2025-01-09 22:15:14,388 - TimesheetTracker - DEBUG - Adding customer to database session
+2025-01-09 22:15:14,403 - TimesheetTracker - INFO - Successfully created customer: Update Test
+2025-01-09 22:15:14,403 - TimesheetTracker - DEBUG - Attempting to update customer Update Test with data: {'industry': 'New Industry'}
+2025-01-09 22:15:14,425 - TimesheetTracker - INFO - Successfully updated customer: Update Test
+2025-01-09 22:15:14,446 - TimesheetTracker - DEBUG - CustomerService initialized with database session
+2025-01-09 22:15:14,446 - TimesheetTracker - DEBUG - Attempting to update customer NonexistentCustomer with data: {'industry': 'New Industry'}
+2025-01-09 22:15:14,447 - TimesheetTracker - WARNING - Customer not found: NonexistentCustomer
+2025-01-09 22:15:15,142 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 22:15:15,188 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 22:15:15,188 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 22:15:15,529 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 22:15:15,529 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 22:15:15,529 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 22:15:15,737 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 22:15:15,737 - TimesheetTracker - INFO - Expected tables: time_entries, projects, customers, project_managers
+2025-01-09 22:15:15,876 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 22:15:15,956 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 22:15:16,035 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 22:15:16,116 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 22:15:16,116 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 22:15:17,299 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 22:15:38,919 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 22:15:38,995 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 22:15:38,995 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 22:15:39,337 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 22:15:39,337 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 22:15:39,338 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 22:15:39,547 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 22:15:39,548 - TimesheetTracker - INFO - Expected tables: time_entries, projects, project_managers, customers
+2025-01-09 22:15:39,690 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 22:15:39,770 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 22:15:39,849 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 22:15:39,928 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 22:15:39,928 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 22:15:41,119 - TimesheetTracker - INFO - Root endpoint accessed
