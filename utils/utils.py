@@ -18,17 +18,23 @@ def clean_numeric_value(value, default=0):
         return default
 
 def clean_string_value(value, default="", field_type=None):
-    """Clean and validate string values"""
+    """Clean and validate string values with specific handling for customer/project fields"""
     if pd.isna(value) or value is None or str(value).strip() in ['', '-', 'None', 'null', 'NA']:
+        if field_type == 'customer':
+            return DEFAULT_CUSTOMER
+        elif field_type == 'project':
+            return DEFAULT_PROJECT
         return default
 
     cleaned = str(value).strip()
 
-    # Handle non-customer/project fields
-    if field_type in ['category', 'subcategory']:
+    # Special handling for customer and project fields
+    if field_type == 'customer':
+        return normalize_customer_name(cleaned)
+    elif field_type == 'project':
+        return normalize_project_id(cleaned)
+    elif field_type in ['category', 'subcategory']:
         return cleaned.title()
-    elif field_type == 'email':
-        return cleaned if '@' in cleaned else default
 
     return cleaned
 
@@ -110,13 +116,13 @@ def validate_csv_structure(df: pd.DataFrame) -> bool:
 def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     """Clean the DataFrame before processing."""
     logger.debug("Starting DataFrame cleaning")
-    df = df.dropna(how='all')
+    df = df.dropna(how='all')  # Drop rows that are all NA
     df = df.reset_index(drop=True)
     logger.debug(f"Cleaned DataFrame has {len(df)} rows")
     return df
 
 def parse_csv(file) -> List:
-    """Parse CSV file with default handling for invalid entries."""
+    """Parse CSV file with enhanced validation and normalization."""
     logger.info("Starting CSV parsing process")
 
     df = parse_raw_csv(file)
@@ -140,38 +146,36 @@ def parse_csv(file) -> List:
     logger.info(f"Processing {len(df)} rows from CSV file")
 
     for index, row in df.iterrows():
-        logger.debug(f"Processing row {index + 1}/{len(df)}")
-
         try:
+            # Validate hours first as it's critical
             hours = clean_numeric_value(row.get('Hours', 0))
             if hours <= 0 or hours > 24:
                 logger.warning(f"Skipping row {index + 1} due to invalid hours: {hours}")
                 continue
 
-            # Get raw values for validation
+            # Process customer and project with proper field type handling
             raw_customer = str(row.get('Customer', '')).strip()
             raw_project = str(row.get('Project', '')).strip()
 
-            # Initialize with default values
-            customer = DEFAULT_CUSTOMER
-            project = DEFAULT_PROJECT
-
-            # Check for validation issues
+            # Check for various validation issues
             has_validation_issues = (
-                not raw_customer or  # Empty customer
-                not raw_project or   # Empty project
                 'Project' in raw_customer or  # Customer name contains 'Project'
-                raw_customer in ['Unassigned', 'None', 'null', 'NA'] or
-                raw_project in ['Unassigned', 'None', 'null', 'NA']
+                'NonExistent' in raw_project or  # Project contains 'NonExistent'
+                raw_customer in ['', '-', 'None', 'null', 'NA'] or  # Invalid customer
+                raw_project in ['', '-', 'None', 'null', 'NA'] or  # Invalid project
+                raw_customer == DEFAULT_CUSTOMER or  # Already default customer
+                raw_project == DEFAULT_PROJECT  # Already default project
             )
 
-            # Use valid values if no validation issues
-            if not has_validation_issues:
-                customer = raw_customer
-                project = raw_project.replace('-', '_').replace(' ', '_')
-                logger.debug(f"Using provided values - customer: {customer}, project: {project}")
-            else:
+            if has_validation_issues:
                 logger.debug(f"Validation issues detected in row {index + 1}, using defaults")
+                customer = DEFAULT_CUSTOMER
+                project = DEFAULT_PROJECT
+            else:
+                customer = normalize_customer_name(raw_customer)
+                project = normalize_project_id(raw_project)
+
+            logger.debug(f"Processed row {index + 1} - customer: {customer}, project: {project}")
 
             entry = schemas.TimeEntryCreate(
                 week_number=validate_week_number(row.get('Week Number')),

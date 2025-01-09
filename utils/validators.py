@@ -23,11 +23,16 @@ def normalize_customer_name(name: str) -> str:
 
 def normalize_project_id(project_id: str) -> str:
     """Normalize project ID for database lookup.
+    Converts spaces and hyphens to underscores.
     Returns DEFAULT_PROJECT if project_id is invalid or not found."""
     if not project_id or str(project_id).strip() in ['-', '', 'None', 'null', 'NA']:
         logger.debug(f"Converting empty/invalid project ID to {DEFAULT_PROJECT}")
         return DEFAULT_PROJECT
-    return str(project_id).strip().replace('-', '_').replace(' ', '_')
+
+    # Replace both hyphens and spaces with underscores
+    normalized = str(project_id).strip()
+    normalized = normalized.replace('-', '_').replace(' ', '_')
+    return normalized
 
 def validate_database_references(
     db: Session,
@@ -62,7 +67,8 @@ def validate_database_references(
 
         # Check project existence
         if entry.project != DEFAULT_PROJECT:
-            project = db.query(Project).filter(Project.project_id == entry.project).first()
+            normalized_project_id = normalize_project_id(entry.project)
+            project = db.query(Project).filter(Project.project_id == normalized_project_id).first()
             if not project:
                 validation_errors.append({
                     'entry': entry.model_dump(),
