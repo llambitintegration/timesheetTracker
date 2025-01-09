@@ -113,6 +113,11 @@ class ProjectManager(ProjectManagerBase):
     class Config:
         orm_model = ProjectManagerModel
 
+class ProjectManagerUpdate(BaseSchema):
+    """Schema for updating project managers"""
+    name: Optional[str] = None
+    email: Optional[str] = None
+
 # Project Schemas
 class ProjectBase(BaseSchema):
     project_id: str
