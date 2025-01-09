@@ -10,10 +10,10 @@ load_dotenv()
 
 logger = Logger().get_logger()
 
-# Get database URL from environment with proper error handling
+# Get database URL from Replit Secrets
 DATABASE_URL = os.getenv('DATABASE_URL')
 if not DATABASE_URL:
-    raise ValueError("DATABASE_URL environment variable is not set")
+    raise ValueError("Please set the DATABASE_URL in Replit Secrets")
 
 # Ensure proper PostgreSQL driver
 if DATABASE_URL.startswith('postgresql://'):
