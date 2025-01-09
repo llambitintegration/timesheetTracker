@@ -106,8 +106,9 @@ def parse_csv(file) -> List:
                 logger.warning(f"Skipping row {index + 1} due to invalid hours: {hours}")
                 continue
 
-            # Replace empty or dash customer with None
-            if not customer or customer == '-':
+            # Clean up customer value
+            customer = clean_string_value(row.get('Customer'))
+            if not customer or customer == '-' or customer.strip() == '':
                 customer = None
 
             entry = schemas.TimeEntryCreate(
