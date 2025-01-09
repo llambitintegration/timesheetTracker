@@ -70,6 +70,13 @@ def upgrade() -> None:
             sa.ForeignKeyConstraint(['customer'], ['customers.name'], ondelete='SET NULL'),
             sa.ForeignKeyConstraint(['project_manager'], ['project_managers.name'], ondelete='SET NULL')
         )
+        
+        # Insert default project
+        connection.execute(sa.text("""
+            INSERT INTO projects (project_id, name, description, status)
+            VALUES ('Unassigned', 'Unassigned', 'Default project for unassigned entries', 'active')
+            ON CONFLICT (project_id) DO NOTHING
+        """))
         connection.execute(sa.text('COMMIT'))
 
         # Create time_entries table with updated foreign keys
