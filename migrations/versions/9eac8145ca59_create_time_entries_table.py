@@ -18,6 +18,7 @@ branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
 def upgrade() -> None:
+    """Create all tables in a single migration"""
     try:
         # Create customers table first
         logger.info("Starting to create customers table")
@@ -32,7 +33,8 @@ def upgrade() -> None:
             sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
             sa.Column('updated_at', sa.DateTime(timezone=True), onupdate=sa.text('now()'), nullable=True),
             sa.PrimaryKeyConstraint('id'),
-            sa.UniqueConstraint('name')
+            sa.UniqueConstraint('name'),
+            sa.UniqueConstraint('contact_email')
         )
         logger.info("Successfully created customers table")
 
@@ -74,7 +76,7 @@ def upgrade() -> None:
         logger.info("Starting to create time_entries table")
         op.create_table('time_entries',
             sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
-            sa.Column('date', sa.Date(), nullable=False),  # Explicit date field for timesheet entries
+            sa.Column('date', sa.Date(), nullable=False),
             sa.Column('week_number', sa.Integer(), nullable=False),
             sa.Column('month', sa.String(), nullable=False),
             sa.Column('category', sa.String(), nullable=False),
@@ -83,8 +85,6 @@ def upgrade() -> None:
             sa.Column('project', sa.String(), nullable=True),
             sa.Column('task_description', sa.String(), nullable=True),
             sa.Column('hours', sa.Float(), nullable=False),
-            sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
-            sa.Column('updated_at', sa.DateTime(timezone=True), onupdate=sa.text('now()'), nullable=True),
             sa.PrimaryKeyConstraint('id'),
             sa.ForeignKeyConstraint(['customer'], ['customers.name'], ondelete='SET NULL'),
             sa.ForeignKeyConstraint(['project'], ['projects.project_id'], ondelete='SET NULL')
@@ -97,8 +97,9 @@ def upgrade() -> None:
         raise
 
 def downgrade() -> None:
-    logger.info("Starting database downgrade")
+    """Drop all tables in reverse order"""
     try:
+        logger.info("Starting database downgrade")
         # Drop tables in reverse order of creation
         logger.info("Dropping time_entries table")
         op.drop_table('time_entries')
