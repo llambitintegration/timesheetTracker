@@ -72,10 +72,16 @@ def upgrade() -> None:
             sa.CheckConstraint("project_id != '-'", name='valid_project_id')
         )
 
-        # Insert default project
+        # Insert default and common projects
         connection.execute(sa.text("""
-            INSERT INTO projects (project_id, name, description, status)
-            VALUES ('Unassigned', 'Unassigned', 'Default project for unassigned entries', 'active')
+            INSERT INTO projects (project_id, name, description, customer, status)
+            VALUES 
+            ('Unassigned', 'Unassigned', 'Default project for unassigned entries', 'Unassigned', 'active'),
+            ('Project_Magic_Bullet', 'Project Magic Bullet', 'ECOLAB Project', 'ECOLAB', 'active'),
+            ('iTrends', 'iTrends', 'ECOLAB iTrends Project', 'ECOLAB', 'active'),
+            ('Wichita_KS', 'Wichita KS', 'Hiland Dairy Wichita Project', 'Hiland Dairy', 'active'),
+            ('Aspers_PA', 'Aspers PA', 'Dr Pepper Snapple Project', 'Dr Pepper Snapple', 'active'),
+            ('Ellington_CT', 'Ellington CT', 'Country Pure Project', 'Country Pure', 'active')
             ON CONFLICT (project_id) DO NOTHING
         """))
         connection.execute(sa.text('COMMIT'))
