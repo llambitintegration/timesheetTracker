@@ -13602,3 +13602,1480 @@ DETAIL:  Key (customer)=(Project Magic Bullet) is not present in table "customer
 2025-01-09 21:16:56,374 - TimesheetTracker - DEBUG - Found 1 existing customers and 1 existing projects
 2025-01-09 21:16:56,380 - TimesheetTracker - WARNING - Customer 'NonExistentCustomer' not found, defaulting to Unassigned
 2025-01-09 21:16:56,380 - TimesheetTracker - WARNING - Project 'NonExistentProject' not found, defaulting to Unassigned
+2025-01-09 21:19:57,262 - TimesheetTracker - DEBUG - Database session created
+2025-01-09 21:19:57,262 - TimesheetTracker - INFO - Processing timesheet upload: Hours Tracker.csv
+2025-01-09 21:19:57,263 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:19:57,263 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:19:57,266 - TimesheetTracker - DEBUG - Successfully read CSV with 10 columns
+2025-01-09 21:19:57,266 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:19:57,267 - TimesheetTracker - DEBUG - Cleaned DataFrame has 167 rows
+2025-01-09 21:19:57,267 - TimesheetTracker - INFO - Processing 167 rows from CSV file
+2025-01-09 21:19:57,267 - TimesheetTracker - DEBUG - Processing row 1/167
+2025-01-09 21:19:57,268 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:19:57,268 - TimesheetTracker - DEBUG - Processing row 2/167
+2025-01-09 21:19:57,269 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:19:57,269 - TimesheetTracker - DEBUG - Processing row 3/167
+2025-01-09 21:19:57,269 - TimesheetTracker - DEBUG - Successfully processed row 3
+2025-01-09 21:19:57,270 - TimesheetTracker - DEBUG - Processing row 4/167
+2025-01-09 21:19:57,270 - TimesheetTracker - DEBUG - Successfully processed row 4
+2025-01-09 21:19:57,270 - TimesheetTracker - DEBUG - Processing row 5/167
+2025-01-09 21:19:57,270 - TimesheetTracker - DEBUG - Successfully processed row 5
+2025-01-09 21:19:57,271 - TimesheetTracker - DEBUG - Processing row 6/167
+2025-01-09 21:19:57,271 - TimesheetTracker - DEBUG - Successfully processed row 6
+2025-01-09 21:19:57,271 - TimesheetTracker - DEBUG - Processing row 7/167
+2025-01-09 21:19:57,271 - TimesheetTracker - DEBUG - Successfully processed row 7
+2025-01-09 21:19:57,271 - TimesheetTracker - DEBUG - Processing row 8/167
+2025-01-09 21:19:57,272 - TimesheetTracker - DEBUG - Successfully processed row 8
+2025-01-09 21:19:57,272 - TimesheetTracker - DEBUG - Processing row 9/167
+2025-01-09 21:19:57,272 - TimesheetTracker - DEBUG - Successfully processed row 9
+2025-01-09 21:19:57,272 - TimesheetTracker - DEBUG - Processing row 10/167
+2025-01-09 21:19:57,272 - TimesheetTracker - DEBUG - Successfully processed row 10
+2025-01-09 21:19:57,272 - TimesheetTracker - DEBUG - Processing row 11/167
+2025-01-09 21:19:57,272 - TimesheetTracker - DEBUG - Successfully processed row 11
+2025-01-09 21:19:57,273 - TimesheetTracker - DEBUG - Processing row 12/167
+2025-01-09 21:19:57,273 - TimesheetTracker - DEBUG - Successfully processed row 12
+2025-01-09 21:19:57,273 - TimesheetTracker - DEBUG - Processing row 13/167
+2025-01-09 21:19:57,273 - TimesheetTracker - DEBUG - Successfully processed row 13
+2025-01-09 21:19:57,273 - TimesheetTracker - DEBUG - Processing row 14/167
+2025-01-09 21:19:57,274 - TimesheetTracker - DEBUG - Successfully processed row 14
+2025-01-09 21:19:57,274 - TimesheetTracker - DEBUG - Processing row 15/167
+2025-01-09 21:19:57,274 - TimesheetTracker - DEBUG - Successfully processed row 15
+2025-01-09 21:19:57,277 - TimesheetTracker - DEBUG - Processing row 16/167
+2025-01-09 21:19:57,277 - TimesheetTracker - DEBUG - Successfully processed row 16
+2025-01-09 21:19:57,278 - TimesheetTracker - DEBUG - Processing row 17/167
+2025-01-09 21:19:57,278 - TimesheetTracker - DEBUG - Successfully processed row 17
+2025-01-09 21:19:57,278 - TimesheetTracker - DEBUG - Processing row 18/167
+2025-01-09 21:19:57,278 - TimesheetTracker - DEBUG - Successfully processed row 18
+2025-01-09 21:19:57,278 - TimesheetTracker - DEBUG - Processing row 19/167
+2025-01-09 21:19:57,279 - TimesheetTracker - DEBUG - Successfully processed row 19
+2025-01-09 21:19:57,279 - TimesheetTracker - DEBUG - Processing row 20/167
+2025-01-09 21:19:57,279 - TimesheetTracker - DEBUG - Successfully processed row 20
+2025-01-09 21:19:57,279 - TimesheetTracker - DEBUG - Processing row 21/167
+2025-01-09 21:19:57,279 - TimesheetTracker - DEBUG - Successfully processed row 21
+2025-01-09 21:19:57,280 - TimesheetTracker - DEBUG - Processing row 22/167
+2025-01-09 21:19:57,280 - TimesheetTracker - DEBUG - Successfully processed row 22
+2025-01-09 21:19:57,280 - TimesheetTracker - DEBUG - Processing row 23/167
+2025-01-09 21:19:57,280 - TimesheetTracker - DEBUG - Successfully processed row 23
+2025-01-09 21:19:57,280 - TimesheetTracker - DEBUG - Processing row 24/167
+2025-01-09 21:19:57,280 - TimesheetTracker - DEBUG - Successfully processed row 24
+2025-01-09 21:19:57,281 - TimesheetTracker - DEBUG - Processing row 25/167
+2025-01-09 21:19:57,281 - TimesheetTracker - DEBUG - Successfully processed row 25
+2025-01-09 21:19:57,281 - TimesheetTracker - DEBUG - Processing row 26/167
+2025-01-09 21:19:57,281 - TimesheetTracker - DEBUG - Successfully processed row 26
+2025-01-09 21:19:57,281 - TimesheetTracker - DEBUG - Processing row 27/167
+2025-01-09 21:19:57,282 - TimesheetTracker - DEBUG - Successfully processed row 27
+2025-01-09 21:19:57,282 - TimesheetTracker - DEBUG - Processing row 28/167
+2025-01-09 21:19:57,282 - TimesheetTracker - DEBUG - Successfully processed row 28
+2025-01-09 21:19:57,282 - TimesheetTracker - DEBUG - Processing row 29/167
+2025-01-09 21:19:57,282 - TimesheetTracker - DEBUG - Successfully processed row 29
+2025-01-09 21:19:57,282 - TimesheetTracker - DEBUG - Processing row 30/167
+2025-01-09 21:19:57,283 - TimesheetTracker - DEBUG - Successfully processed row 30
+2025-01-09 21:19:57,283 - TimesheetTracker - DEBUG - Processing row 31/167
+2025-01-09 21:19:57,283 - TimesheetTracker - DEBUG - Successfully processed row 31
+2025-01-09 21:19:57,284 - TimesheetTracker - DEBUG - Processing row 32/167
+2025-01-09 21:19:57,284 - TimesheetTracker - DEBUG - Successfully processed row 32
+2025-01-09 21:19:57,284 - TimesheetTracker - DEBUG - Processing row 33/167
+2025-01-09 21:19:57,284 - TimesheetTracker - DEBUG - Successfully processed row 33
+2025-01-09 21:19:57,284 - TimesheetTracker - DEBUG - Processing row 34/167
+2025-01-09 21:19:57,285 - TimesheetTracker - DEBUG - Successfully processed row 34
+2025-01-09 21:19:57,285 - TimesheetTracker - DEBUG - Processing row 35/167
+2025-01-09 21:19:57,285 - TimesheetTracker - DEBUG - Successfully processed row 35
+2025-01-09 21:19:57,285 - TimesheetTracker - DEBUG - Processing row 36/167
+2025-01-09 21:19:57,285 - TimesheetTracker - DEBUG - Successfully processed row 36
+2025-01-09 21:19:57,285 - TimesheetTracker - DEBUG - Processing row 37/167
+2025-01-09 21:19:57,286 - TimesheetTracker - DEBUG - Successfully processed row 37
+2025-01-09 21:19:57,286 - TimesheetTracker - DEBUG - Processing row 38/167
+2025-01-09 21:19:57,286 - TimesheetTracker - DEBUG - Successfully processed row 38
+2025-01-09 21:19:57,286 - TimesheetTracker - DEBUG - Processing row 39/167
+2025-01-09 21:19:57,286 - TimesheetTracker - DEBUG - Successfully processed row 39
+2025-01-09 21:19:57,286 - TimesheetTracker - DEBUG - Processing row 40/167
+2025-01-09 21:19:57,286 - TimesheetTracker - DEBUG - Successfully processed row 40
+2025-01-09 21:19:57,287 - TimesheetTracker - DEBUG - Processing row 41/167
+2025-01-09 21:19:57,287 - TimesheetTracker - DEBUG - Successfully processed row 41
+2025-01-09 21:19:57,287 - TimesheetTracker - DEBUG - Processing row 42/167
+2025-01-09 21:19:57,287 - TimesheetTracker - DEBUG - Successfully processed row 42
+2025-01-09 21:19:57,287 - TimesheetTracker - DEBUG - Processing row 43/167
+2025-01-09 21:19:57,288 - TimesheetTracker - DEBUG - Successfully processed row 43
+2025-01-09 21:19:57,288 - TimesheetTracker - DEBUG - Processing row 44/167
+2025-01-09 21:19:57,288 - TimesheetTracker - DEBUG - Successfully processed row 44
+2025-01-09 21:19:57,288 - TimesheetTracker - DEBUG - Processing row 45/167
+2025-01-09 21:19:57,288 - TimesheetTracker - DEBUG - Successfully processed row 45
+2025-01-09 21:19:57,289 - TimesheetTracker - DEBUG - Processing row 46/167
+2025-01-09 21:19:57,289 - TimesheetTracker - DEBUG - Successfully processed row 46
+2025-01-09 21:19:57,289 - TimesheetTracker - DEBUG - Processing row 47/167
+2025-01-09 21:19:57,289 - TimesheetTracker - DEBUG - Successfully processed row 47
+2025-01-09 21:19:57,289 - TimesheetTracker - DEBUG - Processing row 48/167
+2025-01-09 21:19:57,290 - TimesheetTracker - DEBUG - Successfully processed row 48
+2025-01-09 21:19:57,290 - TimesheetTracker - DEBUG - Processing row 49/167
+2025-01-09 21:19:57,290 - TimesheetTracker - DEBUG - Successfully processed row 49
+2025-01-09 21:19:57,290 - TimesheetTracker - DEBUG - Processing row 50/167
+2025-01-09 21:19:57,290 - TimesheetTracker - DEBUG - Successfully processed row 50
+2025-01-09 21:19:57,290 - TimesheetTracker - DEBUG - Processing row 51/167
+2025-01-09 21:19:57,291 - TimesheetTracker - DEBUG - Successfully processed row 51
+2025-01-09 21:19:57,291 - TimesheetTracker - DEBUG - Processing row 52/167
+2025-01-09 21:19:57,291 - TimesheetTracker - DEBUG - Successfully processed row 52
+2025-01-09 21:19:57,291 - TimesheetTracker - DEBUG - Processing row 53/167
+2025-01-09 21:19:57,291 - TimesheetTracker - DEBUG - Successfully processed row 53
+2025-01-09 21:19:57,292 - TimesheetTracker - DEBUG - Processing row 54/167
+2025-01-09 21:19:57,292 - TimesheetTracker - DEBUG - Successfully processed row 54
+2025-01-09 21:19:57,292 - TimesheetTracker - DEBUG - Processing row 55/167
+2025-01-09 21:19:57,292 - TimesheetTracker - DEBUG - Successfully processed row 55
+2025-01-09 21:19:57,292 - TimesheetTracker - DEBUG - Processing row 56/167
+2025-01-09 21:19:57,293 - TimesheetTracker - DEBUG - Successfully processed row 56
+2025-01-09 21:19:57,293 - TimesheetTracker - DEBUG - Processing row 57/167
+2025-01-09 21:19:57,293 - TimesheetTracker - DEBUG - Successfully processed row 57
+2025-01-09 21:19:57,293 - TimesheetTracker - DEBUG - Processing row 58/167
+2025-01-09 21:19:57,293 - TimesheetTracker - DEBUG - Successfully processed row 58
+2025-01-09 21:19:57,294 - TimesheetTracker - DEBUG - Processing row 59/167
+2025-01-09 21:19:57,294 - TimesheetTracker - DEBUG - Successfully processed row 59
+2025-01-09 21:19:57,294 - TimesheetTracker - DEBUG - Processing row 60/167
+2025-01-09 21:19:57,294 - TimesheetTracker - DEBUG - Successfully processed row 60
+2025-01-09 21:19:57,294 - TimesheetTracker - DEBUG - Processing row 61/167
+2025-01-09 21:19:57,294 - TimesheetTracker - DEBUG - Successfully processed row 61
+2025-01-09 21:19:57,295 - TimesheetTracker - DEBUG - Processing row 62/167
+2025-01-09 21:19:57,295 - TimesheetTracker - DEBUG - Successfully processed row 62
+2025-01-09 21:19:57,295 - TimesheetTracker - DEBUG - Processing row 63/167
+2025-01-09 21:19:57,295 - TimesheetTracker - DEBUG - Successfully processed row 63
+2025-01-09 21:19:57,295 - TimesheetTracker - DEBUG - Processing row 64/167
+2025-01-09 21:19:57,295 - TimesheetTracker - DEBUG - Successfully processed row 64
+2025-01-09 21:19:57,296 - TimesheetTracker - DEBUG - Processing row 65/167
+2025-01-09 21:19:57,296 - TimesheetTracker - DEBUG - Successfully processed row 65
+2025-01-09 21:19:57,296 - TimesheetTracker - DEBUG - Processing row 66/167
+2025-01-09 21:19:57,296 - TimesheetTracker - DEBUG - Successfully processed row 66
+2025-01-09 21:19:57,296 - TimesheetTracker - DEBUG - Processing row 67/167
+2025-01-09 21:19:57,297 - TimesheetTracker - DEBUG - Successfully processed row 67
+2025-01-09 21:19:57,297 - TimesheetTracker - DEBUG - Processing row 68/167
+2025-01-09 21:19:57,297 - TimesheetTracker - DEBUG - Successfully processed row 68
+2025-01-09 21:19:57,297 - TimesheetTracker - DEBUG - Processing row 69/167
+2025-01-09 21:19:57,297 - TimesheetTracker - DEBUG - Successfully processed row 69
+2025-01-09 21:19:57,298 - TimesheetTracker - DEBUG - Processing row 70/167
+2025-01-09 21:19:57,298 - TimesheetTracker - DEBUG - Successfully processed row 70
+2025-01-09 21:19:57,298 - TimesheetTracker - DEBUG - Processing row 71/167
+2025-01-09 21:19:57,298 - TimesheetTracker - DEBUG - Successfully processed row 71
+2025-01-09 21:19:57,299 - TimesheetTracker - DEBUG - Processing row 72/167
+2025-01-09 21:19:57,299 - TimesheetTracker - DEBUG - Successfully processed row 72
+2025-01-09 21:19:57,299 - TimesheetTracker - DEBUG - Processing row 73/167
+2025-01-09 21:19:57,299 - TimesheetTracker - DEBUG - Successfully processed row 73
+2025-01-09 21:19:57,299 - TimesheetTracker - DEBUG - Processing row 74/167
+2025-01-09 21:19:57,300 - TimesheetTracker - DEBUG - Successfully processed row 74
+2025-01-09 21:19:57,300 - TimesheetTracker - DEBUG - Processing row 75/167
+2025-01-09 21:19:57,300 - TimesheetTracker - DEBUG - Successfully processed row 75
+2025-01-09 21:19:57,300 - TimesheetTracker - DEBUG - Processing row 76/167
+2025-01-09 21:19:57,300 - TimesheetTracker - DEBUG - Successfully processed row 76
+2025-01-09 21:19:57,301 - TimesheetTracker - DEBUG - Processing row 77/167
+2025-01-09 21:19:57,301 - TimesheetTracker - DEBUG - Successfully processed row 77
+2025-01-09 21:19:57,301 - TimesheetTracker - DEBUG - Processing row 78/167
+2025-01-09 21:19:57,301 - TimesheetTracker - DEBUG - Successfully processed row 78
+2025-01-09 21:19:57,302 - TimesheetTracker - DEBUG - Processing row 79/167
+2025-01-09 21:19:57,302 - TimesheetTracker - DEBUG - Successfully processed row 79
+2025-01-09 21:19:57,302 - TimesheetTracker - DEBUG - Processing row 80/167
+2025-01-09 21:19:57,302 - TimesheetTracker - DEBUG - Successfully processed row 80
+2025-01-09 21:19:57,302 - TimesheetTracker - DEBUG - Processing row 81/167
+2025-01-09 21:19:57,303 - TimesheetTracker - DEBUG - Successfully processed row 81
+2025-01-09 21:19:57,303 - TimesheetTracker - DEBUG - Processing row 82/167
+2025-01-09 21:19:57,303 - TimesheetTracker - DEBUG - Successfully processed row 82
+2025-01-09 21:19:57,303 - TimesheetTracker - DEBUG - Processing row 83/167
+2025-01-09 21:19:57,304 - TimesheetTracker - DEBUG - Successfully processed row 83
+2025-01-09 21:19:57,304 - TimesheetTracker - DEBUG - Processing row 84/167
+2025-01-09 21:19:57,305 - TimesheetTracker - DEBUG - Successfully processed row 84
+2025-01-09 21:19:57,305 - TimesheetTracker - DEBUG - Processing row 85/167
+2025-01-09 21:19:57,305 - TimesheetTracker - DEBUG - Successfully processed row 85
+2025-01-09 21:19:57,305 - TimesheetTracker - DEBUG - Processing row 86/167
+2025-01-09 21:19:57,305 - TimesheetTracker - DEBUG - Successfully processed row 86
+2025-01-09 21:19:57,305 - TimesheetTracker - DEBUG - Processing row 87/167
+2025-01-09 21:19:57,306 - TimesheetTracker - DEBUG - Successfully processed row 87
+2025-01-09 21:19:57,306 - TimesheetTracker - DEBUG - Processing row 88/167
+2025-01-09 21:19:57,306 - TimesheetTracker - DEBUG - Successfully processed row 88
+2025-01-09 21:19:57,306 - TimesheetTracker - DEBUG - Processing row 89/167
+2025-01-09 21:19:57,306 - TimesheetTracker - DEBUG - Successfully processed row 89
+2025-01-09 21:19:57,307 - TimesheetTracker - DEBUG - Processing row 90/167
+2025-01-09 21:19:57,307 - TimesheetTracker - DEBUG - Successfully processed row 90
+2025-01-09 21:19:57,307 - TimesheetTracker - DEBUG - Processing row 91/167
+2025-01-09 21:19:57,307 - TimesheetTracker - DEBUG - Successfully processed row 91
+2025-01-09 21:19:57,308 - TimesheetTracker - DEBUG - Processing row 92/167
+2025-01-09 21:19:57,308 - TimesheetTracker - DEBUG - Successfully processed row 92
+2025-01-09 21:19:57,308 - TimesheetTracker - DEBUG - Processing row 93/167
+2025-01-09 21:19:57,308 - TimesheetTracker - DEBUG - Successfully processed row 93
+2025-01-09 21:19:57,309 - TimesheetTracker - DEBUG - Processing row 94/167
+2025-01-09 21:19:57,309 - TimesheetTracker - DEBUG - Successfully processed row 94
+2025-01-09 21:19:57,309 - TimesheetTracker - DEBUG - Processing row 95/167
+2025-01-09 21:19:57,309 - TimesheetTracker - DEBUG - Successfully processed row 95
+2025-01-09 21:19:57,309 - TimesheetTracker - DEBUG - Processing row 96/167
+2025-01-09 21:19:57,310 - TimesheetTracker - DEBUG - Successfully processed row 96
+2025-01-09 21:19:57,310 - TimesheetTracker - DEBUG - Processing row 97/167
+2025-01-09 21:19:57,310 - TimesheetTracker - DEBUG - Successfully processed row 97
+2025-01-09 21:19:57,310 - TimesheetTracker - DEBUG - Processing row 98/167
+2025-01-09 21:19:57,310 - TimesheetTracker - WARNING - Skipping row 98 due to invalid hours: 0
+2025-01-09 21:19:57,310 - TimesheetTracker - DEBUG - Processing row 99/167
+2025-01-09 21:19:57,311 - TimesheetTracker - DEBUG - Successfully processed row 99
+2025-01-09 21:19:57,311 - TimesheetTracker - DEBUG - Processing row 100/167
+2025-01-09 21:19:57,311 - TimesheetTracker - DEBUG - Successfully processed row 100
+2025-01-09 21:19:57,311 - TimesheetTracker - DEBUG - Processing row 101/167
+2025-01-09 21:19:57,311 - TimesheetTracker - DEBUG - Successfully processed row 101
+2025-01-09 21:19:57,311 - TimesheetTracker - DEBUG - Processing row 102/167
+2025-01-09 21:19:57,312 - TimesheetTracker - DEBUG - Successfully processed row 102
+2025-01-09 21:19:57,312 - TimesheetTracker - DEBUG - Processing row 103/167
+2025-01-09 21:19:57,312 - TimesheetTracker - DEBUG - Successfully processed row 103
+2025-01-09 21:19:57,312 - TimesheetTracker - DEBUG - Processing row 104/167
+2025-01-09 21:19:57,312 - TimesheetTracker - DEBUG - Successfully processed row 104
+2025-01-09 21:19:57,312 - TimesheetTracker - DEBUG - Processing row 105/167
+2025-01-09 21:19:57,312 - TimesheetTracker - DEBUG - Successfully processed row 105
+2025-01-09 21:19:57,312 - TimesheetTracker - DEBUG - Processing row 106/167
+2025-01-09 21:19:57,313 - TimesheetTracker - DEBUG - Successfully processed row 106
+2025-01-09 21:19:57,313 - TimesheetTracker - DEBUG - Processing row 107/167
+2025-01-09 21:19:57,313 - TimesheetTracker - DEBUG - Successfully processed row 107
+2025-01-09 21:19:57,313 - TimesheetTracker - DEBUG - Processing row 108/167
+2025-01-09 21:19:57,313 - TimesheetTracker - DEBUG - Successfully processed row 108
+2025-01-09 21:19:57,313 - TimesheetTracker - DEBUG - Processing row 109/167
+2025-01-09 21:19:57,313 - TimesheetTracker - DEBUG - Successfully processed row 109
+2025-01-09 21:19:57,314 - TimesheetTracker - DEBUG - Processing row 110/167
+2025-01-09 21:19:57,314 - TimesheetTracker - DEBUG - Successfully processed row 110
+2025-01-09 21:19:57,314 - TimesheetTracker - DEBUG - Processing row 111/167
+2025-01-09 21:19:57,314 - TimesheetTracker - DEBUG - Successfully processed row 111
+2025-01-09 21:19:57,314 - TimesheetTracker - DEBUG - Processing row 112/167
+2025-01-09 21:19:57,315 - TimesheetTracker - DEBUG - Successfully processed row 112
+2025-01-09 21:19:57,315 - TimesheetTracker - DEBUG - Processing row 113/167
+2025-01-09 21:19:57,315 - TimesheetTracker - DEBUG - Successfully processed row 113
+2025-01-09 21:19:57,315 - TimesheetTracker - DEBUG - Processing row 114/167
+2025-01-09 21:19:57,315 - TimesheetTracker - DEBUG - Successfully processed row 114
+2025-01-09 21:19:57,315 - TimesheetTracker - DEBUG - Processing row 115/167
+2025-01-09 21:19:57,316 - TimesheetTracker - DEBUG - Successfully processed row 115
+2025-01-09 21:19:57,316 - TimesheetTracker - DEBUG - Processing row 116/167
+2025-01-09 21:19:57,316 - TimesheetTracker - DEBUG - Successfully processed row 116
+2025-01-09 21:19:57,316 - TimesheetTracker - DEBUG - Processing row 117/167
+2025-01-09 21:19:57,316 - TimesheetTracker - DEBUG - Successfully processed row 117
+2025-01-09 21:19:57,316 - TimesheetTracker - DEBUG - Processing row 118/167
+2025-01-09 21:19:57,317 - TimesheetTracker - DEBUG - Successfully processed row 118
+2025-01-09 21:19:57,317 - TimesheetTracker - DEBUG - Processing row 119/167
+2025-01-09 21:19:57,317 - TimesheetTracker - DEBUG - Successfully processed row 119
+2025-01-09 21:19:57,317 - TimesheetTracker - DEBUG - Processing row 120/167
+2025-01-09 21:19:57,318 - TimesheetTracker - DEBUG - Successfully processed row 120
+2025-01-09 21:19:57,318 - TimesheetTracker - DEBUG - Processing row 121/167
+2025-01-09 21:19:57,318 - TimesheetTracker - DEBUG - Successfully processed row 121
+2025-01-09 21:19:57,318 - TimesheetTracker - DEBUG - Processing row 122/167
+2025-01-09 21:19:57,318 - TimesheetTracker - DEBUG - Successfully processed row 122
+2025-01-09 21:19:57,319 - TimesheetTracker - DEBUG - Processing row 123/167
+2025-01-09 21:19:57,319 - TimesheetTracker - DEBUG - Successfully processed row 123
+2025-01-09 21:19:57,319 - TimesheetTracker - DEBUG - Processing row 124/167
+2025-01-09 21:19:57,319 - TimesheetTracker - DEBUG - Successfully processed row 124
+2025-01-09 21:19:57,319 - TimesheetTracker - DEBUG - Processing row 125/167
+2025-01-09 21:19:57,319 - TimesheetTracker - DEBUG - Successfully processed row 125
+2025-01-09 21:19:57,320 - TimesheetTracker - DEBUG - Processing row 126/167
+2025-01-09 21:19:57,320 - TimesheetTracker - WARNING - Skipping row 126 due to invalid hours: 0.0
+2025-01-09 21:19:57,320 - TimesheetTracker - DEBUG - Processing row 127/167
+2025-01-09 21:19:57,320 - TimesheetTracker - DEBUG - Successfully processed row 127
+2025-01-09 21:19:57,320 - TimesheetTracker - DEBUG - Processing row 128/167
+2025-01-09 21:19:57,320 - TimesheetTracker - DEBUG - Successfully processed row 128
+2025-01-09 21:19:57,320 - TimesheetTracker - DEBUG - Processing row 129/167
+2025-01-09 21:19:57,321 - TimesheetTracker - DEBUG - Successfully processed row 129
+2025-01-09 21:19:57,321 - TimesheetTracker - DEBUG - Processing row 130/167
+2025-01-09 21:19:57,321 - TimesheetTracker - WARNING - Skipping row 130 due to invalid hours: 0.0
+2025-01-09 21:19:57,321 - TimesheetTracker - DEBUG - Processing row 131/167
+2025-01-09 21:19:57,321 - TimesheetTracker - WARNING - Skipping row 131 due to invalid hours: 0.0
+2025-01-09 21:19:57,321 - TimesheetTracker - DEBUG - Processing row 132/167
+2025-01-09 21:19:57,322 - TimesheetTracker - DEBUG - Successfully processed row 132
+2025-01-09 21:19:57,322 - TimesheetTracker - DEBUG - Processing row 133/167
+2025-01-09 21:19:57,322 - TimesheetTracker - DEBUG - Successfully processed row 133
+2025-01-09 21:19:57,322 - TimesheetTracker - DEBUG - Processing row 134/167
+2025-01-09 21:19:57,322 - TimesheetTracker - DEBUG - Successfully processed row 134
+2025-01-09 21:19:57,322 - TimesheetTracker - DEBUG - Processing row 135/167
+2025-01-09 21:19:57,323 - TimesheetTracker - DEBUG - Successfully processed row 135
+2025-01-09 21:19:57,323 - TimesheetTracker - DEBUG - Processing row 136/167
+2025-01-09 21:19:57,324 - TimesheetTracker - WARNING - Skipping row 136 due to invalid hours: 0.0
+2025-01-09 21:19:57,324 - TimesheetTracker - DEBUG - Processing row 137/167
+2025-01-09 21:19:57,324 - TimesheetTracker - WARNING - Skipping row 137 due to invalid hours: 0.0
+2025-01-09 21:19:57,324 - TimesheetTracker - DEBUG - Processing row 138/167
+2025-01-09 21:19:57,324 - TimesheetTracker - DEBUG - Successfully processed row 138
+2025-01-09 21:19:57,324 - TimesheetTracker - DEBUG - Processing row 139/167
+2025-01-09 21:19:57,324 - TimesheetTracker - DEBUG - Successfully processed row 139
+2025-01-09 21:19:57,325 - TimesheetTracker - DEBUG - Processing row 140/167
+2025-01-09 21:19:57,325 - TimesheetTracker - DEBUG - Successfully processed row 140
+2025-01-09 21:19:57,325 - TimesheetTracker - DEBUG - Processing row 141/167
+2025-01-09 21:19:57,325 - TimesheetTracker - DEBUG - Successfully processed row 141
+2025-01-09 21:19:57,325 - TimesheetTracker - DEBUG - Processing row 142/167
+2025-01-09 21:19:57,325 - TimesheetTracker - WARNING - Skipping row 142 due to invalid hours: 0.0
+2025-01-09 21:19:57,326 - TimesheetTracker - DEBUG - Processing row 143/167
+2025-01-09 21:19:57,326 - TimesheetTracker - DEBUG - Successfully processed row 143
+2025-01-09 21:19:57,326 - TimesheetTracker - DEBUG - Processing row 144/167
+2025-01-09 21:19:57,326 - TimesheetTracker - DEBUG - Successfully processed row 144
+2025-01-09 21:19:57,326 - TimesheetTracker - DEBUG - Processing row 145/167
+2025-01-09 21:19:57,326 - TimesheetTracker - WARNING - Skipping row 145 due to invalid hours: 0.0
+2025-01-09 21:19:57,327 - TimesheetTracker - DEBUG - Processing row 146/167
+2025-01-09 21:19:57,327 - TimesheetTracker - WARNING - Skipping row 146 due to invalid hours: 0.0
+2025-01-09 21:19:57,327 - TimesheetTracker - DEBUG - Processing row 147/167
+2025-01-09 21:19:57,327 - TimesheetTracker - WARNING - Skipping row 147 due to invalid hours: 0.0
+2025-01-09 21:19:57,327 - TimesheetTracker - DEBUG - Processing row 148/167
+2025-01-09 21:19:57,327 - TimesheetTracker - DEBUG - Successfully processed row 148
+2025-01-09 21:19:57,328 - TimesheetTracker - DEBUG - Processing row 149/167
+2025-01-09 21:19:57,328 - TimesheetTracker - DEBUG - Successfully processed row 149
+2025-01-09 21:19:57,328 - TimesheetTracker - DEBUG - Processing row 150/167
+2025-01-09 21:19:57,328 - TimesheetTracker - DEBUG - Successfully processed row 150
+2025-01-09 21:19:57,328 - TimesheetTracker - DEBUG - Processing row 151/167
+2025-01-09 21:19:57,328 - TimesheetTracker - DEBUG - Successfully processed row 151
+2025-01-09 21:19:57,329 - TimesheetTracker - DEBUG - Processing row 152/167
+2025-01-09 21:19:57,329 - TimesheetTracker - DEBUG - Successfully processed row 152
+2025-01-09 21:19:57,329 - TimesheetTracker - DEBUG - Processing row 153/167
+2025-01-09 21:19:57,329 - TimesheetTracker - DEBUG - Successfully processed row 153
+2025-01-09 21:19:57,329 - TimesheetTracker - DEBUG - Processing row 154/167
+2025-01-09 21:19:57,329 - TimesheetTracker - DEBUG - Successfully processed row 154
+2025-01-09 21:19:57,330 - TimesheetTracker - DEBUG - Processing row 155/167
+2025-01-09 21:19:57,330 - TimesheetTracker - DEBUG - Successfully processed row 155
+2025-01-09 21:19:57,330 - TimesheetTracker - DEBUG - Processing row 156/167
+2025-01-09 21:19:57,330 - TimesheetTracker - DEBUG - Successfully processed row 156
+2025-01-09 21:19:57,330 - TimesheetTracker - DEBUG - Processing row 157/167
+2025-01-09 21:19:57,330 - TimesheetTracker - DEBUG - Successfully processed row 157
+2025-01-09 21:19:57,330 - TimesheetTracker - DEBUG - Processing row 158/167
+2025-01-09 21:19:57,331 - TimesheetTracker - DEBUG - Successfully processed row 158
+2025-01-09 21:19:57,331 - TimesheetTracker - DEBUG - Processing row 159/167
+2025-01-09 21:19:57,331 - TimesheetTracker - DEBUG - Successfully processed row 159
+2025-01-09 21:19:57,331 - TimesheetTracker - DEBUG - Processing row 160/167
+2025-01-09 21:19:57,331 - TimesheetTracker - DEBUG - Successfully processed row 160
+2025-01-09 21:19:57,331 - TimesheetTracker - DEBUG - Processing row 161/167
+2025-01-09 21:19:57,332 - TimesheetTracker - DEBUG - Successfully processed row 161
+2025-01-09 21:19:57,332 - TimesheetTracker - DEBUG - Processing row 162/167
+2025-01-09 21:19:57,332 - TimesheetTracker - WARNING - Skipping row 162 due to invalid hours: 0.0
+2025-01-09 21:19:57,332 - TimesheetTracker - DEBUG - Processing row 163/167
+2025-01-09 21:19:57,334 - TimesheetTracker - DEBUG - Successfully processed row 163
+2025-01-09 21:19:57,334 - TimesheetTracker - DEBUG - Processing row 164/167
+2025-01-09 21:19:57,334 - TimesheetTracker - DEBUG - Successfully processed row 164
+2025-01-09 21:19:57,334 - TimesheetTracker - DEBUG - Processing row 165/167
+2025-01-09 21:19:57,335 - TimesheetTracker - WARNING - Skipping row 165 due to invalid hours: 0
+2025-01-09 21:19:57,335 - TimesheetTracker - DEBUG - Processing row 166/167
+2025-01-09 21:19:57,335 - TimesheetTracker - WARNING - Skipping row 166 due to invalid hours: 0
+2025-01-09 21:19:57,335 - TimesheetTracker - DEBUG - Processing row 167/167
+2025-01-09 21:19:57,335 - TimesheetTracker - WARNING - Skipping row 167 due to invalid hours: 0
+2025-01-09 21:19:57,335 - TimesheetTracker - INFO - Successfully processed 153 valid entries from CSV
+2025-01-09 21:19:57,335 - TimesheetTracker - DEBUG - Initializing TimeEntryService for bulk entry creation
+2025-01-09 21:19:57,338 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 21:19:57,338 - TimesheetTracker - INFO - Creating 153 time entries in bulk
+2025-01-09 21:19:57,338 - TimesheetTracker - INFO - Beginning bulk creation of 153 time entries
+2025-01-09 21:19:57,338 - TimesheetTracker - DEBUG - Processing entry 1/153
+2025-01-09 21:19:57,343 - TimesheetTracker - DEBUG - Added entry 1 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,343 - TimesheetTracker - DEBUG - Processing entry 2/153
+2025-01-09 21:19:57,344 - TimesheetTracker - DEBUG - Added entry 2 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,344 - TimesheetTracker - DEBUG - Processing entry 3/153
+2025-01-09 21:19:57,344 - TimesheetTracker - DEBUG - Added entry 3 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,345 - TimesheetTracker - DEBUG - Processing entry 4/153
+2025-01-09 21:19:57,346 - TimesheetTracker - DEBUG - Added entry 4 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,346 - TimesheetTracker - DEBUG - Processing entry 5/153
+2025-01-09 21:19:57,346 - TimesheetTracker - DEBUG - Added entry 5 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,346 - TimesheetTracker - DEBUG - Processing entry 6/153
+2025-01-09 21:19:57,346 - TimesheetTracker - DEBUG - Added entry 6 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,346 - TimesheetTracker - DEBUG - Processing entry 7/153
+2025-01-09 21:19:57,346 - TimesheetTracker - DEBUG - Added entry 7 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,346 - TimesheetTracker - DEBUG - Processing entry 8/153
+2025-01-09 21:19:57,347 - TimesheetTracker - DEBUG - Added entry 8 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,347 - TimesheetTracker - DEBUG - Processing entry 9/153
+2025-01-09 21:19:57,347 - TimesheetTracker - DEBUG - Added entry 9 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,347 - TimesheetTracker - DEBUG - Processing entry 10/153
+2025-01-09 21:19:57,347 - TimesheetTracker - DEBUG - Added entry 10 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,347 - TimesheetTracker - DEBUG - Processing entry 11/153
+2025-01-09 21:19:57,347 - TimesheetTracker - DEBUG - Added entry 11 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,347 - TimesheetTracker - DEBUG - Processing entry 12/153
+2025-01-09 21:19:57,348 - TimesheetTracker - DEBUG - Added entry 12 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,348 - TimesheetTracker - DEBUG - Processing entry 13/153
+2025-01-09 21:19:57,348 - TimesheetTracker - DEBUG - Added entry 13 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,348 - TimesheetTracker - DEBUG - Processing entry 14/153
+2025-01-09 21:19:57,348 - TimesheetTracker - DEBUG - Added entry 14 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,348 - TimesheetTracker - DEBUG - Processing entry 15/153
+2025-01-09 21:19:57,348 - TimesheetTracker - DEBUG - Added entry 15 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,348 - TimesheetTracker - DEBUG - Processing entry 16/153
+2025-01-09 21:19:57,349 - TimesheetTracker - DEBUG - Added entry 16 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,349 - TimesheetTracker - DEBUG - Processing entry 17/153
+2025-01-09 21:19:57,349 - TimesheetTracker - DEBUG - Added entry 17 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,349 - TimesheetTracker - DEBUG - Processing entry 18/153
+2025-01-09 21:19:57,349 - TimesheetTracker - DEBUG - Added entry 18 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,349 - TimesheetTracker - DEBUG - Processing entry 19/153
+2025-01-09 21:19:57,349 - TimesheetTracker - DEBUG - Added entry 19 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,349 - TimesheetTracker - DEBUG - Processing entry 20/153
+2025-01-09 21:19:57,349 - TimesheetTracker - DEBUG - Added entry 20 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,349 - TimesheetTracker - DEBUG - Processing entry 21/153
+2025-01-09 21:19:57,350 - TimesheetTracker - DEBUG - Added entry 21 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,350 - TimesheetTracker - DEBUG - Processing entry 22/153
+2025-01-09 21:19:57,350 - TimesheetTracker - DEBUG - Added entry 22 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,350 - TimesheetTracker - DEBUG - Processing entry 23/153
+2025-01-09 21:19:57,350 - TimesheetTracker - DEBUG - Added entry 23 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,350 - TimesheetTracker - DEBUG - Processing entry 24/153
+2025-01-09 21:19:57,350 - TimesheetTracker - DEBUG - Added entry 24 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,350 - TimesheetTracker - DEBUG - Processing entry 25/153
+2025-01-09 21:19:57,350 - TimesheetTracker - DEBUG - Added entry 25 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,351 - TimesheetTracker - DEBUG - Processing entry 26/153
+2025-01-09 21:19:57,351 - TimesheetTracker - DEBUG - Added entry 26 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,351 - TimesheetTracker - DEBUG - Processing entry 27/153
+2025-01-09 21:19:57,351 - TimesheetTracker - DEBUG - Added entry 27 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,351 - TimesheetTracker - DEBUG - Processing entry 28/153
+2025-01-09 21:19:57,351 - TimesheetTracker - DEBUG - Added entry 28 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,351 - TimesheetTracker - DEBUG - Processing entry 29/153
+2025-01-09 21:19:57,351 - TimesheetTracker - DEBUG - Added entry 29 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,351 - TimesheetTracker - DEBUG - Processing entry 30/153
+2025-01-09 21:19:57,351 - TimesheetTracker - DEBUG - Added entry 30 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,351 - TimesheetTracker - DEBUG - Processing entry 31/153
+2025-01-09 21:19:57,352 - TimesheetTracker - DEBUG - Added entry 31 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,352 - TimesheetTracker - DEBUG - Processing entry 32/153
+2025-01-09 21:19:57,352 - TimesheetTracker - DEBUG - Added entry 32 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,352 - TimesheetTracker - DEBUG - Processing entry 33/153
+2025-01-09 21:19:57,352 - TimesheetTracker - DEBUG - Added entry 33 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,352 - TimesheetTracker - DEBUG - Processing entry 34/153
+2025-01-09 21:19:57,352 - TimesheetTracker - DEBUG - Added entry 34 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,352 - TimesheetTracker - DEBUG - Processing entry 35/153
+2025-01-09 21:19:57,352 - TimesheetTracker - DEBUG - Added entry 35 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,353 - TimesheetTracker - DEBUG - Processing entry 36/153
+2025-01-09 21:19:57,353 - TimesheetTracker - DEBUG - Added entry 36 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,353 - TimesheetTracker - DEBUG - Processing entry 37/153
+2025-01-09 21:19:57,353 - TimesheetTracker - DEBUG - Added entry 37 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,353 - TimesheetTracker - DEBUG - Processing entry 38/153
+2025-01-09 21:19:57,353 - TimesheetTracker - DEBUG - Added entry 38 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,353 - TimesheetTracker - DEBUG - Processing entry 39/153
+2025-01-09 21:19:57,353 - TimesheetTracker - DEBUG - Added entry 39 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,353 - TimesheetTracker - DEBUG - Processing entry 40/153
+2025-01-09 21:19:57,354 - TimesheetTracker - DEBUG - Added entry 40 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,354 - TimesheetTracker - DEBUG - Processing entry 41/153
+2025-01-09 21:19:57,354 - TimesheetTracker - DEBUG - Added entry 41 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,354 - TimesheetTracker - DEBUG - Processing entry 42/153
+2025-01-09 21:19:57,354 - TimesheetTracker - DEBUG - Added entry 42 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,354 - TimesheetTracker - DEBUG - Processing entry 43/153
+2025-01-09 21:19:57,354 - TimesheetTracker - DEBUG - Added entry 43 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,354 - TimesheetTracker - DEBUG - Processing entry 44/153
+2025-01-09 21:19:57,355 - TimesheetTracker - DEBUG - Added entry 44 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,355 - TimesheetTracker - DEBUG - Processing entry 45/153
+2025-01-09 21:19:57,355 - TimesheetTracker - DEBUG - Added entry 45 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,355 - TimesheetTracker - DEBUG - Processing entry 46/153
+2025-01-09 21:19:57,355 - TimesheetTracker - DEBUG - Added entry 46 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,355 - TimesheetTracker - DEBUG - Processing entry 47/153
+2025-01-09 21:19:57,355 - TimesheetTracker - DEBUG - Added entry 47 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,356 - TimesheetTracker - DEBUG - Processing entry 48/153
+2025-01-09 21:19:57,356 - TimesheetTracker - DEBUG - Added entry 48 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,356 - TimesheetTracker - DEBUG - Processing entry 49/153
+2025-01-09 21:19:57,356 - TimesheetTracker - DEBUG - Added entry 49 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,356 - TimesheetTracker - DEBUG - Processing entry 50/153
+2025-01-09 21:19:57,357 - TimesheetTracker - DEBUG - Added entry 50 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,357 - TimesheetTracker - DEBUG - Processing entry 51/153
+2025-01-09 21:19:57,357 - TimesheetTracker - DEBUG - Added entry 51 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,357 - TimesheetTracker - DEBUG - Processing entry 52/153
+2025-01-09 21:19:57,358 - TimesheetTracker - DEBUG - Added entry 52 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,358 - TimesheetTracker - DEBUG - Processing entry 53/153
+2025-01-09 21:19:57,358 - TimesheetTracker - DEBUG - Added entry 53 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,358 - TimesheetTracker - DEBUG - Processing entry 54/153
+2025-01-09 21:19:57,358 - TimesheetTracker - DEBUG - Added entry 54 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,358 - TimesheetTracker - DEBUG - Processing entry 55/153
+2025-01-09 21:19:57,358 - TimesheetTracker - DEBUG - Added entry 55 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,358 - TimesheetTracker - DEBUG - Processing entry 56/153
+2025-01-09 21:19:57,360 - TimesheetTracker - DEBUG - Added entry 56 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,361 - TimesheetTracker - DEBUG - Processing entry 57/153
+2025-01-09 21:19:57,361 - TimesheetTracker - DEBUG - Added entry 57 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,361 - TimesheetTracker - DEBUG - Processing entry 58/153
+2025-01-09 21:19:57,361 - TimesheetTracker - DEBUG - Added entry 58 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,361 - TimesheetTracker - DEBUG - Processing entry 59/153
+2025-01-09 21:19:57,361 - TimesheetTracker - DEBUG - Added entry 59 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,361 - TimesheetTracker - DEBUG - Processing entry 60/153
+2025-01-09 21:19:57,362 - TimesheetTracker - DEBUG - Added entry 60 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,362 - TimesheetTracker - DEBUG - Processing entry 61/153
+2025-01-09 21:19:57,362 - TimesheetTracker - DEBUG - Added entry 61 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,362 - TimesheetTracker - DEBUG - Processing entry 62/153
+2025-01-09 21:19:57,362 - TimesheetTracker - DEBUG - Added entry 62 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,362 - TimesheetTracker - DEBUG - Processing entry 63/153
+2025-01-09 21:19:57,362 - TimesheetTracker - DEBUG - Added entry 63 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,362 - TimesheetTracker - DEBUG - Processing entry 64/153
+2025-01-09 21:19:57,362 - TimesheetTracker - DEBUG - Added entry 64 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,362 - TimesheetTracker - DEBUG - Processing entry 65/153
+2025-01-09 21:19:57,363 - TimesheetTracker - DEBUG - Added entry 65 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,363 - TimesheetTracker - DEBUG - Processing entry 66/153
+2025-01-09 21:19:57,363 - TimesheetTracker - DEBUG - Added entry 66 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,363 - TimesheetTracker - DEBUG - Processing entry 67/153
+2025-01-09 21:19:57,363 - TimesheetTracker - DEBUG - Added entry 67 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,363 - TimesheetTracker - DEBUG - Processing entry 68/153
+2025-01-09 21:19:57,363 - TimesheetTracker - DEBUG - Added entry 68 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,363 - TimesheetTracker - DEBUG - Processing entry 69/153
+2025-01-09 21:19:57,363 - TimesheetTracker - DEBUG - Added entry 69 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,363 - TimesheetTracker - DEBUG - Processing entry 70/153
+2025-01-09 21:19:57,363 - TimesheetTracker - DEBUG - Added entry 70 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,364 - TimesheetTracker - DEBUG - Processing entry 71/153
+2025-01-09 21:19:57,364 - TimesheetTracker - DEBUG - Added entry 71 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,364 - TimesheetTracker - DEBUG - Processing entry 72/153
+2025-01-09 21:19:57,364 - TimesheetTracker - DEBUG - Added entry 72 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,364 - TimesheetTracker - DEBUG - Processing entry 73/153
+2025-01-09 21:19:57,364 - TimesheetTracker - DEBUG - Added entry 73 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,364 - TimesheetTracker - DEBUG - Processing entry 74/153
+2025-01-09 21:19:57,365 - TimesheetTracker - DEBUG - Added entry 74 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,365 - TimesheetTracker - DEBUG - Processing entry 75/153
+2025-01-09 21:19:57,365 - TimesheetTracker - DEBUG - Added entry 75 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,365 - TimesheetTracker - DEBUG - Processing entry 76/153
+2025-01-09 21:19:57,365 - TimesheetTracker - DEBUG - Added entry 76 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,365 - TimesheetTracker - DEBUG - Processing entry 77/153
+2025-01-09 21:19:57,365 - TimesheetTracker - DEBUG - Added entry 77 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,366 - TimesheetTracker - DEBUG - Processing entry 78/153
+2025-01-09 21:19:57,366 - TimesheetTracker - DEBUG - Added entry 78 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,366 - TimesheetTracker - DEBUG - Processing entry 79/153
+2025-01-09 21:19:57,366 - TimesheetTracker - DEBUG - Added entry 79 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,366 - TimesheetTracker - DEBUG - Processing entry 80/153
+2025-01-09 21:19:57,366 - TimesheetTracker - DEBUG - Added entry 80 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,366 - TimesheetTracker - DEBUG - Processing entry 81/153
+2025-01-09 21:19:57,367 - TimesheetTracker - DEBUG - Added entry 81 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,367 - TimesheetTracker - DEBUG - Processing entry 82/153
+2025-01-09 21:19:57,367 - TimesheetTracker - DEBUG - Added entry 82 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,367 - TimesheetTracker - DEBUG - Processing entry 83/153
+2025-01-09 21:19:57,367 - TimesheetTracker - DEBUG - Added entry 83 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,367 - TimesheetTracker - DEBUG - Processing entry 84/153
+2025-01-09 21:19:57,367 - TimesheetTracker - DEBUG - Added entry 84 to session: ECOLAB - Project_Magic_Bullet
+2025-01-09 21:19:57,367 - TimesheetTracker - DEBUG - Processing entry 85/153
+2025-01-09 21:19:57,367 - TimesheetTracker - DEBUG - Added entry 85 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,368 - TimesheetTracker - DEBUG - Processing entry 86/153
+2025-01-09 21:19:57,368 - TimesheetTracker - DEBUG - Added entry 86 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,368 - TimesheetTracker - DEBUG - Processing entry 87/153
+2025-01-09 21:19:57,368 - TimesheetTracker - DEBUG - Added entry 87 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,368 - TimesheetTracker - DEBUG - Processing entry 88/153
+2025-01-09 21:19:57,368 - TimesheetTracker - DEBUG - Added entry 88 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,368 - TimesheetTracker - DEBUG - Processing entry 89/153
+2025-01-09 21:19:57,368 - TimesheetTracker - DEBUG - Added entry 89 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,368 - TimesheetTracker - DEBUG - Processing entry 90/153
+2025-01-09 21:19:57,369 - TimesheetTracker - DEBUG - Added entry 90 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,369 - TimesheetTracker - DEBUG - Processing entry 91/153
+2025-01-09 21:19:57,369 - TimesheetTracker - DEBUG - Added entry 91 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,369 - TimesheetTracker - DEBUG - Processing entry 92/153
+2025-01-09 21:19:57,369 - TimesheetTracker - DEBUG - Added entry 92 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,369 - TimesheetTracker - DEBUG - Processing entry 93/153
+2025-01-09 21:19:57,370 - TimesheetTracker - DEBUG - Added entry 93 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,370 - TimesheetTracker - DEBUG - Processing entry 94/153
+2025-01-09 21:19:57,370 - TimesheetTracker - DEBUG - Added entry 94 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,370 - TimesheetTracker - DEBUG - Processing entry 95/153
+2025-01-09 21:19:57,370 - TimesheetTracker - DEBUG - Added entry 95 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,370 - TimesheetTracker - DEBUG - Processing entry 96/153
+2025-01-09 21:19:57,370 - TimesheetTracker - DEBUG - Added entry 96 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,370 - TimesheetTracker - DEBUG - Processing entry 97/153
+2025-01-09 21:19:57,371 - TimesheetTracker - DEBUG - Added entry 97 to session: Hiland Dairy - Wichita_KS
+2025-01-09 21:19:57,371 - TimesheetTracker - DEBUG - Processing entry 98/153
+2025-01-09 21:19:57,371 - TimesheetTracker - DEBUG - Added entry 98 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,371 - TimesheetTracker - DEBUG - Processing entry 99/153
+2025-01-09 21:19:57,371 - TimesheetTracker - DEBUG - Added entry 99 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,371 - TimesheetTracker - DEBUG - Processing entry 100/153
+2025-01-09 21:19:57,371 - TimesheetTracker - DEBUG - Added entry 100 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,371 - TimesheetTracker - DEBUG - Processing entry 101/153
+2025-01-09 21:19:57,371 - TimesheetTracker - DEBUG - Added entry 101 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,371 - TimesheetTracker - DEBUG - Processing entry 102/153
+2025-01-09 21:19:57,372 - TimesheetTracker - DEBUG - Added entry 102 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,372 - TimesheetTracker - DEBUG - Processing entry 103/153
+2025-01-09 21:19:57,373 - TimesheetTracker - DEBUG - Added entry 103 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,373 - TimesheetTracker - DEBUG - Processing entry 104/153
+2025-01-09 21:19:57,373 - TimesheetTracker - DEBUG - Added entry 104 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,373 - TimesheetTracker - DEBUG - Processing entry 105/153
+2025-01-09 21:19:57,373 - TimesheetTracker - DEBUG - Added entry 105 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,373 - TimesheetTracker - DEBUG - Processing entry 106/153
+2025-01-09 21:19:57,373 - TimesheetTracker - DEBUG - Added entry 106 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,373 - TimesheetTracker - DEBUG - Processing entry 107/153
+2025-01-09 21:19:57,373 - TimesheetTracker - DEBUG - Added entry 107 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,373 - TimesheetTracker - DEBUG - Processing entry 108/153
+2025-01-09 21:19:57,374 - TimesheetTracker - DEBUG - Added entry 108 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,374 - TimesheetTracker - DEBUG - Processing entry 109/153
+2025-01-09 21:19:57,374 - TimesheetTracker - DEBUG - Added entry 109 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,374 - TimesheetTracker - DEBUG - Processing entry 110/153
+2025-01-09 21:19:57,374 - TimesheetTracker - DEBUG - Added entry 110 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,374 - TimesheetTracker - DEBUG - Processing entry 111/153
+2025-01-09 21:19:57,374 - TimesheetTracker - DEBUG - Added entry 111 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,374 - TimesheetTracker - DEBUG - Processing entry 112/153
+2025-01-09 21:19:57,374 - TimesheetTracker - DEBUG - Added entry 112 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,374 - TimesheetTracker - DEBUG - Processing entry 113/153
+2025-01-09 21:19:57,374 - TimesheetTracker - DEBUG - Added entry 113 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,375 - TimesheetTracker - DEBUG - Processing entry 114/153
+2025-01-09 21:19:57,375 - TimesheetTracker - DEBUG - Added entry 114 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,375 - TimesheetTracker - DEBUG - Processing entry 115/153
+2025-01-09 21:19:57,375 - TimesheetTracker - DEBUG - Added entry 115 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,375 - TimesheetTracker - DEBUG - Processing entry 116/153
+2025-01-09 21:19:57,375 - TimesheetTracker - DEBUG - Added entry 116 to session: Dr Pepper Snapple - Aspers_PA
+2025-01-09 21:19:57,375 - TimesheetTracker - DEBUG - Processing entry 117/153
+2025-01-09 21:19:57,375 - TimesheetTracker - DEBUG - Added entry 117 to session: ECOLAB - iTrends
+2025-01-09 21:19:57,375 - TimesheetTracker - DEBUG - Processing entry 118/153
+2025-01-09 21:19:57,375 - TimesheetTracker - DEBUG - Added entry 118 to session: Hiland Dairy - Wichita_KS
+2025-01-09 21:19:57,375 - TimesheetTracker - DEBUG - Processing entry 119/153
+2025-01-09 21:19:57,376 - TimesheetTracker - DEBUG - Added entry 119 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,376 - TimesheetTracker - DEBUG - Processing entry 120/153
+2025-01-09 21:19:57,376 - TimesheetTracker - DEBUG - Added entry 120 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,376 - TimesheetTracker - DEBUG - Processing entry 121/153
+2025-01-09 21:19:57,376 - TimesheetTracker - DEBUG - Added entry 121 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,376 - TimesheetTracker - DEBUG - Processing entry 122/153
+2025-01-09 21:19:57,376 - TimesheetTracker - DEBUG - Added entry 122 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,377 - TimesheetTracker - DEBUG - Processing entry 123/153
+2025-01-09 21:19:57,377 - TimesheetTracker - DEBUG - Added entry 123 to session: Hiland Dairy - Wichita_KS
+2025-01-09 21:19:57,377 - TimesheetTracker - DEBUG - Processing entry 124/153
+2025-01-09 21:19:57,377 - TimesheetTracker - DEBUG - Added entry 124 to session: Dr Pepper Snapple - Aspers_PA
+2025-01-09 21:19:57,377 - TimesheetTracker - DEBUG - Processing entry 125/153
+2025-01-09 21:19:57,377 - TimesheetTracker - DEBUG - Added entry 125 to session: Hiland Dairy - Wichita_KS
+2025-01-09 21:19:57,377 - TimesheetTracker - DEBUG - Processing entry 126/153
+2025-01-09 21:19:57,377 - TimesheetTracker - DEBUG - Added entry 126 to session: Dr Pepper Snapple - Aspers_PA
+2025-01-09 21:19:57,377 - TimesheetTracker - DEBUG - Processing entry 127/153
+2025-01-09 21:19:57,377 - TimesheetTracker - DEBUG - Added entry 127 to session: Hiland Dairy - Wichita_KS
+2025-01-09 21:19:57,378 - TimesheetTracker - DEBUG - Processing entry 128/153
+2025-01-09 21:19:57,378 - TimesheetTracker - DEBUG - Added entry 128 to session: Hiland Dairy - Wichita_KS
+2025-01-09 21:19:57,378 - TimesheetTracker - DEBUG - Processing entry 129/153
+2025-01-09 21:19:57,378 - TimesheetTracker - DEBUG - Added entry 129 to session: Dr Pepper Snapple - Aspers_PA
+2025-01-09 21:19:57,378 - TimesheetTracker - DEBUG - Processing entry 130/153
+2025-01-09 21:19:57,378 - TimesheetTracker - DEBUG - Added entry 130 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,378 - TimesheetTracker - DEBUG - Processing entry 131/153
+2025-01-09 21:19:57,378 - TimesheetTracker - DEBUG - Added entry 131 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,379 - TimesheetTracker - DEBUG - Processing entry 132/153
+2025-01-09 21:19:57,379 - TimesheetTracker - DEBUG - Added entry 132 to session: Hiland Dairy - Wichita_KS
+2025-01-09 21:19:57,379 - TimesheetTracker - DEBUG - Processing entry 133/153
+2025-01-09 21:19:57,379 - TimesheetTracker - DEBUG - Added entry 133 to session: Project Magic Bullet - ECOLAB
+2025-01-09 21:19:57,379 - TimesheetTracker - DEBUG - Processing entry 134/153
+2025-01-09 21:19:57,379 - TimesheetTracker - DEBUG - Added entry 134 to session: Country Pure - Ellington_CT
+2025-01-09 21:19:57,379 - TimesheetTracker - DEBUG - Processing entry 135/153
+2025-01-09 21:19:57,379 - TimesheetTracker - DEBUG - Added entry 135 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,379 - TimesheetTracker - DEBUG - Processing entry 136/153
+2025-01-09 21:19:57,379 - TimesheetTracker - DEBUG - Added entry 136 to session: Dr Pepper Snapple - Aspers_PA
+2025-01-09 21:19:57,379 - TimesheetTracker - DEBUG - Processing entry 137/153
+2025-01-09 21:19:57,380 - TimesheetTracker - DEBUG - Added entry 137 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,380 - TimesheetTracker - DEBUG - Processing entry 138/153
+2025-01-09 21:19:57,380 - TimesheetTracker - DEBUG - Added entry 138 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,380 - TimesheetTracker - DEBUG - Processing entry 139/153
+2025-01-09 21:19:57,380 - TimesheetTracker - DEBUG - Added entry 139 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,380 - TimesheetTracker - DEBUG - Processing entry 140/153
+2025-01-09 21:19:57,380 - TimesheetTracker - DEBUG - Added entry 140 to session: Country Pure - Ellington_CT
+2025-01-09 21:19:57,380 - TimesheetTracker - DEBUG - Processing entry 141/153
+2025-01-09 21:19:57,380 - TimesheetTracker - DEBUG - Added entry 141 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,380 - TimesheetTracker - DEBUG - Processing entry 142/153
+2025-01-09 21:19:57,380 - TimesheetTracker - DEBUG - Added entry 142 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,381 - TimesheetTracker - DEBUG - Processing entry 143/153
+2025-01-09 21:19:57,381 - TimesheetTracker - DEBUG - Added entry 143 to session: Dr Pepper Snapple - Aspers_PA
+2025-01-09 21:19:57,381 - TimesheetTracker - DEBUG - Processing entry 144/153
+2025-01-09 21:19:57,381 - TimesheetTracker - DEBUG - Added entry 144 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,381 - TimesheetTracker - DEBUG - Processing entry 145/153
+2025-01-09 21:19:57,381 - TimesheetTracker - DEBUG - Added entry 145 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,381 - TimesheetTracker - DEBUG - Processing entry 146/153
+2025-01-09 21:19:57,381 - TimesheetTracker - DEBUG - Added entry 146 to session: Hiland Dairy - Wichita_KS
+2025-01-09 21:19:57,381 - TimesheetTracker - DEBUG - Processing entry 147/153
+2025-01-09 21:19:57,381 - TimesheetTracker - DEBUG - Added entry 147 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,381 - TimesheetTracker - DEBUG - Processing entry 148/153
+2025-01-09 21:19:57,382 - TimesheetTracker - DEBUG - Added entry 148 to session: Country Pure - Ellington_CT
+2025-01-09 21:19:57,382 - TimesheetTracker - DEBUG - Processing entry 149/153
+2025-01-09 21:19:57,382 - TimesheetTracker - DEBUG - Added entry 149 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,382 - TimesheetTracker - DEBUG - Processing entry 150/153
+2025-01-09 21:19:57,382 - TimesheetTracker - DEBUG - Added entry 150 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,382 - TimesheetTracker - DEBUG - Processing entry 151/153
+2025-01-09 21:19:57,382 - TimesheetTracker - DEBUG - Added entry 151 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,382 - TimesheetTracker - DEBUG - Processing entry 152/153
+2025-01-09 21:19:57,382 - TimesheetTracker - DEBUG - Added entry 152 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,382 - TimesheetTracker - DEBUG - Processing entry 153/153
+2025-01-09 21:19:57,383 - TimesheetTracker - DEBUG - Added entry 153 to session: Unassigned - Unassigned
+2025-01-09 21:19:57,383 - TimesheetTracker - DEBUG - Committing all entries to database
+2025-01-09 21:19:57,524 - TimesheetTracker - ERROR - Error during bulk creation: (psycopg2.errors.ForeignKeyViolation) insert or update on table "time_entries" violates foreign key constraint "time_entries_customer_fkey"
+DETAIL:  Key (customer)=(Project Magic Bullet) is not present in table "customers".
+
+[SQL: INSERT INTO time_entries (week_number, month, category, subcategory, customer, project, task_description, hours, date, updated_at) SELECT p0::INTEGER, p1::VARCHAR, p2::VARCHAR, p3::VARCHAR, p4::VARCHAR, p5::VARCHAR, p6::VARCHAR, p7::FLOAT, p8::DATE,  ... 29799 characters truncated ... r) ORDER BY sen_counter RETURNING time_entries.created_at, time_entries.id, time_entries.id AS id__1]
+[parameters: {'project__0': 'Unassigned', 'task_description__0': 'New hire orientation', 'week_number__0': 41, 'date__0': datetime.date(2024, 10, 7), 'hours__0': 6.0, 'updated_at__0': None, 'customer__0': 'Unassigned', 'subcategory__0': 'Other Training', 'category__0': 'Other', 'month__0': 'October', 'project__1': 'Unassigned', 'task_description__1': 'Andrew<>Joseph', 'week_number__1': 41, 'date__1': datetime.date(2024, 10, 7), 'hours__1': 2.0, 'updated_at__1': None, 'customer__1': 'Unassigned', 'subcategory__1': 'Other Training', 'category__1': 'Other', 'month__1': 'October', 'project__2': 'Unassigned', 'task_description__2': 'Andrew<>Joseph', 'week_number__2': 41, 'date__2': datetime.date(2024, 10, 8), 'hours__2': 2.0, 'updated_at__2': None, 'customer__2': 'Unassigned', 'subcategory__2': 'Other Training', 'category__2': 'Other', 'month__2': 'October', 'project__3': 'Unassigned', 'task_description__3': 'I-9 Meeting', 'week_number__3': 41, 'date__3': datetime.date(2024, 10, 8), 'hours__3': 1.0, 'updated_at__3': None, 'customer__3': 'Unassigned', 'subcategory__3': 'Info/File Management', 'category__3': 'Other', 'month__3': 'October', 'project__4': 'Unassigned', 'task_description__4': 'Workday Safety Training', 'week_number__4': 41, 'date__4': datetime.date(2024, 10, 8), 'hours__4': 5.0, 'updated_at__4': None, 'customer__4': 'Unassigned', 'subcategory__4': 'Safety Training/Reporting', 'category__4': 'Other', 'month__4': 'October' ... 1430 parameters truncated ... 'project__148': 'Unassigned', 'task_description__148': 'VMWare troubleshooting', 'week_number__148': 48, 'date__148': datetime.date(2024, 11, 27), 'hours__148': 2.0, 'updated_at__148': None, 'customer__148': 'Unassigned', 'subcategory__148': 'Pc Upgrades/Support', 'category__148': 'Other', 'month__148': 'November', 'project__149': 'Unassigned', 'task_description__149': 'Self study', 'week_number__149': 48, 'date__149': datetime.date(2024, 11, 27), 'hours__149': 2.0, 'updated_at__149': None, 'customer__149': 'Unassigned', 'subcategory__149': 'Other Training', 'category__149': 'Other', 'month__149': 'November', 'project__150': 'Unassigned', 'task_description__150': 'Document generation tool', 'week_number__150': 48, 'date__150': datetime.date(2024, 11, 27), 'hours__150': 1.0, 'updated_at__150': None, 'customer__150': 'Unassigned', 'subcategory__150': 'Pc Upgrades/Support', 'category__150': 'Other', 'month__150': 'November', 'project__151': 'Unassigned', 'task_description__151': 'Thanksgiving', 'week_number__151': 48, 'date__151': datetime.date(2024, 11, 28), 'hours__151': 8.0, 'updated_at__151': None, 'customer__151': 'Unassigned', 'subcategory__151': 'Holidays', 'category__151': 'Other', 'month__151': 'November', 'project__152': 'Unassigned', 'task_description__152': 'Thanksgiving', 'week_number__152': 48, 'date__152': datetime.date(2024, 11, 29), 'hours__152': 8.0, 'updated_at__152': None, 'customer__152': 'Unassigned', 'subcategory__152': 'Holidays', 'category__152': 'Other', 'month__152': 'November'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-01-09 21:19:57,525 - TimesheetTracker - DEBUG - Rolling back transaction
+2025-01-09 21:19:57,525 - TimesheetTracker - ERROR - Error processing timesheet: (psycopg2.errors.ForeignKeyViolation) insert or update on table "time_entries" violates foreign key constraint "time_entries_customer_fkey"
+DETAIL:  Key (customer)=(Project Magic Bullet) is not present in table "customers".
+
+[SQL: INSERT INTO time_entries (week_number, month, category, subcategory, customer, project, task_description, hours, date, updated_at) SELECT p0::INTEGER, p1::VARCHAR, p2::VARCHAR, p3::VARCHAR, p4::VARCHAR, p5::VARCHAR, p6::VARCHAR, p7::FLOAT, p8::DATE,  ... 29799 characters truncated ... r) ORDER BY sen_counter RETURNING time_entries.created_at, time_entries.id, time_entries.id AS id__1]
+[parameters: {'project__0': 'Unassigned', 'task_description__0': 'New hire orientation', 'week_number__0': 41, 'date__0': datetime.date(2024, 10, 7), 'hours__0': 6.0, 'updated_at__0': None, 'customer__0': 'Unassigned', 'subcategory__0': 'Other Training', 'category__0': 'Other', 'month__0': 'October', 'project__1': 'Unassigned', 'task_description__1': 'Andrew<>Joseph', 'week_number__1': 41, 'date__1': datetime.date(2024, 10, 7), 'hours__1': 2.0, 'updated_at__1': None, 'customer__1': 'Unassigned', 'subcategory__1': 'Other Training', 'category__1': 'Other', 'month__1': 'October', 'project__2': 'Unassigned', 'task_description__2': 'Andrew<>Joseph', 'week_number__2': 41, 'date__2': datetime.date(2024, 10, 8), 'hours__2': 2.0, 'updated_at__2': None, 'customer__2': 'Unassigned', 'subcategory__2': 'Other Training', 'category__2': 'Other', 'month__2': 'October', 'project__3': 'Unassigned', 'task_description__3': 'I-9 Meeting', 'week_number__3': 41, 'date__3': datetime.date(2024, 10, 8), 'hours__3': 1.0, 'updated_at__3': None, 'customer__3': 'Unassigned', 'subcategory__3': 'Info/File Management', 'category__3': 'Other', 'month__3': 'October', 'project__4': 'Unassigned', 'task_description__4': 'Workday Safety Training', 'week_number__4': 41, 'date__4': datetime.date(2024, 10, 8), 'hours__4': 5.0, 'updated_at__4': None, 'customer__4': 'Unassigned', 'subcategory__4': 'Safety Training/Reporting', 'category__4': 'Other', 'month__4': 'October' ... 1430 parameters truncated ... 'project__148': 'Unassigned', 'task_description__148': 'VMWare troubleshooting', 'week_number__148': 48, 'date__148': datetime.date(2024, 11, 27), 'hours__148': 2.0, 'updated_at__148': None, 'customer__148': 'Unassigned', 'subcategory__148': 'Pc Upgrades/Support', 'category__148': 'Other', 'month__148': 'November', 'project__149': 'Unassigned', 'task_description__149': 'Self study', 'week_number__149': 48, 'date__149': datetime.date(2024, 11, 27), 'hours__149': 2.0, 'updated_at__149': None, 'customer__149': 'Unassigned', 'subcategory__149': 'Other Training', 'category__149': 'Other', 'month__149': 'November', 'project__150': 'Unassigned', 'task_description__150': 'Document generation tool', 'week_number__150': 48, 'date__150': datetime.date(2024, 11, 27), 'hours__150': 1.0, 'updated_at__150': None, 'customer__150': 'Unassigned', 'subcategory__150': 'Pc Upgrades/Support', 'category__150': 'Other', 'month__150': 'November', 'project__151': 'Unassigned', 'task_description__151': 'Thanksgiving', 'week_number__151': 48, 'date__151': datetime.date(2024, 11, 28), 'hours__151': 8.0, 'updated_at__151': None, 'customer__151': 'Unassigned', 'subcategory__151': 'Holidays', 'category__151': 'Other', 'month__151': 'November', 'project__152': 'Unassigned', 'task_description__152': 'Thanksgiving', 'week_number__152': 48, 'date__152': datetime.date(2024, 11, 29), 'hours__152': 8.0, 'updated_at__152': None, 'customer__152': 'Unassigned', 'subcategory__152': 'Holidays', 'category__152': 'Other', 'month__152': 'November'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-01-09 21:19:57,526 - TimesheetTracker - DEBUG - Database session closed
+2025-01-09 21:21:50,505 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:21:50,546 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 21:21:50,547 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 21:21:50,912 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 21:21:50,912 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 21:21:50,913 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 21:21:51,139 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 21:21:51,140 - TimesheetTracker - INFO - Expected tables: projects, time_entries, project_managers, customers
+2025-01-09 21:21:51,281 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 21:21:51,361 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 21:21:51,440 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 21:21:51,521 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 21:21:51,521 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 21:21:53,376 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:21:53,676 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:21:53,676 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:21:53,679 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:21:53,679 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:21:53,680 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:21:53,680 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:21:53,680 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:21:53,681 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:21:53,681 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:21:53,682 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:21:53,682 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:21:53,685 - TimesheetTracker - WARNING - Error parsing date 'invalid_date': Unknown datetime string format, unable to parse: invalid_date, at position 0
+2025-01-09 21:21:53,689 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:21:53,689 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:21:53,691 - TimesheetTracker - DEBUG - Successfully read CSV with 2 columns
+2025-01-09 21:21:53,691 - TimesheetTracker - ERROR - Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:21:53,691 - TimesheetTracker - ERROR - CSV structure validation failed: Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:21:53,692 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:21:53,692 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:21:53,694 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:21:53,694 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:21:53,695 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:21:53,695 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:21:53,695 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:21:53,695 - TimesheetTracker - WARNING - Skipping row 1 due to invalid hours: -1.0
+2025-01-09 21:21:53,695 - TimesheetTracker - INFO - Successfully processed 0 valid entries from CSV
+2025-01-09 21:21:53,697 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:21:53,697 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:21:53,698 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:21:53,699 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:21:53,699 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:21:53,699 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:21:53,700 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:21:53,700 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:21:53,700 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:21:53,701 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:21:53,701 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:21:53,702 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:21:53,702 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:21:53,703 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:21:53,704 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:21:53,704 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:21:53,704 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:21:53,705 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:21:53,705 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:21:53,705 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:21:53,707 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:21:53,707 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:21:53,708 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:21:53,708 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:21:53,709 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:21:53,709 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:21:53,709 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:21:53,710 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:21:53,710 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:21:53,745 - TimesheetTracker - DEBUG - Found 1 existing customers and 1 existing projects
+2025-01-09 21:21:53,749 - TimesheetTracker - WARNING - Customer 'NonExistentCustomer' not found, defaulting to Unassigned
+2025-01-09 21:21:53,750 - TimesheetTracker - WARNING - Project 'NonExistentProject' not found, defaulting to Unassigned
+2025-01-09 21:21:54,180 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 21:23:01,978 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:23:02,021 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 21:23:02,021 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 21:23:02,373 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 21:23:02,373 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 21:23:02,373 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 21:23:02,596 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 21:23:02,596 - TimesheetTracker - INFO - Expected tables: customers, time_entries, project_managers, projects
+2025-01-09 21:23:02,737 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 21:23:02,822 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 21:23:02,900 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 21:23:02,978 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 21:23:02,978 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 21:23:04,213 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 21:23:05,114 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:23:05,984 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:23:05,985 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:23:05,988 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:23:05,988 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:23:05,988 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:23:05,989 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:23:05,989 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:23:05,990 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:23:05,990 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:23:05,990 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:23:05,990 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:23:05,994 - TimesheetTracker - WARNING - Error parsing date 'invalid_date': Unknown datetime string format, unable to parse: invalid_date, at position 0
+2025-01-09 21:23:05,998 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:23:05,999 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:23:06,000 - TimesheetTracker - DEBUG - Successfully read CSV with 2 columns
+2025-01-09 21:23:06,000 - TimesheetTracker - ERROR - Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:23:06,000 - TimesheetTracker - ERROR - CSV structure validation failed: Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:23:06,002 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:23:06,002 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:23:06,004 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:23:06,004 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:23:06,005 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:23:06,005 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:23:06,005 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:23:06,006 - TimesheetTracker - WARNING - Skipping row 1 due to invalid hours: -1.0
+2025-01-09 21:23:06,006 - TimesheetTracker - INFO - Successfully processed 0 valid entries from CSV
+2025-01-09 21:23:06,007 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:23:06,007 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:23:06,008 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:23:06,009 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:23:06,009 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:23:06,009 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:23:06,010 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:23:06,010 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:23:06,010 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:23:06,010 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:23:06,011 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:23:06,012 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:23:06,012 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:23:06,013 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:23:06,014 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:23:06,014 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:23:06,014 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:23:06,014 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:23:06,015 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:23:06,015 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:23:06,016 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:23:06,016 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:23:06,018 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:23:06,018 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:23:06,018 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:23:06,018 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:23:06,019 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:23:06,019 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:23:06,019 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:23:06,059 - TimesheetTracker - DEBUG - Found 1 existing customers and 1 existing projects
+2025-01-09 21:23:06,064 - TimesheetTracker - WARNING - Customer 'NonExistentCustomer' not found, defaulting to Unassigned
+2025-01-09 21:23:06,064 - TimesheetTracker - WARNING - Project 'NonExistentProject' not found, defaulting to Unassigned
+2025-01-09 21:23:18,825 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:23:19,171 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:23:19,172 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:23:19,174 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:23:19,174 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:23:19,175 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:23:19,175 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:23:19,175 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:23:19,176 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:23:19,177 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:23:19,177 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:23:19,177 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:23:19,181 - TimesheetTracker - WARNING - Error parsing date 'invalid_date': Unknown datetime string format, unable to parse: invalid_date, at position 0
+2025-01-09 21:23:19,185 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:23:19,185 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:23:19,186 - TimesheetTracker - DEBUG - Successfully read CSV with 2 columns
+2025-01-09 21:23:19,186 - TimesheetTracker - ERROR - Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:23:19,186 - TimesheetTracker - ERROR - CSV structure validation failed: Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:23:19,188 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:23:19,188 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:23:19,189 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:23:19,190 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:23:19,190 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:23:19,191 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:23:19,192 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:23:19,192 - TimesheetTracker - WARNING - Skipping row 1 due to invalid hours: -1.0
+2025-01-09 21:23:19,192 - TimesheetTracker - INFO - Successfully processed 0 valid entries from CSV
+2025-01-09 21:23:19,194 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:23:19,194 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:23:19,195 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:23:19,195 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:23:19,196 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:23:19,196 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:23:19,196 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:23:19,196 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:23:19,196 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:23:19,196 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:23:19,197 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:23:19,198 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:23:19,198 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:23:19,199 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:23:19,199 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:23:19,200 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:23:19,200 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:23:19,201 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:23:19,201 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:23:19,201 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:23:19,202 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:23:19,203 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:23:19,204 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:23:19,204 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:23:19,205 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:23:19,205 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:23:19,205 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:23:19,206 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:23:19,206 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:23:19,245 - TimesheetTracker - DEBUG - Found 1 existing customers and 1 existing projects
+2025-01-09 21:23:19,250 - TimesheetTracker - WARNING - Customer 'NonExistentCustomer' not found, defaulting to Unassigned
+2025-01-09 21:23:19,250 - TimesheetTracker - WARNING - Project 'NonExistentProject' not found, defaulting to Unassigned
+2025-01-09 21:24:04,767 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:24:04,808 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 21:24:04,808 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 21:24:05,154 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 21:24:05,154 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 21:24:05,154 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 21:24:05,358 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 21:24:05,358 - TimesheetTracker - INFO - Expected tables: customers, project_managers, projects, time_entries
+2025-01-09 21:24:05,494 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 21:24:05,574 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 21:24:05,651 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 21:24:05,729 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 21:24:05,729 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 21:24:06,967 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 21:24:07,558 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:24:07,881 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:24:07,882 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:24:07,885 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:24:07,885 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:24:07,886 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:24:07,886 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:24:07,886 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:24:07,887 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:24:07,888 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:24:07,888 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:24:07,888 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:24:07,892 - TimesheetTracker - WARNING - Error parsing date 'invalid_date': Unknown datetime string format, unable to parse: invalid_date, at position 0
+2025-01-09 21:24:07,896 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:24:07,896 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:24:07,898 - TimesheetTracker - DEBUG - Successfully read CSV with 2 columns
+2025-01-09 21:24:07,898 - TimesheetTracker - ERROR - Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:24:07,898 - TimesheetTracker - ERROR - CSV structure validation failed: Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:24:07,900 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:24:07,900 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:24:07,901 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:24:07,901 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:24:07,902 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:24:07,902 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:24:07,902 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:24:07,902 - TimesheetTracker - WARNING - Skipping row 1 due to invalid hours: -1.0
+2025-01-09 21:24:07,903 - TimesheetTracker - INFO - Successfully processed 0 valid entries from CSV
+2025-01-09 21:24:07,904 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:24:07,904 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:24:07,905 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:24:07,906 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:24:07,906 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:24:07,906 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:24:07,907 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:24:07,907 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:24:07,907 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:24:07,907 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:24:07,908 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:24:07,909 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:24:07,909 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:24:07,911 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:24:07,911 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:24:07,912 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:24:07,912 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:24:07,912 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:24:07,912 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:24:07,913 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:24:07,914 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:24:07,914 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:24:07,916 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:24:07,916 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:24:07,916 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:24:07,916 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:24:07,917 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:24:07,917 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:24:07,917 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:24:07,957 - TimesheetTracker - DEBUG - Found 1 existing customers and 1 existing projects
+2025-01-09 21:24:07,963 - TimesheetTracker - WARNING - Customer 'NonExistentCustomer' not found, defaulting to Unassigned
+2025-01-09 21:24:07,963 - TimesheetTracker - WARNING - Project 'NonExistentProject' not found, defaulting to Unassigned
+2025-01-09 21:24:28,885 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:24:28,977 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 21:24:28,978 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 21:24:29,333 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 21:24:29,333 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 21:24:29,333 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 21:24:29,578 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 21:24:29,578 - TimesheetTracker - INFO - Expected tables: project_managers, time_entries, customers, projects
+2025-01-09 21:24:29,785 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 21:24:29,877 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 21:24:29,972 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 21:24:30,076 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 21:24:30,077 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 21:24:31,311 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 21:24:32,041 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:24:32,469 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:24:32,469 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:24:32,472 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:24:32,472 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:24:32,473 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:24:32,473 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:24:32,473 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:24:32,474 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:24:32,474 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:24:32,475 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:24:32,475 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:24:32,479 - TimesheetTracker - WARNING - Error parsing date 'invalid_date': Unknown datetime string format, unable to parse: invalid_date, at position 0
+2025-01-09 21:24:32,483 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:24:32,483 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:24:32,484 - TimesheetTracker - DEBUG - Successfully read CSV with 2 columns
+2025-01-09 21:24:32,485 - TimesheetTracker - ERROR - Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:24:32,485 - TimesheetTracker - ERROR - CSV structure validation failed: Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:24:32,486 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:24:32,486 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:24:32,487 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:24:32,488 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:24:32,488 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:24:32,488 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:24:32,488 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:24:32,489 - TimesheetTracker - WARNING - Skipping row 1 due to invalid hours: -1.0
+2025-01-09 21:24:32,489 - TimesheetTracker - INFO - Successfully processed 0 valid entries from CSV
+2025-01-09 21:24:32,490 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:24:32,490 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:24:32,491 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:24:32,491 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:24:32,492 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:24:32,492 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:24:32,492 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:24:32,492 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:24:32,493 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:24:32,493 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:24:32,493 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:24:32,494 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:24:32,494 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:24:32,495 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:24:32,496 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:24:32,496 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:24:32,496 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:24:32,496 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:24:32,497 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:24:32,497 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:24:32,498 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:24:32,498 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:24:32,499 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:24:32,499 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:24:32,500 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:24:32,500 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:24:32,500 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:24:32,500 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:24:32,500 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:24:32,550 - TimesheetTracker - DEBUG - Found 1 existing customers and 1 existing projects
+2025-01-09 21:24:32,555 - TimesheetTracker - WARNING - Customer 'NonExistentCustomer' not found, defaulting to Unassigned
+2025-01-09 21:24:32,555 - TimesheetTracker - WARNING - Project 'NonExistentProject' not found, defaulting to Unassigned
+2025-01-09 21:25:29,032 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:25:29,114 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 21:25:29,116 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 21:25:29,469 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 21:25:29,469 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 21:25:29,470 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 21:25:29,672 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 21:25:29,672 - TimesheetTracker - INFO - Expected tables: customers, projects, project_managers, time_entries
+2025-01-09 21:25:29,817 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 21:25:29,896 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 21:25:29,974 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 21:25:30,052 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 21:25:30,052 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 21:25:30,281 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 21:25:32,575 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:25:33,421 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:25:33,422 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:25:33,425 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:25:33,426 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:25:33,426 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:25:33,427 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:25:33,427 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:25:33,428 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:25:33,428 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:25:33,429 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:25:33,431 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:25:33,437 - TimesheetTracker - WARNING - Error parsing date 'invalid_date': Unknown datetime string format, unable to parse: invalid_date, at position 0
+2025-01-09 21:25:33,442 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:25:33,442 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:25:33,445 - TimesheetTracker - DEBUG - Successfully read CSV with 2 columns
+2025-01-09 21:25:33,445 - TimesheetTracker - ERROR - Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:25:33,445 - TimesheetTracker - ERROR - CSV structure validation failed: Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:25:33,447 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:25:33,447 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:25:33,449 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:25:33,449 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:25:33,450 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:25:33,450 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:25:33,450 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:25:33,450 - TimesheetTracker - WARNING - Skipping row 1 due to invalid hours: -1.0
+2025-01-09 21:25:33,451 - TimesheetTracker - INFO - Successfully processed 0 valid entries from CSV
+2025-01-09 21:25:33,453 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:25:33,453 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:25:33,455 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:25:33,455 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:25:33,456 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:25:33,456 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:25:33,457 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:25:33,457 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:25:33,458 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:25:33,458 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:25:33,459 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:25:33,461 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:25:33,461 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:25:33,463 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:25:33,463 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:25:33,464 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:25:33,464 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:25:33,464 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:25:33,465 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:25:33,465 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:25:33,466 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:25:33,466 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:25:33,468 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:25:33,468 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:25:33,469 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:25:33,469 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:25:33,469 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:25:33,469 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:25:33,470 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:25:33,517 - TimesheetTracker - DEBUG - Found 1 existing customers and 1 existing projects
+2025-01-09 21:25:33,521 - TimesheetTracker - WARNING - Customer 'NonExistentCustomer' not found, defaulting to Unassigned
+2025-01-09 21:25:33,521 - TimesheetTracker - WARNING - Project 'NonExistentProject' not found, defaulting to Unassigned
+2025-01-09 21:25:33,558 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:25:33,558 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:25:33,560 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:25:33,560 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:25:33,561 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:25:33,561 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:25:33,561 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:25:33,563 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:25:33,563 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:25:33,564 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:25:33,564 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:25:33,655 - TimesheetTracker - DEBUG - Found 0 existing customers and 0 existing projects
+2025-01-09 21:25:33,657 - TimesheetTracker - INFO - Created default customer: Unassigned
+2025-01-09 21:25:33,660 - TimesheetTracker - INFO - Created default project: Unassigned
+2025-01-09 21:25:33,680 - TimesheetTracker - WARNING - Customer 'Project Magic Bullet' not found, defaulting to Unassigned
+2025-01-09 21:25:33,680 - TimesheetTracker - WARNING - Project 'NonExistent' not found, defaulting to Unassigned
+2025-01-09 21:25:33,680 - TimesheetTracker - WARNING - Customer 'ECOLAB' not found, defaulting to Unassigned
+2025-01-09 21:25:33,681 - TimesheetTracker - WARNING - Project 'Wrong_Project' not found, defaulting to Unassigned
+2025-01-09 21:26:33,217 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:26:33,262 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 21:26:33,263 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 21:26:33,613 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 21:26:33,615 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 21:26:33,641 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 21:26:33,856 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 21:26:33,857 - TimesheetTracker - INFO - Expected tables: project_managers, projects, customers, time_entries
+2025-01-09 21:26:34,007 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 21:26:34,091 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 21:26:34,173 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 21:26:34,253 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 21:26:34,253 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 21:26:34,506 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 21:26:36,601 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:26:37,544 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:26:37,544 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:26:37,554 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:26:37,555 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:26:37,556 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:26:37,556 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:26:37,558 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:26:37,560 - TimesheetTracker - DEBUG - Normalized customer: Unassigned, project: Unassigned
+2025-01-09 21:26:37,561 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:26:37,561 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:26:37,562 - TimesheetTracker - DEBUG - Normalized customer: ECOLAB, project: Project_Magic_Bullet
+2025-01-09 21:26:37,562 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:26:37,562 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:26:37,569 - TimesheetTracker - WARNING - Error parsing date 'invalid_date': Unknown datetime string format, unable to parse: invalid_date, at position 0
+2025-01-09 21:26:37,575 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:26:37,576 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:26:37,577 - TimesheetTracker - DEBUG - Successfully read CSV with 2 columns
+2025-01-09 21:26:37,578 - TimesheetTracker - ERROR - Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:26:37,579 - TimesheetTracker - ERROR - CSV structure validation failed: Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:26:37,584 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:26:37,584 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:26:37,587 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:26:37,587 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:26:37,589 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:26:37,589 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:26:37,590 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:26:37,590 - TimesheetTracker - WARNING - Skipping row 1 due to invalid hours: -1.0
+2025-01-09 21:26:37,591 - TimesheetTracker - INFO - Successfully processed 0 valid entries from CSV
+2025-01-09 21:26:37,593 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:26:37,593 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:26:37,596 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:26:37,596 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:26:37,597 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:26:37,598 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:26:37,599 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:26:37,600 - TimesheetTracker - DEBUG - Normalized customer: Unassigned, project: Unassigned
+2025-01-09 21:26:37,601 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:26:37,603 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:26:37,604 - TimesheetTracker - DEBUG - Normalized customer: Unassigned, project: Unassigned
+2025-01-09 21:26:37,604 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:26:37,605 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:26:37,608 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:26:37,608 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:26:37,610 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:26:37,610 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:26:37,611 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:26:37,612 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:26:37,613 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:26:37,614 - TimesheetTracker - DEBUG - Normalized customer: Test & Co., project: Project_123
+2025-01-09 21:26:37,615 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:26:37,615 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:26:37,618 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:26:37,619 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:26:37,621 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:26:37,621 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:26:37,623 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:26:37,624 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:26:37,625 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:26:37,625 - TimesheetTracker - DEBUG - Normalized customer: Unassigned, project: Unassigned
+2025-01-09 21:26:37,625 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:26:37,625 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:26:37,694 - TimesheetTracker - DEBUG - Found 1 existing customers and 1 existing projects
+2025-01-09 21:26:37,702 - TimesheetTracker - WARNING - Customer 'NonExistentCustomer' not found, defaulting to Unassigned
+2025-01-09 21:26:37,702 - TimesheetTracker - WARNING - Project 'NonExistentProject' not found, defaulting to Unassigned
+2025-01-09 21:26:37,753 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:26:37,754 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:26:37,757 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:26:37,757 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:26:37,758 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:26:37,758 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:26:37,758 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:26:37,759 - TimesheetTracker - DEBUG - Normalized customer: Project Magic Bullet, project: Unassigned
+2025-01-09 21:26:37,759 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:26:37,759 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:26:37,759 - TimesheetTracker - DEBUG - Normalized customer: ECOLAB, project: NonExistent_Project
+2025-01-09 21:26:37,760 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:26:37,760 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:26:37,901 - TimesheetTracker - DEBUG - Found 0 existing customers and 0 existing projects
+2025-01-09 21:26:37,903 - TimesheetTracker - INFO - Created default customer: Unassigned
+2025-01-09 21:26:37,904 - TimesheetTracker - INFO - Created default project: Unassigned
+2025-01-09 21:26:37,921 - TimesheetTracker - WARNING - Customer 'Project Magic Bullet' not found, defaulting to Unassigned
+2025-01-09 21:26:37,921 - TimesheetTracker - WARNING - Project 'NonExistent' not found, defaulting to Unassigned
+2025-01-09 21:26:37,921 - TimesheetTracker - WARNING - Customer 'ECOLAB' not found, defaulting to Unassigned
+2025-01-09 21:26:37,921 - TimesheetTracker - WARNING - Project 'Wrong_Project' not found, defaulting to Unassigned
+2025-01-09 21:27:10,363 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:27:10,416 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 21:27:10,416 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 21:27:10,780 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 21:27:10,781 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 21:27:10,781 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 21:27:11,003 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 21:27:11,004 - TimesheetTracker - INFO - Expected tables: customers, project_managers, projects, time_entries
+2025-01-09 21:27:11,138 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 21:27:11,217 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 21:27:11,296 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 21:27:11,374 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 21:27:11,374 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 21:27:11,723 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 21:27:13,305 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:27:13,645 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:27:13,645 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:27:13,648 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:27:13,648 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:27:13,649 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:27:13,649 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:27:13,649 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:27:13,649 - TimesheetTracker - DEBUG - Normalized customer name from 'Unassigned' to 'Unassigned'
+2025-01-09 21:27:13,650 - TimesheetTracker - DEBUG - Normalized project ID from 'Unassigned' to 'Unassigned'
+2025-01-09 21:27:13,650 - TimesheetTracker - DEBUG - Normalized customer: Unassigned, project: Unassigned
+2025-01-09 21:27:13,651 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:27:13,651 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:27:13,651 - TimesheetTracker - DEBUG - Normalized customer name from 'ECOLAB' to 'ECOLAB'
+2025-01-09 21:27:13,651 - TimesheetTracker - DEBUG - Normalized project ID from 'Project Magic Bullet' to 'Project_Magic_Bullet'
+2025-01-09 21:27:13,651 - TimesheetTracker - DEBUG - Normalized customer: ECOLAB, project: Project_Magic_Bullet
+2025-01-09 21:27:13,652 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:27:13,652 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:27:13,656 - TimesheetTracker - WARNING - Error parsing date 'invalid_date': Unknown datetime string format, unable to parse: invalid_date, at position 0
+2025-01-09 21:27:13,661 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:27:13,661 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:27:13,662 - TimesheetTracker - DEBUG - Successfully read CSV with 2 columns
+2025-01-09 21:27:13,663 - TimesheetTracker - ERROR - Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:27:13,664 - TimesheetTracker - ERROR - CSV structure validation failed: Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:27:13,665 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:27:13,665 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:27:13,667 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:27:13,667 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:27:13,667 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:27:13,668 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:27:13,668 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:27:13,668 - TimesheetTracker - WARNING - Skipping row 1 due to invalid hours: -1.0
+2025-01-09 21:27:13,668 - TimesheetTracker - INFO - Successfully processed 0 valid entries from CSV
+2025-01-09 21:27:13,670 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:27:13,670 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:27:13,671 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:27:13,671 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:27:13,672 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:27:13,672 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:27:13,672 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:27:13,672 - TimesheetTracker - DEBUG - Normalized customer name from 'Unassigned' to 'Unassigned'
+2025-01-09 21:27:13,673 - TimesheetTracker - DEBUG - Normalized project ID from 'Unassigned' to 'Unassigned'
+2025-01-09 21:27:13,673 - TimesheetTracker - DEBUG - Normalized customer: Unassigned, project: Unassigned
+2025-01-09 21:27:13,673 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:27:13,673 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:27:13,674 - TimesheetTracker - DEBUG - Normalized customer name from 'Unassigned' to 'Unassigned'
+2025-01-09 21:27:13,674 - TimesheetTracker - DEBUG - Normalized project ID from 'Unassigned' to 'Unassigned'
+2025-01-09 21:27:13,674 - TimesheetTracker - DEBUG - Normalized customer: Unassigned, project: Unassigned
+2025-01-09 21:27:13,674 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:27:13,674 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:27:13,676 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:27:13,676 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:27:13,678 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:27:13,678 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:27:13,678 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:27:13,678 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:27:13,679 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:27:13,679 - TimesheetTracker - DEBUG - Normalized customer name from 'Test & Co.' to 'Test & Co.'
+2025-01-09 21:27:13,679 - TimesheetTracker - DEBUG - Normalized project ID from 'Project-123' to 'Project_123'
+2025-01-09 21:27:13,679 - TimesheetTracker - DEBUG - Normalized customer: Test & Co., project: Project_123
+2025-01-09 21:27:13,679 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:27:13,679 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:27:13,681 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:27:13,681 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:27:13,682 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:27:13,683 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:27:13,683 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:27:13,683 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:27:13,683 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:27:13,684 - TimesheetTracker - DEBUG - Normalized customer: Unassigned, project: Unassigned
+2025-01-09 21:27:13,684 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:27:13,684 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:27:14,408 - TimesheetTracker - DEBUG - Found 1 existing customers and 1 existing projects
+2025-01-09 21:27:14,415 - TimesheetTracker - WARNING - Customer 'NonExistentCustomer' not found, defaulting to Unassigned
+2025-01-09 21:27:14,415 - TimesheetTracker - WARNING - Project 'NonExistentProject' not found, defaulting to Unassigned
+2025-01-09 21:27:14,457 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:27:14,457 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:27:14,459 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:27:14,460 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:27:14,460 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:27:14,460 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:27:14,461 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:27:14,461 - TimesheetTracker - DEBUG - Normalized customer name from 'Project Magic Bullet' to 'Project Magic Bullet'
+2025-01-09 21:27:14,461 - TimesheetTracker - DEBUG - Normalized project ID from 'Unassigned' to 'Unassigned'
+2025-01-09 21:27:14,461 - TimesheetTracker - DEBUG - Normalized customer: Project Magic Bullet, project: Unassigned
+2025-01-09 21:27:14,462 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:27:14,462 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:27:14,462 - TimesheetTracker - DEBUG - Normalized customer name from 'ECOLAB' to 'ECOLAB'
+2025-01-09 21:27:14,462 - TimesheetTracker - DEBUG - Normalized project ID from 'NonExistent_Project' to 'NonExistent_Project'
+2025-01-09 21:27:14,462 - TimesheetTracker - DEBUG - Normalized customer: ECOLAB, project: NonExistent_Project
+2025-01-09 21:27:14,463 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:27:14,463 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:27:14,567 - TimesheetTracker - DEBUG - Found 0 existing customers and 0 existing projects
+2025-01-09 21:27:14,569 - TimesheetTracker - INFO - Created default customer: Unassigned
+2025-01-09 21:27:14,570 - TimesheetTracker - INFO - Created default project: Unassigned
+2025-01-09 21:27:14,587 - TimesheetTracker - WARNING - Customer 'Project Magic Bullet' not found, defaulting to Unassigned
+2025-01-09 21:27:14,587 - TimesheetTracker - WARNING - Project 'NonExistent' not found, defaulting to Unassigned
+2025-01-09 21:27:14,588 - TimesheetTracker - WARNING - Customer 'ECOLAB' not found, defaulting to Unassigned
+2025-01-09 21:27:14,588 - TimesheetTracker - WARNING - Project 'Wrong_Project' not found, defaulting to Unassigned
+2025-01-09 21:28:24,110 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:28:24,174 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 21:28:24,174 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 21:28:24,526 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 21:28:24,527 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 21:28:24,527 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 21:28:24,756 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 21:28:24,757 - TimesheetTracker - INFO - Expected tables: customers, projects, project_managers, time_entries
+2025-01-09 21:28:24,900 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 21:28:24,981 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 21:28:25,062 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 21:28:25,143 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 21:28:25,143 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 21:28:25,345 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 21:28:28,540 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:28:29,015 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:28:29,015 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:28:29,018 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:28:29,019 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:28:29,019 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:28:29,019 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:28:29,020 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:28:29,020 - TimesheetTracker - DEBUG - Normalized customer name: Unassigned
+2025-01-09 21:28:29,020 - TimesheetTracker - DEBUG - Normalized customer name from 'Unassigned' to 'Unassigned'
+2025-01-09 21:28:29,020 - TimesheetTracker - DEBUG - Normalized project ID: Unassigned
+2025-01-09 21:28:29,020 - TimesheetTracker - DEBUG - Normalized project ID from 'Unassigned' to 'Unassigned'
+2025-01-09 21:28:29,020 - TimesheetTracker - DEBUG - Normalized customer: Unassigned, project: Unassigned
+2025-01-09 21:28:29,021 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:28:29,021 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:28:29,021 - TimesheetTracker - DEBUG - Normalized customer name: ECOLAB
+2025-01-09 21:28:29,022 - TimesheetTracker - DEBUG - Normalized customer name from 'ECOLAB' to 'ECOLAB'
+2025-01-09 21:28:29,022 - TimesheetTracker - DEBUG - Normalized project ID: Project_Magic_Bullet
+2025-01-09 21:28:29,022 - TimesheetTracker - DEBUG - Normalized project ID from 'Project Magic Bullet' to 'Project_Magic_Bullet'
+2025-01-09 21:28:29,022 - TimesheetTracker - DEBUG - Normalized customer: ECOLAB, project: Project_Magic_Bullet
+2025-01-09 21:28:29,022 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:28:29,022 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:28:29,027 - TimesheetTracker - WARNING - Error parsing date 'invalid_date': Unknown datetime string format, unable to parse: invalid_date, at position 0
+2025-01-09 21:28:29,030 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:28:29,031 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:28:29,032 - TimesheetTracker - DEBUG - Successfully read CSV with 2 columns
+2025-01-09 21:28:29,032 - TimesheetTracker - ERROR - Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:28:29,032 - TimesheetTracker - ERROR - CSV structure validation failed: Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:28:29,033 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:28:29,034 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:28:29,035 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:28:29,035 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:28:29,036 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:28:29,036 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:28:29,036 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:28:29,036 - TimesheetTracker - WARNING - Skipping row 1 due to invalid hours: -1.0
+2025-01-09 21:28:29,037 - TimesheetTracker - INFO - Successfully processed 0 valid entries from CSV
+2025-01-09 21:28:29,038 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:28:29,038 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:28:29,039 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:28:29,039 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:28:29,040 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:28:29,040 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:28:29,040 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:28:29,040 - TimesheetTracker - DEBUG - Normalized customer name: Unassigned
+2025-01-09 21:28:29,040 - TimesheetTracker - DEBUG - Normalized customer name from 'Unassigned' to 'Unassigned'
+2025-01-09 21:28:29,040 - TimesheetTracker - DEBUG - Normalized project ID: Unassigned
+2025-01-09 21:28:29,041 - TimesheetTracker - DEBUG - Normalized project ID from 'Unassigned' to 'Unassigned'
+2025-01-09 21:28:29,041 - TimesheetTracker - DEBUG - Normalized customer: Unassigned, project: Unassigned
+2025-01-09 21:28:29,041 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:28:29,041 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:28:29,041 - TimesheetTracker - DEBUG - Normalized customer name: Unassigned
+2025-01-09 21:28:29,041 - TimesheetTracker - DEBUG - Normalized customer name from 'Unassigned' to 'Unassigned'
+2025-01-09 21:28:29,041 - TimesheetTracker - DEBUG - Normalized project ID: Unassigned
+2025-01-09 21:28:29,042 - TimesheetTracker - DEBUG - Normalized project ID from 'Unassigned' to 'Unassigned'
+2025-01-09 21:28:29,042 - TimesheetTracker - DEBUG - Normalized customer: Unassigned, project: Unassigned
+2025-01-09 21:28:29,042 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:28:29,042 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:28:29,043 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:28:29,043 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:28:29,044 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:28:29,044 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:28:29,045 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:28:29,045 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:28:29,045 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:28:29,045 - TimesheetTracker - DEBUG - Normalized customer name: Test & Co.
+2025-01-09 21:28:29,045 - TimesheetTracker - DEBUG - Normalized customer name from 'Test & Co.' to 'Test & Co.'
+2025-01-09 21:28:29,045 - TimesheetTracker - DEBUG - Normalized project ID: Project_123
+2025-01-09 21:28:29,045 - TimesheetTracker - DEBUG - Normalized project ID from 'Project-123' to 'Project_123'
+2025-01-09 21:28:29,046 - TimesheetTracker - DEBUG - Normalized customer: Test & Co., project: Project_123
+2025-01-09 21:28:29,046 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:28:29,046 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:28:29,047 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:28:29,047 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:28:29,048 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:28:29,049 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:28:29,049 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:28:29,049 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:28:29,050 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:28:29,050 - TimesheetTracker - DEBUG - Normalized customer: Unassigned, project: Unassigned
+2025-01-09 21:28:29,050 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:28:29,050 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:28:29,092 - TimesheetTracker - DEBUG - Normalized customer name: ECOLAB
+2025-01-09 21:28:29,092 - TimesheetTracker - DEBUG - Normalized customer name: NonExistentCustomer
+2025-01-09 21:28:29,092 - TimesheetTracker - DEBUG - Normalized project ID: Project_Magic_Bullet
+2025-01-09 21:28:29,092 - TimesheetTracker - DEBUG - Normalized project ID: NonExistentProject
+2025-01-09 21:28:29,099 - TimesheetTracker - DEBUG - Found 1 existing customers and 1 existing projects
+2025-01-09 21:28:29,102 - TimesheetTracker - DEBUG - Normalized customer name: ECOLAB
+2025-01-09 21:28:29,102 - TimesheetTracker - DEBUG - Normalized project ID: Project_Magic_Bullet
+2025-01-09 21:28:29,105 - TimesheetTracker - DEBUG - Processed entry: customer=ECOLAB, project=Project_Magic_Bullet
+2025-01-09 21:28:29,106 - TimesheetTracker - DEBUG - Normalized customer name: NonExistentCustomer
+2025-01-09 21:28:29,106 - TimesheetTracker - DEBUG - Normalized project ID: NonExistentProject
+2025-01-09 21:28:29,106 - TimesheetTracker - WARNING - Customer 'NonExistentCustomer' not found, defaulting to Unassigned
+2025-01-09 21:28:29,106 - TimesheetTracker - DEBUG - Processed entry: customer=Unassigned, project=Unassigned
+2025-01-09 21:28:29,232 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:28:29,232 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:28:29,233 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:28:29,234 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:28:29,234 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:28:29,234 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:28:29,235 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:28:29,235 - TimesheetTracker - DEBUG - Normalized customer name: Project Magic Bullet
+2025-01-09 21:28:29,235 - TimesheetTracker - DEBUG - Normalized customer name from 'Project Magic Bullet' to 'Project Magic Bullet'
+2025-01-09 21:28:29,235 - TimesheetTracker - DEBUG - Normalized project ID: Unassigned
+2025-01-09 21:28:29,235 - TimesheetTracker - DEBUG - Normalized project ID from 'Unassigned' to 'Unassigned'
+2025-01-09 21:28:29,235 - TimesheetTracker - DEBUG - Normalized customer: Project Magic Bullet, project: Unassigned
+2025-01-09 21:28:29,236 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:28:29,236 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:28:29,236 - TimesheetTracker - DEBUG - Normalized customer name: ECOLAB
+2025-01-09 21:28:29,236 - TimesheetTracker - DEBUG - Normalized customer name from 'ECOLAB' to 'ECOLAB'
+2025-01-09 21:28:29,236 - TimesheetTracker - DEBUG - Normalized project ID: NonExistent_Project
+2025-01-09 21:28:29,237 - TimesheetTracker - DEBUG - Normalized project ID from 'NonExistent_Project' to 'NonExistent_Project'
+2025-01-09 21:28:29,237 - TimesheetTracker - DEBUG - Normalized customer: ECOLAB, project: NonExistent_Project
+2025-01-09 21:28:29,237 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:28:29,237 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:28:29,261 - TimesheetTracker - DEBUG - Normalized customer name: Project Magic Bullet
+2025-01-09 21:28:29,262 - TimesheetTracker - DEBUG - Normalized customer name: ECOLAB
+2025-01-09 21:28:29,262 - TimesheetTracker - DEBUG - Normalized project ID: NonExistent
+2025-01-09 21:28:29,262 - TimesheetTracker - DEBUG - Normalized project ID: Wrong_Project
+2025-01-09 21:28:29,263 - TimesheetTracker - DEBUG - Found 0 existing customers and 0 existing projects
+2025-01-09 21:28:29,266 - TimesheetTracker - INFO - Created default customer: Unassigned
+2025-01-09 21:28:29,267 - TimesheetTracker - INFO - Created default project: Unassigned
+2025-01-09 21:28:29,282 - TimesheetTracker - DEBUG - Normalized customer name: Project Magic Bullet
+2025-01-09 21:28:29,282 - TimesheetTracker - DEBUG - Normalized project ID: NonExistent
+2025-01-09 21:28:29,282 - TimesheetTracker - WARNING - Customer 'Project Magic Bullet' not found, defaulting to Unassigned
+2025-01-09 21:28:29,282 - TimesheetTracker - DEBUG - Processed entry: customer=Unassigned, project=Unassigned
+2025-01-09 21:28:29,282 - TimesheetTracker - DEBUG - Normalized customer name: ECOLAB
+2025-01-09 21:28:29,282 - TimesheetTracker - DEBUG - Normalized project ID: Wrong_Project
+2025-01-09 21:28:29,283 - TimesheetTracker - WARNING - Customer 'ECOLAB' not found, defaulting to Unassigned
+2025-01-09 21:28:29,283 - TimesheetTracker - DEBUG - Processed entry: customer=Unassigned, project=Unassigned
+2025-01-09 21:28:29,289 - TimesheetTracker - DEBUG - Normalized customer name: Project Magic Bullet
+2025-01-09 21:28:29,289 - TimesheetTracker - DEBUG - Converting empty/invalid customer name to Unassigned
+2025-01-09 21:28:29,290 - TimesheetTracker - DEBUG - Converting empty/invalid customer name to Unassigned
+2025-01-09 21:28:29,290 - TimesheetTracker - DEBUG - Converting empty/invalid customer name to Unassigned
+2025-01-09 21:28:29,290 - TimesheetTracker - DEBUG - Converting empty/invalid customer name to Unassigned
+2025-01-09 21:28:29,291 - TimesheetTracker - DEBUG - Normalized project ID: Project_Magic_Bullet
+2025-01-09 21:28:29,291 - TimesheetTracker - DEBUG - Normalized project ID: Project_Magic_Bullet
+2025-01-09 21:28:29,291 - TimesheetTracker - DEBUG - Converting empty/invalid project ID to Unassigned
+2025-01-09 21:28:29,291 - TimesheetTracker - DEBUG - Converting empty/invalid project ID to Unassigned
+2025-01-09 21:28:29,291 - TimesheetTracker - DEBUG - Converting empty/invalid project ID to Unassigned
+2025-01-09 21:28:29,292 - TimesheetTracker - DEBUG - Converting empty/invalid project ID to Unassigned

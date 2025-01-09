@@ -1,4 +1,3 @@
-
 [project]
 name = "repl-nix-timesheettracker"
 version = "0.1.0"
@@ -33,3 +32,9 @@ packages = [
     "migrations",
     "utils"
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v"
+asyncio_mode = "strict"

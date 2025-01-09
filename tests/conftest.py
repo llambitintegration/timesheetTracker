@@ -68,8 +68,9 @@ def setup_test_data(db_session):
     """Set up test data in the database"""
     from models.customerModel import Customer
     from models.projectModel import Project
+    from models.projectManagerModel import ProjectManager
 
-    # Create test customers with unique emails
+    # Create test customers
     customers = [
         Customer(name="Unassigned", contact_email="unassigned_test@example.com", status="active"),
         Customer(name="ECOLAB", contact_email="ecolab_test@example.com", status="active")

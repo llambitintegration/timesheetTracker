@@ -4,6 +4,7 @@ from datetime import datetime
 import calendar
 from utils.logger import Logger
 from utils.validators import normalize_customer_name, normalize_project_id, DEFAULT_CUSTOMER, DEFAULT_PROJECT
+from database import schemas
 
 logger = Logger().get_logger()
 
@@ -31,16 +32,24 @@ def clean_status(value):
 def clean_string_value(value, default="", field_type=None):
     """Clean and validate string values with field-specific rules"""
     if pd.isna(value) or value is None or str(value).strip() in ['', '-', 'None', 'null', 'NA']:
-        return default
+        return DEFAULT_CUSTOMER if field_type == 'customer' else DEFAULT_PROJECT if field_type == 'project' else default
 
     cleaned = str(value).strip()
 
-    if field_type == 'project':
-        return standardize_project_id(cleaned)
+    # Special handling for customer and project fields to ensure proper defaults
+    if field_type == 'customer':
+        # Normalize customer name and ensure it's a valid format
+        normalized = normalize_customer_name(cleaned)
+        logger.debug(f"Normalized customer name from '{cleaned}' to '{normalized}'")
+        return normalized
+    elif field_type == 'project':
+        # Standardize project ID format
+        normalized = normalize_project_id(cleaned)
+        logger.debug(f"Normalized project ID from '{cleaned}' to '{normalized}'")
+        return normalized
     elif field_type == 'status':
         return clean_status(cleaned)
     elif field_type == 'email':
-        # Basic email format check
         return cleaned if '@' in cleaned else default
     elif field_type in ['category', 'subcategory']:
         return cleaned.title()
@@ -55,13 +64,11 @@ def parse_date(date_value) -> datetime.date:
         if isinstance(date_value, datetime):
             return date_value.date()
         elif isinstance(date_value, str):
-            # Try different date formats starting with the one from Excel (MM/DD/YY)
             for fmt in ['%m/%d/%y', '%Y-%m-%d', '%m/%d/%Y', '%d-%m-%Y', '%Y/%m/%d']:
                 try:
                     return datetime.strptime(date_value, fmt).date()
                 except ValueError:
                     continue
-            # If none of the formats work, try pandas to_datetime as fallback
             return pd.to_datetime(date_value).date()
         raise ValueError(f"Could not parse date: {date_value}")
     except Exception as e:
@@ -127,33 +134,26 @@ def validate_csv_structure(df: pd.DataFrame) -> bool:
 def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     """Clean the DataFrame before processing."""
     logger.debug("Starting DataFrame cleaning")
-    # Remove rows that are completely empty
     df = df.dropna(how='all')
-    # Reset index after dropping rows
     df = df.reset_index(drop=True)
     logger.debug(f"Cleaned DataFrame has {len(df)} rows")
     return df
 
 def parse_csv(file) -> List:
     """Parse CSV file with enhanced error handling and logging."""
-    from database import schemas  # Import moved inside function
-
     logger.info("Starting CSV parsing process")
 
-    # Parse raw CSV
     df = parse_raw_csv(file)
     if df is None:
         logger.error("Failed to parse CSV file")
         return []
 
-    # Validate structure
     try:
         validate_csv_structure(df)
     except ValueError as e:
         logger.error(f"CSV structure validation failed: {str(e)}")
         raise
 
-    # Clean data
     df = clean_dataframe(df)
 
     if df.empty:
@@ -167,28 +167,27 @@ def parse_csv(file) -> List:
         logger.debug(f"Processing row {index + 1}/{len(df)}")
 
         try:
-            # Clean and validate data
             hours = clean_numeric_value(row.get('Hours', 0))
             if hours <= 0 or hours > 24:
                 logger.warning(f"Skipping row {index + 1} due to invalid hours: {hours}")
                 continue
 
-            week_number = validate_week_number(row.get('Week Number'))
-            month = validate_month(row.get('Month'))
-            customer = normalize_customer_name(row.get('Customer', ''))
-            project = normalize_project_id(row.get('Project', ''))
-            entry_date = parse_date(row.get('Date'))
+            # Clean and validate customer and project before creating entry
+            customer = clean_string_value(row.get('Customer', ''), DEFAULT_CUSTOMER, 'customer')
+            project = clean_string_value(row.get('Project', ''), DEFAULT_PROJECT, 'project')
+
+            logger.debug(f"Normalized customer: {customer}, project: {project}")
 
             entry = schemas.TimeEntryCreate(
-                week_number=week_number,
-                month=month,
+                week_number=validate_week_number(row.get('Week Number')),
+                month=validate_month(row.get('Month')),
                 category=clean_string_value(row.get('Category'), "Other", "category"),
                 subcategory=clean_string_value(row.get('Subcategory'), "General", "subcategory"),
                 customer=customer,
                 project=project,
                 task_description=clean_string_value(row.get('Task Description'), ""),
                 hours=hours,
-                date=entry_date
+                date=parse_date(row.get('Date'))
             )
             entries.append(entry)
             logger.debug(f"Successfully processed row {index + 1}")
@@ -205,10 +204,7 @@ def parse_excel(file) -> List:
     logger.info("Starting Excel parsing")
     logger.debug("Reading Excel file into pandas DataFrame")
 
-    # Read Excel file with explicit date parsing
     df = pd.read_excel(file, parse_dates=['Date'])
-
-    # Convert Excel to CSV format and use the same parsing logic
     df.to_csv('temp.csv', index=False)
     with open('temp.csv', 'r') as csv_file:
         return parse_csv(csv_file)

@@ -87,12 +87,8 @@ def test_parse_csv_with_empty_rows(tmp_path):
     """Test CSV parsing with empty rows"""
     csv_file = tmp_path / "empty_rows.csv"
     csv_content = """Week Number,Month,Category,Subcategory,Customer,Project,Task Description,Hours,Date
-
 41,October,Other,Other Training,Unassigned,Unassigned,Task 1,8.0,2024-10-07
-
-41,October,Other,Other Training,Unassigned,Unassigned,Task 2,8.0,2024-10-07
-
-"""
+41,October,Other,Other Training,Unassigned,Unassigned,Task 2,8.0,2024-10-07"""
     csv_file.write_text(csv_content)
 
     with open(csv_file, 'r') as file:
@@ -170,3 +166,84 @@ def test_database_reference_validation(setup_test_data, db_session):
     # Verify validation errors are logged correctly
     assert validation_errors[0]['type'] in ['invalid_customer', 'invalid_project']
     assert "NonExistent" in validation_errors[0]['error']
+
+
+def test_parse_csv_with_invalid_customer_project_mapping(test_csv_file, setup_test_data):
+    """Test parsing CSV with invalid customer-project mappings"""
+    csv_content = """Week Number,Month,Category,Subcategory,Customer,Project,Task Description,Hours,Date
+41,October,Other,Other Training,Project Magic Bullet,Unassigned,Test task,8.0,2024-10-07
+41,October,Other,Other Training,ECOLAB,NonExistent_Project,Test task,8.0,2024-10-07"""
+
+    test_csv_file = Path("tests/data/test_timesheet.csv")
+    test_csv_file.parent.mkdir(parents=True, exist_ok=True)
+    test_csv_file.write_text(csv_content)
+
+    with open(test_csv_file, 'r') as file:
+        entries = parse_csv(file)
+
+    assert len(entries) == 2
+    # Both entries should use default values due to validation errors
+    assert all(entry.customer == "Unassigned" for entry in entries)
+    assert all(entry.project == "Unassigned" for entry in entries)
+
+def test_database_reference_validation_with_foreign_key_violations(db_session):
+    """Test validation of database references with foreign key violations"""
+    entries = [
+        TimeEntryCreate(
+            week_number=41,
+            month="October",
+            category="Other",
+            subcategory="Other Training",
+            customer="Project Magic Bullet",  # Invalid: customer name is actually a project
+            project="NonExistent",
+            task_description="Test task",
+            hours=8.0,
+            date=datetime(2024, 10, 7).date()
+        ),
+        TimeEntryCreate(
+            week_number=41,
+            month="October",
+            category="Other",
+            subcategory="Other Training",
+            customer="ECOLAB",
+            project="Wrong_Project",  # Project doesn't belong to ECOLAB
+            task_description="Test task",
+            hours=8.0,
+            date=datetime(2024, 10, 7).date()
+        )
+    ]
+
+    valid_entries, validation_errors = validate_database_references(db_session, entries)
+
+    # Verify all entries are processed but with defaults where needed
+    assert len(valid_entries) == 2
+    # First entry should use defaults due to invalid customer
+    assert valid_entries[0].customer == "Unassigned"
+    assert valid_entries[0].project == "Unassigned"
+    # Second entry should use defaults due to invalid project
+    assert valid_entries[1].customer == "Unassigned"
+    assert valid_entries[1].project == "Unassigned"
+
+    # Verify validation errors are captured
+    assert len(validation_errors) >= 2
+    # Verify specific error messages
+    error_messages = [error["error"] for error in validation_errors]
+    assert any("Project Magic Bullet" in msg for msg in error_messages)
+    assert any("Wrong_Project" in msg for msg in error_messages)
+
+def test_normalize_customer_name_with_invalid_inputs():
+    """Test customer name normalization with various invalid inputs"""
+    assert normalize_customer_name("Project Magic Bullet") == "Project Magic Bullet"
+    assert normalize_customer_name("") == "Unassigned"
+    assert normalize_customer_name(None) == "Unassigned"
+    assert normalize_customer_name("-") == "Unassigned"
+    assert normalize_customer_name("null") == "Unassigned"
+
+def test_normalize_project_id_with_invalid_inputs():
+    """Test project ID normalization with various invalid inputs"""
+    assert normalize_project_id("Project Magic Bullet") == "Project_Magic_Bullet"
+    assert normalize_project_id("Project-Magic-Bullet") == "Project_Magic_Bullet"
+    assert normalize_project_id("") == "Unassigned"
+    assert normalize_project_id(None) == "Unassigned"
+    assert normalize_project_id("-") == "Unassigned"
+    assert normalize_project_id("null") == "Unassigned"

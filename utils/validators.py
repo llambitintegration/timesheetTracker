@@ -14,21 +14,27 @@ DEFAULT_PROJECT = "Unassigned"
 DEFAULT_PROJECT_MANAGER = "Unassigned"
 
 def normalize_customer_name(name: str) -> str:
-    """Normalize customer name for database lookup."""
+    """Normalize customer name for database lookup.
+    Returns DEFAULT_CUSTOMER if name is invalid or not found."""
     if not name or str(name).strip() in ['-', '', 'None', 'null', 'NA']:
+        logger.debug(f"Converting empty/invalid customer name to {DEFAULT_CUSTOMER}")
         return DEFAULT_CUSTOMER
-    return str(name).strip()
+
+    normalized = str(name).strip()
+    logger.debug(f"Normalized customer name: {normalized}")
+    return normalized
 
 def normalize_project_id(project_id: str) -> str:
     """Normalize project ID for database lookup.
     Converts spaces and hyphens to underscores for consistent formatting.
-    """
+    Returns DEFAULT_PROJECT if project_id is invalid or not found."""
     if not project_id or str(project_id).strip() in ['-', '', 'None', 'null', 'NA']:
+        logger.debug(f"Converting empty/invalid project ID to {DEFAULT_PROJECT}")
         return DEFAULT_PROJECT
+
     # Replace both spaces and hyphens with underscores
-    normalized = str(project_id).strip()
-    normalized = normalized.replace('-', '_')
-    normalized = normalized.replace(' ', '_')
+    normalized = str(project_id).strip().replace('-', '_').replace(' ', '_')
+    logger.debug(f"Normalized project ID: {normalized}")
     return normalized
 
 def normalize_project_manager(manager: str) -> str:
@@ -131,7 +137,7 @@ def validate_database_references(
         original_customer = normalized_customer
         original_project = normalized_project
 
-        # Log validation issues but use defaults
+        # If customer doesn't exist, use default
         if normalized_customer not in existing_customers:
             validation_errors.append({
                 'entry': entry.model_dump(),
@@ -140,7 +146,9 @@ def validate_database_references(
             })
             logger.warning(f"Customer '{normalized_customer}' not found, defaulting to {DEFAULT_CUSTOMER}")
             normalized_customer = DEFAULT_CUSTOMER
+            normalized_project = DEFAULT_PROJECT  # Also default project when customer is invalid
 
+        # If project doesn't exist or customer-project relationship is invalid, use defaults
         if normalized_project not in existing_projects:
             validation_errors.append({
                 'entry': entry.model_dump(),
@@ -149,8 +157,8 @@ def validate_database_references(
             })
             logger.warning(f"Project '{normalized_project}' not found, defaulting to {DEFAULT_PROJECT}")
             normalized_project = DEFAULT_PROJECT
-
-        # Log project-customer relationship issues
+            if normalized_customer != DEFAULT_CUSTOMER:
+                normalized_customer = DEFAULT_CUSTOMER  # Also default customer when project is invalid
         elif normalized_project != DEFAULT_PROJECT and normalized_customer != DEFAULT_CUSTOMER:
             project = existing_projects[normalized_project]
             if project.customer != normalized_customer:
@@ -167,5 +175,6 @@ def validate_database_references(
         entry.customer = normalized_customer
         entry.project = normalized_project
         processed_entries.append(entry)
+        logger.debug(f"Processed entry: customer={normalized_customer}, project={normalized_project}")
 
     return processed_entries, validation_errors
