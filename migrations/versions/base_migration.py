@@ -38,7 +38,7 @@ def upgrade() -> None:
         )
         connection.execute(sa.text('COMMIT'))
 
-        # Insert default and common customers first
+        # Insert default and common customers
         logger.info("Creating default and common customers")
         connection.execute(sa.text("""
             INSERT INTO customers (name, contact_email, status) VALUES

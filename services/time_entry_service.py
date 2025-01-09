@@ -20,11 +20,14 @@ class TimeEntryService:
         """Create a new time entry with proper validation and defaults."""
         try:
             logger.debug(f"Starting creation of time entry with data: {entry.model_dump()}")
-            entry_dict = entry.model_dump(exclude={'id', 'created_at', 'updated_at'})  # Exclude ID and timestamps
 
-            # Calculate week number and month from date
-            entry_dict['week_number'] = TimeEntry.get_week_number(entry_dict['date'])
-            entry_dict['month'] = TimeEntry.get_month_name(entry_dict['date'])
+            # Exclude any provided ID, week_number, or month - these will be auto-calculated
+            entry_dict = entry.model_dump(exclude={'id', 'created_at', 'updated_at', 'week_number', 'month'})
+
+            # Set default hours if not provided
+            if entry_dict.get('hours') is None:
+                entry_dict['hours'] = 0.0
+                logger.debug("No hours provided, defaulting to 0.0")
 
             # Validate customer exists and get normalized name
             customer_name = None
@@ -57,10 +60,6 @@ class TimeEntryService:
             if not entry_dict.get('subcategory'):
                 logger.info("No subcategory provided, defaulting to 'General'")
                 entry_dict['subcategory'] = 'General'
-
-            # Set default hours if not provided
-            if not entry_dict.get('hours'):
-                entry_dict['hours'] = 0.0
 
             logger.debug("Creating TimeEntry model instance")
             db_entry = TimeEntry(**entry_dict)

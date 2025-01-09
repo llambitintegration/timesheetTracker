@@ -17,44 +17,41 @@ class BaseSchema(BaseModel):
 # Time Entry Schemas
 class TimeEntryBase(BaseSchema):
     """Base schema for time entries"""
-    week_number: int = Field(..., ge=0, le=53)
-    month: str = Field(..., pattern=r'^(January|February|March|April|May|June|July|August|September|October|November|December)$')
     category: str
     subcategory: str
     customer: Optional[str] = None
     project: Optional[str] = None
     task_description: Optional[str] = None
-    hours: float = Field(..., ge=0, le=24)
-    date: date  # Add date field
+    hours: float = Field(default=0.0, ge=0, le=24)  # Default to 0, allow 0 hours
+    date: date
 
 class TimeEntryCreate(BaseModel):
     """Schema for creating time entries"""
-    week_number: Optional[int] = None  # Will be auto-calculated
-    month: Optional[str] = None  # Will be auto-calculated
     category: str
     subcategory: str
     customer: Optional[str] = None
     project: Optional[str] = None
     task_description: Optional[str] = None
-    hours: float = Field(default=0.0, ge=0, le=24)  # Default to 0 if not provided
-    date: date  # Required field
+    hours: float = Field(default=0.0, ge=0, le=24)  # Default to 0, allow 0 hours
+    date: date  # Only required field for time calculations
 
     model_config = ConfigDict(from_attributes=True)
 
 class TimeEntryUpdate(BaseSchema):
     """Schema for updating time entries"""
-    week_number: Optional[int] = Field(None, ge=1, le=53)
-    month: Optional[str] = Field(None, pattern=r'^(January|February|March|April|May|June|July|August|September|October|November|December)$')
     category: Optional[str] = None
     subcategory: Optional[str] = None
     customer: Optional[str] = None
     project: Optional[str] = None
     task_description: Optional[str] = None
-    hours: Optional[float] = Field(None, gt=0, le=24)
+    hours: Optional[float] = Field(None, ge=0, le=24)
     date: Optional[date] = None
 
 class TimeEntry(TimeEntryBase):
     """Schema for time entry responses"""
+    week_number: int
+    month: str
+
     class Config:
         orm_model = TimeEntryModel
 

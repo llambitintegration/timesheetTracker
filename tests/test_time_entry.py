@@ -5,7 +5,6 @@ from database.schemas import TimeEntryCreate
 from utils.validators import DEFAULT_CUSTOMER, DEFAULT_PROJECT
 from pydantic import ValidationError
 from sqlalchemy.exc import IntegrityError
-from models.customerModel import Customer
 
 def test_create_time_entry_auto_calculations(db_session):
     """Test that week number and month are automatically calculated"""
@@ -34,6 +33,21 @@ def test_create_time_entry_default_hours(db_session):
         task_description="Test default hours",
         date=date(2024, 1, 15)
         # Not providing hours
+    )
+
+    result = service.create_time_entry(entry)
+    assert result is not None
+    assert result.hours == 0.0
+
+def test_create_time_entry_zero_hours(db_session):
+    """Test that zero hours are allowed"""
+    service = TimeEntryService(db_session)
+    entry = TimeEntryCreate(
+        category="Development",
+        subcategory="Coding",
+        task_description="Test zero hours",
+        hours=0.0,  # Explicitly set to zero
+        date=date(2024, 1, 15)
     )
 
     result = service.create_time_entry(entry)
