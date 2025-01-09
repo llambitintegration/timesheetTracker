@@ -39,6 +39,19 @@ def upgrade() -> None:
         )
         connection.execute(sa.text('COMMIT'))
 
+        # Insert default and common customers first
+        logger.info("Creating default and common customers")
+        connection.execute(sa.text("""
+            INSERT INTO customers (name, contact_email, status) VALUES
+            ('Unassigned', 'unassigned@company.com', 'active'),
+            ('ECOLAB', 'contact@ecolab.com', 'active'),
+            ('Hiland Dairy', 'contact@hilanddairy.com', 'active'),
+            ('Dr Pepper Snapple', 'contact@drpepper.com', 'active'),
+            ('Country Pure', 'contact@countrypure.com', 'active')
+            ON CONFLICT (name) DO NOTHING
+        """))
+        connection.execute(sa.text('COMMIT'))
+
         # Create project_managers table
         logger.info("Creating project_managers table")
         op.create_table('project_managers',
@@ -108,18 +121,7 @@ def upgrade() -> None:
         )
         connection.execute(sa.text('COMMIT'))
 
-        # Insert default and common customers
-        logger.info("Creating default and common customers")
-        connection.execute(sa.text("""
-            INSERT INTO customers (name, contact_email, status) VALUES
-            ('Unassigned', 'unassigned@company.com', 'active'),
-            ('ECOLAB', 'contact@ecolab.com', 'active'),
-            ('Hiland Dairy', 'contact@hilanddairy.com', 'active'),
-            ('Dr Pepper Snapple', 'contact@drpepper.com', 'active'),
-            ('Country Pure', 'contact@countrypure.com', 'active')
-            ON CONFLICT (name) DO NOTHING
-        """))
-        connection.execute(sa.text('COMMIT'))
+        
 
         logger.info("All tables created successfully")
 
