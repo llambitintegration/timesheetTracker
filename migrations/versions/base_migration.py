@@ -1,3 +1,4 @@
+
 """base migration
 
 Revision ID: base_migration_001
@@ -25,16 +26,15 @@ def upgrade() -> None:
         op.create_table('customers',
             sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
             sa.Column('name', sa.String(), nullable=False),
-            sa.Column('contact_email', sa.String(), nullable=False),
+            sa.Column('contact_email', sa.String(), nullable=True),  # Made nullable
             sa.Column('industry', sa.String(), nullable=True),
-            sa.Column('status', sa.String(), nullable=False),
+            sa.Column('status', sa.String(), nullable=True),  # Made nullable
             sa.Column('address', sa.String(), nullable=True),
             sa.Column('phone', sa.String(), nullable=True),
             sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
             sa.Column('updated_at', sa.DateTime(timezone=True), onupdate=sa.text('now()'), nullable=True),
             sa.PrimaryKeyConstraint('id'),
-            sa.UniqueConstraint('name'),
-            sa.UniqueConstraint('contact_email')
+            sa.UniqueConstraint('name')
         )
 
         # Create project_managers table
@@ -42,12 +42,11 @@ def upgrade() -> None:
         op.create_table('project_managers',
             sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
             sa.Column('name', sa.String(), nullable=False),
-            sa.Column('email', sa.String(), nullable=False),
+            sa.Column('email', sa.String(), nullable=True),  # Made nullable
             sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
             sa.Column('updated_at', sa.DateTime(timezone=True), onupdate=sa.text('now()'), nullable=True),
             sa.PrimaryKeyConstraint('id'),
-            sa.UniqueConstraint('name'),
-            sa.UniqueConstraint('email')
+            sa.UniqueConstraint('name')
         )
 
         # Create projects table with proper foreign keys
@@ -57,15 +56,15 @@ def upgrade() -> None:
             sa.Column('project_id', sa.String(), nullable=False),
             sa.Column('name', sa.String(), nullable=False),
             sa.Column('description', sa.String(), nullable=True),
-            sa.Column('customer', sa.String(), nullable=False),
-            sa.Column('project_manager', sa.String(), nullable=False),
+            sa.Column('customer', sa.String(), nullable=True),  # Made nullable
+            sa.Column('project_manager', sa.String(), nullable=True),  # Made nullable
             sa.Column('status', sa.String(), nullable=True),
             sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
             sa.Column('updated_at', sa.DateTime(timezone=True), onupdate=sa.text('now()'), nullable=True),
             sa.PrimaryKeyConstraint('id'),
             sa.UniqueConstraint('project_id'),
-            sa.ForeignKeyConstraint(['customer'], ['customers.name'], ondelete='CASCADE'),
-            sa.ForeignKeyConstraint(['project_manager'], ['project_managers.name'], ondelete='CASCADE')
+            sa.ForeignKeyConstraint(['customer'], ['customers.name'], ondelete='SET NULL'),
+            sa.ForeignKeyConstraint(['project_manager'], ['project_managers.name'], ondelete='SET NULL')
         )
 
         # Create time_entries table with updated foreign keys
