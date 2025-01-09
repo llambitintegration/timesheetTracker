@@ -15,11 +15,36 @@ def clean_numeric_value(value, default=0):
     except (ValueError, TypeError):
         return default
 
-def clean_string_value(value, default=""):
-    """Clean and validate string values."""
-    if pd.isna(value) or value == '':
+def standardize_project_id(value):
+    """Standardize project IDs to be database-safe"""
+    if pd.isna(value) or value is None or str(value).strip() in ['', '-', 'None', 'null', 'NA']:
+        return 'Unassigned'
+    return str(value).strip().replace('-', '_').replace(' ', '_')
+
+def clean_status(value):
+    """Clean status fields"""
+    valid_statuses = ['active', 'inactive', 'pending', 'completed']
+    cleaned = str(value).lower().strip() if value else 'active'
+    return cleaned if cleaned in valid_statuses else 'active'
+
+def clean_string_value(value, default="", field_type=None):
+    """Clean and validate string values with field-specific rules"""
+    if pd.isna(value) or value is None or str(value).strip() in ['', '-', 'None', 'null', 'NA']:
         return default
-    return str(value).strip()
+
+    cleaned = str(value).strip()
+
+    if field_type == 'project':
+        return standardize_project_id(cleaned)
+    elif field_type == 'status':
+        return clean_status(cleaned)
+    elif field_type == 'email':
+        # Basic email format check
+        return cleaned if '@' in cleaned else default
+    elif field_type in ['category', 'subcategory']:
+        return cleaned.title()
+
+    return cleaned
 
 def parse_date(date_value) -> datetime.date:
     """Parse and validate date values."""
@@ -113,12 +138,12 @@ def parse_csv(file) -> List:
             entry = schemas.TimeEntryCreate(
                 week_number=week_number,
                 month=month,
-                category=clean_string_value(row.get('Category'), "Other"),
-                subcategory=clean_string_value(row.get('Subcategory'), "General"),
-                customer=customer,
-                project=clean_string_value(row.get('Project')),
-                task_description=clean_string_value(row.get('Task Description')),
-                hours=hours,
+                category=clean_string_value(row.get('Category'), "Other", "category"),
+                subcategory=clean_string_value(row.get('Subcategory'), "General", "subcategory"),
+                customer=clean_string_value(row.get('Customer'), "Unassigned"),
+                project=clean_string_value(row.get('Project'), "Unassigned", "project"),
+                task_description=clean_string_value(row.get('Task Description'), ""),
+                hours=max(min(clean_numeric_value(row.get('Hours', 0)), 24), 0),
                 date=entry_date
             )
             entries.append(entry)

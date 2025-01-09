@@ -1,4 +1,3 @@
-
 """base migration
 
 Revision ID: base_migration_001
@@ -22,7 +21,7 @@ def upgrade() -> None:
     """Create all tables in a single migration"""
     try:
         connection = op.get_bind()
-        
+
         # Create customers table first
         logger.info("Creating customers table")
         op.create_table('customers',
@@ -62,15 +61,17 @@ def upgrade() -> None:
             sa.Column('description', sa.String(), nullable=True),
             sa.Column('customer', sa.String(), nullable=True),
             sa.Column('project_manager', sa.String(), nullable=True),
-            sa.Column('status', sa.String(), nullable=True),
+            sa.Column('status', sa.String(), server_default='active'),
             sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
             sa.Column('updated_at', sa.DateTime(timezone=True), nullable=True),
             sa.PrimaryKeyConstraint('id'),
             sa.UniqueConstraint('project_id'),
             sa.ForeignKeyConstraint(['customer'], ['customers.name'], ondelete='SET NULL'),
-            sa.ForeignKeyConstraint(['project_manager'], ['project_managers.name'], ondelete='SET NULL')
+            sa.ForeignKeyConstraint(['project_manager'], ['project_managers.name'], ondelete='SET NULL'),
+            sa.CheckConstraint("status IN ('active', 'inactive', 'pending', 'completed')", name='valid_status'),
+            sa.CheckConstraint("project_id != '-'", name='valid_project_id')
         )
-        
+
         # Insert default project
         connection.execute(sa.text("""
             INSERT INTO projects (project_id, name, description, status)
@@ -122,23 +123,23 @@ def downgrade() -> None:
     try:
         logger.info("Starting database downgrade")
         connection = op.get_bind()
-        
+
         logger.info("Dropping time_entries table")
         op.drop_table('time_entries')
         connection.execute(sa.text('COMMIT'))
-        
+
         logger.info("Dropping projects table")
         op.drop_table('projects')
         connection.execute(sa.text('COMMIT'))
-        
+
         logger.info("Dropping project_managers table")
         op.drop_table('project_managers')
         connection.execute(sa.text('COMMIT'))
-        
+
         logger.info("Dropping customers table")
         op.drop_table('customers')
         connection.execute(sa.text('COMMIT'))
-        
+
         logger.info("Database downgrade completed successfully")
     except Exception as e:
         logger.error(f"Error during downgrade: {str(e)}")
