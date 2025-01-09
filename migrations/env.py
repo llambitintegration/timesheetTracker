@@ -5,6 +5,7 @@ from sqlalchemy import pool
 from alembic import context
 from dotenv import load_dotenv
 import logging
+from sqlalchemy import text
 
 # Import all models to ensure they are part of the metadata
 from models.baseModel import Base
@@ -84,7 +85,7 @@ def run_migrations_online() -> None:
 
         with connectable.connect() as connection:
             logger.info("Testing database connection")
-            connection.execute("SELECT 1")
+            connection.execute(text("SELECT 1"))
             logger.info("Database connection successful")
 
             logger.info("Configuring Alembic context")
@@ -93,7 +94,8 @@ def run_migrations_online() -> None:
                 target_metadata=target_metadata,
                 version_table='alembic_version',
                 include_schemas=True,
-                compare_type=True
+                compare_type=True,
+                compare_server_default=True
             )
 
             try:

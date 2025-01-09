@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 import os
 from dotenv import load_dotenv
@@ -27,16 +27,19 @@ def verify_database():
     logger.info(f"Verifying database connection and schema: {DATABASE_URL}")
     try:
         with engine.connect() as conn:
+            # Test basic connection
+            conn.execute(text("SELECT 1"))
             logger.info(f"Database driver: {engine.driver}")
             logger.info(f"Database dialect: {engine.dialect.name}")
             logger.info("Successfully connected to database")
-            
+
+            # Get all tables from metadata
             tables = list(Base.metadata.sorted_tables)
             logger.info(f"Checking {len(tables)} tables in schema")
-            
+
             existing_tables = []
             missing_tables = []
-            
+
             for table in tables:
                 logger.debug(f"Verifying table: {table.name}")
                 if not engine.dialect.has_table(conn, table.name):
@@ -45,13 +48,13 @@ def verify_database():
                 else:
                     existing_tables.append(table.name)
                     logger.debug(f"Table {table.name} exists with columns: {[c.name for c in table.columns]}")
-            
+
             if existing_tables:
                 logger.info(f"Found tables: {', '.join(existing_tables)}")
             if missing_tables:
                 logger.warning(f"Missing tables: {', '.join(missing_tables)}")
                 return False
-            
+
             logger.info("Database verification completed successfully")
             return True
     except Exception as e:
@@ -63,11 +66,16 @@ def init_database():
     """Initialize database schema"""
     try:
         logger.info("Initializing database tables")
+        # Import all models to ensure they're registered with metadata
+        from models import Customer, ProjectManager, Project, TimeEntry
+
+        # Create all tables
         Base.metadata.create_all(bind=engine)
         logger.info("Database tables created successfully")
         return True
     except Exception as e:
         logger.error(f"Failed to initialize database: {str(e)}")
+        logger.exception("Stack trace:")
         return False
 
 def get_db():
