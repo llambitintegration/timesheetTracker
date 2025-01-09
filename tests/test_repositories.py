@@ -1,7 +1,10 @@
 import pytest
 from sqlalchemy.exc import IntegrityError
 from database.customer_repository import CustomerRepository
+from database.timesheet_repository import TimeEntryRepository
 from models.customerModel import Customer
+from models.timeEntry import TimeEntry
+from datetime import date
 
 def test_customer_repository_create(db_session):
     """Test creating a customer through repository"""
@@ -11,7 +14,7 @@ def test_customer_repository_create(db_session):
         contact_email="test@example.com",
         industry="Technology"
     )
-    
+
     result = repo.create(db_session, customer)
     assert result is not None
     assert result.name == "Test Customer"
@@ -132,6 +135,177 @@ def test_customer_repository_pagination(db_session):
     page2 = repo.get_all(db_session, skip=2, limit=2)
     assert len(page2) == 2
     
+    # Test last page (1 item)
+    page3 = repo.get_all(db_session, skip=4, limit=2)
+    assert len(page3) == 1
+
+def test_time_entry_repository_create(db_session):
+    """Test creating a time entry through repository"""
+    repo = TimeEntryRepository()
+    entry = TimeEntry(
+        week_number=1,
+        month="January",
+        category="Development",
+        subcategory="Coding",
+        customer="TestCustomer",
+        project="TestProject",
+        task_description="Test entry",
+        hours=8.0,
+        date=date(2024, 1, 1)
+    )
+
+    result = repo.create(db_session, entry)
+    assert result is not None
+    assert result.customer == "TestCustomer"
+    assert result.project == "TestProject"
+    assert result.hours == 8.0
+    assert result.id is not None
+
+def test_time_entry_repository_get_by_id(db_session):
+    """Test retrieving a time entry by ID"""
+    repo = TimeEntryRepository()
+    entry = TimeEntry(
+        week_number=1,
+        month="January",
+        category="Development",
+        subcategory="Coding",
+        customer="TestCustomer",
+        project="TestProject",
+        task_description="Test entry",
+        hours=8.0,
+        date=date(2024, 1, 1)
+    )
+
+    created = repo.create(db_session, entry)
+    retrieved = repo.get_by_id(db_session, created.id)
+
+    assert retrieved is not None
+    assert retrieved.id == created.id
+    assert retrieved.customer == "TestCustomer"
+    assert retrieved.project == "TestProject"
+
+def test_time_entry_repository_get_by_date(db_session):
+    """Test retrieving time entries by date"""
+    repo = TimeEntryRepository()
+    entry_date = date(2024, 1, 1)
+    entry = TimeEntry(
+        week_number=1,
+        month="January",
+        category="Development",
+        subcategory="Coding",
+        customer="TestCustomer",
+        project="TestProject",
+        task_description="Test entry",
+        hours=8.0,
+        date=entry_date
+    )
+
+    repo.create(db_session, entry)
+    entries = repo.get_by_date(db_session, entry_date)
+
+    assert len(entries) == 1
+    assert entries[0].date == entry_date
+    assert entries[0].customer == "TestCustomer"
+
+def test_time_entry_repository_get_all(db_session):
+    """Test retrieving all time entries"""
+    repo = TimeEntryRepository()
+    entries = [
+        TimeEntry(
+            week_number=1,
+            month="January",
+            category="Development",
+            subcategory="Coding",
+            customer=f"TestCustomer{i}",
+            project=f"TestProject{i}",
+            task_description=f"Entry {i}",
+            hours=8.0,
+            date=date(2024, 1, 1)
+        ) for i in range(3)
+    ]
+
+    for entry in entries:
+        repo.create(db_session, entry)
+
+    all_entries = repo.get_all(db_session)
+    assert len(all_entries) >= 3
+    assert any(e.customer == "TestCustomer0" for e in all_entries)
+    assert any(e.customer == "TestCustomer1" for e in all_entries)
+    assert any(e.customer == "TestCustomer2" for e in all_entries)
+
+def test_time_entry_repository_update(db_session):
+    """Test updating a time entry"""
+    repo = TimeEntryRepository()
+    entry = TimeEntry(
+        week_number=1,
+        month="January",
+        category="Development",
+        subcategory="Coding",
+        customer="TestCustomer",
+        project="TestProject",
+        task_description="Original description",
+        hours=8.0,
+        date=date(2024, 1, 1)
+    )
+
+    created = repo.create(db_session, entry)
+    created.task_description = "Updated description"
+    created.hours = 4.0
+    updated = repo.update(db_session, created)
+
+    assert updated.task_description == "Updated description"
+    assert updated.hours == 4.0
+    retrieved = repo.get_by_id(db_session, created.id)
+    assert retrieved.task_description == "Updated description"
+    assert retrieved.hours == 4.0
+
+def test_time_entry_repository_delete(db_session):
+    """Test deleting a time entry"""
+    repo = TimeEntryRepository()
+    entry = TimeEntry(
+        week_number=1,
+        month="January",
+        category="Development",
+        subcategory="Coding",
+        customer="TestCustomer",
+        project="TestProject",
+        task_description="Test entry",
+        hours=8.0,
+        date=date(2024, 1, 1)
+    )
+
+    created = repo.create(db_session, entry)
+    assert repo.get_by_id(db_session, created.id) is not None
+
+    repo.delete(db_session, created.id)
+    assert repo.get_by_id(db_session, created.id) is None
+
+def test_time_entry_repository_pagination(db_session):
+    """Test time entry repository pagination"""
+    repo = TimeEntryRepository()
+    # Create 5 time entries
+    for i in range(5):
+        entry = TimeEntry(
+            week_number=1,
+            month="January",
+            category="Development",
+            subcategory="Coding",
+            customer=f"TestCustomer{i}",
+            project=f"TestProject{i}",
+            task_description=f"Entry {i}",
+            hours=8.0,
+            date=date(2024, 1, 1)
+        )
+        repo.create(db_session, entry)
+
+    # Test first page (2 items)
+    page1 = repo.get_all(db_session, skip=0, limit=2)
+    assert len(page1) == 2
+
+    # Test second page (2 items)
+    page2 = repo.get_all(db_session, skip=2, limit=2)
+    assert len(page2) == 2
+
     # Test last page (1 item)
     page3 = repo.get_all(db_session, skip=4, limit=2)
     assert len(page3) == 1

@@ -17341,3 +17341,1070 @@ DETAIL:  Key (customer)=(-) is not present in table "customers".
 2025-01-09 21:42:47,226 - TimesheetTracker - DEBUG - Converting empty/invalid project ID to Unassigned
 2025-01-09 21:42:47,227 - TimesheetTracker - DEBUG - Converting empty/invalid project ID to Unassigned
 2025-01-09 21:42:47,227 - TimesheetTracker - DEBUG - Converting empty/invalid project ID to Unassigned
+2025-01-09 21:44:06,298 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 21:46:06,848 - TimesheetTracker - DEBUG - Database session created
+2025-01-09 21:46:06,855 - TimesheetTracker - INFO - Processing timesheet upload: Hours Tracker.csv
+2025-01-09 21:46:06,855 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:46:06,855 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:46:06,857 - TimesheetTracker - DEBUG - Successfully read CSV with 10 columns
+2025-01-09 21:46:06,858 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:46:06,859 - TimesheetTracker - DEBUG - Cleaned DataFrame has 167 rows
+2025-01-09 21:46:06,859 - TimesheetTracker - INFO - Processing 167 rows from CSV file
+2025-01-09 21:46:06,859 - TimesheetTracker - DEBUG - Validation issues detected in row 1, using defaults
+2025-01-09 21:46:06,860 - TimesheetTracker - DEBUG - Processed row 1 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,860 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:46:06,860 - TimesheetTracker - DEBUG - Validation issues detected in row 2, using defaults
+2025-01-09 21:46:06,861 - TimesheetTracker - DEBUG - Processed row 2 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,861 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:46:06,861 - TimesheetTracker - DEBUG - Validation issues detected in row 3, using defaults
+2025-01-09 21:46:06,861 - TimesheetTracker - DEBUG - Processed row 3 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,861 - TimesheetTracker - DEBUG - Successfully processed row 3
+2025-01-09 21:46:06,862 - TimesheetTracker - DEBUG - Validation issues detected in row 4, using defaults
+2025-01-09 21:46:06,862 - TimesheetTracker - DEBUG - Processed row 4 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,862 - TimesheetTracker - DEBUG - Successfully processed row 4
+2025-01-09 21:46:06,862 - TimesheetTracker - DEBUG - Validation issues detected in row 5, using defaults
+2025-01-09 21:46:06,862 - TimesheetTracker - DEBUG - Processed row 5 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,863 - TimesheetTracker - DEBUG - Successfully processed row 5
+2025-01-09 21:46:06,863 - TimesheetTracker - DEBUG - Validation issues detected in row 6, using defaults
+2025-01-09 21:46:06,863 - TimesheetTracker - DEBUG - Processed row 6 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,863 - TimesheetTracker - DEBUG - Successfully processed row 6
+2025-01-09 21:46:06,863 - TimesheetTracker - DEBUG - Validation issues detected in row 7, using defaults
+2025-01-09 21:46:06,863 - TimesheetTracker - DEBUG - Processed row 7 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,864 - TimesheetTracker - DEBUG - Successfully processed row 7
+2025-01-09 21:46:06,864 - TimesheetTracker - DEBUG - Validation issues detected in row 8, using defaults
+2025-01-09 21:46:06,864 - TimesheetTracker - DEBUG - Processed row 8 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,864 - TimesheetTracker - DEBUG - Successfully processed row 8
+2025-01-09 21:46:06,864 - TimesheetTracker - DEBUG - Validation issues detected in row 9, using defaults
+2025-01-09 21:46:06,865 - TimesheetTracker - DEBUG - Processed row 9 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,865 - TimesheetTracker - DEBUG - Successfully processed row 9
+2025-01-09 21:46:06,865 - TimesheetTracker - DEBUG - Validation issues detected in row 10, using defaults
+2025-01-09 21:46:06,865 - TimesheetTracker - DEBUG - Processed row 10 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,865 - TimesheetTracker - DEBUG - Successfully processed row 10
+2025-01-09 21:46:06,866 - TimesheetTracker - DEBUG - Validation issues detected in row 11, using defaults
+2025-01-09 21:46:06,866 - TimesheetTracker - DEBUG - Processed row 11 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,866 - TimesheetTracker - DEBUG - Successfully processed row 11
+2025-01-09 21:46:06,866 - TimesheetTracker - DEBUG - Validation issues detected in row 12, using defaults
+2025-01-09 21:46:06,866 - TimesheetTracker - DEBUG - Processed row 12 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,866 - TimesheetTracker - DEBUG - Successfully processed row 12
+2025-01-09 21:46:06,867 - TimesheetTracker - DEBUG - Validation issues detected in row 13, using defaults
+2025-01-09 21:46:06,867 - TimesheetTracker - DEBUG - Processed row 13 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,867 - TimesheetTracker - DEBUG - Successfully processed row 13
+2025-01-09 21:46:06,867 - TimesheetTracker - DEBUG - Validation issues detected in row 14, using defaults
+2025-01-09 21:46:06,867 - TimesheetTracker - DEBUG - Processed row 14 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,867 - TimesheetTracker - DEBUG - Successfully processed row 14
+2025-01-09 21:46:06,868 - TimesheetTracker - DEBUG - Validation issues detected in row 15, using defaults
+2025-01-09 21:46:06,868 - TimesheetTracker - DEBUG - Processed row 15 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,868 - TimesheetTracker - DEBUG - Successfully processed row 15
+2025-01-09 21:46:06,868 - TimesheetTracker - DEBUG - Validation issues detected in row 16, using defaults
+2025-01-09 21:46:06,868 - TimesheetTracker - DEBUG - Processed row 16 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,868 - TimesheetTracker - DEBUG - Successfully processed row 16
+2025-01-09 21:46:06,869 - TimesheetTracker - DEBUG - Validation issues detected in row 17, using defaults
+2025-01-09 21:46:06,869 - TimesheetTracker - DEBUG - Processed row 17 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,869 - TimesheetTracker - DEBUG - Successfully processed row 17
+2025-01-09 21:46:06,869 - TimesheetTracker - DEBUG - Validation issues detected in row 18, using defaults
+2025-01-09 21:46:06,869 - TimesheetTracker - DEBUG - Processed row 18 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,869 - TimesheetTracker - DEBUG - Successfully processed row 18
+2025-01-09 21:46:06,869 - TimesheetTracker - DEBUG - Validation issues detected in row 19, using defaults
+2025-01-09 21:46:06,870 - TimesheetTracker - DEBUG - Processed row 19 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,870 - TimesheetTracker - DEBUG - Successfully processed row 19
+2025-01-09 21:46:06,870 - TimesheetTracker - DEBUG - Validation issues detected in row 20, using defaults
+2025-01-09 21:46:06,870 - TimesheetTracker - DEBUG - Processed row 20 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,870 - TimesheetTracker - DEBUG - Successfully processed row 20
+2025-01-09 21:46:06,870 - TimesheetTracker - DEBUG - Validation issues detected in row 21, using defaults
+2025-01-09 21:46:06,871 - TimesheetTracker - DEBUG - Processed row 21 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,871 - TimesheetTracker - DEBUG - Successfully processed row 21
+2025-01-09 21:46:06,871 - TimesheetTracker - DEBUG - Validation issues detected in row 22, using defaults
+2025-01-09 21:46:06,871 - TimesheetTracker - DEBUG - Processed row 22 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,871 - TimesheetTracker - DEBUG - Successfully processed row 22
+2025-01-09 21:46:06,871 - TimesheetTracker - DEBUG - Validation issues detected in row 23, using defaults
+2025-01-09 21:46:06,872 - TimesheetTracker - DEBUG - Processed row 23 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,872 - TimesheetTracker - DEBUG - Successfully processed row 23
+2025-01-09 21:46:06,872 - TimesheetTracker - DEBUG - Validation issues detected in row 24, using defaults
+2025-01-09 21:46:06,872 - TimesheetTracker - DEBUG - Processed row 24 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,872 - TimesheetTracker - DEBUG - Successfully processed row 24
+2025-01-09 21:46:06,872 - TimesheetTracker - DEBUG - Validation issues detected in row 25, using defaults
+2025-01-09 21:46:06,872 - TimesheetTracker - DEBUG - Processed row 25 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,873 - TimesheetTracker - DEBUG - Successfully processed row 25
+2025-01-09 21:46:06,873 - TimesheetTracker - DEBUG - Validation issues detected in row 26, using defaults
+2025-01-09 21:46:06,873 - TimesheetTracker - DEBUG - Processed row 26 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,873 - TimesheetTracker - DEBUG - Successfully processed row 26
+2025-01-09 21:46:06,873 - TimesheetTracker - DEBUG - Validation issues detected in row 27, using defaults
+2025-01-09 21:46:06,873 - TimesheetTracker - DEBUG - Processed row 27 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,874 - TimesheetTracker - DEBUG - Successfully processed row 27
+2025-01-09 21:46:06,874 - TimesheetTracker - DEBUG - Validation issues detected in row 28, using defaults
+2025-01-09 21:46:06,874 - TimesheetTracker - DEBUG - Processed row 28 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,874 - TimesheetTracker - DEBUG - Successfully processed row 28
+2025-01-09 21:46:06,874 - TimesheetTracker - DEBUG - Validation issues detected in row 29, using defaults
+2025-01-09 21:46:06,874 - TimesheetTracker - DEBUG - Processed row 29 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,874 - TimesheetTracker - DEBUG - Successfully processed row 29
+2025-01-09 21:46:06,875 - TimesheetTracker - DEBUG - Validation issues detected in row 30, using defaults
+2025-01-09 21:46:06,875 - TimesheetTracker - DEBUG - Processed row 30 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,875 - TimesheetTracker - DEBUG - Successfully processed row 30
+2025-01-09 21:46:06,875 - TimesheetTracker - DEBUG - Validation issues detected in row 31, using defaults
+2025-01-09 21:46:06,875 - TimesheetTracker - DEBUG - Processed row 31 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,876 - TimesheetTracker - DEBUG - Successfully processed row 31
+2025-01-09 21:46:06,876 - TimesheetTracker - DEBUG - Validation issues detected in row 32, using defaults
+2025-01-09 21:46:06,876 - TimesheetTracker - DEBUG - Processed row 32 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,876 - TimesheetTracker - DEBUG - Successfully processed row 32
+2025-01-09 21:46:06,876 - TimesheetTracker - DEBUG - Validation issues detected in row 33, using defaults
+2025-01-09 21:46:06,876 - TimesheetTracker - DEBUG - Processed row 33 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,877 - TimesheetTracker - DEBUG - Successfully processed row 33
+2025-01-09 21:46:06,877 - TimesheetTracker - DEBUG - Validation issues detected in row 34, using defaults
+2025-01-09 21:46:06,877 - TimesheetTracker - DEBUG - Processed row 34 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,877 - TimesheetTracker - DEBUG - Successfully processed row 34
+2025-01-09 21:46:06,877 - TimesheetTracker - DEBUG - Validation issues detected in row 35, using defaults
+2025-01-09 21:46:06,877 - TimesheetTracker - DEBUG - Processed row 35 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,878 - TimesheetTracker - DEBUG - Successfully processed row 35
+2025-01-09 21:46:06,878 - TimesheetTracker - DEBUG - Validation issues detected in row 36, using defaults
+2025-01-09 21:46:06,878 - TimesheetTracker - DEBUG - Processed row 36 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,878 - TimesheetTracker - DEBUG - Successfully processed row 36
+2025-01-09 21:46:06,878 - TimesheetTracker - DEBUG - Validation issues detected in row 37, using defaults
+2025-01-09 21:46:06,878 - TimesheetTracker - DEBUG - Processed row 37 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,879 - TimesheetTracker - DEBUG - Successfully processed row 37
+2025-01-09 21:46:06,879 - TimesheetTracker - DEBUG - Validation issues detected in row 38, using defaults
+2025-01-09 21:46:06,879 - TimesheetTracker - DEBUG - Processed row 38 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,879 - TimesheetTracker - DEBUG - Successfully processed row 38
+2025-01-09 21:46:06,879 - TimesheetTracker - DEBUG - Validation issues detected in row 39, using defaults
+2025-01-09 21:46:06,880 - TimesheetTracker - DEBUG - Processed row 39 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,880 - TimesheetTracker - DEBUG - Successfully processed row 39
+2025-01-09 21:46:06,880 - TimesheetTracker - DEBUG - Validation issues detected in row 40, using defaults
+2025-01-09 21:46:06,880 - TimesheetTracker - DEBUG - Processed row 40 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,880 - TimesheetTracker - DEBUG - Successfully processed row 40
+2025-01-09 21:46:06,881 - TimesheetTracker - DEBUG - Validation issues detected in row 41, using defaults
+2025-01-09 21:46:06,881 - TimesheetTracker - DEBUG - Processed row 41 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,881 - TimesheetTracker - DEBUG - Successfully processed row 41
+2025-01-09 21:46:06,881 - TimesheetTracker - DEBUG - Validation issues detected in row 42, using defaults
+2025-01-09 21:46:06,881 - TimesheetTracker - DEBUG - Processed row 42 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,881 - TimesheetTracker - DEBUG - Successfully processed row 42
+2025-01-09 21:46:06,882 - TimesheetTracker - DEBUG - Validation issues detected in row 43, using defaults
+2025-01-09 21:46:06,882 - TimesheetTracker - DEBUG - Processed row 43 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,882 - TimesheetTracker - DEBUG - Successfully processed row 43
+2025-01-09 21:46:06,882 - TimesheetTracker - DEBUG - Validation issues detected in row 44, using defaults
+2025-01-09 21:46:06,882 - TimesheetTracker - DEBUG - Processed row 44 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,882 - TimesheetTracker - DEBUG - Successfully processed row 44
+2025-01-09 21:46:06,882 - TimesheetTracker - DEBUG - Validation issues detected in row 45, using defaults
+2025-01-09 21:46:06,883 - TimesheetTracker - DEBUG - Processed row 45 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,883 - TimesheetTracker - DEBUG - Successfully processed row 45
+2025-01-09 21:46:06,883 - TimesheetTracker - DEBUG - Validation issues detected in row 46, using defaults
+2025-01-09 21:46:06,883 - TimesheetTracker - DEBUG - Processed row 46 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,883 - TimesheetTracker - DEBUG - Successfully processed row 46
+2025-01-09 21:46:06,883 - TimesheetTracker - DEBUG - Validation issues detected in row 47, using defaults
+2025-01-09 21:46:06,884 - TimesheetTracker - DEBUG - Processed row 47 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,884 - TimesheetTracker - DEBUG - Successfully processed row 47
+2025-01-09 21:46:06,884 - TimesheetTracker - DEBUG - Validation issues detected in row 48, using defaults
+2025-01-09 21:46:06,884 - TimesheetTracker - DEBUG - Processed row 48 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,884 - TimesheetTracker - DEBUG - Successfully processed row 48
+2025-01-09 21:46:06,885 - TimesheetTracker - DEBUG - Validation issues detected in row 49, using defaults
+2025-01-09 21:46:06,885 - TimesheetTracker - DEBUG - Processed row 49 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,885 - TimesheetTracker - DEBUG - Successfully processed row 49
+2025-01-09 21:46:06,885 - TimesheetTracker - DEBUG - Validation issues detected in row 50, using defaults
+2025-01-09 21:46:06,885 - TimesheetTracker - DEBUG - Processed row 50 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,885 - TimesheetTracker - DEBUG - Successfully processed row 50
+2025-01-09 21:46:06,886 - TimesheetTracker - DEBUG - Validation issues detected in row 51, using defaults
+2025-01-09 21:46:06,886 - TimesheetTracker - DEBUG - Processed row 51 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,886 - TimesheetTracker - DEBUG - Successfully processed row 51
+2025-01-09 21:46:06,886 - TimesheetTracker - DEBUG - Validation issues detected in row 52, using defaults
+2025-01-09 21:46:06,886 - TimesheetTracker - DEBUG - Processed row 52 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,886 - TimesheetTracker - DEBUG - Successfully processed row 52
+2025-01-09 21:46:06,886 - TimesheetTracker - DEBUG - Validation issues detected in row 53, using defaults
+2025-01-09 21:46:06,887 - TimesheetTracker - DEBUG - Processed row 53 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,887 - TimesheetTracker - DEBUG - Successfully processed row 53
+2025-01-09 21:46:06,887 - TimesheetTracker - DEBUG - Validation issues detected in row 54, using defaults
+2025-01-09 21:46:06,887 - TimesheetTracker - DEBUG - Processed row 54 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,887 - TimesheetTracker - DEBUG - Successfully processed row 54
+2025-01-09 21:46:06,887 - TimesheetTracker - DEBUG - Validation issues detected in row 55, using defaults
+2025-01-09 21:46:06,888 - TimesheetTracker - DEBUG - Processed row 55 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,888 - TimesheetTracker - DEBUG - Successfully processed row 55
+2025-01-09 21:46:06,888 - TimesheetTracker - DEBUG - Validation issues detected in row 56, using defaults
+2025-01-09 21:46:06,888 - TimesheetTracker - DEBUG - Processed row 56 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,888 - TimesheetTracker - DEBUG - Successfully processed row 56
+2025-01-09 21:46:06,888 - TimesheetTracker - DEBUG - Validation issues detected in row 57, using defaults
+2025-01-09 21:46:06,889 - TimesheetTracker - DEBUG - Processed row 57 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,889 - TimesheetTracker - DEBUG - Successfully processed row 57
+2025-01-09 21:46:06,889 - TimesheetTracker - DEBUG - Validation issues detected in row 58, using defaults
+2025-01-09 21:46:06,889 - TimesheetTracker - DEBUG - Processed row 58 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,889 - TimesheetTracker - DEBUG - Successfully processed row 58
+2025-01-09 21:46:06,889 - TimesheetTracker - DEBUG - Validation issues detected in row 59, using defaults
+2025-01-09 21:46:06,890 - TimesheetTracker - DEBUG - Processed row 59 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,890 - TimesheetTracker - DEBUG - Successfully processed row 59
+2025-01-09 21:46:06,890 - TimesheetTracker - DEBUG - Validation issues detected in row 60, using defaults
+2025-01-09 21:46:06,890 - TimesheetTracker - DEBUG - Processed row 60 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,890 - TimesheetTracker - DEBUG - Successfully processed row 60
+2025-01-09 21:46:06,891 - TimesheetTracker - DEBUG - Validation issues detected in row 61, using defaults
+2025-01-09 21:46:06,891 - TimesheetTracker - DEBUG - Processed row 61 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,891 - TimesheetTracker - DEBUG - Successfully processed row 61
+2025-01-09 21:46:06,891 - TimesheetTracker - DEBUG - Validation issues detected in row 62, using defaults
+2025-01-09 21:46:06,891 - TimesheetTracker - DEBUG - Processed row 62 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,892 - TimesheetTracker - DEBUG - Successfully processed row 62
+2025-01-09 21:46:06,892 - TimesheetTracker - DEBUG - Validation issues detected in row 63, using defaults
+2025-01-09 21:46:06,892 - TimesheetTracker - DEBUG - Processed row 63 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,892 - TimesheetTracker - DEBUG - Successfully processed row 63
+2025-01-09 21:46:06,892 - TimesheetTracker - DEBUG - Validation issues detected in row 64, using defaults
+2025-01-09 21:46:06,892 - TimesheetTracker - DEBUG - Processed row 64 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,892 - TimesheetTracker - DEBUG - Successfully processed row 64
+2025-01-09 21:46:06,893 - TimesheetTracker - DEBUG - Validation issues detected in row 65, using defaults
+2025-01-09 21:46:06,893 - TimesheetTracker - DEBUG - Processed row 65 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,893 - TimesheetTracker - DEBUG - Successfully processed row 65
+2025-01-09 21:46:06,893 - TimesheetTracker - DEBUG - Validation issues detected in row 66, using defaults
+2025-01-09 21:46:06,893 - TimesheetTracker - DEBUG - Processed row 66 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,893 - TimesheetTracker - DEBUG - Successfully processed row 66
+2025-01-09 21:46:06,894 - TimesheetTracker - DEBUG - Validation issues detected in row 67, using defaults
+2025-01-09 21:46:06,894 - TimesheetTracker - DEBUG - Processed row 67 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,894 - TimesheetTracker - DEBUG - Successfully processed row 67
+2025-01-09 21:46:06,894 - TimesheetTracker - DEBUG - Validation issues detected in row 68, using defaults
+2025-01-09 21:46:06,894 - TimesheetTracker - DEBUG - Processed row 68 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,894 - TimesheetTracker - DEBUG - Successfully processed row 68
+2025-01-09 21:46:06,895 - TimesheetTracker - DEBUG - Validation issues detected in row 69, using defaults
+2025-01-09 21:46:06,895 - TimesheetTracker - DEBUG - Processed row 69 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,895 - TimesheetTracker - DEBUG - Successfully processed row 69
+2025-01-09 21:46:06,895 - TimesheetTracker - DEBUG - Validation issues detected in row 70, using defaults
+2025-01-09 21:46:06,895 - TimesheetTracker - DEBUG - Processed row 70 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,895 - TimesheetTracker - DEBUG - Successfully processed row 70
+2025-01-09 21:46:06,896 - TimesheetTracker - DEBUG - Validation issues detected in row 71, using defaults
+2025-01-09 21:46:06,896 - TimesheetTracker - DEBUG - Processed row 71 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,896 - TimesheetTracker - DEBUG - Successfully processed row 71
+2025-01-09 21:46:06,896 - TimesheetTracker - DEBUG - Validation issues detected in row 72, using defaults
+2025-01-09 21:46:06,896 - TimesheetTracker - DEBUG - Processed row 72 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,896 - TimesheetTracker - DEBUG - Successfully processed row 72
+2025-01-09 21:46:06,897 - TimesheetTracker - DEBUG - Validation issues detected in row 73, using defaults
+2025-01-09 21:46:06,897 - TimesheetTracker - DEBUG - Processed row 73 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,897 - TimesheetTracker - DEBUG - Successfully processed row 73
+2025-01-09 21:46:06,897 - TimesheetTracker - DEBUG - Validation issues detected in row 74, using defaults
+2025-01-09 21:46:06,897 - TimesheetTracker - DEBUG - Processed row 74 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,897 - TimesheetTracker - DEBUG - Successfully processed row 74
+2025-01-09 21:46:06,898 - TimesheetTracker - DEBUG - Validation issues detected in row 75, using defaults
+2025-01-09 21:46:06,898 - TimesheetTracker - DEBUG - Processed row 75 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,898 - TimesheetTracker - DEBUG - Successfully processed row 75
+2025-01-09 21:46:06,898 - TimesheetTracker - DEBUG - Validation issues detected in row 76, using defaults
+2025-01-09 21:46:06,898 - TimesheetTracker - DEBUG - Processed row 76 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,899 - TimesheetTracker - DEBUG - Successfully processed row 76
+2025-01-09 21:46:06,899 - TimesheetTracker - DEBUG - Validation issues detected in row 77, using defaults
+2025-01-09 21:46:06,899 - TimesheetTracker - DEBUG - Processed row 77 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,899 - TimesheetTracker - DEBUG - Successfully processed row 77
+2025-01-09 21:46:06,899 - TimesheetTracker - DEBUG - Validation issues detected in row 78, using defaults
+2025-01-09 21:46:06,899 - TimesheetTracker - DEBUG - Processed row 78 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,900 - TimesheetTracker - DEBUG - Successfully processed row 78
+2025-01-09 21:46:06,900 - TimesheetTracker - DEBUG - Validation issues detected in row 79, using defaults
+2025-01-09 21:46:06,900 - TimesheetTracker - DEBUG - Processed row 79 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,900 - TimesheetTracker - DEBUG - Successfully processed row 79
+2025-01-09 21:46:06,900 - TimesheetTracker - DEBUG - Validation issues detected in row 80, using defaults
+2025-01-09 21:46:06,901 - TimesheetTracker - DEBUG - Processed row 80 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,901 - TimesheetTracker - DEBUG - Successfully processed row 80
+2025-01-09 21:46:06,901 - TimesheetTracker - DEBUG - Validation issues detected in row 81, using defaults
+2025-01-09 21:46:06,901 - TimesheetTracker - DEBUG - Processed row 81 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,901 - TimesheetTracker - DEBUG - Successfully processed row 81
+2025-01-09 21:46:06,901 - TimesheetTracker - DEBUG - Validation issues detected in row 82, using defaults
+2025-01-09 21:46:06,901 - TimesheetTracker - DEBUG - Processed row 82 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,902 - TimesheetTracker - DEBUG - Successfully processed row 82
+2025-01-09 21:46:06,902 - TimesheetTracker - DEBUG - Validation issues detected in row 83, using defaults
+2025-01-09 21:46:06,902 - TimesheetTracker - DEBUG - Processed row 83 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,902 - TimesheetTracker - DEBUG - Successfully processed row 83
+2025-01-09 21:46:06,903 - TimesheetTracker - DEBUG - Processed row 84 - customer: ECOLAB, project: Project_Magic_Bullet
+2025-01-09 21:46:06,903 - TimesheetTracker - DEBUG - Successfully processed row 84
+2025-01-09 21:46:06,904 - TimesheetTracker - DEBUG - Validation issues detected in row 85, using defaults
+2025-01-09 21:46:06,904 - TimesheetTracker - DEBUG - Processed row 85 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,904 - TimesheetTracker - DEBUG - Successfully processed row 85
+2025-01-09 21:46:06,904 - TimesheetTracker - DEBUG - Validation issues detected in row 86, using defaults
+2025-01-09 21:46:06,904 - TimesheetTracker - DEBUG - Processed row 86 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,904 - TimesheetTracker - DEBUG - Successfully processed row 86
+2025-01-09 21:46:06,905 - TimesheetTracker - DEBUG - Validation issues detected in row 87, using defaults
+2025-01-09 21:46:06,905 - TimesheetTracker - DEBUG - Processed row 87 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,905 - TimesheetTracker - DEBUG - Successfully processed row 87
+2025-01-09 21:46:06,905 - TimesheetTracker - DEBUG - Validation issues detected in row 88, using defaults
+2025-01-09 21:46:06,906 - TimesheetTracker - DEBUG - Processed row 88 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,906 - TimesheetTracker - DEBUG - Successfully processed row 88
+2025-01-09 21:46:06,906 - TimesheetTracker - DEBUG - Validation issues detected in row 89, using defaults
+2025-01-09 21:46:06,906 - TimesheetTracker - DEBUG - Processed row 89 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,906 - TimesheetTracker - DEBUG - Successfully processed row 89
+2025-01-09 21:46:06,907 - TimesheetTracker - DEBUG - Validation issues detected in row 90, using defaults
+2025-01-09 21:46:06,907 - TimesheetTracker - DEBUG - Processed row 90 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,908 - TimesheetTracker - DEBUG - Successfully processed row 90
+2025-01-09 21:46:06,908 - TimesheetTracker - DEBUG - Validation issues detected in row 91, using defaults
+2025-01-09 21:46:06,908 - TimesheetTracker - DEBUG - Processed row 91 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,908 - TimesheetTracker - DEBUG - Successfully processed row 91
+2025-01-09 21:46:06,908 - TimesheetTracker - DEBUG - Validation issues detected in row 92, using defaults
+2025-01-09 21:46:06,908 - TimesheetTracker - DEBUG - Processed row 92 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,909 - TimesheetTracker - DEBUG - Successfully processed row 92
+2025-01-09 21:46:06,909 - TimesheetTracker - DEBUG - Validation issues detected in row 93, using defaults
+2025-01-09 21:46:06,909 - TimesheetTracker - DEBUG - Processed row 93 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,909 - TimesheetTracker - DEBUG - Successfully processed row 93
+2025-01-09 21:46:06,909 - TimesheetTracker - DEBUG - Validation issues detected in row 94, using defaults
+2025-01-09 21:46:06,909 - TimesheetTracker - DEBUG - Processed row 94 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,910 - TimesheetTracker - DEBUG - Successfully processed row 94
+2025-01-09 21:46:06,910 - TimesheetTracker - DEBUG - Validation issues detected in row 95, using defaults
+2025-01-09 21:46:06,910 - TimesheetTracker - DEBUG - Processed row 95 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,910 - TimesheetTracker - DEBUG - Successfully processed row 95
+2025-01-09 21:46:06,910 - TimesheetTracker - DEBUG - Validation issues detected in row 96, using defaults
+2025-01-09 21:46:06,910 - TimesheetTracker - DEBUG - Processed row 96 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,911 - TimesheetTracker - DEBUG - Successfully processed row 96
+2025-01-09 21:46:06,911 - TimesheetTracker - DEBUG - Processed row 97 - customer: Hiland Dairy, project: Wichita_KS
+2025-01-09 21:46:06,911 - TimesheetTracker - DEBUG - Successfully processed row 97
+2025-01-09 21:46:06,911 - TimesheetTracker - WARNING - Skipping row 98 due to invalid hours: 0
+2025-01-09 21:46:06,911 - TimesheetTracker - DEBUG - Validation issues detected in row 99, using defaults
+2025-01-09 21:46:06,912 - TimesheetTracker - DEBUG - Processed row 99 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,912 - TimesheetTracker - DEBUG - Successfully processed row 99
+2025-01-09 21:46:06,912 - TimesheetTracker - DEBUG - Validation issues detected in row 100, using defaults
+2025-01-09 21:46:06,912 - TimesheetTracker - DEBUG - Processed row 100 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,912 - TimesheetTracker - DEBUG - Successfully processed row 100
+2025-01-09 21:46:06,912 - TimesheetTracker - DEBUG - Validation issues detected in row 101, using defaults
+2025-01-09 21:46:06,913 - TimesheetTracker - DEBUG - Processed row 101 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,913 - TimesheetTracker - DEBUG - Successfully processed row 101
+2025-01-09 21:46:06,913 - TimesheetTracker - DEBUG - Validation issues detected in row 102, using defaults
+2025-01-09 21:46:06,913 - TimesheetTracker - DEBUG - Processed row 102 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,913 - TimesheetTracker - DEBUG - Successfully processed row 102
+2025-01-09 21:46:06,913 - TimesheetTracker - DEBUG - Validation issues detected in row 103, using defaults
+2025-01-09 21:46:06,913 - TimesheetTracker - DEBUG - Processed row 103 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,914 - TimesheetTracker - DEBUG - Successfully processed row 103
+2025-01-09 21:46:06,914 - TimesheetTracker - DEBUG - Validation issues detected in row 104, using defaults
+2025-01-09 21:46:06,914 - TimesheetTracker - DEBUG - Processed row 104 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,914 - TimesheetTracker - DEBUG - Successfully processed row 104
+2025-01-09 21:46:06,914 - TimesheetTracker - DEBUG - Validation issues detected in row 105, using defaults
+2025-01-09 21:46:06,914 - TimesheetTracker - DEBUG - Processed row 105 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,915 - TimesheetTracker - DEBUG - Successfully processed row 105
+2025-01-09 21:46:06,915 - TimesheetTracker - DEBUG - Validation issues detected in row 106, using defaults
+2025-01-09 21:46:06,915 - TimesheetTracker - DEBUG - Processed row 106 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,915 - TimesheetTracker - DEBUG - Successfully processed row 106
+2025-01-09 21:46:06,915 - TimesheetTracker - DEBUG - Validation issues detected in row 107, using defaults
+2025-01-09 21:46:06,915 - TimesheetTracker - DEBUG - Processed row 107 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,916 - TimesheetTracker - DEBUG - Successfully processed row 107
+2025-01-09 21:46:06,916 - TimesheetTracker - DEBUG - Validation issues detected in row 108, using defaults
+2025-01-09 21:46:06,916 - TimesheetTracker - DEBUG - Processed row 108 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,916 - TimesheetTracker - DEBUG - Successfully processed row 108
+2025-01-09 21:46:06,916 - TimesheetTracker - DEBUG - Validation issues detected in row 109, using defaults
+2025-01-09 21:46:06,916 - TimesheetTracker - DEBUG - Processed row 109 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,917 - TimesheetTracker - DEBUG - Successfully processed row 109
+2025-01-09 21:46:06,917 - TimesheetTracker - DEBUG - Validation issues detected in row 110, using defaults
+2025-01-09 21:46:06,917 - TimesheetTracker - DEBUG - Processed row 110 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,917 - TimesheetTracker - DEBUG - Successfully processed row 110
+2025-01-09 21:46:06,917 - TimesheetTracker - DEBUG - Validation issues detected in row 111, using defaults
+2025-01-09 21:46:06,917 - TimesheetTracker - DEBUG - Processed row 111 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,917 - TimesheetTracker - DEBUG - Successfully processed row 111
+2025-01-09 21:46:06,918 - TimesheetTracker - DEBUG - Validation issues detected in row 112, using defaults
+2025-01-09 21:46:06,918 - TimesheetTracker - DEBUG - Processed row 112 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,918 - TimesheetTracker - DEBUG - Successfully processed row 112
+2025-01-09 21:46:06,918 - TimesheetTracker - DEBUG - Validation issues detected in row 113, using defaults
+2025-01-09 21:46:06,918 - TimesheetTracker - DEBUG - Processed row 113 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,918 - TimesheetTracker - DEBUG - Successfully processed row 113
+2025-01-09 21:46:06,918 - TimesheetTracker - DEBUG - Validation issues detected in row 114, using defaults
+2025-01-09 21:46:06,918 - TimesheetTracker - DEBUG - Processed row 114 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,919 - TimesheetTracker - DEBUG - Successfully processed row 114
+2025-01-09 21:46:06,919 - TimesheetTracker - DEBUG - Validation issues detected in row 115, using defaults
+2025-01-09 21:46:06,919 - TimesheetTracker - DEBUG - Processed row 115 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,919 - TimesheetTracker - DEBUG - Successfully processed row 115
+2025-01-09 21:46:06,919 - TimesheetTracker - DEBUG - Validation issues detected in row 116, using defaults
+2025-01-09 21:46:06,919 - TimesheetTracker - DEBUG - Processed row 116 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,920 - TimesheetTracker - DEBUG - Successfully processed row 116
+2025-01-09 21:46:06,920 - TimesheetTracker - DEBUG - Processed row 117 - customer: Dr Pepper Snapple, project: Aspers_PA
+2025-01-09 21:46:06,920 - TimesheetTracker - DEBUG - Successfully processed row 117
+2025-01-09 21:46:06,920 - TimesheetTracker - DEBUG - Processed row 118 - customer: ECOLAB, project: iTrends
+2025-01-09 21:46:06,920 - TimesheetTracker - DEBUG - Successfully processed row 118
+2025-01-09 21:46:06,921 - TimesheetTracker - DEBUG - Processed row 119 - customer: Hiland Dairy, project: Wichita_KS
+2025-01-09 21:46:06,921 - TimesheetTracker - DEBUG - Successfully processed row 119
+2025-01-09 21:46:06,921 - TimesheetTracker - DEBUG - Validation issues detected in row 120, using defaults
+2025-01-09 21:46:06,921 - TimesheetTracker - DEBUG - Processed row 120 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,921 - TimesheetTracker - DEBUG - Successfully processed row 120
+2025-01-09 21:46:06,922 - TimesheetTracker - DEBUG - Validation issues detected in row 121, using defaults
+2025-01-09 21:46:06,922 - TimesheetTracker - DEBUG - Processed row 121 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,922 - TimesheetTracker - DEBUG - Successfully processed row 121
+2025-01-09 21:46:06,922 - TimesheetTracker - DEBUG - Validation issues detected in row 122, using defaults
+2025-01-09 21:46:06,922 - TimesheetTracker - DEBUG - Processed row 122 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,922 - TimesheetTracker - DEBUG - Successfully processed row 122
+2025-01-09 21:46:06,922 - TimesheetTracker - DEBUG - Validation issues detected in row 123, using defaults
+2025-01-09 21:46:06,923 - TimesheetTracker - DEBUG - Processed row 123 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,923 - TimesheetTracker - DEBUG - Successfully processed row 123
+2025-01-09 21:46:06,923 - TimesheetTracker - DEBUG - Processed row 124 - customer: Hiland Dairy, project: Wichita_KS
+2025-01-09 21:46:06,923 - TimesheetTracker - DEBUG - Successfully processed row 124
+2025-01-09 21:46:06,923 - TimesheetTracker - DEBUG - Processed row 125 - customer: Dr Pepper Snapple, project: Aspers_PA
+2025-01-09 21:46:06,923 - TimesheetTracker - DEBUG - Successfully processed row 125
+2025-01-09 21:46:06,924 - TimesheetTracker - WARNING - Skipping row 126 due to invalid hours: 0.0
+2025-01-09 21:46:06,924 - TimesheetTracker - DEBUG - Processed row 127 - customer: Hiland Dairy, project: Wichita_KS
+2025-01-09 21:46:06,924 - TimesheetTracker - DEBUG - Successfully processed row 127
+2025-01-09 21:46:06,924 - TimesheetTracker - DEBUG - Processed row 128 - customer: Dr Pepper Snapple, project: Aspers_PA
+2025-01-09 21:46:06,924 - TimesheetTracker - DEBUG - Successfully processed row 128
+2025-01-09 21:46:06,925 - TimesheetTracker - DEBUG - Processed row 129 - customer: Hiland Dairy, project: Wichita_KS
+2025-01-09 21:46:06,925 - TimesheetTracker - DEBUG - Successfully processed row 129
+2025-01-09 21:46:06,925 - TimesheetTracker - WARNING - Skipping row 130 due to invalid hours: 0.0
+2025-01-09 21:46:06,925 - TimesheetTracker - WARNING - Skipping row 131 due to invalid hours: 0.0
+2025-01-09 21:46:06,925 - TimesheetTracker - DEBUG - Processed row 132 - customer: Hiland Dairy, project: Wichita_KS
+2025-01-09 21:46:06,926 - TimesheetTracker - DEBUG - Successfully processed row 132
+2025-01-09 21:46:06,926 - TimesheetTracker - DEBUG - Processed row 133 - customer: Dr Pepper Snapple, project: Aspers_PA
+2025-01-09 21:46:06,926 - TimesheetTracker - DEBUG - Successfully processed row 133
+2025-01-09 21:46:06,926 - TimesheetTracker - DEBUG - Validation issues detected in row 134, using defaults
+2025-01-09 21:46:06,926 - TimesheetTracker - DEBUG - Processed row 134 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,927 - TimesheetTracker - DEBUG - Successfully processed row 134
+2025-01-09 21:46:06,927 - TimesheetTracker - DEBUG - Validation issues detected in row 135, using defaults
+2025-01-09 21:46:06,927 - TimesheetTracker - DEBUG - Processed row 135 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,927 - TimesheetTracker - DEBUG - Successfully processed row 135
+2025-01-09 21:46:06,927 - TimesheetTracker - WARNING - Skipping row 136 due to invalid hours: 0.0
+2025-01-09 21:46:06,927 - TimesheetTracker - WARNING - Skipping row 137 due to invalid hours: 0.0
+2025-01-09 21:46:06,928 - TimesheetTracker - DEBUG - Processed row 138 - customer: Hiland Dairy, project: Wichita_KS
+2025-01-09 21:46:06,928 - TimesheetTracker - DEBUG - Successfully processed row 138
+2025-01-09 21:46:06,928 - TimesheetTracker - DEBUG - Validation issues detected in row 139, using defaults
+2025-01-09 21:46:06,928 - TimesheetTracker - DEBUG - Processed row 139 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,928 - TimesheetTracker - DEBUG - Successfully processed row 139
+2025-01-09 21:46:06,928 - TimesheetTracker - DEBUG - Processed row 140 - customer: Country Pure, project: Ellington_CT
+2025-01-09 21:46:06,929 - TimesheetTracker - DEBUG - Successfully processed row 140
+2025-01-09 21:46:06,929 - TimesheetTracker - DEBUG - Validation issues detected in row 141, using defaults
+2025-01-09 21:46:06,930 - TimesheetTracker - DEBUG - Processed row 141 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,930 - TimesheetTracker - DEBUG - Successfully processed row 141
+2025-01-09 21:46:06,930 - TimesheetTracker - WARNING - Skipping row 142 due to invalid hours: 0.0
+2025-01-09 21:46:06,930 - TimesheetTracker - DEBUG - Processed row 143 - customer: Dr Pepper Snapple, project: Aspers_PA
+2025-01-09 21:46:06,930 - TimesheetTracker - DEBUG - Successfully processed row 143
+2025-01-09 21:46:06,931 - TimesheetTracker - DEBUG - Validation issues detected in row 144, using defaults
+2025-01-09 21:46:06,931 - TimesheetTracker - DEBUG - Processed row 144 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,931 - TimesheetTracker - DEBUG - Successfully processed row 144
+2025-01-09 21:46:06,931 - TimesheetTracker - WARNING - Skipping row 145 due to invalid hours: 0.0
+2025-01-09 21:46:06,931 - TimesheetTracker - WARNING - Skipping row 146 due to invalid hours: 0.0
+2025-01-09 21:46:06,931 - TimesheetTracker - WARNING - Skipping row 147 due to invalid hours: 0.0
+2025-01-09 21:46:06,932 - TimesheetTracker - DEBUG - Validation issues detected in row 148, using defaults
+2025-01-09 21:46:06,932 - TimesheetTracker - DEBUG - Processed row 148 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,932 - TimesheetTracker - DEBUG - Successfully processed row 148
+2025-01-09 21:46:06,932 - TimesheetTracker - DEBUG - Validation issues detected in row 149, using defaults
+2025-01-09 21:46:06,932 - TimesheetTracker - DEBUG - Processed row 149 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,932 - TimesheetTracker - DEBUG - Successfully processed row 149
+2025-01-09 21:46:06,932 - TimesheetTracker - DEBUG - Processed row 150 - customer: Country Pure, project: Ellington_CT
+2025-01-09 21:46:06,933 - TimesheetTracker - DEBUG - Successfully processed row 150
+2025-01-09 21:46:06,933 - TimesheetTracker - DEBUG - Validation issues detected in row 151, using defaults
+2025-01-09 21:46:06,933 - TimesheetTracker - DEBUG - Processed row 151 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,934 - TimesheetTracker - DEBUG - Successfully processed row 151
+2025-01-09 21:46:06,934 - TimesheetTracker - DEBUG - Validation issues detected in row 152, using defaults
+2025-01-09 21:46:06,934 - TimesheetTracker - DEBUG - Processed row 152 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,934 - TimesheetTracker - DEBUG - Successfully processed row 152
+2025-01-09 21:46:06,934 - TimesheetTracker - DEBUG - Processed row 153 - customer: Dr Pepper Snapple, project: Aspers_PA
+2025-01-09 21:46:06,934 - TimesheetTracker - DEBUG - Successfully processed row 153
+2025-01-09 21:46:06,935 - TimesheetTracker - DEBUG - Validation issues detected in row 154, using defaults
+2025-01-09 21:46:06,935 - TimesheetTracker - DEBUG - Processed row 154 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,935 - TimesheetTracker - DEBUG - Successfully processed row 154
+2025-01-09 21:46:06,935 - TimesheetTracker - DEBUG - Validation issues detected in row 155, using defaults
+2025-01-09 21:46:06,935 - TimesheetTracker - DEBUG - Processed row 155 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,935 - TimesheetTracker - DEBUG - Successfully processed row 155
+2025-01-09 21:46:06,936 - TimesheetTracker - DEBUG - Processed row 156 - customer: Hiland Dairy, project: Wichita_KS
+2025-01-09 21:46:06,936 - TimesheetTracker - DEBUG - Successfully processed row 156
+2025-01-09 21:46:06,936 - TimesheetTracker - DEBUG - Validation issues detected in row 157, using defaults
+2025-01-09 21:46:06,936 - TimesheetTracker - DEBUG - Processed row 157 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,936 - TimesheetTracker - DEBUG - Successfully processed row 157
+2025-01-09 21:46:06,936 - TimesheetTracker - DEBUG - Processed row 158 - customer: Country Pure, project: Ellington_CT
+2025-01-09 21:46:06,937 - TimesheetTracker - DEBUG - Successfully processed row 158
+2025-01-09 21:46:06,937 - TimesheetTracker - DEBUG - Validation issues detected in row 159, using defaults
+2025-01-09 21:46:06,937 - TimesheetTracker - DEBUG - Processed row 159 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,937 - TimesheetTracker - DEBUG - Successfully processed row 159
+2025-01-09 21:46:06,937 - TimesheetTracker - DEBUG - Validation issues detected in row 160, using defaults
+2025-01-09 21:46:06,937 - TimesheetTracker - DEBUG - Processed row 160 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,939 - TimesheetTracker - DEBUG - Successfully processed row 160
+2025-01-09 21:46:06,939 - TimesheetTracker - DEBUG - Validation issues detected in row 161, using defaults
+2025-01-09 21:46:06,939 - TimesheetTracker - DEBUG - Processed row 161 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,939 - TimesheetTracker - DEBUG - Successfully processed row 161
+2025-01-09 21:46:06,939 - TimesheetTracker - WARNING - Skipping row 162 due to invalid hours: 0.0
+2025-01-09 21:46:06,939 - TimesheetTracker - DEBUG - Validation issues detected in row 163, using defaults
+2025-01-09 21:46:06,940 - TimesheetTracker - DEBUG - Processed row 163 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,941 - TimesheetTracker - DEBUG - Successfully processed row 163
+2025-01-09 21:46:06,941 - TimesheetTracker - DEBUG - Validation issues detected in row 164, using defaults
+2025-01-09 21:46:06,941 - TimesheetTracker - DEBUG - Processed row 164 - customer: Unassigned, project: Unassigned
+2025-01-09 21:46:06,941 - TimesheetTracker - DEBUG - Successfully processed row 164
+2025-01-09 21:46:06,941 - TimesheetTracker - WARNING - Skipping row 165 due to invalid hours: 0
+2025-01-09 21:46:06,942 - TimesheetTracker - WARNING - Skipping row 166 due to invalid hours: 0
+2025-01-09 21:46:06,942 - TimesheetTracker - WARNING - Skipping row 167 due to invalid hours: 0
+2025-01-09 21:46:06,942 - TimesheetTracker - INFO - Successfully processed 153 valid entries from CSV
+2025-01-09 21:46:06,942 - TimesheetTracker - DEBUG - Initializing TimeEntryService for bulk entry creation
+2025-01-09 21:46:06,947 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 21:46:06,947 - TimesheetTracker - INFO - Creating 153 time entries in bulk
+2025-01-09 21:46:06,947 - TimesheetTracker - INFO - Beginning bulk creation of 153 time entries
+2025-01-09 21:46:06,947 - TimesheetTracker - DEBUG - Processing entry 1/153
+2025-01-09 21:46:06,951 - TimesheetTracker - DEBUG - Added entry 1 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,951 - TimesheetTracker - DEBUG - Processing entry 2/153
+2025-01-09 21:46:06,951 - TimesheetTracker - DEBUG - Added entry 2 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,951 - TimesheetTracker - DEBUG - Processing entry 3/153
+2025-01-09 21:46:06,951 - TimesheetTracker - DEBUG - Added entry 3 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,951 - TimesheetTracker - DEBUG - Processing entry 4/153
+2025-01-09 21:46:06,952 - TimesheetTracker - DEBUG - Added entry 4 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,952 - TimesheetTracker - DEBUG - Processing entry 5/153
+2025-01-09 21:46:06,952 - TimesheetTracker - DEBUG - Added entry 5 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,952 - TimesheetTracker - DEBUG - Processing entry 6/153
+2025-01-09 21:46:06,952 - TimesheetTracker - DEBUG - Added entry 6 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,952 - TimesheetTracker - DEBUG - Processing entry 7/153
+2025-01-09 21:46:06,952 - TimesheetTracker - DEBUG - Added entry 7 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,953 - TimesheetTracker - DEBUG - Processing entry 8/153
+2025-01-09 21:46:06,953 - TimesheetTracker - DEBUG - Added entry 8 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,953 - TimesheetTracker - DEBUG - Processing entry 9/153
+2025-01-09 21:46:06,953 - TimesheetTracker - DEBUG - Added entry 9 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,953 - TimesheetTracker - DEBUG - Processing entry 10/153
+2025-01-09 21:46:06,953 - TimesheetTracker - DEBUG - Added entry 10 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,953 - TimesheetTracker - DEBUG - Processing entry 11/153
+2025-01-09 21:46:06,954 - TimesheetTracker - DEBUG - Added entry 11 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,954 - TimesheetTracker - DEBUG - Processing entry 12/153
+2025-01-09 21:46:06,954 - TimesheetTracker - DEBUG - Added entry 12 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,954 - TimesheetTracker - DEBUG - Processing entry 13/153
+2025-01-09 21:46:06,954 - TimesheetTracker - DEBUG - Added entry 13 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,954 - TimesheetTracker - DEBUG - Processing entry 14/153
+2025-01-09 21:46:06,954 - TimesheetTracker - DEBUG - Added entry 14 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,954 - TimesheetTracker - DEBUG - Processing entry 15/153
+2025-01-09 21:46:06,955 - TimesheetTracker - DEBUG - Added entry 15 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,955 - TimesheetTracker - DEBUG - Processing entry 16/153
+2025-01-09 21:46:06,955 - TimesheetTracker - DEBUG - Added entry 16 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,955 - TimesheetTracker - DEBUG - Processing entry 17/153
+2025-01-09 21:46:06,955 - TimesheetTracker - DEBUG - Added entry 17 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,955 - TimesheetTracker - DEBUG - Processing entry 18/153
+2025-01-09 21:46:06,955 - TimesheetTracker - DEBUG - Added entry 18 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,955 - TimesheetTracker - DEBUG - Processing entry 19/153
+2025-01-09 21:46:06,956 - TimesheetTracker - DEBUG - Added entry 19 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,956 - TimesheetTracker - DEBUG - Processing entry 20/153
+2025-01-09 21:46:06,956 - TimesheetTracker - DEBUG - Added entry 20 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,956 - TimesheetTracker - DEBUG - Processing entry 21/153
+2025-01-09 21:46:06,956 - TimesheetTracker - DEBUG - Added entry 21 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,956 - TimesheetTracker - DEBUG - Processing entry 22/153
+2025-01-09 21:46:06,956 - TimesheetTracker - DEBUG - Added entry 22 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,956 - TimesheetTracker - DEBUG - Processing entry 23/153
+2025-01-09 21:46:06,956 - TimesheetTracker - DEBUG - Added entry 23 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,957 - TimesheetTracker - DEBUG - Processing entry 24/153
+2025-01-09 21:46:06,957 - TimesheetTracker - DEBUG - Added entry 24 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,957 - TimesheetTracker - DEBUG - Processing entry 25/153
+2025-01-09 21:46:06,957 - TimesheetTracker - DEBUG - Added entry 25 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,957 - TimesheetTracker - DEBUG - Processing entry 26/153
+2025-01-09 21:46:06,957 - TimesheetTracker - DEBUG - Added entry 26 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,957 - TimesheetTracker - DEBUG - Processing entry 27/153
+2025-01-09 21:46:06,957 - TimesheetTracker - DEBUG - Added entry 27 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,957 - TimesheetTracker - DEBUG - Processing entry 28/153
+2025-01-09 21:46:06,958 - TimesheetTracker - DEBUG - Added entry 28 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,958 - TimesheetTracker - DEBUG - Processing entry 29/153
+2025-01-09 21:46:06,958 - TimesheetTracker - DEBUG - Added entry 29 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,958 - TimesheetTracker - DEBUG - Processing entry 30/153
+2025-01-09 21:46:06,958 - TimesheetTracker - DEBUG - Added entry 30 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,958 - TimesheetTracker - DEBUG - Processing entry 31/153
+2025-01-09 21:46:06,958 - TimesheetTracker - DEBUG - Added entry 31 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,958 - TimesheetTracker - DEBUG - Processing entry 32/153
+2025-01-09 21:46:06,958 - TimesheetTracker - DEBUG - Added entry 32 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,958 - TimesheetTracker - DEBUG - Processing entry 33/153
+2025-01-09 21:46:06,958 - TimesheetTracker - DEBUG - Added entry 33 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,959 - TimesheetTracker - DEBUG - Processing entry 34/153
+2025-01-09 21:46:06,959 - TimesheetTracker - DEBUG - Added entry 34 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,959 - TimesheetTracker - DEBUG - Processing entry 35/153
+2025-01-09 21:46:06,959 - TimesheetTracker - DEBUG - Added entry 35 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,959 - TimesheetTracker - DEBUG - Processing entry 36/153
+2025-01-09 21:46:06,959 - TimesheetTracker - DEBUG - Added entry 36 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,959 - TimesheetTracker - DEBUG - Processing entry 37/153
+2025-01-09 21:46:06,959 - TimesheetTracker - DEBUG - Added entry 37 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,959 - TimesheetTracker - DEBUG - Processing entry 38/153
+2025-01-09 21:46:06,960 - TimesheetTracker - DEBUG - Added entry 38 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,960 - TimesheetTracker - DEBUG - Processing entry 39/153
+2025-01-09 21:46:06,960 - TimesheetTracker - DEBUG - Added entry 39 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,960 - TimesheetTracker - DEBUG - Processing entry 40/153
+2025-01-09 21:46:06,960 - TimesheetTracker - DEBUG - Added entry 40 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,960 - TimesheetTracker - DEBUG - Processing entry 41/153
+2025-01-09 21:46:06,960 - TimesheetTracker - DEBUG - Added entry 41 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,960 - TimesheetTracker - DEBUG - Processing entry 42/153
+2025-01-09 21:46:06,960 - TimesheetTracker - DEBUG - Added entry 42 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,961 - TimesheetTracker - DEBUG - Processing entry 43/153
+2025-01-09 21:46:06,961 - TimesheetTracker - DEBUG - Added entry 43 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,961 - TimesheetTracker - DEBUG - Processing entry 44/153
+2025-01-09 21:46:06,961 - TimesheetTracker - DEBUG - Added entry 44 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,961 - TimesheetTracker - DEBUG - Processing entry 45/153
+2025-01-09 21:46:06,961 - TimesheetTracker - DEBUG - Added entry 45 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,961 - TimesheetTracker - DEBUG - Processing entry 46/153
+2025-01-09 21:46:06,961 - TimesheetTracker - DEBUG - Added entry 46 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,961 - TimesheetTracker - DEBUG - Processing entry 47/153
+2025-01-09 21:46:06,962 - TimesheetTracker - DEBUG - Added entry 47 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,962 - TimesheetTracker - DEBUG - Processing entry 48/153
+2025-01-09 21:46:06,962 - TimesheetTracker - DEBUG - Added entry 48 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,962 - TimesheetTracker - DEBUG - Processing entry 49/153
+2025-01-09 21:46:06,962 - TimesheetTracker - DEBUG - Added entry 49 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,962 - TimesheetTracker - DEBUG - Processing entry 50/153
+2025-01-09 21:46:06,962 - TimesheetTracker - DEBUG - Added entry 50 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,962 - TimesheetTracker - DEBUG - Processing entry 51/153
+2025-01-09 21:46:06,963 - TimesheetTracker - DEBUG - Added entry 51 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,963 - TimesheetTracker - DEBUG - Processing entry 52/153
+2025-01-09 21:46:06,963 - TimesheetTracker - DEBUG - Added entry 52 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,963 - TimesheetTracker - DEBUG - Processing entry 53/153
+2025-01-09 21:46:06,963 - TimesheetTracker - DEBUG - Added entry 53 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,963 - TimesheetTracker - DEBUG - Processing entry 54/153
+2025-01-09 21:46:06,963 - TimesheetTracker - DEBUG - Added entry 54 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,963 - TimesheetTracker - DEBUG - Processing entry 55/153
+2025-01-09 21:46:06,963 - TimesheetTracker - DEBUG - Added entry 55 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,964 - TimesheetTracker - DEBUG - Processing entry 56/153
+2025-01-09 21:46:06,964 - TimesheetTracker - DEBUG - Added entry 56 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,964 - TimesheetTracker - DEBUG - Processing entry 57/153
+2025-01-09 21:46:06,964 - TimesheetTracker - DEBUG - Added entry 57 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,964 - TimesheetTracker - DEBUG - Processing entry 58/153
+2025-01-09 21:46:06,964 - TimesheetTracker - DEBUG - Added entry 58 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,964 - TimesheetTracker - DEBUG - Processing entry 59/153
+2025-01-09 21:46:06,964 - TimesheetTracker - DEBUG - Added entry 59 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,964 - TimesheetTracker - DEBUG - Processing entry 60/153
+2025-01-09 21:46:06,965 - TimesheetTracker - DEBUG - Added entry 60 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,965 - TimesheetTracker - DEBUG - Processing entry 61/153
+2025-01-09 21:46:06,965 - TimesheetTracker - DEBUG - Added entry 61 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,965 - TimesheetTracker - DEBUG - Processing entry 62/153
+2025-01-09 21:46:06,965 - TimesheetTracker - DEBUG - Added entry 62 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,965 - TimesheetTracker - DEBUG - Processing entry 63/153
+2025-01-09 21:46:06,965 - TimesheetTracker - DEBUG - Added entry 63 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,965 - TimesheetTracker - DEBUG - Processing entry 64/153
+2025-01-09 21:46:06,965 - TimesheetTracker - DEBUG - Added entry 64 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,965 - TimesheetTracker - DEBUG - Processing entry 65/153
+2025-01-09 21:46:06,966 - TimesheetTracker - DEBUG - Added entry 65 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,967 - TimesheetTracker - DEBUG - Processing entry 66/153
+2025-01-09 21:46:06,967 - TimesheetTracker - DEBUG - Added entry 66 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,967 - TimesheetTracker - DEBUG - Processing entry 67/153
+2025-01-09 21:46:06,967 - TimesheetTracker - DEBUG - Added entry 67 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,967 - TimesheetTracker - DEBUG - Processing entry 68/153
+2025-01-09 21:46:06,967 - TimesheetTracker - DEBUG - Added entry 68 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,967 - TimesheetTracker - DEBUG - Processing entry 69/153
+2025-01-09 21:46:06,968 - TimesheetTracker - DEBUG - Added entry 69 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,968 - TimesheetTracker - DEBUG - Processing entry 70/153
+2025-01-09 21:46:06,968 - TimesheetTracker - DEBUG - Added entry 70 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,968 - TimesheetTracker - DEBUG - Processing entry 71/153
+2025-01-09 21:46:06,968 - TimesheetTracker - DEBUG - Added entry 71 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,968 - TimesheetTracker - DEBUG - Processing entry 72/153
+2025-01-09 21:46:06,968 - TimesheetTracker - DEBUG - Added entry 72 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,968 - TimesheetTracker - DEBUG - Processing entry 73/153
+2025-01-09 21:46:06,969 - TimesheetTracker - DEBUG - Added entry 73 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,969 - TimesheetTracker - DEBUG - Processing entry 74/153
+2025-01-09 21:46:06,969 - TimesheetTracker - DEBUG - Added entry 74 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,969 - TimesheetTracker - DEBUG - Processing entry 75/153
+2025-01-09 21:46:06,969 - TimesheetTracker - DEBUG - Added entry 75 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,969 - TimesheetTracker - DEBUG - Processing entry 76/153
+2025-01-09 21:46:06,969 - TimesheetTracker - DEBUG - Added entry 76 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,970 - TimesheetTracker - DEBUG - Processing entry 77/153
+2025-01-09 21:46:06,970 - TimesheetTracker - DEBUG - Added entry 77 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,970 - TimesheetTracker - DEBUG - Processing entry 78/153
+2025-01-09 21:46:06,970 - TimesheetTracker - DEBUG - Added entry 78 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,970 - TimesheetTracker - DEBUG - Processing entry 79/153
+2025-01-09 21:46:06,970 - TimesheetTracker - DEBUG - Added entry 79 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,970 - TimesheetTracker - DEBUG - Processing entry 80/153
+2025-01-09 21:46:06,971 - TimesheetTracker - DEBUG - Added entry 80 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,971 - TimesheetTracker - DEBUG - Processing entry 81/153
+2025-01-09 21:46:06,971 - TimesheetTracker - DEBUG - Added entry 81 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,971 - TimesheetTracker - DEBUG - Processing entry 82/153
+2025-01-09 21:46:06,971 - TimesheetTracker - DEBUG - Added entry 82 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,971 - TimesheetTracker - DEBUG - Processing entry 83/153
+2025-01-09 21:46:06,971 - TimesheetTracker - DEBUG - Added entry 83 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,972 - TimesheetTracker - DEBUG - Processing entry 84/153
+2025-01-09 21:46:06,972 - TimesheetTracker - DEBUG - Added entry 84 to session: ECOLAB - Project_Magic_Bullet
+2025-01-09 21:46:06,972 - TimesheetTracker - DEBUG - Processing entry 85/153
+2025-01-09 21:46:06,972 - TimesheetTracker - DEBUG - Added entry 85 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,972 - TimesheetTracker - DEBUG - Processing entry 86/153
+2025-01-09 21:46:06,972 - TimesheetTracker - DEBUG - Added entry 86 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,972 - TimesheetTracker - DEBUG - Processing entry 87/153
+2025-01-09 21:46:06,972 - TimesheetTracker - DEBUG - Added entry 87 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,973 - TimesheetTracker - DEBUG - Processing entry 88/153
+2025-01-09 21:46:06,973 - TimesheetTracker - DEBUG - Added entry 88 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,973 - TimesheetTracker - DEBUG - Processing entry 89/153
+2025-01-09 21:46:06,973 - TimesheetTracker - DEBUG - Added entry 89 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,973 - TimesheetTracker - DEBUG - Processing entry 90/153
+2025-01-09 21:46:06,973 - TimesheetTracker - DEBUG - Added entry 90 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,973 - TimesheetTracker - DEBUG - Processing entry 91/153
+2025-01-09 21:46:06,974 - TimesheetTracker - DEBUG - Added entry 91 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,974 - TimesheetTracker - DEBUG - Processing entry 92/153
+2025-01-09 21:46:06,974 - TimesheetTracker - DEBUG - Added entry 92 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,974 - TimesheetTracker - DEBUG - Processing entry 93/153
+2025-01-09 21:46:06,974 - TimesheetTracker - DEBUG - Added entry 93 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,974 - TimesheetTracker - DEBUG - Processing entry 94/153
+2025-01-09 21:46:06,974 - TimesheetTracker - DEBUG - Added entry 94 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,974 - TimesheetTracker - DEBUG - Processing entry 95/153
+2025-01-09 21:46:06,975 - TimesheetTracker - DEBUG - Added entry 95 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,975 - TimesheetTracker - DEBUG - Processing entry 96/153
+2025-01-09 21:46:06,975 - TimesheetTracker - DEBUG - Added entry 96 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,975 - TimesheetTracker - DEBUG - Processing entry 97/153
+2025-01-09 21:46:06,975 - TimesheetTracker - DEBUG - Added entry 97 to session: Hiland Dairy - Wichita_KS
+2025-01-09 21:46:06,975 - TimesheetTracker - DEBUG - Processing entry 98/153
+2025-01-09 21:46:06,975 - TimesheetTracker - DEBUG - Added entry 98 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,975 - TimesheetTracker - DEBUG - Processing entry 99/153
+2025-01-09 21:46:06,976 - TimesheetTracker - DEBUG - Added entry 99 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,976 - TimesheetTracker - DEBUG - Processing entry 100/153
+2025-01-09 21:46:06,976 - TimesheetTracker - DEBUG - Added entry 100 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,976 - TimesheetTracker - DEBUG - Processing entry 101/153
+2025-01-09 21:46:06,976 - TimesheetTracker - DEBUG - Added entry 101 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,976 - TimesheetTracker - DEBUG - Processing entry 102/153
+2025-01-09 21:46:06,976 - TimesheetTracker - DEBUG - Added entry 102 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,976 - TimesheetTracker - DEBUG - Processing entry 103/153
+2025-01-09 21:46:06,976 - TimesheetTracker - DEBUG - Added entry 103 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,977 - TimesheetTracker - DEBUG - Processing entry 104/153
+2025-01-09 21:46:06,977 - TimesheetTracker - DEBUG - Added entry 104 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,977 - TimesheetTracker - DEBUG - Processing entry 105/153
+2025-01-09 21:46:06,977 - TimesheetTracker - DEBUG - Added entry 105 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,977 - TimesheetTracker - DEBUG - Processing entry 106/153
+2025-01-09 21:46:06,978 - TimesheetTracker - DEBUG - Added entry 106 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,978 - TimesheetTracker - DEBUG - Processing entry 107/153
+2025-01-09 21:46:06,978 - TimesheetTracker - DEBUG - Added entry 107 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,978 - TimesheetTracker - DEBUG - Processing entry 108/153
+2025-01-09 21:46:06,978 - TimesheetTracker - DEBUG - Added entry 108 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,978 - TimesheetTracker - DEBUG - Processing entry 109/153
+2025-01-09 21:46:06,978 - TimesheetTracker - DEBUG - Added entry 109 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,978 - TimesheetTracker - DEBUG - Processing entry 110/153
+2025-01-09 21:46:06,978 - TimesheetTracker - DEBUG - Added entry 110 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,979 - TimesheetTracker - DEBUG - Processing entry 111/153
+2025-01-09 21:46:06,979 - TimesheetTracker - DEBUG - Added entry 111 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,979 - TimesheetTracker - DEBUG - Processing entry 112/153
+2025-01-09 21:46:06,979 - TimesheetTracker - DEBUG - Added entry 112 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,979 - TimesheetTracker - DEBUG - Processing entry 113/153
+2025-01-09 21:46:06,979 - TimesheetTracker - DEBUG - Added entry 113 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,979 - TimesheetTracker - DEBUG - Processing entry 114/153
+2025-01-09 21:46:06,979 - TimesheetTracker - DEBUG - Added entry 114 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,979 - TimesheetTracker - DEBUG - Processing entry 115/153
+2025-01-09 21:46:06,980 - TimesheetTracker - DEBUG - Added entry 115 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,980 - TimesheetTracker - DEBUG - Processing entry 116/153
+2025-01-09 21:46:06,980 - TimesheetTracker - DEBUG - Added entry 116 to session: Dr Pepper Snapple - Aspers_PA
+2025-01-09 21:46:06,980 - TimesheetTracker - DEBUG - Processing entry 117/153
+2025-01-09 21:46:06,980 - TimesheetTracker - DEBUG - Added entry 117 to session: ECOLAB - iTrends
+2025-01-09 21:46:06,980 - TimesheetTracker - DEBUG - Processing entry 118/153
+2025-01-09 21:46:06,980 - TimesheetTracker - DEBUG - Added entry 118 to session: Hiland Dairy - Wichita_KS
+2025-01-09 21:46:06,980 - TimesheetTracker - DEBUG - Processing entry 119/153
+2025-01-09 21:46:06,981 - TimesheetTracker - DEBUG - Added entry 119 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,981 - TimesheetTracker - DEBUG - Processing entry 120/153
+2025-01-09 21:46:06,981 - TimesheetTracker - DEBUG - Added entry 120 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,981 - TimesheetTracker - DEBUG - Processing entry 121/153
+2025-01-09 21:46:06,981 - TimesheetTracker - DEBUG - Added entry 121 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,981 - TimesheetTracker - DEBUG - Processing entry 122/153
+2025-01-09 21:46:06,981 - TimesheetTracker - DEBUG - Added entry 122 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,981 - TimesheetTracker - DEBUG - Processing entry 123/153
+2025-01-09 21:46:06,982 - TimesheetTracker - DEBUG - Added entry 123 to session: Hiland Dairy - Wichita_KS
+2025-01-09 21:46:06,982 - TimesheetTracker - DEBUG - Processing entry 124/153
+2025-01-09 21:46:06,982 - TimesheetTracker - DEBUG - Added entry 124 to session: Dr Pepper Snapple - Aspers_PA
+2025-01-09 21:46:06,982 - TimesheetTracker - DEBUG - Processing entry 125/153
+2025-01-09 21:46:06,982 - TimesheetTracker - DEBUG - Added entry 125 to session: Hiland Dairy - Wichita_KS
+2025-01-09 21:46:06,982 - TimesheetTracker - DEBUG - Processing entry 126/153
+2025-01-09 21:46:06,982 - TimesheetTracker - DEBUG - Added entry 126 to session: Dr Pepper Snapple - Aspers_PA
+2025-01-09 21:46:06,982 - TimesheetTracker - DEBUG - Processing entry 127/153
+2025-01-09 21:46:06,983 - TimesheetTracker - DEBUG - Added entry 127 to session: Hiland Dairy - Wichita_KS
+2025-01-09 21:46:06,983 - TimesheetTracker - DEBUG - Processing entry 128/153
+2025-01-09 21:46:06,983 - TimesheetTracker - DEBUG - Added entry 128 to session: Hiland Dairy - Wichita_KS
+2025-01-09 21:46:06,983 - TimesheetTracker - DEBUG - Processing entry 129/153
+2025-01-09 21:46:06,983 - TimesheetTracker - DEBUG - Added entry 129 to session: Dr Pepper Snapple - Aspers_PA
+2025-01-09 21:46:06,983 - TimesheetTracker - DEBUG - Processing entry 130/153
+2025-01-09 21:46:06,983 - TimesheetTracker - DEBUG - Added entry 130 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,983 - TimesheetTracker - DEBUG - Processing entry 131/153
+2025-01-09 21:46:06,983 - TimesheetTracker - DEBUG - Added entry 131 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,983 - TimesheetTracker - DEBUG - Processing entry 132/153
+2025-01-09 21:46:06,984 - TimesheetTracker - DEBUG - Added entry 132 to session: Hiland Dairy - Wichita_KS
+2025-01-09 21:46:06,984 - TimesheetTracker - DEBUG - Processing entry 133/153
+2025-01-09 21:46:06,984 - TimesheetTracker - DEBUG - Added entry 133 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,984 - TimesheetTracker - DEBUG - Processing entry 134/153
+2025-01-09 21:46:06,984 - TimesheetTracker - DEBUG - Added entry 134 to session: Country Pure - Ellington_CT
+2025-01-09 21:46:06,984 - TimesheetTracker - DEBUG - Processing entry 135/153
+2025-01-09 21:46:06,984 - TimesheetTracker - DEBUG - Added entry 135 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,984 - TimesheetTracker - DEBUG - Processing entry 136/153
+2025-01-09 21:46:06,985 - TimesheetTracker - DEBUG - Added entry 136 to session: Dr Pepper Snapple - Aspers_PA
+2025-01-09 21:46:06,985 - TimesheetTracker - DEBUG - Processing entry 137/153
+2025-01-09 21:46:06,985 - TimesheetTracker - DEBUG - Added entry 137 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,985 - TimesheetTracker - DEBUG - Processing entry 138/153
+2025-01-09 21:46:06,985 - TimesheetTracker - DEBUG - Added entry 138 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,985 - TimesheetTracker - DEBUG - Processing entry 139/153
+2025-01-09 21:46:06,985 - TimesheetTracker - DEBUG - Added entry 139 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,985 - TimesheetTracker - DEBUG - Processing entry 140/153
+2025-01-09 21:46:06,986 - TimesheetTracker - DEBUG - Added entry 140 to session: Country Pure - Ellington_CT
+2025-01-09 21:46:06,986 - TimesheetTracker - DEBUG - Processing entry 141/153
+2025-01-09 21:46:06,986 - TimesheetTracker - DEBUG - Added entry 141 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,986 - TimesheetTracker - DEBUG - Processing entry 142/153
+2025-01-09 21:46:06,986 - TimesheetTracker - DEBUG - Added entry 142 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,986 - TimesheetTracker - DEBUG - Processing entry 143/153
+2025-01-09 21:46:06,986 - TimesheetTracker - DEBUG - Added entry 143 to session: Dr Pepper Snapple - Aspers_PA
+2025-01-09 21:46:06,986 - TimesheetTracker - DEBUG - Processing entry 144/153
+2025-01-09 21:46:06,986 - TimesheetTracker - DEBUG - Added entry 144 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,987 - TimesheetTracker - DEBUG - Processing entry 145/153
+2025-01-09 21:46:06,987 - TimesheetTracker - DEBUG - Added entry 145 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,987 - TimesheetTracker - DEBUG - Processing entry 146/153
+2025-01-09 21:46:06,987 - TimesheetTracker - DEBUG - Added entry 146 to session: Hiland Dairy - Wichita_KS
+2025-01-09 21:46:06,987 - TimesheetTracker - DEBUG - Processing entry 147/153
+2025-01-09 21:46:06,987 - TimesheetTracker - DEBUG - Added entry 147 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,987 - TimesheetTracker - DEBUG - Processing entry 148/153
+2025-01-09 21:46:06,988 - TimesheetTracker - DEBUG - Added entry 148 to session: Country Pure - Ellington_CT
+2025-01-09 21:46:06,988 - TimesheetTracker - DEBUG - Processing entry 149/153
+2025-01-09 21:46:06,988 - TimesheetTracker - DEBUG - Added entry 149 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,988 - TimesheetTracker - DEBUG - Processing entry 150/153
+2025-01-09 21:46:06,988 - TimesheetTracker - DEBUG - Added entry 150 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,988 - TimesheetTracker - DEBUG - Processing entry 151/153
+2025-01-09 21:46:06,988 - TimesheetTracker - DEBUG - Added entry 151 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,988 - TimesheetTracker - DEBUG - Processing entry 152/153
+2025-01-09 21:46:06,989 - TimesheetTracker - DEBUG - Added entry 152 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,989 - TimesheetTracker - DEBUG - Processing entry 153/153
+2025-01-09 21:46:06,989 - TimesheetTracker - DEBUG - Added entry 153 to session: Unassigned - Unassigned
+2025-01-09 21:46:06,989 - TimesheetTracker - DEBUG - Committing all entries to database
+2025-01-09 21:46:07,101 - TimesheetTracker - INFO - Successfully created 153 time entries (Total: 341.0 hours)
+2025-01-09 21:46:07,102 - TimesheetTracker - INFO - Successfully created 153 time entries
+2025-01-09 21:46:10,140 - TimesheetTracker - DEBUG - Database session closed
+2025-01-09 21:51:03,245 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:51:03,997 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 21:51:03,997 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': None, 'created_at': None, 'updated_at': None, 'week_number': 1, 'month': 'January', 'category': 'Development', 'subcategory': 'Coding', 'customer': 'TestCustomer', 'project': 'TestProject', 'task_description': 'Unit testing', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}
+2025-01-09 21:51:03,997 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 21:51:03,997 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 21:51:04,004 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 21:51:04,004 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 21:51:04,026 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 21:51:04,030 - TimesheetTracker - INFO - Successfully created time entry [1] for TestCustomer - TestProject (8.0 hours)
+2025-01-09 21:51:04,051 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 21:51:04,051 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': None, 'created_at': None, 'updated_at': None, 'week_number': 1, 'month': 'January', 'category': 'Development', 'subcategory': 'Coding', 'customer': None, 'project': None, 'task_description': 'Testing defaults', 'hours': 4.0, 'date': datetime.date(2024, 1, 1)}
+2025-01-09 21:51:04,051 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 21:51:04,051 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 21:51:04,052 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 21:51:04,052 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 21:51:04,067 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 21:51:04,068 - TimesheetTracker - INFO - Successfully created time entry [1] for None - None (4.0 hours)
+2025-01-09 21:51:04,150 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 21:51:04,193 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 21:51:04,193 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': None, 'created_at': None, 'updated_at': None, 'week_number': 1, 'month': 'January', 'category': 'Development', 'subcategory': 'Coding', 'customer': 'TestCustomer', 'project': 'TestProject', 'task_description': 'Entry 0', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}
+2025-01-09 21:51:04,194 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 21:51:04,194 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 21:51:04,194 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 21:51:04,194 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 21:51:04,208 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 21:51:04,209 - TimesheetTracker - INFO - Successfully created time entry [1] for TestCustomer - TestProject (8.0 hours)
+2025-01-09 21:51:04,210 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': None, 'created_at': None, 'updated_at': None, 'week_number': 1, 'month': 'January', 'category': 'Development', 'subcategory': 'Coding', 'customer': 'TestCustomer', 'project': 'TestProject', 'task_description': 'Entry 1', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}
+2025-01-09 21:51:04,210 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 21:51:04,210 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 21:51:04,210 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 21:51:04,210 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 21:51:04,227 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 21:51:04,228 - TimesheetTracker - INFO - Successfully created time entry [2] for TestCustomer - TestProject (8.0 hours)
+2025-01-09 21:51:04,228 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': None, 'created_at': None, 'updated_at': None, 'week_number': 1, 'month': 'January', 'category': 'Development', 'subcategory': 'Coding', 'customer': 'TestCustomer', 'project': 'TestProject', 'task_description': 'Entry 2', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}
+2025-01-09 21:51:04,229 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 21:51:04,229 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 21:51:04,229 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 21:51:04,229 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 21:51:04,257 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 21:51:04,258 - TimesheetTracker - INFO - Successfully created time entry [3] for TestCustomer - TestProject (8.0 hours)
+2025-01-09 21:51:04,258 - TimesheetTracker - DEBUG - Retrieving time entries with filters: project_id=None, customer=None
+2025-01-09 21:51:04,258 - TimesheetTracker - DEBUG - Applying pagination: skip=0, limit=100
+2025-01-09 21:51:04,260 - TimesheetTracker - INFO - Retrieved 3 time entries
+2025-01-09 21:51:04,261 - TimesheetTracker - DEBUG - Retrieving time entries with filters: project_id=None, customer=None
+2025-01-09 21:51:04,261 - TimesheetTracker - DEBUG - Applying pagination: skip=1, limit=1
+2025-01-09 21:51:04,261 - TimesheetTracker - INFO - Retrieved 1 time entries
+2025-01-09 21:51:04,280 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 21:51:04,281 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': None, 'created_at': None, 'updated_at': None, 'week_number': 1, 'month': 'January', 'category': 'Development', 'subcategory': 'Coding', 'customer': 'Customer1', 'project': 'Customer1_Project', 'task_description': 'Work for Customer1', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}
+2025-01-09 21:51:04,281 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 21:51:04,281 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 21:51:04,281 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 21:51:04,281 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 21:51:04,293 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 21:51:04,294 - TimesheetTracker - INFO - Successfully created time entry [1] for Customer1 - Customer1_Project (8.0 hours)
+2025-01-09 21:51:04,294 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': None, 'created_at': None, 'updated_at': None, 'week_number': 1, 'month': 'January', 'category': 'Development', 'subcategory': 'Coding', 'customer': 'Customer2', 'project': 'Customer2_Project', 'task_description': 'Work for Customer2', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}
+2025-01-09 21:51:04,295 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 21:51:04,295 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 21:51:04,295 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 21:51:04,295 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 21:51:04,307 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 21:51:04,308 - TimesheetTracker - INFO - Successfully created time entry [2] for Customer2 - Customer2_Project (8.0 hours)
+2025-01-09 21:51:04,308 - TimesheetTracker - DEBUG - Retrieving time entries with filters: project_id=None, customer=Customer1
+2025-01-09 21:51:04,309 - TimesheetTracker - DEBUG - Applying customer filter: Customer1
+2025-01-09 21:51:04,309 - TimesheetTracker - DEBUG - Applying pagination: skip=0, limit=100
+2025-01-09 21:51:04,311 - TimesheetTracker - INFO - Retrieved 1 time entries
+2025-01-09 21:51:04,311 - TimesheetTracker - DEBUG - Retrieving time entries with filters: project_id=Customer1_Project, customer=None
+2025-01-09 21:51:04,311 - TimesheetTracker - DEBUG - Applying project filter: Customer1_Project
+2025-01-09 21:51:04,311 - TimesheetTracker - DEBUG - Applying pagination: skip=0, limit=100
+2025-01-09 21:51:04,312 - TimesheetTracker - INFO - Retrieved 1 time entries
+2025-01-09 21:51:04,329 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 21:51:04,330 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': None, 'created_at': None, 'updated_at': None, 'week_number': 1, 'month': 'January', 'category': 'Development', 'subcategory': 'Coding', 'customer': 'TestCustomer', 'project': 'TestProject', 'task_description': 'Future work', 'hours': 8.0, 'date': datetime.date(2025, 1, 1)}
+2025-01-09 21:51:04,330 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 21:51:04,330 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 21:51:04,330 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 21:51:04,330 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 21:51:04,352 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 21:51:04,353 - TimesheetTracker - INFO - Successfully created time entry [1] for TestCustomer - TestProject (8.0 hours)
+2025-01-09 21:51:40,808 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:51:41,308 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 21:51:41,308 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': None, 'created_at': None, 'updated_at': None, 'week_number': 1, 'month': 'January', 'category': 'Development', 'subcategory': 'Coding', 'customer': 'TestCustomer', 'project': 'TestProject', 'task_description': 'Unit testing', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}
+2025-01-09 21:51:41,308 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 21:51:41,308 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 21:51:41,315 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 21:51:41,316 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 21:51:41,373 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 21:51:41,406 - TimesheetTracker - INFO - Successfully created time entry [1] for TestCustomer - TestProject (8.0 hours)
+2025-01-09 21:51:41,458 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 21:51:41,459 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': None, 'created_at': None, 'updated_at': None, 'week_number': 1, 'month': 'January', 'category': 'Development', 'subcategory': 'Coding', 'customer': None, 'project': None, 'task_description': 'Testing defaults', 'hours': 4.0, 'date': datetime.date(2024, 1, 1)}
+2025-01-09 21:51:41,459 - TimesheetTracker - INFO - No customer provided, defaulting to Unassigned
+2025-01-09 21:51:41,459 - TimesheetTracker - INFO - No project provided, defaulting to Unassigned
+2025-01-09 21:51:41,459 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 21:51:41,459 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 21:51:41,459 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 21:51:41,460 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 21:51:41,477 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 21:51:41,478 - TimesheetTracker - INFO - Successfully created time entry [1] for Unassigned - Unassigned (4.0 hours)
+2025-01-09 21:51:41,511 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 21:51:41,980 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:51:42,050 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 21:51:42,054 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 21:51:42,377 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 21:51:42,377 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': None, 'created_at': None, 'updated_at': None, 'week_number': 1, 'month': 'January', 'category': 'Development', 'subcategory': 'Coding', 'customer': 'TestCustomer', 'project': 'TestProject', 'task_description': 'Entry 0', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}
+2025-01-09 21:51:42,377 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 21:51:42,378 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 21:51:42,378 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 21:51:42,382 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 21:51:42,408 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 21:51:42,409 - TimesheetTracker - INFO - Successfully created time entry [1] for TestCustomer - TestProject (8.0 hours)
+2025-01-09 21:51:42,410 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': None, 'created_at': None, 'updated_at': None, 'week_number': 1, 'month': 'January', 'category': 'Development', 'subcategory': 'Coding', 'customer': 'TestCustomer', 'project': 'TestProject', 'task_description': 'Entry 1', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}
+2025-01-09 21:51:42,410 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 21:51:42,412 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 21:51:42,415 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 21:51:42,419 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 21:51:42,422 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 21:51:42,422 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 21:51:42,422 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 21:51:42,457 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 21:51:42,459 - TimesheetTracker - INFO - Successfully created time entry [2] for TestCustomer - TestProject (8.0 hours)
+2025-01-09 21:51:42,459 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': None, 'created_at': None, 'updated_at': None, 'week_number': 1, 'month': 'January', 'category': 'Development', 'subcategory': 'Coding', 'customer': 'TestCustomer', 'project': 'TestProject', 'task_description': 'Entry 2', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}
+2025-01-09 21:51:42,459 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 21:51:42,459 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 21:51:42,459 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 21:51:42,459 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 21:51:42,476 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 21:51:42,477 - TimesheetTracker - INFO - Successfully created time entry [3] for TestCustomer - TestProject (8.0 hours)
+2025-01-09 21:51:42,477 - TimesheetTracker - DEBUG - Retrieving time entries with filters: project_id=None, customer=None
+2025-01-09 21:51:42,477 - TimesheetTracker - DEBUG - Applying pagination: skip=0, limit=100
+2025-01-09 21:51:42,479 - TimesheetTracker - INFO - Retrieved 3 time entries
+2025-01-09 21:51:42,479 - TimesheetTracker - DEBUG - Retrieving time entries with filters: project_id=None, customer=None
+2025-01-09 21:51:42,479 - TimesheetTracker - DEBUG - Applying pagination: skip=1, limit=1
+2025-01-09 21:51:42,480 - TimesheetTracker - INFO - Retrieved 1 time entries
+2025-01-09 21:51:42,503 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 21:51:42,504 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': None, 'created_at': None, 'updated_at': None, 'week_number': 1, 'month': 'January', 'category': 'Development', 'subcategory': 'Coding', 'customer': 'Customer1', 'project': 'Customer1_Project', 'task_description': 'Work for Customer1', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}
+2025-01-09 21:51:42,504 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 21:51:42,504 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 21:51:42,504 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 21:51:42,504 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 21:51:42,530 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 21:51:42,533 - TimesheetTracker - INFO - Successfully created time entry [1] for Customer1 - Customer1_Project (8.0 hours)
+2025-01-09 21:51:42,534 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': None, 'created_at': None, 'updated_at': None, 'week_number': 1, 'month': 'January', 'category': 'Development', 'subcategory': 'Coding', 'customer': 'Customer2', 'project': 'Customer2_Project', 'task_description': 'Work for Customer2', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}
+2025-01-09 21:51:42,534 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 21:51:42,534 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 21:51:42,534 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 21:51:42,534 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 21:51:42,546 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 21:51:42,547 - TimesheetTracker - INFO - Successfully created time entry [2] for Customer2 - Customer2_Project (8.0 hours)
+2025-01-09 21:51:42,549 - TimesheetTracker - DEBUG - Retrieving time entries with filters: project_id=None, customer=Customer1
+2025-01-09 21:51:42,549 - TimesheetTracker - DEBUG - Applying customer filter: Customer1
+2025-01-09 21:51:42,549 - TimesheetTracker - DEBUG - Applying pagination: skip=0, limit=100
+2025-01-09 21:51:42,550 - TimesheetTracker - INFO - Retrieved 1 time entries
+2025-01-09 21:51:42,553 - TimesheetTracker - DEBUG - Retrieving time entries with filters: project_id=Customer1_Project, customer=None
+2025-01-09 21:51:42,553 - TimesheetTracker - DEBUG - Applying project filter: Customer1_Project
+2025-01-09 21:51:42,554 - TimesheetTracker - DEBUG - Applying pagination: skip=0, limit=100
+2025-01-09 21:51:42,557 - TimesheetTracker - INFO - Retrieved 1 time entries
+2025-01-09 21:51:42,586 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 21:51:42,587 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': None, 'created_at': None, 'updated_at': None, 'week_number': 1, 'month': 'January', 'category': 'Development', 'subcategory': 'Coding', 'customer': 'TestCustomer', 'project': 'TestProject', 'task_description': 'Future work', 'hours': 8.0, 'date': datetime.date(2025, 1, 1)}
+2025-01-09 21:51:42,587 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 21:51:42,587 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 21:51:42,587 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 21:51:42,587 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 21:51:42,616 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 21:51:42,617 - TimesheetTracker - INFO - Successfully created time entry [1] for TestCustomer - TestProject (8.0 hours)
+2025-01-09 21:51:42,662 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 21:51:42,662 - TimesheetTracker - INFO - Expected tables: projects, time_entries, project_managers, customers
+2025-01-09 21:51:42,850 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 21:51:42,947 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 21:51:43,032 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 21:51:43,112 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 21:51:43,115 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 21:52:22,983 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:52:23,250 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:52:23,326 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 21:52:23,327 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 21:52:23,502 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 21:52:23,502 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': None, 'created_at': None, 'updated_at': None, 'week_number': 1, 'month': 'January', 'category': 'Development', 'subcategory': 'Coding', 'customer': 'TestCustomer', 'project': 'TestProject', 'task_description': 'Unit testing', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}
+2025-01-09 21:52:23,502 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 21:52:23,502 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 21:52:23,510 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 21:52:23,510 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 21:52:23,533 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 21:52:23,539 - TimesheetTracker - INFO - Successfully created time entry [1] for TestCustomer - TestProject (8.0 hours)
+2025-01-09 21:52:23,561 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 21:52:23,561 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': None, 'created_at': None, 'updated_at': None, 'week_number': 1, 'month': 'January', 'category': 'Development', 'subcategory': 'Coding', 'customer': None, 'project': None, 'task_description': 'Testing defaults', 'hours': 4.0, 'date': datetime.date(2024, 1, 1)}
+2025-01-09 21:52:23,561 - TimesheetTracker - INFO - No customer provided, defaulting to Unassigned
+2025-01-09 21:52:23,561 - TimesheetTracker - INFO - No project provided, defaulting to Unassigned
+2025-01-09 21:52:23,561 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 21:52:23,562 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 21:52:23,562 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 21:52:23,562 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 21:52:23,582 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 21:52:23,583 - TimesheetTracker - INFO - Successfully created time entry [1] for Unassigned - Unassigned (4.0 hours)
+2025-01-09 21:52:23,607 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 21:52:23,625 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 21:52:23,625 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': None, 'created_at': None, 'updated_at': None, 'week_number': 1, 'month': 'January', 'category': 'Development', 'subcategory': 'Coding', 'customer': 'TestCustomer', 'project': 'TestProject', 'task_description': 'Entry 0', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}
+2025-01-09 21:52:23,625 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 21:52:23,626 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 21:52:23,626 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 21:52:23,626 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 21:52:23,642 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 21:52:23,644 - TimesheetTracker - INFO - Successfully created time entry [1] for TestCustomer - TestProject (8.0 hours)
+2025-01-09 21:52:23,645 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': None, 'created_at': None, 'updated_at': None, 'week_number': 1, 'month': 'January', 'category': 'Development', 'subcategory': 'Coding', 'customer': 'TestCustomer', 'project': 'TestProject', 'task_description': 'Entry 1', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}
+2025-01-09 21:52:23,650 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 21:52:23,651 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 21:52:23,651 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 21:52:23,651 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 21:52:23,675 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 21:52:23,676 - TimesheetTracker - INFO - Successfully created time entry [2] for TestCustomer - TestProject (8.0 hours)
+2025-01-09 21:52:23,676 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': None, 'created_at': None, 'updated_at': None, 'week_number': 1, 'month': 'January', 'category': 'Development', 'subcategory': 'Coding', 'customer': 'TestCustomer', 'project': 'TestProject', 'task_description': 'Entry 2', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}
+2025-01-09 21:52:23,676 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 21:52:23,676 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 21:52:23,676 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 21:52:23,676 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 21:52:23,689 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 21:52:23,691 - TimesheetTracker - INFO - Successfully created time entry [3] for TestCustomer - TestProject (8.0 hours)
+2025-01-09 21:52:23,691 - TimesheetTracker - DEBUG - Retrieving time entries with filters: project_id=None, customer=None
+2025-01-09 21:52:23,691 - TimesheetTracker - DEBUG - Applying pagination: skip=0, limit=100
+2025-01-09 21:52:23,693 - TimesheetTracker - INFO - Retrieved 3 time entries
+2025-01-09 21:52:23,693 - TimesheetTracker - DEBUG - Retrieving time entries with filters: project_id=None, customer=None
+2025-01-09 21:52:23,700 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 21:52:23,700 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 21:52:23,700 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 21:52:23,701 - TimesheetTracker - DEBUG - Applying pagination: skip=1, limit=1
+2025-01-09 21:52:23,702 - TimesheetTracker - INFO - Retrieved 1 time entries
+2025-01-09 21:52:23,729 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 21:52:23,729 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': None, 'created_at': None, 'updated_at': None, 'week_number': 1, 'month': 'January', 'category': 'Development', 'subcategory': 'Coding', 'customer': 'Customer1', 'project': 'Customer1_Project', 'task_description': 'Work for Customer1', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}
+2025-01-09 21:52:23,729 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 21:52:23,729 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 21:52:23,730 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 21:52:23,730 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 21:52:23,754 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 21:52:23,755 - TimesheetTracker - INFO - Successfully created time entry [1] for Customer1 - Customer1_Project (8.0 hours)
+2025-01-09 21:52:23,755 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': None, 'created_at': None, 'updated_at': None, 'week_number': 1, 'month': 'January', 'category': 'Development', 'subcategory': 'Coding', 'customer': 'Customer2', 'project': 'Customer2_Project', 'task_description': 'Work for Customer2', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}
+2025-01-09 21:52:23,756 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 21:52:23,756 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 21:52:23,756 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 21:52:23,756 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 21:52:23,770 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 21:52:23,771 - TimesheetTracker - INFO - Successfully created time entry [2] for Customer2 - Customer2_Project (8.0 hours)
+2025-01-09 21:52:23,772 - TimesheetTracker - DEBUG - Retrieving time entries with filters: project_id=None, customer=Customer1
+2025-01-09 21:52:23,772 - TimesheetTracker - DEBUG - Applying customer filter: Customer1
+2025-01-09 21:52:23,772 - TimesheetTracker - DEBUG - Applying pagination: skip=0, limit=100
+2025-01-09 21:52:23,775 - TimesheetTracker - INFO - Retrieved 1 time entries
+2025-01-09 21:52:23,775 - TimesheetTracker - DEBUG - Retrieving time entries with filters: project_id=Customer1_Project, customer=None
+2025-01-09 21:52:23,775 - TimesheetTracker - DEBUG - Applying project filter: Customer1_Project
+2025-01-09 21:52:23,776 - TimesheetTracker - DEBUG - Applying pagination: skip=0, limit=100
+2025-01-09 21:52:23,777 - TimesheetTracker - INFO - Retrieved 1 time entries
+2025-01-09 21:52:23,793 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 21:52:23,793 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': None, 'created_at': None, 'updated_at': None, 'week_number': 1, 'month': 'January', 'category': 'Development', 'subcategory': 'Coding', 'customer': 'TestCustomer', 'project': 'TestProject', 'task_description': 'Future work', 'hours': 8.0, 'date': datetime.date(2025, 1, 1)}
+2025-01-09 21:52:23,793 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 21:52:23,793 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 21:52:23,793 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 21:52:23,794 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 21:52:23,812 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 21:52:23,813 - TimesheetTracker - INFO - Successfully created time entry [1] for TestCustomer - TestProject (8.0 hours)
+2025-01-09 21:52:23,944 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 21:52:23,946 - TimesheetTracker - INFO - Expected tables: customers, project_managers, time_entries, projects
+2025-01-09 21:52:24,105 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 21:52:24,193 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 21:52:24,278 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 21:52:24,363 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 21:52:24,364 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 21:54:16,395 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:54:20,190 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:54:20,257 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 21:54:20,257 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 21:54:20,621 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 21:54:20,621 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 21:54:20,622 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 21:54:20,836 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 21:54:20,837 - TimesheetTracker - INFO - Expected tables: time_entries, project_managers, customers, projects
+2025-01-09 21:54:20,989 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 21:54:21,071 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 21:54:21,153 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 21:54:21,236 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 21:54:21,238 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 21:54:57,793 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:54:59,213 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:54:59,276 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 21:54:59,277 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 21:54:59,686 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 21:54:59,686 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 21:54:59,687 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 21:54:59,896 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 21:54:59,896 - TimesheetTracker - INFO - Expected tables: projects, time_entries, project_managers, customers
+2025-01-09 21:55:00,035 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 21:55:00,113 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 21:55:00,191 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 21:55:00,270 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 21:55:00,270 - TimesheetTracker - INFO - Database verification completed successfully
