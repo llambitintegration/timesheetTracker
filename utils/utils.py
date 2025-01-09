@@ -17,42 +17,18 @@ def clean_numeric_value(value, default=0):
     except (ValueError, TypeError):
         return default
 
-def standardize_project_id(value):
-    """Standardize project IDs to be database-safe"""
-    if pd.isna(value) or value is None or str(value).strip() in ['', '-', 'None', 'null', 'NA']:
-        return 'Unassigned'
-    return str(value).strip().replace('-', '_').replace(' ', '_')
-
-def clean_status(value):
-    """Clean status fields"""
-    valid_statuses = ['active', 'inactive', 'pending', 'completed']
-    cleaned = str(value).lower().strip() if value else 'active'
-    return cleaned if cleaned in valid_statuses else 'active'
-
 def clean_string_value(value, default="", field_type=None):
-    """Clean and validate string values with field-specific rules"""
+    """Clean and validate string values"""
     if pd.isna(value) or value is None or str(value).strip() in ['', '-', 'None', 'null', 'NA']:
-        return DEFAULT_CUSTOMER if field_type == 'customer' else DEFAULT_PROJECT if field_type == 'project' else default
+        return default
 
     cleaned = str(value).strip()
 
-    # Special handling for customer and project fields to ensure proper defaults
-    if field_type == 'customer':
-        # Normalize customer name and ensure it's a valid format
-        normalized = normalize_customer_name(cleaned)
-        logger.debug(f"Normalized customer name from '{cleaned}' to '{normalized}'")
-        return normalized
-    elif field_type == 'project':
-        # Standardize project ID format
-        normalized = normalize_project_id(cleaned)
-        logger.debug(f"Normalized project ID from '{cleaned}' to '{normalized}'")
-        return normalized
-    elif field_type == 'status':
-        return clean_status(cleaned)
+    # Handle non-customer/project fields
+    if field_type in ['category', 'subcategory']:
+        return cleaned.title()
     elif field_type == 'email':
         return cleaned if '@' in cleaned else default
-    elif field_type in ['category', 'subcategory']:
-        return cleaned.title()
 
     return cleaned
 
@@ -140,7 +116,7 @@ def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 def parse_csv(file) -> List:
-    """Parse CSV file with enhanced error handling and logging."""
+    """Parse CSV file with default handling for invalid entries."""
     logger.info("Starting CSV parsing process")
 
     df = parse_raw_csv(file)
@@ -172,11 +148,30 @@ def parse_csv(file) -> List:
                 logger.warning(f"Skipping row {index + 1} due to invalid hours: {hours}")
                 continue
 
-            # Clean and validate customer and project before creating entry
-            customer = clean_string_value(row.get('Customer', ''), DEFAULT_CUSTOMER, 'customer')
-            project = clean_string_value(row.get('Project', ''), DEFAULT_PROJECT, 'project')
+            # Get raw values for validation
+            raw_customer = str(row.get('Customer', '')).strip()
+            raw_project = str(row.get('Project', '')).strip()
 
-            logger.debug(f"Normalized customer: {customer}, project: {project}")
+            # Initialize with default values
+            customer = DEFAULT_CUSTOMER
+            project = DEFAULT_PROJECT
+
+            # Check for validation issues
+            has_validation_issues = (
+                not raw_customer or  # Empty customer
+                not raw_project or   # Empty project
+                'Project' in raw_customer or  # Customer name contains 'Project'
+                raw_customer in ['Unassigned', 'None', 'null', 'NA'] or
+                raw_project in ['Unassigned', 'None', 'null', 'NA']
+            )
+
+            # Use valid values if no validation issues
+            if not has_validation_issues:
+                customer = raw_customer
+                project = raw_project.replace('-', '_').replace(' ', '_')
+                logger.debug(f"Using provided values - customer: {customer}, project: {project}")
+            else:
+                logger.debug(f"Validation issues detected in row {index + 1}, using defaults")
 
             entry = schemas.TimeEntryCreate(
                 week_number=validate_week_number(row.get('Week Number')),
