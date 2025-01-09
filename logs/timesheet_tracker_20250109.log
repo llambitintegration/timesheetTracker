@@ -2192,3 +2192,265 @@ alembic.util.exc.CommandError: Could not determine revision id from filename add
 2025-01-09 20:12:27,686 - TimesheetTracker - DEBUG - Script location: migrations
 2025-01-09 20:12:27,872 - TimesheetTracker - INFO - Current migration revision: None
 2025-01-09 20:12:27,892 - TimesheetTracker - INFO - Starting migration process
+2025-01-09 20:15:01,920 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 20:15:02,082 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 20:15:02,082 - TimesheetTracker - INFO - Verifying database connection and schema: postgresql+psycopg2://timesheetDatabase_owner:imz1MH3OjLef@ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 20:15:02,434 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 20:15:02,434 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 20:15:02,434 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 20:15:02,434 - TimesheetTracker - INFO - Checking 4 tables in schema
+2025-01-09 20:15:02,435 - TimesheetTracker - DEBUG - Verifying table: customers
+2025-01-09 20:15:02,459 - TimesheetTracker - WARNING - Table customers does not exist
+2025-01-09 20:15:02,459 - TimesheetTracker - DEBUG - Verifying table: project_managers
+2025-01-09 20:15:02,479 - TimesheetTracker - WARNING - Table project_managers does not exist
+2025-01-09 20:15:02,479 - TimesheetTracker - DEBUG - Verifying table: projects
+2025-01-09 20:15:02,499 - TimesheetTracker - WARNING - Table projects does not exist
+2025-01-09 20:15:02,499 - TimesheetTracker - DEBUG - Verifying table: time_entries
+2025-01-09 20:15:02,519 - TimesheetTracker - WARNING - Table time_entries does not exist
+2025-01-09 20:15:02,519 - TimesheetTracker - WARNING - Missing tables: customers, project_managers, projects, time_entries
+2025-01-09 20:15:02,538 - TimesheetTracker - WARNING - Database verification failed - schema may need initialization
+2025-01-09 20:15:04,782 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 20:15:05,052 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 20:15:05,053 - TimesheetTracker - INFO - Verifying database connection and schema: postgresql+psycopg2://timesheetDatabase_owner:imz1MH3OjLef@ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 20:15:05,418 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 20:15:05,418 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 20:15:05,418 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 20:15:05,418 - TimesheetTracker - INFO - Checking 4 tables in schema
+2025-01-09 20:15:05,418 - TimesheetTracker - DEBUG - Verifying table: customers
+2025-01-09 20:15:05,448 - TimesheetTracker - WARNING - Table customers does not exist
+2025-01-09 20:15:05,448 - TimesheetTracker - DEBUG - Verifying table: project_managers
+2025-01-09 20:15:05,475 - TimesheetTracker - WARNING - Table project_managers does not exist
+2025-01-09 20:15:05,477 - TimesheetTracker - DEBUG - Verifying table: projects
+2025-01-09 20:15:05,500 - TimesheetTracker - WARNING - Table projects does not exist
+2025-01-09 20:15:05,502 - TimesheetTracker - DEBUG - Verifying table: time_entries
+2025-01-09 20:15:05,525 - TimesheetTracker - WARNING - Table time_entries does not exist
+2025-01-09 20:15:05,527 - TimesheetTracker - WARNING - Missing tables: customers, project_managers, projects, time_entries
+2025-01-09 20:15:05,552 - TimesheetTracker - WARNING - Database verification failed - schema may need initialization
+2025-01-09 20:15:06,911 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 20:15:36,513 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 20:15:36,660 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 20:15:36,661 - TimesheetTracker - INFO - Verifying database connection and schema: postgresql+psycopg2://timesheetDatabase_owner:imz1MH3OjLef@ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 20:15:37,023 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 20:15:37,025 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 20:15:37,026 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 20:15:37,026 - TimesheetTracker - INFO - Checking 4 tables in schema
+2025-01-09 20:15:37,027 - TimesheetTracker - DEBUG - Verifying table: customers
+2025-01-09 20:15:37,061 - TimesheetTracker - WARNING - Table customers does not exist
+2025-01-09 20:15:37,061 - TimesheetTracker - DEBUG - Verifying table: project_managers
+2025-01-09 20:15:37,082 - TimesheetTracker - WARNING - Table project_managers does not exist
+2025-01-09 20:15:37,083 - TimesheetTracker - DEBUG - Verifying table: projects
+2025-01-09 20:15:37,104 - TimesheetTracker - WARNING - Table projects does not exist
+2025-01-09 20:15:37,105 - TimesheetTracker - DEBUG - Verifying table: time_entries
+2025-01-09 20:15:37,128 - TimesheetTracker - WARNING - Table time_entries does not exist
+2025-01-09 20:15:37,128 - TimesheetTracker - WARNING - Missing tables: customers, project_managers, projects, time_entries
+2025-01-09 20:15:37,149 - TimesheetTracker - WARNING - Database verification failed - schema may need initialization
+2025-01-09 20:15:46,997 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 20:15:47,094 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 20:15:47,095 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 20:15:47,435 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 20:15:47,435 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 20:15:47,435 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 20:15:47,436 - TimesheetTracker - INFO - Checking 4 tables in schema
+2025-01-09 20:15:47,436 - TimesheetTracker - DEBUG - Verifying table: customers
+2025-01-09 20:15:47,461 - TimesheetTracker - WARNING - Table customers does not exist
+2025-01-09 20:15:47,462 - TimesheetTracker - DEBUG - Verifying table: project_managers
+2025-01-09 20:15:47,481 - TimesheetTracker - WARNING - Table project_managers does not exist
+2025-01-09 20:15:47,482 - TimesheetTracker - DEBUG - Verifying table: projects
+2025-01-09 20:15:47,501 - TimesheetTracker - WARNING - Table projects does not exist
+2025-01-09 20:15:47,502 - TimesheetTracker - DEBUG - Verifying table: time_entries
+2025-01-09 20:15:47,521 - TimesheetTracker - WARNING - Table time_entries does not exist
+2025-01-09 20:15:47,522 - TimesheetTracker - WARNING - Missing tables: customers, project_managers, projects, time_entries
+2025-01-09 20:15:47,541 - TimesheetTracker - WARNING - Database verification failed - schema may need initialization
+2025-01-09 20:15:49,239 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 20:15:49,333 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 20:15:49,333 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 20:15:49,683 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 20:15:49,684 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 20:15:49,684 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 20:15:49,684 - TimesheetTracker - INFO - Checking 4 tables in schema
+2025-01-09 20:15:49,684 - TimesheetTracker - DEBUG - Verifying table: customers
+2025-01-09 20:15:49,709 - TimesheetTracker - WARNING - Table customers does not exist
+2025-01-09 20:15:49,710 - TimesheetTracker - DEBUG - Verifying table: project_managers
+2025-01-09 20:15:49,731 - TimesheetTracker - WARNING - Table project_managers does not exist
+2025-01-09 20:15:49,732 - TimesheetTracker - DEBUG - Verifying table: projects
+2025-01-09 20:15:49,752 - TimesheetTracker - WARNING - Table projects does not exist
+2025-01-09 20:15:49,752 - TimesheetTracker - DEBUG - Verifying table: time_entries
+2025-01-09 20:15:49,772 - TimesheetTracker - WARNING - Table time_entries does not exist
+2025-01-09 20:15:49,773 - TimesheetTracker - WARNING - Missing tables: customers, project_managers, projects, time_entries
+2025-01-09 20:15:49,793 - TimesheetTracker - WARNING - Database verification failed - schema may need initialization
+2025-01-09 20:15:50,973 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 20:15:51,407 - TimesheetTracker - DEBUG - Database session created
+2025-01-09 20:15:51,407 - TimesheetTracker - INFO - Starting database initialization process
+2025-01-09 20:15:51,408 - TimesheetTracker - INFO - Checking current database state
+2025-01-09 20:15:51,408 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 20:15:51,468 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 20:15:51,468 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 20:15:51,468 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 20:15:51,469 - TimesheetTracker - INFO - Checking 4 tables in schema
+2025-01-09 20:15:51,469 - TimesheetTracker - DEBUG - Verifying table: customers
+2025-01-09 20:15:51,489 - TimesheetTracker - WARNING - Table customers does not exist
+2025-01-09 20:15:51,490 - TimesheetTracker - DEBUG - Verifying table: project_managers
+2025-01-09 20:15:51,511 - TimesheetTracker - WARNING - Table project_managers does not exist
+2025-01-09 20:15:51,511 - TimesheetTracker - DEBUG - Verifying table: projects
+2025-01-09 20:15:51,531 - TimesheetTracker - WARNING - Table projects does not exist
+2025-01-09 20:15:51,531 - TimesheetTracker - DEBUG - Verifying table: time_entries
+2025-01-09 20:15:51,552 - TimesheetTracker - WARNING - Table time_entries does not exist
+2025-01-09 20:15:51,552 - TimesheetTracker - WARNING - Missing tables: customers, project_managers, projects, time_entries
+2025-01-09 20:15:51,679 - TimesheetTracker - INFO - Testing database connection
+2025-01-09 20:15:51,741 - TimesheetTracker - INFO - Database connection successful
+2025-01-09 20:15:51,742 - TimesheetTracker - INFO - Loading Alembic configuration
+2025-01-09 20:15:51,742 - TimesheetTracker - DEBUG - Alembic config loaded from: alembic.ini
+2025-01-09 20:15:51,743 - TimesheetTracker - DEBUG - Script location: migrations
+2025-01-09 20:15:51,915 - TimesheetTracker - INFO - Current migration revision: None
+2025-01-09 20:15:51,935 - TimesheetTracker - INFO - Starting migration process
+2025-01-09 20:15:52,255 - TimesheetTracker - INFO - Testing database connection
+2025-01-09 20:15:52,294 - TimesheetTracker - INFO - Database connection successful
+2025-01-09 20:15:52,294 - TimesheetTracker - INFO - Configuring Alembic context
+2025-01-09 20:15:52,295 - TimesheetTracker - INFO - Beginning migration transaction
+2025-01-09 20:15:52,374 - TimesheetTracker - INFO - Creating customers table
+2025-01-09 20:15:52,405 - TimesheetTracker - INFO - Creating project_managers table
+2025-01-09 20:15:52,435 - TimesheetTracker - INFO - Creating projects table
+2025-01-09 20:15:52,465 - TimesheetTracker - INFO - Creating time_entries table
+2025-01-09 20:15:52,498 - TimesheetTracker - INFO - All tables created successfully
+2025-01-09 20:15:52,522 - TimesheetTracker - INFO - Migrations completed successfully
+2025-01-09 20:15:52,543 - TimesheetTracker - INFO - Migration completed successfully
+2025-01-09 20:15:52,543 - TimesheetTracker - INFO - Verifying database state after migration
+2025-01-09 20:15:52,543 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 20:15:52,602 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 20:15:52,603 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 20:15:52,603 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 20:15:52,603 - TimesheetTracker - INFO - Checking 4 tables in schema
+2025-01-09 20:15:52,603 - TimesheetTracker - DEBUG - Verifying table: customers
+2025-01-09 20:15:52,627 - TimesheetTracker - WARNING - Table customers does not exist
+2025-01-09 20:15:52,627 - TimesheetTracker - DEBUG - Verifying table: project_managers
+2025-01-09 20:15:52,661 - TimesheetTracker - WARNING - Table project_managers does not exist
+2025-01-09 20:15:52,670 - TimesheetTracker - DEBUG - Verifying table: projects
+2025-01-09 20:15:52,694 - TimesheetTracker - WARNING - Table projects does not exist
+2025-01-09 20:15:52,694 - TimesheetTracker - DEBUG - Verifying table: time_entries
+2025-01-09 20:15:52,715 - TimesheetTracker - WARNING - Table time_entries does not exist
+2025-01-09 20:15:52,715 - TimesheetTracker - WARNING - Missing tables: customers, project_managers, projects, time_entries
+2025-01-09 20:15:52,735 - TimesheetTracker - ERROR - Database verification failed after migration
+2025-01-09 20:15:52,757 - TimesheetTracker - DEBUG - Database session closed
+2025-01-09 20:17:21,306 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 20:17:21,418 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 20:17:21,418 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 20:17:21,777 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 20:17:21,778 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 20:17:21,778 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 20:17:21,783 - TimesheetTracker - INFO - Checking 4 tables in schema
+2025-01-09 20:17:21,784 - TimesheetTracker - DEBUG - Verifying table: customers
+2025-01-09 20:17:21,810 - TimesheetTracker - WARNING - Table customers does not exist
+2025-01-09 20:17:21,811 - TimesheetTracker - DEBUG - Verifying table: project_managers
+2025-01-09 20:17:21,832 - TimesheetTracker - WARNING - Table project_managers does not exist
+2025-01-09 20:17:21,832 - TimesheetTracker - DEBUG - Verifying table: projects
+2025-01-09 20:17:21,852 - TimesheetTracker - WARNING - Table projects does not exist
+2025-01-09 20:17:21,852 - TimesheetTracker - DEBUG - Verifying table: time_entries
+2025-01-09 20:17:21,872 - TimesheetTracker - WARNING - Table time_entries does not exist
+2025-01-09 20:17:21,872 - TimesheetTracker - WARNING - Missing tables: customers, project_managers, projects, time_entries
+2025-01-09 20:17:21,893 - TimesheetTracker - WARNING - Database verification failed - schema may need initialization
+2025-01-09 20:17:26,844 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 20:17:27,005 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 20:17:27,010 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 20:17:27,371 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 20:17:27,371 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 20:17:27,372 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 20:17:27,614 - TimesheetTracker - INFO - Found 0 tables in database
+2025-01-09 20:17:27,615 - TimesheetTracker - INFO - Expected tables: customers, project_managers, projects, time_entries
+2025-01-09 20:17:27,615 - TimesheetTracker - WARNING - Missing tables: customers, project_managers, projects, time_entries
+2025-01-09 20:17:27,642 - TimesheetTracker - WARNING - Database verification failed - schema may need initialization
+2025-01-09 20:17:29,716 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 20:17:29,841 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 20:17:29,842 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 20:17:30,183 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 20:17:30,184 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 20:17:30,187 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 20:17:30,396 - TimesheetTracker - INFO - Found 0 tables in database
+2025-01-09 20:17:30,397 - TimesheetTracker - INFO - Expected tables: time_entries, projects, project_managers, customers
+2025-01-09 20:17:30,397 - TimesheetTracker - WARNING - Missing tables: time_entries, projects, project_managers, customers
+2025-01-09 20:17:30,417 - TimesheetTracker - WARNING - Database verification failed - schema may need initialization
+2025-01-09 20:17:31,608 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 20:17:31,924 - TimesheetTracker - DEBUG - Database session created
+2025-01-09 20:17:31,924 - TimesheetTracker - INFO - Starting database initialization process
+2025-01-09 20:17:31,924 - TimesheetTracker - INFO - Checking current database state
+2025-01-09 20:17:31,924 - TimesheetTracker - INFO - Testing database connection
+2025-01-09 20:17:31,982 - TimesheetTracker - INFO - Database connection successful
+2025-01-09 20:17:31,983 - TimesheetTracker - INFO - Loading Alembic configuration
+2025-01-09 20:17:31,983 - TimesheetTracker - ERROR - Database initialization failed: name 'Config' is not defined
+2025-01-09 20:17:31,983 - TimesheetTracker - ERROR - Initialization error stack trace:
+Traceback (most recent call last):
+  File "/home/runner/workspace/main.py", line 176, in initialize_database
+    alembic_cfg = Config("alembic.ini")
+                  ^^^^^^
+NameError: name 'Config' is not defined
+2025-01-09 20:17:32,004 - TimesheetTracker - DEBUG - Database session closed
+2025-01-09 20:18:27,030 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 20:18:27,144 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 20:18:27,145 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 20:18:27,490 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 20:18:27,491 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 20:18:27,491 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 20:18:27,707 - TimesheetTracker - INFO - Found 0 tables in database
+2025-01-09 20:18:27,707 - TimesheetTracker - INFO - Expected tables: project_managers, time_entries, customers, projects
+2025-01-09 20:18:27,708 - TimesheetTracker - WARNING - Missing tables: project_managers, time_entries, customers, projects
+2025-01-09 20:18:27,727 - TimesheetTracker - WARNING - Database verification failed - schema may need initialization
+2025-01-09 20:18:34,751 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 20:18:34,838 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 20:18:34,838 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 20:18:35,176 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 20:18:35,177 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 20:18:35,177 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 20:18:35,387 - TimesheetTracker - INFO - Found 0 tables in database
+2025-01-09 20:18:35,389 - TimesheetTracker - INFO - Expected tables: customers, time_entries, projects, project_managers
+2025-01-09 20:18:35,391 - TimesheetTracker - WARNING - Missing tables: customers, time_entries, projects, project_managers
+2025-01-09 20:18:35,412 - TimesheetTracker - WARNING - Database verification failed - schema may need initialization
+2025-01-09 20:18:37,492 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 20:18:37,568 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 20:18:37,568 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 20:18:37,908 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 20:18:37,908 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 20:18:37,909 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 20:18:38,115 - TimesheetTracker - INFO - Found 0 tables in database
+2025-01-09 20:18:38,117 - TimesheetTracker - INFO - Expected tables: customers, projects, time_entries, project_managers
+2025-01-09 20:18:38,117 - TimesheetTracker - WARNING - Missing tables: customers, projects, time_entries, project_managers
+2025-01-09 20:18:38,137 - TimesheetTracker - WARNING - Database verification failed - schema may need initialization
+2025-01-09 20:18:39,415 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 20:18:39,647 - TimesheetTracker - DEBUG - Database session created
+2025-01-09 20:18:39,648 - TimesheetTracker - INFO - Starting database initialization process
+2025-01-09 20:18:39,648 - TimesheetTracker - INFO - Checking current database state
+2025-01-09 20:18:39,648 - TimesheetTracker - INFO - Testing database connection
+2025-01-09 20:18:39,706 - TimesheetTracker - INFO - Database connection successful
+2025-01-09 20:18:39,706 - TimesheetTracker - INFO - Loading Alembic configuration
+2025-01-09 20:18:39,707 - TimesheetTracker - DEBUG - Alembic config loaded from: alembic.ini
+2025-01-09 20:18:39,708 - TimesheetTracker - DEBUG - Script location: migrations
+2025-01-09 20:18:39,772 - TimesheetTracker - INFO - Current migration revision: None
+2025-01-09 20:18:39,791 - TimesheetTracker - INFO - Starting migration process
+2025-01-09 20:18:40,093 - TimesheetTracker - INFO - Testing database connection
+2025-01-09 20:18:40,132 - TimesheetTracker - INFO - Database connection successful
+2025-01-09 20:18:40,132 - TimesheetTracker - INFO - Configuring Alembic context
+2025-01-09 20:18:40,132 - TimesheetTracker - INFO - Beginning migration transaction
+2025-01-09 20:18:40,206 - TimesheetTracker - INFO - Creating customers table
+2025-01-09 20:18:40,237 - TimesheetTracker - INFO - Creating project_managers table
+2025-01-09 20:18:40,266 - TimesheetTracker - INFO - Creating projects table
+2025-01-09 20:18:40,296 - TimesheetTracker - INFO - Creating time_entries table
+2025-01-09 20:18:40,324 - TimesheetTracker - INFO - All tables created successfully
+2025-01-09 20:18:40,347 - TimesheetTracker - INFO - Migrations completed successfully
+2025-01-09 20:18:40,369 - TimesheetTracker - INFO - Migration completed successfully
+2025-01-09 20:18:40,369 - TimesheetTracker - INFO - Verifying database state after migration
+2025-01-09 20:18:40,593 - TimesheetTracker - WARNING - Table customers not found
+2025-01-09 20:18:40,671 - TimesheetTracker - WARNING - Table project_managers not found
+2025-01-09 20:18:40,749 - TimesheetTracker - WARNING - Table projects not found
+2025-01-09 20:18:40,827 - TimesheetTracker - WARNING - Table time_entries not found
+2025-01-09 20:18:40,827 - TimesheetTracker - ERROR - Tables missing after migration: customers, project_managers, projects, time_entries
+2025-01-09 20:18:40,849 - TimesheetTracker - DEBUG - Database session closed
+2025-01-09 20:20:41,394 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 20:20:41,480 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 20:20:41,482 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 20:20:41,814 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 20:20:41,814 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 20:20:41,815 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 20:20:42,036 - TimesheetTracker - INFO - Found 0 tables in database
+2025-01-09 20:20:42,036 - TimesheetTracker - INFO - Expected tables: projects, customers, time_entries, project_managers
+2025-01-09 20:20:42,037 - TimesheetTracker - WARNING - Missing tables: projects, customers, time_entries, project_managers
+2025-01-09 20:20:42,056 - TimesheetTracker - WARNING - Database verification failed - schema may need initialization
+2025-01-09 20:20:43,632 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 20:20:43,696 - TimesheetTracker - INFO - Root endpoint accessed

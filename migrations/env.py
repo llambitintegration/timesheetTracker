@@ -34,10 +34,6 @@ from utils.logger import Logger
 logger = Logger().get_logger()
 logger.setLevel(logging.DEBUG)
 
-# Interpret the config file for Python logging
-if config.config_file_name is not None:
-    fileConfig(config.config_file_name)
-
 # Add your model's MetaData object here for 'autogenerate' support
 target_metadata = Base.metadata
 
@@ -57,23 +53,6 @@ def run_migrations_offline() -> None:
 def run_migrations_online() -> None:
     """Run migrations in 'online' mode."""
     try:
-        logger.info("Starting database migration process")
-        logger.info(f"Using database URL: {database_url.split('@')[1]}")  # Log only host/db part
-
-        # Verify metadata
-        logger.info("Checking target metadata")
-        if not target_metadata:
-            logger.error("No target metadata found")
-            raise Exception("No target metadata available for migrations")
-
-        # Log table information
-        logger.info(f"Found {len(target_metadata.tables)} tables in metadata")
-        for table in target_metadata.tables.values():
-            logger.info(f"Table in metadata: {table.name}")
-            logger.debug(f"Columns in {table.name}:")
-            for column in table.columns:
-                logger.debug(f"  - {column.name} ({column.type})")
-
         # Create our connectable
         connectable = engine_from_config(
             config.get_section(config.config_ini_section, {}),

@@ -5,6 +5,10 @@ from typing import List, Optional
 from datetime import datetime, timedelta, date
 import calendar
 from dotenv import load_dotenv
+from sqlalchemy import inspect, text
+from alembic.config import Config
+from alembic import command
+from alembic.runtime.migration import MigrationContext
 
 from database import schemas, crud, get_db, verify_database, engine
 from utils.logger import Logger
@@ -157,14 +161,6 @@ async def initialize_database(force: bool = False, db: Session = Depends(get_db)
     try:
         # First verify current database state
         logger.info("Checking current database state")
-        if not force and verify_database():
-            logger.info("Database already initialized and verified")
-            return {"status": "success", "message": "Database already initialized"}
-
-        from alembic.config import Config
-        from alembic import command
-        from alembic.runtime.migration import MigrationContext
-        from sqlalchemy import text
 
         # Test database connection first
         logger.info("Testing database connection")
@@ -201,24 +197,31 @@ async def initialize_database(force: bool = False, db: Session = Depends(get_db)
                 detail=f"Migration failed: {str(migration_error)}"
             )
 
-        # Verify database state after migration
+        # Verify database state after migration by checking each table
         logger.info("Verifying database state after migration")
-        if not verify_database():
-            error_msg = "Database verification failed after migration"
-            logger.error(error_msg)
-            raise HTTPException(status_code=500, detail=error_msg)
+        with engine.connect() as connection:
+            inspector = inspect(engine)
+            tables = ['customers', 'project_managers', 'projects', 'time_entries']
+            missing_tables = []
+
+            for table in tables:
+                if not inspector.has_table(table):
+                    missing_tables.append(table)
+                    logger.warning(f"Table {table} not found")
+                else:
+                    logger.info(f"Table {table} exists")
+
+            if missing_tables:
+                error_msg = f"Tables missing after migration: {', '.join(missing_tables)}"
+                logger.error(error_msg)
+                raise HTTPException(status_code=500, detail=error_msg)
 
         logger.info("Database initialization completed successfully")
         return {
             "status": "success",
             "message": "Database initialized and verified",
             "details": {
-                "tables_created": [
-                    "customers",
-                    "project_managers",
-                    "projects",
-                    "time_entries"
-                ]
+                "tables_created": tables
             }
         }
     except HTTPException:

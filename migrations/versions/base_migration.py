@@ -36,7 +36,6 @@ def upgrade() -> None:
             sa.UniqueConstraint('name'),
             sa.UniqueConstraint('contact_email')
         )
-        logger.info("Customers table created successfully")
 
         # Create project_managers table
         logger.info("Creating project_managers table")
@@ -50,9 +49,8 @@ def upgrade() -> None:
             sa.UniqueConstraint('name'),
             sa.UniqueConstraint('email')
         )
-        logger.info("Project managers table created successfully")
 
-        # Create projects table
+        # Create projects table with proper foreign keys
         logger.info("Creating projects table")
         op.create_table('projects',
             sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
@@ -69,9 +67,8 @@ def upgrade() -> None:
             sa.ForeignKeyConstraint(['customer'], ['customers.name'], ondelete='CASCADE'),
             sa.ForeignKeyConstraint(['project_manager'], ['project_managers.name'], ondelete='CASCADE')
         )
-        logger.info("Projects table created successfully")
 
-        # Create time_entries table
+        # Create time_entries table with updated foreign keys
         logger.info("Creating time_entries table")
         op.create_table('time_entries',
             sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
@@ -88,9 +85,11 @@ def upgrade() -> None:
             sa.Column('updated_at', sa.DateTime(timezone=True), onupdate=sa.text('now()'), nullable=True),
             sa.PrimaryKeyConstraint('id'),
             sa.ForeignKeyConstraint(['customer'], ['customers.name'], ondelete='SET NULL'),
-            sa.ForeignKeyConstraint(['project'], ['projects.project_id'], ondelete='SET NULL')
+            sa.ForeignKeyConstraint(['project'], ['projects.project_id'], ondelete='SET NULL'),
+            sa.CheckConstraint('hours > 0 AND hours <= 24', name='check_valid_hours')
         )
-        logger.info("Time entries table created successfully")
+
+        logger.info("All tables created successfully")
 
     except Exception as e:
         logger.error(f"Error during upgrade: {str(e)}")
