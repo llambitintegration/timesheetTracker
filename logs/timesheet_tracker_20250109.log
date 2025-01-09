@@ -3529,3 +3529,994 @@ DETAIL:  Key (customer)=(-) is not present in table "customers".
 [parameters: {'date__0': datetime.date(2024, 10, 7), 'category__0': 'Other', 'subcategory__0': 'Other Training', 'week_number__0': 41, 'task_description__0': 'New hire orientation', 'customer__0': '-', 'updated_at__0': None, 'hours__0': 6.0, 'month__0': 'October', 'project__0': '-', 'date__1': datetime.date(2024, 10, 7), 'category__1': 'Other', 'subcategory__1': 'Other Training', 'week_number__1': 41, 'task_description__1': 'Andrew<>Joseph', 'customer__1': '-', 'updated_at__1': None, 'hours__1': 2.0, 'month__1': 'October', 'project__1': '-', 'date__2': datetime.date(2024, 10, 8), 'category__2': 'Other', 'subcategory__2': 'Other Training', 'week_number__2': 41, 'task_description__2': 'Andrew<>Joseph', 'customer__2': '-', 'updated_at__2': None, 'hours__2': 2.0, 'month__2': 'October', 'project__2': '-', 'date__3': datetime.date(2024, 10, 8), 'category__3': 'Other', 'subcategory__3': 'Info/File Management', 'week_number__3': 41, 'task_description__3': 'I-9 Meeting', 'customer__3': '-', 'updated_at__3': None, 'hours__3': 1.0, 'month__3': 'October', 'project__3': '-', 'date__4': datetime.date(2024, 10, 8), 'category__4': 'Other', 'subcategory__4': 'Safety Training/Reporting', 'week_number__4': 41, 'task_description__4': 'Workday Safety Training', 'customer__4': '-', 'updated_at__4': None, 'hours__4': 5.0, 'month__4': 'October', 'project__4': '-' ... 1430 parameters truncated ... 'date__148': datetime.date(2024, 11, 27), 'category__148': 'Other', 'subcategory__148': 'PC Upgrades/Support', 'week_number__148': 48, 'task_description__148': 'VMWare troubleshooting', 'customer__148': '-', 'updated_at__148': None, 'hours__148': 2.0, 'month__148': 'November', 'project__148': '-', 'date__149': datetime.date(2024, 11, 27), 'category__149': 'Other', 'subcategory__149': 'Other Training', 'week_number__149': 48, 'task_description__149': 'Self study', 'customer__149': '-', 'updated_at__149': None, 'hours__149': 2.0, 'month__149': 'November', 'project__149': '-', 'date__150': datetime.date(2024, 11, 27), 'category__150': 'Other', 'subcategory__150': 'PC Upgrades/Support', 'week_number__150': 48, 'task_description__150': 'Document generation tool', 'customer__150': '-', 'updated_at__150': None, 'hours__150': 1.0, 'month__150': 'November', 'project__150': '-', 'date__151': datetime.date(2024, 11, 28), 'category__151': 'Other', 'subcategory__151': 'Holidays', 'week_number__151': 48, 'task_description__151': 'Thanksgiving', 'customer__151': '', 'updated_at__151': None, 'hours__151': 8.0, 'month__151': 'November', 'project__151': '', 'date__152': datetime.date(2024, 11, 29), 'category__152': 'Other', 'subcategory__152': 'Holidays', 'week_number__152': 48, 'task_description__152': 'Thanksgiving', 'customer__152': '', 'updated_at__152': None, 'hours__152': 8.0, 'month__152': 'November', 'project__152': ''}]
 (Background on this error at: https://sqlalche.me/e/20/gkpj)
 2025-01-09 20:25:44,954 - TimesheetTracker - DEBUG - Database session closed
+2025-01-09 20:27:38,480 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 20:27:38,556 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 20:27:38,556 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 20:27:38,933 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 20:27:38,933 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 20:27:38,933 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 20:27:39,167 - TimesheetTracker - INFO - Found 4 tables in database
+2025-01-09 20:27:39,169 - TimesheetTracker - INFO - Expected tables: projects, customers, time_entries, project_managers
+2025-01-09 20:27:39,334 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 20:27:39,413 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 20:27:39,496 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 20:27:39,575 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 20:27:39,575 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 20:27:40,881 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 20:27:40,949 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 20:27:45,177 - TimesheetTracker - INFO - Testing database connection
+2025-01-09 20:27:45,217 - TimesheetTracker - INFO - Database connection successful
+2025-01-09 20:27:45,217 - TimesheetTracker - INFO - Configuring Alembic context
+2025-01-09 20:27:45,218 - TimesheetTracker - INFO - Beginning migration transaction
+2025-01-09 20:27:45,312 - TimesheetTracker - INFO - Creating customers table
+2025-01-09 20:27:45,346 - TimesheetTracker - ERROR - Error during upgrade: (psycopg2.errors.DuplicateTable) relation "customers" already exists
+
+[SQL: 
+CREATE TABLE customers (
+	id SERIAL NOT NULL, 
+	name VARCHAR NOT NULL, 
+	contact_email VARCHAR, 
+	industry VARCHAR, 
+	status VARCHAR, 
+	address VARCHAR, 
+	phone VARCHAR, 
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL, 
+	updated_at TIMESTAMP WITH TIME ZONE, 
+	PRIMARY KEY (id), 
+	UNIQUE (name)
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-01-09 20:27:45,347 - TimesheetTracker - ERROR - Upgrade error details:
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.DuplicateTable: relation "customers" already exists
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/migrations/versions/base_migration.py", line 26, in upgrade
+    op.create_table('customers',
+  File "<string>", line 8, in create_table
+  File "<string>", line 3, in create_table
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/ops.py", line 1318, in create_table
+    return operations.invoke(op)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/base.py", line 442, in invoke
+    return fn(self, operation)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/toimpl.py", line 143, in create_table
+    operations.impl.create_table(table, **kw)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/ddl/impl.py", line 406, in create_table
+    self._exec(schema.CreateTable(table, **kw))
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/ddl/impl.py", line 247, in _exec
+    return conn.execute(construct, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/sql/ddl.py", line 180, in _execute_on_connection
+    return connection._execute_ddl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1529, in _execute_ddl
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.DuplicateTable) relation "customers" already exists
+
+[SQL: 
+CREATE TABLE customers (
+	id SERIAL NOT NULL, 
+	name VARCHAR NOT NULL, 
+	contact_email VARCHAR, 
+	industry VARCHAR, 
+	status VARCHAR, 
+	address VARCHAR, 
+	phone VARCHAR, 
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL, 
+	updated_at TIMESTAMP WITH TIME ZONE, 
+	PRIMARY KEY (id), 
+	UNIQUE (name)
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-01-09 20:27:45,360 - TimesheetTracker - ERROR - Migration failed: (psycopg2.errors.DuplicateTable) relation "customers" already exists
+
+[SQL: 
+CREATE TABLE customers (
+	id SERIAL NOT NULL, 
+	name VARCHAR NOT NULL, 
+	contact_email VARCHAR, 
+	industry VARCHAR, 
+	status VARCHAR, 
+	address VARCHAR, 
+	phone VARCHAR, 
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL, 
+	updated_at TIMESTAMP WITH TIME ZONE, 
+	PRIMARY KEY (id), 
+	UNIQUE (name)
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-01-09 20:27:45,360 - TimesheetTracker - ERROR - Migration error details:
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.DuplicateTable: relation "customers" already exists
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/migrations/env.py", line 81, in run_migrations_online
+    context.run_migrations()
+  File "<string>", line 8, in run_migrations
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/runtime/environment.py", line 946, in run_migrations
+    self.get_context().run_migrations(**kw)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/runtime/migration.py", line 623, in run_migrations
+    step.migration_fn(**kw)
+  File "/home/runner/workspace/migrations/versions/base_migration.py", line 26, in upgrade
+    op.create_table('customers',
+  File "<string>", line 8, in create_table
+  File "<string>", line 3, in create_table
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/ops.py", line 1318, in create_table
+    return operations.invoke(op)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/base.py", line 442, in invoke
+    return fn(self, operation)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/toimpl.py", line 143, in create_table
+    operations.impl.create_table(table, **kw)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/ddl/impl.py", line 406, in create_table
+    self._exec(schema.CreateTable(table, **kw))
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/ddl/impl.py", line 247, in _exec
+    return conn.execute(construct, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/sql/ddl.py", line 180, in _execute_on_connection
+    return connection._execute_ddl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1529, in _execute_ddl
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.DuplicateTable) relation "customers" already exists
+
+[SQL: 
+CREATE TABLE customers (
+	id SERIAL NOT NULL, 
+	name VARCHAR NOT NULL, 
+	contact_email VARCHAR, 
+	industry VARCHAR, 
+	status VARCHAR, 
+	address VARCHAR, 
+	phone VARCHAR, 
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL, 
+	updated_at TIMESTAMP WITH TIME ZONE, 
+	PRIMARY KEY (id), 
+	UNIQUE (name)
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-01-09 20:27:45,382 - TimesheetTracker - ERROR - Migration setup failed: (psycopg2.errors.DuplicateTable) relation "customers" already exists
+
+[SQL: 
+CREATE TABLE customers (
+	id SERIAL NOT NULL, 
+	name VARCHAR NOT NULL, 
+	contact_email VARCHAR, 
+	industry VARCHAR, 
+	status VARCHAR, 
+	address VARCHAR, 
+	phone VARCHAR, 
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL, 
+	updated_at TIMESTAMP WITH TIME ZONE, 
+	PRIMARY KEY (id), 
+	UNIQUE (name)
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-01-09 20:27:45,383 - TimesheetTracker - ERROR - Setup error details:
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.DuplicateTable: relation "customers" already exists
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/migrations/env.py", line 81, in run_migrations_online
+    context.run_migrations()
+  File "<string>", line 8, in run_migrations
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/runtime/environment.py", line 946, in run_migrations
+    self.get_context().run_migrations(**kw)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/runtime/migration.py", line 623, in run_migrations
+    step.migration_fn(**kw)
+  File "/home/runner/workspace/migrations/versions/base_migration.py", line 26, in upgrade
+    op.create_table('customers',
+  File "<string>", line 8, in create_table
+  File "<string>", line 3, in create_table
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/ops.py", line 1318, in create_table
+    return operations.invoke(op)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/base.py", line 442, in invoke
+    return fn(self, operation)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/toimpl.py", line 143, in create_table
+    operations.impl.create_table(table, **kw)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/ddl/impl.py", line 406, in create_table
+    self._exec(schema.CreateTable(table, **kw))
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/ddl/impl.py", line 247, in _exec
+    return conn.execute(construct, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/sql/ddl.py", line 180, in _execute_on_connection
+    return connection._execute_ddl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1529, in _execute_ddl
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.DuplicateTable) relation "customers" already exists
+
+[SQL: 
+CREATE TABLE customers (
+	id SERIAL NOT NULL, 
+	name VARCHAR NOT NULL, 
+	contact_email VARCHAR, 
+	industry VARCHAR, 
+	status VARCHAR, 
+	address VARCHAR, 
+	phone VARCHAR, 
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL, 
+	updated_at TIMESTAMP WITH TIME ZONE, 
+	PRIMARY KEY (id), 
+	UNIQUE (name)
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-01-09 20:28:34,810 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 20:28:34,911 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 20:28:34,912 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 20:28:35,260 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 20:28:35,261 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 20:28:35,262 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 20:28:35,470 - TimesheetTracker - INFO - Found 4 tables in database
+2025-01-09 20:28:35,472 - TimesheetTracker - INFO - Expected tables: project_managers, time_entries, customers, projects
+2025-01-09 20:28:35,623 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 20:28:35,706 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 20:28:35,787 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 20:28:35,867 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 20:28:35,867 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 20:28:37,105 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 20:28:37,174 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 20:28:39,530 - TimesheetTracker - INFO - Testing database connection
+2025-01-09 20:28:39,570 - TimesheetTracker - INFO - Database connection successful
+2025-01-09 20:28:39,570 - TimesheetTracker - INFO - Configuring Alembic context
+2025-01-09 20:28:39,571 - TimesheetTracker - INFO - Beginning migration transaction
+2025-01-09 20:28:39,647 - TimesheetTracker - INFO - Creating customers table
+2025-01-09 20:28:39,675 - TimesheetTracker - ERROR - Error during upgrade: (psycopg2.errors.DuplicateTable) relation "customers" already exists
+
+[SQL: 
+CREATE TABLE customers (
+	id SERIAL NOT NULL, 
+	name VARCHAR NOT NULL, 
+	contact_email VARCHAR, 
+	industry VARCHAR, 
+	status VARCHAR, 
+	address VARCHAR, 
+	phone VARCHAR, 
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL, 
+	updated_at TIMESTAMP WITH TIME ZONE, 
+	PRIMARY KEY (id), 
+	UNIQUE (name)
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-01-09 20:28:39,677 - TimesheetTracker - ERROR - Upgrade error details:
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.DuplicateTable: relation "customers" already exists
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/migrations/versions/base_migration.py", line 26, in upgrade
+    op.create_table('customers',
+  File "<string>", line 8, in create_table
+  File "<string>", line 3, in create_table
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/ops.py", line 1318, in create_table
+    return operations.invoke(op)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/base.py", line 442, in invoke
+    return fn(self, operation)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/toimpl.py", line 143, in create_table
+    operations.impl.create_table(table, **kw)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/ddl/impl.py", line 406, in create_table
+    self._exec(schema.CreateTable(table, **kw))
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/ddl/impl.py", line 247, in _exec
+    return conn.execute(construct, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/sql/ddl.py", line 180, in _execute_on_connection
+    return connection._execute_ddl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1529, in _execute_ddl
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.DuplicateTable) relation "customers" already exists
+
+[SQL: 
+CREATE TABLE customers (
+	id SERIAL NOT NULL, 
+	name VARCHAR NOT NULL, 
+	contact_email VARCHAR, 
+	industry VARCHAR, 
+	status VARCHAR, 
+	address VARCHAR, 
+	phone VARCHAR, 
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL, 
+	updated_at TIMESTAMP WITH TIME ZONE, 
+	PRIMARY KEY (id), 
+	UNIQUE (name)
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-01-09 20:28:39,682 - TimesheetTracker - ERROR - Migration failed: (psycopg2.errors.DuplicateTable) relation "customers" already exists
+
+[SQL: 
+CREATE TABLE customers (
+	id SERIAL NOT NULL, 
+	name VARCHAR NOT NULL, 
+	contact_email VARCHAR, 
+	industry VARCHAR, 
+	status VARCHAR, 
+	address VARCHAR, 
+	phone VARCHAR, 
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL, 
+	updated_at TIMESTAMP WITH TIME ZONE, 
+	PRIMARY KEY (id), 
+	UNIQUE (name)
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-01-09 20:28:39,682 - TimesheetTracker - ERROR - Migration error details:
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.DuplicateTable: relation "customers" already exists
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/migrations/env.py", line 81, in run_migrations_online
+    context.run_migrations()
+  File "<string>", line 8, in run_migrations
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/runtime/environment.py", line 946, in run_migrations
+    self.get_context().run_migrations(**kw)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/runtime/migration.py", line 623, in run_migrations
+    step.migration_fn(**kw)
+  File "/home/runner/workspace/migrations/versions/base_migration.py", line 26, in upgrade
+    op.create_table('customers',
+  File "<string>", line 8, in create_table
+  File "<string>", line 3, in create_table
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/ops.py", line 1318, in create_table
+    return operations.invoke(op)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/base.py", line 442, in invoke
+    return fn(self, operation)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/toimpl.py", line 143, in create_table
+    operations.impl.create_table(table, **kw)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/ddl/impl.py", line 406, in create_table
+    self._exec(schema.CreateTable(table, **kw))
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/ddl/impl.py", line 247, in _exec
+    return conn.execute(construct, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/sql/ddl.py", line 180, in _execute_on_connection
+    return connection._execute_ddl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1529, in _execute_ddl
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.DuplicateTable) relation "customers" already exists
+
+[SQL: 
+CREATE TABLE customers (
+	id SERIAL NOT NULL, 
+	name VARCHAR NOT NULL, 
+	contact_email VARCHAR, 
+	industry VARCHAR, 
+	status VARCHAR, 
+	address VARCHAR, 
+	phone VARCHAR, 
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL, 
+	updated_at TIMESTAMP WITH TIME ZONE, 
+	PRIMARY KEY (id), 
+	UNIQUE (name)
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-01-09 20:28:39,705 - TimesheetTracker - ERROR - Migration setup failed: (psycopg2.errors.DuplicateTable) relation "customers" already exists
+
+[SQL: 
+CREATE TABLE customers (
+	id SERIAL NOT NULL, 
+	name VARCHAR NOT NULL, 
+	contact_email VARCHAR, 
+	industry VARCHAR, 
+	status VARCHAR, 
+	address VARCHAR, 
+	phone VARCHAR, 
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL, 
+	updated_at TIMESTAMP WITH TIME ZONE, 
+	PRIMARY KEY (id), 
+	UNIQUE (name)
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-01-09 20:28:39,707 - TimesheetTracker - ERROR - Setup error details:
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.DuplicateTable: relation "customers" already exists
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/migrations/env.py", line 81, in run_migrations_online
+    context.run_migrations()
+  File "<string>", line 8, in run_migrations
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/runtime/environment.py", line 946, in run_migrations
+    self.get_context().run_migrations(**kw)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/runtime/migration.py", line 623, in run_migrations
+    step.migration_fn(**kw)
+  File "/home/runner/workspace/migrations/versions/base_migration.py", line 26, in upgrade
+    op.create_table('customers',
+  File "<string>", line 8, in create_table
+  File "<string>", line 3, in create_table
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/ops.py", line 1318, in create_table
+    return operations.invoke(op)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/base.py", line 442, in invoke
+    return fn(self, operation)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/toimpl.py", line 143, in create_table
+    operations.impl.create_table(table, **kw)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/ddl/impl.py", line 406, in create_table
+    self._exec(schema.CreateTable(table, **kw))
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/ddl/impl.py", line 247, in _exec
+    return conn.execute(construct, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/sql/ddl.py", line 180, in _execute_on_connection
+    return connection._execute_ddl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1529, in _execute_ddl
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.DuplicateTable) relation "customers" already exists
+
+[SQL: 
+CREATE TABLE customers (
+	id SERIAL NOT NULL, 
+	name VARCHAR NOT NULL, 
+	contact_email VARCHAR, 
+	industry VARCHAR, 
+	status VARCHAR, 
+	address VARCHAR, 
+	phone VARCHAR, 
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL, 
+	updated_at TIMESTAMP WITH TIME ZONE, 
+	PRIMARY KEY (id), 
+	UNIQUE (name)
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-01-09 20:29:01,205 - TimesheetTracker - DEBUG - Database session created
+2025-01-09 20:29:01,208 - TimesheetTracker - INFO - Starting database initialization process
+2025-01-09 20:29:01,208 - TimesheetTracker - INFO - Checking current database state
+2025-01-09 20:29:01,208 - TimesheetTracker - INFO - Testing database connection
+2025-01-09 20:29:01,274 - TimesheetTracker - INFO - Database connection successful
+2025-01-09 20:29:01,275 - TimesheetTracker - INFO - Loading Alembic configuration
+2025-01-09 20:29:01,277 - TimesheetTracker - DEBUG - Alembic config loaded from: alembic.ini
+2025-01-09 20:29:01,278 - TimesheetTracker - DEBUG - Script location: migrations
+2025-01-09 20:29:01,340 - TimesheetTracker - INFO - Current migration revision: None
+2025-01-09 20:29:01,361 - TimesheetTracker - INFO - Starting migration process
+2025-01-09 20:29:01,671 - TimesheetTracker - INFO - Testing database connection
+2025-01-09 20:29:01,713 - TimesheetTracker - INFO - Database connection successful
+2025-01-09 20:29:01,713 - TimesheetTracker - INFO - Configuring Alembic context
+2025-01-09 20:29:01,714 - TimesheetTracker - INFO - Beginning migration transaction
+2025-01-09 20:29:01,789 - TimesheetTracker - INFO - Creating customers table
+2025-01-09 20:29:01,822 - TimesheetTracker - ERROR - Error during upgrade: (psycopg2.errors.DuplicateTable) relation "customers" already exists
+
+[SQL: 
+CREATE TABLE customers (
+	id SERIAL NOT NULL, 
+	name VARCHAR NOT NULL, 
+	contact_email VARCHAR, 
+	industry VARCHAR, 
+	status VARCHAR, 
+	address VARCHAR, 
+	phone VARCHAR, 
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL, 
+	updated_at TIMESTAMP WITH TIME ZONE, 
+	PRIMARY KEY (id), 
+	UNIQUE (name)
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-01-09 20:29:01,822 - TimesheetTracker - ERROR - Upgrade error details:
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.DuplicateTable: relation "customers" already exists
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/migrations/versions/base_migration.py", line 26, in upgrade
+    op.create_table('customers',
+  File "<string>", line 8, in create_table
+  File "<string>", line 3, in create_table
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/ops.py", line 1318, in create_table
+    return operations.invoke(op)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/base.py", line 442, in invoke
+    return fn(self, operation)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/toimpl.py", line 143, in create_table
+    operations.impl.create_table(table, **kw)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/ddl/impl.py", line 406, in create_table
+    self._exec(schema.CreateTable(table, **kw))
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/ddl/impl.py", line 247, in _exec
+    return conn.execute(construct, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/sql/ddl.py", line 180, in _execute_on_connection
+    return connection._execute_ddl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1529, in _execute_ddl
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.DuplicateTable) relation "customers" already exists
+
+[SQL: 
+CREATE TABLE customers (
+	id SERIAL NOT NULL, 
+	name VARCHAR NOT NULL, 
+	contact_email VARCHAR, 
+	industry VARCHAR, 
+	status VARCHAR, 
+	address VARCHAR, 
+	phone VARCHAR, 
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL, 
+	updated_at TIMESTAMP WITH TIME ZONE, 
+	PRIMARY KEY (id), 
+	UNIQUE (name)
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-01-09 20:29:01,827 - TimesheetTracker - ERROR - Migration failed: (psycopg2.errors.DuplicateTable) relation "customers" already exists
+
+[SQL: 
+CREATE TABLE customers (
+	id SERIAL NOT NULL, 
+	name VARCHAR NOT NULL, 
+	contact_email VARCHAR, 
+	industry VARCHAR, 
+	status VARCHAR, 
+	address VARCHAR, 
+	phone VARCHAR, 
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL, 
+	updated_at TIMESTAMP WITH TIME ZONE, 
+	PRIMARY KEY (id), 
+	UNIQUE (name)
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-01-09 20:29:01,827 - TimesheetTracker - ERROR - Migration error details:
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.DuplicateTable: relation "customers" already exists
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/migrations/env.py", line 81, in run_migrations_online
+    context.run_migrations()
+  File "<string>", line 8, in run_migrations
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/runtime/environment.py", line 946, in run_migrations
+    self.get_context().run_migrations(**kw)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/runtime/migration.py", line 623, in run_migrations
+    step.migration_fn(**kw)
+  File "/home/runner/workspace/migrations/versions/base_migration.py", line 26, in upgrade
+    op.create_table('customers',
+  File "<string>", line 8, in create_table
+  File "<string>", line 3, in create_table
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/ops.py", line 1318, in create_table
+    return operations.invoke(op)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/base.py", line 442, in invoke
+    return fn(self, operation)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/toimpl.py", line 143, in create_table
+    operations.impl.create_table(table, **kw)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/ddl/impl.py", line 406, in create_table
+    self._exec(schema.CreateTable(table, **kw))
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/ddl/impl.py", line 247, in _exec
+    return conn.execute(construct, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/sql/ddl.py", line 180, in _execute_on_connection
+    return connection._execute_ddl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1529, in _execute_ddl
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.DuplicateTable) relation "customers" already exists
+
+[SQL: 
+CREATE TABLE customers (
+	id SERIAL NOT NULL, 
+	name VARCHAR NOT NULL, 
+	contact_email VARCHAR, 
+	industry VARCHAR, 
+	status VARCHAR, 
+	address VARCHAR, 
+	phone VARCHAR, 
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL, 
+	updated_at TIMESTAMP WITH TIME ZONE, 
+	PRIMARY KEY (id), 
+	UNIQUE (name)
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-01-09 20:29:01,851 - TimesheetTracker - ERROR - Migration setup failed: (psycopg2.errors.DuplicateTable) relation "customers" already exists
+
+[SQL: 
+CREATE TABLE customers (
+	id SERIAL NOT NULL, 
+	name VARCHAR NOT NULL, 
+	contact_email VARCHAR, 
+	industry VARCHAR, 
+	status VARCHAR, 
+	address VARCHAR, 
+	phone VARCHAR, 
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL, 
+	updated_at TIMESTAMP WITH TIME ZONE, 
+	PRIMARY KEY (id), 
+	UNIQUE (name)
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-01-09 20:29:01,852 - TimesheetTracker - ERROR - Setup error details:
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.DuplicateTable: relation "customers" already exists
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/migrations/env.py", line 81, in run_migrations_online
+    context.run_migrations()
+  File "<string>", line 8, in run_migrations
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/runtime/environment.py", line 946, in run_migrations
+    self.get_context().run_migrations(**kw)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/runtime/migration.py", line 623, in run_migrations
+    step.migration_fn(**kw)
+  File "/home/runner/workspace/migrations/versions/base_migration.py", line 26, in upgrade
+    op.create_table('customers',
+  File "<string>", line 8, in create_table
+  File "<string>", line 3, in create_table
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/ops.py", line 1318, in create_table
+    return operations.invoke(op)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/base.py", line 442, in invoke
+    return fn(self, operation)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/toimpl.py", line 143, in create_table
+    operations.impl.create_table(table, **kw)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/ddl/impl.py", line 406, in create_table
+    self._exec(schema.CreateTable(table, **kw))
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/ddl/impl.py", line 247, in _exec
+    return conn.execute(construct, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/sql/ddl.py", line 180, in _execute_on_connection
+    return connection._execute_ddl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1529, in _execute_ddl
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.DuplicateTable) relation "customers" already exists
+
+[SQL: 
+CREATE TABLE customers (
+	id SERIAL NOT NULL, 
+	name VARCHAR NOT NULL, 
+	contact_email VARCHAR, 
+	industry VARCHAR, 
+	status VARCHAR, 
+	address VARCHAR, 
+	phone VARCHAR, 
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL, 
+	updated_at TIMESTAMP WITH TIME ZONE, 
+	PRIMARY KEY (id), 
+	UNIQUE (name)
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-01-09 20:29:01,855 - TimesheetTracker - ERROR - Migration failed: (psycopg2.errors.DuplicateTable) relation "customers" already exists
+
+[SQL: 
+CREATE TABLE customers (
+	id SERIAL NOT NULL, 
+	name VARCHAR NOT NULL, 
+	contact_email VARCHAR, 
+	industry VARCHAR, 
+	status VARCHAR, 
+	address VARCHAR, 
+	phone VARCHAR, 
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL, 
+	updated_at TIMESTAMP WITH TIME ZONE, 
+	PRIMARY KEY (id), 
+	UNIQUE (name)
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-01-09 20:29:01,855 - TimesheetTracker - ERROR - Migration stack trace:
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.DuplicateTable: relation "customers" already exists
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/main.py", line 190, in initialize_database
+    command.upgrade(alembic_cfg, "head")
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/command.py", line 406, in upgrade
+    script.run_env()
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/script/base.py", line 586, in run_env
+    util.load_python_file(self.dir, "env.py")
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/util/pyfiles.py", line 95, in load_python_file
+    module = load_module_py(module_id, path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/util/pyfiles.py", line 113, in load_module_py
+    spec.loader.exec_module(module)  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/runner/workspace/migrations/env.py", line 96, in <module>
+    run_migrations_online()
+  File "/home/runner/workspace/migrations/env.py", line 81, in run_migrations_online
+    context.run_migrations()
+  File "<string>", line 8, in run_migrations
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/runtime/environment.py", line 946, in run_migrations
+    self.get_context().run_migrations(**kw)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/runtime/migration.py", line 623, in run_migrations
+    step.migration_fn(**kw)
+  File "/home/runner/workspace/migrations/versions/base_migration.py", line 26, in upgrade
+    op.create_table('customers',
+  File "<string>", line 8, in create_table
+  File "<string>", line 3, in create_table
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/ops.py", line 1318, in create_table
+    return operations.invoke(op)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/base.py", line 442, in invoke
+    return fn(self, operation)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/operations/toimpl.py", line 143, in create_table
+    operations.impl.create_table(table, **kw)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/ddl/impl.py", line 406, in create_table
+    self._exec(schema.CreateTable(table, **kw))
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/alembic/ddl/impl.py", line 247, in _exec
+    return conn.execute(construct, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/sql/ddl.py", line 180, in _execute_on_connection
+    return connection._execute_ddl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1529, in _execute_ddl
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.DuplicateTable) relation "customers" already exists
+
+[SQL: 
+CREATE TABLE customers (
+	id SERIAL NOT NULL, 
+	name VARCHAR NOT NULL, 
+	contact_email VARCHAR, 
+	industry VARCHAR, 
+	status VARCHAR, 
+	address VARCHAR, 
+	phone VARCHAR, 
+	created_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL, 
+	updated_at TIMESTAMP WITH TIME ZONE, 
+	PRIMARY KEY (id), 
+	UNIQUE (name)
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-01-09 20:29:01,881 - TimesheetTracker - DEBUG - Database session closed
