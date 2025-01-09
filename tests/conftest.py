@@ -24,16 +24,18 @@ def test_engine():
 @pytest.fixture(scope="function")
 def db_session(test_engine):
     """Create a fresh database session for each test"""
-    connection = test_engine.connect()
-    transaction = connection.begin()
-    Session = sessionmaker(bind=connection)
+    Session = sessionmaker(bind=test_engine)
     session = Session()
-    
-    yield session
-    
-    session.close()
-    transaction.rollback()
-    connection.close()
+
+    # Clear tables before each test
+    for table in reversed(Base.metadata.sorted_tables):
+        session.execute(table.delete())
+    session.commit()
+
+    try:
+        yield session
+    finally:
+        session.close()
 
 @pytest.fixture(scope="function")
 def client(db_session):
@@ -42,14 +44,14 @@ def client(db_session):
         try:
             yield db_session
         finally:
-            db_session.close()
-    
+            pass  # Don't close here, as it's handled by the db_session fixture
+
     app.dependency_overrides[get_db] = override_get_db
     with TestClient(app) as test_client:
         yield test_client
     app.dependency_overrides.clear()
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def test_csv_file():
     """Create a test CSV file with sample data"""
     csv_content = """Week Number,Month,Category,Subcategory,Customer,Project,Task Description,Hours,Date
@@ -66,29 +68,47 @@ def setup_test_data(db_session):
     """Set up test data in the database"""
     from models.customerModel import Customer
     from models.projectModel import Project
-    
-    # Create test customers
+
+    # Create test customers with unique emails
     customers = [
-        Customer(name="Unassigned", contact_email="unassigned@company.com"),
-        Customer(name="ECOLAB", contact_email="contact@ecolab.com")
+        Customer(name="Unassigned", contact_email="unassigned_test@example.com", status="active"),
+        Customer(name="ECOLAB", contact_email="ecolab_test@example.com", status="active")
     ]
-    
+    for customer in customers:
+        try:
+            db_session.add(customer)
+            db_session.flush()
+        except:
+            db_session.rollback()
+            # Skip if customer already exists
+            continue
+
     # Create test projects
     projects = [
         Project(
             project_id="Unassigned",
             name="Unassigned",
-            customer="Unassigned"
+            customer="Unassigned",
+            status="active"
         ),
         Project(
             project_id="Project_Magic_Bullet",
             name="Project Magic Bullet",
-            customer="ECOLAB"
+            customer="ECOLAB",
+            status="active"
         )
     ]
-    
-    db_session.add_all(customers)
-    db_session.add_all(projects)
+    for project in projects:
+        try:
+            db_session.add(project)
+            db_session.flush()
+        except:
+            db_session.rollback()
+            # Skip if project already exists
+            continue
+
     db_session.commit()
-    
-    return {"customers": customers, "projects": projects}
+
+    yield {"customers": customers, "projects": projects}
+
+    # Cleanup handled by db_session fixture

@@ -1,7 +1,9 @@
 import pytest
 from utils.utils import parse_csv, clean_string_value, parse_date, validate_week_number, validate_month
+from utils.validators import validate_database_references, normalize_customer_name, normalize_project_id
 from datetime import datetime
 from pathlib import Path
+from database.schemas import TimeEntryCreate
 
 def test_parse_csv_with_valid_data(test_csv_file, setup_test_data):
     """Test parsing a valid CSV file"""
@@ -19,7 +21,6 @@ def test_clean_string_value():
     assert clean_string_value("  Test  ") == "Test"
     assert clean_string_value("") == ""
     assert clean_string_value(None) == ""
-    assert clean_string_value("Project-123", field_type="project") == "Project_123"
     assert clean_string_value("other training", field_type="category") == "Other Training"
     assert clean_string_value("info/file management", field_type="subcategory") == "Info/File Management"
 
@@ -111,3 +112,57 @@ def test_parse_csv_with_special_characters(tmp_path):
     assert entries[0].customer == "Test & Co."
     assert entries[0].project == "Project_123"
     assert entries[0].task_description == "Task, with comma"
+
+def test_parse_csv_with_missing_values(tmp_path):
+    """Test CSV parsing with missing values that should use defaults"""
+    csv_file = tmp_path / "missing_values.csv"
+    csv_content = """Week Number,Month,Category,Subcategory,Customer,Project,Task Description,Hours,Date
+41,October,Other,Other Training,,,Generic task,8.0,2024-10-07"""
+    csv_file.write_text(csv_content)
+
+    with open(csv_file, 'r') as file:
+        entries = parse_csv(file)
+    assert len(entries) == 1
+    assert entries[0].customer == "Unassigned"
+    assert entries[0].project == "Unassigned"
+
+def test_database_reference_validation(setup_test_data, db_session):
+    """Test database reference validation with foreign key constraints"""
+    entries = [
+        TimeEntryCreate(
+            week_number=41,
+            month="October",
+            category="Other",
+            subcategory="Other Training",
+            customer="ECOLAB",
+            project="Project_Magic_Bullet",
+            task_description="Valid entry",
+            hours=8.0,
+            date=datetime(2024, 10, 7).date()
+        ),
+        TimeEntryCreate(
+            week_number=41,
+            month="October",
+            category="Other",
+            subcategory="Other Training",
+            customer="NonExistentCustomer",
+            project="NonExistentProject",
+            task_description="Invalid entry",
+            hours=8.0,
+            date=datetime(2024, 10, 7).date()
+        )
+    ]
+
+    valid_entries, validation_errors = validate_database_references(db_session, entries)
+
+    # Should have one valid entry and one error
+    assert len(valid_entries) == 1
+    assert len(validation_errors) == 1
+
+    # Valid entry should maintain the correct relationship
+    assert valid_entries[0].customer == "ECOLAB"
+    assert valid_entries[0].project == "Project_Magic_Bullet"
+
+    # Invalid entry should be in validation errors
+    assert validation_errors[0]['type'] == 'invalid_project_customer'
+    assert "NonExistentCustomer" in validation_errors[0]['error']

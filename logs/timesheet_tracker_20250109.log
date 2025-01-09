@@ -12404,3 +12404,587 @@ DETAIL:  Key (customer)=(Project Magic Bullet) is not present in table "customer
 2025-01-09 20:59:33,715 - TimesheetTracker - DEBUG - Processing row 1/1
 2025-01-09 20:59:33,716 - TimesheetTracker - DEBUG - Successfully processed row 1
 2025-01-09 20:59:33,716 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:01:09,908 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:01:10,198 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:01:10,198 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:01:10,200 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:01:10,201 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:01:10,201 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:01:10,201 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:01:10,202 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:01:10,202 - TimesheetTracker - DEBUG - Raw data from row 1: {'week_number': 41, 'month': 'October', 'category': 'Other', 'subcategory': 'Other Training', 'customer': 'Unassigned', 'project': 'Unassigned', 'task_description': 'New hire orientation', 'hours': 6.0, 'date': '2024-10-07'}
+2025-01-09 21:01:10,202 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:01:10,202 - TimesheetTracker - DEBUG - Raw data from row 2: {'week_number': 41, 'month': 'October', 'category': 'Other', 'subcategory': 'Other Training', 'customer': 'ECOLAB', 'project': 'Project Magic Bullet', 'task_description': 'Training session', 'hours': 2.0, 'date': '2024-10-07'}
+2025-01-09 21:01:10,202 - TimesheetTracker - INFO - Successfully extracted 2 entries from CSV
+2025-01-09 21:01:10,268 - TimesheetTracker - WARNING - Error parsing date 'invalid_date': Unknown datetime string format, unable to parse: invalid_date, at position 0
+2025-01-09 21:01:10,272 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:01:10,272 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:01:10,274 - TimesheetTracker - DEBUG - Successfully read CSV with 2 columns
+2025-01-09 21:01:10,274 - TimesheetTracker - ERROR - Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:01:10,274 - TimesheetTracker - ERROR - CSV structure validation failed: Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:01:10,275 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:01:10,275 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:01:10,276 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:01:10,277 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:01:10,277 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:01:10,277 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:01:10,278 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:01:10,278 - TimesheetTracker - DEBUG - Raw data from row 1: {'week_number': 41, 'month': 'October', 'category': 'Other', 'subcategory': 'Other Training', 'customer': 'Unassigned', 'project': 'Unassigned', 'task_description': 'Test task', 'hours': -1.0, 'date': '2024-10-07'}
+2025-01-09 21:01:10,278 - TimesheetTracker - INFO - Successfully extracted 1 entries from CSV
+2025-01-09 21:01:10,286 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:01:10,286 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:01:10,287 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:01:10,287 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:01:10,288 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:01:10,288 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:01:10,288 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:01:10,288 - TimesheetTracker - DEBUG - Raw data from row 1: {'week_number': 41, 'month': 'October', 'category': 'Other', 'subcategory': 'Other Training', 'customer': 'Unassigned', 'project': 'Unassigned', 'task_description': 'Task 1', 'hours': 8.0, 'date': '2024-10-07'}
+2025-01-09 21:01:10,288 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:01:10,288 - TimesheetTracker - DEBUG - Raw data from row 2: {'week_number': 41, 'month': 'October', 'category': 'Other', 'subcategory': 'Other Training', 'customer': 'Unassigned', 'project': 'Unassigned', 'task_description': 'Task 2', 'hours': 8.0, 'date': '2024-10-07'}
+2025-01-09 21:01:10,288 - TimesheetTracker - INFO - Successfully extracted 2 entries from CSV
+2025-01-09 21:01:10,290 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:01:10,290 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:01:10,291 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:01:10,291 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:01:10,292 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:01:10,292 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:01:10,292 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:01:10,292 - TimesheetTracker - DEBUG - Raw data from row 1: {'week_number': 41, 'month': 'October', 'category': 'Other', 'subcategory': 'Other Training', 'customer': 'Test & Co.', 'project': 'Project-123', 'task_description': 'Task, with comma', 'hours': 8.0, 'date': '2024-10-07'}
+2025-01-09 21:01:10,292 - TimesheetTracker - INFO - Successfully extracted 1 entries from CSV
+2025-01-09 21:02:10,328 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:02:10,646 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:02:10,646 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:02:10,648 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:02:10,649 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:02:10,649 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:02:10,649 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:02:10,650 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:02:10,651 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:02:10,651 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:02:10,652 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:02:10,652 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:02:10,661 - TimesheetTracker - WARNING - Error parsing date 'invalid_date': Unknown datetime string format, unable to parse: invalid_date, at position 0
+2025-01-09 21:02:10,665 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:02:10,665 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:02:10,667 - TimesheetTracker - DEBUG - Successfully read CSV with 2 columns
+2025-01-09 21:02:10,667 - TimesheetTracker - ERROR - Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:02:10,667 - TimesheetTracker - ERROR - CSV structure validation failed: Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:02:10,668 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:02:10,668 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:02:10,670 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:02:10,670 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:02:10,671 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:02:10,671 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:02:10,672 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:02:10,672 - TimesheetTracker - WARNING - Skipping row 1 due to invalid hours: -1.0
+2025-01-09 21:02:10,672 - TimesheetTracker - INFO - Successfully processed 0 valid entries from CSV
+2025-01-09 21:02:10,673 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:02:10,673 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:02:10,674 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:02:10,675 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:02:10,675 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:02:10,675 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:02:10,675 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:02:10,676 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:02:10,676 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:02:10,676 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:02:10,676 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:02:10,678 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:02:10,678 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:02:10,679 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:02:10,679 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:02:10,680 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:02:10,680 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:02:10,680 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:02:10,681 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:02:10,683 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:04:47,721 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:04:48,104 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:04:48,104 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:04:48,106 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:04:48,107 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:04:48,107 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:04:48,107 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:04:48,108 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:04:48,109 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:04:48,109 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:04:48,109 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:04:48,110 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:04:48,114 - TimesheetTracker - WARNING - Error parsing date 'invalid_date': Unknown datetime string format, unable to parse: invalid_date, at position 0
+2025-01-09 21:04:48,121 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:04:48,121 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:04:48,123 - TimesheetTracker - DEBUG - Successfully read CSV with 2 columns
+2025-01-09 21:04:48,123 - TimesheetTracker - ERROR - Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:04:48,123 - TimesheetTracker - ERROR - CSV structure validation failed: Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:04:48,125 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:04:48,125 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:04:48,126 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:04:48,126 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:04:48,127 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:04:48,127 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:04:48,127 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:04:48,128 - TimesheetTracker - WARNING - Skipping row 1 due to invalid hours: -1.0
+2025-01-09 21:04:48,128 - TimesheetTracker - INFO - Successfully processed 0 valid entries from CSV
+2025-01-09 21:04:48,129 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:04:48,129 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:04:48,131 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:04:48,131 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:04:48,131 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:04:48,132 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:04:48,132 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:04:48,132 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:04:48,133 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:04:48,133 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:04:48,133 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:04:48,135 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:04:48,135 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:04:48,136 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:04:48,136 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:04:48,137 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:04:48,137 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:04:48,137 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:04:48,137 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:04:48,137 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:04:48,192 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:04:48,192 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:04:48,194 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:04:48,194 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:04:48,194 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:04:48,195 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:04:48,195 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:04:48,195 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:04:48,195 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:05:25,763 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:05:25,815 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 21:05:25,816 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 21:05:27,228 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 21:05:27,229 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 21:05:27,229 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 21:05:27,498 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 21:05:27,499 - TimesheetTracker - INFO - Expected tables: project_managers, customers, projects, time_entries
+2025-01-09 21:05:27,719 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 21:05:27,800 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 21:05:27,880 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 21:05:27,960 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 21:05:27,960 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 21:05:29,964 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:05:30,255 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:05:30,255 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:05:30,258 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:05:30,258 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:05:30,259 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:05:30,259 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:05:30,260 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:05:30,260 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:05:30,261 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:05:30,261 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:05:30,261 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:05:30,266 - TimesheetTracker - WARNING - Error parsing date 'invalid_date': Unknown datetime string format, unable to parse: invalid_date, at position 0
+2025-01-09 21:05:30,272 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:05:30,272 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:05:30,274 - TimesheetTracker - DEBUG - Successfully read CSV with 2 columns
+2025-01-09 21:05:30,274 - TimesheetTracker - ERROR - Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:05:30,274 - TimesheetTracker - ERROR - CSV structure validation failed: Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:05:30,275 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:05:30,275 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:05:30,277 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:05:30,277 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:05:30,278 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:05:30,278 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:05:30,278 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:05:30,278 - TimesheetTracker - WARNING - Skipping row 1 due to invalid hours: -1.0
+2025-01-09 21:05:30,278 - TimesheetTracker - INFO - Successfully processed 0 valid entries from CSV
+2025-01-09 21:05:30,280 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:05:30,280 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:05:30,281 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:05:30,281 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:05:30,281 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:05:30,281 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:05:30,282 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:05:30,282 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:05:30,282 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:05:30,283 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:05:30,283 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:05:30,286 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:05:30,286 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:05:30,287 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:05:30,287 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:05:30,288 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:05:30,288 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:05:30,288 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:05:30,288 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:05:30,289 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:05:30,290 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:05:30,290 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:05:30,291 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:05:30,291 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:05:30,292 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:05:30,292 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:05:30,292 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:05:30,293 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:05:30,293 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:05:30,682 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 21:06:23,916 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:06:23,991 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 21:06:23,991 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 21:06:24,347 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 21:06:24,347 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 21:06:24,347 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 21:06:24,574 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 21:06:24,575 - TimesheetTracker - INFO - Expected tables: project_managers, projects, customers, time_entries
+2025-01-09 21:06:24,719 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 21:06:24,798 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 21:06:24,879 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 21:06:24,958 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 21:06:24,959 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 21:06:26,157 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 21:06:27,732 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:06:28,151 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:06:28,151 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:06:28,156 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:06:28,156 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:06:28,157 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:06:28,157 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:06:28,157 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:06:28,158 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:06:28,159 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:06:28,160 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:06:28,160 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:06:28,165 - TimesheetTracker - WARNING - Error parsing date 'invalid_date': Unknown datetime string format, unable to parse: invalid_date, at position 0
+2025-01-09 21:06:28,172 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:06:28,172 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:06:28,174 - TimesheetTracker - DEBUG - Successfully read CSV with 2 columns
+2025-01-09 21:06:28,174 - TimesheetTracker - ERROR - Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:06:28,174 - TimesheetTracker - ERROR - CSV structure validation failed: Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:06:28,175 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:06:28,175 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:06:28,177 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:06:28,177 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:06:28,178 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:06:28,178 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:06:28,178 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:06:28,178 - TimesheetTracker - WARNING - Skipping row 1 due to invalid hours: -1.0
+2025-01-09 21:06:28,179 - TimesheetTracker - INFO - Successfully processed 0 valid entries from CSV
+2025-01-09 21:06:28,180 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:06:28,180 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:06:28,182 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:06:28,182 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:06:28,183 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:06:28,183 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:06:28,184 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:06:28,184 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:06:28,184 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:06:28,185 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:06:28,185 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:06:28,186 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:06:28,186 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:06:28,188 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:06:28,188 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:06:28,189 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:06:28,189 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:06:28,189 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:06:28,189 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:06:28,189 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:06:28,191 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:06:28,191 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:06:28,192 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:06:28,192 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:06:28,193 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:06:28,193 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:06:28,193 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:06:28,193 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:06:28,194 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:06:28,203 - TimesheetTracker - DEBUG - Found 1 existing customers and 1 existing projects
+2025-01-09 21:06:28,203 - TimesheetTracker - WARNING - Default customer 'Unassigned' not found in database
+2025-01-09 21:06:28,204 - TimesheetTracker - ERROR - Failed to create default customer: (sqlite3.IntegrityError) UNIQUE constraint failed: customers.contact_email
+[SQL: INSERT INTO customers (name, contact_email, industry, status, address, phone, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING id, created_at]
+[parameters: ('Unassigned', 'unassigned@company.com', None, 'active', None, None, None)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-01-09 21:06:28,204 - TimesheetTracker - WARNING - Default project 'Unassigned' not found in database
+2025-01-09 21:06:28,220 - TimesheetTracker - INFO - Created default project: Unassigned
+2025-01-09 21:08:14,567 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:08:14,645 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 21:08:14,646 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 21:08:14,997 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 21:08:14,999 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 21:08:15,000 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 21:08:15,222 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 21:08:15,225 - TimesheetTracker - INFO - Expected tables: project_managers, projects, time_entries, customers
+2025-01-09 21:08:15,386 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 21:08:15,469 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 21:08:15,554 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 21:08:15,639 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 21:08:15,639 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 21:08:16,912 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 21:08:19,509 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:08:19,972 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:08:19,973 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:08:19,980 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:08:19,980 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:08:19,981 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:08:19,981 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:08:19,982 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:08:19,983 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:08:19,983 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:08:19,984 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:08:19,984 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:08:19,989 - TimesheetTracker - WARNING - Error parsing date 'invalid_date': Unknown datetime string format, unable to parse: invalid_date, at position 0
+2025-01-09 21:08:19,997 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:08:19,997 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:08:20,000 - TimesheetTracker - DEBUG - Successfully read CSV with 2 columns
+2025-01-09 21:08:20,001 - TimesheetTracker - ERROR - Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:08:20,001 - TimesheetTracker - ERROR - CSV structure validation failed: Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:08:20,003 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:08:20,003 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:08:20,005 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:08:20,005 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:08:20,006 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:08:20,006 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:08:20,006 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:08:20,007 - TimesheetTracker - WARNING - Skipping row 1 due to invalid hours: -1.0
+2025-01-09 21:08:20,007 - TimesheetTracker - INFO - Successfully processed 0 valid entries from CSV
+2025-01-09 21:08:20,008 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:08:20,008 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:08:20,010 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:08:20,010 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:08:20,011 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:08:20,011 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:08:20,011 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:08:20,011 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:08:20,012 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:08:20,012 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:08:20,012 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:08:20,013 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:08:20,013 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:08:20,015 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:08:20,015 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:08:20,015 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:08:20,015 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:08:20,016 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:08:20,016 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:08:20,016 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:08:20,017 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:08:20,017 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:08:20,019 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:08:20,019 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:08:20,020 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:08:20,020 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:08:20,020 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:08:20,020 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:08:20,020 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:09:03,183 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:09:03,246 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 21:09:03,247 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 21:09:03,596 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 21:09:03,596 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 21:09:03,596 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 21:09:03,801 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 21:09:03,802 - TimesheetTracker - INFO - Expected tables: customers, projects, time_entries, project_managers
+2025-01-09 21:09:03,941 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 21:09:04,020 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 21:09:04,097 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 21:09:04,176 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 21:09:04,176 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 21:09:05,367 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 21:09:06,714 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:09:07,113 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:09:07,113 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:09:07,116 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:09:07,117 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:09:07,117 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:09:07,118 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:09:07,118 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:09:07,119 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:09:07,120 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:09:07,120 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:09:07,120 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:09:07,125 - TimesheetTracker - WARNING - Error parsing date 'invalid_date': Unknown datetime string format, unable to parse: invalid_date, at position 0
+2025-01-09 21:09:07,132 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:09:07,132 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:09:07,134 - TimesheetTracker - DEBUG - Successfully read CSV with 2 columns
+2025-01-09 21:09:07,134 - TimesheetTracker - ERROR - Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:09:07,134 - TimesheetTracker - ERROR - CSV structure validation failed: Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:09:07,136 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:09:07,136 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:09:07,139 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:09:07,139 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:09:07,140 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:09:07,140 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:09:07,140 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:09:07,140 - TimesheetTracker - WARNING - Skipping row 1 due to invalid hours: -1.0
+2025-01-09 21:09:07,140 - TimesheetTracker - INFO - Successfully processed 0 valid entries from CSV
+2025-01-09 21:09:07,142 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:09:07,142 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:09:07,144 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:09:07,144 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:09:07,144 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:09:07,145 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:09:07,145 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:09:07,145 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:09:07,145 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:09:07,146 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:09:07,146 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:09:07,147 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:09:07,148 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:09:07,149 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:09:07,149 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:09:07,150 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:09:07,150 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:09:07,150 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:09:07,151 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:09:07,151 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:09:07,152 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:09:07,152 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:09:07,154 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:09:07,154 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:09:07,155 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:09:07,155 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:09:07,155 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:09:07,155 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:09:07,156 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:09:38,272 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:09:38,318 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 21:09:38,319 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 21:09:38,655 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 21:09:38,656 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 21:09:38,656 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 21:09:38,861 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 21:09:38,862 - TimesheetTracker - INFO - Expected tables: customers, project_managers, time_entries, projects
+2025-01-09 21:09:39,003 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 21:09:39,081 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 21:09:39,158 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 21:09:39,236 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 21:09:39,237 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 21:09:40,435 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 21:09:41,239 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:09:42,617 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:09:42,617 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:09:42,621 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:09:42,622 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:09:42,622 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:09:42,623 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:09:42,623 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:09:42,624 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:09:42,624 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:09:42,625 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:09:42,625 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:09:42,631 - TimesheetTracker - WARNING - Error parsing date 'invalid_date': Unknown datetime string format, unable to parse: invalid_date, at position 0
+2025-01-09 21:09:42,636 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:09:42,636 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:09:42,638 - TimesheetTracker - DEBUG - Successfully read CSV with 2 columns
+2025-01-09 21:09:42,638 - TimesheetTracker - ERROR - Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:09:42,639 - TimesheetTracker - ERROR - CSV structure validation failed: Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:09:42,641 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:09:42,641 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:09:42,643 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:09:42,643 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:09:42,644 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:09:42,644 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:09:42,644 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:09:42,644 - TimesheetTracker - WARNING - Skipping row 1 due to invalid hours: -1.0
+2025-01-09 21:09:42,644 - TimesheetTracker - INFO - Successfully processed 0 valid entries from CSV
+2025-01-09 21:09:42,647 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:09:42,647 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:09:42,649 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:09:42,649 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:09:42,650 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:09:42,650 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:09:42,650 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:09:42,651 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:09:42,651 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:09:42,651 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:09:42,651 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:09:42,653 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:09:42,653 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:09:42,655 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:09:42,655 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:09:42,655 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:09:42,656 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:09:42,656 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:09:42,656 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:09:42,656 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:09:42,658 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:09:42,658 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:09:42,659 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:09:42,659 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:09:42,660 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:09:42,660 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:09:42,660 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:09:42,661 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:09:42,661 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:09:42,709 - TimesheetTracker - DEBUG - Found 1 existing customers and 1 existing projects
+2025-01-09 21:09:42,714 - TimesheetTracker - WARNING - Customer 'NonExistentCustomer' not found, using Unassigned
+2025-01-09 21:09:42,714 - TimesheetTracker - WARNING - Project 'NonExistentProject' not found, using Unassigned
+2025-01-09 21:10:29,478 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:10:29,558 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 21:10:29,559 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 21:10:29,935 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 21:10:29,935 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 21:10:29,935 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 21:10:30,168 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 21:10:30,169 - TimesheetTracker - INFO - Expected tables: project_managers, projects, time_entries, customers
+2025-01-09 21:10:30,334 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 21:10:30,417 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 21:10:30,501 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 21:10:30,588 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 21:10:30,589 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 21:10:31,976 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 21:10:33,471 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 21:10:33,844 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:10:33,844 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:10:33,847 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:10:33,847 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:10:33,848 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:10:33,848 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:10:33,848 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:10:33,850 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:10:33,850 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:10:33,850 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:10:33,851 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:10:33,855 - TimesheetTracker - WARNING - Error parsing date 'invalid_date': Unknown datetime string format, unable to parse: invalid_date, at position 0
+2025-01-09 21:10:33,860 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:10:33,860 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:10:33,861 - TimesheetTracker - DEBUG - Successfully read CSV with 2 columns
+2025-01-09 21:10:33,862 - TimesheetTracker - ERROR - Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:10:33,862 - TimesheetTracker - ERROR - CSV structure validation failed: Missing required columns: Week Number, Customer, Project, Date
+2025-01-09 21:10:33,863 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:10:33,863 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:10:33,865 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:10:33,865 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:10:33,866 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:10:33,866 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:10:33,866 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:10:33,866 - TimesheetTracker - WARNING - Skipping row 1 due to invalid hours: -1.0
+2025-01-09 21:10:33,866 - TimesheetTracker - INFO - Successfully processed 0 valid entries from CSV
+2025-01-09 21:10:33,868 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:10:33,868 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:10:33,869 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:10:33,869 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:10:33,870 - TimesheetTracker - DEBUG - Cleaned DataFrame has 2 rows
+2025-01-09 21:10:33,870 - TimesheetTracker - INFO - Processing 2 rows from CSV file
+2025-01-09 21:10:33,870 - TimesheetTracker - DEBUG - Processing row 1/2
+2025-01-09 21:10:33,871 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:10:33,871 - TimesheetTracker - DEBUG - Processing row 2/2
+2025-01-09 21:10:33,871 - TimesheetTracker - DEBUG - Successfully processed row 2
+2025-01-09 21:10:33,872 - TimesheetTracker - INFO - Successfully processed 2 valid entries from CSV
+2025-01-09 21:10:33,873 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:10:33,873 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:10:33,874 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:10:33,875 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:10:33,875 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:10:33,875 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:10:33,876 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:10:33,876 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:10:33,876 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:10:33,877 - TimesheetTracker - INFO - Starting CSV parsing process
+2025-01-09 21:10:33,877 - TimesheetTracker - INFO - Starting raw CSV parsing
+2025-01-09 21:10:33,879 - TimesheetTracker - DEBUG - Successfully read CSV with 9 columns
+2025-01-09 21:10:33,879 - TimesheetTracker - DEBUG - Starting DataFrame cleaning
+2025-01-09 21:10:33,879 - TimesheetTracker - DEBUG - Cleaned DataFrame has 1 rows
+2025-01-09 21:10:33,880 - TimesheetTracker - INFO - Processing 1 rows from CSV file
+2025-01-09 21:10:33,880 - TimesheetTracker - DEBUG - Processing row 1/1
+2025-01-09 21:10:33,880 - TimesheetTracker - DEBUG - Successfully processed row 1
+2025-01-09 21:10:33,880 - TimesheetTracker - INFO - Successfully processed 1 valid entries from CSV
+2025-01-09 21:10:33,922 - TimesheetTracker - DEBUG - Found 1 existing customers and 1 existing projects
+2025-01-09 21:10:33,927 - TimesheetTracker - WARNING - Customer 'NonExistentCustomer' not found, defaulting to Unassigned
+2025-01-09 21:10:33,927 - TimesheetTracker - WARNING - Project 'NonExistentProject' not found, defaulting to Unassigned

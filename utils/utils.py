@@ -1,8 +1,9 @@
 import pandas as pd
-from typing import List
+from typing import List, Dict, Any, Optional
 from datetime import datetime
 import calendar
 from utils.logger import Logger
+from utils.validators import normalize_customer_name, normalize_project_id, DEFAULT_CUSTOMER, DEFAULT_PROJECT
 
 logger = Logger().get_logger()
 
@@ -91,25 +92,69 @@ def validate_month(month):
         pass
     return calendar.month_name[datetime.now().month]
 
-def parse_csv(file) -> List:
-    """Parse CSV file with enhanced data cleaning and validation."""
-    from database import schemas  # Import moved inside function
+def parse_raw_csv(file) -> Optional[pd.DataFrame]:
+    """Parse raw CSV file into DataFrame without validation."""
+    try:
+        logger.info("Starting raw CSV parsing")
+        df = pd.read_csv(file, keep_default_na=False, encoding='utf-8')
+        logger.debug(f"Successfully read CSV with {len(df.columns)} columns")
+        return df
+    except UnicodeDecodeError:
+        try:
+            logger.warning("UTF-8 encoding failed, attempting with ISO-8859-1")
+            df = pd.read_csv(file, keep_default_na=False, encoding='ISO-8859-1')
+            logger.debug(f"Successfully read CSV with ISO-8859-1 encoding")
+            return df
+        except Exception as e:
+            logger.error(f"Failed to parse CSV with ISO-8859-1 encoding: {str(e)}")
+            return None
+    except Exception as e:
+        logger.error(f"Failed to parse CSV: {str(e)}")
+        return None
 
-    logger.info("Starting CSV parsing")
-    logger.debug("Reading CSV file into pandas DataFrame")
-
-    # Check for required columns first
+def validate_csv_structure(df: pd.DataFrame) -> bool:
+    """Validate CSV structure and required columns."""
     required_columns = ['Week Number', 'Hours', 'Customer', 'Project', 'Date']
-    df = pd.read_csv(file, keep_default_na=False)
     missing_columns = [col for col in required_columns if col not in df.columns]
+
     if missing_columns:
         error_msg = f"Missing required columns: {', '.join(missing_columns)}"
         logger.error(error_msg)
         raise ValueError(error_msg)
 
-    # Remove rows that are all empty and reset index
+    return True
+
+def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
+    """Clean the DataFrame before processing."""
+    logger.debug("Starting DataFrame cleaning")
+    # Remove rows that are completely empty
     df = df.dropna(how='all')
+    # Reset index after dropping rows
     df = df.reset_index(drop=True)
+    logger.debug(f"Cleaned DataFrame has {len(df)} rows")
+    return df
+
+def parse_csv(file) -> List:
+    """Parse CSV file with enhanced error handling and logging."""
+    from database import schemas  # Import moved inside function
+
+    logger.info("Starting CSV parsing process")
+
+    # Parse raw CSV
+    df = parse_raw_csv(file)
+    if df is None:
+        logger.error("Failed to parse CSV file")
+        return []
+
+    # Validate structure
+    try:
+        validate_csv_structure(df)
+    except ValueError as e:
+        logger.error(f"CSV structure validation failed: {str(e)}")
+        raise
+
+    # Clean data
+    df = clean_dataframe(df)
 
     if df.empty:
         logger.warning("No valid entries found in CSV file")
@@ -130,12 +175,9 @@ def parse_csv(file) -> List:
 
             week_number = validate_week_number(row.get('Week Number'))
             month = validate_month(row.get('Month'))
-            customer = clean_string_value(row.get('Customer', ''))
+            customer = normalize_customer_name(row.get('Customer', ''))
+            project = normalize_project_id(row.get('Project', ''))
             entry_date = parse_date(row.get('Date'))
-
-            # Clean up customer value and handle special cases
-            if not customer or customer.strip() in ['-', '', 'None', None]:
-                customer = 'Unassigned'
 
             entry = schemas.TimeEntryCreate(
                 week_number=week_number,
@@ -143,13 +185,14 @@ def parse_csv(file) -> List:
                 category=clean_string_value(row.get('Category'), "Other", "category"),
                 subcategory=clean_string_value(row.get('Subcategory'), "General", "subcategory"),
                 customer=customer,
-                project=clean_string_value(row.get('Project'), "Unassigned", "project"),
+                project=project,
                 task_description=clean_string_value(row.get('Task Description'), ""),
                 hours=hours,
                 date=entry_date
             )
             entries.append(entry)
             logger.debug(f"Successfully processed row {index + 1}")
+
         except Exception as e:
             logger.error(f"Error processing row {index + 1}: {str(e)}")
             continue
