@@ -1,4 +1,4 @@
-from sqlalchemy import join
+from sqlalchemy import join, text, inspect
 from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, Query, Path
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
@@ -6,6 +6,10 @@ from typing import List, Optional
 from datetime import datetime, timedelta, date
 import calendar
 from dotenv import load_dotenv
+from alembic.config import Config
+from alembic import command
+from alembic.script import MigrationContext
+import uvicorn
 
 from database import schemas, crud, get_db, verify_database, engine
 from utils.logger import Logger
@@ -20,22 +24,25 @@ from services.project_service import ProjectService
 logger = Logger().get_logger()
 app = FastAPI(title="Timesheet Management API")
 
-# Configure CORS with more specific settings
+# Configure CORS with more permissive settings during development
 origins = [
-    "https://kzmnist91qyym9byf4h7.lite.vusercontent.net",  # Frontend origin
-    "https://*.repl.co",  # Allow all repl.co subdomains
-    "http://localhost:3000",  # Local development
-    "http://localhost:8080"
+    "https://kzmnist91qyym9byf4h7.lite.vusercontent.net",  # Current frontend origin
+    "https://*.lite.vusercontent.net",     # Allow all Replit vusercontent domains
+    "https://*.repl.co",                   # Allow all repl.co subdomains
+    "http://localhost:3000",               # Local development
+    "http://localhost:8080",               # Local development alternative port
+    "https://*.replit.app",                # Replit app domains
+    "https://*.replit.dev"                 # Replit development domains
 ]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-    allow_headers=["*"],
-    expose_headers=["*"],
-    max_age=3600,
+    allow_methods=["*"],                   # Allow all methods for development
+    allow_headers=["*"],                   # Allow all headers
+    expose_headers=["*"],                  # Expose all headers
+    max_age=3600,                         # Cache preflight requests for 1 hour
 )
 
 load_dotenv()
@@ -533,6 +540,5 @@ def get_monthly_report(
 
 
 if __name__ == "__main__":
-    import uvicorn
     logger.info("Starting FastAPI server")
     uvicorn.run(app, host="0.0.0.0", port=8000)
