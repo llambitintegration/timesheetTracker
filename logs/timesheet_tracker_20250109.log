@@ -4520,3 +4520,62 @@ CREATE TABLE customers (
 ]
 (Background on this error at: https://sqlalche.me/e/20/f405)
 2025-01-09 20:29:01,881 - TimesheetTracker - DEBUG - Database session closed
+2025-01-09 20:29:46,044 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 20:29:46,139 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 20:29:46,139 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 20:29:46,502 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 20:29:46,502 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 20:29:46,502 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 20:29:46,711 - TimesheetTracker - INFO - Found 4 tables in database
+2025-01-09 20:29:46,711 - TimesheetTracker - INFO - Expected tables: project_managers, customers, time_entries, projects
+2025-01-09 20:29:46,860 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 20:29:46,942 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 20:29:47,022 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 20:29:47,103 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 20:29:47,103 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 20:29:48,522 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 20:29:48,652 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 20:30:03,067 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 20:30:03,203 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 20:30:03,204 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 20:30:03,585 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 20:30:03,587 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 20:30:03,588 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 20:30:03,832 - TimesheetTracker - INFO - Found 4 tables in database
+2025-01-09 20:30:03,833 - TimesheetTracker - INFO - Expected tables: time_entries, project_managers, customers, projects
+2025-01-09 20:30:03,989 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 20:30:04,076 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 20:30:04,158 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 20:30:04,237 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 20:30:04,238 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 20:30:05,453 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 20:30:05,525 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 20:30:22,234 - TimesheetTracker - DEBUG - Database session created
+2025-01-09 20:30:22,237 - TimesheetTracker - INFO - Starting database initialization process
+2025-01-09 20:30:22,242 - TimesheetTracker - INFO - Testing database connection
+2025-01-09 20:30:22,309 - TimesheetTracker - INFO - Database connection successful
+2025-01-09 20:30:22,311 - TimesheetTracker - INFO - Force flag is true, dropping existing tables
+2025-01-09 20:30:22,497 - TimesheetTracker - INFO - Existing tables dropped successfully
+2025-01-09 20:30:22,500 - TimesheetTracker - INFO - Loading Alembic configuration
+2025-01-09 20:30:22,504 - TimesheetTracker - DEBUG - Alembic config loaded from: alembic.ini
+2025-01-09 20:30:22,507 - TimesheetTracker - DEBUG - Script location: migrations
+2025-01-09 20:30:22,579 - TimesheetTracker - INFO - Current migration revision: None
+2025-01-09 20:30:22,608 - TimesheetTracker - INFO - Starting migration process
+2025-01-09 20:30:23,022 - TimesheetTracker - INFO - Testing database connection
+2025-01-09 20:30:23,074 - TimesheetTracker - INFO - Database connection successful
+2025-01-09 20:30:23,077 - TimesheetTracker - INFO - Configuring Alembic context
+2025-01-09 20:30:23,080 - TimesheetTracker - INFO - Beginning migration transaction
+2025-01-09 20:30:23,201 - TimesheetTracker - INFO - Creating customers table
+2025-01-09 20:30:23,237 - TimesheetTracker - INFO - Creating project_managers table
+2025-01-09 20:30:23,267 - TimesheetTracker - INFO - Creating projects table
+2025-01-09 20:30:23,297 - TimesheetTracker - INFO - Creating time_entries table
+2025-01-09 20:30:23,331 - TimesheetTracker - INFO - All tables created successfully
+2025-01-09 20:30:23,355 - TimesheetTracker - INFO - Migrations completed successfully
+2025-01-09 20:30:23,376 - TimesheetTracker - INFO - Migration completed successfully
+2025-01-09 20:30:23,376 - TimesheetTracker - INFO - Verifying database state after migration
+2025-01-09 20:30:23,609 - TimesheetTracker - WARNING - Table customers not found
+2025-01-09 20:30:23,693 - TimesheetTracker - WARNING - Table project_managers not found
+2025-01-09 20:30:23,773 - TimesheetTracker - WARNING - Table projects not found
+2025-01-09 20:30:23,854 - TimesheetTracker - WARNING - Table time_entries not found
+2025-01-09 20:30:23,854 - TimesheetTracker - ERROR - Tables missing after migration: customers, project_managers, projects, time_entries
+2025-01-09 20:30:23,880 - TimesheetTracker - DEBUG - Database session closed
