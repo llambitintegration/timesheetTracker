@@ -1,9 +1,9 @@
+
 import pandas as pd
 from typing import List
-from database import schemas
 from datetime import datetime
-from utils.logger import Logger
 import calendar
+from utils.logger import Logger
 
 logger = Logger().get_logger()
 
@@ -67,8 +67,10 @@ def validate_month(month):
         pass
     return calendar.month_name[datetime.now().month]
 
-def parse_csv(file) -> List[schemas.TimeEntryCreate]:
+def parse_csv(file) -> List:
     """Parse CSV file with enhanced data cleaning and validation."""
+    from database import schemas  # Import moved inside function
+    
     logger.info("Starting CSV parsing")
     logger.debug("Reading CSV file into pandas DataFrame")
 
@@ -132,7 +134,7 @@ def parse_csv(file) -> List[schemas.TimeEntryCreate]:
     logger.debug(f"Total hours recorded: {sum(entry.hours for entry in entries)}")
     return entries
 
-def parse_excel(file) -> List[schemas.TimeEntryCreate]:
+def parse_excel(file) -> List:
     """Parse Excel file with enhanced date handling."""
     logger.info("Starting Excel parsing")
     logger.debug("Reading Excel file into pandas DataFrame")
