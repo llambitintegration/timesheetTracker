@@ -24,6 +24,8 @@ config = context.config
 # override sqlalchemy.url with DATABASE_URL environment variable
     # Fetch the DATABASE_URL directly from environment variables
     database_url = os.getenv('DATABASE_URL')
+    if database_url is None:
+        raise ValueError("DATABASE_URL environment variable is not set")
     config.set_main_option('sqlalchemy.url', database_url)
 
 # Interpret the config file for Python logging.
