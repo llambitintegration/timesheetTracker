@@ -155,14 +155,18 @@ def test_database_reference_validation(setup_test_data, db_session):
 
     valid_entries, validation_errors = validate_database_references(db_session, entries)
 
-    # Should have one valid entry and one error
-    assert len(valid_entries) == 1
-    assert len(validation_errors) == 1
+    # All entries should be processed
+    assert len(valid_entries) == 2
+    assert len(validation_errors) == 2  # One for customer, one for project
 
-    # Valid entry should maintain the correct relationship
+    # First entry should maintain its original values
     assert valid_entries[0].customer == "ECOLAB"
     assert valid_entries[0].project == "Project_Magic_Bullet"
 
-    # Invalid entry should be in validation errors
-    assert validation_errors[0]['type'] == 'invalid_project_customer'
-    assert "NonExistentCustomer" in validation_errors[0]['error']
+    # Second entry should use default values
+    assert valid_entries[1].customer == "Unassigned"
+    assert valid_entries[1].project == "Unassigned"
+
+    # Verify validation errors are logged correctly
+    assert validation_errors[0]['type'] in ['invalid_customer', 'invalid_project']
+    assert "NonExistent" in validation_errors[0]['error']

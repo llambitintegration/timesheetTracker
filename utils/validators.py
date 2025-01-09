@@ -93,7 +93,7 @@ def validate_database_references(
     Validate database references in time entries.
     Returns tuple of (valid_entries, validation_errors)
     """
-    valid_entries = []
+    processed_entries = []
     validation_errors = []
 
     # Get all unique customer names and project IDs
@@ -124,53 +124,48 @@ def validate_database_references(
     except Exception as e:
         logger.error(f"Error committing default entities: {str(e)}")
         db.rollback()
-        return [], [{'error': 'Database error during validation', 'type': 'database_error'}]
 
     for entry in entries:
         normalized_customer = normalize_customer_name(entry.customer)
         normalized_project = normalize_project_id(entry.project)
-        validation_error = None
+        original_customer = normalized_customer
+        original_project = normalized_project
 
-        # Check if customer exists
+        # Log validation issues but use defaults
         if normalized_customer not in existing_customers:
-            validation_error = {
-                'entry': entry.dict(),
-                'error': f"Customer '{normalized_customer}' not found in database",
+            validation_errors.append({
+                'entry': entry.model_dump(),
+                'error': f"Customer '{normalized_customer}' not found in database, using {DEFAULT_CUSTOMER}",
                 'type': 'invalid_customer'
-            }
+            })
             logger.warning(f"Customer '{normalized_customer}' not found, defaulting to {DEFAULT_CUSTOMER}")
             normalized_customer = DEFAULT_CUSTOMER
 
-        # Check if project exists
         if normalized_project not in existing_projects:
-            validation_error = {
-                'entry': entry.dict(),
-                'error': f"Project '{normalized_project}' not found in database",
+            validation_errors.append({
+                'entry': entry.model_dump(),
+                'error': f"Project '{normalized_project}' not found in database, using {DEFAULT_PROJECT}",
                 'type': 'invalid_project'
-            }
+            })
             logger.warning(f"Project '{normalized_project}' not found, defaulting to {DEFAULT_PROJECT}")
             normalized_project = DEFAULT_PROJECT
 
-        # If both exist, validate the project-customer relationship
+        # Log project-customer relationship issues
         elif normalized_project != DEFAULT_PROJECT and normalized_customer != DEFAULT_CUSTOMER:
             project = existing_projects[normalized_project]
             if project.customer != normalized_customer:
-                validation_error = {
-                    'entry': entry.dict(),
-                    'error': f"Project '{normalized_project}' does not belong to customer '{normalized_customer}'",
-                    'type': 'invalid_project_customer'
-                }
+                validation_errors.append({
+                    'entry': entry.model_dump(),
+                    'error': f"Project '{original_project}' does not belong to customer '{original_customer}', using defaults",
+                    'type': 'invalid_project_customer_relationship'
+                })
+                logger.warning(f"Invalid project-customer relationship: {original_project} - {original_customer}")
+                normalized_customer = DEFAULT_CUSTOMER
+                normalized_project = DEFAULT_PROJECT
 
-        if validation_error:
-            validation_errors.append(validation_error)
-            # Only add entry to valid entries if using default values
-            if normalized_customer == DEFAULT_CUSTOMER and normalized_project == DEFAULT_PROJECT:
-                entry.customer = normalized_customer
-                entry.project = normalized_project
-                valid_entries.append(entry)
-        else:
-            entry.customer = normalized_customer
-            entry.project = normalized_project
-            valid_entries.append(entry)
+        # Update entry with final values (original or default)
+        entry.customer = normalized_customer
+        entry.project = normalized_project
+        processed_entries.append(entry)
 
-    return valid_entries, validation_errors
+    return processed_entries, validation_errors
