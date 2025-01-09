@@ -20,7 +20,7 @@ class TimeEntryService:
         """Create a new time entry with proper validation and defaults."""
         try:
             logger.debug(f"Starting creation of time entry with data: {entry.model_dump()}")
-            entry_dict = entry.model_dump()
+            entry_dict = entry.model_dump(exclude={'id', 'created_at', 'updated_at'})  # Exclude ID and timestamps
 
             # Calculate week number and month from date
             entry_dict['week_number'] = TimeEntry.get_week_number(entry_dict['date'])

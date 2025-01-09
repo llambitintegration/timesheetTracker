@@ -25,7 +25,7 @@ def upgrade() -> None:
         # Create customers table first
         logger.info("Creating customers table")
         op.create_table('customers',
-            sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
+            sa.Column('id', sa.Integer(), primary_key=True, autoincrement=True, nullable=False, index=True),
             sa.Column('name', sa.String(), nullable=False),
             sa.Column('contact_email', sa.String(), nullable=True),
             sa.Column('industry', sa.String(), nullable=True),
@@ -34,7 +34,6 @@ def upgrade() -> None:
             sa.Column('phone', sa.String(), nullable=True),
             sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
             sa.Column('updated_at', sa.DateTime(timezone=True), nullable=True),
-            sa.PrimaryKeyConstraint('id'),
             sa.UniqueConstraint('name')
         )
         connection.execute(sa.text('COMMIT'))
@@ -55,12 +54,11 @@ def upgrade() -> None:
         # Create project_managers table
         logger.info("Creating project_managers table")
         op.create_table('project_managers',
-            sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
+            sa.Column('id', sa.Integer(), primary_key=True, autoincrement=True, nullable=False, index=True),
             sa.Column('name', sa.String(), nullable=False),
             sa.Column('email', sa.String(), nullable=True),
             sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
             sa.Column('updated_at', sa.DateTime(timezone=True), nullable=True),
-            sa.PrimaryKeyConstraint('id'),
             sa.UniqueConstraint('name')
         )
         connection.execute(sa.text('COMMIT'))
@@ -68,7 +66,7 @@ def upgrade() -> None:
         # Create projects table with proper foreign keys
         logger.info("Creating projects table")
         op.create_table('projects',
-            sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
+            sa.Column('id', sa.Integer(), primary_key=True, autoincrement=True, nullable=False, index=True),
             sa.Column('project_id', sa.String(), nullable=False),
             sa.Column('name', sa.String(), nullable=False),
             sa.Column('description', sa.String(), nullable=True),
@@ -77,7 +75,6 @@ def upgrade() -> None:
             sa.Column('status', sa.String(), server_default='active'),
             sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
             sa.Column('updated_at', sa.DateTime(timezone=True), nullable=True),
-            sa.PrimaryKeyConstraint('id'),
             sa.UniqueConstraint('project_id'),
             sa.ForeignKeyConstraint(['customer'], ['customers.name'], ondelete='SET NULL'),
             sa.ForeignKeyConstraint(['project_manager'], ['project_managers.name'], ondelete='SET NULL'),
@@ -85,24 +82,10 @@ def upgrade() -> None:
             sa.CheckConstraint("project_id != '-'", name='valid_project_id')
         )
 
-        # Insert default and common projects
-        connection.execute(sa.text("""
-            INSERT INTO projects (project_id, name, description, customer, status)
-            VALUES 
-            ('Unassigned', 'Unassigned', 'Default project for unassigned entries', 'Unassigned', 'active'),
-            ('Project_Magic_Bullet', 'Project Magic Bullet', 'ECOLAB Project', 'ECOLAB', 'active'),
-            ('iTrends', 'iTrends', 'ECOLAB iTrends Project', 'ECOLAB', 'active'),
-            ('Wichita_KS', 'Wichita KS', 'Hiland Dairy Wichita Project', 'Hiland Dairy', 'active'),
-            ('Aspers_PA', 'Aspers PA', 'Dr Pepper Snapple Project', 'Dr Pepper Snapple', 'active'),
-            ('Ellington_CT', 'Ellington CT', 'Country Pure Project', 'Country Pure', 'active')
-            ON CONFLICT (project_id) DO NOTHING
-        """))
-        connection.execute(sa.text('COMMIT'))
-
-        # Create time_entries table with updated foreign keys
+        # Create time_entries table with proper constraints
         logger.info("Creating time_entries table")
         op.create_table('time_entries',
-            sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
+            sa.Column('id', sa.Integer(), primary_key=True, autoincrement=True, nullable=False, index=True),
             sa.Column('date', sa.Date(), nullable=False),
             sa.Column('week_number', sa.Integer(), nullable=False),
             sa.Column('month', sa.String(), nullable=False),
@@ -111,17 +94,14 @@ def upgrade() -> None:
             sa.Column('customer', sa.String(), nullable=True),
             sa.Column('project', sa.String(), nullable=True),
             sa.Column('task_description', sa.String(), nullable=True),
-            sa.Column('hours', sa.Float(), nullable=False),
+            sa.Column('hours', sa.Float(), nullable=False, server_default='0'),
             sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
             sa.Column('updated_at', sa.DateTime(timezone=True), nullable=True),
-            sa.PrimaryKeyConstraint('id'),
             sa.ForeignKeyConstraint(['customer'], ['customers.name'], ondelete='SET NULL'),
             sa.ForeignKeyConstraint(['project'], ['projects.project_id'], ondelete='SET NULL'),
-            sa.CheckConstraint('hours > 0 AND hours <= 24', name='check_valid_hours')
+            sa.CheckConstraint('hours >= 0 AND hours <= 24', name='check_valid_hours')  # Modified to allow 0 hours
         )
         connection.execute(sa.text('COMMIT'))
-
-        
 
         logger.info("All tables created successfully")
 

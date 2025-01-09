@@ -24,8 +24,8 @@ class CustomerService:
                 logger.warning(f"Customer with name {customer.name} already exists")
                 raise ValueError(f"Customer with name {customer.name} already exists")
 
-            # Convert pydantic model to dict and create customer
-            customer_data = customer.model_dump()
+            # Convert pydantic model to dict and create customer, excluding ID and timestamps
+            customer_data = customer.model_dump(exclude={'id', 'created_at', 'updated_at'})
             logger.debug("Adding customer to database session")
             created_customer = self.customer_repo.create(self.db, customer_data)
 
@@ -63,7 +63,8 @@ class CustomerService:
             return None
 
         try:
-            update_data = customer_update.model_dump(exclude_unset=True)
+            # Exclude ID and timestamps from update data
+            update_data = customer_update.model_dump(exclude={'id', 'created_at', 'updated_at'}, exclude_unset=True)
             for key, value in update_data.items():
                 setattr(existing_customer, key, value)
 

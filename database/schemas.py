@@ -8,7 +8,7 @@ from models.projectManagerModel import ProjectManager as ProjectManagerModel
 
 class BaseSchema(BaseModel):
     """Base schema with common fields"""
-    id: Optional[int] = None
+    id: Optional[int] = None  # ID field is optional in input, will be set by database
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
 
@@ -27,9 +27,19 @@ class TimeEntryBase(BaseSchema):
     hours: float = Field(..., ge=0, le=24)
     date: date  # Add date field
 
-class TimeEntryCreate(TimeEntryBase):
+class TimeEntryCreate(BaseModel):
     """Schema for creating time entries"""
-    pass
+    week_number: Optional[int] = None  # Will be auto-calculated
+    month: Optional[str] = None  # Will be auto-calculated
+    category: str
+    subcategory: str
+    customer: Optional[str] = None
+    project: Optional[str] = None
+    task_description: Optional[str] = None
+    hours: float = Field(default=0.0, ge=0, le=24)  # Default to 0 if not provided
+    date: date  # Required field
+
+    model_config = ConfigDict(from_attributes=True)
 
 class TimeEntryUpdate(BaseSchema):
     """Schema for updating time entries"""
