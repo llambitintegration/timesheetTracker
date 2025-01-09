@@ -159,10 +159,6 @@ async def initialize_database(force: bool = False, db: Session = Depends(get_db)
     """Initialize database and run migrations"""
     logger.info("Starting database initialization process")
     try:
-        # First verify current database state
-        logger.info("Checking current database state")
-
-        # Test database connection first
         logger.info("Testing database connection")
         try:
             db.execute(text("SELECT 1"))
@@ -173,6 +169,22 @@ async def initialize_database(force: bool = False, db: Session = Depends(get_db)
                 status_code=500,
                 detail=f"Database connection failed: {str(conn_error)}"
             )
+
+        if force:
+            logger.info("Force flag is true, dropping existing tables")
+            try:
+                with engine.connect() as connection:
+                    # Drop tables in correct order due to foreign key constraints
+                    connection.execute(text("DROP TABLE IF EXISTS time_entries CASCADE"))
+                    connection.execute(text("DROP TABLE IF EXISTS projects CASCADE"))
+                    connection.execute(text("DROP TABLE IF EXISTS project_managers CASCADE"))
+                    connection.execute(text("DROP TABLE IF EXISTS customers CASCADE"))
+                    connection.execute(text("DROP TABLE IF EXISTS alembic_version"))
+                    connection.commit()
+                logger.info("Existing tables dropped successfully")
+            except Exception as e:
+                logger.error(f"Error dropping tables: {str(e)}")
+                raise HTTPException(status_code=500, detail=f"Error dropping tables: {str(e)}")
 
         logger.info("Loading Alembic configuration")
         alembic_cfg = Config("alembic.ini")
