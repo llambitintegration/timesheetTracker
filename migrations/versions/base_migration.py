@@ -94,6 +94,15 @@ def upgrade() -> None:
         )
         connection.execute(sa.text('COMMIT'))
 
+        # Insert default customer for unassigned entries
+        logger.info("Creating default customer")
+        connection.execute(sa.text("""
+            INSERT INTO customers (name, contact_email, status)
+            VALUES ('Unassigned', 'unassigned@company.com', 'active')
+            ON CONFLICT (name) DO NOTHING
+        """))
+        connection.execute(sa.text('COMMIT'))
+
         logger.info("All tables created successfully")
 
     except Exception as e:

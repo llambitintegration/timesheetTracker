@@ -109,7 +109,7 @@ def parse_csv(file) -> List:
             # Clean up customer value
             customer = clean_string_value(row.get('Customer'))
             if not customer or customer == '-' or customer.strip() == '':
-                customer = None
+                customer = 'Unassigned'
 
             entry = schemas.TimeEntryCreate(
                 week_number=week_number,
