@@ -1,4 +1,3 @@
-
 import pandas as pd
 from typing import List
 from datetime import datetime
@@ -70,7 +69,7 @@ def validate_month(month):
 def parse_csv(file) -> List:
     """Parse CSV file with enhanced data cleaning and validation."""
     from database import schemas  # Import moved inside function
-    
+
     logger.info("Starting CSV parsing")
     logger.debug("Reading CSV file into pandas DataFrame")
 
@@ -108,7 +107,7 @@ def parse_csv(file) -> List:
 
             # Clean up customer value and handle special cases
             customer = clean_string_value(row.get('Customer', ''))
-            if not customer or customer.strip() in ['-', '', None]:
+            if not customer or customer.strip() in ['-', '', 'None', None]:
                 customer = 'Unassigned'
 
             entry = schemas.TimeEntryCreate(
@@ -116,7 +115,7 @@ def parse_csv(file) -> List:
                 month=month,
                 category=clean_string_value(row.get('Category'), "Other"),
                 subcategory=clean_string_value(row.get('Subcategory'), "General"),
-                customer=clean_string_value(row.get('Customer')),
+                customer=customer,
                 project=clean_string_value(row.get('Project')),
                 task_description=clean_string_value(row.get('Task Description')),
                 hours=hours,
