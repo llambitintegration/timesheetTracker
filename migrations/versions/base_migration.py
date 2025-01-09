@@ -1,8 +1,8 @@
-"""create_time_entries_table
+"""base migration
 
-Revision ID: 9eac8145ca59
+Revision ID: base_migration_001
 Revises: 
-Create Date: 2025-01-09 20:05:00.000000
+Create Date: 2025-01-09 20:15:00.000000
 """
 from typing import Sequence, Union
 from alembic import op
@@ -12,7 +12,7 @@ from utils.logger import Logger
 logger = Logger().get_logger()
 
 # revision identifiers, used by Alembic.
-revision: str = '9eac8145ca59'
+revision: str = 'base_migration_001'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -58,7 +58,6 @@ def upgrade() -> None:
             sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
             sa.Column('project_id', sa.String(), nullable=False),
             sa.Column('name', sa.String(), nullable=False),
-            sa.Column('location', sa.String(), nullable=False),
             sa.Column('description', sa.String(), nullable=True),
             sa.Column('customer', sa.String(), nullable=False),
             sa.Column('project_manager', sa.String(), nullable=False),

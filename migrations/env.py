@@ -1,6 +1,5 @@
 from logging.config import fileConfig
 import os
-from os import environ
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 from alembic import context
@@ -22,25 +21,24 @@ load_dotenv()
 # access to the values within the .ini file in use.
 config = context.config
 
-# override sqlalchemy.url with DATABASE_URL environment variable
-    # Fetch the DATABASE_URL directly from environment variables
+# Fetch the DATABASE_URL from environment variables
 database_url = os.environ.get('DATABASE_URL')
 if database_url is None:
-        raise ValueError("DATABASE_URL environment variable is not set")
-config.set_main_option('sqlalchemy.url', database_url)
+    raise ValueError("DATABASE_URL environment variable is not set")
 
-# Interpret the config file for Python logging.
-# This line sets up loggers basically.
-if config.config_file_name is not None:
-    fileConfig(config.config_file_name)
+# Override sqlalchemy.url with DATABASE_URL environment variable
+config.set_main_option('sqlalchemy.url', database_url)
 
 # Setup custom logger
 from utils.logger import Logger
 logger = Logger().get_logger()
 logger.setLevel(logging.DEBUG)
 
-# add your model's MetaData object here
-# for 'autogenerate' support
+# Interpret the config file for Python logging
+if config.config_file_name is not None:
+    fileConfig(config.config_file_name)
+
+# Add your model's MetaData object here for 'autogenerate' support
 target_metadata = Base.metadata
 
 def run_migrations_offline() -> None:
@@ -76,8 +74,7 @@ def run_migrations_online() -> None:
             for column in table.columns:
                 logger.debug(f"  - {column.name} ({column.type})")
 
-        # Setup database connection
-        logger.info("Setting up database connection for migrations")
+        # Create our connectable
         connectable = engine_from_config(
             config.get_section(config.config_ini_section, {}),
             prefix="sqlalchemy.",
@@ -102,17 +99,16 @@ def run_migrations_online() -> None:
             try:
                 with context.begin_transaction():
                     logger.info("Beginning migration transaction")
-                    logger.info("Running migrations with target metadata tables: " + 
-                              ", ".join([t.name for t in target_metadata.tables.values()]))
                     context.run_migrations()
                     logger.info("Migrations completed successfully")
             except Exception as e:
                 logger.error(f"Migration failed: {str(e)}")
-                logger.error("Migration error details:", exc_info=True)
+                logger.exception("Migration error details:")
                 raise
+
     except Exception as e:
         logger.error(f"Migration setup failed: {str(e)}")
-        logger.error("Setup error details:", exc_info=True)
+        logger.exception("Setup error details:")
         raise
 
 if context.is_offline_mode():
