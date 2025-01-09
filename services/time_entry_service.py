@@ -4,12 +4,16 @@ from database import schemas
 from models.timeEntry import TimeEntry
 from utils.logger import Logger
 from utils.validators import DEFAULT_CUSTOMER, DEFAULT_PROJECT, normalize_customer_name, normalize_project_id
+from database.customer_repository import CustomerRepository
+from database.project_repository import ProjectRepository
 
 logger = Logger().get_logger()
 
 class TimeEntryService:
     def __init__(self, db: Session):
         self.db = db
+        self.customer_repo = CustomerRepository()
+        self.project_repo = ProjectRepository()
         logger.debug("TimeEntryService initialized with database session")
 
     def create_time_entry(self, entry: schemas.TimeEntryCreate) -> TimeEntry:
@@ -18,18 +22,29 @@ class TimeEntryService:
             logger.debug(f"Starting creation of time entry with data: {entry.model_dump()}")
             entry_dict = entry.model_dump()
 
-            # Handle default values for customer and project
-            if not entry_dict.get('customer'):
-                logger.info("No customer provided, defaulting to Unassigned")
-                entry_dict['customer'] = DEFAULT_CUSTOMER
-            else:
-                entry_dict['customer'] = normalize_customer_name(entry_dict['customer'])
+            # Validate customer exists and get normalized name
+            customer_name = None
+            if entry_dict.get('customer'):
+                customer = self.customer_repo.get_by_name(self.db, normalize_customer_name(entry_dict['customer']))
+                if customer:
+                    customer_name = customer.name
+                else:
+                    logger.info(f"Customer {entry_dict['customer']} not found, defaulting to {DEFAULT_CUSTOMER}")
 
-            if not entry_dict.get('project'):
-                logger.info("No project provided, defaulting to Unassigned")
-                entry_dict['project'] = DEFAULT_PROJECT
-            else:
-                entry_dict['project'] = normalize_project_id(entry_dict['project'])
+            # Validate project exists and belongs to customer
+            project_id = None
+            if entry_dict.get('project') and customer_name:
+                normalized_project_id = normalize_project_id(entry_dict['project'])
+                project = self.project_repo.get_by_project_id(self.db, normalized_project_id)
+                if project and project.customer == customer_name:
+                    project_id = project.project_id
+                else:
+                    logger.info(f"Project {entry_dict['project']} not found or doesn't belong to customer, defaulting both customer and project to defaults")
+                    customer_name = None  # Reset customer name to trigger default
+
+            # Apply defaults if either validation failed
+            entry_dict['customer'] = customer_name or DEFAULT_CUSTOMER
+            entry_dict['project'] = project_id or DEFAULT_PROJECT
 
             logger.debug("Validating and setting default categories")
             if not entry_dict.get('category'):
@@ -51,7 +66,7 @@ class TimeEntryService:
             logger.debug("Refreshing database entry")
             self.db.refresh(db_entry)
 
-            logger.info(f"Successfully created time entry [{db_entry.id}] for {entry_dict['customer']} - {entry_dict['project']} ({entry_dict['hours']} hours)")
+            logger.info(f"Successfully created time entry [{db_entry.id}] for {db_entry.customer} - {db_entry.project} ({db_entry.hours} hours)")
             return db_entry
         except Exception as e:
             logger.error(f"Error creating time entry: {str(e)}")
@@ -92,10 +107,10 @@ class TimeEntryService:
 
         if project_id:
             logger.debug(f"Applying project filter: {project_id}")
-            query = query.filter(TimeEntry.project == project_id)
+            query = query.filter(TimeEntry.project == normalize_project_id(project_id))
         if customer_name:
             logger.debug(f"Applying customer filter: {customer_name}")
-            query = query.filter(TimeEntry.customer == customer_name)
+            query = query.filter(TimeEntry.customer == normalize_customer_name(customer_name))
 
         logger.debug(f"Applying pagination: skip={skip}, limit={limit}")
         results = query.offset(skip).limit(limit).all()

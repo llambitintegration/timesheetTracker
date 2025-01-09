@@ -1,0 +1,159 @@
+INFO:     Application startup complete.
+INFO:     172.31.196.110:55006 - "GET /docs HTTP/1.1" 200 OK
+/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/openapi/utils.py:225: UserWarning: Duplicate Operation ID get_time_entries_by_date_time_entries_by_date__date__get for function get_time_entries_by_date at /home/runner/workspace/main.py
+  warnings.warn(message, stacklevel=1)
+INFO:     172.31.196.110:55006 - "GET /openapi.json HTTP/1.1" 200 OK
+2025-01-09 21:56:48,019 - TimesheetTracker - DEBUG - Database session created
+2025-01-09 21:56:48,027 - TimesheetTracker - INFO - Creating new time entry
+2025-01-09 21:56:48,028 - TimesheetTracker - DEBUG - Initializing TimeEntryService for single entry creation
+2025-01-09 21:56:48,029 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 21:56:48,029 - TimesheetTracker - INFO - Creating time entry for string - string
+2025-01-09 21:56:48,029 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'id': 0, 'created_at': datetime.datetime(2025, 1, 9, 21, 56, 3, 591000, tzinfo=TzInfo(UTC)), 'updated_at': datetime.datetime(2025, 1, 9, 21, 56, 3, 591000, tzinfo=TzInfo(UTC)), 'week_number': 53, 'month': 'January', 'category': 'string', 'subcategory': 'string', 'customer': 'string', 'project': 'string', 'task_description': 'string', 'hours': 24.0, 'date': datetime.date(2025, 1, 9)}
+2025-01-09 21:56:48,030 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 21:56:48,030 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 21:56:48,033 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 21:56:48,034 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 21:56:48,116 - TimesheetTracker - ERROR - Error creating time entry: (psycopg2.errors.ForeignKeyViolation) insert or update on table "time_entries" violates foreign key constraint "time_entries_customer_fkey"
+DETAIL:  Key (customer)=(string) is not present in table "customers".
+
+[SQL: INSERT INTO time_entries (week_number, month, category, subcategory, customer, project, task_description, hours, date, created_at, updated_at, id) VALUES (%(week_number)s, %(month)s, %(category)s, %(subcategory)s, %(customer)s, %(project)s, %(task_description)s, %(hours)s, %(date)s, %(created_at)s, %(updated_at)s, %(id)s)]
+[parameters: {'week_number': 53, 'month': 'January', 'category': 'string', 'subcategory': 'string', 'customer': 'string', 'project': 'string', 'task_description': 'string', 'hours': 24.0, 'date': datetime.date(2025, 1, 9), 'created_at': datetime.datetime(2025, 1, 9, 21, 56, 3, 591000, tzinfo=TzInfo(UTC)), 'updated_at': datetime.datetime(2025, 1, 9, 21, 56, 3, 591000, tzinfo=TzInfo(UTC)), 'id': 0}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-01-09 21:56:48,116 - TimesheetTracker - DEBUG - Rolling back transaction
+2025-01-09 21:56:48,118 - TimesheetTracker - DEBUG - Database session closed
+INFO:     172.31.196.110:56312 - "POST /time-entries/ HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.ForeignKeyViolation: insert or update on table "time_entries" violates foreign key constraint "time_entries_customer_fkey"
+DETAIL:  Key (customer)=(string) is not present in table "customers".
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/to_thread.py", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 2505, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 1005, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/main.py", line 250, in create_time_entry
+    return crud.create_time_entry(db, entry)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/database/crud.py", line 142, in create_time_entry
+    return service.create_time_entry(entry)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/services/time_entry_service.py", line 49, in create_time_entry
+    self.db.commit()
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2028, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4352, in flush
+    self._flush(objects)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4487, in _flush
+    with util.safe_reraise():
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4448, in _flush
+    flush_context.execute()
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 1048, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.ForeignKeyViolation) insert or update on table "time_entries" violates foreign key constraint "time_entries_customer_fkey"
+DETAIL:  Key (customer)=(string) is not present in table "customers".
+
+[SQL: INSERT INTO time_entries (week_number, month, category, subcategory, customer, project, task_description, hours, date, created_at, updated_at, id) VALUES (%(week_number)s, %(month)s, %(category)s, %(subcategory)s, %(customer)s, %(project)s, %(task_description)s, %(hours)s, %(date)s, %(created_at)s, %(updated_at)s, %(id)s)]
+[parameters: {'week_number': 53, 'month': 'January', 'category': 'string', 'subcategory': 'string', 'customer': 'string', 'project': 'string', 'task_description': 'string', 'hours': 24.0, 'date': datetime.date(2025, 1, 9), 'created_at': datetime.datetime(2025, 1, 9, 21, 56, 3, 591000, tzinfo=TzInfo(UTC)), 'updated_at': datetime.datetime(2025, 1, 9, 21, 56, 3, 591000, tzinfo=TzInfo(UTC)), 'id': 0}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)

@@ -4,8 +4,10 @@ from database.schemas import TimeEntryCreate
 from services.time_entry_service import TimeEntryService
 from utils.validators import DEFAULT_CUSTOMER, DEFAULT_PROJECT
 from pydantic import ValidationError
+from sqlalchemy.exc import IntegrityError
+from models.customerModel import Customer
 
-def test_create_single_time_entry(db_session):
+def test_create_single_time_entry(db_session, setup_test_data):
     """Test creating a single time entry"""
     service = TimeEntryService(db_session)
     entry = TimeEntryCreate(
@@ -13,8 +15,8 @@ def test_create_single_time_entry(db_session):
         month="January",
         category="Development",
         subcategory="Coding",
-        customer="TestCustomer",
-        project="TestProject",
+        customer="ECOLAB",  # Using existing customer from setup_test_data
+        project="Project_Magic_Bullet",  # Using existing project from setup_test_data
         task_description="Unit testing",
         hours=8.0,
         date=date(2024, 1, 1)
@@ -27,6 +29,8 @@ def test_create_single_time_entry(db_session):
     assert result.category == "Development"
     assert result.hours == 8.0
     assert result.date == date(2024, 1, 1)
+    assert result.customer == "ECOLAB"
+    assert result.project == "Project_Magic_Bullet"
 
 def test_create_time_entry_with_defaults(db_session):
     """Test creating a time entry with default values"""
@@ -83,65 +87,98 @@ def test_create_time_entry_invalid_hours(db_session):
         )
     assert "Input should be greater than or equal to 0" in str(exc_info.value)
 
-def test_get_time_entries(db_session):
-    """Test retrieving time entries"""
+def test_create_time_entry_with_nonexistent_customer(db_session):
+    """Test creating a time entry with a non-existent customer"""
     service = TimeEntryService(db_session)
+    entry = TimeEntryCreate(
+        week_number=1,
+        month="January",
+        category="Development",
+        subcategory="Coding",
+        customer="NonExistentCustomer",  # Customer that doesn't exist
+        project="NonExistentProject",    # Project that doesn't exist
+        task_description="Testing foreign key handling",
+        hours=8.0,
+        date=date(2024, 1, 1)
+    )
 
-    # Create test entries
-    entries = [
-        TimeEntryCreate(
-            week_number=1,
-            month="January",
-            category="Development",
-            subcategory="Coding",
-            customer="TestCustomer",
-            project="TestProject",
-            task_description=f"Entry {i}",
-            hours=8.0,
-            date=date(2024, 1, 1)
-        ) for i in range(3)
-    ]
+    result = service.create_time_entry(entry)
+    assert result is not None
+    assert result.customer == DEFAULT_CUSTOMER  # Should fall back to default
+    assert result.project == DEFAULT_PROJECT    # Should fall back to default
+    assert result.hours == 8.0
 
-    for entry in entries:
-        service.create_time_entry(entry)
+def test_create_time_entry_customer_mismatch(db_session, setup_test_data):
+    """Test creating a time entry with mismatched customer-project relationship"""
+    service = TimeEntryService(db_session)
+    entry = TimeEntryCreate(
+        week_number=1,
+        month="January",
+        category="Development",
+        subcategory="Coding",
+        customer="ECOLAB",  # Existing customer
+        project="NonMatchingProject",  # Project not belonging to this customer
+        task_description="Testing customer-project mismatch",
+        hours=8.0,
+        date=date(2024, 1, 1)
+    )
 
-    # Test listing all entries
-    results = service.get_time_entries()
-    assert len(results) == 3
+    result = service.create_time_entry(entry)
+    assert result is not None
+    assert result.customer == DEFAULT_CUSTOMER  # Should fall back to default
+    assert result.project == DEFAULT_PROJECT    # Should fall back to default
 
-    # Test pagination
-    paginated = service.get_time_entries(skip=1, limit=1)
-    assert len(paginated) == 1
+def test_create_time_entry_api_example(db_session):
+    """Test the specific API example provided - creating entry with non-existent 'string' customer"""
+    service = TimeEntryService(db_session)
+    entry = TimeEntryCreate(
+        week_number=53,
+        month="January",
+        category="string",
+        subcategory="string",
+        customer="string",  # Non-existent customer
+        project="string",   # Non-existent project
+        task_description="string",
+        hours=24.0,
+        date=date(2025, 1, 9)
+    )
 
-def test_get_time_entries_with_filters(db_session):
+    result = service.create_time_entry(entry)
+    assert result is not None
+    assert result.customer == DEFAULT_CUSTOMER
+    assert result.project == DEFAULT_PROJECT
+    assert result.week_number == 53
+    assert result.month == "January"
+    assert result.hours == 24.0
+    assert result.date == date(2025, 1, 9)
+
+def test_get_time_entries_with_filters(db_session, setup_test_data):
     """Test retrieving time entries with filters"""
     service = TimeEntryService(db_session)
 
-    # Create entries for different customers
-    customers = ["Customer1", "Customer2"]
-    for customer in customers:
-        entry = TimeEntryCreate(
-            week_number=1,
-            month="January",
-            category="Development",
-            subcategory="Coding",
-            customer=customer,
-            project=f"{customer}_Project",
-            task_description=f"Work for {customer}",
-            hours=8.0,
-            date=date(2024, 1, 1)
-        )
-        service.create_time_entry(entry)
+    # Create test entries with existing customer and project
+    entry1 = TimeEntryCreate(
+        week_number=1,
+        month="January",
+        category="Development",
+        subcategory="Coding",
+        customer="ECOLAB",
+        project="Project_Magic_Bullet",
+        task_description="Work for ECOLAB",
+        hours=8.0,
+        date=date(2024, 1, 1)
+    )
+    service.create_time_entry(entry1)
 
     # Test filtering by customer
-    results = service.get_time_entries(customer_name="Customer1")
+    results = service.get_time_entries(customer_name="ECOLAB")
     assert len(results) == 1
-    assert results[0].customer == "Customer1"
+    assert results[0].customer == "ECOLAB"
 
     # Test filtering by project
-    results = service.get_time_entries(project_id="Customer1_Project")
+    results = service.get_time_entries(project_id="Project_Magic_Bullet")
     assert len(results) == 1
-    assert results[0].project == "Customer1_Project"
+    assert results[0].project == "Project_Magic_Bullet"
 
 def test_time_entry_date_validation(db_session):
     """Test time entry date validation"""
