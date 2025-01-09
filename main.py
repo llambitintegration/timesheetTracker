@@ -1,3 +1,4 @@
+from sqlalchemy import join
 from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, Query, Path
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
@@ -13,8 +14,12 @@ from alembic.runtime.migration import MigrationContext
 from database import schemas, crud, get_db, verify_database, engine
 from utils.logger import Logger
 from utils import utils
-from models import TimeEntry
+from models.timeEntry import TimeEntry
+from models.projectModel import Project
+from models.projectManagerModel import ProjectManager
 from services.customer_service import CustomerService
+from services.project_manager_service import ProjectManagerService
+from services.project_service import ProjectService
 
 logger = Logger().get_logger()
 app = FastAPI(title="Timesheet Management API")
@@ -138,27 +143,69 @@ def create_project_manager(
     project_manager: schemas.ProjectManagerCreate,
     db: Session = Depends(get_db)
 ):
-    logger.info(f"Creating new project manager: {project_manager.name}")
-    return crud.create_project_manager(db, project_manager)
+    """Create a new project manager"""
+    try:
+        logger.info(f"Creating new project manager: {project_manager.name}")
+        service = ProjectManagerService(db)
+        return service.create_project_manager(project_manager)
+    except ValueError as e:
+        logger.warning(f"Project manager creation failed: {str(e)}")
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        logger.error(f"Error creating project manager: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
 
 @app.get("/project-managers/", response_model=List[schemas.ProjectManager])
 def read_project_managers(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    """Get all project managers with pagination"""
     logger.info(f"Fetching project managers with skip={skip}, limit={limit}")
-    return crud.get_project_managers(db, skip=skip, limit=limit)
+    service = ProjectManagerService(db)
+    return service.get_all_project_managers(skip=skip, limit=limit)
 
-@app.get("/project-managers/{name}", response_model=schemas.ProjectManager)
-def read_project_manager(name: str, db: Session = Depends(get_db)):
-    logger.info(f"Fetching project manager: {name}")
-    project_manager = crud.get_project_manager(db, name)
+@app.get("/project-managers/{email}", response_model=schemas.ProjectManager)
+def read_project_manager(email: str, db: Session = Depends(get_db)):
+    """Get a project manager by email"""
+    logger.info(f"Fetching project manager with email: {email}")
+    service = ProjectManagerService(db)
+    project_manager = service.get_project_manager(email)
     if project_manager is None:
-        logger.warning(f"Project manager not found: {name}")
-        raise HTTPException(status_code=404, detail="Project Manager not found")
+        logger.warning(f"Project manager not found: {email}")
+        raise HTTPException(status_code=404, detail="Project manager not found")
     return project_manager
 
+@app.patch("/project-managers/{email}", response_model=schemas.ProjectManager)
+def update_project_manager(
+    email: str,
+    project_manager_update: schemas.ProjectManagerUpdate,
+    db: Session = Depends(get_db)
+):
+    """Update a project manager"""
+    try:
+        logger.info(f"Updating project manager: {email}")
+        service = ProjectManagerService(db)
+        updated_pm = service.update_project_manager(email, project_manager_update)
+        if updated_pm is None:
+            logger.warning(f"Project manager not found: {email}")
+            raise HTTPException(status_code=404, detail="Project manager not found")
+        return updated_pm
+    except Exception as e:
+        logger.error(f"Error updating project manager: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+# Project endpoints using ProjectService
 @app.post("/projects/", response_model=schemas.Project)
 def create_project(project: schemas.ProjectCreate, db: Session = Depends(get_db)):
-    logger.info(f"Creating new project: {project.project_id}")
-    return crud.create_project(db, project)
+    """Create a new project"""
+    try:
+        logger.info(f"Creating new project: {project.project_id}")
+        service = ProjectService(db)
+        return service.create_project(project)
+    except ValueError as e:
+        logger.warning(f"Project creation failed: {str(e)}")
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        logger.error(f"Error creating project: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
 
 @app.get("/projects/", response_model=List[schemas.Project])
 def read_projects(
@@ -168,23 +215,64 @@ def read_projects(
     limit: int = 100,
     db: Session = Depends(get_db)
 ):
+    """Get all projects with optional filtering"""
     logger.info(
         f"Fetching projects with customer={customer_name}, "
         f"manager={project_manager_name}, skip={skip}, limit={limit}"
     )
-    return crud.get_projects(db, customer_name, project_manager_name, skip, limit)
+    service = ProjectService(db)
+    if customer_name:
+        return service.get_projects_by_customer(customer_name)
+    elif project_manager_name:
+        return service.get_projects_by_manager(project_manager_name)
+    return service.get_all_projects(skip=skip, limit=limit)
 
 @app.get("/projects/{project_id}", response_model=schemas.Project)
 def read_project(project_id: str, db: Session = Depends(get_db)):
+    """Get a project by ID"""
     logger.info(f"Fetching project: {project_id}")
-    project = crud.get_project(db, project_id)
+    service = ProjectService(db)
+    project = service.get_project(project_id)
     if project is None:
         logger.warning(f"Project not found: {project_id}")
         raise HTTPException(status_code=404, detail="Project not found")
     return project
 
-@app.get("/init-db/")
+@app.patch("/projects/{project_id}", response_model=schemas.Project)
+def update_project(
+    project_id: str,
+    project_update: schemas.ProjectBase,
+    db: Session = Depends(get_db)
+):
+    """Update a project"""
+    try:
+        logger.info(f"Updating project: {project_id}")
+        service = ProjectService(db)
+        updated_project = service.update_project(project_id, project_update)
+        if updated_project is None:
+            logger.warning(f"Project not found: {project_id}")
+            raise HTTPException(status_code=404, detail="Project not found")
+        return updated_project
+    except Exception as e:
+        logger.error(f"Error updating project: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@app.delete("/projects/{project_id}")
+def delete_project(project_id: str, db: Session = Depends(get_db)):
+    """Delete a project"""
+    try:
+        logger.info(f"Deleting project: {project_id}")
+        service = ProjectService(db)
+        if service.delete_project(project_id):
+            return {"status": "success", "message": f"Project {project_id} deleted"}
+        logger.warning(f"Project not found for deletion: {project_id}")
+        raise HTTPException(status_code=404, detail="Project not found")
+    except Exception as e:
+        logger.error(f"Error deleting project: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
 @app.post("/init-db/")
+@app.get("/init-db/")
 async def initialize_database(force: bool = False, db: Session = Depends(get_db)):
     """Initialize database and run migrations"""
     logger.info("Starting database initialization process")
@@ -348,25 +436,29 @@ def get_weekly_report(
     week_end = week_start + timedelta(days=6)
 
     query = db.query(
-        models.TimeEntry.project,
-        models.TimeEntry.customer,
-        db.func.sum(models.TimeEntry.hours).label('total_hours')
+        Project.project_id,
+        Project.customer,
+        db.func.sum(TimeEntry.hours).label('total_hours')
+    ).join(
+        TimeEntry,
+        TimeEntry.project == Project.project_id
     ).filter(
-        models.TimeEntry.week_number == week_start.isocalendar()[1]
+        TimeEntry.date >= week_start.date(),
+        TimeEntry.date <= week_end.date()
     ).group_by(
-        models.TimeEntry.project,
-        models.TimeEntry.customer
+        Project.project_id,
+        Project.customer
     )
 
     if project_id:
-        query = query.filter(models.TimeEntry.project == project_id)
+        query = query.filter(Project.project_id == project_id)
 
     results = query.all()
     entries = [
         schemas.ReportEntry(
-            total_hours=float(r.total_hours),
+            total_hours=float(r.total_hours or 0),
             category=r.customer or "Unassigned",
-            project=r.project,
+            project=r.project_id,
             period=f"{week_start.date()} to {week_end.date()}"
         )
         for r in results
@@ -388,26 +480,36 @@ def get_monthly_report(
     db: Session = Depends(get_db)
 ):
     logger.info(f"Generating monthly report for {year}-{month}, project={project_id}")
+
+    # Get the first and last day of the month
+    _, last_day = calendar.monthrange(year, month)
+    start_date = date(year, month, 1)
+    end_date = date(year, month, last_day)
+
     query = db.query(
-        models.TimeEntry.project,
-        models.TimeEntry.customer,
-        db.func.sum(models.TimeEntry.hours).label('total_hours')
+        Project.project_id,
+        Project.customer,
+        db.func.sum(TimeEntry.hours).label('total_hours')
+    ).join(
+        TimeEntry,
+        TimeEntry.project == Project.project_id
     ).filter(
-        models.TimeEntry.month == calendar.month_name[month]
+        TimeEntry.date >= start_date,
+        TimeEntry.date <= end_date
     ).group_by(
-        models.TimeEntry.project,
-        models.TimeEntry.customer
+        Project.project_id,
+        Project.customer
     )
 
     if project_id:
-        query = query.filter(models.TimeEntry.project == project_id)
+        query = query.filter(Project.project_id == project_id)
 
     results = query.all()
     entries = [
         schemas.ReportEntry(
-            total_hours=float(r.total_hours),
+            total_hours=float(r.total_hours or 0),
             category=r.customer or "Unassigned",
-            project=r.project,
+            project=r.project_id,
             period=f"{year}-{month:02d}"
         )
         for r in results
@@ -421,26 +523,6 @@ def get_monthly_report(
         year=year
     )
 
-@app.get("/time-entries/by-date/{date}", response_model=List[schemas.TimeEntry])
-def get_time_entries_by_date(
-    date: date,
-    db: Session = Depends(get_db)
-):
-    """
-    Get all time entries for a specific date.
-    Date format: YYYY-MM-DD
-    """
-    logger.info(f"Fetching time entries for date: {date}")
-    try:
-        entries = crud.get_time_entries_by_date(db, date)
-        if not entries:
-            logger.info(f"No entries found for date: {date}")
-            return []
-        logger.info(f"Found {len(entries)} entries for date: {date}")
-        return entries
-    except Exception as e:
-        logger.error(f"Error fetching time entries for date {date}: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
     import uvicorn
