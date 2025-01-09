@@ -5,6 +5,7 @@ from database.schemas import TimeEntryCreate
 from utils.validators import DEFAULT_CUSTOMER, DEFAULT_PROJECT
 from pydantic import ValidationError
 from sqlalchemy.exc import IntegrityError
+from models.customerModel import Customer
 
 def test_create_time_entry_auto_calculations(db_session):
     """Test that week number and month are automatically calculated"""
@@ -33,21 +34,6 @@ def test_create_time_entry_default_hours(db_session):
         task_description="Test default hours",
         date=date(2024, 1, 15)
         # Not providing hours
-    )
-
-    result = service.create_time_entry(entry)
-    assert result is not None
-    assert result.hours == 0.0
-
-def test_create_time_entry_zero_hours(db_session):
-    """Test that zero hours are allowed"""
-    service = TimeEntryService(db_session)
-    entry = TimeEntryCreate(
-        category="Development",
-        subcategory="Coding",
-        task_description="Test zero hours",
-        hours=0.0,  # Explicitly set to zero
-        date=date(2024, 1, 15)
     )
 
     result = service.create_time_entry(entry)
@@ -237,3 +223,38 @@ def test_time_entry_date_validation(db_session):
     result = service.create_time_entry(future_entry)
     assert result is not None
     assert result.date == date(2025, 1, 1)
+
+def test_create_time_entry_zero_hours(db_session):
+    """Test creating a time entry with zero hours"""
+    service = TimeEntryService(db_session)
+    entry = TimeEntryCreate(
+        category="Development",
+        subcategory="Coding",
+        task_description="Test zero hours",
+        hours=0.0,  # Explicitly set to zero
+        date=date(2024, 1, 15)
+    )
+
+    result = service.create_time_entry(entry)
+    assert result is not None
+    assert result.hours == 0.0
+    assert result.week_number == 3  # Week 3 of January
+    assert result.month == "January"
+
+def test_create_time_entry_auto_date_calculations(db_session):
+    """Test that date calculations are handled automatically"""
+    service = TimeEntryService(db_session)
+    entry = TimeEntryCreate(
+        category="Development",
+        subcategory="Coding",
+        task_description="Test date calculations",
+        hours=8.0,
+        date=date(2024, 2, 1)  # February 1st, 2024
+    )
+
+    result = service.create_time_entry(entry)
+    assert result is not None
+    assert result.week_number == 5  # Should be week 5
+    assert result.month == "February"
+    # Original date should be preserved
+    assert result.date == date(2024, 2, 1)

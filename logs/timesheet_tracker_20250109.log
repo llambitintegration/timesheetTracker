@@ -21786,3 +21786,181 @@ DETAIL:  Failing row contains (154, 2025-01-09, 2, January, string, string, Unas
 2025-01-09 22:43:46,779 - TimesheetTracker - DEBUG - Committing transaction
 2025-01-09 22:43:46,790 - TimesheetTracker - DEBUG - Refreshing database entry
 2025-01-09 22:43:46,791 - TimesheetTracker - INFO - Successfully created time entry [1] for Unassigned - Unassigned (8.0 hours)
+2025-01-09 22:45:36,070 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 22:45:36,114 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-09 22:45:36,115 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-09 22:45:36,487 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 22:45:36,487 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 22:45:36,488 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 22:45:36,764 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-09 22:45:36,764 - TimesheetTracker - INFO - Expected tables: project_managers, projects, time_entries, customers
+2025-01-09 22:45:36,904 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-09 22:45:36,984 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-09 22:45:37,064 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-09 22:45:37,144 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-09 22:45:37,144 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-09 22:45:37,627 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 22:45:38,625 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-09 22:45:40,541 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 22:45:41,146 - TimesheetTracker - DEBUG - CustomerService initialized with database session
+2025-01-09 22:45:41,146 - TimesheetTracker - DEBUG - Starting creation of customer with data: {'id': None, 'created_at': None, 'updated_at': None, 'name': 'Test Customer', 'contact_email': 'test@example.com', 'industry': 'Technology', 'status': 'active', 'address': None, 'phone': None}
+2025-01-09 22:45:41,155 - TimesheetTracker - DEBUG - Adding customer to database session
+2025-01-09 22:45:41,171 - TimesheetTracker - INFO - Successfully created customer: Test Customer
+2025-01-09 22:45:41,187 - TimesheetTracker - DEBUG - CustomerService initialized with database session
+2025-01-09 22:45:41,188 - TimesheetTracker - DEBUG - Starting creation of customer with data: {'id': None, 'created_at': None, 'updated_at': None, 'name': 'Duplicate Test', 'contact_email': 'duplicate@test.com', 'industry': None, 'status': 'active', 'address': None, 'phone': None}
+2025-01-09 22:45:41,189 - TimesheetTracker - DEBUG - Adding customer to database session
+2025-01-09 22:45:41,207 - TimesheetTracker - INFO - Successfully created customer: Duplicate Test
+2025-01-09 22:45:41,207 - TimesheetTracker - DEBUG - Starting creation of customer with data: {'id': None, 'created_at': None, 'updated_at': None, 'name': 'Duplicate Test', 'contact_email': 'duplicate@test.com', 'industry': None, 'status': 'active', 'address': None, 'phone': None}
+2025-01-09 22:45:41,208 - TimesheetTracker - WARNING - Customer with name Duplicate Test already exists
+2025-01-09 22:45:41,208 - TimesheetTracker - ERROR - Error creating customer: Customer with name Duplicate Test already exists
+2025-01-09 22:45:41,234 - TimesheetTracker - DEBUG - CustomerService initialized with database session
+2025-01-09 22:45:41,234 - TimesheetTracker - DEBUG - Starting creation of customer with data: {'id': None, 'created_at': None, 'updated_at': None, 'name': 'Get Test', 'contact_email': 'get@test.com', 'industry': None, 'status': 'active', 'address': None, 'phone': None}
+2025-01-09 22:45:41,237 - TimesheetTracker - DEBUG - Adding customer to database session
+2025-01-09 22:45:41,253 - TimesheetTracker - INFO - Successfully created customer: Get Test
+2025-01-09 22:45:41,253 - TimesheetTracker - DEBUG - Attempting to fetch customer with name: Get Test
+2025-01-09 22:45:41,253 - TimesheetTracker - INFO - Found customer: Get Test
+2025-01-09 22:45:41,273 - TimesheetTracker - DEBUG - CustomerService initialized with database session
+2025-01-09 22:45:41,274 - TimesheetTracker - DEBUG - Attempting to fetch customer with name: NonexistentCustomer
+2025-01-09 22:45:41,274 - TimesheetTracker - INFO - No customer found with name: NonexistentCustomer
+2025-01-09 22:45:41,291 - TimesheetTracker - DEBUG - CustomerService initialized with database session
+2025-01-09 22:45:41,291 - TimesheetTracker - DEBUG - Starting creation of customer with data: {'id': None, 'created_at': None, 'updated_at': None, 'name': 'Test Customer 0', 'contact_email': 'test0@example.com', 'industry': None, 'status': 'active', 'address': None, 'phone': None}
+2025-01-09 22:45:41,293 - TimesheetTracker - DEBUG - Adding customer to database session
+2025-01-09 22:45:41,306 - TimesheetTracker - INFO - Successfully created customer: Test Customer 0
+2025-01-09 22:45:41,306 - TimesheetTracker - DEBUG - Starting creation of customer with data: {'id': None, 'created_at': None, 'updated_at': None, 'name': 'Test Customer 1', 'contact_email': 'test1@example.com', 'industry': None, 'status': 'active', 'address': None, 'phone': None}
+2025-01-09 22:45:41,307 - TimesheetTracker - DEBUG - Adding customer to database session
+2025-01-09 22:45:41,335 - TimesheetTracker - INFO - Successfully created customer: Test Customer 1
+2025-01-09 22:45:41,335 - TimesheetTracker - DEBUG - Starting creation of customer with data: {'id': None, 'created_at': None, 'updated_at': None, 'name': 'Test Customer 2', 'contact_email': 'test2@example.com', 'industry': None, 'status': 'active', 'address': None, 'phone': None}
+2025-01-09 22:45:41,336 - TimesheetTracker - DEBUG - Adding customer to database session
+2025-01-09 22:45:41,354 - TimesheetTracker - INFO - Successfully created customer: Test Customer 2
+2025-01-09 22:45:41,354 - TimesheetTracker - DEBUG - Fetching customers with offset=0, limit=100
+2025-01-09 22:45:41,356 - TimesheetTracker - INFO - Retrieved 3 customers
+2025-01-09 22:45:41,356 - TimesheetTracker - DEBUG - Fetching customers with offset=0, limit=2
+2025-01-09 22:45:41,357 - TimesheetTracker - INFO - Retrieved 2 customers
+2025-01-09 22:45:41,357 - TimesheetTracker - DEBUG - Fetching customers with offset=2, limit=2
+2025-01-09 22:45:41,358 - TimesheetTracker - INFO - Retrieved 1 customers
+2025-01-09 22:45:41,376 - TimesheetTracker - DEBUG - CustomerService initialized with database session
+2025-01-09 22:45:41,376 - TimesheetTracker - DEBUG - Starting creation of customer with data: {'id': None, 'created_at': None, 'updated_at': None, 'name': 'Update Test', 'contact_email': 'update@test.com', 'industry': 'Old Industry', 'status': 'active', 'address': None, 'phone': None}
+2025-01-09 22:45:41,378 - TimesheetTracker - DEBUG - Adding customer to database session
+2025-01-09 22:45:41,394 - TimesheetTracker - INFO - Successfully created customer: Update Test
+2025-01-09 22:45:41,394 - TimesheetTracker - DEBUG - Attempting to update customer Update Test with data: {'industry': 'New Industry'}
+2025-01-09 22:45:41,408 - TimesheetTracker - INFO - Successfully updated customer: Update Test
+2025-01-09 22:45:41,423 - TimesheetTracker - DEBUG - CustomerService initialized with database session
+2025-01-09 22:45:41,423 - TimesheetTracker - DEBUG - Attempting to update customer NonexistentCustomer with data: {'industry': 'New Industry'}
+2025-01-09 22:45:41,424 - TimesheetTracker - WARNING - Customer not found: NonexistentCustomer
+2025-01-09 22:45:41,442 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 22:45:41,442 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'category': 'Development', 'subcategory': 'Coding', 'customer': None, 'project': None, 'task_description': 'Test auto calculations', 'hours': 8.0, 'date': datetime.date(2024, 1, 15)}
+2025-01-09 22:45:41,442 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 22:45:41,442 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 22:45:41,443 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 22:45:41,443 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 22:45:41,456 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 22:45:41,459 - TimesheetTracker - INFO - Successfully created time entry [1] for Unassigned - Unassigned (8.0 hours)
+2025-01-09 22:45:41,477 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 22:45:41,478 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'category': 'Development', 'subcategory': 'Coding', 'customer': None, 'project': None, 'task_description': 'Test default hours', 'hours': 0.0, 'date': datetime.date(2024, 1, 15)}
+2025-01-09 22:45:41,478 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 22:45:41,478 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 22:45:41,478 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 22:45:41,478 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 22:45:41,492 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 22:45:41,493 - TimesheetTracker - INFO - Successfully created time entry [1] for Unassigned - Unassigned (0.0 hours)
+2025-01-09 22:45:41,510 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 22:45:41,510 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'category': 'Development', 'subcategory': 'Coding', 'customer': None, 'project': None, 'task_description': 'Entry 1', 'hours': 0.0, 'date': datetime.date(2024, 1, 15)}
+2025-01-09 22:45:41,511 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 22:45:41,511 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 22:45:41,511 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 22:45:41,511 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 22:45:41,524 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 22:45:41,525 - TimesheetTracker - INFO - Successfully created time entry [1] for Unassigned - Unassigned (0.0 hours)
+2025-01-09 22:45:41,525 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'category': 'Development', 'subcategory': 'Coding', 'customer': None, 'project': None, 'task_description': 'Entry 2', 'hours': 0.0, 'date': datetime.date(2024, 1, 15)}
+2025-01-09 22:45:41,525 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 22:45:41,525 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 22:45:41,526 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 22:45:41,526 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 22:45:41,538 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 22:45:41,540 - TimesheetTracker - INFO - Successfully created time entry [2] for Unassigned - Unassigned (0.0 hours)
+2025-01-09 22:45:41,577 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 22:45:41,577 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'category': 'Development', 'subcategory': 'Coding', 'customer': 'ECOLAB', 'project': 'Project_Magic_Bullet', 'task_description': 'Unit testing', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}
+2025-01-09 22:45:41,579 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 22:45:41,579 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 22:45:41,579 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 22:45:41,580 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 22:45:41,594 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 22:45:41,595 - TimesheetTracker - INFO - Successfully created time entry [1] for ECOLAB - Project_Magic_Bullet (8.0 hours)
+2025-01-09 22:45:41,611 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 22:45:41,611 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'category': 'Development', 'subcategory': 'Coding', 'customer': None, 'project': None, 'task_description': 'Testing defaults', 'hours': 0.0, 'date': datetime.date(2024, 1, 1)}
+2025-01-09 22:45:41,611 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 22:45:41,612 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 22:45:41,612 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 22:45:41,612 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 22:45:41,628 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 22:45:41,630 - TimesheetTracker - INFO - Successfully created time entry [1] for Unassigned - Unassigned (0.0 hours)
+2025-01-09 22:45:41,646 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 22:45:41,663 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 22:45:41,663 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'category': 'Development', 'subcategory': 'Coding', 'customer': 'NonExistentCustomer', 'project': 'NonExistentProject', 'task_description': 'Testing foreign key handling', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}
+2025-01-09 22:45:41,664 - TimesheetTracker - INFO - Customer NonExistentCustomer not found, defaulting to Unassigned
+2025-01-09 22:45:41,664 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 22:45:41,664 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 22:45:41,665 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 22:45:41,665 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 22:45:41,678 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 22:45:41,679 - TimesheetTracker - INFO - Successfully created time entry [1] for Unassigned - Unassigned (8.0 hours)
+2025-01-09 22:45:41,712 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 22:45:41,713 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'category': 'Development', 'subcategory': 'Coding', 'customer': 'ECOLAB', 'project': 'NonMatchingProject', 'task_description': 'Testing customer-project mismatch', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}
+2025-01-09 22:45:41,714 - TimesheetTracker - INFO - Project NonMatchingProject not found or doesn't belong to customer, defaulting both customer and project to defaults
+2025-01-09 22:45:41,714 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 22:45:41,715 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 22:45:41,715 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 22:45:41,715 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 22:45:41,726 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 22:45:41,727 - TimesheetTracker - INFO - Successfully created time entry [1] for Unassigned - Unassigned (8.0 hours)
+2025-01-09 22:45:41,759 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 22:45:41,759 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'category': 'Development', 'subcategory': 'Coding', 'customer': 'ECOLAB', 'project': 'Project_Magic_Bullet', 'task_description': 'Work for ECOLAB', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}
+2025-01-09 22:45:41,761 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 22:45:41,761 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 22:45:41,761 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 22:45:41,761 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 22:45:41,773 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 22:45:41,774 - TimesheetTracker - INFO - Successfully created time entry [1] for ECOLAB - Project_Magic_Bullet (8.0 hours)
+2025-01-09 22:45:41,774 - TimesheetTracker - DEBUG - Retrieving time entries with filters: project_id=None, customer=ECOLAB
+2025-01-09 22:45:41,774 - TimesheetTracker - DEBUG - Applying customer filter: ECOLAB
+2025-01-09 22:45:41,775 - TimesheetTracker - DEBUG - Applying pagination: skip=0, limit=100
+2025-01-09 22:45:41,776 - TimesheetTracker - INFO - Retrieved 1 time entries
+2025-01-09 22:45:41,776 - TimesheetTracker - DEBUG - Retrieving time entries with filters: project_id=Project_Magic_Bullet, customer=None
+2025-01-09 22:45:41,776 - TimesheetTracker - DEBUG - Applying project filter: Project_Magic_Bullet
+2025-01-09 22:45:41,776 - TimesheetTracker - DEBUG - Applying pagination: skip=0, limit=100
+2025-01-09 22:45:41,779 - TimesheetTracker - INFO - Retrieved 1 time entries
+2025-01-09 22:45:41,796 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 22:45:41,796 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'category': 'string', 'subcategory': 'string', 'customer': 'string', 'project': 'string', 'task_description': 'string', 'hours': 0.0, 'date': datetime.date(2025, 1, 9)}
+2025-01-09 22:45:41,797 - TimesheetTracker - INFO - Customer string not found, defaulting to Unassigned
+2025-01-09 22:45:41,798 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 22:45:41,798 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 22:45:41,798 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 22:45:41,798 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 22:45:41,813 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 22:45:41,814 - TimesheetTracker - INFO - Successfully created time entry [1] for Unassigned - Unassigned (0.0 hours)
+2025-01-09 22:45:41,829 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 22:45:41,829 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'category': 'Development', 'subcategory': 'Coding', 'customer': 'TestCustomer', 'project': 'TestProject', 'task_description': 'Future work', 'hours': 8.0, 'date': datetime.date(2025, 1, 1)}
+2025-01-09 22:45:41,830 - TimesheetTracker - INFO - Customer TestCustomer not found, defaulting to Unassigned
+2025-01-09 22:45:41,831 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 22:45:41,831 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 22:45:41,831 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 22:45:41,831 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 22:45:41,843 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 22:45:41,844 - TimesheetTracker - INFO - Successfully created time entry [1] for Unassigned - Unassigned (8.0 hours)
+2025-01-09 22:45:41,860 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 22:45:41,860 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'category': 'Development', 'subcategory': 'Coding', 'customer': None, 'project': None, 'task_description': 'Test zero hours', 'hours': 0.0, 'date': datetime.date(2024, 1, 15)}
+2025-01-09 22:45:41,860 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 22:45:41,860 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 22:45:41,861 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 22:45:41,861 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 22:45:41,872 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 22:45:41,873 - TimesheetTracker - INFO - Successfully created time entry [1] for Unassigned - Unassigned (0.0 hours)
+2025-01-09 22:45:41,890 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-09 22:45:41,890 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'category': 'Development', 'subcategory': 'Coding', 'customer': None, 'project': None, 'task_description': 'Test date calculations', 'hours': 8.0, 'date': datetime.date(2024, 2, 1)}
+2025-01-09 22:45:41,890 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-09 22:45:41,891 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-09 22:45:41,891 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-09 22:45:41,891 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-09 22:45:41,903 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-09 22:45:41,905 - TimesheetTracker - INFO - Successfully created time entry [1] for Unassigned - Unassigned (8.0 hours)
+2025-01-09 22:45:42,397 - TimesheetTracker - INFO - Root endpoint accessed
