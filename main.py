@@ -6,10 +6,6 @@ from typing import List, Optional
 from datetime import datetime, timedelta, date
 import calendar
 from dotenv import load_dotenv
-from sqlalchemy import inspect, text
-from alembic.config import Config
-from alembic import command
-from alembic.runtime.migration import MigrationContext
 
 from database import schemas, crud, get_db, verify_database, engine
 from utils.logger import Logger
@@ -24,13 +20,22 @@ from services.project_service import ProjectService
 logger = Logger().get_logger()
 app = FastAPI(title="Timesheet Management API")
 
-# Configure CORS
+# Configure CORS with more specific settings
+origins = [
+    "https://kzmnist91qyym9byf4h7.lite.vusercontent.net",  # Frontend origin
+    "https://*.repl.co",  # Allow all repl.co subdomains
+    "http://localhost:3000",  # Local development
+    "http://localhost:8080"
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allows all origins
+    allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],  # Allows all methods
-    allow_headers=["*"],  # Allows all headers
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allow_headers=["*"],
+    expose_headers=["*"],
+    max_age=3600,
 )
 
 load_dotenv()
@@ -38,6 +43,7 @@ load_dotenv()
 @app.on_event("startup")
 async def startup_event():
     """Verify database connection on startup"""
+    logger.info("Starting FastAPI server")
     logger.info("Verifying database connection on startup")
     try:
         if not verify_database():
@@ -48,9 +54,11 @@ async def startup_event():
 
 @app.get("/")
 def read_root():
+    """Root endpoint for API health check"""
     logger.info("Root endpoint accessed")
     return {
-        "message": "Welcome to Timesheet Management API",
+        "status": "healthy",
+        "message": "Timesheet Management API is running",
         "documentation": "/docs",
         "redoc": "/redoc"
     }
