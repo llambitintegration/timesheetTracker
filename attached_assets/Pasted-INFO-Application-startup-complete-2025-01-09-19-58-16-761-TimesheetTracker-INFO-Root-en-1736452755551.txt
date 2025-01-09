@@ -1,0 +1,36 @@
+INFO:     Application startup complete.
+2025-01-09 19:58:16,761 - TimesheetTracker - INFO - Root endpoint accessed
+INFO:     172.31.196.110:33230 - "GET / HTTP/1.1" 200 OK
+INFO:     172.31.196.110:48496 - "GET /docs HTTP/1.1" 200 OK
+/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/openapi/utils.py:225: UserWarning: Duplicate Operation ID get_time_entries_by_date_time_entries_by_date__date__get for function get_time_entries_by_date at /home/runner/workspace/main.py
+  warnings.warn(message, stacklevel=1)
+INFO:     172.31.196.110:48496 - "GET /openapi.json HTTP/1.1" 200 OK
+2025-01-09 19:58:31,715 - TimesheetTracker - DEBUG - Database session created
+2025-01-09 19:58:31,717 - TimesheetTracker - INFO - Starting database initialization process
+2025-01-09 19:58:31,717 - TimesheetTracker - INFO - Checking current database state
+2025-01-09 19:58:31,718 - TimesheetTracker - INFO - Verifying database connection and schema: postgresql+psycopg2://timesheetDatabase_owner:imz1MH3OjLef@ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-09 19:58:31,776 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-09 19:58:31,776 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-09 19:58:31,777 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-09 19:58:31,777 - TimesheetTracker - INFO - Checking 4 tables in schema
+2025-01-09 19:58:31,777 - TimesheetTracker - DEBUG - Verifying table: customers
+2025-01-09 19:58:31,797 - TimesheetTracker - WARNING - Table customers does not exist
+2025-01-09 19:58:31,798 - TimesheetTracker - DEBUG - Verifying table: project_managers
+2025-01-09 19:58:31,818 - TimesheetTracker - WARNING - Table project_managers does not exist
+2025-01-09 19:58:31,819 - TimesheetTracker - DEBUG - Verifying table: projects
+2025-01-09 19:58:31,838 - TimesheetTracker - WARNING - Table projects does not exist
+2025-01-09 19:58:31,838 - TimesheetTracker - DEBUG - Verifying table: time_entries
+2025-01-09 19:58:31,858 - TimesheetTracker - WARNING - Table time_entries does not exist
+2025-01-09 19:58:31,858 - TimesheetTracker - WARNING - Missing tables: customers, project_managers, projects, time_entries
+2025-01-09 19:58:31,925 - TimesheetTracker - INFO - Testing database connection
+2025-01-09 19:58:31,984 - TimesheetTracker - INFO - Database connection successful
+2025-01-09 19:58:31,984 - TimesheetTracker - INFO - Loading Alembic configuration
+2025-01-09 19:58:31,985 - TimesheetTracker - DEBUG - Alembic config loaded from: alembic.ini
+2025-01-09 19:58:31,986 - TimesheetTracker - DEBUG - Script location: migrations
+2025-01-09 19:58:32,172 - TimesheetTracker - INFO - Current migration revision: None
+2025-01-09 19:58:32,192 - TimesheetTracker - INFO - Starting migration process
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> 9eac8145ca59, create_time_entries_table
+INFO  [alembic.runtime.migration] Running upgrade 9eac8145ca59 -> add_timestamps_to_time_entries, add timestamps to time entries
+INFO  [alembic.runtime.migration] Running upgrade add_timestamps_to_time_entries -> add_date_to_time_entries, add date to time entries - Deprecated, merged into base migration
