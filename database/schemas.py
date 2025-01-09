@@ -1,7 +1,6 @@
-
 from pydantic import BaseModel, Field, ConfigDict
 from typing import Optional, List
-from datetime import datetime
+from datetime import datetime, date
 from models.timeEntry import TimeEntry as TimeEntryModel
 from models.customerModel import Customer as CustomerModel
 from models.projectModel import Project as ProjectModel
@@ -26,6 +25,7 @@ class TimeEntryBase(BaseSchema):
     project: Optional[str] = None
     task_description: Optional[str] = None
     hours: float = Field(..., ge=0, le=24)
+    date: date  # Add date field
 
 class TimeEntryCreate(TimeEntryBase):
     """Schema for creating time entries"""
@@ -41,11 +41,33 @@ class TimeEntryUpdate(BaseSchema):
     project: Optional[str] = None
     task_description: Optional[str] = None
     hours: Optional[float] = Field(None, gt=0, le=24)
+    date: Optional[date] = None
 
 class TimeEntry(TimeEntryBase):
     """Schema for time entry responses"""
     class Config:
         orm_model = TimeEntryModel
+
+# Time Summary Schemas
+class DateRangeParams(BaseModel):
+    """Schema for date range parameters"""
+    start_date: date
+    end_date: date
+
+class TimeSummaryEntry(BaseModel):
+    """Schema for time summary entries"""
+    date: date
+    total_hours: float
+    entries: List[TimeEntry]
+
+    model_config = ConfigDict(from_attributes=True)
+
+class TimeSummary(BaseModel):
+    """Schema for time summaries"""
+    total_hours: float
+    entries: List[TimeSummaryEntry]
+
+    model_config = ConfigDict(from_attributes=True)
 
 # Customer Schemas
 class CustomerBase(BaseSchema):

@@ -289,3 +289,95 @@ def get_time_entries_by_date(db: Session, query_date: date) -> List[models.TimeE
         logger.info(f"No time entries found for date {query_date}")
 
     return entries
+
+try:
+    from . import schemas
+except ImportError:
+    print("Error importing schemas.  Make sure schemas.py is in the same directory.")
+    exit(1)
+
+def get_time_summaries(
+    db: Session,
+    start_date: date,
+    end_date: date,
+    project_id: Optional[str] = None,
+    customer_name: Optional[str] = None
+) -> schemas.TimeSummary:
+    """Get time entries summary within a date range."""
+    logger.debug(f"Fetching time summaries from {start_date} to {end_date}")
+
+    query = db.query(models.TimeEntry).filter(
+        models.TimeEntry.date >= start_date,
+        models.TimeEntry.date <= end_date
+    )
+
+    if project_id:
+        query = query.filter(models.TimeEntry.project == project_id)
+    if customer_name:
+        query = query.filter(models.TimeEntry.customer == customer_name)
+
+    entries = query.all()
+
+    # Group entries by date
+    date_entries = {}
+    total_hours = 0
+
+    for entry in entries:
+        if entry.date not in date_entries:
+            date_entries[entry.date] = {
+                'entries': [],
+                'total_hours': 0
+            }
+        date_entries[entry.date]['entries'].append(entry)
+        date_entries[entry.date]['total_hours'] += entry.hours
+        total_hours += entry.hours
+
+    summary_entries = [
+        schemas.TimeSummaryEntry(
+            date=date,
+            total_hours=data['total_hours'],
+            entries=data['entries']
+        )
+        for date, data in sorted(date_entries.items())
+    ]
+
+    return schemas.TimeSummary(
+        total_hours=total_hours,
+        entries=summary_entries
+    )
+
+def get_time_entries_by_month(
+    db: Session,
+    month: str,
+    year: int,
+    project_id: Optional[str] = None
+) -> schemas.TimeSummary:
+    """Get time entries for a specific month."""
+    logger.debug(f"Fetching time entries for {month} {year}")
+
+    # Get the month number from the month name
+    month_num = list(calendar.month_name).index(month)
+    if month_num == 0:
+        raise ValueError("Invalid month name")
+
+    # Calculate start and end dates for the month
+    start_date = date(year, month_num, 1)
+    _, last_day = calendar.monthrange(year, month_num)
+    end_date = date(year, month_num, last_day)
+
+    return get_time_summaries(db, start_date, end_date, project_id)
+
+def get_time_entries_by_week(
+    db: Session,
+    week_number: int,
+    year: int,
+    project_id: Optional[str] = None
+) -> schemas.TimeSummary:
+    """Get time entries for a specific week number."""
+    logger.debug(f"Fetching time entries for week {week_number} of {year}")
+
+    # Calculate the date range for the given week number
+    first_day = datetime.strptime(f'{year}-W{week_number}-1', '%Y-W%W-%w').date()
+    last_day = first_day + timedelta(days=6)
+
+    return get_time_summaries(db, first_day, last_day, project_id)

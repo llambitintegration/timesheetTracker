@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, Query
+from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, Query, Path
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List, Optional
@@ -190,47 +190,40 @@ def create_time_entry(entry: schemas.TimeEntryCreate, db: Session = Depends(get_
     logger.info("Creating new time entry")
     return crud.create_time_entry(db, entry)
 
-@app.get("/time-entries/", response_model=List[schemas.TimeEntry])
-def read_time_entries(
+@app.get("/time-summaries/", response_model=schemas.TimeSummary)
+def get_time_summaries(
+    start_date: date = Query(..., description="Start date (YYYY-MM-DD)"),
+    end_date: date = Query(..., description="End date (YYYY-MM-DD)"),
     project_id: Optional[str] = None,
     customer_name: Optional[str] = None,
-    skip: int = 0,
-    limit: int = 100,
     db: Session = Depends(get_db)
 ):
-    logger.info(f"Fetching time entries with project={project_id}, customer={customer_name}")
-    return crud.get_time_entries(db, project_id, customer_name, skip, limit)
+    """Get time entries summary within a date range."""
+    logger.info(f"Fetching time summaries from {start_date} to {end_date}")
+    return crud.get_time_summaries(db, start_date, end_date, project_id, customer_name)
 
-@app.get("/time-entries/{entry_id}", response_model=schemas.TimeEntry)
-def read_time_entry(entry_id: int, db: Session = Depends(get_db)):
-    logger.info(f"Fetching time entry: {entry_id}")
-    entry = crud.get_time_entry(db, entry_id)
-    if entry is None:
-        logger.warning(f"Time entry not found: {entry_id}")
-        raise HTTPException(status_code=404, detail="Time entry not found")
-    return entry
-
-@app.put("/time-entries/{entry_id}", response_model=schemas.TimeEntry)
-def update_time_entry(
-    entry_id: int,
-    entry: schemas.TimeEntryUpdate,
+@app.get("/time-entries/by-month/{month}", response_model=schemas.TimeSummary)
+def get_time_entries_by_month(
+    month: str = Path(..., description="Month name (e.g., January)"),
+    year: int = Query(..., description="Year (e.g., 2025)"),
+    project_id: Optional[str] = None,
     db: Session = Depends(get_db)
 ):
-    logger.info(f"Updating time entry: {entry_id}")
-    updated_entry = crud.update_time_entry(db, entry_id, entry)
-    if updated_entry is None:
-        logger.warning(f"Time entry not found: {entry_id}")
-        raise HTTPException(status_code=404, detail="Time entry not found")
-    return updated_entry
+    """Get time entries for a specific month."""
+    logger.info(f"Fetching time entries for {month} {year}")
+    return crud.get_time_entries_by_month(db, month, year, project_id)
 
-@app.delete("/time-entries/{entry_id}")
-def delete_time_entry(entry_id: int, db: Session = Depends(get_db)):
-    logger.info(f"Deleting time entry: {entry_id}")
-    success = crud.delete_time_entry(db, entry_id)
-    if not success:
-        logger.warning(f"Time entry not found: {entry_id}")
-        raise HTTPException(status_code=404, detail="Time entry not found")
-    return {"message": "Entry deleted successfully"}
+@app.get("/time-entries/by-week/{week_number}", response_model=schemas.TimeSummary)
+def get_time_entries_by_week(
+    week_number: int = Path(..., ge=1, le=53),
+    year: int = Query(..., description="Year (e.g., 2025)"),
+    project_id: Optional[str] = None,
+    db: Session = Depends(get_db)
+):
+    """Get time entries for a specific week number."""
+    logger.info(f"Fetching time entries for week {week_number} of {year}")
+    return crud.get_time_entries_by_week(db, week_number, year, project_id)
+
 
 @app.get("/reports/weekly", response_model=schemas.WeeklyReport)
 def get_weekly_report(

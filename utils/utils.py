@@ -22,6 +22,25 @@ def clean_string_value(value, default=""):
         return default
     return str(value).strip()
 
+def parse_date(date_value) -> datetime.date:
+    """Parse and validate date values."""
+    if pd.isna(date_value) or date_value == '':
+        return datetime.now().date()
+    try:
+        if isinstance(date_value, datetime):
+            return date_value.date()
+        elif isinstance(date_value, str):
+            # Try different date formats
+            for fmt in ['%m/%d/%y', '%Y-%m-%d', '%m/%d/%Y']:
+                try:
+                    return datetime.strptime(date_value, fmt).date()
+                except ValueError:
+                    continue
+        raise ValueError(f"Could not parse date: {date_value}")
+    except Exception as e:
+        logger.warning(f"Error parsing date '{date_value}': {str(e)}")
+        return datetime.now().date()
+
 def validate_week_number(week_number):
     """Validate week number is between 1 and 53."""
     try:
@@ -63,7 +82,7 @@ def parse_csv(file) -> List[schemas.TimeEntryCreate]:
     entries = []
     logger.info(f"Processing {len(df)} rows from CSV file")
 
-    required_columns = ['Week Number', 'Hours', 'Customer', 'Project']
+    required_columns = ['Week Number', 'Hours', 'Customer', 'Project', 'Date']
     missing_columns = [col for col in required_columns if col not in df.columns]
     if missing_columns:
         raise ValueError(f"Missing required columns: {', '.join(missing_columns)}")
@@ -77,11 +96,12 @@ def parse_csv(file) -> List[schemas.TimeEntryCreate]:
             week_number = validate_week_number(row.get('Week Number'))
             month = validate_month(row.get('Month'))
             customer = row.get('Customer', '').strip()
-            
+            entry_date = parse_date(row.get('Date'))
+
             if hours <= 0:
                 logger.warning(f"Skipping row {index + 1} due to invalid hours: {hours}")
                 continue
-                
+
             # Replace empty or dash customer with None
             if not customer or customer == '-':
                 customer = None
@@ -94,7 +114,8 @@ def parse_csv(file) -> List[schemas.TimeEntryCreate]:
                 customer=clean_string_value(row.get('Customer')),
                 project=clean_string_value(row.get('Project')),
                 task_description=clean_string_value(row.get('Task Description')),
-                hours=hours
+                hours=hours,
+                date=entry_date
             )
             entries.append(entry)
             logger.debug(f"Successfully processed row {index + 1}")
