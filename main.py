@@ -8,6 +8,8 @@ from datetime import datetime, timedelta, date
 import calendar
 from dotenv import load_dotenv
 import uvicorn
+from alembic import context
+from alembic.migration import MigrationContext
 
 from database import schemas, crud, get_db, verify_database, engine
 from utils.logger import Logger
@@ -86,9 +88,9 @@ async def upload_timesheet(
     """Upload and process timesheet file"""
     logger.info(f"Processing timesheet upload: {file.filename}")
     try:
-        if file.filename.endswith('.xlsx'):
+        if file.filename and file.filename.endswith('.xlsx'):
             entries = utils.parse_excel(file.file)
-        elif file.filename.endswith('.csv'):
+        elif file.filename and file.filename.endswith('.csv'):
             entries = utils.parse_csv(file.file)
         else:
             logger.error(f"Unsupported file format: {file.filename}")
