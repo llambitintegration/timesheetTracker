@@ -18,14 +18,14 @@ async def logging_middleware(request: Request, call_next: Callable):
         logger.info(f"Origin: {request.headers.get('origin', 'No origin')}")
         logger.info(f"Headers: {dict(request.headers)}")
 
-        # Special handling for preflight requests
-        if request.method == "OPTIONS":
-            logger.info("Processing CORS preflight request")
-            logger.info(f"Access-Control-Request-Method: {request.headers.get('access-control-request-method')}")
-            logger.info(f"Access-Control-Request-Headers: {request.headers.get('access-control-request-headers')}")
-
         # Process the request
         response = await call_next(request)
+
+        # Always add CORS headers in development
+        response.headers["Access-Control-Allow-Origin"] = "*"
+        response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS, PATCH"
+        response.headers["Access-Control-Allow-Headers"] = "*"
+        response.headers["Access-Control-Max-Age"] = "3600"
 
         # Log response details
         process_time = (time.time() - start_time) * 1000

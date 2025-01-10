@@ -24,26 +24,32 @@ from services.project_service import ProjectService
 logger = Logger().get_logger()
 app = FastAPI(title="Timesheet Management API")
 
-# Define allowed origins
-origins = [
-    "https://kzml3cjwnshszfymqji0.lite.vusercontent.net",
-    "https://kzmjk7upp9bwloroftyo.lite.vusercontent.net"
-]
-
-# Add CORS middleware first, before any other middleware
+# CORS configuration for development (allowing all origins)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
+    allow_origins=["*"],  # Allow all origins in development
+    allow_credentials=False,  # Keep as False since we're using '*' for origins
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allow_headers=["*"],
     expose_headers=["*"],
-    max_age=3600,
+    max_age=3600
 )
 
-# Add custom logging middleware after CORS
+# Custom middleware for logging
 @app.middleware("http")
 async def custom_middleware(request: Request, call_next):
+    """Custom middleware to handle preflight requests and logging"""
+    # Special handling for preflight requests
+    if request.method == "OPTIONS":
+        headers = {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Max-Age": "3600",
+        }
+        return JSONResponse(content={}, headers=headers)
+
+    # For non-preflight requests, use the logging middleware
     return await logging_middleware(request, call_next)
 
 @app.on_event("startup")
@@ -57,9 +63,9 @@ async def startup_event():
 
         # Log CORS configuration
         logger.info("=== CORS Configuration ===")
-        logger.info(f"Allowed Origins: {origins}")
-        logger.info(f"Allowed Methods: {['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH']}")
-        logger.info(f"Allow Credentials: True")
+        logger.info("Development mode: All origins allowed (*)")
+        logger.info(f"Allowed Methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH']")
+        logger.info(f"Allow Credentials: False")
         logger.info(f"Max Age: 3600")
 
     except Exception as e:

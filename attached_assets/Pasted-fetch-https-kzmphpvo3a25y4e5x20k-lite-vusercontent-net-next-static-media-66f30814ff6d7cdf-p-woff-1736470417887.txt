@@ -1,0 +1,290 @@
+fetch("https://kzmphpvo3a25y4e5x20k.lite.vusercontent.net/_next/static/media/66f30814ff6d7cdf.p.woff2", {
+  "headers": {
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\""
+  },
+  "referrer": "https://kzmphpvo3a25y4e5x20k.lite.vusercontent.net/time-entry/view",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "omit"
+}); ;
+fetch("https://kzmphpvo3a25y4e5x20k.lite.vusercontent.net/_next/static/media/6d93bde91c0c2823-s.p.woff2", {
+  "headers": {
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\""
+  },
+  "referrer": "https://kzmphpvo3a25y4e5x20k.lite.vusercontent.net/time-entry/view",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "omit"
+}); ;
+fetch("https://kzmphpvo3a25y4e5x20k.lite.vusercontent.net/_next/static/media/e11418ac562b8ac1-s.p.woff2", {
+  "headers": {
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\""
+  },
+  "referrer": "https://kzmphpvo3a25y4e5x20k.lite.vusercontent.net/time-entry/view",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "omit"
+}); ;
+fetch("https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/by-date/2024-11-15", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "cross-site"
+  },
+  "referrer": "https://kzmphpvo3a25y4e5x20k.lite.vusercontent.net/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "OPTIONS",
+  "mode": "cors",
+  "credentials": "omit"
+}); ;
+fetch("https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/by-date/2024-11-15", {
+  "headers": {
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\""
+  },
+  "referrer": "https://kzmphpvo3a25y4e5x20k.lite.vusercontent.net/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "omit"
+}); ;
+fetch("https://r.stripe.com/b", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/x-www-form-urlencoded",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "no-cors",
+    "sec-fetch-site": "same-site"
+  },
+  "referrer": "https://js.stripe.com/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "client_id=stripe-js&num_requests=1&events=%5B%7B%22event_name%22%3A%22elements.controller.page_hide%22%2C%22created%22%3A1736470399271%2C%22batching_enabled%22%3Atrue%2C%22event_count%22%3A45%2C%22os%22%3A%22Windows%22%2C%22browserFamily%22%3A%22IE+Edge%22%2C%22version%22%3A%22ccf8deed2b%22%2C%22event_id%22%3A%2265a92562-7e66-4540-9f04-9bc83bcdf5b7%22%2C%22deploy_status%22%3A%22main%22%2C%22browserClassification%22%3A%22modern%22%2C%22browser_classification_v2%22%3A%222024%22%2C%22connection_rtt%22%3A%22100%22%2C%22connection_downlink%22%3A%2210%22%2C%22connection_effective_type%22%3A%224g%22%2C%22key%22%3A%22pk_live_alyEi3lN0kSwbdevK0nrGwTw%22%2C%22key_mode%22%3A%22live%22%2C%22referrer%22%3A%22https%3A%2F%2Fv0.dev%22%2C%22stripe_js_id%22%3A%2274cced5b-2211-4065-9ba5-8a2994515a09%22%2C%22controller_load_time%22%3A1736468547815%2C%22wrapper%22%3A%22react-stripe-js%22%2C%22wrapper_version%22%3A%222.8.0%22%2C%22es_module%22%3A%22true%22%2C%22es_module_version%22%3A%224.8.0%22%2C%22elements_init_source%22%3A%22stripe.elements%22%2C%22deploy_status_time_to_fetch_ms%22%3A%22468%22%2C%22deploy_status_fetch_failed%22%3A%22false%22%2C%22cdn_name%22%3A%22Cloudfront%22%2C%22cdn_pop_dc%22%3A%22DFW%22%2C%22decoupled_intent%22%3A%22true%22%2C%22merchant%22%3A%22acct_188ZXFGIpdKFUmPY%22%2C%22currency%22%3A%22usd%22%2C%22frame_width%22%3A1528%2C%22event_flush_reason%22%3A%22visibilitystate%22%7D%5D",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "omit"
+}); ;
+fetch("https://api.getkoala.com/web/projects/vercel/batch", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "text/plain;charset=UTF-8",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "no-cors",
+    "sec-fetch-site": "cross-site"
+  },
+  "referrer": "https://v0.dev/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "{\"profile_id\":\"40a9f37a-7c0c-4db9-b238-5f2ffd3b5491\",\"page_views\":[{\"context\":{\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0\",\"platform\":{\"name\":\"Win32\",\"deviceType\":\"desktop\"},\"library\":{\"name\":\"koala\",\"version\":\"1.25.0\"},\"session\":{\"id\":\"1736463136326\",\"lastTouched\":1736468543609},\"locale\":\"en-US\",\"timezone\":\"America/Chicago\"},\"message_id\":\"0379dcbd-927b-41ef-a43b-cefc9dedbfda\",\"page\":{\"path\":\"/chat/UFsxiVsYhL6\",\"referrer\":\"\",\"title\":\"Timesheet management guide - v0 by Vercel\",\"url\":\"https://v0.dev/chat/UFsxiVsYhL6\",\"host\":\"v0.dev\"},\"visit_start\":\"2025-01-10T00:22:23.609Z\",\"focus_intervals\":[7116,28904,902,17043,9027,6110,5170,27269,1677,5351,1049,17915,3215,1209,34827,16072,2527,74945,63604,16578,6998,4872,15066,3870,1251,37078,5332,2954,908,20540,21491]}]}",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "omit"
+}); ;
+fetch("https://v0.dev/chat/api/chat/env-vars/outdated?bid=b_pbIs03Dczet", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/api/auth/info", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/api/auth/update", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/wait-room", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/history", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/rate-limit?scope=llambitintegration", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/projects/history", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/favorites", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/chat/cstu?scopeSlug=llambitintegration&chatId=UFsxiVsYhL6&messageId=5syDWkbsm97La86H06XCNAb2CdhuYMQw", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://r.stripe.com/b", {
+  "headers": {
+    "accept": "application/json",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/x-www-form-urlencoded",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site"
+  },
+  "referrer": "https://js.stripe.com/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "client_id=stripe-js&num_requests=1&events=%5B%7B%22event_name%22%3A%22elements.controller.page_show%22%2C%22created%22%3A1736470403293%2C%22batching_enabled%22%3Atrue%2C%22event_count%22%3A46%2C%22os%22%3A%22Windows%22%2C%22browserFamily%22%3A%22IE+Edge%22%2C%22version%22%3A%22ccf8deed2b%22%2C%22event_id%22%3A%22df8a15d3-36b8-4ab0-ba58-b4a84667b0d4%22%2C%22deploy_status%22%3A%22main%22%2C%22browserClassification%22%3A%22modern%22%2C%22browser_classification_v2%22%3A%222024%22%2C%22connection_rtt%22%3A%22100%22%2C%22connection_downlink%22%3A%2210%22%2C%22connection_effective_type%22%3A%224g%22%2C%22key%22%3A%22pk_live_alyEi3lN0kSwbdevK0nrGwTw%22%2C%22key_mode%22%3A%22live%22%2C%22referrer%22%3A%22https%3A%2F%2Fv0.dev%22%2C%22stripe_js_id%22%3A%2274cced5b-2211-4065-9ba5-8a2994515a09%22%2C%22controller_load_time%22%3A1736468547815%2C%22wrapper%22%3A%22react-stripe-js%22%2C%22wrapper_version%22%3A%222.8.0%22%2C%22es_module%22%3A%22true%22%2C%22es_module_version%22%3A%224.8.0%22%2C%22elements_init_source%22%3A%22stripe.elements%22%2C%22deploy_status_time_to_fetch_ms%22%3A%22468%22%2C%22deploy_status_fetch_failed%22%3A%22false%22%2C%22cdn_name%22%3A%22Cloudfront%22%2C%22cdn_pop_dc%22%3A%22DFW%22%2C%22decoupled_intent%22%3A%22true%22%2C%22merchant%22%3A%22acct_188ZXFGIpdKFUmPY%22%2C%22currency%22%3A%22usd%22%2C%22frame_width%22%3A1528%7D%5D",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "omit"
+});
