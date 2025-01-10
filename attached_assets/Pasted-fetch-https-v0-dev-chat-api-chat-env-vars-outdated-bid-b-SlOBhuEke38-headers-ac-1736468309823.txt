@@ -1,0 +1,842 @@
+fetch("https://v0.dev/chat/api/chat/env-vars/outdated?bid=b_SlOBhuEke38", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/chat/env-vars/outdated?bid=b_SlOBhuEke38", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/wait-room", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://api.getkoala.com/web/projects/vercel/batch", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "text/plain;charset=UTF-8",
+    "priority": "u=4, i",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "no-cors",
+    "sec-fetch-site": "cross-site"
+  },
+  "referrer": "https://v0.dev/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "{\"profile_id\":\"40a9f37a-7c0c-4db9-b238-5f2ffd3b5491\",\"page_views\":[{\"context\":{\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0\",\"platform\":{\"name\":\"Win32\",\"deviceType\":\"desktop\"},\"library\":{\"name\":\"koala\",\"version\":\"1.25.0\"},\"session\":{\"id\":\"1736463136326\",\"lastTouched\":1736467212743},\"locale\":\"en-US\",\"timezone\":\"America/Chicago\"},\"message_id\":\"ebd23267-b1ec-4cdb-973d-5bb96cc196e3\",\"page\":{\"path\":\"/chat/UFsxiVsYhL6\",\"referrer\":\"\",\"title\":\"Timesheet management guide - v0 by Vercel\",\"url\":\"https://v0.dev/chat/UFsxiVsYhL6\",\"host\":\"v0.dev\"},\"visit_start\":\"2025-01-10T00:00:12.744Z\",\"focus_intervals\":[3958,5231,3643,18691,10682,10600,19806,17623,18132,13899,24853]}]}",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "omit"
+}); ;
+fetch("https://v0.dev/api/auth/info", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/api/auth/update", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/scopes", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/wait-room", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/history", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/rate-limit?scope=llambitintegration", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/projects/history", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/favorites", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/chat/cstu?scopeSlug=llambitintegration&chatId=UFsxiVsYhL6&messageId=fDuiT1Hh7LAjaeNHhJcNkuOs8lARJYRj", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/chat/env-vars/outdated?bid=b_SlOBhuEke38", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/chat/env-vars/outdated?bid=b_SlOBhuEke38", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/chat/env-vars/outdated?bid=b_SlOBhuEke38", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/wait-room", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://api.getkoala.com/web/projects/vercel/batch", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "text/plain;charset=UTF-8",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "no-cors",
+    "sec-fetch-site": "cross-site"
+  },
+  "referrer": "https://v0.dev/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "{\"profile_id\":\"40a9f37a-7c0c-4db9-b238-5f2ffd3b5491\",\"page_views\":[{\"context\":{\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0\",\"platform\":{\"name\":\"Win32\",\"deviceType\":\"desktop\"},\"library\":{\"name\":\"koala\",\"version\":\"1.25.0\"},\"session\":{\"id\":\"1736463136326\",\"lastTouched\":1736467212743},\"locale\":\"en-US\",\"timezone\":\"America/Chicago\"},\"message_id\":\"ebd23267-b1ec-4cdb-973d-5bb96cc196e3\",\"page\":{\"path\":\"/chat/UFsxiVsYhL6\",\"referrer\":\"\",\"title\":\"Timesheet management guide - v0 by Vercel\",\"url\":\"https://v0.dev/chat/UFsxiVsYhL6\",\"host\":\"v0.dev\"},\"visit_start\":\"2025-01-10T00:00:12.744Z\",\"focus_intervals\":[3958,5231,3643,18691,10682,10600,19806,17623,18132,13899,24853,20309]}]}",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "omit"
+}); ;
+fetch("https://v0.dev/chat/api/chat/env-vars/outdated?bid=b_SlOBhuEke38", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/wait-room", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/by-date/2024-11-19", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "cross-site"
+  },
+  "referrer": "https://kzml3cjwnshszfymqji0.lite.vusercontent.net/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "OPTIONS",
+  "mode": "cors",
+  "credentials": "omit"
+}); ;
+fetch("https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/by-date/2024-11-19", {
+  "headers": {
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\""
+  },
+  "referrer": "https://kzml3cjwnshszfymqji0.lite.vusercontent.net/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "omit"
+}); ;
+fetch("https://v0.dev/chat/api/send", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "{\"action\":\"V0BlockPreviewError\",\"meta\":\"{\\\"error\\\":\\\"Attempt 1 failed: {}\\\\n\\\\n  at Object.getTimeEntriesByDate (/services/api-client)\\\\n  at async fetchTimeEntriesByDate (/app/time-entry/view/page)\\\"}\",\"referer\":\"https://v0.dev/chat/UFsxiVsYhL6\",\"error_code\":19,\"generic_route\":\"/[id]\",\"call_layer\":\"client\",\"chat_id\":\"UFsxiVsYhL6\",\"message_id\":\"fDuiT1Hh7LAjaeNHhJcNkuOs8lARJYRj\",\"block_id\":\"b_SlOBhuEke38\",\"domain\":\"v0.dev\",\"path\":\"/chat/UFsxiVsYhL6\",\"query_string\":null,\"browser_width\":973,\"browser_height\":802}",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/by-date/2024-11-19", {
+  "headers": {
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\""
+  },
+  "referrer": "https://kzml3cjwnshszfymqji0.lite.vusercontent.net/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "omit"
+}); ;
+fetch("https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/by-date/2024-11-19", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "cross-site"
+  },
+  "referrer": "https://kzml3cjwnshszfymqji0.lite.vusercontent.net/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "OPTIONS",
+  "mode": "cors",
+  "credentials": "omit"
+}); ;
+fetch("https://v0.dev/chat/api/send", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "{\"action\":\"V0BlockPreviewError\",\"meta\":\"{\\\"error\\\":\\\"Attempt 2 failed: {}\\\\n\\\\n  at Object.getTimeEntriesByDate (/services/api-client)\\\\n  at async fetchTimeEntriesByDate (/app/time-entry/view/page)\\\"}\",\"referer\":\"https://v0.dev/chat/UFsxiVsYhL6\",\"error_code\":19,\"generic_route\":\"/[id]\",\"call_layer\":\"client\",\"chat_id\":\"UFsxiVsYhL6\",\"message_id\":\"fDuiT1Hh7LAjaeNHhJcNkuOs8lARJYRj\",\"block_id\":\"b_SlOBhuEke38\",\"domain\":\"v0.dev\",\"path\":\"/chat/UFsxiVsYhL6\",\"query_string\":null,\"browser_width\":973,\"browser_height\":802}",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/by-date/2024-11-19", {
+  "headers": {
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\""
+  },
+  "referrer": "https://kzml3cjwnshszfymqji0.lite.vusercontent.net/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "omit"
+}); ;
+fetch("https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/by-date/2024-11-19", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "cross-site"
+  },
+  "referrer": "https://kzml3cjwnshszfymqji0.lite.vusercontent.net/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "OPTIONS",
+  "mode": "cors",
+  "credentials": "omit"
+}); ;
+fetch("https://v0.dev/chat/api/send", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "{\"action\":\"V0BlockPreviewError\",\"meta\":\"{\\\"error\\\":\\\"Attempt 3 failed: {}\\\\n\\\\n  at Object.getTimeEntriesByDate (/services/api-client)\\\\n  at async fetchTimeEntriesByDate (/app/time-entry/view/page)\\\"}\",\"referer\":\"https://v0.dev/chat/UFsxiVsYhL6\",\"error_code\":19,\"generic_route\":\"/[id]\",\"call_layer\":\"client\",\"chat_id\":\"UFsxiVsYhL6\",\"message_id\":\"fDuiT1Hh7LAjaeNHhJcNkuOs8lARJYRj\",\"block_id\":\"b_SlOBhuEke38\",\"domain\":\"v0.dev\",\"path\":\"/chat/UFsxiVsYhL6\",\"query_string\":null,\"browser_width\":973,\"browser_height\":802}",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/send", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "{\"action\":\"V0BlockPreviewError\",\"meta\":\"{\\\"error\\\":\\\"Error fetching time entries: {}\\\\n\\\\n  at fetchTimeEntriesByDate (/app/time-entry/view/page)\\\"}\",\"referer\":\"https://v0.dev/chat/UFsxiVsYhL6\",\"error_code\":19,\"generic_route\":\"/[id]\",\"call_layer\":\"client\",\"chat_id\":\"UFsxiVsYhL6\",\"message_id\":\"fDuiT1Hh7LAjaeNHhJcNkuOs8lARJYRj\",\"block_id\":\"b_SlOBhuEke38\",\"domain\":\"v0.dev\",\"path\":\"/chat/UFsxiVsYhL6\",\"query_string\":null,\"browser_width\":973,\"browser_height\":802}",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/wait-room", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/chat/env-vars/outdated?bid=b_SlOBhuEke38", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/_vercel/speed-insights/vitals", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "text/plain",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "no-cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "{\"speed\":\"4g\",\"metrics\":[{\"id\":\"v3-1736467202872-1463841731091\",\"type\":\"INP\",\"route\":\"/chat/UFsxiVsYhL6\",\"href\":\"https://v0.dev/chat/UFsxiVsYhL6\",\"value\":56,\"attribution\":{\"eventTarget\":\"\",\"eventType\":\"click\"}}],\"scriptVersion\":\"0.1.2\",\"sdkName\":\"@vercel/speed-insights/next\",\"sdkVersion\":\"1.0.12\"}",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://r.stripe.com/b", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/x-www-form-urlencoded",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "no-cors",
+    "sec-fetch-site": "same-site"
+  },
+  "referrer": "https://js.stripe.com/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "client_id=stripe-js&num_requests=1&events=%5B%7B%22event_name%22%3A%22elements.controller.page_hide%22%2C%22created%22%3A1736468291612%2C%22batching_enabled%22%3Atrue%2C%22event_count%22%3A32%2C%22os%22%3A%22Windows%22%2C%22browserFamily%22%3A%22IE+Edge%22%2C%22version%22%3A%22ccf8deed2b%22%2C%22event_id%22%3A%227b71fea0-8d4a-4e0f-9d09-47fbd485c54c%22%2C%22deploy_status%22%3A%22main%22%2C%22browserClassification%22%3A%22modern%22%2C%22browser_classification_v2%22%3A%222024%22%2C%22connection_rtt%22%3A%22100%22%2C%22connection_downlink%22%3A%2210%22%2C%22connection_effective_type%22%3A%224g%22%2C%22key%22%3A%22pk_live_alyEi3lN0kSwbdevK0nrGwTw%22%2C%22key_mode%22%3A%22live%22%2C%22referrer%22%3A%22https%3A%2F%2Fv0.dev%22%2C%22stripe_js_id%22%3A%226ae16c76-6323-4a57-94ad-5e56d9b7d5d8%22%2C%22controller_load_time%22%3A1736467208751%2C%22wrapper%22%3A%22react-stripe-js%22%2C%22wrapper_version%22%3A%222.8.0%22%2C%22es_module%22%3A%22true%22%2C%22es_module_version%22%3A%224.8.0%22%2C%22elements_init_source%22%3A%22stripe.elements%22%2C%22deploy_status_time_to_fetch_ms%22%3A%22368%22%2C%22deploy_status_fetch_failed%22%3A%22false%22%2C%22cdn_name%22%3A%22Fastly%22%2C%22cdn_pop_dc%22%3A%22PDK%22%2C%22decoupled_intent%22%3A%22true%22%2C%22merchant%22%3A%22acct_188ZXFGIpdKFUmPY%22%2C%22currency%22%3A%22usd%22%2C%22frame_width%22%3A1536%2C%22event_flush_reason%22%3A%22visibilitystate%22%7D%5D",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "omit"
+}); ;
+fetch("https://api.getkoala.com/web/projects/vercel/batch", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "text/plain;charset=UTF-8",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "no-cors",
+    "sec-fetch-site": "cross-site"
+  },
+  "referrer": "https://v0.dev/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "{\"profile_id\":\"40a9f37a-7c0c-4db9-b238-5f2ffd3b5491\",\"page_views\":[{\"context\":{\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0\",\"platform\":{\"name\":\"Win32\",\"deviceType\":\"desktop\"},\"library\":{\"name\":\"koala\",\"version\":\"1.25.0\"},\"session\":{\"id\":\"1736463136326\",\"lastTouched\":1736467212743},\"locale\":\"en-US\",\"timezone\":\"America/Chicago\"},\"message_id\":\"ebd23267-b1ec-4cdb-973d-5bb96cc196e3\",\"page\":{\"path\":\"/chat/UFsxiVsYhL6\",\"referrer\":\"\",\"title\":\"Timesheet management guide - v0 by Vercel\",\"url\":\"https://v0.dev/chat/UFsxiVsYhL6\",\"host\":\"v0.dev\"},\"visit_start\":\"2025-01-10T00:00:12.744Z\",\"focus_intervals\":[3958,5231,3643,18691,10682,10600,19806,17623,18132,13899,24853,20309,1429,12260]}]}",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "omit"
+}); ;
+fetch("https://v0.dev/api/auth/info", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/api/auth/update", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/wait-room", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/history", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/rate-limit?scope=llambitintegration", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/projects/history", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/favorites", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/chat/cstu?scopeSlug=llambitintegration&chatId=UFsxiVsYhL6&messageId=fDuiT1Hh7LAjaeNHhJcNkuOs8lARJYRj", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/chat/env-vars/outdated?bid=b_SlOBhuEke38", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://r.stripe.com/b", {
+  "headers": {
+    "accept": "application/json",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/x-www-form-urlencoded",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site"
+  },
+  "referrer": "https://js.stripe.com/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "client_id=stripe-js&num_requests=1&events=%5B%7B%22event_name%22%3A%22elements.controller.page_show%22%2C%22created%22%3A1736468297368%2C%22batching_enabled%22%3Atrue%2C%22event_count%22%3A33%2C%22os%22%3A%22Windows%22%2C%22browserFamily%22%3A%22IE+Edge%22%2C%22version%22%3A%22ccf8deed2b%22%2C%22event_id%22%3A%22ea701c5c-97c1-4dad-af77-467fd652c9a1%22%2C%22deploy_status%22%3A%22main%22%2C%22browserClassification%22%3A%22modern%22%2C%22browser_classification_v2%22%3A%222024%22%2C%22connection_rtt%22%3A%22100%22%2C%22connection_downlink%22%3A%2210%22%2C%22connection_effective_type%22%3A%224g%22%2C%22key%22%3A%22pk_live_alyEi3lN0kSwbdevK0nrGwTw%22%2C%22key_mode%22%3A%22live%22%2C%22referrer%22%3A%22https%3A%2F%2Fv0.dev%22%2C%22stripe_js_id%22%3A%226ae16c76-6323-4a57-94ad-5e56d9b7d5d8%22%2C%22controller_load_time%22%3A1736467208751%2C%22wrapper%22%3A%22react-stripe-js%22%2C%22wrapper_version%22%3A%222.8.0%22%2C%22es_module%22%3A%22true%22%2C%22es_module_version%22%3A%224.8.0%22%2C%22elements_init_source%22%3A%22stripe.elements%22%2C%22deploy_status_time_to_fetch_ms%22%3A%22368%22%2C%22deploy_status_fetch_failed%22%3A%22false%22%2C%22cdn_name%22%3A%22Fastly%22%2C%22cdn_pop_dc%22%3A%22PDK%22%2C%22decoupled_intent%22%3A%22true%22%2C%22merchant%22%3A%22acct_188ZXFGIpdKFUmPY%22%2C%22currency%22%3A%22usd%22%2C%22frame_width%22%3A1536%7D%5D",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "omit"
+}); ;
+fetch("https://v0.dev/chat/api/chat/env-vars/outdated?bid=b_SlOBhuEke38", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}); ;
+fetch("https://v0.dev/chat/api/chat/env-vars/outdated?bid=b_SlOBhuEke38", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://v0.dev/chat/UFsxiVsYhL6",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+});

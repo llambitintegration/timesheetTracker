@@ -497,21 +497,24 @@ def get_monthly_report(
 ):
     logger.info(f"Generating monthly report for {year}-{month}, project={project_id}")
 
+    # Adjust the logic to fix week start and start date
     # Get the first and last day of the month
     _, last_day = calendar.monthrange(year, month)
-    start_date = date(year, month, 1)
-    end_date = date(year, month, last_day)
+    
+    # Determine the correct week start and end based on the given year and month
+    week_start = datetime(year, month, 1).date()  # Assuming week starts from the 1st of the month
+    week_end = datetime(year, month, last_day).date()  # Assuming week ends on the last day of the month
 
     query = db.query(
         Project.project_id,
         Project.customer,
-        db.func.sum(TimeEntry.hours).label('total_hours')
+        func.sum(TimeEntry.hours).label('total_hours')
     ).join(
         TimeEntry,
         TimeEntry.project == Project.project_id
     ).filter(
-        TimeEntry.date >= start_date,
-        TimeEntry.date <= end_date
+        TimeEntry.date >= week_start,
+        TimeEntry.date <= week_end
     ).group_by(
         Project.project_id,
         Project.customer
