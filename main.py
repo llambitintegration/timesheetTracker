@@ -8,8 +8,6 @@ from datetime import datetime, timedelta, date
 import calendar
 from dotenv import load_dotenv
 import uvicorn
-from alembic import context
-from alembic.migration import MigrationContext
 
 from database import schemas, crud, get_db, verify_database, engine
 from utils.logger import Logger
@@ -25,21 +23,10 @@ from utils.middleware import log_middleware
 logger = Logger().get_logger()
 app = FastAPI(title="Timesheet Management API")
 
-# Configure CORS with development-friendly settings and detailed logging
-origins = [
-    "https://*.lite.vusercontent.net",     # Allow all Replit vusercontent domains
-    "https://*.repl.co",                  # Allow all repl.co subdomains
-    "http://localhost:3000",              # Local development
-    "http://localhost:8080",              # Local development alternative port
-    "https://*.replit.app",               # Replit app domains
-    "https://*.replit.dev",               # Replit development domains
-    "*"                                   # Allow all origins during development
-]
-
-# Add CORS middleware with explicit OPTIONS handling
+# CORS middleware must be added before other middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["https://kzml3cjwnshszfymqji0.lite.vusercontent.net"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -63,7 +50,7 @@ async def startup_event():
         if not verify_database():
             logger.warning("Database verification failed - schema may need initialization")
         logger.info("CORS configuration:")
-        logger.info(f"Allowed origins: {origins}")
+        logger.info(f"Allowed origins: ['https://kzml3cjwnshszfymqji0.lite.vusercontent.net']")
         logger.info(f"Allowed methods: {['*']}")
         logger.info(f"Allowed headers: {['*']}")
     except Exception as e:
