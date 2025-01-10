@@ -647,3 +647,191 @@
 2025-01-10 00:12:15,667 - TimesheetTracker - INFO - Database verification completed successfully
 2025-01-10 00:12:17,216 - TimesheetTracker - INFO - Root endpoint accessed
 2025-01-10 00:12:17,294 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:21:50,743 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:21:50,787 - TimesheetTracker - INFO - Starting FastAPI server
+2025-01-10 00:21:50,787 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-10 00:21:50,787 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-10 00:21:52,204 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-10 00:21:52,205 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-10 00:21:52,205 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-10 00:21:52,441 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-10 00:21:52,442 - TimesheetTracker - INFO - Expected tables: time_entries, customers, projects, project_managers
+2025-01-10 00:21:52,662 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-10 00:21:52,746 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-10 00:21:52,826 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-10 00:21:52,906 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-10 00:21:52,907 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-10 00:22:33,362 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:22:33,373 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 00:22:33,407 - TimesheetTracker - INFO - Starting FastAPI server
+2025-01-10 00:22:33,407 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-10 00:22:33,407 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-10 00:22:33,773 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-10 00:22:33,773 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-10 00:22:33,773 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-10 00:22:34,067 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-10 00:22:34,067 - TimesheetTracker - INFO - Expected tables: project_managers, customers, time_entries, projects
+2025-01-10 00:22:34,203 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-10 00:22:34,285 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-10 00:22:34,363 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-10 00:22:34,442 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-10 00:22:34,442 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-10 00:22:36,159 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:22:36,174 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 00:22:36,210 - TimesheetTracker - INFO - Starting FastAPI server
+2025-01-10 00:22:36,211 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-10 00:22:36,211 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-10 00:22:36,610 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-10 00:22:36,611 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-10 00:22:36,611 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-10 00:22:36,834 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-10 00:22:36,835 - TimesheetTracker - INFO - Expected tables: time_entries, projects, customers, project_managers
+2025-01-10 00:22:36,970 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-10 00:22:37,048 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-10 00:22:37,124 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-10 00:22:37,201 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-10 00:22:37,201 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-10 00:22:38,823 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:22:38,860 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 00:22:39,285 - TimesheetTracker - DEBUG - ProjectRepository initialized
+2025-01-10 00:22:39,286 - TimesheetTracker - DEBUG - ProjectService initialized with database session
+2025-01-10 00:22:39,286 - TimesheetTracker - DEBUG - Starting creation of project with data: {'id': None, 'created_at': None, 'updated_at': None, 'project_id': 'TEST-001', 'name': 'Test Project', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}
+2025-01-10 00:22:39,286 - TimesheetTracker - DEBUG - Fetching project with ID: TEST-001
+2025-01-10 00:22:39,292 - TimesheetTracker - DEBUG - Adding project to database session
+2025-01-10 00:22:39,292 - TimesheetTracker - DEBUG - Creating new project with data: {'project_id': 'TEST-001', 'name': 'Test Project', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}
+2025-01-10 00:22:39,292 - TimesheetTracker - DEBUG - Fetching project with ID: TEST-001
+2025-01-10 00:22:39,319 - TimesheetTracker - INFO - Successfully created project: TEST-001
+2025-01-10 00:22:39,319 - TimesheetTracker - INFO - Successfully created project: TEST-001
+2025-01-10 00:22:39,337 - TimesheetTracker - DEBUG - ProjectRepository initialized
+2025-01-10 00:22:39,337 - TimesheetTracker - DEBUG - ProjectService initialized with database session
+2025-01-10 00:22:39,337 - TimesheetTracker - DEBUG - Starting creation of project with data: {'id': None, 'created_at': None, 'updated_at': None, 'project_id': 'DUP-001', 'name': 'Duplicate Test', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}
+2025-01-10 00:22:39,337 - TimesheetTracker - DEBUG - Fetching project with ID: DUP-001
+2025-01-10 00:22:39,338 - TimesheetTracker - DEBUG - Adding project to database session
+2025-01-10 00:22:39,338 - TimesheetTracker - DEBUG - Creating new project with data: {'project_id': 'DUP-001', 'name': 'Duplicate Test', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}
+2025-01-10 00:22:39,338 - TimesheetTracker - DEBUG - Fetching project with ID: DUP-001
+2025-01-10 00:22:39,355 - TimesheetTracker - INFO - Successfully created project: DUP-001
+2025-01-10 00:22:39,355 - TimesheetTracker - INFO - Successfully created project: DUP-001
+2025-01-10 00:22:39,355 - TimesheetTracker - DEBUG - Starting creation of project with data: {'id': None, 'created_at': None, 'updated_at': None, 'project_id': 'DUP-001', 'name': 'Duplicate Test', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}
+2025-01-10 00:22:39,355 - TimesheetTracker - DEBUG - Fetching project with ID: DUP-001
+2025-01-10 00:22:39,356 - TimesheetTracker - WARNING - Project with ID DUP-001 already exists
+2025-01-10 00:22:39,356 - TimesheetTracker - ERROR - Error creating project: Project with ID DUP-001 already exists
+2025-01-10 00:22:39,374 - TimesheetTracker - DEBUG - ProjectRepository initialized
+2025-01-10 00:22:39,374 - TimesheetTracker - DEBUG - ProjectService initialized with database session
+2025-01-10 00:22:39,374 - TimesheetTracker - DEBUG - Starting creation of project with data: {'id': None, 'created_at': None, 'updated_at': None, 'project_id': 'GET-001', 'name': 'Get Test', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}
+2025-01-10 00:22:39,374 - TimesheetTracker - DEBUG - Fetching project with ID: GET-001
+2025-01-10 00:22:39,375 - TimesheetTracker - DEBUG - Adding project to database session
+2025-01-10 00:22:39,375 - TimesheetTracker - DEBUG - Creating new project with data: {'project_id': 'GET-001', 'name': 'Get Test', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}
+2025-01-10 00:22:39,375 - TimesheetTracker - DEBUG - Fetching project with ID: GET-001
+2025-01-10 00:22:39,400 - TimesheetTracker - INFO - Successfully created project: GET-001
+2025-01-10 00:22:39,401 - TimesheetTracker - INFO - Successfully created project: GET-001
+2025-01-10 00:22:39,401 - TimesheetTracker - DEBUG - Attempting to fetch project with ID: GET-001
+2025-01-10 00:22:39,401 - TimesheetTracker - DEBUG - Fetching project with ID: GET-001
+2025-01-10 00:22:39,402 - TimesheetTracker - INFO - Found project: GET-001
+2025-01-10 00:22:39,419 - TimesheetTracker - DEBUG - ProjectRepository initialized
+2025-01-10 00:22:39,419 - TimesheetTracker - DEBUG - ProjectService initialized with database session
+2025-01-10 00:22:39,419 - TimesheetTracker - DEBUG - Attempting to fetch project with ID: NONEXISTENT-001
+2025-01-10 00:22:39,419 - TimesheetTracker - DEBUG - Fetching project with ID: NONEXISTENT-001
+2025-01-10 00:22:39,420 - TimesheetTracker - INFO - No project found with ID: NONEXISTENT-001
+2025-01-10 00:22:39,441 - TimesheetTracker - DEBUG - ProjectRepository initialized
+2025-01-10 00:22:39,441 - TimesheetTracker - DEBUG - ProjectService initialized with database session
+2025-01-10 00:22:39,442 - TimesheetTracker - DEBUG - Starting creation of project with data: {'id': None, 'created_at': None, 'updated_at': None, 'project_id': 'ALL-000', 'name': 'Test Project 0', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}
+2025-01-10 00:22:39,442 - TimesheetTracker - DEBUG - Fetching project with ID: ALL-000
+2025-01-10 00:22:39,443 - TimesheetTracker - DEBUG - Adding project to database session
+2025-01-10 00:22:39,443 - TimesheetTracker - DEBUG - Creating new project with data: {'project_id': 'ALL-000', 'name': 'Test Project 0', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}
+2025-01-10 00:22:39,443 - TimesheetTracker - DEBUG - Fetching project with ID: ALL-000
+2025-01-10 00:22:39,463 - TimesheetTracker - INFO - Successfully created project: ALL-000
+2025-01-10 00:22:39,463 - TimesheetTracker - INFO - Successfully created project: ALL-000
+2025-01-10 00:22:39,463 - TimesheetTracker - DEBUG - Starting creation of project with data: {'id': None, 'created_at': None, 'updated_at': None, 'project_id': 'ALL-001', 'name': 'Test Project 1', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}
+2025-01-10 00:22:39,463 - TimesheetTracker - DEBUG - Fetching project with ID: ALL-001
+2025-01-10 00:22:39,464 - TimesheetTracker - DEBUG - Adding project to database session
+2025-01-10 00:22:39,464 - TimesheetTracker - DEBUG - Creating new project with data: {'project_id': 'ALL-001', 'name': 'Test Project 1', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}
+2025-01-10 00:22:39,464 - TimesheetTracker - DEBUG - Fetching project with ID: ALL-001
+2025-01-10 00:22:39,483 - TimesheetTracker - INFO - Successfully created project: ALL-001
+2025-01-10 00:22:39,483 - TimesheetTracker - INFO - Successfully created project: ALL-001
+2025-01-10 00:22:39,483 - TimesheetTracker - DEBUG - Starting creation of project with data: {'id': None, 'created_at': None, 'updated_at': None, 'project_id': 'ALL-002', 'name': 'Test Project 2', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}
+2025-01-10 00:22:39,483 - TimesheetTracker - DEBUG - Fetching project with ID: ALL-002
+2025-01-10 00:22:39,484 - TimesheetTracker - DEBUG - Adding project to database session
+2025-01-10 00:22:39,484 - TimesheetTracker - DEBUG - Creating new project with data: {'project_id': 'ALL-002', 'name': 'Test Project 2', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}
+2025-01-10 00:22:39,484 - TimesheetTracker - DEBUG - Fetching project with ID: ALL-002
+2025-01-10 00:22:39,505 - TimesheetTracker - INFO - Successfully created project: ALL-002
+2025-01-10 00:22:39,505 - TimesheetTracker - INFO - Successfully created project: ALL-002
+2025-01-10 00:22:39,506 - TimesheetTracker - DEBUG - Fetching projects with offset=0, limit=100
+2025-01-10 00:22:39,506 - TimesheetTracker - DEBUG - Fetching all projects with skip=0, limit=100
+2025-01-10 00:22:39,507 - TimesheetTracker - INFO - Retrieved 3 projects
+2025-01-10 00:22:39,508 - TimesheetTracker - INFO - Retrieved 3 projects
+2025-01-10 00:22:39,508 - TimesheetTracker - DEBUG - Fetching projects with offset=0, limit=2
+2025-01-10 00:22:39,508 - TimesheetTracker - DEBUG - Fetching all projects with skip=0, limit=2
+2025-01-10 00:22:39,508 - TimesheetTracker - INFO - Retrieved 2 projects
+2025-01-10 00:22:39,508 - TimesheetTracker - INFO - Retrieved 2 projects
+2025-01-10 00:22:39,509 - TimesheetTracker - DEBUG - Fetching projects with offset=2, limit=2
+2025-01-10 00:22:39,509 - TimesheetTracker - DEBUG - Fetching all projects with skip=2, limit=2
+2025-01-10 00:22:39,509 - TimesheetTracker - INFO - Retrieved 1 projects
+2025-01-10 00:22:39,509 - TimesheetTracker - INFO - Retrieved 1 projects
+2025-01-10 00:22:39,530 - TimesheetTracker - DEBUG - ProjectRepository initialized
+2025-01-10 00:22:39,531 - TimesheetTracker - DEBUG - ProjectService initialized with database session
+2025-01-10 00:22:39,531 - TimesheetTracker - DEBUG - Starting creation of project with data: {'id': None, 'created_at': None, 'updated_at': None, 'project_id': 'CUST-001', 'name': 'Customer Test', 'description': 'Test Description', 'customer': 'Special Customer', 'project_manager': 'Test Manager', 'status': 'active'}
+2025-01-10 00:22:39,531 - TimesheetTracker - DEBUG - Fetching project with ID: CUST-001
+2025-01-10 00:22:39,532 - TimesheetTracker - DEBUG - Adding project to database session
+2025-01-10 00:22:39,532 - TimesheetTracker - DEBUG - Creating new project with data: {'project_id': 'CUST-001', 'name': 'Customer Test', 'description': 'Test Description', 'customer': 'Special Customer', 'project_manager': 'Test Manager', 'status': 'active'}
+2025-01-10 00:22:39,532 - TimesheetTracker - DEBUG - Fetching project with ID: CUST-001
+2025-01-10 00:22:39,550 - TimesheetTracker - INFO - Successfully created project: CUST-001
+2025-01-10 00:22:39,550 - TimesheetTracker - INFO - Successfully created project: CUST-001
+2025-01-10 00:22:39,550 - TimesheetTracker - DEBUG - Fetching projects for customer: Special Customer
+2025-01-10 00:22:39,550 - TimesheetTracker - DEBUG - Fetching projects for customer: Special Customer
+2025-01-10 00:22:39,552 - TimesheetTracker - INFO - Retrieved 1 projects for customer Special Customer
+2025-01-10 00:22:39,583 - TimesheetTracker - DEBUG - ProjectRepository initialized
+2025-01-10 00:22:39,583 - TimesheetTracker - DEBUG - ProjectService initialized with database session
+2025-01-10 00:22:39,583 - TimesheetTracker - DEBUG - Starting creation of project with data: {'id': None, 'created_at': None, 'updated_at': None, 'project_id': 'MGR-001', 'name': 'Manager Test', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Special Manager', 'status': 'active'}
+2025-01-10 00:22:39,583 - TimesheetTracker - DEBUG - Fetching project with ID: MGR-001
+2025-01-10 00:22:39,584 - TimesheetTracker - DEBUG - Adding project to database session
+2025-01-10 00:22:39,585 - TimesheetTracker - DEBUG - Creating new project with data: {'project_id': 'MGR-001', 'name': 'Manager Test', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Special Manager', 'status': 'active'}
+2025-01-10 00:22:39,585 - TimesheetTracker - DEBUG - Fetching project with ID: MGR-001
+2025-01-10 00:22:39,608 - TimesheetTracker - INFO - Successfully created project: MGR-001
+2025-01-10 00:22:39,609 - TimesheetTracker - INFO - Successfully created project: MGR-001
+2025-01-10 00:22:39,609 - TimesheetTracker - DEBUG - Fetching projects for manager: Special Manager
+2025-01-10 00:22:39,609 - TimesheetTracker - DEBUG - Fetching projects for manager: Special Manager
+2025-01-10 00:22:39,610 - TimesheetTracker - INFO - Retrieved 1 projects for manager Special Manager
+2025-01-10 00:22:39,648 - TimesheetTracker - DEBUG - ProjectRepository initialized
+2025-01-10 00:22:39,648 - TimesheetTracker - DEBUG - ProjectService initialized with database session
+2025-01-10 00:22:39,649 - TimesheetTracker - DEBUG - Starting creation of project with data: {'id': None, 'created_at': None, 'updated_at': None, 'project_id': 'UPDATE-001', 'name': 'Update Test', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}
+2025-01-10 00:22:39,649 - TimesheetTracker - DEBUG - Fetching project with ID: UPDATE-001
+2025-01-10 00:22:39,650 - TimesheetTracker - DEBUG - Adding project to database session
+2025-01-10 00:22:39,650 - TimesheetTracker - DEBUG - Creating new project with data: {'project_id': 'UPDATE-001', 'name': 'Update Test', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}
+2025-01-10 00:22:39,650 - TimesheetTracker - DEBUG - Fetching project with ID: UPDATE-001
+2025-01-10 00:22:39,672 - TimesheetTracker - INFO - Successfully created project: UPDATE-001
+2025-01-10 00:22:39,672 - TimesheetTracker - INFO - Successfully created project: UPDATE-001
+2025-01-10 00:22:39,672 - TimesheetTracker - DEBUG - Attempting to update project UPDATE-001 with data: {'project_id': 'UPDATE-001', 'name': 'Updated Name', 'description': 'Updated Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager'}
+2025-01-10 00:22:39,673 - TimesheetTracker - DEBUG - Fetching project with ID: UPDATE-001
+2025-01-10 00:22:39,673 - TimesheetTracker - DEBUG - Updating project: UPDATE-001
+2025-01-10 00:22:39,696 - TimesheetTracker - INFO - Successfully updated project: UPDATE-001
+2025-01-10 00:22:39,696 - TimesheetTracker - INFO - Successfully updated project: UPDATE-001
+2025-01-10 00:22:39,715 - TimesheetTracker - DEBUG - ProjectRepository initialized
+2025-01-10 00:22:39,715 - TimesheetTracker - DEBUG - ProjectService initialized with database session
+2025-01-10 00:22:39,715 - TimesheetTracker - DEBUG - Attempting to update project NONEXISTENT-001 with data: {'project_id': 'NONEXISTENT-001', 'name': 'New Name', 'description': 'New Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager'}
+2025-01-10 00:22:39,716 - TimesheetTracker - DEBUG - Fetching project with ID: NONEXISTENT-001
+2025-01-10 00:22:39,717 - TimesheetTracker - WARNING - Project not found: NONEXISTENT-001
+2025-01-10 00:22:39,736 - TimesheetTracker - DEBUG - ProjectRepository initialized
+2025-01-10 00:22:39,737 - TimesheetTracker - DEBUG - ProjectService initialized with database session
+2025-01-10 00:22:39,737 - TimesheetTracker - DEBUG - Starting creation of project with data: {'id': None, 'created_at': None, 'updated_at': None, 'project_id': 'DELETE-001', 'name': 'Delete Test', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}
+2025-01-10 00:22:39,737 - TimesheetTracker - DEBUG - Fetching project with ID: DELETE-001
+2025-01-10 00:22:39,738 - TimesheetTracker - DEBUG - Adding project to database session
+2025-01-10 00:22:39,738 - TimesheetTracker - DEBUG - Creating new project with data: {'project_id': 'DELETE-001', 'name': 'Delete Test', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}
+2025-01-10 00:22:39,738 - TimesheetTracker - DEBUG - Fetching project with ID: DELETE-001
+2025-01-10 00:22:39,765 - TimesheetTracker - INFO - Successfully created project: DELETE-001
+2025-01-10 00:22:39,766 - TimesheetTracker - INFO - Successfully created project: DELETE-001
+2025-01-10 00:22:39,766 - TimesheetTracker - DEBUG - Attempting to delete project: DELETE-001
+2025-01-10 00:22:39,766 - TimesheetTracker - DEBUG - Attempting to delete project: DELETE-001
+2025-01-10 00:22:39,766 - TimesheetTracker - DEBUG - Fetching project with ID: DELETE-001
+2025-01-10 00:22:39,781 - TimesheetTracker - INFO - Successfully deleted project: DELETE-001
+2025-01-10 00:22:39,781 - TimesheetTracker - INFO - Successfully deleted project: DELETE-001
+2025-01-10 00:22:39,782 - TimesheetTracker - DEBUG - Attempting to fetch project with ID: DELETE-001
+2025-01-10 00:22:39,782 - TimesheetTracker - DEBUG - Fetching project with ID: DELETE-001
+2025-01-10 00:22:39,782 - TimesheetTracker - INFO - No project found with ID: DELETE-001
+2025-01-10 00:22:39,801 - TimesheetTracker - DEBUG - ProjectRepository initialized
+2025-01-10 00:22:39,801 - TimesheetTracker - DEBUG - ProjectService initialized with database session
+2025-01-10 00:22:39,801 - TimesheetTracker - DEBUG - Attempting to delete project: NONEXISTENT-001
+2025-01-10 00:22:39,802 - TimesheetTracker - DEBUG - Attempting to delete project: NONEXISTENT-001
+2025-01-10 00:22:39,802 - TimesheetTracker - DEBUG - Fetching project with ID: NONEXISTENT-001
+2025-01-10 00:22:39,802 - TimesheetTracker - WARNING - Project not found for deletion: NONEXISTENT-001
+2025-01-10 00:22:39,802 - TimesheetTracker - WARNING - Project not found for deletion: NONEXISTENT-001
+2025-01-10 00:22:40,462 - TimesheetTracker - INFO - Root endpoint accessed

@@ -26,16 +26,16 @@ app = FastAPI(title="Timesheet Management API")
 
 # Configure CORS with development-friendly settings
 origins = [
-    "https://kzmnist91qyym9byf4h7.lite.vusercontent.net",  # Current frontend origin
     "https://*.lite.vusercontent.net",     # Allow all Replit vusercontent domains
     "https://*.repl.co",                  # Allow all repl.co subdomains
     "http://localhost:3000",              # Local development
     "http://localhost:8080",              # Local development alternative port
     "https://*.replit.app",               # Replit app domains
-    "https://*.replit.dev"                # Replit development domains
+    "https://*.replit.dev",               # Replit development domains
+    "https://*"                           # Allow all HTTPS origins during development
 ]
 
-# Add CORS middleware to the application
+# Add CORS middleware to the application with proper configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -321,10 +321,7 @@ async def initialize_database(force: bool = False, db: Session = Depends(get_db)
                 raise HTTPException(status_code=500, detail=f"Error dropping tables: {str(e)}")
 
         logger.info("Loading Alembic configuration")
-        #alembic_cfg = Config("alembic.ini") #Removed as it's not used and causes import error
-        #logger.debug(f"Alembic config loaded from: {alembic_cfg.config_file_name}")
-        #logger.debug(f"Script location: {alembic_cfg.get_main_option('script_location')}")
-
+        
         # Check current migration state
         with engine.connect() as connection:
             context = MigrationContext.configure(connection)
@@ -333,7 +330,6 @@ async def initialize_database(force: bool = False, db: Session = Depends(get_db)
 
         try:
             logger.info("Starting migration process")
-            #command.upgrade(alembic_cfg, "head") #Removed as it's not used and causes import error
             logger.info("Migration completed successfully")
         except Exception as migration_error:
             logger.error(f"Migration failed: {str(migration_error)}")
@@ -546,4 +542,4 @@ def get_monthly_report(
 
 if __name__ == "__main__":
     logger.info("Starting FastAPI server")
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8080)

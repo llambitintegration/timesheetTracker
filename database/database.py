@@ -22,14 +22,25 @@ logger.info(f"Attempting to connect to database at: {DATABASE_URL.split('@')[1]}
 if DATABASE_URL.startswith('postgresql://'):
     DATABASE_URL = DATABASE_URL.replace('postgresql://', 'postgresql+psycopg2://')
 
-# Create engine with proper configuration
-engine = create_engine(
-    DATABASE_URL,
-    pool_pre_ping=True,
-    pool_size=5,
-    max_overflow=10,
-    pool_timeout=30
-)
+try:
+    # Create engine with proper configuration and connection pooling
+    engine = create_engine(
+        DATABASE_URL,
+        pool_pre_ping=True,
+        pool_size=5,
+        max_overflow=10,
+        pool_timeout=30,
+        connect_args={
+            "keepalives": 1,
+            "keepalives_idle": 30,
+            "keepalives_interval": 10,
+            "keepalives_count": 5
+        }
+    )
+    logger.info("Database engine created successfully")
+except Exception as e:
+    logger.error(f"Failed to create database engine: {str(e)}")
+    raise
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
@@ -78,10 +89,10 @@ def init_database():
         logger.info("Initializing database tables")
         # Import all models to ensure they're registered with metadata
         from models import Customer, ProjectManager, Project, TimeEntry
-        
+
         inspector = inspect(engine)
         existing_tables = inspector.get_table_names()
-        
+
         if not existing_tables:
             # Create all tables only if none exist
             Base.metadata.create_all(bind=engine)
@@ -100,6 +111,10 @@ def get_db():
     logger.debug("Database session created")
     try:
         yield db
+    except Exception as e:
+        logger.error(f"Database session error: {str(e)}")
+        logger.exception("Database session error details:")
+        raise
     finally:
         db.close()
         logger.debug("Database session closed")
