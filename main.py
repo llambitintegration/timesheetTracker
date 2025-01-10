@@ -23,21 +23,42 @@ from utils.middleware import log_middleware
 logger = Logger().get_logger()
 app = FastAPI(title="Timesheet Management API")
 
-# CORS middleware must be added before other middleware
+# CORS configuration
+origins = ["https://kzml3cjwnshszfymqji0.lite.vusercontent.net"]
+
+# Ensure CORS middleware is the first middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://kzml3cjwnshszfymqji0.lite.vusercontent.net"],
+    allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allow_headers=["*"],
     expose_headers=["*"],
     max_age=3600,
 )
 
-# Add request logging middleware
+# Add request logging middleware after CORS
 @app.middleware("http")
 async def log_requests(request: Request, call_next):
-    return await log_middleware(request, call_next)
+    # Log the incoming request details
+    logger.info(f"Incoming request: {request.method} {request.url}")
+    logger.info(f"Request headers: {dict(request.headers)}")
+
+    # Special handling for preflight requests
+    if request.method == "OPTIONS":
+        logger.info("Processing preflight request")
+        headers = {
+            "Access-Control-Allow-Origin": origins[0],
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Max-Age": "3600",
+        }
+        return JSONResponse(content={}, headers=headers)
+
+    response = await log_middleware(request, call_next)
+    logger.info(f"Response headers: {dict(response.headers)}")
+    return response
 
 load_dotenv()
 
@@ -50,8 +71,8 @@ async def startup_event():
         if not verify_database():
             logger.warning("Database verification failed - schema may need initialization")
         logger.info("CORS configuration:")
-        logger.info(f"Allowed origins: ['https://kzml3cjwnshszfymqji0.lite.vusercontent.net']")
-        logger.info(f"Allowed methods: {['*']}")
+        logger.info(f"Allowed origins: {origins}")
+        logger.info(f"Allowed methods: {['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH']}")
         logger.info(f"Allowed headers: {['*']}")
     except Exception as e:
         logger.error(f"Error verifying database: {str(e)}")
@@ -536,7 +557,6 @@ def get_monthly_report(
         month=month,
         year=year
     )
-
 
 
 if __name__ == "__main__":
