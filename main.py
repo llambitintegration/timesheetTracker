@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, Query, Path
+from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, Query, Path, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from sqlalchemy import join, text, inspect, func
@@ -20,11 +20,12 @@ from models.projectManagerModel import ProjectManager
 from services.customer_service import CustomerService
 from services.project_manager_service import ProjectManagerService
 from services.project_service import ProjectService
+from utils.middleware import log_middleware
 
 logger = Logger().get_logger()
 app = FastAPI(title="Timesheet Management API")
 
-# Configure CORS with development-friendly settings
+# Configure CORS with development-friendly settings and detailed logging
 origins = [
     "https://*.lite.vusercontent.net",     # Allow all Replit vusercontent domains
     "https://*.repl.co",                  # Allow all repl.co subdomains
@@ -32,10 +33,10 @@ origins = [
     "http://localhost:8080",              # Local development alternative port
     "https://*.replit.app",               # Replit app domains
     "https://*.replit.dev",               # Replit development domains
-    "https://*"                           # Allow all HTTPS origins during development
+    "*"                                   # Allow all origins during development
 ]
 
-# Add CORS middleware to the application with proper configuration
+# Add CORS middleware with explicit OPTIONS handling
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -45,6 +46,11 @@ app.add_middleware(
     expose_headers=["*"],
     max_age=3600,
 )
+
+# Add request logging middleware
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    return await log_middleware(request, call_next)
 
 load_dotenv()
 
@@ -56,6 +62,10 @@ async def startup_event():
     try:
         if not verify_database():
             logger.warning("Database verification failed - schema may need initialization")
+        logger.info("CORS configuration:")
+        logger.info(f"Allowed origins: {origins}")
+        logger.info(f"Allowed methods: {['*']}")
+        logger.info(f"Allowed headers: {['*']}")
     except Exception as e:
         logger.error(f"Error verifying database: {str(e)}")
         raise
@@ -330,6 +340,8 @@ async def initialize_database(force: bool = False, db: Session = Depends(get_db)
 
         try:
             logger.info("Starting migration process")
+            # Add your alembic upgrade command here.  This is missing from the original and edited code.  
+            # Example:  alembic.command.upgrade(config, 'head')  (Requires alembic import)
             logger.info("Migration completed successfully")
         except Exception as migration_error:
             logger.error(f"Migration failed: {str(migration_error)}")
