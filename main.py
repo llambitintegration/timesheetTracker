@@ -1,38 +1,39 @@
-from datetime import date, datetime, timedelta
-from typing import List, Optional
-
-import calendar
-import uvicorn
-from fastapi import Depends, FastAPI, File, HTTPException, Path, Query, UploadFile
+from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, Query, Path
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from sqlalchemy import inspect, join, text
+from sqlalchemy import join, text, inspect
 from sqlalchemy.orm import Session
+from typing import List, Optional
+from datetime import datetime, timedelta, date
+import calendar
+from dotenv import load_dotenv
+import uvicorn
 
-from database import crud, get_db, schemas, verify_database, engine
-from models.projectManagerModel import ProjectManager
-from models.projectModel import Project
+from database import schemas, crud, get_db, verify_database, engine
+from utils.logger import Logger
+from utils import utils
 from models.timeEntry import TimeEntry
+from models.projectModel import Project
+from models.projectManagerModel import ProjectManager
 from services.customer_service import CustomerService
 from services.project_manager_service import ProjectManagerService
 from services.project_service import ProjectService
-from utils.logger import Logger
-from utils import utils
 
 logger = Logger().get_logger()
 app = FastAPI(title="Timesheet Management API")
 
 # Configure CORS with development-friendly settings
 origins = [
-    "https://kzmnist91qyym9byf4h7.lite.vusercontent.net",
-    "https://*.lite.vusercontent.net",
-    "https://*.repl.co",
-    "http://localhost:3000",
-    "http://localhost:8080",
-    "https://*.replit.app",
-    "https://*.replit.dev"
+    "https://kzmnist91qyym9byf4h7.lite.vusercontent.net",  # Current frontend origin
+    "https://*.lite.vusercontent.net",     # Allow all Replit vusercontent domains
+    "https://*.repl.co",                  # Allow all repl.co subdomains
+    "http://localhost:3000",              # Local development
+    "http://localhost:8080",              # Local development alternative port
+    "https://*.replit.app",               # Replit app domains
+    "https://*.replit.dev"                # Replit development domains
 ]
 
+# Add CORS middleware to the application
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -43,9 +44,11 @@ app.add_middleware(
     max_age=3600,
 )
 
+load_dotenv()
+
 @app.on_event("startup")
-async def startup_event() -> None:
-    """Verify database connection on startup."""
+async def startup_event():
+    """Verify database connection on startup"""
     logger.info("Starting FastAPI server")
     logger.info("Verifying database connection on startup")
     try:
@@ -56,8 +59,8 @@ async def startup_event() -> None:
         raise
 
 @app.get("/")
-def read_root() -> dict:
-    """Root endpoint for API health check."""
+def read_root():
+    """Root endpoint for API health check"""
     logger.info("Root endpoint accessed")
     return {
         "status": "healthy",
@@ -70,7 +73,7 @@ def read_root() -> dict:
 async def upload_timesheet_entries(
     entries: List[schemas.TimeEntryCreate],
     db: Session = Depends(get_db)
-) -> List[schemas.TimeEntry]:
+):
     """Upload multiple time entries directly."""
     logger.info(f"Processing {len(entries)} time entries")
     return crud.create_time_entries(db, entries)
@@ -79,7 +82,7 @@ async def upload_timesheet_entries(
 async def upload_timesheet(
     file: UploadFile = File(...),
     db: Session = Depends(get_db)
-) -> List[schemas.TimeEntry]:
+):
     """Upload and process timesheet file"""
     logger.info(f"Processing timesheet upload: {file.filename}")
     try:
@@ -102,7 +105,7 @@ async def upload_timesheet(
         raise HTTPException(status_code=400, detail=str(e))
 
 @app.post("/customers/", response_model=schemas.Customer)
-def create_customer(customer: schemas.CustomerCreate, db: Session = Depends(get_db)) -> schemas.Customer:
+def create_customer(customer: schemas.CustomerCreate, db: Session = Depends(get_db)):
     """Create a new customer using CustomerService"""
     try:
         logger.info(f"Creating new customer: {customer.name}")
@@ -116,14 +119,14 @@ def create_customer(customer: schemas.CustomerCreate, db: Session = Depends(get_
         raise HTTPException(status_code=500, detail="Internal server error")
 
 @app.get("/customers/", response_model=List[schemas.Customer])
-def read_customers(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)) -> List[schemas.Customer]:
+def read_customers(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     """Get all customers using CustomerService"""
     logger.info(f"Fetching customers with skip={skip}, limit={limit}")
     service = CustomerService(db)
     return service.get_all_customers(skip=skip, limit=limit)
 
 @app.get("/customers/{name}", response_model=schemas.Customer)
-def read_customer(name: str, db: Session = Depends(get_db)) -> schemas.Customer:
+def read_customer(name: str, db: Session = Depends(get_db)):
     """Get a specific customer by name using CustomerService"""
     logger.info(f"Fetching customer: {name}")
     service = CustomerService(db)
@@ -134,7 +137,7 @@ def read_customer(name: str, db: Session = Depends(get_db)) -> schemas.Customer:
     return customer
 
 @app.patch("/customers/{name}", response_model=schemas.Customer)
-def update_customer(name: str, customer_update: schemas.CustomerUpdate, db: Session = Depends(get_db)) -> schemas.Customer:
+def update_customer(name: str, customer_update: schemas.CustomerUpdate, db: Session = Depends(get_db)):
     """Update a customer using CustomerService"""
     try:
         logger.info(f"Updating customer: {name}")
@@ -153,7 +156,7 @@ def update_customer(name: str, customer_update: schemas.CustomerUpdate, db: Sess
 def create_project_manager(
     project_manager: schemas.ProjectManagerCreate,
     db: Session = Depends(get_db)
-) -> schemas.ProjectManager:
+):
     """Create a new project manager"""
     try:
         logger.info(f"Creating new project manager: {project_manager.name}")
@@ -167,14 +170,14 @@ def create_project_manager(
         raise HTTPException(status_code=500, detail="Internal server error")
 
 @app.get("/project-managers/", response_model=List[schemas.ProjectManager])
-def read_project_managers(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)) -> List[schemas.ProjectManager]:
+def read_project_managers(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     """Get all project managers with pagination"""
     logger.info(f"Fetching project managers with skip={skip}, limit={limit}")
     service = ProjectManagerService(db)
     return service.get_all_project_managers(skip=skip, limit=limit)
 
 @app.get("/project-managers/{email}", response_model=schemas.ProjectManager)
-def read_project_manager(email: str, db: Session = Depends(get_db)) -> schemas.ProjectManager:
+def read_project_manager(email: str, db: Session = Depends(get_db)):
     """Get a project manager by email"""
     logger.info(f"Fetching project manager with email: {email}")
     service = ProjectManagerService(db)
@@ -189,7 +192,7 @@ def update_project_manager(
     email: str,
     project_manager_update: schemas.ProjectManagerUpdate,
     db: Session = Depends(get_db)
-) -> schemas.ProjectManager:
+):
     """Update a project manager"""
     try:
         logger.info(f"Updating project manager: {email}")
@@ -205,7 +208,7 @@ def update_project_manager(
 
 # Project endpoints using ProjectService
 @app.post("/projects/", response_model=schemas.Project)
-def create_project(project: schemas.ProjectCreate, db: Session = Depends(get_db)) -> schemas.Project:
+def create_project(project: schemas.ProjectCreate, db: Session = Depends(get_db)):
     """Create a new project"""
     try:
         logger.info(f"Creating new project: {project.project_id}")
@@ -225,7 +228,7 @@ def read_projects(
     skip: int = 0,
     limit: int = 100,
     db: Session = Depends(get_db)
-) -> List[schemas.Project]:
+):
     """Get all projects with optional filtering"""
     logger.info(
         f"Fetching projects with customer={customer_name}, "
@@ -239,7 +242,7 @@ def read_projects(
     return service.get_all_projects(skip=skip, limit=limit)
 
 @app.get("/projects/{project_id}", response_model=schemas.Project)
-def read_project(project_id: str, db: Session = Depends(get_db)) -> schemas.Project:
+def read_project(project_id: str, db: Session = Depends(get_db)):
     """Get a project by ID"""
     logger.info(f"Fetching project: {project_id}")
     service = ProjectService(db)
@@ -254,7 +257,7 @@ def update_project(
     project_id: str,
     project_update: schemas.ProjectBase,
     db: Session = Depends(get_db)
-) -> schemas.Project:
+):
     """Update a project"""
     try:
         logger.info(f"Updating project: {project_id}")
@@ -269,7 +272,7 @@ def update_project(
         raise HTTPException(status_code=500, detail="Internal server error")
 
 @app.delete("/projects/{project_id}")
-def delete_project(project_id: str, db: Session = Depends(get_db)) -> dict:
+def delete_project(project_id: str, db: Session = Depends(get_db)):
     """Delete a project"""
     try:
         logger.info(f"Deleting project: {project_id}")
@@ -284,7 +287,7 @@ def delete_project(project_id: str, db: Session = Depends(get_db)) -> dict:
 
 @app.post("/init-db/")
 @app.get("/init-db/")
-async def initialize_database(force: bool = False, db: Session = Depends(get_db)) -> dict:
+async def initialize_database(force: bool = False, db: Session = Depends(get_db)):
     """Initialize database and run migrations"""
     logger.info("Starting database initialization process")
     try:
@@ -374,7 +377,7 @@ async def initialize_database(force: bool = False, db: Session = Depends(get_db)
         raise HTTPException(status_code=500, detail=error_msg)
 
 @app.post("/time-entries/", response_model=schemas.TimeEntry)
-def create_time_entry(entry: schemas.TimeEntryCreate, db: Session = Depends(get_db)) -> schemas.TimeEntry:
+def create_time_entry(entry: schemas.TimeEntryCreate, db: Session = Depends(get_db)):
     logger.info("Creating new time entry")
     return crud.create_time_entry(db, entry)
 
@@ -385,7 +388,7 @@ def get_time_summaries(
     project_id: Optional[str] = None,
     customer_name: Optional[str] = None,
     db: Session = Depends(get_db)
-) -> schemas.TimeSummary:
+):
     """Get time entries summary within a date range."""
     logger.info(f"Fetching time summaries from {start_date} to {end_date}")
     return crud.get_time_summaries(db, start_date, end_date, project_id, customer_name)
@@ -396,7 +399,7 @@ def get_time_entries_by_month(
     year: int = Query(..., description="Year (e.g., 2025)"),
     project_id: Optional[str] = None,
     db: Session = Depends(get_db)
-) -> schemas.TimeSummary:
+):
     """Get time entries for a specific month."""
     logger.info(f"Fetching time entries for {month} {year}")
     return crud.get_time_entries_by_month(db, month, year, project_id)
@@ -407,7 +410,7 @@ def get_time_entries_by_week(
     year: int = Query(..., description="Year (e.g., 2025)"),
     project_id: Optional[str] = None,
     db: Session = Depends(get_db)
-) -> schemas.TimeSummary:
+):
     """Get time entries for a specific week number."""
     logger.info(f"Fetching time entries for week {week_number} of {year}")
     return crud.get_time_entries_by_week(db, week_number, year, project_id)
@@ -416,7 +419,7 @@ def get_time_entries_by_week(
 def get_time_entries_by_date(
     date: date,
     db: Session = Depends(get_db)
-) -> List[schemas.TimeEntry]:
+):
     """
     Get all time entries for a specific date.
     Date format: YYYY-MM-DD
@@ -438,7 +441,7 @@ def get_weekly_report(
     date: datetime = Query(default=None),
     project_id: Optional[str] = None,
     db: Session = Depends(get_db)
-) -> schemas.WeeklyReport:
+):
     logger.info(f"Generating weekly report for date={date}, project={project_id}")
     if date is None:
         date = datetime.now()
@@ -489,7 +492,7 @@ def get_monthly_report(
     month: int = Query(...),
     project_id: Optional[str] = None,
     db: Session = Depends(get_db)
-) -> schemas.MonthlyReport:
+):
     logger.info(f"Generating monthly report for {year}-{month}, project={project_id}")
 
     # Get the first and last day of the month
@@ -533,6 +536,8 @@ def get_monthly_report(
         month=month,
         year=year
     )
+
+
 
 if __name__ == "__main__":
     logger.info("Starting FastAPI server")
