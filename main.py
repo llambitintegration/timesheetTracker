@@ -24,7 +24,7 @@ from services.project_service import ProjectService
 logger = Logger().get_logger()
 app = FastAPI(title="Timesheet Management API")
 
-# CORS configuration for development (allowing all origins)
+# CORS configuration for development
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # Allow all origins in development
@@ -35,10 +35,10 @@ app.add_middleware(
     max_age=3600
 )
 
-# Custom middleware for logging
+# Custom middleware for logging and error handling
 @app.middleware("http")
 async def custom_middleware(request: Request, call_next):
-    """Custom middleware to handle preflight requests and logging"""
+    """Custom middleware to handle preflight requests, logging and error handling"""
     # Special handling for preflight requests
     if request.method == "OPTIONS":
         headers = {
@@ -49,8 +49,53 @@ async def custom_middleware(request: Request, call_next):
         }
         return JSONResponse(content={}, headers=headers)
 
-    # For non-preflight requests, use the logging middleware
-    return await logging_middleware(request, call_next)
+    try:
+        # For non-preflight requests, use the logging middleware
+        response = await logging_middleware(request, call_next)
+        return response
+    except Exception as e:
+        logger.error(f"Error processing request: {str(e)}")
+        # Return error as JSON with proper CORS headers
+        headers = {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH",
+            "Access-Control-Allow-Headers": "*",
+        }
+        return JSONResponse(
+            status_code=500,
+            content={"detail": str(e)},
+            headers=headers
+        )
+
+# Project endpoints using ProjectService
+@app.get("/projects/", response_model=List[schemas.Project])
+def read_projects(
+    customer_name: Optional[str] = None,
+    project_manager_name: Optional[str] = None,
+    skip: int = 0,
+    limit: int = 100,
+    db: Session = Depends(get_db)
+):
+    """Get all projects with optional filtering"""
+    try:
+        logger.info(
+            f"Fetching projects with customer={customer_name}, "
+            f"manager={project_manager_name}, skip={skip}, limit={limit}"
+        )
+        service = ProjectService(db)
+        if customer_name:
+            projects = service.get_projects_by_customer(customer_name)
+        elif project_manager_name:
+            projects = service.get_projects_by_manager(project_manager_name)
+        else:
+            projects = service.get_all_projects(skip=skip, limit=limit)
+
+        # Ensure proper serialization
+        return [project.__dict__ for project in projects]
+    except Exception as e:
+        logger.error(f"Error fetching projects: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 @app.on_event("startup")
 async def startup_event():
@@ -245,16 +290,24 @@ def read_projects(
     db: Session = Depends(get_db)
 ):
     """Get all projects with optional filtering"""
-    logger.info(
-        f"Fetching projects with customer={customer_name}, "
-        f"manager={project_manager_name}, skip={skip}, limit={limit}"
-    )
-    service = ProjectService(db)
-    if customer_name:
-        return service.get_projects_by_customer(customer_name)
-    elif project_manager_name:
-        return service.get_projects_by_manager(project_manager_name)
-    return service.get_all_projects(skip=skip, limit=limit)
+    try:
+        logger.info(
+            f"Fetching projects with customer={customer_name}, "
+            f"manager={project_manager_name}, skip={skip}, limit={limit}"
+        )
+        service = ProjectService(db)
+        if customer_name:
+            projects = service.get_projects_by_customer(customer_name)
+        elif project_manager_name:
+            projects = service.get_projects_by_manager(project_manager_name)
+        else:
+            projects = service.get_all_projects(skip=skip, limit=limit)
+
+        # Ensure proper serialization
+        return [project.__dict__ for project in projects]
+    except Exception as e:
+        logger.error(f"Error fetching projects: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/projects/{project_id}", response_model=schemas.Project)
 def read_project(project_id: str, db: Session = Depends(get_db)):

@@ -4060,3 +4060,1063 @@
 2025-01-10 01:02:33,534 - TimesheetTracker - INFO - Response Headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-expose-headers': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
 2025-01-10 01:02:33,534 - TimesheetTracker - INFO - Processing Time: 6.95ms
 2025-01-10 01:02:33,534 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-expose-headers': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:08:22,918 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:08:22,922 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:08:22,922 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/docs
+2025-01-10 01:08:22,922 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:08:22,922 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2Fdocs&id=%3Ar7mh%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.4.115', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 01:08:22,923 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:08:22,923 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 01:08:22,923 - TimesheetTracker - INFO - Response Headers: {'content-length': '948', 'content-type': 'text/html; charset=utf-8', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:08:22,923 - TimesheetTracker - INFO - Processing Time: 4.68ms
+2025-01-10 01:08:22,923 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:08:24,519 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:08:24,520 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:08:24,520 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/openapi.json
+2025-01-10 01:08:24,520 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:08:24,520 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'application/json,*/*', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/docs', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'empty', 'sec-fetch-mode': 'cors', 'sec-fetch-site': 'same-origin', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.4.115', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 01:08:24,557 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:08:24,557 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 01:08:24,557 - TimesheetTracker - INFO - Response Headers: {'content-length': '26833', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:08:24,557 - TimesheetTracker - INFO - Processing Time: 37.42ms
+2025-01-10 01:08:24,557 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:08:29,304 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:08:29,304 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:08:29,305 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/openapi.json
+2025-01-10 01:08:29,305 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:08:29,305 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'document', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'sec-fetch-user': '?1', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.4.115', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 01:08:29,306 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:08:29,306 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 01:08:29,306 - TimesheetTracker - INFO - Response Headers: {'content-length': '26833', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:08:29,306 - TimesheetTracker - INFO - Processing Time: 1.77ms
+2025-01-10 01:08:29,306 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:12:33,727 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:12:33,728 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:12:33,728 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/openapi.json
+2025-01-10 01:12:33,728 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:12:33,728 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'document', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'sec-fetch-user': '?1', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.3.67', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 01:12:33,729 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:12:33,729 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 01:12:33,730 - TimesheetTracker - INFO - Response Headers: {'content-length': '26833', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:12:33,730 - TimesheetTracker - INFO - Processing Time: 1.95ms
+2025-01-10 01:12:33,730 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:14:36,970 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:14:36,970 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:14:36,970 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/
+2025-01-10 01:14:36,970 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:14:36,971 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'node', 'accept': '*/*', 'accept-encoding': 'identity', 'accept-language': '*', 'cache-control': 'no-cache', 'pragma': 'no-cache', 'sec-fetch-mode': 'cors', 'x-forwarded-for': '165.225.36.200, 18.234.119.74, 10.83.1.47', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': '', 'x-v0-dev': 'true', 'x-vercel-id': 'cle1::xvnkh-1736471676658-7a34598b6a5f'}
+2025-01-10 01:14:36,971 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:14:36,971 - TimesheetTracker - INFO - Status Code: 405
+2025-01-10 01:14:36,971 - TimesheetTracker - INFO - Response Headers: {'allow': 'POST', 'content-length': '31', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:14:36,971 - TimesheetTracker - INFO - Processing Time: 1.07ms
+2025-01-10 01:14:36,971 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:14:43,485 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:14:43,485 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:14:43,485 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/
+2025-01-10 01:14:43,485 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:14:43,486 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'node', 'accept': '*/*', 'accept-encoding': 'identity', 'accept-language': '*', 'cache-control': 'no-cache', 'pragma': 'no-cache', 'sec-fetch-mode': 'cors', 'x-forwarded-for': '165.225.36.200, 18.234.119.74, 10.83.4.115', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': '', 'x-v0-dev': 'true', 'x-vercel-id': 'cle1::t8rgx-1736471683136-43859478e281'}
+2025-01-10 01:14:43,486 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:14:43,486 - TimesheetTracker - INFO - Status Code: 405
+2025-01-10 01:14:43,486 - TimesheetTracker - INFO - Response Headers: {'allow': 'POST', 'content-length': '31', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:14:43,487 - TimesheetTracker - INFO - Processing Time: 1.07ms
+2025-01-10 01:14:43,487 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:14:49,503 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:14:49,503 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:14:49,503 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/
+2025-01-10 01:14:49,503 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:14:49,504 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'node', 'accept': '*/*', 'accept-encoding': 'identity', 'accept-language': '*', 'cache-control': 'no-cache', 'pragma': 'no-cache', 'sec-fetch-mode': 'cors', 'x-forwarded-for': '165.225.36.200, 18.234.119.74, 10.83.3.67', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': '', 'x-v0-dev': 'true', 'x-vercel-id': 'cle1::mw2zc-1736471689352-5c27d758c741'}
+2025-01-10 01:14:49,504 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:14:49,504 - TimesheetTracker - INFO - Status Code: 405
+2025-01-10 01:14:49,504 - TimesheetTracker - INFO - Response Headers: {'allow': 'POST', 'content-length': '31', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:14:49,504 - TimesheetTracker - INFO - Processing Time: 1.11ms
+2025-01-10 01:14:49,504 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:15:41,367 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:15:41,367 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:15:41,368 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/
+2025-01-10 01:15:41,368 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:15:41,368 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'node', 'accept': '*/*', 'accept-encoding': 'identity', 'accept-language': '*', 'cache-control': 'no-cache', 'pragma': 'no-cache', 'sec-fetch-mode': 'cors', 'x-forwarded-for': '165.225.36.200, 18.234.119.74, 10.83.3.67', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': '', 'x-v0-dev': 'true', 'x-vercel-id': 'cle1::cfnsr-1736471741218-8a0d938a6fec'}
+2025-01-10 01:15:41,368 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:15:41,368 - TimesheetTracker - INFO - Status Code: 405
+2025-01-10 01:15:41,369 - TimesheetTracker - INFO - Response Headers: {'allow': 'POST', 'content-length': '31', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:15:41,369 - TimesheetTracker - INFO - Processing Time: 1.17ms
+2025-01-10 01:15:41,369 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:18:52,347 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:18:52,347 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:18:52,347 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/by-date/2025-01-09
+2025-01-10 01:18:52,348 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:18:52,348 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'node', 'accept': '*/*', 'accept-encoding': 'identity', 'accept-language': '*', 'cache-control': 'no-cache', 'pragma': 'no-cache', 'sec-fetch-mode': 'cors', 'x-forwarded-for': '165.225.36.200, 54.237.171.61, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': '', 'x-v0-dev': 'true', 'x-vercel-id': 'cle1::dfrzq-1736471932072-527a282607af'}
+2025-01-10 01:18:52,349 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 01:18:52,349 - TimesheetTracker - INFO - Fetching time entries for date: 2025-01-09
+2025-01-10 01:18:52,350 - TimesheetTracker - DEBUG - Executing database query for time entries on date: 2025-01-09
+2025-01-10 01:18:53,459 - TimesheetTracker - INFO - Found 1 time entries for date 2025-01-09
+2025-01-10 01:18:53,459 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (24.0 hours)
+2025-01-10 01:18:53,459 - TimesheetTracker - INFO - Found 1 entries for date: 2025-01-09
+2025-01-10 01:18:53,484 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 01:18:53,484 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:18:53,484 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 01:18:53,485 - TimesheetTracker - INFO - Response Headers: {'content-length': '281', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:18:53,485 - TimesheetTracker - INFO - Processing Time: 1137.34ms
+2025-01-10 01:18:53,485 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:19:11,121 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:19:11,121 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:19:11,121 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/by-date/2024-11-11
+2025-01-10 01:19:11,121 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:19:11,122 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'node', 'accept': '*/*', 'accept-encoding': 'identity', 'accept-language': '*', 'cache-control': 'no-cache', 'pragma': 'no-cache', 'sec-fetch-mode': 'cors', 'x-forwarded-for': '165.225.36.200, 54.237.171.61, 10.83.5.94', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': '', 'x-v0-dev': 'true', 'x-vercel-id': 'cle1::mw2zc-1736471950893-629016211766'}
+2025-01-10 01:19:11,122 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 01:19:11,123 - TimesheetTracker - INFO - Fetching time entries for date: 2024-11-11
+2025-01-10 01:19:11,123 - TimesheetTracker - DEBUG - Executing database query for time entries on date: 2024-11-11
+2025-01-10 01:19:11,334 - TimesheetTracker - INFO - Found 7 time entries for date 2024-11-11
+2025-01-10 01:19:11,334 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (2.0 hours)
+2025-01-10 01:19:11,334 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (1.0 hours)
+2025-01-10 01:19:11,334 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (1.0 hours)
+2025-01-10 01:19:11,334 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (1.0 hours)
+2025-01-10 01:19:11,334 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (1.0 hours)
+2025-01-10 01:19:11,335 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (1.0 hours)
+2025-01-10 01:19:11,335 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (1.0 hours)
+2025-01-10 01:19:11,335 - TimesheetTracker - INFO - Found 7 entries for date: 2024-11-11
+2025-01-10 01:19:11,359 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 01:19:11,359 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:19:11,360 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 01:19:11,360 - TimesheetTracker - INFO - Response Headers: {'content-length': '1979', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:19:11,360 - TimesheetTracker - INFO - Processing Time: 238.53ms
+2025-01-10 01:19:11,360 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:23:27,369 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:23:27,369 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:23:27,369 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/by-date/2025-01-09
+2025-01-10 01:23:27,369 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:23:27,369 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'node', 'accept': '*/*', 'accept-encoding': 'identity', 'accept-language': '*', 'cache-control': 'no-cache', 'pragma': 'no-cache', 'sec-fetch-mode': 'cors', 'x-forwarded-for': '165.225.36.200, 3.234.216.50, 10.83.1.47', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': '', 'x-v0-dev': 'true', 'x-vercel-id': 'cle1::mw66k-1736472207135-c9f2c08094c5'}
+2025-01-10 01:23:27,370 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 01:23:27,371 - TimesheetTracker - INFO - Fetching time entries for date: 2025-01-09
+2025-01-10 01:23:27,371 - TimesheetTracker - DEBUG - Executing database query for time entries on date: 2025-01-09
+2025-01-10 01:23:27,431 - TimesheetTracker - INFO - Found 1 time entries for date 2025-01-09
+2025-01-10 01:23:27,431 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (24.0 hours)
+2025-01-10 01:23:27,431 - TimesheetTracker - INFO - Found 1 entries for date: 2025-01-09
+2025-01-10 01:23:27,452 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 01:23:27,452 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:23:27,452 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 01:23:27,453 - TimesheetTracker - INFO - Response Headers: {'content-length': '281', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:23:27,453 - TimesheetTracker - INFO - Processing Time: 83.32ms
+2025-01-10 01:23:27,453 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:32:35,012 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:32:35,012 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:32:35,013 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/by-date/2025-01-09
+2025-01-10 01:32:35,013 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:32:35,013 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'node', 'accept': '*/*', 'accept-encoding': 'identity', 'accept-language': '*', 'cache-control': 'no-cache', 'pragma': 'no-cache', 'sec-fetch-mode': 'cors', 'x-forwarded-for': '165.225.36.200, 3.90.7.72, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': '', 'x-v0-dev': 'true', 'x-vercel-id': 'cle1::f6b4r-1736472754768-7d1af54872c3'}
+2025-01-10 01:32:35,013 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 01:32:35,014 - TimesheetTracker - INFO - Fetching time entries for date: 2025-01-09
+2025-01-10 01:32:35,014 - TimesheetTracker - DEBUG - Executing database query for time entries on date: 2025-01-09
+2025-01-10 01:32:36,103 - TimesheetTracker - INFO - Found 1 time entries for date 2025-01-09
+2025-01-10 01:32:36,103 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (24.0 hours)
+2025-01-10 01:32:36,103 - TimesheetTracker - INFO - Found 1 entries for date: 2025-01-09
+2025-01-10 01:32:36,124 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 01:32:36,124 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:32:36,124 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 01:32:36,125 - TimesheetTracker - INFO - Response Headers: {'content-length': '281', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:32:36,125 - TimesheetTracker - INFO - Processing Time: 1112.21ms
+2025-01-10 01:32:36,125 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:33:39,161 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:33:39,161 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:33:39,161 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/by-date/2025-01-09
+2025-01-10 01:33:39,161 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:33:39,162 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'node', 'accept': '*/*', 'accept-encoding': 'identity', 'accept-language': '*', 'cache-control': 'no-cache', 'pragma': 'no-cache', 'sec-fetch-mode': 'cors', 'x-forwarded-for': '165.225.36.200, 44.202.238.130, 10.83.3.67', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': '', 'x-v0-dev': 'true', 'x-vercel-id': 'cle1::mvz2f-1736472818943-ac28f2606b55'}
+2025-01-10 01:33:39,163 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 01:33:39,164 - TimesheetTracker - INFO - Fetching time entries for date: 2025-01-09
+2025-01-10 01:33:39,164 - TimesheetTracker - DEBUG - Executing database query for time entries on date: 2025-01-09
+2025-01-10 01:33:39,346 - TimesheetTracker - INFO - Found 1 time entries for date 2025-01-09
+2025-01-10 01:33:39,346 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (24.0 hours)
+2025-01-10 01:33:39,346 - TimesheetTracker - INFO - Found 1 entries for date: 2025-01-09
+2025-01-10 01:33:39,366 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 01:33:39,367 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:33:39,367 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 01:33:39,367 - TimesheetTracker - INFO - Response Headers: {'content-length': '281', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:33:39,367 - TimesheetTracker - INFO - Processing Time: 206.04ms
+2025-01-10 01:33:39,368 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:36:07,815 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:36:07,815 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:36:07,815 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/by-date/2025-01-09
+2025-01-10 01:36:07,815 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:36:07,815 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'node', 'accept': '*/*', 'accept-encoding': 'identity', 'accept-language': '*', 'cache-control': 'no-cache', 'pragma': 'no-cache', 'sec-fetch-mode': 'cors', 'x-forwarded-for': '165.225.36.200, 52.23.252.70, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': '', 'x-v0-dev': 'true', 'x-vercel-id': 'cle1::94t8m-1736472967634-6db290ee3ad8'}
+2025-01-10 01:36:07,816 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 01:36:07,817 - TimesheetTracker - INFO - Fetching time entries for date: 2025-01-09
+2025-01-10 01:36:07,817 - TimesheetTracker - DEBUG - Executing database query for time entries on date: 2025-01-09
+2025-01-10 01:36:07,877 - TimesheetTracker - INFO - Found 1 time entries for date 2025-01-09
+2025-01-10 01:36:07,877 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (24.0 hours)
+2025-01-10 01:36:07,877 - TimesheetTracker - INFO - Found 1 entries for date: 2025-01-09
+2025-01-10 01:36:07,897 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 01:36:07,898 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:36:07,898 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 01:36:07,898 - TimesheetTracker - INFO - Response Headers: {'content-length': '281', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:36:07,898 - TimesheetTracker - INFO - Processing Time: 83.10ms
+2025-01-10 01:36:07,899 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:37:15,677 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:37:15,677 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:37:15,677 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/by-date/2025-01-09
+2025-01-10 01:37:15,677 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:37:15,677 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'node', 'accept': '*/*', 'accept-encoding': 'identity', 'accept-language': '*', 'cache-control': 'no-cache', 'pragma': 'no-cache', 'sec-fetch-mode': 'cors', 'x-forwarded-for': '165.225.36.200, 44.221.63.176, 10.83.4.115', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': '', 'x-v0-dev': 'true', 'x-vercel-id': 'cle1::nf2jn-1736473035440-d1c15225ed52'}
+2025-01-10 01:37:15,678 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 01:37:15,679 - TimesheetTracker - INFO - Fetching time entries for date: 2025-01-09
+2025-01-10 01:37:15,679 - TimesheetTracker - DEBUG - Executing database query for time entries on date: 2025-01-09
+2025-01-10 01:37:15,737 - TimesheetTracker - INFO - Found 1 time entries for date 2025-01-09
+2025-01-10 01:37:15,738 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (24.0 hours)
+2025-01-10 01:37:15,738 - TimesheetTracker - INFO - Found 1 entries for date: 2025-01-09
+2025-01-10 01:37:15,757 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 01:37:15,758 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:37:15,758 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 01:37:15,758 - TimesheetTracker - INFO - Response Headers: {'content-length': '281', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:37:15,758 - TimesheetTracker - INFO - Processing Time: 81.04ms
+2025-01-10 01:37:15,758 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:37:28,217 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:37:28,217 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:37:28,217 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/by-date/2025-01-09
+2025-01-10 01:37:28,217 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:37:28,217 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'node', 'accept': '*/*', 'accept-encoding': 'identity', 'accept-language': '*', 'cache-control': 'no-cache', 'pragma': 'no-cache', 'sec-fetch-mode': 'cors', 'x-forwarded-for': '165.225.36.200, 3.239.55.180, 10.83.4.115', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': '', 'x-v0-dev': 'true', 'x-vercel-id': 'cle1::ld54l-1736473047971-fafe3900bc5d'}
+2025-01-10 01:37:28,218 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 01:37:28,218 - TimesheetTracker - INFO - Fetching time entries for date: 2025-01-09
+2025-01-10 01:37:28,218 - TimesheetTracker - DEBUG - Executing database query for time entries on date: 2025-01-09
+2025-01-10 01:37:28,277 - TimesheetTracker - INFO - Found 1 time entries for date 2025-01-09
+2025-01-10 01:37:28,277 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (24.0 hours)
+2025-01-10 01:37:28,278 - TimesheetTracker - INFO - Found 1 entries for date: 2025-01-09
+2025-01-10 01:37:28,298 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 01:37:28,298 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:37:28,298 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 01:37:28,299 - TimesheetTracker - INFO - Response Headers: {'content-length': '281', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:37:28,299 - TimesheetTracker - INFO - Processing Time: 81.62ms
+2025-01-10 01:37:28,299 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:37:33,940 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:37:33,941 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:37:33,941 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/by-date/2024-11-12
+2025-01-10 01:37:33,941 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:37:33,941 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'node', 'accept': '*/*', 'accept-encoding': 'identity', 'accept-language': '*', 'cache-control': 'no-cache', 'pragma': 'no-cache', 'sec-fetch-mode': 'cors', 'x-forwarded-for': '165.225.36.200, 3.239.55.180, 10.83.3.67', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': '', 'x-v0-dev': 'true', 'x-vercel-id': 'cle1::2tgw9-1736473053795-95d70e990544'}
+2025-01-10 01:37:33,942 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 01:37:33,942 - TimesheetTracker - INFO - Fetching time entries for date: 2024-11-12
+2025-01-10 01:37:33,942 - TimesheetTracker - DEBUG - Executing database query for time entries on date: 2024-11-12
+2025-01-10 01:37:34,001 - TimesheetTracker - INFO - Found 4 time entries for date 2024-11-12
+2025-01-10 01:37:34,001 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (1.0 hours)
+2025-01-10 01:37:34,001 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (2.0 hours)
+2025-01-10 01:37:34,001 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (2.0 hours)
+2025-01-10 01:37:34,001 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (3.0 hours)
+2025-01-10 01:37:34,002 - TimesheetTracker - INFO - Found 4 entries for date: 2024-11-12
+2025-01-10 01:37:34,022 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 01:37:34,022 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:37:34,022 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 01:37:34,022 - TimesheetTracker - INFO - Response Headers: {'content-length': '1149', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:37:34,022 - TimesheetTracker - INFO - Processing Time: 81.61ms
+2025-01-10 01:37:34,023 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:43:44,699 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:43:44,699 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:43:44,699 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/customers/?skip=0&limit=10
+2025-01-10 01:43:44,699 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:43:44,699 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'node', 'accept': '*/*', 'accept-encoding': 'identity', 'accept-language': '*', 'cache-control': 'no-cache', 'pragma': 'no-cache', 'sec-fetch-mode': 'cors', 'x-forwarded-for': '165.225.36.200, 3.239.55.180, 10.83.1.47', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': '', 'x-v0-dev': 'true', 'x-vercel-id': 'cle1::nvlkj-1736473424483-13aeaf0c15b0'}
+2025-01-10 01:43:44,700 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 01:43:44,701 - TimesheetTracker - INFO - Fetching customers with skip=0, limit=10
+2025-01-10 01:43:44,701 - TimesheetTracker - DEBUG - CustomerService initialized with database session
+2025-01-10 01:43:44,701 - TimesheetTracker - DEBUG - Fetching customers with offset=0, limit=10
+2025-01-10 01:43:45,689 - TimesheetTracker - INFO - Retrieved 7 customers
+2025-01-10 01:43:45,718 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 01:43:45,718 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:43:45,718 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 01:43:45,718 - TimesheetTracker - INFO - Response Headers: {'content-length': '1425', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:43:45,718 - TimesheetTracker - INFO - Processing Time: 1019.30ms
+2025-01-10 01:43:45,718 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:45:36,409 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:45:36,410 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:45:36,410 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/projects/?skip=0&limit=10
+2025-01-10 01:45:36,410 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:45:36,410 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'node', 'accept': '*/*', 'accept-encoding': 'identity', 'accept-language': '*', 'cache-control': 'no-cache', 'pragma': 'no-cache', 'sec-fetch-mode': 'cors', 'x-forwarded-for': '165.225.36.200, 54.196.210.240, 10.83.2.11', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': '', 'x-v0-dev': 'true', 'x-vercel-id': 'cle1::lmkxl-1736473535538-2b8d1fef3f94'}
+2025-01-10 01:45:36,411 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 01:45:36,412 - TimesheetTracker - INFO - Fetching projects with customer=None, manager=None, skip=0, limit=10
+2025-01-10 01:45:36,412 - TimesheetTracker - DEBUG - ProjectRepository initialized
+2025-01-10 01:45:36,412 - TimesheetTracker - DEBUG - ProjectService initialized with database session
+2025-01-10 01:45:36,413 - TimesheetTracker - DEBUG - Fetching projects with offset=0, limit=10
+2025-01-10 01:45:36,413 - TimesheetTracker - DEBUG - Fetching all projects with skip=0, limit=10
+2025-01-10 01:45:36,621 - TimesheetTracker - INFO - Retrieved 6 projects
+2025-01-10 01:45:36,622 - TimesheetTracker - INFO - Retrieved 6 projects
+2025-01-10 01:45:36,623 - TimesheetTracker - ERROR - Database session error: 6 validation errors:
+  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+
+2025-01-10 01:45:36,623 - TimesheetTracker - ERROR - Database session error details:
+Traceback (most recent call last):
+  File "/home/runner/workspace/database/database.py", line 113, in get_db
+    yield db
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/concurrency.py", line 27, in contextmanager_in_threadpool
+    yield await run_in_threadpool(cm.__enter__)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py", line 327, in app
+    content = await serialize_response(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py", line 176, in serialize_response
+    raise ResponseValidationError(
+fastapi.exceptions.ResponseValidationError: 6 validation errors:
+  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+
+2025-01-10 01:45:36,644 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 01:45:36,644 - TimesheetTracker - ERROR - Request failed: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/projects/?skip=0&limit=10
+2025-01-10 01:45:36,644 - TimesheetTracker - ERROR - Error details: 6 validation errors:
+  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+
+2025-01-10 01:45:36,644 - TimesheetTracker - ERROR - Full error traceback:
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py", line 111, in receive
+    return self.receive_nowait()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py", line 106, in receive_nowait
+    raise WouldBlock
+anyio.WouldBlock
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py", line 124, in receive
+    return receiver.item
+           ^^^^^^^^^^^^^
+AttributeError: 'MemoryObjectItemReceiver' object has no attribute 'item'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py", line 157, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py", line 126, in receive
+    raise EndOfStream
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/utils/middleware.py", line 22, in logging_middleware
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py", line 163, in call_next
+    raise app_exc
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py", line 149, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py", line 327, in app
+    content = await serialize_response(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py", line 176, in serialize_response
+    raise ResponseValidationError(
+fastapi.exceptions.ResponseValidationError: 6 validation errors:
+  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+
+2025-01-10 01:47:28,706 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:47:28,706 - TimesheetTracker - INFO - Method: POST
+2025-01-10 01:47:28,706 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/projects/
+2025-01-10 01:47:28,706 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:47:28,706 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'node', 'content-length': '195', 'accept': '*/*', 'accept-encoding': 'identity', 'accept-language': '*', 'cache-control': 'no-cache', 'content-type': 'application/json', 'pragma': 'no-cache', 'sec-fetch-mode': 'cors', 'x-forwarded-for': '165.225.36.200, 3.239.73.155, 10.83.5.94', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': '', 'x-v0-dev': 'true', 'x-vercel-id': 'cle1::mdxbf-1736473648484-f0bd7a4d6221'}
+2025-01-10 01:47:28,707 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 01:47:28,711 - TimesheetTracker - INFO - Creating new project: 2402647452
+2025-01-10 01:47:28,711 - TimesheetTracker - DEBUG - ProjectRepository initialized
+2025-01-10 01:47:28,711 - TimesheetTracker - DEBUG - ProjectService initialized with database session
+2025-01-10 01:47:28,711 - TimesheetTracker - DEBUG - Starting creation of project with data: {'id': None, 'created_at': None, 'updated_at': None, 'project_id': '2402647452', 'name': 'Aspers, PA', 'description': 'ASC System (1), Manual Foam Drop (1)\n', 'customer': 'Dr. Pepper Snapple Group', 'project_manager': 'Andriy Grebenyuk', 'status': 'active'}
+2025-01-10 01:47:28,711 - TimesheetTracker - DEBUG - Fetching project with ID: 2402647452
+2025-01-10 01:47:28,790 - TimesheetTracker - DEBUG - Adding project to database session
+2025-01-10 01:47:28,791 - TimesheetTracker - DEBUG - Creating new project with data: {'project_id': '2402647452', 'name': 'Aspers, PA', 'description': 'ASC System (1), Manual Foam Drop (1)\n', 'customer': 'Dr. Pepper Snapple Group', 'project_manager': 'Andriy Grebenyuk', 'status': 'active'}
+2025-01-10 01:47:28,791 - TimesheetTracker - DEBUG - Fetching project with ID: 2402647452
+2025-01-10 01:47:28,866 - TimesheetTracker - ERROR - Error creating project: (psycopg2.errors.ForeignKeyViolation) insert or update on table "projects" violates foreign key constraint "projects_customer_fkey"
+DETAIL:  Key (customer)=(Dr. Pepper Snapple Group) is not present in table "customers".
+
+[SQL: INSERT INTO projects (project_id, name, description, customer, project_manager, status, updated_at) VALUES (%(project_id)s, %(name)s, %(description)s, %(customer)s, %(project_manager)s, %(status)s, %(updated_at)s) RETURNING projects.id, projects.created_at]
+[parameters: {'project_id': '2402647452', 'name': 'Aspers, PA', 'description': 'ASC System (1), Manual Foam Drop (1)\n', 'customer': 'Dr. Pepper Snapple Group', 'project_manager': 'Andriy Grebenyuk', 'status': 'active', 'updated_at': None}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-01-10 01:47:28,866 - TimesheetTracker - ERROR - Error creating project: (psycopg2.errors.ForeignKeyViolation) insert or update on table "projects" violates foreign key constraint "projects_customer_fkey"
+DETAIL:  Key (customer)=(Dr. Pepper Snapple Group) is not present in table "customers".
+
+[SQL: INSERT INTO projects (project_id, name, description, customer, project_manager, status, updated_at) VALUES (%(project_id)s, %(name)s, %(description)s, %(customer)s, %(project_manager)s, %(status)s, %(updated_at)s) RETURNING projects.id, projects.created_at]
+[parameters: {'project_id': '2402647452', 'name': 'Aspers, PA', 'description': 'ASC System (1), Manual Foam Drop (1)\n', 'customer': 'Dr. Pepper Snapple Group', 'project_manager': 'Andriy Grebenyuk', 'status': 'active', 'updated_at': None}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-01-10 01:47:28,867 - TimesheetTracker - ERROR - Error creating project: (psycopg2.errors.ForeignKeyViolation) insert or update on table "projects" violates foreign key constraint "projects_customer_fkey"
+DETAIL:  Key (customer)=(Dr. Pepper Snapple Group) is not present in table "customers".
+
+[SQL: INSERT INTO projects (project_id, name, description, customer, project_manager, status, updated_at) VALUES (%(project_id)s, %(name)s, %(description)s, %(customer)s, %(project_manager)s, %(status)s, %(updated_at)s) RETURNING projects.id, projects.created_at]
+[parameters: {'project_id': '2402647452', 'name': 'Aspers, PA', 'description': 'ASC System (1), Manual Foam Drop (1)\n', 'customer': 'Dr. Pepper Snapple Group', 'project_manager': 'Andriy Grebenyuk', 'status': 'active', 'updated_at': None}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-01-10 01:47:28,867 - TimesheetTracker - ERROR - Database session error: 500: Internal server error
+2025-01-10 01:47:28,867 - TimesheetTracker - ERROR - Database session error details:
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.ForeignKeyViolation: insert or update on table "projects" violates foreign key constraint "projects_customer_fkey"
+DETAIL:  Key (customer)=(Dr. Pepper Snapple Group) is not present in table "customers".
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/main.py", line 231, in create_project
+    return service.create_project(project)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/services/project_service.py", line 30, in create_project
+    created_project = self.project_repo.create(self.db, project_data)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/database/project_repository.py", line 41, in create
+    db.commit()
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2028, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4352, in flush
+    self._flush(objects)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4487, in _flush
+    with util.safe_reraise():
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4448, in _flush
+    flush_context.execute()
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.ForeignKeyViolation) insert or update on table "projects" violates foreign key constraint "projects_customer_fkey"
+DETAIL:  Key (customer)=(Dr. Pepper Snapple Group) is not present in table "customers".
+
+[SQL: INSERT INTO projects (project_id, name, description, customer, project_manager, status, updated_at) VALUES (%(project_id)s, %(name)s, %(description)s, %(customer)s, %(project_manager)s, %(status)s, %(updated_at)s) RETURNING projects.id, projects.created_at]
+[parameters: {'project_id': '2402647452', 'name': 'Aspers, PA', 'description': 'ASC System (1), Manual Foam Drop (1)\n', 'customer': 'Dr. Pepper Snapple Group', 'project_manager': 'Andriy Grebenyuk', 'status': 'active', 'updated_at': None}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/database/database.py", line 113, in get_db
+    yield db
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/concurrency.py", line 27, in contextmanager_in_threadpool
+    yield await run_in_threadpool(cm.__enter__)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/to_thread.py", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 2505, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 1005, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/main.py", line 237, in create_project
+    raise HTTPException(status_code=500, detail="Internal server error")
+fastapi.exceptions.HTTPException: 500: Internal server error
+2025-01-10 01:47:28,874 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 01:47:28,874 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:47:28,875 - TimesheetTracker - INFO - Status Code: 500
+2025-01-10 01:47:28,875 - TimesheetTracker - INFO - Response Headers: {'content-length': '34', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:47:28,875 - TimesheetTracker - INFO - Processing Time: 168.86ms
+2025-01-10 01:47:28,875 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:47:29,062 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:47:29,062 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:47:29,062 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/projects/?skip=0&limit=10
+2025-01-10 01:47:29,062 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:47:29,062 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'node', 'accept': '*/*', 'accept-encoding': 'identity', 'accept-language': '*', 'cache-control': 'no-cache', 'pragma': 'no-cache', 'sec-fetch-mode': 'cors', 'x-forwarded-for': '165.225.36.200, 3.239.73.155, 10.83.5.94', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': '', 'x-v0-dev': 'true', 'x-vercel-id': 'cle1::692ws-1736473648982-202459b30200'}
+2025-01-10 01:47:29,064 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 01:47:29,064 - TimesheetTracker - INFO - Fetching projects with customer=None, manager=None, skip=0, limit=10
+2025-01-10 01:47:29,064 - TimesheetTracker - DEBUG - ProjectRepository initialized
+2025-01-10 01:47:29,064 - TimesheetTracker - DEBUG - ProjectService initialized with database session
+2025-01-10 01:47:29,065 - TimesheetTracker - DEBUG - Fetching projects with offset=0, limit=10
+2025-01-10 01:47:29,065 - TimesheetTracker - DEBUG - Fetching all projects with skip=0, limit=10
+2025-01-10 01:47:29,123 - TimesheetTracker - INFO - Retrieved 6 projects
+2025-01-10 01:47:29,123 - TimesheetTracker - INFO - Retrieved 6 projects
+2025-01-10 01:47:29,124 - TimesheetTracker - ERROR - Database session error: 6 validation errors:
+  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+
+2025-01-10 01:47:29,124 - TimesheetTracker - ERROR - Database session error details:
+Traceback (most recent call last):
+  File "/home/runner/workspace/database/database.py", line 113, in get_db
+    yield db
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/concurrency.py", line 27, in contextmanager_in_threadpool
+    yield await run_in_threadpool(cm.__enter__)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py", line 327, in app
+    content = await serialize_response(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py", line 176, in serialize_response
+    raise ResponseValidationError(
+fastapi.exceptions.ResponseValidationError: 6 validation errors:
+  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+
+2025-01-10 01:47:29,144 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 01:47:29,144 - TimesheetTracker - ERROR - Request failed: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/projects/?skip=0&limit=10
+2025-01-10 01:47:29,144 - TimesheetTracker - ERROR - Error details: 6 validation errors:
+  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+
+2025-01-10 01:47:29,144 - TimesheetTracker - ERROR - Full error traceback:
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py", line 111, in receive
+    return self.receive_nowait()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py", line 106, in receive_nowait
+    raise WouldBlock
+anyio.WouldBlock
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py", line 124, in receive
+    return receiver.item
+           ^^^^^^^^^^^^^
+AttributeError: 'MemoryObjectItemReceiver' object has no attribute 'item'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py", line 157, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py", line 126, in receive
+    raise EndOfStream
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/utils/middleware.py", line 22, in logging_middleware
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py", line 163, in call_next
+    raise app_exc
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py", line 149, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py", line 327, in app
+    content = await serialize_response(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py", line 176, in serialize_response
+    raise ResponseValidationError(
+fastapi.exceptions.ResponseValidationError: 6 validation errors:
+  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+
+2025-01-10 01:48:03,881 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:48:03,882 - TimesheetTracker - INFO - Method: POST
+2025-01-10 01:48:03,882 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/projects/
+2025-01-10 01:48:03,882 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:48:03,882 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'node', 'content-length': '195', 'accept': '*/*', 'accept-encoding': 'identity', 'accept-language': '*', 'cache-control': 'no-cache', 'content-type': 'application/json', 'pragma': 'no-cache', 'sec-fetch-mode': 'cors', 'x-forwarded-for': '165.225.36.200, 100.28.218.85, 10.83.3.67', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': '', 'x-v0-dev': 'true', 'x-vercel-id': 'cle1::9tdgv-1736473683652-29e4b06cc35e'}
+2025-01-10 01:48:03,884 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 01:48:03,884 - TimesheetTracker - INFO - Creating new project: 2402647452
+2025-01-10 01:48:03,884 - TimesheetTracker - DEBUG - ProjectRepository initialized
+2025-01-10 01:48:03,885 - TimesheetTracker - DEBUG - ProjectService initialized with database session
+2025-01-10 01:48:03,885 - TimesheetTracker - DEBUG - Starting creation of project with data: {'id': None, 'created_at': None, 'updated_at': None, 'project_id': '2402647452', 'name': 'Aspers, PA', 'description': 'ASC System (1), Manual Foam Drop (1)\n', 'customer': 'Dr. Pepper Snapple Group', 'project_manager': 'Andriy Grebenyuk', 'status': 'active'}
+2025-01-10 01:48:03,885 - TimesheetTracker - DEBUG - Fetching project with ID: 2402647452
+2025-01-10 01:48:03,945 - TimesheetTracker - DEBUG - Adding project to database session
+2025-01-10 01:48:03,945 - TimesheetTracker - DEBUG - Creating new project with data: {'project_id': '2402647452', 'name': 'Aspers, PA', 'description': 'ASC System (1), Manual Foam Drop (1)\n', 'customer': 'Dr. Pepper Snapple Group', 'project_manager': 'Andriy Grebenyuk', 'status': 'active'}
+2025-01-10 01:48:03,945 - TimesheetTracker - DEBUG - Fetching project with ID: 2402647452
+2025-01-10 01:48:04,005 - TimesheetTracker - ERROR - Error creating project: (psycopg2.errors.ForeignKeyViolation) insert or update on table "projects" violates foreign key constraint "projects_customer_fkey"
+DETAIL:  Key (customer)=(Dr. Pepper Snapple Group) is not present in table "customers".
+
+[SQL: INSERT INTO projects (project_id, name, description, customer, project_manager, status, updated_at) VALUES (%(project_id)s, %(name)s, %(description)s, %(customer)s, %(project_manager)s, %(status)s, %(updated_at)s) RETURNING projects.id, projects.created_at]
+[parameters: {'project_id': '2402647452', 'name': 'Aspers, PA', 'description': 'ASC System (1), Manual Foam Drop (1)\n', 'customer': 'Dr. Pepper Snapple Group', 'project_manager': 'Andriy Grebenyuk', 'status': 'active', 'updated_at': None}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-01-10 01:48:04,005 - TimesheetTracker - ERROR - Error creating project: (psycopg2.errors.ForeignKeyViolation) insert or update on table "projects" violates foreign key constraint "projects_customer_fkey"
+DETAIL:  Key (customer)=(Dr. Pepper Snapple Group) is not present in table "customers".
+
+[SQL: INSERT INTO projects (project_id, name, description, customer, project_manager, status, updated_at) VALUES (%(project_id)s, %(name)s, %(description)s, %(customer)s, %(project_manager)s, %(status)s, %(updated_at)s) RETURNING projects.id, projects.created_at]
+[parameters: {'project_id': '2402647452', 'name': 'Aspers, PA', 'description': 'ASC System (1), Manual Foam Drop (1)\n', 'customer': 'Dr. Pepper Snapple Group', 'project_manager': 'Andriy Grebenyuk', 'status': 'active', 'updated_at': None}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-01-10 01:48:04,005 - TimesheetTracker - ERROR - Error creating project: (psycopg2.errors.ForeignKeyViolation) insert or update on table "projects" violates foreign key constraint "projects_customer_fkey"
+DETAIL:  Key (customer)=(Dr. Pepper Snapple Group) is not present in table "customers".
+
+[SQL: INSERT INTO projects (project_id, name, description, customer, project_manager, status, updated_at) VALUES (%(project_id)s, %(name)s, %(description)s, %(customer)s, %(project_manager)s, %(status)s, %(updated_at)s) RETURNING projects.id, projects.created_at]
+[parameters: {'project_id': '2402647452', 'name': 'Aspers, PA', 'description': 'ASC System (1), Manual Foam Drop (1)\n', 'customer': 'Dr. Pepper Snapple Group', 'project_manager': 'Andriy Grebenyuk', 'status': 'active', 'updated_at': None}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-01-10 01:48:04,007 - TimesheetTracker - ERROR - Database session error: 500: Internal server error
+2025-01-10 01:48:04,007 - TimesheetTracker - ERROR - Database session error details:
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.ForeignKeyViolation: insert or update on table "projects" violates foreign key constraint "projects_customer_fkey"
+DETAIL:  Key (customer)=(Dr. Pepper Snapple Group) is not present in table "customers".
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/main.py", line 231, in create_project
+    return service.create_project(project)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/services/project_service.py", line 30, in create_project
+    created_project = self.project_repo.create(self.db, project_data)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/database/project_repository.py", line 41, in create
+    db.commit()
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2028, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4352, in flush
+    self._flush(objects)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4487, in _flush
+    with util.safe_reraise():
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4448, in _flush
+    flush_context.execute()
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.ForeignKeyViolation) insert or update on table "projects" violates foreign key constraint "projects_customer_fkey"
+DETAIL:  Key (customer)=(Dr. Pepper Snapple Group) is not present in table "customers".
+
+[SQL: INSERT INTO projects (project_id, name, description, customer, project_manager, status, updated_at) VALUES (%(project_id)s, %(name)s, %(description)s, %(customer)s, %(project_manager)s, %(status)s, %(updated_at)s) RETURNING projects.id, projects.created_at]
+[parameters: {'project_id': '2402647452', 'name': 'Aspers, PA', 'description': 'ASC System (1), Manual Foam Drop (1)\n', 'customer': 'Dr. Pepper Snapple Group', 'project_manager': 'Andriy Grebenyuk', 'status': 'active', 'updated_at': None}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/database/database.py", line 113, in get_db
+    yield db
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/concurrency.py", line 27, in contextmanager_in_threadpool
+    yield await run_in_threadpool(cm.__enter__)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/to_thread.py", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 2505, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 1005, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/main.py", line 237, in create_project
+    raise HTTPException(status_code=500, detail="Internal server error")
+fastapi.exceptions.HTTPException: 500: Internal server error
+2025-01-10 01:48:04,010 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 01:48:04,011 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:48:04,011 - TimesheetTracker - INFO - Status Code: 500
+2025-01-10 01:48:04,011 - TimesheetTracker - INFO - Response Headers: {'content-length': '34', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:48:04,011 - TimesheetTracker - INFO - Processing Time: 129.43ms
+2025-01-10 01:48:04,011 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:48:04,182 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:48:04,184 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:48:04,184 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/projects/?skip=0&limit=10
+2025-01-10 01:48:04,184 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:48:04,184 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'node', 'accept': '*/*', 'accept-encoding': 'identity', 'accept-language': '*', 'cache-control': 'no-cache', 'pragma': 'no-cache', 'sec-fetch-mode': 'cors', 'x-forwarded-for': '165.225.36.200, 100.28.218.85, 10.83.3.67', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': '', 'x-v0-dev': 'true', 'x-vercel-id': 'cle1::pxs8b-1736473684129-905398c41193'}
+2025-01-10 01:48:04,185 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 01:48:04,186 - TimesheetTracker - INFO - Fetching projects with customer=None, manager=None, skip=0, limit=10
+2025-01-10 01:48:04,186 - TimesheetTracker - DEBUG - ProjectRepository initialized
+2025-01-10 01:48:04,186 - TimesheetTracker - DEBUG - ProjectService initialized with database session
+2025-01-10 01:48:04,187 - TimesheetTracker - DEBUG - Fetching projects with offset=0, limit=10
+2025-01-10 01:48:04,187 - TimesheetTracker - DEBUG - Fetching all projects with skip=0, limit=10
+2025-01-10 01:48:04,249 - TimesheetTracker - INFO - Retrieved 6 projects
+2025-01-10 01:48:04,249 - TimesheetTracker - INFO - Retrieved 6 projects
+2025-01-10 01:48:04,249 - TimesheetTracker - ERROR - Database session error: 6 validation errors:
+  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+
+2025-01-10 01:48:04,249 - TimesheetTracker - ERROR - Database session error details:
+Traceback (most recent call last):
+  File "/home/runner/workspace/database/database.py", line 113, in get_db
+    yield db
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/concurrency.py", line 27, in contextmanager_in_threadpool
+    yield await run_in_threadpool(cm.__enter__)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py", line 327, in app
+    content = await serialize_response(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py", line 176, in serialize_response
+    raise ResponseValidationError(
+fastapi.exceptions.ResponseValidationError: 6 validation errors:
+  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+
+2025-01-10 01:48:04,269 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 01:48:04,269 - TimesheetTracker - ERROR - Request failed: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/projects/?skip=0&limit=10
+2025-01-10 01:48:04,270 - TimesheetTracker - ERROR - Error details: 6 validation errors:
+  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+
+2025-01-10 01:48:04,270 - TimesheetTracker - ERROR - Full error traceback:
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py", line 111, in receive
+    return self.receive_nowait()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py", line 106, in receive_nowait
+    raise WouldBlock
+anyio.WouldBlock
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py", line 124, in receive
+    return receiver.item
+           ^^^^^^^^^^^^^
+AttributeError: 'MemoryObjectItemReceiver' object has no attribute 'item'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py", line 157, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py", line 126, in receive
+    raise EndOfStream
+anyio.EndOfStream
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/workspace/utils/middleware.py", line 22, in logging_middleware
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py", line 163, in call_next
+    raise app_exc
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py", line 149, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py", line 327, in app
+    content = await serialize_response(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py", line 176, in serialize_response
+    raise ResponseValidationError(
+fastapi.exceptions.ResponseValidationError: 6 validation errors:
+  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+
+2025-01-10 01:49:53,321 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:49:53,321 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:49:53,322 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 01:49:53,322 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:49:53,322 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar1t%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.2.11', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 01:49:53,323 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 01:49:53,323 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:49:53,324 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 01:49:53,324 - TimesheetTracker - INFO - Response Headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:49:53,324 - TimesheetTracker - INFO - Processing Time: 2.77ms
+2025-01-10 01:49:53,324 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:50:21,778 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:50:21,779 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:50:21,779 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/customers/?skip=0&limit=10
+2025-01-10 01:50:21,779 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:50:21,779 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'node', 'accept': '*/*', 'accept-encoding': 'identity', 'accept-language': '*', 'cache-control': 'no-cache', 'pragma': 'no-cache', 'sec-fetch-mode': 'cors', 'x-forwarded-for': '165.225.36.200, 3.239.73.155, 10.83.5.94', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': '', 'x-v0-dev': 'true', 'x-vercel-id': 'cle1::255sk-1736473821629-badf6b26a34e'}
+2025-01-10 01:50:21,780 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 01:50:21,780 - TimesheetTracker - INFO - Fetching customers with skip=0, limit=10
+2025-01-10 01:50:21,780 - TimesheetTracker - DEBUG - CustomerService initialized with database session
+2025-01-10 01:50:21,781 - TimesheetTracker - DEBUG - Fetching customers with offset=0, limit=10
+2025-01-10 01:50:21,840 - TimesheetTracker - INFO - Retrieved 7 customers
+2025-01-10 01:50:21,860 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 01:50:21,861 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:50:21,861 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 01:50:21,861 - TimesheetTracker - INFO - Response Headers: {'content-length': '1425', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:50:21,861 - TimesheetTracker - INFO - Processing Time: 82.36ms
+2025-01-10 01:50:21,861 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:51:28,610 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 01:51:28,634 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 01:51:28,838 - TimesheetTracker - INFO - Starting FastAPI server
+2025-01-10 01:51:28,838 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-10 01:51:28,838 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-10 01:51:29,258 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-10 01:51:29,258 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-10 01:51:29,258 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-10 01:51:29,514 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-10 01:51:29,515 - TimesheetTracker - INFO - Expected tables: projects, time_entries, customers, project_managers
+2025-01-10 01:51:29,745 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-10 01:51:29,823 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-10 01:51:29,903 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-10 01:51:29,982 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-10 01:51:29,983 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-10 01:51:30,002 - TimesheetTracker - INFO - === CORS Configuration ===
+2025-01-10 01:51:30,003 - TimesheetTracker - INFO - Development mode: All origins allowed (*)
+2025-01-10 01:51:30,003 - TimesheetTracker - INFO - Allowed Methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH']
+2025-01-10 01:51:30,003 - TimesheetTracker - INFO - Allow Credentials: False
+2025-01-10 01:51:30,003 - TimesheetTracker - INFO - Max Age: 3600
+2025-01-10 01:51:33,953 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 01:51:33,968 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 01:51:34,080 - TimesheetTracker - INFO - Starting FastAPI server
+2025-01-10 01:51:34,080 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-10 01:51:34,081 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-10 01:51:34,484 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-10 01:51:34,484 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-10 01:51:34,484 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-10 01:51:34,710 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-10 01:51:34,710 - TimesheetTracker - INFO - Expected tables: project_managers, customers, time_entries, projects
+2025-01-10 01:51:34,847 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-10 01:51:34,925 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-10 01:51:35,002 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-10 01:51:35,081 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-10 01:51:35,081 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-10 01:51:35,100 - TimesheetTracker - INFO - === CORS Configuration ===
+2025-01-10 01:51:35,101 - TimesheetTracker - INFO - Development mode: All origins allowed (*)
+2025-01-10 01:51:35,101 - TimesheetTracker - INFO - Allowed Methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH']
+2025-01-10 01:51:35,101 - TimesheetTracker - INFO - Allow Credentials: False
+2025-01-10 01:51:35,101 - TimesheetTracker - INFO - Max Age: 3600
+2025-01-10 01:51:36,386 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:51:36,386 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:51:36,386 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 01:51:36,386 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:51:36,386 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar99%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.2.11', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 01:51:36,403 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 01:51:36,408 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:51:36,408 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 01:51:36,408 - TimesheetTracker - INFO - Response Headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:51:36,409 - TimesheetTracker - INFO - Processing Time: 22.48ms
+2025-01-10 01:51:36,409 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:51:37,446 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:51:37,446 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:51:37,446 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 01:51:37,446 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:51:37,450 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar9h%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.2.11', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 01:51:37,451 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 01:51:37,451 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:51:37,452 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 01:51:37,452 - TimesheetTracker - INFO - Response Headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:51:37,452 - TimesheetTracker - INFO - Processing Time: 5.56ms
+2025-01-10 01:51:37,452 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:51:40,268 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 01:51:40,411 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 01:51:41,071 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:51:41,073 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:51:41,073 - TimesheetTracker - INFO - URL: http://testserver/
+2025-01-10 01:51:41,073 - TimesheetTracker - INFO - Origin: https://example.com
+2025-01-10 01:51:41,073 - TimesheetTracker - INFO - Headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://example.com', 'access-control-request-method': 'GET'}
+2025-01-10 01:51:41,075 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 01:51:41,075 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:51:41,075 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 01:51:41,075 - TimesheetTracker - INFO - Response Headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-expose-headers': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:51:41,075 - TimesheetTracker - INFO - Processing Time: 3.88ms
+2025-01-10 01:51:41,076 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-expose-headers': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:51:41,083 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:51:41,084 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:51:41,084 - TimesheetTracker - INFO - URL: http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 01:51:41,084 - TimesheetTracker - INFO - Origin: https://example.com
+2025-01-10 01:51:41,084 - TimesheetTracker - INFO - Headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://example.com', 'access-control-request-method': 'GET'}
+2025-01-10 01:51:41,088 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 01:51:41,089 - TimesheetTracker - INFO - Fetching time entries for date: 2025-01-09
+2025-01-10 01:51:41,089 - TimesheetTracker - DEBUG - Executing database query for time entries on date: 2025-01-09
+2025-01-10 01:51:41,498 - TimesheetTracker - INFO - Found 1 time entries for date 2025-01-09
+2025-01-10 01:51:41,498 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (24.0 hours)
+2025-01-10 01:51:41,498 - TimesheetTracker - INFO - Found 1 entries for date: 2025-01-09
+2025-01-10 01:51:41,521 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 01:51:41,522 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:51:41,522 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 01:51:41,522 - TimesheetTracker - INFO - Response Headers: {'content-length': '281', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-expose-headers': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:51:41,522 - TimesheetTracker - INFO - Processing Time: 438.04ms
+2025-01-10 01:51:41,522 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-expose-headers': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:51:41,526 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:51:41,526 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:51:41,526 - TimesheetTracker - INFO - URL: http://testserver/
+2025-01-10 01:51:41,527 - TimesheetTracker - INFO - Origin: https://example.com
+2025-01-10 01:51:41,527 - TimesheetTracker - INFO - Headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://example.com'}
+2025-01-10 01:51:41,532 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 01:51:41,533 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:51:41,533 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 01:51:41,533 - TimesheetTracker - INFO - Response Headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-expose-headers': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:51:41,533 - TimesheetTracker - INFO - Processing Time: 6.44ms
+2025-01-10 01:51:41,533 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-expose-headers': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:51:41,549 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:51:41,549 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:51:41,549 - TimesheetTracker - INFO - URL: http://testserver/
+2025-01-10 01:51:41,549 - TimesheetTracker - INFO - Origin: https://example.com
+2025-01-10 01:51:41,549 - TimesheetTracker - INFO - Headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://example.com'}
+2025-01-10 01:51:41,552 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 01:51:41,552 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:51:41,552 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 01:51:41,553 - TimesheetTracker - INFO - Response Headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-expose-headers': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:51:41,553 - TimesheetTracker - INFO - Processing Time: 3.55ms
+2025-01-10 01:51:41,553 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-expose-headers': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
