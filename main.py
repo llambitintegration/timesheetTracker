@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, Query, Path
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from sqlalchemy import join, text, inspect
+from sqlalchemy import join, text, inspect, func
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from datetime import datetime, timedelta, date
@@ -454,7 +454,7 @@ def get_weekly_report(
     query = db.query(
         Project.project_id,
         Project.customer,
-        db.func.sum(TimeEntry.hours).label('total_hours')
+        func.sum(TimeEntry.hours).label('total_hours')
     ).join(
         TimeEntry,
         TimeEntry.project == Project.project_id
