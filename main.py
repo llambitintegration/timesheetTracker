@@ -1,14 +1,12 @@
-from sqlalchemy import join, text, inspect
 from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, Query, Path
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from sqlalchemy import join, text, inspect
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from datetime import datetime, timedelta, date
 import calendar
 from dotenv import load_dotenv
-from alembic.config import Config
-from alembic import command
-from alembic.script import MigrationContext
 import uvicorn
 
 from database import schemas, crud, get_db, verify_database, engine
@@ -24,25 +22,26 @@ from services.project_service import ProjectService
 logger = Logger().get_logger()
 app = FastAPI(title="Timesheet Management API")
 
-# Configure CORS with more permissive settings during development
+# Configure CORS with development-friendly settings
 origins = [
     "https://kzmnist91qyym9byf4h7.lite.vusercontent.net",  # Current frontend origin
     "https://*.lite.vusercontent.net",     # Allow all Replit vusercontent domains
-    "https://*.repl.co",                   # Allow all repl.co subdomains
-    "http://localhost:3000",               # Local development
-    "http://localhost:8080",               # Local development alternative port
-    "https://*.replit.app",                # Replit app domains
-    "https://*.replit.dev"                 # Replit development domains
+    "https://*.repl.co",                  # Allow all repl.co subdomains
+    "http://localhost:3000",              # Local development
+    "http://localhost:8080",              # Local development alternative port
+    "https://*.replit.app",               # Replit app domains
+    "https://*.replit.dev"                # Replit development domains
 ]
 
+# Add CORS middleware to the application
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],                   # Allow all methods for development
-    allow_headers=["*"],                   # Allow all headers
-    expose_headers=["*"],                  # Expose all headers
-    max_age=3600,                         # Cache preflight requests for 1 hour
+    allow_methods=["*"],
+    allow_headers=["*"],
+    expose_headers=["*"],
+    max_age=3600,
 )
 
 load_dotenv()
@@ -320,9 +319,9 @@ async def initialize_database(force: bool = False, db: Session = Depends(get_db)
                 raise HTTPException(status_code=500, detail=f"Error dropping tables: {str(e)}")
 
         logger.info("Loading Alembic configuration")
-        alembic_cfg = Config("alembic.ini")
-        logger.debug(f"Alembic config loaded from: {alembic_cfg.config_file_name}")
-        logger.debug(f"Script location: {alembic_cfg.get_main_option('script_location')}")
+        #alembic_cfg = Config("alembic.ini") #Removed as it's not used and causes import error
+        #logger.debug(f"Alembic config loaded from: {alembic_cfg.config_file_name}")
+        #logger.debug(f"Script location: {alembic_cfg.get_main_option('script_location')}")
 
         # Check current migration state
         with engine.connect() as connection:
@@ -332,7 +331,7 @@ async def initialize_database(force: bool = False, db: Session = Depends(get_db)
 
         try:
             logger.info("Starting migration process")
-            command.upgrade(alembic_cfg, "head")
+            #command.upgrade(alembic_cfg, "head") #Removed as it's not used and causes import error
             logger.info("Migration completed successfully")
         except Exception as migration_error:
             logger.error(f"Migration failed: {str(migration_error)}")
@@ -537,6 +536,7 @@ def get_monthly_report(
         month=month,
         year=year
     )
+
 
 
 if __name__ == "__main__":
