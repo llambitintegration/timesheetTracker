@@ -348,3 +348,34 @@
 2025-01-10 00:01:43,697 - TimesheetTracker - DEBUG - Fetching project with ID: NONEXISTENT-001
 2025-01-10 00:01:43,698 - TimesheetTracker - WARNING - Project not found for deletion: NONEXISTENT-001
 2025-01-10 00:01:43,698 - TimesheetTracker - WARNING - Project not found for deletion: NONEXISTENT-001
+2025-01-10 00:03:29,846 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:03:29,913 - TimesheetTracker - INFO - Starting FastAPI server
+2025-01-10 00:03:29,913 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-10 00:03:29,913 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-10 00:03:30,258 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-10 00:03:30,259 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-10 00:03:30,260 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-10 00:03:30,479 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-10 00:03:30,480 - TimesheetTracker - INFO - Expected tables: projects, customers, time_entries, project_managers
+2025-01-10 00:03:30,641 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-10 00:03:30,719 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-10 00:03:30,798 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-10 00:03:30,879 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-10 00:03:30,880 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-10 00:03:33,706 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:04:02,602 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:04:02,668 - TimesheetTracker - INFO - Starting FastAPI server
+2025-01-10 00:04:02,668 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-10 00:04:02,668 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-10 00:04:03,021 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-10 00:04:03,021 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-10 00:04:03,021 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-10 00:04:03,233 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-10 00:04:03,233 - TimesheetTracker - INFO - Expected tables: projects, customers, project_managers, time_entries
+2025-01-10 00:04:03,372 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-10 00:04:03,452 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-10 00:04:03,533 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-10 00:04:03,612 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-10 00:04:03,613 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-10 00:04:04,857 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:04:04,918 - TimesheetTracker - INFO - Root endpoint accessed
