@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from sqlalchemy import join, text, inspect, func
 from sqlalchemy.orm import Session
+from sqlalchemy.sql.schema import MetaData
+from alembic.migration import MigrationContext
 from typing import List, Optional
 from datetime import datetime, timedelta, date
 import calendar
@@ -11,22 +13,24 @@ import uvicorn
 
 from database import schemas, crud, get_db, verify_database, engine
 from utils.logger import Logger
-from utils import utils
+from utils.middleware import logging_middleware
 from models.timeEntry import TimeEntry
 from models.projectModel import Project
 from models.projectManagerModel import ProjectManager
 from services.customer_service import CustomerService
 from services.project_manager_service import ProjectManagerService
 from services.project_service import ProjectService
-from utils.middleware import log_middleware
 
 logger = Logger().get_logger()
 app = FastAPI(title="Timesheet Management API")
 
-# CORS configuration
-origins = ["https://kzml3cjwnshszfymqji0.lite.vusercontent.net"]
+# Define allowed origins
+origins = [
+    "https://kzml3cjwnshszfymqji0.lite.vusercontent.net",
+    "https://kzmjk7upp9bwloroftyo.lite.vusercontent.net"
+]
 
-# Ensure CORS middleware is the first middleware
+# Add CORS middleware first, before any other middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -37,45 +41,30 @@ app.add_middleware(
     max_age=3600,
 )
 
-# Add request logging middleware after CORS
+# Add custom logging middleware after CORS
 @app.middleware("http")
-async def log_requests(request: Request, call_next):
-    # Log the incoming request details
-    logger.info(f"Incoming request: {request.method} {request.url}")
-    logger.info(f"Request headers: {dict(request.headers)}")
-
-    # Special handling for preflight requests
-    if request.method == "OPTIONS":
-        logger.info("Processing preflight request")
-        headers = {
-            "Access-Control-Allow-Origin": origins[0],
-            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH",
-            "Access-Control-Allow-Headers": "*",
-            "Access-Control-Allow-Credentials": "true",
-            "Access-Control-Max-Age": "3600",
-        }
-        return JSONResponse(content={}, headers=headers)
-
-    response = await log_middleware(request, call_next)
-    logger.info(f"Response headers: {dict(response.headers)}")
-    return response
-
-load_dotenv()
+async def custom_middleware(request: Request, call_next):
+    return await logging_middleware(request, call_next)
 
 @app.on_event("startup")
 async def startup_event():
-    """Verify database connection on startup"""
+    """Verify database connection and log CORS configuration on startup"""
     logger.info("Starting FastAPI server")
     logger.info("Verifying database connection on startup")
     try:
         if not verify_database():
             logger.warning("Database verification failed - schema may need initialization")
-        logger.info("CORS configuration:")
-        logger.info(f"Allowed origins: {origins}")
-        logger.info(f"Allowed methods: {['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH']}")
-        logger.info(f"Allowed headers: {['*']}")
+
+        # Log CORS configuration
+        logger.info("=== CORS Configuration ===")
+        logger.info(f"Allowed Origins: {origins}")
+        logger.info(f"Allowed Methods: {['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH']}")
+        logger.info(f"Allow Credentials: True")
+        logger.info(f"Max Age: 3600")
+
     except Exception as e:
-        logger.error(f"Error verifying database: {str(e)}")
+        logger.error(f"Error during startup: {str(e)}")
+        logger.exception("Startup error details:")
         raise
 
 @app.get("/")
@@ -345,7 +334,7 @@ async def initialize_database(force: bool = False, db: Session = Depends(get_db)
             context = MigrationContext.configure(connection)
             current_rev = context.get_current_revision()
             logger.info(f"Current migration revision: {current_rev or 'None'}")
-
+        
         try:
             logger.info("Starting migration process")
             # Add your alembic upgrade command here.  This is missing from the original and edited code.  

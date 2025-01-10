@@ -1,0 +1,333 @@
+fetch("https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/by-date/2024-11-13", {
+  "headers": {
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "https://kzmjk7upp9bwloroftyo.lite.vusercontent.net/",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/by-date/2024-11-13", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "cross-site",
+    "Referer": "https://kzmjk7upp9bwloroftyo.lite.vusercontent.net/",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "OPTIONS"
+}); ;
+fetch("https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/by-date/2024-11-13", {
+  "headers": {
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "https://kzmjk7upp9bwloroftyo.lite.vusercontent.net/",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/by-date/2024-11-13", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "cross-site",
+    "Referer": "https://kzmjk7upp9bwloroftyo.lite.vusercontent.net/",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "OPTIONS"
+}); ;
+fetch("https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/by-date/2024-11-13", {
+  "headers": {
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "https://kzmjk7upp9bwloroftyo.lite.vusercontent.net/",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/by-date/2024-11-13", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "cross-site",
+    "Referer": "https://kzmjk7upp9bwloroftyo.lite.vusercontent.net/",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "OPTIONS"
+}); ;
+fetch("https://v0.dev/chat/api/wait-room", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "cookie": "ko_id=40a9f37a-7c0c-4db9-b238-5f2ffd3b5491; v0-has-signed-in=1; __stripe_mid=6065616d-4710-4548-9cd2-7012e27c9d9cd89bba; file-tree-size=25; last-clicked-feature=You%20can%20now%20double%20click%20on%20text%20with%20the%20refinement%20tool%20to%20edit%20text%20live%20in%20your%20preview; chat-sidebar-collapsed=true; block-view-size=95; v0-active=1; __stripe_sid=24c5a7c0-1b07-485b-b132-b8b56913a152183637; user_session=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..rpskEbT__LkHjqhm.yIbVcvRf2VRqTnUtq1iSB85IEghnyS14BXMva_wKovwjMz32aNE_TvmEXu_kzf0nhIKHwwKul6rCVMOvU2WMJiodUoALkUyNLVL3qfMwg_3NLgXKcCcD8tXl4jxPhPcaXGUWBzXZCPGJDfok4HM_HVY-_hPMIxL667IUgh0oCh_GAkUPPrlvBgQeiljUPH7eLK6izvVqzsgme1Y2-z9XyaiGlC1Ex0Idp1ZbdlXMAVK-L-kA8eKjAbNcBBaMIx9EfWgWJ14esAxE9tx8LDrYVswN9qq0pVqth86DTpeBnlSf4yfxOaUMr-NO0oiIT4PfBEpqe08SP7VgdJAChgSHt0oXxcG08xEZLJ5JxkhJCeTonzIsTN-SSXtGXDqGJvBzpELHQJcgCMI11gkPG-6Zk1yDAjwJ5agts2HFdjahPtQCE5WPT-sHjBGrjYy5keN3pemeMzxZ2H2nxSFizVYd20S7XjS8kJp-cqV7a8_eMlBBiC8jRVD6kkQnz9cknpacLexPqNvjny1rAaaJ8Gd5gv_p0KHjYqvEsXboB1cjTwAcl3mKY1gSERwEVwI_sRoE7h3CU03vixx_dv6V8iRejExIKRvWCau35dRHkR_Xj1bS-BYHL6NZ3bD2c1TcdfnKPMF1dHECkK8zjW5B3k6JNfi0yKWKnCVnG9YaWSV9m7eU5wMthPcP-gq3Q9UbY2kP3DG1iAv8x8UJ55dVZr2NLVaAFq5LUF2L.gL5tsW8WUKdiwE1mjjbKJA; anon_session_id=WOJDSOJsrnEepiFmADAqSr4raakhSY5e; session_referer=https%3A%2F%2Fv0.dev%2Fchat%2FUFsxiVsYhL6; ko_sid={%22id%22:%221736463136326%22%2C%22lastTouched%22:1736469497392}; prompt-draft={%22version%22:1%2C%22drafts%22:{%22new-chat-prompt-draft%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736185508047}%2C%22UFsxiVsYhL6%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736469589672}}}",
+    "Referer": "https://v0.dev/chat/UFsxiVsYhL6",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://api.getkoala.com/web/projects/vercel/batch", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "text/plain;charset=UTF-8",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "no-cors",
+    "sec-fetch-site": "cross-site",
+    "Referer": "https://v0.dev/",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": "{\"profile_id\":\"40a9f37a-7c0c-4db9-b238-5f2ffd3b5491\",\"page_views\":[{\"context\":{\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0\",\"platform\":{\"name\":\"Win32\",\"deviceType\":\"desktop\"},\"library\":{\"name\":\"koala\",\"version\":\"1.25.0\"},\"session\":{\"id\":\"1736463136326\",\"lastTouched\":1736468543609},\"locale\":\"en-US\",\"timezone\":\"America/Chicago\"},\"message_id\":\"0379dcbd-927b-41ef-a43b-cefc9dedbfda\",\"page\":{\"path\":\"/chat/UFsxiVsYhL6\",\"referrer\":\"\",\"title\":\"Timesheet management guide - v0 by Vercel\",\"url\":\"https://v0.dev/chat/UFsxiVsYhL6\",\"host\":\"v0.dev\"},\"visit_start\":\"2025-01-10T00:22:23.609Z\",\"focus_intervals\":[7116,28904,902,17043,9027,6110,5170,27269,1677,5351,1049,17915,3215,1209,34827,16072,2527,74945,63604,16578]}]}",
+  "method": "POST"
+}); ;
+fetch("https://v0.dev/api/auth/info", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "cookie": "ko_id=40a9f37a-7c0c-4db9-b238-5f2ffd3b5491; v0-has-signed-in=1; __stripe_mid=6065616d-4710-4548-9cd2-7012e27c9d9cd89bba; file-tree-size=25; last-clicked-feature=You%20can%20now%20double%20click%20on%20text%20with%20the%20refinement%20tool%20to%20edit%20text%20live%20in%20your%20preview; chat-sidebar-collapsed=true; block-view-size=95; v0-active=1; __stripe_sid=24c5a7c0-1b07-485b-b132-b8b56913a152183637; user_session=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..rpskEbT__LkHjqhm.yIbVcvRf2VRqTnUtq1iSB85IEghnyS14BXMva_wKovwjMz32aNE_TvmEXu_kzf0nhIKHwwKul6rCVMOvU2WMJiodUoALkUyNLVL3qfMwg_3NLgXKcCcD8tXl4jxPhPcaXGUWBzXZCPGJDfok4HM_HVY-_hPMIxL667IUgh0oCh_GAkUPPrlvBgQeiljUPH7eLK6izvVqzsgme1Y2-z9XyaiGlC1Ex0Idp1ZbdlXMAVK-L-kA8eKjAbNcBBaMIx9EfWgWJ14esAxE9tx8LDrYVswN9qq0pVqth86DTpeBnlSf4yfxOaUMr-NO0oiIT4PfBEpqe08SP7VgdJAChgSHt0oXxcG08xEZLJ5JxkhJCeTonzIsTN-SSXtGXDqGJvBzpELHQJcgCMI11gkPG-6Zk1yDAjwJ5agts2HFdjahPtQCE5WPT-sHjBGrjYy5keN3pemeMzxZ2H2nxSFizVYd20S7XjS8kJp-cqV7a8_eMlBBiC8jRVD6kkQnz9cknpacLexPqNvjny1rAaaJ8Gd5gv_p0KHjYqvEsXboB1cjTwAcl3mKY1gSERwEVwI_sRoE7h3CU03vixx_dv6V8iRejExIKRvWCau35dRHkR_Xj1bS-BYHL6NZ3bD2c1TcdfnKPMF1dHECkK8zjW5B3k6JNfi0yKWKnCVnG9YaWSV9m7eU5wMthPcP-gq3Q9UbY2kP3DG1iAv8x8UJ55dVZr2NLVaAFq5LUF2L.gL5tsW8WUKdiwE1mjjbKJA; anon_session_id=WOJDSOJsrnEepiFmADAqSr4raakhSY5e; session_referer=https%3A%2F%2Fv0.dev%2Fchat%2FUFsxiVsYhL6; ko_sid={%22id%22:%221736463136326%22%2C%22lastTouched%22:1736469695230}; prompt-draft={%22version%22:1%2C%22drafts%22:{%22new-chat-prompt-draft%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736185508047}%2C%22UFsxiVsYhL6%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736469695262}}}",
+    "Referer": "https://v0.dev/chat/UFsxiVsYhL6",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://v0.dev/api/auth/update", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "cookie": "ko_id=40a9f37a-7c0c-4db9-b238-5f2ffd3b5491; v0-has-signed-in=1; __stripe_mid=6065616d-4710-4548-9cd2-7012e27c9d9cd89bba; file-tree-size=25; last-clicked-feature=You%20can%20now%20double%20click%20on%20text%20with%20the%20refinement%20tool%20to%20edit%20text%20live%20in%20your%20preview; chat-sidebar-collapsed=true; block-view-size=95; v0-active=1; __stripe_sid=24c5a7c0-1b07-485b-b132-b8b56913a152183637; user_session=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..rpskEbT__LkHjqhm.yIbVcvRf2VRqTnUtq1iSB85IEghnyS14BXMva_wKovwjMz32aNE_TvmEXu_kzf0nhIKHwwKul6rCVMOvU2WMJiodUoALkUyNLVL3qfMwg_3NLgXKcCcD8tXl4jxPhPcaXGUWBzXZCPGJDfok4HM_HVY-_hPMIxL667IUgh0oCh_GAkUPPrlvBgQeiljUPH7eLK6izvVqzsgme1Y2-z9XyaiGlC1Ex0Idp1ZbdlXMAVK-L-kA8eKjAbNcBBaMIx9EfWgWJ14esAxE9tx8LDrYVswN9qq0pVqth86DTpeBnlSf4yfxOaUMr-NO0oiIT4PfBEpqe08SP7VgdJAChgSHt0oXxcG08xEZLJ5JxkhJCeTonzIsTN-SSXtGXDqGJvBzpELHQJcgCMI11gkPG-6Zk1yDAjwJ5agts2HFdjahPtQCE5WPT-sHjBGrjYy5keN3pemeMzxZ2H2nxSFizVYd20S7XjS8kJp-cqV7a8_eMlBBiC8jRVD6kkQnz9cknpacLexPqNvjny1rAaaJ8Gd5gv_p0KHjYqvEsXboB1cjTwAcl3mKY1gSERwEVwI_sRoE7h3CU03vixx_dv6V8iRejExIKRvWCau35dRHkR_Xj1bS-BYHL6NZ3bD2c1TcdfnKPMF1dHECkK8zjW5B3k6JNfi0yKWKnCVnG9YaWSV9m7eU5wMthPcP-gq3Q9UbY2kP3DG1iAv8x8UJ55dVZr2NLVaAFq5LUF2L.gL5tsW8WUKdiwE1mjjbKJA; anon_session_id=WOJDSOJsrnEepiFmADAqSr4raakhSY5e; session_referer=https%3A%2F%2Fv0.dev%2Fchat%2FUFsxiVsYhL6; ko_sid={%22id%22:%221736463136326%22%2C%22lastTouched%22:1736469695230}; prompt-draft={%22version%22:1%2C%22drafts%22:{%22new-chat-prompt-draft%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736185508047}%2C%22UFsxiVsYhL6%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736469695262}}}",
+    "Referer": "https://v0.dev/chat/UFsxiVsYhL6",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "POST"
+}); ;
+fetch("https://v0.dev/chat/api/scopes", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "cookie": "ko_id=40a9f37a-7c0c-4db9-b238-5f2ffd3b5491; v0-has-signed-in=1; __stripe_mid=6065616d-4710-4548-9cd2-7012e27c9d9cd89bba; file-tree-size=25; last-clicked-feature=You%20can%20now%20double%20click%20on%20text%20with%20the%20refinement%20tool%20to%20edit%20text%20live%20in%20your%20preview; chat-sidebar-collapsed=true; block-view-size=95; v0-active=1; __stripe_sid=24c5a7c0-1b07-485b-b132-b8b56913a152183637; user_session=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..rpskEbT__LkHjqhm.yIbVcvRf2VRqTnUtq1iSB85IEghnyS14BXMva_wKovwjMz32aNE_TvmEXu_kzf0nhIKHwwKul6rCVMOvU2WMJiodUoALkUyNLVL3qfMwg_3NLgXKcCcD8tXl4jxPhPcaXGUWBzXZCPGJDfok4HM_HVY-_hPMIxL667IUgh0oCh_GAkUPPrlvBgQeiljUPH7eLK6izvVqzsgme1Y2-z9XyaiGlC1Ex0Idp1ZbdlXMAVK-L-kA8eKjAbNcBBaMIx9EfWgWJ14esAxE9tx8LDrYVswN9qq0pVqth86DTpeBnlSf4yfxOaUMr-NO0oiIT4PfBEpqe08SP7VgdJAChgSHt0oXxcG08xEZLJ5JxkhJCeTonzIsTN-SSXtGXDqGJvBzpELHQJcgCMI11gkPG-6Zk1yDAjwJ5agts2HFdjahPtQCE5WPT-sHjBGrjYy5keN3pemeMzxZ2H2nxSFizVYd20S7XjS8kJp-cqV7a8_eMlBBiC8jRVD6kkQnz9cknpacLexPqNvjny1rAaaJ8Gd5gv_p0KHjYqvEsXboB1cjTwAcl3mKY1gSERwEVwI_sRoE7h3CU03vixx_dv6V8iRejExIKRvWCau35dRHkR_Xj1bS-BYHL6NZ3bD2c1TcdfnKPMF1dHECkK8zjW5B3k6JNfi0yKWKnCVnG9YaWSV9m7eU5wMthPcP-gq3Q9UbY2kP3DG1iAv8x8UJ55dVZr2NLVaAFq5LUF2L.gL5tsW8WUKdiwE1mjjbKJA; anon_session_id=WOJDSOJsrnEepiFmADAqSr4raakhSY5e; session_referer=https%3A%2F%2Fv0.dev%2Fchat%2FUFsxiVsYhL6; ko_sid={%22id%22:%221736463136326%22%2C%22lastTouched%22:1736469695230}; prompt-draft={%22version%22:1%2C%22drafts%22:{%22new-chat-prompt-draft%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736185508047}%2C%22UFsxiVsYhL6%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736469695262}}}",
+    "Referer": "https://v0.dev/chat/UFsxiVsYhL6",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://v0.dev/chat/api/wait-room", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "cookie": "ko_id=40a9f37a-7c0c-4db9-b238-5f2ffd3b5491; v0-has-signed-in=1; __stripe_mid=6065616d-4710-4548-9cd2-7012e27c9d9cd89bba; file-tree-size=25; last-clicked-feature=You%20can%20now%20double%20click%20on%20text%20with%20the%20refinement%20tool%20to%20edit%20text%20live%20in%20your%20preview; chat-sidebar-collapsed=true; block-view-size=95; v0-active=1; __stripe_sid=24c5a7c0-1b07-485b-b132-b8b56913a152183637; user_session=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..rpskEbT__LkHjqhm.yIbVcvRf2VRqTnUtq1iSB85IEghnyS14BXMva_wKovwjMz32aNE_TvmEXu_kzf0nhIKHwwKul6rCVMOvU2WMJiodUoALkUyNLVL3qfMwg_3NLgXKcCcD8tXl4jxPhPcaXGUWBzXZCPGJDfok4HM_HVY-_hPMIxL667IUgh0oCh_GAkUPPrlvBgQeiljUPH7eLK6izvVqzsgme1Y2-z9XyaiGlC1Ex0Idp1ZbdlXMAVK-L-kA8eKjAbNcBBaMIx9EfWgWJ14esAxE9tx8LDrYVswN9qq0pVqth86DTpeBnlSf4yfxOaUMr-NO0oiIT4PfBEpqe08SP7VgdJAChgSHt0oXxcG08xEZLJ5JxkhJCeTonzIsTN-SSXtGXDqGJvBzpELHQJcgCMI11gkPG-6Zk1yDAjwJ5agts2HFdjahPtQCE5WPT-sHjBGrjYy5keN3pemeMzxZ2H2nxSFizVYd20S7XjS8kJp-cqV7a8_eMlBBiC8jRVD6kkQnz9cknpacLexPqNvjny1rAaaJ8Gd5gv_p0KHjYqvEsXboB1cjTwAcl3mKY1gSERwEVwI_sRoE7h3CU03vixx_dv6V8iRejExIKRvWCau35dRHkR_Xj1bS-BYHL6NZ3bD2c1TcdfnKPMF1dHECkK8zjW5B3k6JNfi0yKWKnCVnG9YaWSV9m7eU5wMthPcP-gq3Q9UbY2kP3DG1iAv8x8UJ55dVZr2NLVaAFq5LUF2L.gL5tsW8WUKdiwE1mjjbKJA; anon_session_id=WOJDSOJsrnEepiFmADAqSr4raakhSY5e; session_referer=https%3A%2F%2Fv0.dev%2Fchat%2FUFsxiVsYhL6; ko_sid={%22id%22:%221736463136326%22%2C%22lastTouched%22:1736469695230}; prompt-draft={%22version%22:1%2C%22drafts%22:{%22new-chat-prompt-draft%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736185508047}%2C%22UFsxiVsYhL6%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736469695262}}}",
+    "Referer": "https://v0.dev/chat/UFsxiVsYhL6",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://v0.dev/chat/api/history", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "cookie": "ko_id=40a9f37a-7c0c-4db9-b238-5f2ffd3b5491; v0-has-signed-in=1; __stripe_mid=6065616d-4710-4548-9cd2-7012e27c9d9cd89bba; file-tree-size=25; last-clicked-feature=You%20can%20now%20double%20click%20on%20text%20with%20the%20refinement%20tool%20to%20edit%20text%20live%20in%20your%20preview; chat-sidebar-collapsed=true; block-view-size=95; v0-active=1; __stripe_sid=24c5a7c0-1b07-485b-b132-b8b56913a152183637; user_session=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..rpskEbT__LkHjqhm.yIbVcvRf2VRqTnUtq1iSB85IEghnyS14BXMva_wKovwjMz32aNE_TvmEXu_kzf0nhIKHwwKul6rCVMOvU2WMJiodUoALkUyNLVL3qfMwg_3NLgXKcCcD8tXl4jxPhPcaXGUWBzXZCPGJDfok4HM_HVY-_hPMIxL667IUgh0oCh_GAkUPPrlvBgQeiljUPH7eLK6izvVqzsgme1Y2-z9XyaiGlC1Ex0Idp1ZbdlXMAVK-L-kA8eKjAbNcBBaMIx9EfWgWJ14esAxE9tx8LDrYVswN9qq0pVqth86DTpeBnlSf4yfxOaUMr-NO0oiIT4PfBEpqe08SP7VgdJAChgSHt0oXxcG08xEZLJ5JxkhJCeTonzIsTN-SSXtGXDqGJvBzpELHQJcgCMI11gkPG-6Zk1yDAjwJ5agts2HFdjahPtQCE5WPT-sHjBGrjYy5keN3pemeMzxZ2H2nxSFizVYd20S7XjS8kJp-cqV7a8_eMlBBiC8jRVD6kkQnz9cknpacLexPqNvjny1rAaaJ8Gd5gv_p0KHjYqvEsXboB1cjTwAcl3mKY1gSERwEVwI_sRoE7h3CU03vixx_dv6V8iRejExIKRvWCau35dRHkR_Xj1bS-BYHL6NZ3bD2c1TcdfnKPMF1dHECkK8zjW5B3k6JNfi0yKWKnCVnG9YaWSV9m7eU5wMthPcP-gq3Q9UbY2kP3DG1iAv8x8UJ55dVZr2NLVaAFq5LUF2L.gL5tsW8WUKdiwE1mjjbKJA; anon_session_id=WOJDSOJsrnEepiFmADAqSr4raakhSY5e; session_referer=https%3A%2F%2Fv0.dev%2Fchat%2FUFsxiVsYhL6; ko_sid={%22id%22:%221736463136326%22%2C%22lastTouched%22:1736469695230}; prompt-draft={%22version%22:1%2C%22drafts%22:{%22new-chat-prompt-draft%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736185508047}%2C%22UFsxiVsYhL6%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736469695262}}}",
+    "Referer": "https://v0.dev/chat/UFsxiVsYhL6",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://v0.dev/chat/api/rate-limit?scope=llambitintegration", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "cookie": "ko_id=40a9f37a-7c0c-4db9-b238-5f2ffd3b5491; v0-has-signed-in=1; __stripe_mid=6065616d-4710-4548-9cd2-7012e27c9d9cd89bba; file-tree-size=25; last-clicked-feature=You%20can%20now%20double%20click%20on%20text%20with%20the%20refinement%20tool%20to%20edit%20text%20live%20in%20your%20preview; chat-sidebar-collapsed=true; block-view-size=95; v0-active=1; __stripe_sid=24c5a7c0-1b07-485b-b132-b8b56913a152183637; user_session=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..rpskEbT__LkHjqhm.yIbVcvRf2VRqTnUtq1iSB85IEghnyS14BXMva_wKovwjMz32aNE_TvmEXu_kzf0nhIKHwwKul6rCVMOvU2WMJiodUoALkUyNLVL3qfMwg_3NLgXKcCcD8tXl4jxPhPcaXGUWBzXZCPGJDfok4HM_HVY-_hPMIxL667IUgh0oCh_GAkUPPrlvBgQeiljUPH7eLK6izvVqzsgme1Y2-z9XyaiGlC1Ex0Idp1ZbdlXMAVK-L-kA8eKjAbNcBBaMIx9EfWgWJ14esAxE9tx8LDrYVswN9qq0pVqth86DTpeBnlSf4yfxOaUMr-NO0oiIT4PfBEpqe08SP7VgdJAChgSHt0oXxcG08xEZLJ5JxkhJCeTonzIsTN-SSXtGXDqGJvBzpELHQJcgCMI11gkPG-6Zk1yDAjwJ5agts2HFdjahPtQCE5WPT-sHjBGrjYy5keN3pemeMzxZ2H2nxSFizVYd20S7XjS8kJp-cqV7a8_eMlBBiC8jRVD6kkQnz9cknpacLexPqNvjny1rAaaJ8Gd5gv_p0KHjYqvEsXboB1cjTwAcl3mKY1gSERwEVwI_sRoE7h3CU03vixx_dv6V8iRejExIKRvWCau35dRHkR_Xj1bS-BYHL6NZ3bD2c1TcdfnKPMF1dHECkK8zjW5B3k6JNfi0yKWKnCVnG9YaWSV9m7eU5wMthPcP-gq3Q9UbY2kP3DG1iAv8x8UJ55dVZr2NLVaAFq5LUF2L.gL5tsW8WUKdiwE1mjjbKJA; anon_session_id=WOJDSOJsrnEepiFmADAqSr4raakhSY5e; session_referer=https%3A%2F%2Fv0.dev%2Fchat%2FUFsxiVsYhL6; ko_sid={%22id%22:%221736463136326%22%2C%22lastTouched%22:1736469695230}; prompt-draft={%22version%22:1%2C%22drafts%22:{%22new-chat-prompt-draft%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736185508047}%2C%22UFsxiVsYhL6%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736469695262}}}",
+    "Referer": "https://v0.dev/chat/UFsxiVsYhL6",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://v0.dev/chat/api/projects/history", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "cookie": "ko_id=40a9f37a-7c0c-4db9-b238-5f2ffd3b5491; v0-has-signed-in=1; __stripe_mid=6065616d-4710-4548-9cd2-7012e27c9d9cd89bba; file-tree-size=25; last-clicked-feature=You%20can%20now%20double%20click%20on%20text%20with%20the%20refinement%20tool%20to%20edit%20text%20live%20in%20your%20preview; chat-sidebar-collapsed=true; block-view-size=95; v0-active=1; __stripe_sid=24c5a7c0-1b07-485b-b132-b8b56913a152183637; user_session=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..rpskEbT__LkHjqhm.yIbVcvRf2VRqTnUtq1iSB85IEghnyS14BXMva_wKovwjMz32aNE_TvmEXu_kzf0nhIKHwwKul6rCVMOvU2WMJiodUoALkUyNLVL3qfMwg_3NLgXKcCcD8tXl4jxPhPcaXGUWBzXZCPGJDfok4HM_HVY-_hPMIxL667IUgh0oCh_GAkUPPrlvBgQeiljUPH7eLK6izvVqzsgme1Y2-z9XyaiGlC1Ex0Idp1ZbdlXMAVK-L-kA8eKjAbNcBBaMIx9EfWgWJ14esAxE9tx8LDrYVswN9qq0pVqth86DTpeBnlSf4yfxOaUMr-NO0oiIT4PfBEpqe08SP7VgdJAChgSHt0oXxcG08xEZLJ5JxkhJCeTonzIsTN-SSXtGXDqGJvBzpELHQJcgCMI11gkPG-6Zk1yDAjwJ5agts2HFdjahPtQCE5WPT-sHjBGrjYy5keN3pemeMzxZ2H2nxSFizVYd20S7XjS8kJp-cqV7a8_eMlBBiC8jRVD6kkQnz9cknpacLexPqNvjny1rAaaJ8Gd5gv_p0KHjYqvEsXboB1cjTwAcl3mKY1gSERwEVwI_sRoE7h3CU03vixx_dv6V8iRejExIKRvWCau35dRHkR_Xj1bS-BYHL6NZ3bD2c1TcdfnKPMF1dHECkK8zjW5B3k6JNfi0yKWKnCVnG9YaWSV9m7eU5wMthPcP-gq3Q9UbY2kP3DG1iAv8x8UJ55dVZr2NLVaAFq5LUF2L.gL5tsW8WUKdiwE1mjjbKJA; anon_session_id=WOJDSOJsrnEepiFmADAqSr4raakhSY5e; session_referer=https%3A%2F%2Fv0.dev%2Fchat%2FUFsxiVsYhL6; ko_sid={%22id%22:%221736463136326%22%2C%22lastTouched%22:1736469695230}; prompt-draft={%22version%22:1%2C%22drafts%22:{%22new-chat-prompt-draft%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736185508047}%2C%22UFsxiVsYhL6%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736469695262}}}",
+    "Referer": "https://v0.dev/chat/UFsxiVsYhL6",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://v0.dev/chat/api/favorites", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "cookie": "ko_id=40a9f37a-7c0c-4db9-b238-5f2ffd3b5491; v0-has-signed-in=1; __stripe_mid=6065616d-4710-4548-9cd2-7012e27c9d9cd89bba; file-tree-size=25; last-clicked-feature=You%20can%20now%20double%20click%20on%20text%20with%20the%20refinement%20tool%20to%20edit%20text%20live%20in%20your%20preview; chat-sidebar-collapsed=true; block-view-size=95; v0-active=1; __stripe_sid=24c5a7c0-1b07-485b-b132-b8b56913a152183637; user_session=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..rpskEbT__LkHjqhm.yIbVcvRf2VRqTnUtq1iSB85IEghnyS14BXMva_wKovwjMz32aNE_TvmEXu_kzf0nhIKHwwKul6rCVMOvU2WMJiodUoALkUyNLVL3qfMwg_3NLgXKcCcD8tXl4jxPhPcaXGUWBzXZCPGJDfok4HM_HVY-_hPMIxL667IUgh0oCh_GAkUPPrlvBgQeiljUPH7eLK6izvVqzsgme1Y2-z9XyaiGlC1Ex0Idp1ZbdlXMAVK-L-kA8eKjAbNcBBaMIx9EfWgWJ14esAxE9tx8LDrYVswN9qq0pVqth86DTpeBnlSf4yfxOaUMr-NO0oiIT4PfBEpqe08SP7VgdJAChgSHt0oXxcG08xEZLJ5JxkhJCeTonzIsTN-SSXtGXDqGJvBzpELHQJcgCMI11gkPG-6Zk1yDAjwJ5agts2HFdjahPtQCE5WPT-sHjBGrjYy5keN3pemeMzxZ2H2nxSFizVYd20S7XjS8kJp-cqV7a8_eMlBBiC8jRVD6kkQnz9cknpacLexPqNvjny1rAaaJ8Gd5gv_p0KHjYqvEsXboB1cjTwAcl3mKY1gSERwEVwI_sRoE7h3CU03vixx_dv6V8iRejExIKRvWCau35dRHkR_Xj1bS-BYHL6NZ3bD2c1TcdfnKPMF1dHECkK8zjW5B3k6JNfi0yKWKnCVnG9YaWSV9m7eU5wMthPcP-gq3Q9UbY2kP3DG1iAv8x8UJ55dVZr2NLVaAFq5LUF2L.gL5tsW8WUKdiwE1mjjbKJA; anon_session_id=WOJDSOJsrnEepiFmADAqSr4raakhSY5e; session_referer=https%3A%2F%2Fv0.dev%2Fchat%2FUFsxiVsYhL6; ko_sid={%22id%22:%221736463136326%22%2C%22lastTouched%22:1736469695230}; prompt-draft={%22version%22:1%2C%22drafts%22:{%22new-chat-prompt-draft%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736185508047}%2C%22UFsxiVsYhL6%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736469695262}}}",
+    "Referer": "https://v0.dev/chat/UFsxiVsYhL6",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://v0.dev/chat/api/chat/cstu?scopeSlug=llambitintegration&chatId=UFsxiVsYhL6&messageId=rhTUtPElY14yVbKIBlH1rQm6xtSjcm9G", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "cookie": "ko_id=40a9f37a-7c0c-4db9-b238-5f2ffd3b5491; v0-has-signed-in=1; __stripe_mid=6065616d-4710-4548-9cd2-7012e27c9d9cd89bba; file-tree-size=25; last-clicked-feature=You%20can%20now%20double%20click%20on%20text%20with%20the%20refinement%20tool%20to%20edit%20text%20live%20in%20your%20preview; chat-sidebar-collapsed=true; block-view-size=95; v0-active=1; __stripe_sid=24c5a7c0-1b07-485b-b132-b8b56913a152183637; user_session=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..rpskEbT__LkHjqhm.yIbVcvRf2VRqTnUtq1iSB85IEghnyS14BXMva_wKovwjMz32aNE_TvmEXu_kzf0nhIKHwwKul6rCVMOvU2WMJiodUoALkUyNLVL3qfMwg_3NLgXKcCcD8tXl4jxPhPcaXGUWBzXZCPGJDfok4HM_HVY-_hPMIxL667IUgh0oCh_GAkUPPrlvBgQeiljUPH7eLK6izvVqzsgme1Y2-z9XyaiGlC1Ex0Idp1ZbdlXMAVK-L-kA8eKjAbNcBBaMIx9EfWgWJ14esAxE9tx8LDrYVswN9qq0pVqth86DTpeBnlSf4yfxOaUMr-NO0oiIT4PfBEpqe08SP7VgdJAChgSHt0oXxcG08xEZLJ5JxkhJCeTonzIsTN-SSXtGXDqGJvBzpELHQJcgCMI11gkPG-6Zk1yDAjwJ5agts2HFdjahPtQCE5WPT-sHjBGrjYy5keN3pemeMzxZ2H2nxSFizVYd20S7XjS8kJp-cqV7a8_eMlBBiC8jRVD6kkQnz9cknpacLexPqNvjny1rAaaJ8Gd5gv_p0KHjYqvEsXboB1cjTwAcl3mKY1gSERwEVwI_sRoE7h3CU03vixx_dv6V8iRejExIKRvWCau35dRHkR_Xj1bS-BYHL6NZ3bD2c1TcdfnKPMF1dHECkK8zjW5B3k6JNfi0yKWKnCVnG9YaWSV9m7eU5wMthPcP-gq3Q9UbY2kP3DG1iAv8x8UJ55dVZr2NLVaAFq5LUF2L.gL5tsW8WUKdiwE1mjjbKJA; anon_session_id=WOJDSOJsrnEepiFmADAqSr4raakhSY5e; session_referer=https%3A%2F%2Fv0.dev%2Fchat%2FUFsxiVsYhL6; ko_sid={%22id%22:%221736463136326%22%2C%22lastTouched%22:1736469695230}; prompt-draft={%22version%22:1%2C%22drafts%22:{%22new-chat-prompt-draft%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736185508047}%2C%22UFsxiVsYhL6%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736469695262}}}",
+    "Referer": "https://v0.dev/chat/UFsxiVsYhL6",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://v0.dev/chat/api/chat/env-vars/outdated?bid=b_IWjkud2Ubip", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "cookie": "ko_id=40a9f37a-7c0c-4db9-b238-5f2ffd3b5491; v0-has-signed-in=1; __stripe_mid=6065616d-4710-4548-9cd2-7012e27c9d9cd89bba; file-tree-size=25; last-clicked-feature=You%20can%20now%20double%20click%20on%20text%20with%20the%20refinement%20tool%20to%20edit%20text%20live%20in%20your%20preview; chat-sidebar-collapsed=true; block-view-size=95; v0-active=1; __stripe_sid=24c5a7c0-1b07-485b-b132-b8b56913a152183637; user_session=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..rpskEbT__LkHjqhm.yIbVcvRf2VRqTnUtq1iSB85IEghnyS14BXMva_wKovwjMz32aNE_TvmEXu_kzf0nhIKHwwKul6rCVMOvU2WMJiodUoALkUyNLVL3qfMwg_3NLgXKcCcD8tXl4jxPhPcaXGUWBzXZCPGJDfok4HM_HVY-_hPMIxL667IUgh0oCh_GAkUPPrlvBgQeiljUPH7eLK6izvVqzsgme1Y2-z9XyaiGlC1Ex0Idp1ZbdlXMAVK-L-kA8eKjAbNcBBaMIx9EfWgWJ14esAxE9tx8LDrYVswN9qq0pVqth86DTpeBnlSf4yfxOaUMr-NO0oiIT4PfBEpqe08SP7VgdJAChgSHt0oXxcG08xEZLJ5JxkhJCeTonzIsTN-SSXtGXDqGJvBzpELHQJcgCMI11gkPG-6Zk1yDAjwJ5agts2HFdjahPtQCE5WPT-sHjBGrjYy5keN3pemeMzxZ2H2nxSFizVYd20S7XjS8kJp-cqV7a8_eMlBBiC8jRVD6kkQnz9cknpacLexPqNvjny1rAaaJ8Gd5gv_p0KHjYqvEsXboB1cjTwAcl3mKY1gSERwEVwI_sRoE7h3CU03vixx_dv6V8iRejExIKRvWCau35dRHkR_Xj1bS-BYHL6NZ3bD2c1TcdfnKPMF1dHECkK8zjW5B3k6JNfi0yKWKnCVnG9YaWSV9m7eU5wMthPcP-gq3Q9UbY2kP3DG1iAv8x8UJ55dVZr2NLVaAFq5LUF2L.gL5tsW8WUKdiwE1mjjbKJA; anon_session_id=WOJDSOJsrnEepiFmADAqSr4raakhSY5e; session_referer=https%3A%2F%2Fv0.dev%2Fchat%2FUFsxiVsYhL6; ko_sid={%22id%22:%221736463136326%22%2C%22lastTouched%22:1736469695230}; prompt-draft={%22version%22:1%2C%22drafts%22:{%22new-chat-prompt-draft%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736185508047}%2C%22UFsxiVsYhL6%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736469695262}}}",
+    "Referer": "https://v0.dev/chat/UFsxiVsYhL6",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://v0.dev/chat/api/chat/env-vars/outdated?bid=b_IWjkud2Ubip", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "cookie": "ko_id=40a9f37a-7c0c-4db9-b238-5f2ffd3b5491; v0-has-signed-in=1; __stripe_mid=6065616d-4710-4548-9cd2-7012e27c9d9cd89bba; file-tree-size=25; last-clicked-feature=You%20can%20now%20double%20click%20on%20text%20with%20the%20refinement%20tool%20to%20edit%20text%20live%20in%20your%20preview; chat-sidebar-collapsed=true; block-view-size=95; v0-active=1; __stripe_sid=24c5a7c0-1b07-485b-b132-b8b56913a152183637; anon_session_id=WOJDSOJsrnEepiFmADAqSr4raakhSY5e; session_referer=https%3A%2F%2Fv0.dev%2Fchat%2FUFsxiVsYhL6; ko_sid={%22id%22:%221736463136326%22%2C%22lastTouched%22:1736469695230}; user_session=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..ihJ_DXntD6WXgFH_.UjK-wuhmWFfnROVeB5jBktCan_WmxiWRWjP69vNjPPiUQBZVf14fOKOZzzaHk1l61uqNHqDpaqr_l-bz7BuW8mnB1fOuqaZkLP2k-mtrmv4usZmR4BCG4ApflywA7NG_r7-x_9JXOxtKasDEm2YCUYINcG56i-bnSjXYPMb4gqXNsgtibGCEc60xvKzJsIrXZltZFqEj2uzavSh7LNQVz6ABGqEgZubbQf17vAgSR2sFbMg4noAmkghposio48KRSuQixJ4KkVnKk5r6og7UbLkg7AmgpmnEMbRzkYkhwYoSn7MAc8DRo2qnOEVsNK5bKZjKpuX-z55bVM3Cleja_xFDWisxfwLF0_CbHX1eRsU8tbyhq--oJvFm3vrtl_8PbSGS_sunXNMczqQNLPxnOqL8rDgMgz4NfTGmIw1yBThi4HG5mOnuzwu8xW4fGr1pVUQ4oKFsBkgIe9uM4gfMKc8Bizzj1rmwwSoloZZ8lZ-s6NCI_LWs6NkLIw8fdBpXRBtDegAsibOHJKkJTMnBMPQK4vb7guDGXvU31hcxnf5xUZxQOc_iNmQQnWFQc--UbQhi9jhZWHEbOS0bMTQvOV2AVl50hNqybQ4JmlvrWrNUTUBB7_o-ATE4RVStOP3Dey7Ook6e7OkMVLAdjOfcFodl8UlLzM-9O1CF3P4Ji3z0FQTILmx3YCV0tSp7LuGflfrA0-uwfDyT_Z30BwJmM8mYEGUYn7p3.7scDZO3tQwLE0pfRljszMQ; prompt-draft={%22version%22:1%2C%22drafts%22:{%22new-chat-prompt-draft%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736185508047}%2C%22UFsxiVsYhL6%22:{%22message%22:%22%22%2C%22inputHeight%22:384%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736469698271%2C%22isMessageTrimmed%22:true}}}",
+    "Referer": "https://v0.dev/chat/UFsxiVsYhL6",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://v0.dev/chat/api/chat/env-vars/outdated?bid=b_IWjkud2Ubip", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "cookie": "ko_id=40a9f37a-7c0c-4db9-b238-5f2ffd3b5491; v0-has-signed-in=1; __stripe_mid=6065616d-4710-4548-9cd2-7012e27c9d9cd89bba; file-tree-size=25; last-clicked-feature=You%20can%20now%20double%20click%20on%20text%20with%20the%20refinement%20tool%20to%20edit%20text%20live%20in%20your%20preview; chat-sidebar-collapsed=true; block-view-size=95; v0-active=1; __stripe_sid=24c5a7c0-1b07-485b-b132-b8b56913a152183637; anon_session_id=WOJDSOJsrnEepiFmADAqSr4raakhSY5e; session_referer=https%3A%2F%2Fv0.dev%2Fchat%2FUFsxiVsYhL6; ko_sid={%22id%22:%221736463136326%22%2C%22lastTouched%22:1736469695230}; user_session=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..ihJ_DXntD6WXgFH_.UjK-wuhmWFfnROVeB5jBktCan_WmxiWRWjP69vNjPPiUQBZVf14fOKOZzzaHk1l61uqNHqDpaqr_l-bz7BuW8mnB1fOuqaZkLP2k-mtrmv4usZmR4BCG4ApflywA7NG_r7-x_9JXOxtKasDEm2YCUYINcG56i-bnSjXYPMb4gqXNsgtibGCEc60xvKzJsIrXZltZFqEj2uzavSh7LNQVz6ABGqEgZubbQf17vAgSR2sFbMg4noAmkghposio48KRSuQixJ4KkVnKk5r6og7UbLkg7AmgpmnEMbRzkYkhwYoSn7MAc8DRo2qnOEVsNK5bKZjKpuX-z55bVM3Cleja_xFDWisxfwLF0_CbHX1eRsU8tbyhq--oJvFm3vrtl_8PbSGS_sunXNMczqQNLPxnOqL8rDgMgz4NfTGmIw1yBThi4HG5mOnuzwu8xW4fGr1pVUQ4oKFsBkgIe9uM4gfMKc8Bizzj1rmwwSoloZZ8lZ-s6NCI_LWs6NkLIw8fdBpXRBtDegAsibOHJKkJTMnBMPQK4vb7guDGXvU31hcxnf5xUZxQOc_iNmQQnWFQc--UbQhi9jhZWHEbOS0bMTQvOV2AVl50hNqybQ4JmlvrWrNUTUBB7_o-ATE4RVStOP3Dey7Ook6e7OkMVLAdjOfcFodl8UlLzM-9O1CF3P4Ji3z0FQTILmx3YCV0tSp7LuGflfrA0-uwfDyT_Z30BwJmM8mYEGUYn7p3.7scDZO3tQwLE0pfRljszMQ; prompt-draft={%22version%22:1%2C%22drafts%22:{%22new-chat-prompt-draft%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736185508047}%2C%22UFsxiVsYhL6%22:{%22message%22:%22%22%2C%22inputHeight%22:384%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736469698271%2C%22isMessageTrimmed%22:true}}}",
+    "Referer": "https://v0.dev/chat/UFsxiVsYhL6",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://api.getkoala.com/web/projects/vercel/batch", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "text/plain;charset=UTF-8",
+    "sec-ch-ua": "\"Microsoft Edge\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "no-cors",
+    "sec-fetch-site": "cross-site",
+    "Referer": "https://v0.dev/",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": "{\"profile_id\":\"40a9f37a-7c0c-4db9-b238-5f2ffd3b5491\",\"page_views\":[{\"context\":{\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0\",\"platform\":{\"name\":\"Win32\",\"deviceType\":\"desktop\"},\"library\":{\"name\":\"koala\",\"version\":\"1.25.0\"},\"session\":{\"id\":\"1736463136326\",\"lastTouched\":1736468543609},\"locale\":\"en-US\",\"timezone\":\"America/Chicago\"},\"message_id\":\"0379dcbd-927b-41ef-a43b-cefc9dedbfda\",\"page\":{\"path\":\"/chat/UFsxiVsYhL6\",\"referrer\":\"\",\"title\":\"Timesheet management guide - v0 by Vercel\",\"url\":\"https://v0.dev/chat/UFsxiVsYhL6\",\"host\":\"v0.dev\"},\"visit_start\":\"2025-01-10T00:22:23.609Z\",\"focus_intervals\":[7116,28904,902,17043,9027,6110,5170,27269,1677,5351,1049,17915,3215,1209,34827,16072,2527,74945,63604,16578,6998]}]}",
+  "method": "POST"
+});

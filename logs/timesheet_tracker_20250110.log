@@ -2360,3 +2360,1068 @@
 2025-01-10 00:37:11,355 - TimesheetTracker - INFO - Incoming request: OPTIONS http://testserver/time-entries/
 2025-01-10 00:37:11,355 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'PUT', 'access-control-request-headers': 'content-type'}
 2025-01-10 00:37:11,356 - TimesheetTracker - INFO - Processing preflight request
+2025-01-10 00:43:44,959 - TimesheetTracker - INFO - Incoming request: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/docs
+2025-01-10 00:43:44,960 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2Fdocs&id=%3Ar75k%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:43:44,960 - TimesheetTracker - INFO - Request started: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/docs
+2025-01-10 00:43:44,961 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:43:44,962 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2Fdocs&id=%3Ar75k%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:43:44,962 - TimesheetTracker - INFO - Request completed: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/docs - Status: 200 - Duration: 1.91ms
+2025-01-10 00:43:44,962 - TimesheetTracker - INFO - Response headers: {'content-length': '948', 'content-type': 'text/html; charset=utf-8'}
+2025-01-10 00:43:44,963 - TimesheetTracker - INFO - Response headers: {'content-length': '948', 'content-type': 'text/html; charset=utf-8'}
+2025-01-10 00:43:45,861 - TimesheetTracker - INFO - Incoming request: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/openapi.json
+2025-01-10 00:43:45,862 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'application/json,*/*', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/docs', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'empty', 'sec-fetch-mode': 'cors', 'sec-fetch-site': 'same-origin', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:43:45,862 - TimesheetTracker - INFO - Request started: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/openapi.json
+2025-01-10 00:43:45,862 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:43:45,862 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'application/json,*/*', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/docs', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'empty', 'sec-fetch-mode': 'cors', 'sec-fetch-site': 'same-origin', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:43:45,894 - TimesheetTracker - INFO - Request completed: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/openapi.json - Status: 200 - Duration: 32.33ms
+2025-01-10 00:43:45,894 - TimesheetTracker - INFO - Response headers: {'content-length': '26833', 'content-type': 'application/json'}
+2025-01-10 00:43:45,894 - TimesheetTracker - INFO - Response headers: {'content-length': '26833', 'content-type': 'application/json'}
+2025-01-10 00:44:02,865 - TimesheetTracker - INFO - Incoming request: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/openapi.json
+2025-01-10 00:44:02,866 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'document', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'sec-fetch-user': '?1', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:44:02,867 - TimesheetTracker - INFO - Request started: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/openapi.json
+2025-01-10 00:44:02,867 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:44:02,868 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'document', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'sec-fetch-user': '?1', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:44:02,869 - TimesheetTracker - INFO - Request completed: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/openapi.json - Status: 200 - Duration: 2.09ms
+2025-01-10 00:44:02,870 - TimesheetTracker - INFO - Response headers: {'content-length': '26833', 'content-type': 'application/json'}
+2025-01-10 00:44:02,871 - TimesheetTracker - INFO - Response headers: {'content-length': '26833', 'content-type': 'application/json'}
+2025-01-10 00:44:24,017 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:44:24,070 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 00:44:24,281 - TimesheetTracker - INFO - Incoming request: GET http://testserver/
+2025-01-10 00:44:24,283 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:44:24,284 - TimesheetTracker - INFO - Request started: GET http://testserver/
+2025-01-10 00:44:24,285 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:44:24,286 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:44:24,288 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:44:24,289 - TimesheetTracker - INFO - Request completed: GET http://testserver/ - Status: 200 - Duration: 4.84ms
+2025-01-10 00:44:24,289 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:44:24,289 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:44:24,295 - TimesheetTracker - INFO - Incoming request: OPTIONS http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:44:24,297 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:44:24,298 - TimesheetTracker - INFO - Processing preflight request
+2025-01-10 00:44:24,306 - TimesheetTracker - INFO - Incoming request: GET http://testserver/
+2025-01-10 00:44:24,311 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://malicious-site.com', 'access-control-request-method': 'GET'}
+2025-01-10 00:44:24,311 - TimesheetTracker - INFO - Request started: GET http://testserver/
+2025-01-10 00:44:24,311 - TimesheetTracker - INFO - Request origin: https://malicious-site.com
+2025-01-10 00:44:24,311 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://malicious-site.com', 'access-control-request-method': 'GET'}
+2025-01-10 00:44:24,316 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:44:24,316 - TimesheetTracker - INFO - Request completed: GET http://testserver/ - Status: 200 - Duration: 4.88ms
+2025-01-10 00:44:24,316 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*'}
+2025-01-10 00:44:24,316 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*'}
+2025-01-10 00:44:24,324 - TimesheetTracker - INFO - Incoming request: GET http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:44:24,324 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:44:24,324 - TimesheetTracker - INFO - Request started: GET http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:44:24,325 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:44:24,325 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:44:24,329 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 00:44:24,332 - TimesheetTracker - INFO - Fetching time entries for date: 2025-01-09
+2025-01-10 00:44:24,333 - TimesheetTracker - DEBUG - Executing database query for time entries on date: 2025-01-09
+2025-01-10 00:44:24,920 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:44:24,962 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 00:44:25,008 - TimesheetTracker - INFO - Starting FastAPI server
+2025-01-10 00:44:25,008 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-10 00:44:25,009 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-10 00:44:25,575 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-10 00:44:25,577 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-10 00:44:25,577 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-10 00:44:25,634 - TimesheetTracker - INFO - Found 1 time entries for date 2025-01-09
+2025-01-10 00:44:25,635 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (24.0 hours)
+2025-01-10 00:44:25,635 - TimesheetTracker - INFO - Found 1 entries for date: 2025-01-09
+2025-01-10 00:44:25,656 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 00:44:25,660 - TimesheetTracker - INFO - Request completed: GET http://testserver/time-entries/by-date/2025-01-09 - Status: 200 - Duration: 1335.77ms
+2025-01-10 00:44:25,660 - TimesheetTracker - INFO - Response headers: {'content-length': '281', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:44:25,661 - TimesheetTracker - INFO - Response headers: {'content-length': '281', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:44:25,671 - TimesheetTracker - INFO - Incoming request: OPTIONS http://testserver/time-entries/
+2025-01-10 00:44:25,674 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'POST', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:44:25,674 - TimesheetTracker - INFO - Processing preflight request
+2025-01-10 00:44:25,680 - TimesheetTracker - INFO - Incoming request: GET http://testserver/
+2025-01-10 00:44:25,681 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net'}
+2025-01-10 00:44:25,682 - TimesheetTracker - INFO - Request started: GET http://testserver/
+2025-01-10 00:44:25,683 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:44:25,683 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net'}
+2025-01-10 00:44:25,685 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:44:25,686 - TimesheetTracker - INFO - Request completed: GET http://testserver/ - Status: 200 - Duration: 3.26ms
+2025-01-10 00:44:25,686 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:44:25,687 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:44:25,692 - TimesheetTracker - INFO - Incoming request: OPTIONS http://testserver/time-entries/
+2025-01-10 00:44:25,694 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'PUT', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:44:25,695 - TimesheetTracker - INFO - Processing preflight request
+2025-01-10 00:44:25,822 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-10 00:44:25,822 - TimesheetTracker - INFO - Expected tables: time_entries, project_managers, customers, projects
+2025-01-10 00:44:26,040 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-10 00:44:26,120 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-10 00:44:26,199 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-10 00:44:26,278 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-10 00:44:26,279 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-10 00:44:26,299 - TimesheetTracker - INFO - CORS configuration:
+2025-01-10 00:44:26,300 - TimesheetTracker - INFO - Allowed origins: ['https://kzml3cjwnshszfymqji0.lite.vusercontent.net']
+2025-01-10 00:44:26,300 - TimesheetTracker - INFO - Allowed methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH']
+2025-01-10 00:44:26,300 - TimesheetTracker - INFO - Allowed headers: ['content-type', 'authorization', 'accept', 'origin', 'access-control-request-method', 'access-control-request-headers']
+2025-01-10 00:44:26,626 - TimesheetTracker - INFO - Incoming request: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:44:26,628 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar75h%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:44:26,629 - TimesheetTracker - INFO - Request started: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:44:26,630 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:44:26,631 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar75h%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:44:26,636 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:44:26,637 - TimesheetTracker - INFO - Request completed: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/ - Status: 200 - Duration: 7.43ms
+2025-01-10 00:44:26,638 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:44:26,638 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:45:28,613 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:45:28,664 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 00:45:28,706 - TimesheetTracker - INFO - Starting FastAPI server
+2025-01-10 00:45:28,708 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-10 00:45:28,708 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-10 00:45:29,088 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-10 00:45:29,089 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-10 00:45:29,089 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-10 00:45:29,325 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-10 00:45:29,325 - TimesheetTracker - INFO - Expected tables: projects, customers, project_managers, time_entries
+2025-01-10 00:45:29,464 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-10 00:45:29,546 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-10 00:45:29,626 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-10 00:45:29,710 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-10 00:45:29,710 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-10 00:45:29,730 - TimesheetTracker - INFO - CORS configuration:
+2025-01-10 00:45:29,730 - TimesheetTracker - INFO - Allowed origins: ['https://kzml3cjwnshszfymqji0.lite.vusercontent.net']
+2025-01-10 00:45:29,730 - TimesheetTracker - INFO - Allowed methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH']
+2025-01-10 00:45:29,730 - TimesheetTracker - INFO - Allowed headers: ['content-type', 'authorization', 'accept', 'origin', 'access-control-request-method', 'access-control-request-headers']
+2025-01-10 00:45:30,095 - TimesheetTracker - INFO - Incoming request: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:45:30,095 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar75h%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:45:30,095 - TimesheetTracker - INFO - Request started: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:45:30,095 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:45:30,095 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar75h%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:45:30,100 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:45:30,100 - TimesheetTracker - INFO - Request completed: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/ - Status: 200 - Duration: 5.22ms
+2025-01-10 00:45:30,100 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:45:30,101 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:46:26,133 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:46:26,185 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 00:46:26,236 - TimesheetTracker - INFO - Starting FastAPI server
+2025-01-10 00:46:26,237 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-10 00:46:26,237 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-10 00:46:26,588 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-10 00:46:26,589 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-10 00:46:26,589 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-10 00:46:26,802 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-10 00:46:26,802 - TimesheetTracker - INFO - Expected tables: time_entries, project_managers, customers, projects
+2025-01-10 00:46:26,957 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-10 00:46:27,042 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-10 00:46:27,121 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-10 00:46:27,205 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-10 00:46:27,205 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-10 00:46:27,225 - TimesheetTracker - INFO - CORS configuration:
+2025-01-10 00:46:27,225 - TimesheetTracker - INFO - Allowed origins: ['https://kzml3cjwnshszfymqji0.lite.vusercontent.net']
+2025-01-10 00:46:27,225 - TimesheetTracker - INFO - Allowed methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH']
+2025-01-10 00:46:27,225 - TimesheetTracker - INFO - Allowed headers: ['content-type', 'authorization', 'accept', 'origin', 'access-control-request-method', 'access-control-request-headers']
+2025-01-10 00:46:27,328 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:46:27,368 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 00:46:27,522 - TimesheetTracker - INFO - Incoming request: GET http://testserver/
+2025-01-10 00:46:27,522 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:46:27,522 - TimesheetTracker - INFO - Request started: GET http://testserver/
+2025-01-10 00:46:27,522 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:46:27,522 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:46:27,523 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:46:27,524 - TimesheetTracker - INFO - Request completed: GET http://testserver/ - Status: 200 - Duration: 1.92ms
+2025-01-10 00:46:27,524 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:46:27,524 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:46:27,529 - TimesheetTracker - INFO - Incoming request: OPTIONS http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:46:27,529 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:46:27,529 - TimesheetTracker - INFO - Processing preflight request
+2025-01-10 00:46:27,533 - TimesheetTracker - INFO - Incoming request: GET http://testserver/
+2025-01-10 00:46:27,533 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://malicious-site.com', 'access-control-request-method': 'GET'}
+2025-01-10 00:46:27,534 - TimesheetTracker - INFO - Request started: GET http://testserver/
+2025-01-10 00:46:27,534 - TimesheetTracker - INFO - Request origin: https://malicious-site.com
+2025-01-10 00:46:27,534 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://malicious-site.com', 'access-control-request-method': 'GET'}
+2025-01-10 00:46:27,535 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:46:27,536 - TimesheetTracker - INFO - Request completed: GET http://testserver/ - Status: 200 - Duration: 2.24ms
+2025-01-10 00:46:27,536 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*'}
+2025-01-10 00:46:27,536 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*'}
+2025-01-10 00:46:27,539 - TimesheetTracker - INFO - Incoming request: GET http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:46:27,539 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:46:27,539 - TimesheetTracker - INFO - Request started: GET http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:46:27,540 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:46:27,540 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:46:27,541 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 00:46:27,541 - TimesheetTracker - INFO - Fetching time entries for date: 2025-01-09
+2025-01-10 00:46:27,541 - TimesheetTracker - DEBUG - Executing database query for time entries on date: 2025-01-09
+2025-01-10 00:46:27,566 - TimesheetTracker - INFO - Incoming request: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:46:27,566 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7a0%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:46:27,566 - TimesheetTracker - INFO - Request started: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:46:27,566 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:46:27,567 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7a0%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:46:27,568 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:46:27,568 - TimesheetTracker - INFO - Request completed: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/ - Status: 200 - Duration: 1.78ms
+2025-01-10 00:46:27,568 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:46:27,568 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:46:27,888 - TimesheetTracker - INFO - Found 1 time entries for date 2025-01-09
+2025-01-10 00:46:27,889 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (24.0 hours)
+2025-01-10 00:46:27,889 - TimesheetTracker - INFO - Found 1 entries for date: 2025-01-09
+2025-01-10 00:46:27,909 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 00:46:27,910 - TimesheetTracker - INFO - Request completed: GET http://testserver/time-entries/by-date/2025-01-09 - Status: 200 - Duration: 370.06ms
+2025-01-10 00:46:27,910 - TimesheetTracker - INFO - Response headers: {'content-length': '281', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:46:27,910 - TimesheetTracker - INFO - Response headers: {'content-length': '281', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:46:27,913 - TimesheetTracker - INFO - Incoming request: OPTIONS http://testserver/time-entries/
+2025-01-10 00:46:27,914 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'POST', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:46:27,914 - TimesheetTracker - INFO - Processing preflight request
+2025-01-10 00:46:27,921 - TimesheetTracker - INFO - Incoming request: GET http://testserver/
+2025-01-10 00:46:27,921 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net'}
+2025-01-10 00:46:27,922 - TimesheetTracker - INFO - Request started: GET http://testserver/
+2025-01-10 00:46:27,922 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:46:27,922 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net'}
+2025-01-10 00:46:27,924 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:46:27,924 - TimesheetTracker - INFO - Request completed: GET http://testserver/ - Status: 200 - Duration: 2.63ms
+2025-01-10 00:46:27,924 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:46:27,925 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:46:27,929 - TimesheetTracker - INFO - Incoming request: OPTIONS http://testserver/time-entries/
+2025-01-10 00:46:27,929 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'PUT', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:46:27,929 - TimesheetTracker - INFO - Processing preflight request
+2025-01-10 00:47:31,951 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:47:31,990 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 00:47:32,023 - TimesheetTracker - INFO - Starting FastAPI server
+2025-01-10 00:47:32,023 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-10 00:47:32,023 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-10 00:47:32,401 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-10 00:47:32,401 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-10 00:47:32,401 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-10 00:47:32,620 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-10 00:47:32,620 - TimesheetTracker - INFO - Expected tables: customers, projects, project_managers, time_entries
+2025-01-10 00:47:32,764 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-10 00:47:32,843 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-10 00:47:32,922 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-10 00:47:33,001 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-10 00:47:33,001 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-10 00:47:33,021 - TimesheetTracker - INFO - CORS configuration:
+2025-01-10 00:47:33,021 - TimesheetTracker - INFO - Allowed origins: ['https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'https://kzmjk7upp9bwloroftyo.lite.vusercontent.net']
+2025-01-10 00:47:33,021 - TimesheetTracker - INFO - Allowed methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH']
+2025-01-10 00:47:33,021 - TimesheetTracker - INFO - Allowed headers: ['content-type', 'authorization', 'accept', 'origin', 'access-control-request-method', 'access-control-request-headers']
+2025-01-10 00:47:33,329 - TimesheetTracker - INFO - Incoming request: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:47:33,329 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7ad%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:47:33,330 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:47:33,330 - TimesheetTracker - INFO - Request started: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:47:33,330 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:47:33,330 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7ad%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:47:33,331 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:47:33,331 - TimesheetTracker - INFO - Request completed: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/ - Status: 200 - Duration: 1.68ms
+2025-01-10 00:47:33,331 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:47:33,332 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:47:33,332 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:47:35,257 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:47:35,300 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 00:47:35,339 - TimesheetTracker - INFO - Starting FastAPI server
+2025-01-10 00:47:35,339 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-10 00:47:35,339 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-10 00:47:35,675 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-10 00:47:35,675 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-10 00:47:35,675 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-10 00:47:35,879 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-10 00:47:35,879 - TimesheetTracker - INFO - Expected tables: time_entries, customers, projects, project_managers
+2025-01-10 00:47:36,023 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-10 00:47:36,102 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-10 00:47:36,180 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-10 00:47:36,259 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-10 00:47:36,259 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-10 00:47:36,278 - TimesheetTracker - INFO - CORS configuration:
+2025-01-10 00:47:36,278 - TimesheetTracker - INFO - Allowed origins: ['https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'https://kzmjk7upp9bwloroftyo.lite.vusercontent.net']
+2025-01-10 00:47:36,278 - TimesheetTracker - INFO - Allowed methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH']
+2025-01-10 00:47:36,279 - TimesheetTracker - INFO - Allowed headers: ['content-type', 'authorization', 'accept', 'origin', 'access-control-request-method', 'access-control-request-headers']
+2025-01-10 00:47:36,603 - TimesheetTracker - INFO - Incoming request: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:47:36,607 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7aq%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:47:36,607 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:47:36,607 - TimesheetTracker - INFO - Request started: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:47:36,607 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:47:36,608 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7aq%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:47:36,609 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:47:36,609 - TimesheetTracker - INFO - Request completed: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/ - Status: 200 - Duration: 2.01ms
+2025-01-10 00:47:36,609 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:47:36,610 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:47:36,610 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:47:37,619 - TimesheetTracker - INFO - Incoming request: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:47:37,620 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7bb%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:47:37,620 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:47:37,620 - TimesheetTracker - INFO - Request started: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:47:37,620 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:47:37,620 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7bb%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:47:37,621 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:47:37,621 - TimesheetTracker - INFO - Request completed: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/ - Status: 200 - Duration: 1.42ms
+2025-01-10 00:47:37,621 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:47:37,621 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:47:37,622 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:47:38,589 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:47:38,634 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 00:47:38,814 - TimesheetTracker - INFO - Incoming request: GET http://testserver/
+2025-01-10 00:47:38,815 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:47:38,815 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:47:38,815 - TimesheetTracker - INFO - Request started: GET http://testserver/
+2025-01-10 00:47:38,816 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:47:38,816 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:47:38,832 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:47:38,842 - TimesheetTracker - INFO - Request completed: GET http://testserver/ - Status: 200 - Duration: 26.33ms
+2025-01-10 00:47:38,842 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:47:38,843 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:47:38,844 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:47:38,857 - TimesheetTracker - INFO - Incoming request: OPTIONS http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:47:38,858 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:47:38,859 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:47:38,859 - TimesheetTracker - INFO - Processing preflight request
+2025-01-10 00:47:38,859 - TimesheetTracker - INFO - Valid origin for preflight: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:47:38,859 - TimesheetTracker - INFO - Returning preflight response headers: {'Access-Control-Allow-Origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'Access-Control-Allow-Headers': 'content-type, authorization, accept, origin, access-control-request-method, access-control-request-headers', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Max-Age': '3600'}
+2025-01-10 00:47:38,863 - TimesheetTracker - INFO - Incoming request: GET http://testserver/
+2025-01-10 00:47:38,863 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://malicious-site.com', 'access-control-request-method': 'GET'}
+2025-01-10 00:47:38,864 - TimesheetTracker - INFO - Request origin: https://malicious-site.com
+2025-01-10 00:47:38,864 - TimesheetTracker - INFO - Request started: GET http://testserver/
+2025-01-10 00:47:38,864 - TimesheetTracker - INFO - Request origin: https://malicious-site.com
+2025-01-10 00:47:38,864 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://malicious-site.com', 'access-control-request-method': 'GET'}
+2025-01-10 00:47:38,865 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:47:38,866 - TimesheetTracker - INFO - Request completed: GET http://testserver/ - Status: 200 - Duration: 2.02ms
+2025-01-10 00:47:38,866 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*'}
+2025-01-10 00:47:38,866 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:47:38,866 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*'}
+2025-01-10 00:47:38,871 - TimesheetTracker - INFO - Incoming request: GET http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:47:38,872 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:47:38,872 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:47:38,872 - TimesheetTracker - INFO - Request started: GET http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:47:38,874 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:47:38,874 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:47:38,879 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 00:47:38,880 - TimesheetTracker - INFO - Fetching time entries for date: 2025-01-09
+2025-01-10 00:47:38,880 - TimesheetTracker - DEBUG - Executing database query for time entries on date: 2025-01-09
+2025-01-10 00:47:39,248 - TimesheetTracker - INFO - Found 1 time entries for date 2025-01-09
+2025-01-10 00:47:39,248 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (24.0 hours)
+2025-01-10 00:47:39,248 - TimesheetTracker - INFO - Found 1 entries for date: 2025-01-09
+2025-01-10 00:47:39,269 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 00:47:39,270 - TimesheetTracker - INFO - Request completed: GET http://testserver/time-entries/by-date/2025-01-09 - Status: 200 - Duration: 397.56ms
+2025-01-10 00:47:39,270 - TimesheetTracker - INFO - Response headers: {'content-length': '281', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:47:39,270 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:47:39,270 - TimesheetTracker - INFO - Response headers: {'content-length': '281', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:47:39,274 - TimesheetTracker - INFO - Incoming request: OPTIONS http://testserver/time-entries/
+2025-01-10 00:47:39,274 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'POST', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:47:39,275 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:47:39,275 - TimesheetTracker - INFO - Processing preflight request
+2025-01-10 00:47:39,275 - TimesheetTracker - INFO - Valid origin for preflight: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:47:39,275 - TimesheetTracker - INFO - Returning preflight response headers: {'Access-Control-Allow-Origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'Access-Control-Allow-Headers': 'content-type, authorization, accept, origin, access-control-request-method, access-control-request-headers', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Max-Age': '3600'}
+2025-01-10 00:47:39,280 - TimesheetTracker - INFO - Incoming request: GET http://testserver/
+2025-01-10 00:47:39,281 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net'}
+2025-01-10 00:47:39,281 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:47:39,281 - TimesheetTracker - INFO - Request started: GET http://testserver/
+2025-01-10 00:47:39,281 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:47:39,281 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net'}
+2025-01-10 00:47:39,283 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:47:39,283 - TimesheetTracker - INFO - Request completed: GET http://testserver/ - Status: 200 - Duration: 2.29ms
+2025-01-10 00:47:39,283 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:47:39,283 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:47:39,284 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:47:39,288 - TimesheetTracker - INFO - Incoming request: OPTIONS http://testserver/time-entries/
+2025-01-10 00:47:39,289 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'PUT', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:47:39,289 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:47:39,289 - TimesheetTracker - INFO - Processing preflight request
+2025-01-10 00:47:39,289 - TimesheetTracker - INFO - Valid origin for preflight: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:47:39,289 - TimesheetTracker - INFO - Returning preflight response headers: {'Access-Control-Allow-Origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'Access-Control-Allow-Headers': 'content-type, authorization, accept, origin, access-control-request-method, access-control-request-headers', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Max-Age': '3600'}
+2025-01-10 00:48:52,934 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:48:52,945 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 00:48:52,978 - TimesheetTracker - INFO - Starting FastAPI server
+2025-01-10 00:48:52,978 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-10 00:48:52,978 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-10 00:48:53,317 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-10 00:48:53,317 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-10 00:48:53,317 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-10 00:48:53,520 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-10 00:48:53,521 - TimesheetTracker - INFO - Expected tables: time_entries, project_managers, projects, customers
+2025-01-10 00:48:53,657 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-10 00:48:53,736 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-10 00:48:53,814 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-10 00:48:53,892 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-10 00:48:53,892 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-10 00:48:53,911 - TimesheetTracker - INFO - CORS configuration:
+2025-01-10 00:48:53,912 - TimesheetTracker - INFO - Allowed origins: ['https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'https://kzmjk7upp9bwloroftyo.lite.vusercontent.net']
+2025-01-10 00:48:53,912 - TimesheetTracker - INFO - Allowed methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH']
+2025-01-10 00:48:53,912 - TimesheetTracker - INFO - Allowed headers: ['content-type', 'authorization', 'accept', 'origin', 'access-control-request-method', 'access-control-request-headers']
+2025-01-10 00:48:54,271 - TimesheetTracker - INFO - Incoming request: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:48:54,271 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7aq%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:48:54,271 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:48:54,272 - TimesheetTracker - INFO - Request started: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:48:54,272 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:48:54,272 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7aq%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:48:54,273 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:48:54,273 - TimesheetTracker - INFO - Request completed: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/ - Status: 200 - Duration: 1.84ms
+2025-01-10 00:48:54,274 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:48:54,274 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:48:54,274 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:48:54,482 - TimesheetTracker - INFO - Incoming request: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:48:54,482 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7br%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.5.94', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:48:54,482 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:48:54,482 - TimesheetTracker - INFO - Request started: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:48:54,483 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:48:54,483 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7br%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.5.94', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:48:54,483 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:48:54,484 - TimesheetTracker - INFO - Request completed: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/ - Status: 200 - Duration: 1.35ms
+2025-01-10 00:48:54,484 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:48:54,484 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:48:54,484 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:48:55,982 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:48:56,024 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 00:48:56,250 - TimesheetTracker - INFO - Incoming request: GET http://testserver/
+2025-01-10 00:48:56,251 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:48:56,251 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:48:56,251 - TimesheetTracker - INFO - Request started: GET http://testserver/
+2025-01-10 00:48:56,251 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:48:56,251 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:48:56,253 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:48:56,254 - TimesheetTracker - INFO - Request completed: GET http://testserver/ - Status: 200 - Duration: 3.00ms
+2025-01-10 00:48:56,254 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:48:56,254 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:48:56,254 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:48:56,259 - TimesheetTracker - INFO - Incoming request: OPTIONS http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:48:56,259 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:48:56,259 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:48:56,259 - TimesheetTracker - INFO - Processing preflight request
+2025-01-10 00:48:56,260 - TimesheetTracker - INFO - Valid origin for preflight: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:48:56,260 - TimesheetTracker - INFO - Returning preflight response headers: {'Access-Control-Allow-Origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'Access-Control-Allow-Headers': 'content-type, authorization, accept, origin, access-control-request-method, access-control-request-headers', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Max-Age': '3600'}
+2025-01-10 00:48:56,270 - TimesheetTracker - INFO - Incoming request: GET http://testserver/
+2025-01-10 00:48:56,270 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://malicious-site.com', 'access-control-request-method': 'GET'}
+2025-01-10 00:48:56,270 - TimesheetTracker - INFO - Request origin: https://malicious-site.com
+2025-01-10 00:48:56,270 - TimesheetTracker - INFO - Request started: GET http://testserver/
+2025-01-10 00:48:56,270 - TimesheetTracker - INFO - Request origin: https://malicious-site.com
+2025-01-10 00:48:56,270 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://malicious-site.com', 'access-control-request-method': 'GET'}
+2025-01-10 00:48:56,273 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:48:56,273 - TimesheetTracker - INFO - Request completed: GET http://testserver/ - Status: 200 - Duration: 3.34ms
+2025-01-10 00:48:56,274 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*'}
+2025-01-10 00:48:56,274 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:48:56,274 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*'}
+2025-01-10 00:48:56,283 - TimesheetTracker - INFO - Incoming request: GET http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:48:56,283 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:48:56,283 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:48:56,283 - TimesheetTracker - INFO - Request started: GET http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:48:56,284 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:48:56,284 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:48:56,286 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 00:48:56,287 - TimesheetTracker - INFO - Fetching time entries for date: 2025-01-09
+2025-01-10 00:48:56,287 - TimesheetTracker - DEBUG - Executing database query for time entries on date: 2025-01-09
+2025-01-10 00:48:56,492 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:48:56,507 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 00:48:56,546 - TimesheetTracker - INFO - Starting FastAPI server
+2025-01-10 00:48:56,546 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-10 00:48:56,546 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-10 00:48:56,635 - TimesheetTracker - INFO - Found 1 time entries for date 2025-01-09
+2025-01-10 00:48:56,635 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (24.0 hours)
+2025-01-10 00:48:56,635 - TimesheetTracker - INFO - Found 1 entries for date: 2025-01-09
+2025-01-10 00:48:56,655 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 00:48:56,656 - TimesheetTracker - INFO - Request completed: GET http://testserver/time-entries/by-date/2025-01-09 - Status: 200 - Duration: 372.38ms
+2025-01-10 00:48:56,656 - TimesheetTracker - INFO - Response headers: {'content-length': '281', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:48:56,656 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:48:56,656 - TimesheetTracker - INFO - Response headers: {'content-length': '281', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:48:56,660 - TimesheetTracker - INFO - Incoming request: OPTIONS http://testserver/time-entries/
+2025-01-10 00:48:56,660 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'POST', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:48:56,660 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:48:56,660 - TimesheetTracker - INFO - Processing preflight request
+2025-01-10 00:48:56,660 - TimesheetTracker - INFO - Valid origin for preflight: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:48:56,660 - TimesheetTracker - INFO - Returning preflight response headers: {'Access-Control-Allow-Origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'Access-Control-Allow-Headers': 'content-type, authorization, accept, origin, access-control-request-method, access-control-request-headers', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Max-Age': '3600'}
+2025-01-10 00:48:56,663 - TimesheetTracker - INFO - Incoming request: GET http://testserver/
+2025-01-10 00:48:56,664 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net'}
+2025-01-10 00:48:56,664 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:48:56,664 - TimesheetTracker - INFO - Request started: GET http://testserver/
+2025-01-10 00:48:56,664 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:48:56,664 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net'}
+2025-01-10 00:48:56,665 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:48:56,665 - TimesheetTracker - INFO - Request completed: GET http://testserver/ - Status: 200 - Duration: 1.13ms
+2025-01-10 00:48:56,665 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:48:56,665 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:48:56,665 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:48:56,668 - TimesheetTracker - INFO - Incoming request: OPTIONS http://testserver/time-entries/
+2025-01-10 00:48:56,669 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'PUT', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:48:56,669 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:48:56,669 - TimesheetTracker - INFO - Processing preflight request
+2025-01-10 00:48:56,669 - TimesheetTracker - INFO - Valid origin for preflight: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:48:56,669 - TimesheetTracker - INFO - Returning preflight response headers: {'Access-Control-Allow-Origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'Access-Control-Allow-Headers': 'content-type, authorization, accept, origin, access-control-request-method, access-control-request-headers', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Max-Age': '3600'}
+2025-01-10 00:48:56,885 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-10 00:48:56,885 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-10 00:48:56,885 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-10 00:48:57,102 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-10 00:48:57,102 - TimesheetTracker - INFO - Expected tables: projects, project_managers, customers, time_entries
+2025-01-10 00:48:57,257 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-10 00:48:57,335 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-10 00:48:57,422 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-10 00:48:57,502 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-10 00:48:57,502 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-10 00:48:57,521 - TimesheetTracker - INFO - CORS configuration:
+2025-01-10 00:48:57,522 - TimesheetTracker - INFO - Allowed origins: ['https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'https://kzmjk7upp9bwloroftyo.lite.vusercontent.net']
+2025-01-10 00:48:57,522 - TimesheetTracker - INFO - Allowed methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH']
+2025-01-10 00:48:57,522 - TimesheetTracker - INFO - Allowed headers: ['content-type', 'authorization', 'accept', 'origin', 'access-control-request-method', 'access-control-request-headers']
+2025-01-10 00:48:57,776 - TimesheetTracker - INFO - Incoming request: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:48:57,777 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7cb%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.5.94', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:48:57,777 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:48:57,778 - TimesheetTracker - INFO - Request started: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:48:57,778 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:48:57,779 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7cb%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.5.94', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:48:57,781 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:48:57,782 - TimesheetTracker - INFO - Request completed: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/ - Status: 200 - Duration: 4.40ms
+2025-01-10 00:48:57,783 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:48:57,783 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:48:57,784 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:48:57,937 - TimesheetTracker - INFO - Incoming request: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:48:57,937 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7ce%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:48:57,937 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:48:57,937 - TimesheetTracker - INFO - Request started: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:48:57,937 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:48:57,937 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7ce%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:48:57,938 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:48:57,938 - TimesheetTracker - INFO - Request completed: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/ - Status: 200 - Duration: 1.01ms
+2025-01-10 00:48:57,938 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:48:57,939 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:48:57,939 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:48:58,590 - TimesheetTracker - INFO - Incoming request: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:48:58,592 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7ce%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:48:58,594 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:48:58,594 - TimesheetTracker - INFO - Request started: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:48:58,595 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:48:58,595 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7ce%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:48:58,596 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:48:58,597 - TimesheetTracker - INFO - Request completed: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/ - Status: 200 - Duration: 2.47ms
+2025-01-10 00:48:58,597 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:48:58,598 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:48:58,598 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:48:59,534 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:48:59,588 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 00:48:59,812 - TimesheetTracker - INFO - Incoming request: GET http://testserver/
+2025-01-10 00:48:59,814 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:48:59,815 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:48:59,815 - TimesheetTracker - INFO - Request started: GET http://testserver/
+2025-01-10 00:48:59,815 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:48:59,815 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:48:59,817 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:48:59,819 - TimesheetTracker - INFO - Request completed: GET http://testserver/ - Status: 200 - Duration: 3.48ms
+2025-01-10 00:48:59,819 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:48:59,820 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:48:59,820 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:48:59,824 - TimesheetTracker - INFO - Incoming request: OPTIONS http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:48:59,824 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:48:59,830 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:48:59,830 - TimesheetTracker - INFO - Processing preflight request
+2025-01-10 00:48:59,830 - TimesheetTracker - INFO - Valid origin for preflight: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:48:59,830 - TimesheetTracker - INFO - Returning preflight response headers: {'Access-Control-Allow-Origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'Access-Control-Allow-Headers': 'content-type, authorization, accept, origin, access-control-request-method, access-control-request-headers', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Max-Age': '3600'}
+2025-01-10 00:48:59,839 - TimesheetTracker - INFO - Incoming request: GET http://testserver/
+2025-01-10 00:48:59,839 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://malicious-site.com', 'access-control-request-method': 'GET'}
+2025-01-10 00:48:59,839 - TimesheetTracker - INFO - Request origin: https://malicious-site.com
+2025-01-10 00:48:59,839 - TimesheetTracker - INFO - Request started: GET http://testserver/
+2025-01-10 00:48:59,840 - TimesheetTracker - INFO - Request origin: https://malicious-site.com
+2025-01-10 00:48:59,840 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://malicious-site.com', 'access-control-request-method': 'GET'}
+2025-01-10 00:48:59,850 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:48:59,851 - TimesheetTracker - INFO - Request completed: GET http://testserver/ - Status: 200 - Duration: 11.43ms
+2025-01-10 00:48:59,851 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*'}
+2025-01-10 00:48:59,851 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:48:59,851 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*'}
+2025-01-10 00:48:59,858 - TimesheetTracker - INFO - Incoming request: GET http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:48:59,860 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:48:59,860 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:48:59,861 - TimesheetTracker - INFO - Request started: GET http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:48:59,861 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:48:59,861 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:48:59,862 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 00:48:59,870 - TimesheetTracker - INFO - Fetching time entries for date: 2025-01-09
+2025-01-10 00:48:59,870 - TimesheetTracker - DEBUG - Executing database query for time entries on date: 2025-01-09
+2025-01-10 00:49:00,213 - TimesheetTracker - INFO - Found 1 time entries for date 2025-01-09
+2025-01-10 00:49:00,213 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (24.0 hours)
+2025-01-10 00:49:00,213 - TimesheetTracker - INFO - Found 1 entries for date: 2025-01-09
+2025-01-10 00:49:00,235 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 00:49:00,236 - TimesheetTracker - INFO - Request completed: GET http://testserver/time-entries/by-date/2025-01-09 - Status: 200 - Duration: 374.96ms
+2025-01-10 00:49:00,236 - TimesheetTracker - INFO - Response headers: {'content-length': '281', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:49:00,236 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:49:00,237 - TimesheetTracker - INFO - Response headers: {'content-length': '281', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:49:00,244 - TimesheetTracker - INFO - Incoming request: OPTIONS http://testserver/time-entries/
+2025-01-10 00:49:00,245 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'POST', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:49:00,245 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:49:00,246 - TimesheetTracker - INFO - Processing preflight request
+2025-01-10 00:49:00,246 - TimesheetTracker - INFO - Valid origin for preflight: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:49:00,247 - TimesheetTracker - INFO - Returning preflight response headers: {'Access-Control-Allow-Origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'Access-Control-Allow-Headers': 'content-type, authorization, accept, origin, access-control-request-method, access-control-request-headers', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Max-Age': '3600'}
+2025-01-10 00:49:00,253 - TimesheetTracker - INFO - Incoming request: GET http://testserver/
+2025-01-10 00:49:00,253 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net'}
+2025-01-10 00:49:00,254 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:49:00,254 - TimesheetTracker - INFO - Request started: GET http://testserver/
+2025-01-10 00:49:00,257 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:49:00,257 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net'}
+2025-01-10 00:49:00,261 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:49:00,262 - TimesheetTracker - INFO - Request completed: GET http://testserver/ - Status: 200 - Duration: 7.35ms
+2025-01-10 00:49:00,262 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:49:00,262 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:49:00,262 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:49:00,273 - TimesheetTracker - INFO - Incoming request: OPTIONS http://testserver/time-entries/
+2025-01-10 00:49:00,274 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'PUT', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:49:00,275 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:49:00,275 - TimesheetTracker - INFO - Processing preflight request
+2025-01-10 00:49:00,277 - TimesheetTracker - INFO - Valid origin for preflight: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:49:00,277 - TimesheetTracker - INFO - Returning preflight response headers: {'Access-Control-Allow-Origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'Access-Control-Allow-Headers': 'content-type, authorization, accept, origin, access-control-request-method, access-control-request-headers', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Max-Age': '3600'}
+2025-01-10 00:50:07,574 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:50:07,587 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 00:50:07,620 - TimesheetTracker - INFO - Starting FastAPI server
+2025-01-10 00:50:07,621 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-10 00:50:07,621 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-10 00:50:07,994 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-10 00:50:07,994 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-10 00:50:07,994 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-10 00:50:08,207 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-10 00:50:08,207 - TimesheetTracker - INFO - Expected tables: projects, time_entries, project_managers, customers
+2025-01-10 00:50:08,357 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-10 00:50:08,437 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-10 00:50:08,518 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-10 00:50:08,598 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-10 00:50:08,598 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-10 00:50:08,619 - TimesheetTracker - INFO - CORS configuration:
+2025-01-10 00:50:08,619 - TimesheetTracker - INFO - Allowed origins: ['https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'https://kzmjk7upp9bwloroftyo.lite.vusercontent.net']
+2025-01-10 00:50:08,619 - TimesheetTracker - INFO - Allowed methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH']
+2025-01-10 00:50:08,620 - TimesheetTracker - INFO - Allowed headers: ['content-type', 'authorization', 'accept', 'origin', 'access-control-request-method', 'access-control-request-headers']
+2025-01-10 00:50:08,952 - TimesheetTracker - INFO - Request started: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:50:08,954 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7da%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:50:08,954 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:50:08,956 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:50:08,957 - TimesheetTracker - INFO - Request completed: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:50:08,963 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:08,963 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:50:08,963 - TimesheetTracker - INFO - Request duration: 0.005 seconds
+2025-01-10 00:50:10,744 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:50:10,758 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 00:50:10,798 - TimesheetTracker - INFO - Starting FastAPI server
+2025-01-10 00:50:10,799 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-10 00:50:10,799 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-10 00:50:11,147 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-10 00:50:11,148 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-10 00:50:11,148 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-10 00:50:11,363 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-10 00:50:11,364 - TimesheetTracker - INFO - Expected tables: time_entries, projects, project_managers, customers
+2025-01-10 00:50:11,508 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-10 00:50:11,587 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-10 00:50:11,666 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-10 00:50:11,746 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-10 00:50:11,746 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-10 00:50:11,766 - TimesheetTracker - INFO - CORS configuration:
+2025-01-10 00:50:11,766 - TimesheetTracker - INFO - Allowed origins: ['https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'https://kzmjk7upp9bwloroftyo.lite.vusercontent.net']
+2025-01-10 00:50:11,767 - TimesheetTracker - INFO - Allowed methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH']
+2025-01-10 00:50:11,767 - TimesheetTracker - INFO - Allowed headers: ['content-type', 'authorization', 'accept', 'origin', 'access-control-request-method', 'access-control-request-headers']
+2025-01-10 00:50:12,075 - TimesheetTracker - INFO - Request started: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:50:12,076 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7dp%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.5.94', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:50:12,076 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:50:12,079 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:50:12,079 - TimesheetTracker - INFO - Request completed: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:50:12,080 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:12,080 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:50:12,080 - TimesheetTracker - INFO - Request duration: 0.005 seconds
+2025-01-10 00:50:12,319 - TimesheetTracker - INFO - Request started: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:50:12,320 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7du%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.5.94', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:50:12,321 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:50:12,322 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:50:12,322 - TimesheetTracker - INFO - Request completed: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:50:12,322 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:12,322 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:50:12,323 - TimesheetTracker - INFO - Request duration: 0.003 seconds
+2025-01-10 00:50:12,953 - TimesheetTracker - INFO - Request started: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:50:12,953 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7du%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.5.94', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:50:12,953 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:50:12,954 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:50:12,955 - TimesheetTracker - INFO - Request completed: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:50:12,955 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:12,955 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:50:12,956 - TimesheetTracker - INFO - Request duration: 0.002 seconds
+2025-01-10 00:50:13,576 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:50:13,610 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 00:50:13,781 - TimesheetTracker - INFO - Request started: GET http://testserver/
+2025-01-10 00:50:13,782 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:50:13,782 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:50:13,783 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:50:13,783 - TimesheetTracker - INFO - Request completed: GET http://testserver/
+2025-01-10 00:50:13,783 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:13,784 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:50:13,784 - TimesheetTracker - INFO - Request duration: 0.002 seconds
+2025-01-10 00:50:13,788 - TimesheetTracker - INFO - Request started: OPTIONS http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:50:13,788 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:50:13,788 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:50:13,789 - TimesheetTracker - INFO - Request completed: OPTIONS http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:50:13,789 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:13,789 - TimesheetTracker - INFO - Response headers: {'vary': 'Origin', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-max-age': '3600', 'access-control-allow-credentials': 'true', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-allow-headers': 'content-type', 'content-length': '2', 'content-type': 'text/plain; charset=utf-8'}
+2025-01-10 00:50:13,789 - TimesheetTracker - INFO - Request duration: 0.001 seconds
+2025-01-10 00:50:13,792 - TimesheetTracker - INFO - Request started: GET http://testserver/
+2025-01-10 00:50:13,793 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://malicious-site.com', 'access-control-request-method': 'GET'}
+2025-01-10 00:50:13,795 - TimesheetTracker - INFO - Request origin: https://malicious-site.com
+2025-01-10 00:50:13,796 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:50:13,797 - TimesheetTracker - INFO - Request completed: GET http://testserver/
+2025-01-10 00:50:13,797 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:13,798 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*'}
+2025-01-10 00:50:13,798 - TimesheetTracker - INFO - Request duration: 0.005 seconds
+2025-01-10 00:50:13,806 - TimesheetTracker - INFO - Request started: GET http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:50:13,807 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:50:13,808 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:50:13,812 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 00:50:13,813 - TimesheetTracker - INFO - Fetching time entries for date: 2025-01-09
+2025-01-10 00:50:13,813 - TimesheetTracker - DEBUG - Executing database query for time entries on date: 2025-01-09
+2025-01-10 00:50:14,169 - TimesheetTracker - INFO - Found 1 time entries for date 2025-01-09
+2025-01-10 00:50:14,169 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (24.0 hours)
+2025-01-10 00:50:14,170 - TimesheetTracker - INFO - Found 1 entries for date: 2025-01-09
+2025-01-10 00:50:14,189 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 00:50:14,190 - TimesheetTracker - INFO - Request completed: GET http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:50:14,190 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:14,190 - TimesheetTracker - INFO - Response headers: {'content-length': '281', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:50:14,191 - TimesheetTracker - INFO - Request duration: 0.384 seconds
+2025-01-10 00:50:14,195 - TimesheetTracker - INFO - Request started: OPTIONS http://testserver/time-entries/
+2025-01-10 00:50:14,195 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'POST', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:50:14,195 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:50:14,196 - TimesheetTracker - INFO - Request completed: OPTIONS http://testserver/time-entries/
+2025-01-10 00:50:14,196 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:14,196 - TimesheetTracker - INFO - Response headers: {'vary': 'Origin', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-max-age': '3600', 'access-control-allow-credentials': 'true', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-allow-headers': 'content-type', 'content-length': '2', 'content-type': 'text/plain; charset=utf-8'}
+2025-01-10 00:50:14,196 - TimesheetTracker - INFO - Request duration: 0.001 seconds
+2025-01-10 00:50:14,200 - TimesheetTracker - INFO - Request started: GET http://testserver/
+2025-01-10 00:50:14,200 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net'}
+2025-01-10 00:50:14,200 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:50:14,201 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:50:14,202 - TimesheetTracker - INFO - Request completed: GET http://testserver/
+2025-01-10 00:50:14,202 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:14,202 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:50:14,203 - TimesheetTracker - INFO - Request duration: 0.002 seconds
+2025-01-10 00:50:14,206 - TimesheetTracker - INFO - Request started: OPTIONS http://testserver/time-entries/
+2025-01-10 00:50:14,206 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'PUT', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:50:14,206 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:50:14,207 - TimesheetTracker - INFO - Request completed: OPTIONS http://testserver/time-entries/
+2025-01-10 00:50:14,207 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:14,207 - TimesheetTracker - INFO - Response headers: {'vary': 'Origin', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-max-age': '3600', 'access-control-allow-credentials': 'true', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-allow-headers': 'content-type', 'content-length': '2', 'content-type': 'text/plain; charset=utf-8'}
+2025-01-10 00:50:14,207 - TimesheetTracker - INFO - Request duration: 0.001 seconds
+2025-01-10 00:50:37,057 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:50:37,097 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 00:50:37,262 - TimesheetTracker - INFO - Request started: GET http://testserver/
+2025-01-10 00:50:37,263 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:50:37,263 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:50:37,264 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:50:37,266 - TimesheetTracker - INFO - Request completed: GET http://testserver/
+2025-01-10 00:50:37,267 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:37,267 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:50:37,267 - TimesheetTracker - INFO - Request duration: 0.004 seconds
+2025-01-10 00:50:37,273 - TimesheetTracker - INFO - Request started: OPTIONS http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:50:37,273 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:50:37,273 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:50:37,274 - TimesheetTracker - INFO - Request completed: OPTIONS http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:50:37,274 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:37,274 - TimesheetTracker - INFO - Response headers: {'vary': 'Origin', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-max-age': '3600', 'access-control-allow-credentials': 'true', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-allow-headers': 'content-type', 'content-length': '2', 'content-type': 'text/plain; charset=utf-8'}
+2025-01-10 00:50:37,274 - TimesheetTracker - INFO - Request duration: 0.001 seconds
+2025-01-10 00:50:37,278 - TimesheetTracker - INFO - Request started: GET http://testserver/
+2025-01-10 00:50:37,278 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://malicious-site.com', 'access-control-request-method': 'GET'}
+2025-01-10 00:50:37,279 - TimesheetTracker - INFO - Request origin: https://malicious-site.com
+2025-01-10 00:50:37,283 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:50:37,284 - TimesheetTracker - INFO - Request completed: GET http://testserver/
+2025-01-10 00:50:37,284 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:37,284 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*'}
+2025-01-10 00:50:37,284 - TimesheetTracker - INFO - Request duration: 0.006 seconds
+2025-01-10 00:50:37,289 - TimesheetTracker - INFO - Request started: GET http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:50:37,289 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:50:37,290 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:50:37,292 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 00:50:37,293 - TimesheetTracker - INFO - Fetching time entries for date: 2025-01-09
+2025-01-10 00:50:37,293 - TimesheetTracker - DEBUG - Executing database query for time entries on date: 2025-01-09
+2025-01-10 00:50:37,353 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:50:37,368 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 00:50:37,462 - TimesheetTracker - INFO - Starting FastAPI server
+2025-01-10 00:50:37,462 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-10 00:50:37,462 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-10 00:50:37,650 - TimesheetTracker - INFO - Found 1 time entries for date 2025-01-09
+2025-01-10 00:50:37,650 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (24.0 hours)
+2025-01-10 00:50:37,650 - TimesheetTracker - INFO - Found 1 entries for date: 2025-01-09
+2025-01-10 00:50:37,670 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 00:50:37,671 - TimesheetTracker - INFO - Request completed: GET http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:50:37,671 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:37,671 - TimesheetTracker - INFO - Response headers: {'content-length': '281', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:50:37,671 - TimesheetTracker - INFO - Request duration: 0.382 seconds
+2025-01-10 00:50:37,676 - TimesheetTracker - INFO - Request started: OPTIONS http://testserver/time-entries/
+2025-01-10 00:50:37,676 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'POST', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:50:37,676 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:50:37,676 - TimesheetTracker - INFO - Request completed: OPTIONS http://testserver/time-entries/
+2025-01-10 00:50:37,676 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:37,676 - TimesheetTracker - INFO - Response headers: {'vary': 'Origin', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-max-age': '3600', 'access-control-allow-credentials': 'true', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-allow-headers': 'content-type', 'content-length': '2', 'content-type': 'text/plain; charset=utf-8'}
+2025-01-10 00:50:37,677 - TimesheetTracker - INFO - Request duration: 0.001 seconds
+2025-01-10 00:50:37,679 - TimesheetTracker - INFO - Request started: GET http://testserver/
+2025-01-10 00:50:37,679 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net'}
+2025-01-10 00:50:37,680 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:50:37,680 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:50:37,681 - TimesheetTracker - INFO - Request completed: GET http://testserver/
+2025-01-10 00:50:37,681 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:37,681 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:50:37,681 - TimesheetTracker - INFO - Request duration: 0.002 seconds
+2025-01-10 00:50:37,685 - TimesheetTracker - INFO - Request started: OPTIONS http://testserver/time-entries/
+2025-01-10 00:50:37,686 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'PUT', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:50:37,686 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:50:37,686 - TimesheetTracker - INFO - Request completed: OPTIONS http://testserver/time-entries/
+2025-01-10 00:50:37,686 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:37,686 - TimesheetTracker - INFO - Response headers: {'vary': 'Origin', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-max-age': '3600', 'access-control-allow-credentials': 'true', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-allow-headers': 'content-type', 'content-length': '2', 'content-type': 'text/plain; charset=utf-8'}
+2025-01-10 00:50:37,687 - TimesheetTracker - INFO - Request duration: 0.001 seconds
+2025-01-10 00:50:37,810 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-10 00:50:37,810 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-10 00:50:37,810 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-10 00:50:38,018 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-10 00:50:38,018 - TimesheetTracker - INFO - Expected tables: customers, projects, time_entries, project_managers
+2025-01-10 00:50:38,162 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-10 00:50:38,240 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-10 00:50:38,318 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-10 00:50:38,397 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-10 00:50:38,397 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-10 00:50:38,417 - TimesheetTracker - INFO - CORS configuration:
+2025-01-10 00:50:38,417 - TimesheetTracker - INFO - Allowed origins: ['https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'https://kzmjk7upp9bwloroftyo.lite.vusercontent.net']
+2025-01-10 00:50:38,417 - TimesheetTracker - INFO - Allowed methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH']
+2025-01-10 00:50:38,417 - TimesheetTracker - INFO - Allowed headers: ['content-type', 'authorization', 'accept', 'origin', 'access-control-request-method', 'access-control-request-headers']
+2025-01-10 00:50:40,500 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:50:40,512 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 00:50:40,589 - TimesheetTracker - INFO - Starting FastAPI server
+2025-01-10 00:50:40,589 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-10 00:50:40,589 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-10 00:50:40,921 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-10 00:50:40,922 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-10 00:50:40,922 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-10 00:50:41,128 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-10 00:50:41,129 - TimesheetTracker - INFO - Expected tables: project_managers, projects, customers, time_entries
+2025-01-10 00:50:41,268 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-10 00:50:41,347 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-10 00:50:41,427 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-10 00:50:41,508 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-10 00:50:41,508 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-10 00:50:41,527 - TimesheetTracker - INFO - CORS configuration:
+2025-01-10 00:50:41,528 - TimesheetTracker - INFO - Allowed origins: ['https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'https://kzmjk7upp9bwloroftyo.lite.vusercontent.net']
+2025-01-10 00:50:41,528 - TimesheetTracker - INFO - Allowed methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH']
+2025-01-10 00:50:41,528 - TimesheetTracker - INFO - Allowed headers: ['content-type', 'authorization', 'accept', 'origin', 'access-control-request-method', 'access-control-request-headers']
+2025-01-10 00:50:42,927 - TimesheetTracker - INFO - Request started: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:50:42,927 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7f5%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.5.94', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:50:42,928 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:50:42,930 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:50:42,932 - TimesheetTracker - INFO - Request completed: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:50:42,932 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:42,932 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:50:42,933 - TimesheetTracker - INFO - Request duration: 0.005 seconds
+2025-01-10 00:50:43,329 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:50:43,394 - TimesheetTracker - INFO - Request started: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:50:43,394 - TimesheetTracker - INFO - Request headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7fa%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.5.94', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:50:43,394 - TimesheetTracker - INFO - Request origin: No origin
+2025-01-10 00:50:43,395 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:50:43,395 - TimesheetTracker - INFO - Request completed: GET http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:50:43,395 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:43,395 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:50:43,395 - TimesheetTracker - INFO - Request duration: 0.001 seconds
+2025-01-10 00:50:43,418 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 00:50:43,580 - TimesheetTracker - INFO - Request started: GET http://testserver/
+2025-01-10 00:50:43,580 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:50:43,581 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:50:43,584 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:50:43,585 - TimesheetTracker - INFO - Request completed: GET http://testserver/
+2025-01-10 00:50:43,585 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:43,585 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:50:43,585 - TimesheetTracker - INFO - Request duration: 0.005 seconds
+2025-01-10 00:50:43,589 - TimesheetTracker - INFO - Request started: OPTIONS http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:50:43,590 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:50:43,590 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:50:43,590 - TimesheetTracker - INFO - Request completed: OPTIONS http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:50:43,591 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:43,591 - TimesheetTracker - INFO - Response headers: {'vary': 'Origin', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-max-age': '3600', 'access-control-allow-credentials': 'true', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-allow-headers': 'content-type', 'content-length': '2', 'content-type': 'text/plain; charset=utf-8'}
+2025-01-10 00:50:43,591 - TimesheetTracker - INFO - Request duration: 0.001 seconds
+2025-01-10 00:50:43,595 - TimesheetTracker - INFO - Request started: GET http://testserver/
+2025-01-10 00:50:43,595 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://malicious-site.com', 'access-control-request-method': 'GET'}
+2025-01-10 00:50:43,595 - TimesheetTracker - INFO - Request origin: https://malicious-site.com
+2025-01-10 00:50:43,596 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:50:43,597 - TimesheetTracker - INFO - Request completed: GET http://testserver/
+2025-01-10 00:50:43,597 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:43,597 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*'}
+2025-01-10 00:50:43,597 - TimesheetTracker - INFO - Request duration: 0.002 seconds
+2025-01-10 00:50:43,601 - TimesheetTracker - INFO - Request started: GET http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:50:43,601 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:50:43,601 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:50:43,602 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 00:50:43,602 - TimesheetTracker - INFO - Fetching time entries for date: 2025-01-09
+2025-01-10 00:50:43,603 - TimesheetTracker - DEBUG - Executing database query for time entries on date: 2025-01-09
+2025-01-10 00:50:43,944 - TimesheetTracker - INFO - Found 1 time entries for date 2025-01-09
+2025-01-10 00:50:43,944 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (24.0 hours)
+2025-01-10 00:50:43,945 - TimesheetTracker - INFO - Found 1 entries for date: 2025-01-09
+2025-01-10 00:50:43,965 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 00:50:43,965 - TimesheetTracker - INFO - Request completed: GET http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:50:43,965 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:43,965 - TimesheetTracker - INFO - Response headers: {'content-length': '281', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:50:43,965 - TimesheetTracker - INFO - Request duration: 0.364 seconds
+2025-01-10 00:50:43,970 - TimesheetTracker - INFO - Request started: OPTIONS http://testserver/time-entries/
+2025-01-10 00:50:43,970 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'POST', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:50:43,970 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:50:43,970 - TimesheetTracker - INFO - Request completed: OPTIONS http://testserver/time-entries/
+2025-01-10 00:50:43,970 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:43,971 - TimesheetTracker - INFO - Response headers: {'vary': 'Origin', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-max-age': '3600', 'access-control-allow-credentials': 'true', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-allow-headers': 'content-type', 'content-length': '2', 'content-type': 'text/plain; charset=utf-8'}
+2025-01-10 00:50:43,971 - TimesheetTracker - INFO - Request duration: 0.001 seconds
+2025-01-10 00:50:43,974 - TimesheetTracker - INFO - Request started: GET http://testserver/
+2025-01-10 00:50:43,974 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net'}
+2025-01-10 00:50:43,974 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:50:43,975 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:50:43,975 - TimesheetTracker - INFO - Request completed: GET http://testserver/
+2025-01-10 00:50:43,975 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:43,976 - TimesheetTracker - INFO - Response headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:50:43,976 - TimesheetTracker - INFO - Request duration: 0.002 seconds
+2025-01-10 00:50:43,979 - TimesheetTracker - INFO - Request started: OPTIONS http://testserver/time-entries/
+2025-01-10 00:50:43,979 - TimesheetTracker - INFO - Request headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'PUT', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:50:43,979 - TimesheetTracker - INFO - Request origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:50:43,980 - TimesheetTracker - INFO - Request completed: OPTIONS http://testserver/time-entries/
+2025-01-10 00:50:43,980 - TimesheetTracker - INFO - Response status: 200
+2025-01-10 00:50:43,980 - TimesheetTracker - INFO - Response headers: {'vary': 'Origin', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-max-age': '3600', 'access-control-allow-credentials': 'true', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-allow-headers': 'content-type', 'content-length': '2', 'content-type': 'text/plain; charset=utf-8'}
+2025-01-10 00:50:43,980 - TimesheetTracker - INFO - Request duration: 0.001 seconds
+2025-01-10 00:51:11,566 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:51:11,578 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 00:51:11,655 - TimesheetTracker - INFO - Starting FastAPI server
+2025-01-10 00:51:11,656 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-10 00:51:11,656 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-10 00:51:12,005 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-10 00:51:12,005 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-10 00:51:12,005 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-10 00:51:12,225 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-10 00:51:12,225 - TimesheetTracker - INFO - Expected tables: projects, project_managers, customers, time_entries
+2025-01-10 00:51:12,375 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-10 00:51:12,454 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-10 00:51:12,535 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-10 00:51:12,614 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-10 00:51:12,614 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-10 00:51:12,634 - TimesheetTracker - INFO - CORS configuration:
+2025-01-10 00:51:12,634 - TimesheetTracker - INFO - Allowed origins: ['https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'https://kzmjk7upp9bwloroftyo.lite.vusercontent.net']
+2025-01-10 00:51:12,634 - TimesheetTracker - INFO - Allowed methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH']
+2025-01-10 00:51:12,634 - TimesheetTracker - INFO - Allowed headers: ['content-type', 'authorization', 'accept', 'origin', 'access-control-request-method', 'access-control-request-headers']
+2025-01-10 00:52:05,470 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:52:05,485 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 00:52:05,572 - TimesheetTracker - INFO - Starting FastAPI server
+2025-01-10 00:52:05,572 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-10 00:52:05,572 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-10 00:52:05,920 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-10 00:52:05,921 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-10 00:52:05,921 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-10 00:52:06,131 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-10 00:52:06,132 - TimesheetTracker - INFO - Expected tables: project_managers, projects, customers, time_entries
+2025-01-10 00:52:06,268 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-10 00:52:06,347 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-10 00:52:06,426 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-10 00:52:06,518 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-10 00:52:06,518 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-10 00:52:06,538 - TimesheetTracker - INFO - === CORS Configuration ===
+2025-01-10 00:52:06,538 - TimesheetTracker - INFO - Allowed Origins: ['https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'https://kzmjk7upp9bwloroftyo.lite.vusercontent.net']
+2025-01-10 00:52:06,539 - TimesheetTracker - INFO - Allowed Methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH']
+2025-01-10 00:52:06,539 - TimesheetTracker - INFO - Allow Credentials: True
+2025-01-10 00:52:06,539 - TimesheetTracker - INFO - Max Age: 3600
+2025-01-10 00:52:09,164 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:52:09,176 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 00:52:09,252 - TimesheetTracker - INFO - Starting FastAPI server
+2025-01-10 00:52:09,252 - TimesheetTracker - INFO - Verifying database connection on startup
+2025-01-10 00:52:09,252 - TimesheetTracker - INFO - Verifying database connection and schema
+2025-01-10 00:52:09,594 - TimesheetTracker - INFO - Database driver: psycopg2
+2025-01-10 00:52:09,594 - TimesheetTracker - INFO - Database dialect: postgresql
+2025-01-10 00:52:09,594 - TimesheetTracker - INFO - Successfully connected to database
+2025-01-10 00:52:09,807 - TimesheetTracker - INFO - Found 5 tables in database
+2025-01-10 00:52:09,807 - TimesheetTracker - INFO - Expected tables: customers, time_entries, projects, project_managers
+2025-01-10 00:52:09,950 - TimesheetTracker - DEBUG - Table customers exists with 9 columns
+2025-01-10 00:52:10,032 - TimesheetTracker - DEBUG - Table projects exists with 9 columns
+2025-01-10 00:52:10,111 - TimesheetTracker - DEBUG - Table project_managers exists with 5 columns
+2025-01-10 00:52:10,192 - TimesheetTracker - DEBUG - Table time_entries exists with 12 columns
+2025-01-10 00:52:10,192 - TimesheetTracker - INFO - Database verification completed successfully
+2025-01-10 00:52:10,211 - TimesheetTracker - INFO - === CORS Configuration ===
+2025-01-10 00:52:10,211 - TimesheetTracker - INFO - Allowed Origins: ['https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'https://kzmjk7upp9bwloroftyo.lite.vusercontent.net']
+2025-01-10 00:52:10,212 - TimesheetTracker - INFO - Allowed Methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH']
+2025-01-10 00:52:10,212 - TimesheetTracker - INFO - Allow Credentials: True
+2025-01-10 00:52:10,212 - TimesheetTracker - INFO - Max Age: 3600
+2025-01-10 00:52:11,443 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 00:52:11,443 - TimesheetTracker - INFO - Method: GET
+2025-01-10 00:52:11,443 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:52:11,443 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 00:52:11,444 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7gf%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.5.94', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:52:11,445 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:52:11,446 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 00:52:11,446 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 00:52:11,446 - TimesheetTracker - INFO - Response Headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:52:11,446 - TimesheetTracker - INFO - Processing Time: 3.04ms
+2025-01-10 00:52:12,106 - TimesheetTracker - INFO - Attempting to connect to database at: ep-polished-snowflake-a846vhb3.eastus2.azure.neon.tech/timesheetDatabase?sslmode=require
+2025-01-10 00:52:12,203 - TimesheetTracker - INFO - Database engine created successfully
+2025-01-10 00:52:12,294 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 00:52:12,294 - TimesheetTracker - INFO - Method: GET
+2025-01-10 00:52:12,295 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/
+2025-01-10 00:52:12,295 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 00:52:12,295 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'accept-encoding': 'identity, gzip, deflate, br, zstd', 'accept-language': 'en-US,en;q=0.9', 'referer': 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co:8080/__replco/workspace_iframe.html?initialPath=%2F&id=%3Ar7gi%3A', 'sec-ch-ua': '"Microsoft Edge";v="131", "Chromium";v="131", "Not_A Brand";v="24"', 'sec-ch-ua-mobile': '?0', 'sec-ch-ua-platform': '"Windows"', 'sec-fetch-dest': 'iframe', 'sec-fetch-mode': 'navigate', 'sec-fetch-site': 'same-origin', 'upgrade-insecure-requests': '1', 'x-forwarded-for': '67.11.111.13, 165.225.36.200, 10.83.5.94', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': ''}
+2025-01-10 00:52:12,295 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:52:12,296 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 00:52:12,296 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 00:52:12,296 - TimesheetTracker - INFO - Response Headers: {'content-length': '109', 'content-type': 'application/json'}
+2025-01-10 00:52:12,297 - TimesheetTracker - INFO - Processing Time: 2.56ms
+2025-01-10 00:52:12,360 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 00:52:12,360 - TimesheetTracker - INFO - Method: GET
+2025-01-10 00:52:12,360 - TimesheetTracker - INFO - URL: http://testserver/
+2025-01-10 00:52:12,360 - TimesheetTracker - INFO - Origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:52:12,361 - TimesheetTracker - INFO - Headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:52:12,361 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:52:12,362 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 00:52:12,362 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 00:52:12,362 - TimesheetTracker - INFO - Response Headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:52:12,362 - TimesheetTracker - INFO - Processing Time: 2.06ms
+2025-01-10 00:52:12,363 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net'}
+2025-01-10 00:52:12,367 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 00:52:12,367 - TimesheetTracker - INFO - Method: OPTIONS
+2025-01-10 00:52:12,367 - TimesheetTracker - INFO - URL: http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:52:12,367 - TimesheetTracker - INFO - Origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:52:12,368 - TimesheetTracker - INFO - Headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:52:12,368 - TimesheetTracker - INFO - Processing CORS preflight request
+2025-01-10 00:52:12,368 - TimesheetTracker - INFO - Access-Control-Request-Method: GET
+2025-01-10 00:52:12,368 - TimesheetTracker - INFO - Access-Control-Request-Headers: content-type
+2025-01-10 00:52:12,368 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 00:52:12,368 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 00:52:12,369 - TimesheetTracker - INFO - Response Headers: {'vary': 'Origin', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-max-age': '3600', 'access-control-allow-credentials': 'true', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-allow-headers': 'content-type', 'content-length': '2', 'content-type': 'text/plain; charset=utf-8'}
+2025-01-10 00:52:12,369 - TimesheetTracker - INFO - Processing Time: 1.41ms
+2025-01-10 00:52:12,369 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-max-age': '3600', 'access-control-allow-credentials': 'true', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-allow-headers': 'content-type'}
+2025-01-10 00:52:12,371 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 00:52:12,372 - TimesheetTracker - INFO - Method: GET
+2025-01-10 00:52:12,372 - TimesheetTracker - INFO - URL: http://testserver/
+2025-01-10 00:52:12,372 - TimesheetTracker - INFO - Origin: https://malicious-site.com
+2025-01-10 00:52:12,372 - TimesheetTracker - INFO - Headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://malicious-site.com', 'access-control-request-method': 'GET'}
+2025-01-10 00:52:12,373 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:52:12,373 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 00:52:12,374 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 00:52:12,374 - TimesheetTracker - INFO - Response Headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*'}
+2025-01-10 00:52:12,374 - TimesheetTracker - INFO - Processing Time: 2.09ms
+2025-01-10 00:52:12,374 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*'}
+2025-01-10 00:52:12,376 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 00:52:12,377 - TimesheetTracker - INFO - Method: GET
+2025-01-10 00:52:12,377 - TimesheetTracker - INFO - URL: http://testserver/time-entries/by-date/2025-01-09
+2025-01-10 00:52:12,377 - TimesheetTracker - INFO - Origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:52:12,377 - TimesheetTracker - INFO - Headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'GET'}
+2025-01-10 00:52:12,378 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 00:52:12,379 - TimesheetTracker - INFO - Fetching time entries for date: 2025-01-09
+2025-01-10 00:52:12,379 - TimesheetTracker - DEBUG - Executing database query for time entries on date: 2025-01-09
+2025-01-10 00:52:12,729 - TimesheetTracker - INFO - Found 1 time entries for date 2025-01-09
+2025-01-10 00:52:12,730 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (24.0 hours)
+2025-01-10 00:52:12,730 - TimesheetTracker - INFO - Found 1 entries for date: 2025-01-09
+2025-01-10 00:52:12,751 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 00:52:12,752 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 00:52:12,752 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 00:52:12,752 - TimesheetTracker - INFO - Response Headers: {'content-length': '281', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:52:12,752 - TimesheetTracker - INFO - Processing Time: 375.11ms
+2025-01-10 00:52:12,752 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net'}
+2025-01-10 00:52:12,756 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 00:52:12,757 - TimesheetTracker - INFO - Method: OPTIONS
+2025-01-10 00:52:12,757 - TimesheetTracker - INFO - URL: http://testserver/time-entries/
+2025-01-10 00:52:12,757 - TimesheetTracker - INFO - Origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:52:12,757 - TimesheetTracker - INFO - Headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'POST', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:52:12,757 - TimesheetTracker - INFO - Processing CORS preflight request
+2025-01-10 00:52:12,757 - TimesheetTracker - INFO - Access-Control-Request-Method: POST
+2025-01-10 00:52:12,757 - TimesheetTracker - INFO - Access-Control-Request-Headers: content-type
+2025-01-10 00:52:12,758 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 00:52:12,758 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 00:52:12,758 - TimesheetTracker - INFO - Response Headers: {'vary': 'Origin', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-max-age': '3600', 'access-control-allow-credentials': 'true', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-allow-headers': 'content-type', 'content-length': '2', 'content-type': 'text/plain; charset=utf-8'}
+2025-01-10 00:52:12,758 - TimesheetTracker - INFO - Processing Time: 1.11ms
+2025-01-10 00:52:12,758 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-max-age': '3600', 'access-control-allow-credentials': 'true', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-allow-headers': 'content-type'}
+2025-01-10 00:52:12,764 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 00:52:12,764 - TimesheetTracker - INFO - Method: GET
+2025-01-10 00:52:12,764 - TimesheetTracker - INFO - URL: http://testserver/
+2025-01-10 00:52:12,764 - TimesheetTracker - INFO - Origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:52:12,764 - TimesheetTracker - INFO - Headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net'}
+2025-01-10 00:52:12,765 - TimesheetTracker - INFO - Root endpoint accessed
+2025-01-10 00:52:12,766 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 00:52:12,766 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 00:52:12,766 - TimesheetTracker - INFO - Response Headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'vary': 'Origin'}
+2025-01-10 00:52:12,766 - TimesheetTracker - INFO - Processing Time: 2.09ms
+2025-01-10 00:52:12,766 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-credentials': 'true', 'access-control-expose-headers': '*', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net'}
+2025-01-10 00:52:12,770 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 00:52:12,771 - TimesheetTracker - INFO - Method: OPTIONS
+2025-01-10 00:52:12,771 - TimesheetTracker - INFO - URL: http://testserver/time-entries/
+2025-01-10 00:52:12,771 - TimesheetTracker - INFO - Origin: https://kzml3cjwnshszfymqji0.lite.vusercontent.net
+2025-01-10 00:52:12,771 - TimesheetTracker - INFO - Headers: {'host': 'testserver', 'accept': '*/*', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'user-agent': 'testclient', 'origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-request-method': 'PUT', 'access-control-request-headers': 'content-type'}
+2025-01-10 00:52:12,771 - TimesheetTracker - INFO - Processing CORS preflight request
+2025-01-10 00:52:12,771 - TimesheetTracker - INFO - Access-Control-Request-Method: PUT
+2025-01-10 00:52:12,771 - TimesheetTracker - INFO - Access-Control-Request-Headers: content-type
+2025-01-10 00:52:12,771 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 00:52:12,772 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 00:52:12,772 - TimesheetTracker - INFO - Response Headers: {'vary': 'Origin', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-max-age': '3600', 'access-control-allow-credentials': 'true', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-allow-headers': 'content-type', 'content-length': '2', 'content-type': 'text/plain; charset=utf-8'}
+2025-01-10 00:52:12,772 - TimesheetTracker - INFO - Processing Time: 1.02ms
+2025-01-10 00:52:12,772 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-max-age': '3600', 'access-control-allow-credentials': 'true', 'access-control-allow-origin': 'https://kzml3cjwnshszfymqji0.lite.vusercontent.net', 'access-control-allow-headers': 'content-type'}

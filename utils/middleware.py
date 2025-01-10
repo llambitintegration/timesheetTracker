@@ -1,37 +1,47 @@
 from fastapi import Request
+from fastapi.responses import JSONResponse
 from utils.logger import Logger
 import time
 from typing import Callable
 
 logger = Logger().get_logger()
 
-async def log_middleware(request: Request, call_next: Callable):
-    """Middleware to log request details and timing"""
+async def logging_middleware(request: Request, call_next: Callable):
+    """Enhanced logging middleware with CORS details"""
     start_time = time.time()
 
-    # Log detailed request information
-    logger.info(f"Request started: {request.method} {request.url}")
-    logger.info(f"Request origin: {request.headers.get('origin', 'No origin')}")
-    logger.info(f"Request headers: {dict(request.headers)}")
-
     try:
+        # Detailed request logging
+        logger.info(f"=== Request Details ===")
+        logger.info(f"Method: {request.method}")
+        logger.info(f"URL: {request.url}")
+        logger.info(f"Origin: {request.headers.get('origin', 'No origin')}")
+        logger.info(f"Headers: {dict(request.headers)}")
+
+        # Special handling for preflight requests
+        if request.method == "OPTIONS":
+            logger.info("Processing CORS preflight request")
+            logger.info(f"Access-Control-Request-Method: {request.headers.get('access-control-request-method')}")
+            logger.info(f"Access-Control-Request-Headers: {request.headers.get('access-control-request-headers')}")
+
         # Process the request
         response = await call_next(request)
 
         # Log response details
         process_time = (time.time() - start_time) * 1000
-        logger.info(
-            f"Request completed: {request.method} {request.url} - Status: {response.status_code} - Duration: {process_time:.2f}ms"
-        )
-        logger.info(f"Response headers: {dict(response.headers)}")
+        logger.info(f"=== Response Details ===")
+        logger.info(f"Status Code: {response.status_code}")
+        logger.info(f"Response Headers: {dict(response.headers)}")
+        logger.info(f"Processing Time: {process_time:.2f}ms")
 
-        # Special handling for CORS preflight requests
-        if request.method == "OPTIONS":
-            logger.info("Processing CORS preflight request")
-            logger.info(f"CORS headers in response: {[h for h in response.headers.keys() if h.lower().startswith('access-control-')]}")
+        # Log CORS-specific headers
+        cors_headers = {k: v for k, v in response.headers.items() if k.lower().startswith('access-control-')}
+        if cors_headers:
+            logger.info(f"CORS Headers: {cors_headers}")
 
         return response
     except Exception as e:
-        logger.error(f"Request failed: {request.method} {request.url} - Error: {str(e)}")
-        logger.exception("Request processing error details:")
+        logger.error(f"Request failed: {request.method} {request.url}")
+        logger.error(f"Error details: {str(e)}")
+        logger.exception("Full error traceback:")
         raise
