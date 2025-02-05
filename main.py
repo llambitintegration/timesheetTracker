@@ -10,7 +10,6 @@ from datetime import datetime, timedelta, date
 import calendar
 from dotenv import load_dotenv
 import uvicorn
-
 from database import schemas, crud, get_db, verify_database, engine
 from utils.logger import Logger
 from utils.middleware import logging_middleware
@@ -20,6 +19,7 @@ from models.projectManagerModel import ProjectManager
 from services.customer_service import CustomerService
 from services.project_manager_service import ProjectManagerService
 from services.project_service import ProjectService
+import utils
 
 logger = Logger().get_logger()
 app = FastAPI(title="Timesheet Management API")
@@ -96,6 +96,7 @@ def read_projects(
         raise HTTPException(status_code=500, detail=str(e))
 
 
+
 @app.on_event("startup")
 async def startup_event():
     """Verify database connection and log CORS configuration on startup"""
@@ -146,16 +147,22 @@ async def upload_timesheet(
     """Upload and process timesheet file"""
     logger.info(f"Processing timesheet upload: {file.filename}")
     try:
-        if file.filename and file.filename.endswith('.xlsx'):
-            entries = utils.parse_excel(file.file)
-        elif file.filename and file.filename.endswith('.csv'):
-            entries = utils.parse_csv(file.file)
+        contents = await file.read()
+        # Create a temporary file-like object
+        from io import StringIO, BytesIO
+        if file.filename.endswith('.xlsx'):
+            entries = utils.parse_excel(BytesIO(contents))
+        elif file.filename.endswith('.csv'):
+            # Decode bytes to string for CSV
+            text_contents = contents.decode('utf-8')
+            entries = utils.parse_csv(StringIO(text_contents))
         else:
             logger.error(f"Unsupported file format: {file.filename}")
             raise HTTPException(status_code=400, detail="Unsupported file format")
 
         if not entries:
-            raise HTTPException(status_code=400, detail="No valid entries found in file")
+            logger.warning("No valid entries found in file")
+            return []
 
         created_entries = crud.create_time_entries(db, entries)
         logger.info(f"Successfully created {len(created_entries)} time entries")
