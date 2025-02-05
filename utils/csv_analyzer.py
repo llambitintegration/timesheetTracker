@@ -6,8 +6,8 @@ from utils.utils import clean_numeric_value, clean_string_value, parse_date, val
 
 logger = logging.getLogger(__name__)
 
-DEFAULT_CUSTOMER = "Unassigned Customer"
-DEFAULT_PROJECT = "General Project"
+DEFAULT_CUSTOMER = "Unassigned"
+DEFAULT_PROJECT = "General"
 
 def normalize_customer_name(name: str) -> str:
     """Normalize customer name"""

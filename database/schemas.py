@@ -85,8 +85,16 @@ class CustomerBase(BaseSchema):
     address: Optional[str] = None
     phone: Optional[str] = None
 
-class CustomerCreate(CustomerBase):
-    pass
+class CustomerCreate(BaseModel):
+    """Schema for creating new customers"""
+    name: str
+    contact_email: str
+    industry: Optional[str] = None
+    status: str = "active"
+    address: Optional[str] = None
+    phone: Optional[str] = None
+
+    model_config = ConfigDict(from_attributes=True)
 
 class CustomerUpdate(BaseSchema):
     """Schema for updating customers"""
@@ -106,17 +114,21 @@ class ProjectManagerBase(BaseSchema):
     name: str
     email: str
 
-class ProjectManagerCreate(ProjectManagerBase):
-    pass
+class ProjectManagerCreate(BaseModel):
+    """Schema for creating new project managers"""
+    name: str
+    email: str
 
-class ProjectManager(ProjectManagerBase):
-    class Config:
-        orm_model = ProjectManagerModel
+    model_config = ConfigDict(from_attributes=True)
 
 class ProjectManagerUpdate(BaseSchema):
     """Schema for updating project managers"""
     name: Optional[str] = None
     email: Optional[str] = None
+
+class ProjectManager(ProjectManagerBase):
+    class Config:
+        orm_model = ProjectManagerModel
 
 # Project Schemas
 class ProjectBase(BaseSchema):
@@ -127,8 +139,16 @@ class ProjectBase(BaseSchema):
     project_manager: str
     status: str = "active"
 
-class ProjectCreate(ProjectBase):
-    pass
+class ProjectCreate(BaseModel):
+    """Schema for creating new projects"""
+    project_id: str
+    name: str
+    description: Optional[str] = None
+    customer: str
+    project_manager: str
+    status: str = "active"
+
+    model_config = ConfigDict(from_attributes=True)
 
 class Project(ProjectBase):
     class Config:
