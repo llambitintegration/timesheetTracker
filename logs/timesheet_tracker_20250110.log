@@ -5120,3 +5120,98 @@ fastapi.exceptions.ResponseValidationError: 6 validation errors:
 2025-01-10 01:51:41,553 - TimesheetTracker - INFO - Response Headers: {'content-length': '109', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-expose-headers': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
 2025-01-10 01:51:41,553 - TimesheetTracker - INFO - Processing Time: 3.55ms
 2025-01-10 01:51:41,553 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-expose-headers': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:54:30,709 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:54:30,710 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:54:30,710 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/by-date/2025-01-09
+2025-01-10 01:54:30,711 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:54:30,711 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'node', 'accept': '*/*', 'accept-encoding': 'identity', 'accept-language': '*', 'cache-control': 'no-cache', 'pragma': 'no-cache', 'sec-fetch-mode': 'cors', 'x-forwarded-for': '165.225.36.200, 54.157.255.178, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': '', 'x-v0-dev': 'true', 'x-vercel-id': 'cle1::hfh46-1736474070469-4eb0117b2b57'}
+2025-01-10 01:54:30,712 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 01:54:30,712 - TimesheetTracker - INFO - Fetching time entries for date: 2025-01-09
+2025-01-10 01:54:30,713 - TimesheetTracker - DEBUG - Executing database query for time entries on date: 2025-01-09
+2025-01-10 01:54:30,777 - TimesheetTracker - INFO - Found 1 time entries for date 2025-01-09
+2025-01-10 01:54:30,777 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (24.0 hours)
+2025-01-10 01:54:30,777 - TimesheetTracker - INFO - Found 1 entries for date: 2025-01-09
+2025-01-10 01:54:30,797 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 01:54:30,798 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:54:30,798 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 01:54:30,798 - TimesheetTracker - INFO - Response Headers: {'content-length': '281', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:54:30,798 - TimesheetTracker - INFO - Processing Time: 88.56ms
+2025-01-10 01:54:30,798 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:54:33,112 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:54:33,112 - TimesheetTracker - INFO - Method: POST
+2025-01-10 01:54:33,112 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/upload
+2025-01-10 01:54:33,112 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:54:33,112 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'node', 'content-length': '312', 'accept': '*/*', 'accept-encoding': 'identity', 'accept-language': '*', 'cache-control': 'no-cache', 'content-type': 'application/json', 'pragma': 'no-cache', 'sec-fetch-mode': 'cors', 'x-forwarded-for': '165.225.36.200, 3.88.191.13, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': '', 'x-v0-dev': 'true', 'x-vercel-id': 'cle1::j5nvr-1736474063315-7af4e4d58839'}
+2025-01-10 01:54:33,113 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 01:54:33,113 - TimesheetTracker - INFO - Processing 2 time entries
+2025-01-10 01:54:33,114 - TimesheetTracker - DEBUG - Initializing TimeEntryService for bulk entry creation
+2025-01-10 01:54:33,114 - TimesheetTracker - DEBUG - ProjectRepository initialized
+2025-01-10 01:54:33,114 - TimesheetTracker - DEBUG - TimeEntryService initialized with database session
+2025-01-10 01:54:33,114 - TimesheetTracker - INFO - Creating 2 time entries in bulk
+2025-01-10 01:54:33,114 - TimesheetTracker - INFO - Beginning bulk creation of 2 time entries
+2025-01-10 01:54:33,114 - TimesheetTracker - DEBUG - Processing entry 1/2
+2025-01-10 01:54:33,114 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'category': 'Other', 'subcategory': 'Non-Customer Meetings', 'customer': '-', 'project': '-', 'task_description': 'Safety Meeting', 'hours': 1.0, 'date': datetime.date(2024, 12, 2)}
+2025-01-10 01:54:33,114 - TimesheetTracker - DEBUG - Converting empty/invalid customer name to Unassigned
+2025-01-10 01:54:33,175 - TimesheetTracker - DEBUG - Converting empty/invalid project ID to Unassigned
+2025-01-10 01:54:33,175 - TimesheetTracker - DEBUG - Fetching project with ID: Unassigned
+2025-01-10 01:54:33,197 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-10 01:54:33,197 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-10 01:54:33,198 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-10 01:54:33,198 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-10 01:54:33,253 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-10 01:54:33,313 - TimesheetTracker - INFO - Successfully created time entry [155] for Unassigned - Unassigned (1.0 hours)
+2025-01-10 01:54:33,313 - TimesheetTracker - DEBUG - Added entry 1 to session: Unassigned - Unassigned
+2025-01-10 01:54:33,313 - TimesheetTracker - DEBUG - Processing entry 2/2
+2025-01-10 01:54:33,313 - TimesheetTracker - DEBUG - Starting creation of time entry with data: {'category': 'Other', 'subcategory': 'Non-Customer Meeting', 'customer': '-', 'project': '-', 'task_description': 'Priorities meeting', 'hours': 1.0, 'date': datetime.date(2024, 12, 2)}
+2025-01-10 01:54:33,313 - TimesheetTracker - DEBUG - Converting empty/invalid customer name to Unassigned
+2025-01-10 01:54:33,335 - TimesheetTracker - DEBUG - Converting empty/invalid project ID to Unassigned
+2025-01-10 01:54:33,335 - TimesheetTracker - DEBUG - Fetching project with ID: Unassigned
+2025-01-10 01:54:33,355 - TimesheetTracker - DEBUG - Validating and setting default categories
+2025-01-10 01:54:33,355 - TimesheetTracker - DEBUG - Creating TimeEntry model instance
+2025-01-10 01:54:33,355 - TimesheetTracker - DEBUG - Adding entry to database session
+2025-01-10 01:54:33,355 - TimesheetTracker - DEBUG - Committing transaction
+2025-01-10 01:54:33,396 - TimesheetTracker - DEBUG - Refreshing database entry
+2025-01-10 01:54:33,456 - TimesheetTracker - INFO - Successfully created time entry [156] for Unassigned - Unassigned (1.0 hours)
+2025-01-10 01:54:33,456 - TimesheetTracker - DEBUG - Added entry 2 to session: Unassigned - Unassigned
+2025-01-10 01:54:33,456 - TimesheetTracker - INFO - Successfully created 2 time entries (Total: 2.0 hours)
+2025-01-10 01:54:33,497 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 01:54:33,497 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:54:33,497 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 01:54:33,497 - TimesheetTracker - INFO - Response Headers: {'content-length': '564', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:54:33,498 - TimesheetTracker - INFO - Processing Time: 385.47ms
+2025-01-10 01:54:33,498 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:54:33,685 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:54:33,685 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:54:33,685 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/by-date/2025-01-09
+2025-01-10 01:54:33,685 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:54:33,685 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'node', 'accept': '*/*', 'accept-encoding': 'identity', 'accept-language': '*', 'cache-control': 'no-cache', 'pragma': 'no-cache', 'sec-fetch-mode': 'cors', 'x-forwarded-for': '165.225.36.200, 3.88.191.13, 10.83.0.51', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': '', 'x-v0-dev': 'true', 'x-vercel-id': 'cle1::w46h9-1736474073620-bea0adb7276f'}
+2025-01-10 01:54:33,686 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 01:54:33,686 - TimesheetTracker - INFO - Fetching time entries for date: 2025-01-09
+2025-01-10 01:54:33,686 - TimesheetTracker - DEBUG - Executing database query for time entries on date: 2025-01-09
+2025-01-10 01:54:33,744 - TimesheetTracker - INFO - Found 1 time entries for date 2025-01-09
+2025-01-10 01:54:33,745 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (24.0 hours)
+2025-01-10 01:54:33,745 - TimesheetTracker - INFO - Found 1 entries for date: 2025-01-09
+2025-01-10 01:54:33,765 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 01:54:33,765 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:54:33,765 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 01:54:33,765 - TimesheetTracker - INFO - Response Headers: {'content-length': '281', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:54:33,765 - TimesheetTracker - INFO - Processing Time: 80.16ms
+2025-01-10 01:54:33,765 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:54:40,476 - TimesheetTracker - INFO - === Request Details ===
+2025-01-10 01:54:40,476 - TimesheetTracker - INFO - Method: GET
+2025-01-10 01:54:40,476 - TimesheetTracker - INFO - URL: http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-entries/by-date/2024-12-02
+2025-01-10 01:54:40,476 - TimesheetTracker - INFO - Origin: No origin
+2025-01-10 01:54:40,476 - TimesheetTracker - INFO - Headers: {'host': '6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co', 'user-agent': 'node', 'accept': '*/*', 'accept-encoding': 'identity', 'accept-language': '*', 'cache-control': 'no-cache', 'pragma': 'no-cache', 'sec-fetch-mode': 'cors', 'x-forwarded-for': '165.225.36.200, 54.157.255.178, 10.83.3.67', 'x-forwarded-proto': 'https', 'x-replit-user-bio': '', 'x-replit-user-id': '', 'x-replit-user-name': '', 'x-replit-user-profile-image': '', 'x-replit-user-roles': '', 'x-replit-user-teams': '', 'x-replit-user-url': '', 'x-v0-dev': 'true', 'x-vercel-id': 'cle1::wpnqs-1736474080231-5b35795984c5'}
+2025-01-10 01:54:40,477 - TimesheetTracker - DEBUG - Database session created
+2025-01-10 01:54:40,477 - TimesheetTracker - INFO - Fetching time entries for date: 2024-12-02
+2025-01-10 01:54:40,478 - TimesheetTracker - DEBUG - Executing database query for time entries on date: 2024-12-02
+2025-01-10 01:54:40,537 - TimesheetTracker - INFO - Found 2 time entries for date 2024-12-02
+2025-01-10 01:54:40,538 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (1.0 hours)
+2025-01-10 01:54:40,538 - TimesheetTracker - DEBUG - Entry: Unassigned - Unassigned (1.0 hours)
+2025-01-10 01:54:40,538 - TimesheetTracker - INFO - Found 2 entries for date: 2024-12-02
+2025-01-10 01:54:40,558 - TimesheetTracker - DEBUG - Database session closed
+2025-01-10 01:54:40,558 - TimesheetTracker - INFO - === Response Details ===
+2025-01-10 01:54:40,558 - TimesheetTracker - INFO - Status Code: 200
+2025-01-10 01:54:40,558 - TimesheetTracker - INFO - Response Headers: {'content-length': '564', 'content-type': 'application/json', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
+2025-01-10 01:54:40,559 - TimesheetTracker - INFO - Processing Time: 82.69ms
+2025-01-10 01:54:40,559 - TimesheetTracker - INFO - CORS Headers: {'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH', 'access-control-allow-headers': '*', 'access-control-max-age': '3600'}
