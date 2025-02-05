@@ -24,26 +24,14 @@ from services.project_service import ProjectService
 logger = Logger().get_logger()
 app = FastAPI(title="Timesheet Management API")
 
-# CORS configuration section only
+# Simplified CORS configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "https://localhost:3000",
-        "https://v0.dev",
-        "*"  # During development - remove in production
-    ],
-    allow_credentials=False,  # Set to False since we're using '*' for origins
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-    allow_headers=[
-        "Content-Type",
-        "Authorization",
-        "Access-Control-Allow-Origin",
-        "Access-Control-Allow-Methods",
-        "Access-Control-Allow-Headers",
-    ],
-    expose_headers=["*"],
-    max_age=3600
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    expose_headers=["*"]
 )
 
 # Custom middleware for logging and error handling
@@ -119,12 +107,11 @@ async def startup_event():
 
         # Log CORS configuration
         logger.info("=== CORS Configuration ===")
-        logger.info("Allowed Origins: ['http://localhost:3000', 'https://localhost:3000', 'https://v0.dev', '*']")
-        logger.info(f"Allowed Methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH']")
+        logger.info("Allowed Origins: '*'")
+        logger.info(f"Allowed Methods: '*'")
         logger.info(f"Allow Credentials: False")
-        logger.info(f"Allowed Headers: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin', 'Access-Control-Allow-Methods', 'Access-Control-Allow-Headers']")
+        logger.info(f"Allowed Headers: '*'")
         logger.info(f"Expose Headers: '*'")
-        logger.info(f"Max Age: 3600")
 
     except Exception as e:
         logger.error(f"Error during startup: {str(e)}")

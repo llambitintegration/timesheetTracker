@@ -3,8 +3,6 @@ from typing import List, Dict, Any, Optional
 from datetime import datetime
 import calendar
 from utils.logger import Logger
-from utils.validators import normalize_customer_name, normalize_project_id, DEFAULT_CUSTOMER, DEFAULT_PROJECT
-from database import schemas
 
 logger = Logger().get_logger()
 
@@ -17,26 +15,12 @@ def clean_numeric_value(value, default=0):
     except (ValueError, TypeError):
         return default
 
-def clean_string_value(value, default="", field_type=None):
-    """Clean and validate string values with specific handling for customer/project fields"""
+def clean_string_value(value, default=""):
+    """Clean and validate string values"""
     if pd.isna(value) or value is None or str(value).strip() in ['', '-', 'None', 'null', 'NA']:
-        if field_type == 'customer':
-            return DEFAULT_CUSTOMER
-        elif field_type == 'project':
-            return DEFAULT_PROJECT
         return default
 
-    cleaned = str(value).strip()
-
-    # Special handling for customer and project fields
-    if field_type == 'customer':
-        return normalize_customer_name(cleaned)
-    elif field_type == 'project':
-        return normalize_project_id(cleaned)
-    elif field_type in ['category', 'subcategory']:
-        return cleaned.title()
-
-    return cleaned
+    return str(value).strip()
 
 def parse_date(date_value) -> datetime.date:
     """Parse and validate date values."""
@@ -172,16 +156,16 @@ def parse_csv(file) -> List:
                 customer = DEFAULT_CUSTOMER
                 project = DEFAULT_PROJECT
             else:
-                customer = normalize_customer_name(raw_customer)
-                project = normalize_project_id(raw_project)
+                customer = clean_string_value(raw_customer)
+                project = clean_string_value(raw_project)
 
             logger.debug(f"Processed row {index + 1} - customer: {customer}, project: {project}")
 
             entry = schemas.TimeEntryCreate(
                 week_number=validate_week_number(row.get('Week Number')),
                 month=validate_month(row.get('Month')),
-                category=clean_string_value(row.get('Category'), "Other", "category"),
-                subcategory=clean_string_value(row.get('Subcategory'), "General", "subcategory"),
+                category=clean_string_value(row.get('Category'), "Other"),
+                subcategory=clean_string_value(row.get('Subcategory'), "General"),
                 customer=customer,
                 project=project,
                 task_description=clean_string_value(row.get('Task Description'), ""),
