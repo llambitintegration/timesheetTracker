@@ -43,7 +43,7 @@ async def lifespan(app: FastAPI):
 
         # Log CORS configuration
         logger.info("=== CORS Configuration ===")
-        logger.info("Allowed Origins: '*'")
+        logger.info(f"Allowed Origins: ['https://kzmk61p9ygadt1kvrsrm.lite.vusercontent.net']")
         logger.info(f"Allowed Methods: 'GET,POST,PUT,DELETE,OPTIONS,PATCH'")
         logger.info(f"Allow Credentials: False")
         logger.info(f"Allowed Headers: '*'")
@@ -72,10 +72,10 @@ app.middleware("http")(error_logging_middleware)
 # Update CORS configuration with proper settings
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, this should be restricted
-    allow_credentials=False,  # Changed to False to match API client
+    allow_origins=["https://kzmk61p9ygadt1kvrsrm.lite.vusercontent.net"],  # Specific origin instead of wildcard
+    allow_credentials=False,  # Must be False since frontend doesn't need credentials
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-    allow_headers=["*"],
+    allow_headers=["*"],  # Allow all headers
     expose_headers=["X-Total-Count", "X-Correlation-ID"],
     max_age=3600
 )
@@ -125,18 +125,7 @@ async def options_handler(request: Request):
     response.headers["Access-Control-Expose-Headers"] = "X-Total-Count,X-Correlation-ID"
     return response
 
-@app.middleware("http")
-async def cors_middleware(request: Request, call_next):
-    """Additional CORS middleware to ensure headers are set on all responses"""
-    response = await call_next(request)
-
-    # Ensure CORS headers are present on all responses
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS,PATCH"
-    response.headers["Access-Control-Allow-Headers"] = "*"
-    response.headers["Access-Control-Allow-Credentials"] = "false"
-    response.headers["Access-Control-Expose-Headers"] = "X-Total-Count,X-Correlation-ID"
-    return response
+#The cors_middleware is redundant given the CORSMiddleware above.  Removing it.
 
 # Move catch-all route to the end of file and update its behavior
 @app.api_route("/{path_name:path}", methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
@@ -709,7 +698,6 @@ def create_sample_data(db: Session = Depends(get_db)):
             continue
 
     return {"message": f"Created {len(created_entries)} sample entries"}
-
 
 if __name__ == "__main__":
     logger.info("Starting FastAPI server")
