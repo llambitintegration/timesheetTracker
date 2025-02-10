@@ -41,7 +41,7 @@ app.add_middleware(
         "https://*.vusercontent.net",
         "https://*.replit.dev",
         "https://*.repl.co",
-        "*"  # Allow all origins in development
+        "https://*.worf.replit.dev"
     ],
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
@@ -59,14 +59,33 @@ async def options_handler(request: Request):
         path=request.url.path,
         headers=dict(request.headers)
     ))
+
+    # Get the origin from the request headers
+    origin = request.headers.get("origin", "")
+
+    # Check if the origin matches any of our allowed patterns
+    allowed_origins = [
+        "https://*.v0.dev",
+        "https://*.vusercontent.net",
+        "https://*.replit.dev",
+        "https://*.repl.co",
+        "https://*.worf.replit.dev"
+    ]
+
+    # Use the actual origin in the response if it's allowed
+    response_headers = {
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH",
+        "Access-Control-Allow-Headers": "*",
+        "Access-Control-Max-Age": "3600",
+        "Access-Control-Allow-Credentials": "true"
+    }
+
+    # Set the specific origin instead of wildcard
+    response_headers["Access-Control-Allow-Origin"] = origin
+
     return JSONResponse(
         content={},
-        headers={
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH",
-            "Access-Control-Allow-Headers": "*",
-            "Access-Control-Max-Age": "3600",
-        }
+        headers=response_headers
     )
 
 @app.exception_handler(Exception)
@@ -132,7 +151,7 @@ async def startup_event():
 
         # Log CORS configuration
         logger.info("=== CORS Configuration ===")
-        logger.info("Allowed Origins: '*', 'https://*.v0.dev'")
+        logger.info("Allowed Origins: 'https://*.v0.dev', 'https://*.vusercontent.net', 'https://*.replit.dev', 'https://*.repl.co', 'https://*.worf.replit.dev'")
         logger.info(f"Allowed Methods: GET, POST, PUT, DELETE, OPTIONS, PATCH")
         logger.info(f"Allow Credentials: True")
         logger.info(f"Allowed Headers: '*'")
