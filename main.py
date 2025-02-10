@@ -72,8 +72,8 @@ app.middleware("http")(error_logging_middleware)
 # Update CORS configuration with proper settings
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=False,
+    allow_origins=["*"],  # In production, this should be restricted
+    allow_credentials=False,  # Changed to False to match API client
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allow_headers=["*"],
     expose_headers=["X-Total-Count", "X-Correlation-ID"],
