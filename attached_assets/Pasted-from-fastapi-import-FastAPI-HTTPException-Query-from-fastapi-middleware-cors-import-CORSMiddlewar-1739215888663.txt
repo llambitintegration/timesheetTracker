@@ -1,0 +1,84 @@
+from fastapi import FastAPI, HTTPException, Query
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from typing import List, Optional
+from datetime import datetime, date
+import calendar
+
+app = FastAPI()
+
+# CORS middleware configuration
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://kzmlujlqmvbcsanq2a21.lite.vusercontent.net", "https://*.v0.dev", "https://*.replit.dev", "https://*.repl.co"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Sample data (you should replace this with a database in a real application)
+time_entries = [
+    {
+        "id": 1,
+        "date": "2025-02-01",
+        "category": "Development",
+        "subcategory": "Frontend",
+        "hours": 8,
+        "description": "Worked on React components"
+    },
+    {
+        "id": 2,
+        "date": "2025-02-02",
+        "category": "Development",
+        "subcategory": "Backend",
+        "hours": 6,
+        "description": "Implemented API endpoints"
+    },
+    # Add more sample entries as needed
+]
+
+class TimeEntry(BaseModel):
+    id: int
+    date: str
+    category: str
+    subcategory: str
+    hours: float
+    description: str
+
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
+
+@app.get("/health")
+async def health_check():
+    return {"status": "ok"}
+
+@app.options("/{path:path}")
+async def options_handler(path: str):
+    return {"message": "OK"}
+
+@app.get("/time-entries", response_model=List[TimeEntry])
+async def get_time_entries(skip: int = 0, limit: int = 100):
+    return time_entries[skip : skip + limit]
+
+@app.get("/time-entries/by-month/{month}")
+async def get_time_entries_by_month(month: str, year: int = Query(...)):
+    month_number = list(calendar.month_name).index(month.capitalize())
+    if month_number == 0:
+        raise HTTPException(status_code=400, detail="Invalid month name")
+    
+    filtered_entries = [
+        entry for entry in time_entries
+        if datetime.strptime(entry['date'], "%Y-%m-%d").month == month_number
+        and datetime.strptime(entry['date'], "%Y-%m-%d").year == year
+    ]
+    
+    total_hours = sum(entry['hours'] for entry in filtered_entries)
+    
+    return {
+        "total_hours": total_hours,
+        "entries": filtered_entries
+    }
+
+# Add more endpoints as needed
+
