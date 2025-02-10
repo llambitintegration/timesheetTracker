@@ -1,0 +1,222 @@
+fetch("https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.replit.dev/time-summaries/?start_date=2024-11-01&end_date=2024-11-30", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "cross-site",
+    "Referer": "https://kzmofsxt8ko4klafvak3.lite.vusercontent.net/",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "OPTIONS"
+}); ;
+fetch("https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.replit.dev/time-summaries/?start_date=2024-11-01&end_date=2024-11-30", {
+  "headers": {
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Not A(Brand\";v=\"8\", \"Chromium\";v=\"132\", \"Microsoft Edge\";v=\"132\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "https://kzmofsxt8ko4klafvak3.lite.vusercontent.net/",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.replit.dev/time-summaries/?start_date=2024-11-01&end_date=2024-11-30", {
+  "headers": {
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Not A(Brand\";v=\"8\", \"Chromium\";v=\"132\", \"Microsoft Edge\";v=\"132\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "https://kzmofsxt8ko4klafvak3.lite.vusercontent.net/",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.replit.dev/time-summaries/?start_date=2024-11-01&end_date=2024-11-30", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "cross-site",
+    "Referer": "https://kzmofsxt8ko4klafvak3.lite.vusercontent.net/",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "OPTIONS"
+}); ;
+fetch("https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.replit.dev/time-summaries/?start_date=2024-11-01&end_date=2024-11-30", {
+  "headers": {
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Not A(Brand\";v=\"8\", \"Chromium\";v=\"132\", \"Microsoft Edge\";v=\"132\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "https://kzmofsxt8ko4klafvak3.lite.vusercontent.net/",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.replit.dev/time-summaries/?start_date=2024-11-01&end_date=2024-11-30", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "cross-site",
+    "Referer": "https://kzmofsxt8ko4klafvak3.lite.vusercontent.net/",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "OPTIONS"
+}); ;
+fetch("https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.replit.dev/time-summaries/?start_date=2024-11-01&end_date=2024-11-30", {
+  "headers": {
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Not A(Brand\";v=\"8\", \"Chromium\";v=\"132\", \"Microsoft Edge\";v=\"132\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "https://kzmofsxt8ko4klafvak3.lite.vusercontent.net/",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.replit.dev/time-summaries/?start_date=2024-11-01&end_date=2024-11-30", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "cross-site",
+    "Referer": "https://kzmofsxt8ko4klafvak3.lite.vusercontent.net/",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "OPTIONS"
+}); ;
+fetch("https://v0.dev/chat/api/send", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Not A(Brand\";v=\"8\", \"Chromium\";v=\"132\", \"Microsoft Edge\";v=\"132\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "cookie": "ko_id=40a9f37a-7c0c-4db9-b238-5f2ffd3b5491; v0-has-signed-in=1; __stripe_mid=6065616d-4710-4548-9cd2-7012e27c9d9cd89bba; block-view-size=75.7674087617; file-tree-size=33.5047129392; anon_session_id=ePZNbfPnAQU1TLjPPl5C930rm3iOQa9m; _hp2_id.380479483=%7B%22userId%22%3A%22529413785537396%22%2C%22pageviewId%22%3A%22388672144664848%22%2C%22sessionId%22%3A%222433826273635469%22%2C%22identity%22%3Anull%2C%22trackerVersion%22%3A%224.0%22%7D; _hp2_ses_props.380479483=%7B%22ts%22%3A1739201438450%2C%22d%22%3A%22v0.dev%22%2C%22h%22%3A%22%2Fchat%2Ftimesheet-management-guide-UFsxiVsYhL6%22%7D; session_referer=https%3A%2F%2Fv0.dev%2Fchat%2Ftimesheet-management-guide-UFsxiVsYhL6; user_session=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..CMi7w5CpX6edaBo3.ZWzkFw1Dy68nfS7IV3k0Bu4UMpgMFuDG1QnL9c_8JPaviivfMJbEapfDee7HX4fpYhmkYNMlNLP5oUX34UP2QqiOflUQ84Yq4pRsnJF5Cvd0BYxiZOGinwzU1SIFIkV3Xo4cDUSEhXSLHQG3XvNOOf2iXfsN-qeFpS8iK8BCyveBRbM-Q307URz4HmE2qeeD2ZRcYb2T0OaH7sfLgLIn4BFBm_iUeZo_9fMP4ii8xrz8qrBZrmaXDrK53Irtn2IVJ-jbenWsjVKPggGct5av-U0zTLdNZcI3XI88b8MllimsW66OE1IPxYu8iA1IvH-kiTCK5L76B_ncBlPYEhaLqF8tSIhGVoWTnat9ycYCu-bRp7Zjxvjd_HXsOmWij2R3xHgRPdET53DjVo0iEs9toA2YFt2UOwsdgeinzseOdG-pccPX_IRD3PK5hHoRBYeeiRE5cWZw8SOGhFDfKjdhlXAp2wYUrdftulVhMrooxuJXA8LlgwBLs5WIKfhvRQXJg_ozPY23olAEG1e7EJmDKXWysLT2Hbrw3GwXwQTBx8czysKcDP6VrTbygSlQ9HoY5uLN9DQvxOgSQuV7Z--MSeOKUsfIWH_V0bPUhqIzpBP_0FHydWmVxf4QXpdvEY772R6dM9cGRE09ftQyzai_Lw3o_uHI8BY3j9rxCMZr9mTUezWYmp_iPqBMs2kyeYjeSAHElVkqb2S1ARD7LwsZAdCjhtOe5hNw.uksaNYhl7OUbnshvxvdUFQ; prompt-draft={%22version%22:1%2C%22drafts%22:{%22new-chat-prompt-draft%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736471242514}%2C%224oGhnKlqI0X%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736474055616}%2C%22UFsxiVsYhL6%22:{%22message%22:%22%22%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1739201909782}}}; ko_sid={%22id%22:%221739197473676%22%2C%22lastTouched%22:1739202072828}",
+    "Referer": "https://v0.dev/chat/timesheet-management-guide-UFsxiVsYhL6",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": "{\"action\":\"V0BlockPreviewError\",\"meta\":\"{\\\"error\\\":\\\"Error in getTimeSummaries: {}\\\\n\\\\n  at Object.getTimeSummaries (/services/api-client)\\\\n  at async exportTimeSummary (/app/time-entry/view/page)\\\\n  at async handleExportMonth (/app/time-entry/view/page)\\\"}\",\"referer\":\"https://v0.dev/chat/timesheet-management-guide-UFsxiVsYhL6\",\"error_code\":19,\"generic_route\":\"/[id]\",\"call_layer\":\"client\",\"chat_id\":\"timesheet-management-guide-UFsxiVsYhL6\",\"message_id\":\"myjdvUXIiPgIQdgyiuLcoSA2m1cHfdvK\",\"block_id\":\"b_isS4Ow5TNn3\",\"domain\":\"v0.dev\",\"path\":\"/chat/timesheet-management-guide-UFsxiVsYhL6\",\"query_string\":null,\"browser_width\":926,\"browser_height\":920}",
+  "method": "POST"
+}); ;
+fetch("https://v0.dev/chat/api/send", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Not A(Brand\";v=\"8\", \"Chromium\";v=\"132\", \"Microsoft Edge\";v=\"132\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "cookie": "ko_id=40a9f37a-7c0c-4db9-b238-5f2ffd3b5491; v0-has-signed-in=1; __stripe_mid=6065616d-4710-4548-9cd2-7012e27c9d9cd89bba; block-view-size=75.7674087617; file-tree-size=33.5047129392; anon_session_id=ePZNbfPnAQU1TLjPPl5C930rm3iOQa9m; _hp2_id.380479483=%7B%22userId%22%3A%22529413785537396%22%2C%22pageviewId%22%3A%22388672144664848%22%2C%22sessionId%22%3A%222433826273635469%22%2C%22identity%22%3Anull%2C%22trackerVersion%22%3A%224.0%22%7D; _hp2_ses_props.380479483=%7B%22ts%22%3A1739201438450%2C%22d%22%3A%22v0.dev%22%2C%22h%22%3A%22%2Fchat%2Ftimesheet-management-guide-UFsxiVsYhL6%22%7D; session_referer=https%3A%2F%2Fv0.dev%2Fchat%2Ftimesheet-management-guide-UFsxiVsYhL6; user_session=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..CMi7w5CpX6edaBo3.ZWzkFw1Dy68nfS7IV3k0Bu4UMpgMFuDG1QnL9c_8JPaviivfMJbEapfDee7HX4fpYhmkYNMlNLP5oUX34UP2QqiOflUQ84Yq4pRsnJF5Cvd0BYxiZOGinwzU1SIFIkV3Xo4cDUSEhXSLHQG3XvNOOf2iXfsN-qeFpS8iK8BCyveBRbM-Q307URz4HmE2qeeD2ZRcYb2T0OaH7sfLgLIn4BFBm_iUeZo_9fMP4ii8xrz8qrBZrmaXDrK53Irtn2IVJ-jbenWsjVKPggGct5av-U0zTLdNZcI3XI88b8MllimsW66OE1IPxYu8iA1IvH-kiTCK5L76B_ncBlPYEhaLqF8tSIhGVoWTnat9ycYCu-bRp7Zjxvjd_HXsOmWij2R3xHgRPdET53DjVo0iEs9toA2YFt2UOwsdgeinzseOdG-pccPX_IRD3PK5hHoRBYeeiRE5cWZw8SOGhFDfKjdhlXAp2wYUrdftulVhMrooxuJXA8LlgwBLs5WIKfhvRQXJg_ozPY23olAEG1e7EJmDKXWysLT2Hbrw3GwXwQTBx8czysKcDP6VrTbygSlQ9HoY5uLN9DQvxOgSQuV7Z--MSeOKUsfIWH_V0bPUhqIzpBP_0FHydWmVxf4QXpdvEY772R6dM9cGRE09ftQyzai_Lw3o_uHI8BY3j9rxCMZr9mTUezWYmp_iPqBMs2kyeYjeSAHElVkqb2S1ARD7LwsZAdCjhtOe5hNw.uksaNYhl7OUbnshvxvdUFQ; prompt-draft={%22version%22:1%2C%22drafts%22:{%22new-chat-prompt-draft%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736471242514}%2C%224oGhnKlqI0X%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736474055616}%2C%22UFsxiVsYhL6%22:{%22message%22:%22%22%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1739201909782}}}; ko_sid={%22id%22:%221739197473676%22%2C%22lastTouched%22:1739202072828}",
+    "Referer": "https://v0.dev/chat/timesheet-management-guide-UFsxiVsYhL6",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": "{\"action\":\"V0BlockPreviewError\",\"meta\":\"{\\\"error\\\":\\\"Error exporting time summary: {\\\\\\\"status\\\\\\\":500,\\\\\\\"name\\\\\\\":\\\\\\\"ApiError\\\\\\\"}\\\\n\\\\n  at exportTimeSummary (/app/time-entry/view/page)\\\\n  at async handleExportMonth (/app/time-entry/view/page)\\\"}\",\"referer\":\"https://v0.dev/chat/timesheet-management-guide-UFsxiVsYhL6\",\"error_code\":19,\"generic_route\":\"/[id]\",\"call_layer\":\"client\",\"chat_id\":\"timesheet-management-guide-UFsxiVsYhL6\",\"message_id\":\"myjdvUXIiPgIQdgyiuLcoSA2m1cHfdvK\",\"block_id\":\"b_isS4Ow5TNn3\",\"domain\":\"v0.dev\",\"path\":\"/chat/timesheet-management-guide-UFsxiVsYhL6\",\"query_string\":null,\"browser_width\":926,\"browser_height\":920}",
+  "method": "POST"
+}); ;
+fetch("https://v0.dev/chat/api/send", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Not A(Brand\";v=\"8\", \"Chromium\";v=\"132\", \"Microsoft Edge\";v=\"132\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "cookie": "ko_id=40a9f37a-7c0c-4db9-b238-5f2ffd3b5491; v0-has-signed-in=1; __stripe_mid=6065616d-4710-4548-9cd2-7012e27c9d9cd89bba; block-view-size=75.7674087617; file-tree-size=33.5047129392; anon_session_id=ePZNbfPnAQU1TLjPPl5C930rm3iOQa9m; _hp2_id.380479483=%7B%22userId%22%3A%22529413785537396%22%2C%22pageviewId%22%3A%22388672144664848%22%2C%22sessionId%22%3A%222433826273635469%22%2C%22identity%22%3Anull%2C%22trackerVersion%22%3A%224.0%22%7D; _hp2_ses_props.380479483=%7B%22ts%22%3A1739201438450%2C%22d%22%3A%22v0.dev%22%2C%22h%22%3A%22%2Fchat%2Ftimesheet-management-guide-UFsxiVsYhL6%22%7D; session_referer=https%3A%2F%2Fv0.dev%2Fchat%2Ftimesheet-management-guide-UFsxiVsYhL6; user_session=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..CMi7w5CpX6edaBo3.ZWzkFw1Dy68nfS7IV3k0Bu4UMpgMFuDG1QnL9c_8JPaviivfMJbEapfDee7HX4fpYhmkYNMlNLP5oUX34UP2QqiOflUQ84Yq4pRsnJF5Cvd0BYxiZOGinwzU1SIFIkV3Xo4cDUSEhXSLHQG3XvNOOf2iXfsN-qeFpS8iK8BCyveBRbM-Q307URz4HmE2qeeD2ZRcYb2T0OaH7sfLgLIn4BFBm_iUeZo_9fMP4ii8xrz8qrBZrmaXDrK53Irtn2IVJ-jbenWsjVKPggGct5av-U0zTLdNZcI3XI88b8MllimsW66OE1IPxYu8iA1IvH-kiTCK5L76B_ncBlPYEhaLqF8tSIhGVoWTnat9ycYCu-bRp7Zjxvjd_HXsOmWij2R3xHgRPdET53DjVo0iEs9toA2YFt2UOwsdgeinzseOdG-pccPX_IRD3PK5hHoRBYeeiRE5cWZw8SOGhFDfKjdhlXAp2wYUrdftulVhMrooxuJXA8LlgwBLs5WIKfhvRQXJg_ozPY23olAEG1e7EJmDKXWysLT2Hbrw3GwXwQTBx8czysKcDP6VrTbygSlQ9HoY5uLN9DQvxOgSQuV7Z--MSeOKUsfIWH_V0bPUhqIzpBP_0FHydWmVxf4QXpdvEY772R6dM9cGRE09ftQyzai_Lw3o_uHI8BY3j9rxCMZr9mTUezWYmp_iPqBMs2kyeYjeSAHElVkqb2S1ARD7LwsZAdCjhtOe5hNw.uksaNYhl7OUbnshvxvdUFQ; prompt-draft={%22version%22:1%2C%22drafts%22:{%22new-chat-prompt-draft%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736471242514}%2C%224oGhnKlqI0X%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736474055616}%2C%22UFsxiVsYhL6%22:{%22message%22:%22%22%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1739201909782}}}; ko_sid={%22id%22:%221739197473676%22%2C%22lastTouched%22:1739202072828}",
+    "Referer": "https://v0.dev/chat/timesheet-management-guide-UFsxiVsYhL6",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": "{\"action\":\"V0BlockPreviewError\",\"meta\":\"{\\\"error\\\":\\\"API Error Details: undefined\\\\n\\\\n  at exportTimeSummary (/app/time-entry/view/page)\\\\n  at async handleExportMonth (/app/time-entry/view/page)\\\"}\",\"referer\":\"https://v0.dev/chat/timesheet-management-guide-UFsxiVsYhL6\",\"error_code\":19,\"generic_route\":\"/[id]\",\"call_layer\":\"client\",\"chat_id\":\"timesheet-management-guide-UFsxiVsYhL6\",\"message_id\":\"myjdvUXIiPgIQdgyiuLcoSA2m1cHfdvK\",\"block_id\":\"b_isS4Ow5TNn3\",\"domain\":\"v0.dev\",\"path\":\"/chat/timesheet-management-guide-UFsxiVsYhL6\",\"query_string\":null,\"browser_width\":926,\"browser_height\":920}",
+  "method": "POST"
+}); ;
+fetch("https://v0.dev/chat/api/chat/env-vars/outdated?bid=b_isS4Ow5TNn3", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Not A(Brand\";v=\"8\", \"Chromium\";v=\"132\", \"Microsoft Edge\";v=\"132\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "cookie": "ko_id=40a9f37a-7c0c-4db9-b238-5f2ffd3b5491; v0-has-signed-in=1; __stripe_mid=6065616d-4710-4548-9cd2-7012e27c9d9cd89bba; block-view-size=75.7674087617; file-tree-size=33.5047129392; anon_session_id=ePZNbfPnAQU1TLjPPl5C930rm3iOQa9m; _hp2_id.380479483=%7B%22userId%22%3A%22529413785537396%22%2C%22pageviewId%22%3A%22388672144664848%22%2C%22sessionId%22%3A%222433826273635469%22%2C%22identity%22%3Anull%2C%22trackerVersion%22%3A%224.0%22%7D; _hp2_ses_props.380479483=%7B%22ts%22%3A1739201438450%2C%22d%22%3A%22v0.dev%22%2C%22h%22%3A%22%2Fchat%2Ftimesheet-management-guide-UFsxiVsYhL6%22%7D; session_referer=https%3A%2F%2Fv0.dev%2Fchat%2Ftimesheet-management-guide-UFsxiVsYhL6; user_session=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..CMi7w5CpX6edaBo3.ZWzkFw1Dy68nfS7IV3k0Bu4UMpgMFuDG1QnL9c_8JPaviivfMJbEapfDee7HX4fpYhmkYNMlNLP5oUX34UP2QqiOflUQ84Yq4pRsnJF5Cvd0BYxiZOGinwzU1SIFIkV3Xo4cDUSEhXSLHQG3XvNOOf2iXfsN-qeFpS8iK8BCyveBRbM-Q307URz4HmE2qeeD2ZRcYb2T0OaH7sfLgLIn4BFBm_iUeZo_9fMP4ii8xrz8qrBZrmaXDrK53Irtn2IVJ-jbenWsjVKPggGct5av-U0zTLdNZcI3XI88b8MllimsW66OE1IPxYu8iA1IvH-kiTCK5L76B_ncBlPYEhaLqF8tSIhGVoWTnat9ycYCu-bRp7Zjxvjd_HXsOmWij2R3xHgRPdET53DjVo0iEs9toA2YFt2UOwsdgeinzseOdG-pccPX_IRD3PK5hHoRBYeeiRE5cWZw8SOGhFDfKjdhlXAp2wYUrdftulVhMrooxuJXA8LlgwBLs5WIKfhvRQXJg_ozPY23olAEG1e7EJmDKXWysLT2Hbrw3GwXwQTBx8czysKcDP6VrTbygSlQ9HoY5uLN9DQvxOgSQuV7Z--MSeOKUsfIWH_V0bPUhqIzpBP_0FHydWmVxf4QXpdvEY772R6dM9cGRE09ftQyzai_Lw3o_uHI8BY3j9rxCMZr9mTUezWYmp_iPqBMs2kyeYjeSAHElVkqb2S1ARD7LwsZAdCjhtOe5hNw.uksaNYhl7OUbnshvxvdUFQ; prompt-draft={%22version%22:1%2C%22drafts%22:{%22new-chat-prompt-draft%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736471242514}%2C%224oGhnKlqI0X%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736474055616}%2C%22UFsxiVsYhL6%22:{%22message%22:%22%22%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1739201909782}}}; ko_sid={%22id%22:%221739197473676%22%2C%22lastTouched%22:1739202072828}",
+    "Referer": "https://v0.dev/chat/timesheet-management-guide-UFsxiVsYhL6",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://v0.dev/chat/api/chat/env-vars/outdated?bid=b_isS4Ow5TNn3", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Not A(Brand\";v=\"8\", \"Chromium\";v=\"132\", \"Microsoft Edge\";v=\"132\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "cookie": "ko_id=40a9f37a-7c0c-4db9-b238-5f2ffd3b5491; v0-has-signed-in=1; __stripe_mid=6065616d-4710-4548-9cd2-7012e27c9d9cd89bba; block-view-size=75.7674087617; file-tree-size=33.5047129392; anon_session_id=ePZNbfPnAQU1TLjPPl5C930rm3iOQa9m; _hp2_id.380479483=%7B%22userId%22%3A%22529413785537396%22%2C%22pageviewId%22%3A%22388672144664848%22%2C%22sessionId%22%3A%222433826273635469%22%2C%22identity%22%3Anull%2C%22trackerVersion%22%3A%224.0%22%7D; _hp2_ses_props.380479483=%7B%22ts%22%3A1739201438450%2C%22d%22%3A%22v0.dev%22%2C%22h%22%3A%22%2Fchat%2Ftimesheet-management-guide-UFsxiVsYhL6%22%7D; session_referer=https%3A%2F%2Fv0.dev%2Fchat%2Ftimesheet-management-guide-UFsxiVsYhL6; user_session=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..CMi7w5CpX6edaBo3.ZWzkFw1Dy68nfS7IV3k0Bu4UMpgMFuDG1QnL9c_8JPaviivfMJbEapfDee7HX4fpYhmkYNMlNLP5oUX34UP2QqiOflUQ84Yq4pRsnJF5Cvd0BYxiZOGinwzU1SIFIkV3Xo4cDUSEhXSLHQG3XvNOOf2iXfsN-qeFpS8iK8BCyveBRbM-Q307URz4HmE2qeeD2ZRcYb2T0OaH7sfLgLIn4BFBm_iUeZo_9fMP4ii8xrz8qrBZrmaXDrK53Irtn2IVJ-jbenWsjVKPggGct5av-U0zTLdNZcI3XI88b8MllimsW66OE1IPxYu8iA1IvH-kiTCK5L76B_ncBlPYEhaLqF8tSIhGVoWTnat9ycYCu-bRp7Zjxvjd_HXsOmWij2R3xHgRPdET53DjVo0iEs9toA2YFt2UOwsdgeinzseOdG-pccPX_IRD3PK5hHoRBYeeiRE5cWZw8SOGhFDfKjdhlXAp2wYUrdftulVhMrooxuJXA8LlgwBLs5WIKfhvRQXJg_ozPY23olAEG1e7EJmDKXWysLT2Hbrw3GwXwQTBx8czysKcDP6VrTbygSlQ9HoY5uLN9DQvxOgSQuV7Z--MSeOKUsfIWH_V0bPUhqIzpBP_0FHydWmVxf4QXpdvEY772R6dM9cGRE09ftQyzai_Lw3o_uHI8BY3j9rxCMZr9mTUezWYmp_iPqBMs2kyeYjeSAHElVkqb2S1ARD7LwsZAdCjhtOe5hNw.uksaNYhl7OUbnshvxvdUFQ; prompt-draft={%22version%22:1%2C%22drafts%22:{%22new-chat-prompt-draft%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736471242514}%2C%224oGhnKlqI0X%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736474055616}%2C%22UFsxiVsYhL6%22:{%22message%22:%22%22%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1739201909782}}}; ko_sid={%22id%22:%221739197473676%22%2C%22lastTouched%22:1739202072828}",
+    "Referer": "https://v0.dev/chat/timesheet-management-guide-UFsxiVsYhL6",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://v0.dev/chat/api/chat/env-vars/outdated?bid=b_isS4Ow5TNn3", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\"Not A(Brand\";v=\"8\", \"Chromium\";v=\"132\", \"Microsoft Edge\";v=\"132\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "cookie": "ko_id=40a9f37a-7c0c-4db9-b238-5f2ffd3b5491; v0-has-signed-in=1; __stripe_mid=6065616d-4710-4548-9cd2-7012e27c9d9cd89bba; block-view-size=75.7674087617; file-tree-size=33.5047129392; anon_session_id=ePZNbfPnAQU1TLjPPl5C930rm3iOQa9m; _hp2_id.380479483=%7B%22userId%22%3A%22529413785537396%22%2C%22pageviewId%22%3A%22388672144664848%22%2C%22sessionId%22%3A%222433826273635469%22%2C%22identity%22%3Anull%2C%22trackerVersion%22%3A%224.0%22%7D; _hp2_ses_props.380479483=%7B%22ts%22%3A1739201438450%2C%22d%22%3A%22v0.dev%22%2C%22h%22%3A%22%2Fchat%2Ftimesheet-management-guide-UFsxiVsYhL6%22%7D; session_referer=https%3A%2F%2Fv0.dev%2Fchat%2Ftimesheet-management-guide-UFsxiVsYhL6; user_session=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..CMi7w5CpX6edaBo3.ZWzkFw1Dy68nfS7IV3k0Bu4UMpgMFuDG1QnL9c_8JPaviivfMJbEapfDee7HX4fpYhmkYNMlNLP5oUX34UP2QqiOflUQ84Yq4pRsnJF5Cvd0BYxiZOGinwzU1SIFIkV3Xo4cDUSEhXSLHQG3XvNOOf2iXfsN-qeFpS8iK8BCyveBRbM-Q307URz4HmE2qeeD2ZRcYb2T0OaH7sfLgLIn4BFBm_iUeZo_9fMP4ii8xrz8qrBZrmaXDrK53Irtn2IVJ-jbenWsjVKPggGct5av-U0zTLdNZcI3XI88b8MllimsW66OE1IPxYu8iA1IvH-kiTCK5L76B_ncBlPYEhaLqF8tSIhGVoWTnat9ycYCu-bRp7Zjxvjd_HXsOmWij2R3xHgRPdET53DjVo0iEs9toA2YFt2UOwsdgeinzseOdG-pccPX_IRD3PK5hHoRBYeeiRE5cWZw8SOGhFDfKjdhlXAp2wYUrdftulVhMrooxuJXA8LlgwBLs5WIKfhvRQXJg_ozPY23olAEG1e7EJmDKXWysLT2Hbrw3GwXwQTBx8czysKcDP6VrTbygSlQ9HoY5uLN9DQvxOgSQuV7Z--MSeOKUsfIWH_V0bPUhqIzpBP_0FHydWmVxf4QXpdvEY772R6dM9cGRE09ftQyzai_Lw3o_uHI8BY3j9rxCMZr9mTUezWYmp_iPqBMs2kyeYjeSAHElVkqb2S1ARD7LwsZAdCjhtOe5hNw.uksaNYhl7OUbnshvxvdUFQ; prompt-draft={%22version%22:1%2C%22drafts%22:{%22new-chat-prompt-draft%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736471242514}%2C%224oGhnKlqI0X%22:{%22message%22:%22%22%2C%22inputHeight%22:42%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1736474055616}%2C%22UFsxiVsYhL6%22:{%22message%22:%22%22%2C%22localFileInfos%22:[]%2C%22fileMap%22:{}%2C%22updatedAt%22:1739201909782}}}; ko_sid={%22id%22:%221739197473676%22%2C%22lastTouched%22:1739202072828}",
+    "Referer": "https://v0.dev/chat/timesheet-management-guide-UFsxiVsYhL6",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": null,
+  "method": "GET"
+}); ;
+fetch("https://api.getkoala.com/web/projects/vercel/batch", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "text/plain;charset=UTF-8",
+    "sec-ch-ua": "\"Not A(Brand\";v=\"8\", \"Chromium\";v=\"132\", \"Microsoft Edge\";v=\"132\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "no-cors",
+    "sec-fetch-site": "cross-site",
+    "Referer": "https://v0.dev/",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": "{\"profile_id\":\"40a9f37a-7c0c-4db9-b238-5f2ffd3b5491\",\"page_views\":[{\"context\":{\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0\",\"platform\":{\"name\":\"Win32\",\"deviceType\":\"desktop\"},\"library\":{\"name\":\"koala\",\"version\":\"1.26.0\"},\"session\":{\"id\":\"1739197473676\",\"lastTouched\":1739201438110},\"locale\":\"en-US\",\"timezone\":\"America/Chicago\"},\"message_id\":\"0abcc44e-4fa7-4ac6-a534-7dbf9cb2039c\",\"page\":{\"path\":\"/chat/timesheet-management-guide-UFsxiVsYhL6\",\"referrer\":\"\",\"title\":\"Timesheet management guide - v0 by Vercel\",\"url\":\"https://v0.dev/chat/timesheet-management-guide-UFsxiVsYhL6\",\"host\":\"v0.dev\"},\"visit_start\":\"2025-02-10T15:30:38.110Z\",\"focus_intervals\":[15197,15184,17976,47638,88645,7002,15019,80987,5361,5605,4677,37139,21921]}]}",
+  "method": "POST"
+});
