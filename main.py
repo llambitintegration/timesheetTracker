@@ -43,7 +43,7 @@ async def lifespan(app: FastAPI):
 
         # Log CORS configuration
         logger.info("=== CORS Configuration ===")
-        logger.info(f"Allowed Origins: ['https://kzmk61p9ygadt1kvrsrm.lite.vusercontent.net']")
+        logger.info(f"Allowed Origins: ['*']")  # Allow all origins
         logger.info(f"Allowed Methods: 'GET,POST,PUT,DELETE,OPTIONS,PATCH'")
         logger.info(f"Allow Credentials: False")
         logger.info(f"Allowed Headers: '*'")
@@ -69,12 +69,12 @@ app = FastAPI(
 app.middleware("http")(logging_middleware)
 app.middleware("http")(error_logging_middleware)
 
-# Update CORS configuration with proper settings
+# Update CORS configuration with more permissive settings
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*.vusercontent.net","*"],  # Specific origin instead of wildcard
+    allow_origins=["*"],  # Allow all origins
     allow_credentials=False,  # Must be False since frontend doesn't need credentials
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allow_methods=["*"],  # Allow all methods
     allow_headers=["*"],  # Allow all headers
     expose_headers=["X-Total-Count", "X-Correlation-ID"],
     max_age=3600
@@ -94,7 +94,7 @@ async def read_root(request: Request):
         "message": "Timesheet Management API is running",
         "documentation": "/docs",
         "redoc": "/redoc"
-    })
+    }, headers={"Access-Control-Allow-Origin": "*"})  # Allow CORS on response
     return response
 
 @app.get("/health")
@@ -109,7 +109,7 @@ async def options_handler(request: Request):
     methods = "GET,POST,PUT,DELETE,OPTIONS,PATCH"
     response = JSONResponse(content={})
     response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Methods"] = methods
+    response.headers["Access-Control-Allow-Methods"] = "*"
     response.headers["Access-Control-Allow-Headers"] = "*"
     response.headers["Access-Control-Max-Age"] = "3600"
     response.headers["Access-Control-Allow-Credentials"] = "false"
@@ -388,319 +388,4 @@ async def initialize_database(force: bool = False, db: Session = Depends(get_db)
                 raise HTTPException(status_code=500, detail=f"Error dropping tables: {str(e)}")
 
         logger.info("Loading Alembic configuration")
-        from alembic import command
-        from alembic.config import Config
-
-        alembic_cfg = Config("alembic.ini")
-        alembic_cfg.set_main_option("sqlalchemy.url", os.environ["DATABASE_URL"])
-
-        try:
-            logger.info("Starting migration process")
-            command.upgrade(alembic_cfg, "head")
-            logger.info("Migration completed successfully")
-        except Exception as migration_error:
-            logger.error(f"Migration failed: {str(migration_error)}")
-            logger.exception("Migration stack trace:")
-            raise HTTPException(
-                status_code=500,
-                detail=f"Migration failed: {str(migration_error)}"
-            )
-
-        # Verify database state after migration
-        logger.info("Verifying database state after migration")
-        with engine.connect() as connection:
-            inspector = inspect(engine)
-            tables = ['customers', 'project_managers', 'projects', 'time_entries']
-            missing_tables = []
-
-            for table in tables:
-                if not inspector.has_table(table):
-                    missing_tables.append(table)
-                    logger.warning(f"Table {table} not found")
-                else:
-                    logger.info(f"Table {table} exists")
-                    # Verify columns in time_entries table
-                    if table == 'time_entries':
-                        columns = [col['name'] for col in inspector.get_columns(table)]
-                        logger.info(f"Columns in time_entries: {columns}")
-                        if 'date' not in columns:
-                            missing_tables.append('time_entries (missing date column)')
-
-            if missing_tables:
-                error_msg = f"Tables missing after migration: {', '.join(missing_tables)}"
-                logger.error(error_msg)
-                raise HTTPException(status_code=500, detail=error_msg)
-
-        logger.info("Database initialization completed successfully")
-        return {
-            "status": "success",
-            "message": "Database initialized and verified",
-            "details": {
-                "tables_created": tables
-            }
-        }
-    except HTTPException:
-        raise
-    except Exception as e:
-        error_msg = f"Database initialization failed: {str(e)}"
-        logger.error(error_msg)
-        logger.exception("Initialization error stack trace:")
-        raise HTTPException(status_code=500, detail=error_msg)
-
-@app.post("/time-entries/", response_model=schemas.TimeEntry)
-def create_time_entry(entry: schemas.TimeEntryCreate, db: Session = Depends(get_db)):
-    logger.info("Creating new time entry")
-    return crud.create_time_entry(db, entry)
-
-@app.get("/time-entries", response_model=List[schemas.TimeEntry])
-@app.get("/time-entries/", response_model=List[schemas.TimeEntry])
-def get_time_entries(
-    skip: int = Query(default=0, ge=0),
-    limit: int = Query(default=100, ge=1, le=1000),
-    db: Session = Depends(get_db)
-):
-    logger.info(f"Fetching time entries with skip={skip}, limit={limit}")
-    return crud.get_time_entries(db, skip=skip, limit=limit)
-
-@app.get("/time-summaries/", response_model=schemas.TimeSummary)
-def get_time_summaries(
-    start_date: date = Query(..., description="Start date (YYYY-MM-DD)"),
-    end_date: date = Query(..., description="End date (YYYY-MM-DD)"),
-    project_id: Optional[str] = None,
-    customer_name: Optional[str] = None,
-    db: Session = Depends(get_db)
-):
-    """Get time entries summary within a date range."""
-    logger.info(f"Fetching time summaries from {start_date} to {end_date}")
-    return crud.get_time_summaries(db, start_date, end_date, project_id, customer_name)
-
-@app.get("/time-entries/by-month/{month}", response_model=schemas.TimeSummary)
-def get_time_entries_by_month(
-    month: str = Path(..., description="Month name (e.g., January)"),
-    year: int = Query(..., description="Year (e.g., 2025)"),
-    project_id: Optional[str] = None,
-    db: Session = Depends(get_db)
-):
-    """Get time entries for a specific month."""
-    logger.info(f"Fetching time entries for {month} {year}")
-    return crud.get_time_entries_by_month(db, month, year, project_id)
-
-@app.get("/time-entries/by-week/{week_number}", response_model=schemas.TimeSummary)
-def get_time_entries_by_week(
-    week_number: int = Path(..., ge=1, le=53),
-    year: int = Query(..., description="Year (e.g., 2025)"),
-    project_id: Optional[str] = None,
-    db: Session = Depends(get_db)
-):
-    """Get time entries for a specific week number."""
-    logger.info(f"Fetching time entries for week {week_number} of {year}")
-    return crud.get_time_entries_by_week(db, week_number, year, project_id)
-
-@app.get("/time-entries/by-date/{date}", response_model=List[schemas.TimeEntry])
-def get_time_entries_by_date(
-    date: date,
-    db: Session = Depends(get_db)
-):
-    """
-    Get all time entries for a specific date.
-    Date format: YYYY-MM-DD
-    """
-    logger.info(f"Fetching time entries for date: {date}")
-    try:
-        entries = crud.get_time_entries_by_date(db, date)
-        if not entries:
-            logger.info(f"No entries found for date: {date}")
-            return []
-        logger.info(f"Found {len(entries)} entries for date: {date}")
-        return entries
-    except Exception as e:
-        logger.error(f"Error fetching time entries for date {date}: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
-
-@app.get("/reports/weekly", response_model=schemas.WeeklyReport)
-def get_weekly_report(
-    date: datetime = Query(default=None),
-    project_id: Optional[str] = None,
-    db: Session = Depends(get_db)
-):
-    logger.info(f"Generating weekly report for date={date}, project={project_id}")
-    if date is None:
-        date = datetime.now()
-
-    week_start = date - timedelta(days=date.weekday())
-    week_end = week_start + timedelta(days=6)
-
-    query = db.query(
-        Project.project_id,
-        Project.customer,
-        func.sum(TimeEntry.hours).label('total_hours')
-    ).join(
-        TimeEntry,
-        TimeEntry.project == Project.project_id
-    ).filter(
-        TimeEntry.date >= week_start.date(),
-        TimeEntry.date <= week_end.date()
-    ).group_by(
-        Project.project_id,
-        Project.customer
-    )
-
-    if project_id:
-        query = query.filter(Project.project_id == project_id)
-
-    results = query.all()
-    entries = [
-        schemas.ReportEntry(
-            total_hours=float(r.total_hours or 0),
-            category=r.customer or "Unassigned",
-            project=r.project_id,
-            period=f"{week_start.date()} to {week_end.date()}"
-        )
-        for r in results
-    ]
-
-    total_hours = sum(entry.total_hours for entry in entries)
-    return schemas.WeeklyReport(
-        entries=entries,
-        total_hours=total_hours,
-        week_number=week_start.isocalendar()[1],
-        month=calendar.month_name[week_start.month]
-    )
-
-
-@app.get("/reports/monthly", response_model=schemas.MonthlyReport)
-def get_monthly_report(
-    year: int = Query(...),
-    month: int = Query(...),
-    project_id: Optional[str] = None,
-    db: Session = Depends(get_db)
-):
-    logger.info(f"Generating monthly report for {year}-{month}, project={project_id}")
-
-    # Adjust the logic to fix week start and start date
-    # Get the first and last day of the month
-    _, last_day = calendar.monthrange(year, month)
-
-    # Determine the correct week start and end based on the given year and month
-    week_start = datetime(year, month, 1).date()  # Assuming week starts from the 1st of the month
-    week_end = datetime(year, month, last_day).date()  # Assuming week ends on the last day of the month
-
-    query = db.query(
-        Project.project_id,
-        Project.customer,
-        func.sum(TimeEntry.hours).label('total_hours')
-    ).join(
-        TimeEntry,
-        TimeEntry.project == Project.project_id
-    ).filter(
-        TimeEntry.date >= week_start,
-        TimeEntry.date <= week_end
-    ).group_by(
-        Project.project_id,
-        Project.customer
-    )
-
-    if project_id:
-        query = query.filter(Project.project_id == project_id)
-
-    results = query.all()
-    entries = [
-        schemas.ReportEntry(
-            total_hours=float(r.total_hours or 0),
-            category=r.customer or "Unassigned",
-            project=r.project_id,
-            period=f"{year}-{month:02d}"
-        )
-        for r in results
-    ]
-
-    total_hours = sum(entry.total_hours for entry in entries)
-    return schemas.MonthlyReport(
-        entries=entries,
-        total_hours=total_hours,
-        month=month,
-        year=year
-    )
-
-@app.exception_handler(Exception)
-async def global_exception_handler(request: Request, exc: Exception):
-    """Global exception handler with structured logging"""
-    correlation_id = Logger().get_correlation_id()
-    logger.error(structured_log(
-        "Unhandled exception in request",
-        correlation_id=correlation_id,
-        error_type=type(exc).__name__,
-        error_message=str(exc),
-        traceback=traceback.format_exc(),
-        path=request.url.path,
-        method=request.method
-    ))
-
-    return JSONResponse(
-        status_code=500,
-        content={
-            "detail": "Internal server error",
-            "correlation_id": correlation_id
-        }
-    )
-
-@app.post("/dev/sample-data", include_in_schema=False)
-def create_sample_data(db: Session = Depends(get_db)):
-    """Create sample time entries for testing"""
-    sample_entries = [
-        schemas.TimeEntryCreate(
-            category="Development",
-            subcategory="Frontend",
-            customer="ECOLAB",
-            project="Project_Magic_Bullet",
-            task_description="Worked on React components",
-            hours=8.0,
-            date=date(2025, 2, 1)
-        ),
-        schemas.TimeEntryCreate(
-            category="Development",
-            subcategory="Backend",
-            customer="ECOLAB",
-            project="Project_Magic_Bullet",
-            task_description="Implemented API endpoints",
-            hours=6.0,
-            date=date(2025, 2, 2)
-        ),
-        schemas.TimeEntryCreate(
-            category="Testing",
-            subcategory="QA",
-            customer="ECOLAB",
-            project="Project_Magic_Bullet",
-            task_description="End-to-end testing",
-            hours=4.0,
-            date=date(2025, 2, 3)
-        )
-    ]
-
-    created_entries = []
-    for entry in sample_entries:
-        try:
-            created_entry = crud.create_time_entry(db, entry)
-            created_entries.append(created_entry)
-        except Exception as e:
-            logger.error(f"Error creating sample entry: {str(e)}")
-            continue
-
-    return {"message": f"Created {len(created_entries)} sample entries"}
-
-if __name__ == "__main__":
-    logger.info("Starting FastAPI server")
-    try:
-        port = int(os.getenv('PORT', '8000'))  # Changed default port to 8000
-        logger.info(f"Server will start on port {port}")
-
-        uvicorn.run(
-            "main:app",  # Changed to use string reference
-            host="0.0.0.0",
-            port=port,
-            reload=True,
-            log_level="info"  # Changed to info for cleaner logs
-        )
-    except Exception as e:
-        logger.error(f"Server startup failed: {str(e)}")
-        raise
+        from alembic import
