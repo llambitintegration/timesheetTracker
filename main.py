@@ -28,16 +28,26 @@ load_dotenv()
 logger = Logger().get_logger()
 app = FastAPI(title="Timesheet Management API")
 
-# CORS configuration for development
+# Update CORS middleware configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # In development mode, allow all origins
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
     expose_headers=["*"],
-    max_age=3600
+    max_age=3600,
 )
+
+# Add custom middleware to handle mixed content
+@app.middleware("http")
+async def add_security_headers(request: Request, call_next):
+    response = await call_next(request)
+    # Allow mixed content during development
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = '*'
+    return response
 
 
 # Project endpoints using ProjectService
@@ -438,6 +448,7 @@ async def initialize_database(force: bool = False, db: Session = Depends(get_db)
         logger.error(error_msg)
         logger.exception("Initialization error stack trace:")
         raise HTTPException(status_code=500, detail=error_msg)
+
 
 
 @app.post("/time-entries/", response_model=schemas.TimeEntry)

@@ -1,0 +1,32 @@
+Thought for 4 secondsThought for 4 secondsTo address these issues and provide a clear explanation, it would be most appropriate to use a standard code block to highlight the key errors and then provide an explanation. Here's how we can present this information:
+
+```plaintext
+Mixed Content: The page at 'https://v0.dev/' was loaded over HTTPS, but requested an insecure resource 'http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co/time-summaries/?start_date=2024-11-01&end_date=2024-11-30'. This request has been blocked; the content must be served over HTTPS.
+
+Error exporting time summary: TypeError: Failed to fetch
+```
+
+These errors indicate that your application is facing a Mixed Content issue. This occurs when a webpage loaded over HTTPS tries to make requests to resources (like APIs) over insecure HTTP connections. Modern browsers block such requests for security reasons.
+
+To resolve this issue and allow you to view time entries, you need to make the following changes:
+
+1. Update your API endpoint to use HTTPS instead of HTTP. This is the most secure and recommended solution.
+2. If you can't immediately switch your API to HTTPS, you have a few temporary options for development purposes:
+
+1. Use a proxy server that can forward requests to your HTTP API while maintaining HTTPS on the client side.
+2. For local development, you can try disabling web security in your browser (not recommended for regular use).
+
+
+
+3. Update your client-side code to use the secure HTTPS URL for API requests. Modify the `API_BASE_URL` in your `api-client.ts` file:
+
+
+```typescript
+const API_BASE_URL = 'https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.repl.co'
+```
+
+4. If you're using environment variables, ensure that `NEXT_PUBLIC_API_URL` is set to the HTTPS version of your API URL.
+5. Review and update any hardcoded URLs in your application to use HTTPS.
+
+
+Remember, using HTTPS for both your application and API is crucial for security in production environments. The changes we made earlier to use HTTP were intended for local development only. For a production setup, ensure all communications are over HTTPS.
