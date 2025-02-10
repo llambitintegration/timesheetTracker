@@ -1,11 +1,10 @@
 from logging.config import fileConfig
 import os
 from sqlalchemy import engine_from_config
-from sqlalchemy import pool
+from sqlalchemy import pool, text
 from alembic import context
 from dotenv import load_dotenv
 import logging
-from sqlalchemy import text
 
 # Import all models to ensure they are part of the metadata
 from models.baseModel import Base
@@ -53,9 +52,15 @@ def run_migrations_offline() -> None:
 def run_migrations_online() -> None:
     """Run migrations in 'online' mode."""
     try:
+        # Configure SQLAlchemy for migrations
+        configuration = config.get_section(config.config_ini_section)
+        if not isinstance(configuration, dict):
+            configuration = {}
+        configuration["sqlalchemy.url"] = database_url
+
         # Create our connectable
         connectable = engine_from_config(
-            config.get_section(config.config_ini_section, {}),
+            configuration,
             prefix="sqlalchemy.",
             poolclass=pool.NullPool,
         )
@@ -72,7 +77,9 @@ def run_migrations_online() -> None:
                 version_table='alembic_version',
                 include_schemas=True,
                 compare_type=True,
-                compare_server_default=True
+                compare_server_default=True,
+                transaction_per_migration=True,
+                render_as_batch=True
             )
 
             try:

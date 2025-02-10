@@ -101,7 +101,7 @@ def upgrade() -> None:
         logger.info("Creating time_entries table")
         op.create_table('time_entries',
             sa.Column('id', sa.Integer(), primary_key=True, autoincrement=True, nullable=False, index=True),
-            sa.Column('date', sa.Date(), nullable=False),
+            sa.Column('date', sa.Date(), nullable=False, index=True),  # Added date column with index
             sa.Column('week_number', sa.Integer(), nullable=False),
             sa.Column('month', sa.String(), nullable=False),
             sa.Column('category', sa.String(), nullable=False),
@@ -114,7 +114,7 @@ def upgrade() -> None:
             sa.Column('updated_at', sa.DateTime(timezone=True), nullable=True),
             sa.ForeignKeyConstraint(['customer'], ['customers.name'], ondelete='SET NULL'),
             sa.ForeignKeyConstraint(['project'], ['projects.project_id'], ondelete='SET NULL'),
-            sa.CheckConstraint('hours >= 0 AND hours <= 24', name='check_valid_hours')  # Modified to allow 0 hours
+            sa.CheckConstraint('hours >= 0 AND hours <= 24', name='check_valid_hours')
         )
         connection.execute(sa.text('COMMIT'))
 

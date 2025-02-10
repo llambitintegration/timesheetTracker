@@ -39,6 +39,15 @@ app.add_middleware(
     max_age=3600,
 )
 
+# Add development middleware to ensure CORS headers
+@app.middleware("http")
+async def add_cors_headers(request: Request, call_next):
+    response = await call_next(request)
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS, PATCH"
+    response.headers["Access-Control-Allow-Headers"] = "*"
+    response.headers["Access-Control-Max-Age"] = "3600"
+    return response
 
 # Project endpoints using ProjectService
 @app.get("/projects/", response_model=List[schemas.Project])
@@ -257,7 +266,6 @@ def update_project_manager(
         logger.error(f"Error updating project manager: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
-
 # Project endpoints using ProjectService
 @app.post("/projects/", response_model=schemas.Project)
 def create_project(project: schemas.ProjectCreate, db: Session = Depends(get_db)):
@@ -384,17 +392,15 @@ async def initialize_database(force: bool = False, db: Session = Depends(get_db)
                 raise HTTPException(status_code=500, detail=f"Error dropping tables: {str(e)}")
 
         logger.info("Loading Alembic configuration")
+        from alembic import command
+        from alembic.config import Config
 
-        # Check current migration state
-        with engine.connect() as connection:
-            context = MigrationContext.configure(connection)
-            current_rev = context.get_current_revision()
-            logger.info(f"Current migration revision: {current_rev or 'None'}")
+        alembic_cfg = Config("alembic.ini")
+        alembic_cfg.set_main_option("sqlalchemy.url", os.environ["DATABASE_URL"])
 
         try:
             logger.info("Starting migration process")
-            # Add your alembic upgrade command here.  This is missing from the original and edited code.  
-            # Example:  alembic.command.upgrade(config, 'head')  (Requires alembic import)
+            command.upgrade(alembic_cfg, "head")
             logger.info("Migration completed successfully")
         except Exception as migration_error:
             logger.error(f"Migration failed: {str(migration_error)}")
@@ -404,7 +410,7 @@ async def initialize_database(force: bool = False, db: Session = Depends(get_db)
                 detail=f"Migration failed: {str(migration_error)}"
             )
 
-        # Verify database state after migration by checking each table
+        # Verify database state after migration
         logger.info("Verifying database state after migration")
         with engine.connect() as connection:
             inspector = inspect(engine)
@@ -417,6 +423,12 @@ async def initialize_database(force: bool = False, db: Session = Depends(get_db)
                     logger.warning(f"Table {table} not found")
                 else:
                     logger.info(f"Table {table} exists")
+                    # Verify columns in time_entries table
+                    if table == 'time_entries':
+                        columns = [col['name'] for col in inspector.get_columns(table)]
+                        logger.info(f"Columns in time_entries: {columns}")
+                        if 'date' not in columns:
+                            missing_tables.append('time_entries (missing date column)')
 
             if missing_tables:
                 error_msg = f"Tables missing after migration: {', '.join(missing_tables)}"
@@ -438,7 +450,6 @@ async def initialize_database(force: bool = False, db: Session = Depends(get_db)
         logger.error(error_msg)
         logger.exception("Initialization error stack trace:")
         raise HTTPException(status_code=500, detail=error_msg)
-
 
 
 @app.post("/time-entries/", response_model=schemas.TimeEntry)
