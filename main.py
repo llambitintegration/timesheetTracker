@@ -23,18 +23,53 @@ from services.project_manager_service import ProjectManagerService
 from services.project_service import ProjectService
 import utils
 import re
+from contextlib import asynccontextmanager
 
 # Load environment variables
 load_dotenv()
 
 logger = Logger().get_logger()
-app = FastAPI(title="Timesheet Management API")
+
+# Add lifespan context manager before app initialization
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Lifespan context manager for startup/shutdown events"""
+    # Startup logic
+    logger.info("Starting FastAPI server")
+    logger.info("Verifying database connection on startup")
+    try:
+        if not verify_database():
+            logger.warning("Database verification failed - schema may need initialization")
+
+        # Log CORS configuration
+        logger.info("=== CORS Configuration ===")
+        logger.info("Allowed Origins: '*'")
+        logger.info(f"Allowed Methods: 'GET,POST,PUT,DELETE,OPTIONS,PATCH'")
+        logger.info(f"Allow Credentials: True")
+        logger.info(f"Allowed Headers: '*'")
+        logger.info(f"Expose Headers: 'X-Total-Count', 'X-Correlation-ID'")
+
+    except Exception as e:
+        logger.error(f"Error during startup: {str(e)}")
+        logger.exception("Startup error details:")
+        raise
+
+    yield  # Server runs here
+
+    # Shutdown logic (if any)
+    logger.info("Shutting down FastAPI server")
+
+# Update app initialization to use lifespan
+app = FastAPI(
+    title="Timesheet Management API",
+    lifespan=lifespan
+)
 
 # Add both middleware
 app.middleware("http")(logging_middleware)
 app.middleware("http")(error_logging_middleware)
 
-# Updated CORS configuration with proper settings
+# Update CORS configuration with proper settings
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -45,33 +80,21 @@ app.add_middleware(
     max_age=3600
 )
 
-@app.options("/{path:path}")
-async def options_handler(request: Request):
-    """Handle OPTIONS requests explicitly"""
-    origin = request.headers.get("origin", "*")
-    methods = "GET,POST,PUT,DELETE,OPTIONS,PATCH"
-
-    response = JSONResponse(content={})
-    # Set CORS headers explicitly for OPTIONS requests
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Methods"] = methods
-    response.headers["Access-Control-Allow-Headers"] = "*"
-    response.headers["Access-Control-Max-Age"] = "3600"
-    response.headers["Access-Control-Allow-Credentials"] = "true"
-    return response
-
-@app.middleware("http")
-async def cors_middleware(request: Request, call_next):
-    """Additional CORS middleware to ensure headers are set on all responses"""
-    response = await call_next(request)
-
-    # Ensure CORS headers are present on all responses
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS,PATCH"
-    response.headers["Access-Control-Allow-Headers"] = "*"
-    response.headers["Access-Control-Allow-Credentials"] = "true"
-
-    return response
+@app.get("/")
+@app.post("/")
+@app.put("/")
+@app.delete("/")
+@app.patch("/")
+@app.options("/")
+async def read_root(request: Request):
+    """Root endpoint for API health check"""
+    logger.info("Root endpoint accessed")
+    return {
+        "status": "healthy",
+        "message": "Timesheet Management API is running",
+        "documentation": "/docs",
+        "redoc": "/redoc"
+    }
 
 @app.get("/health")
 async def health_check(request: Request):
@@ -89,106 +112,40 @@ async def health_check(request: Request):
         "version": "1.0.0"
     }
 
-@app.get("/")
-@app.options("/")
-async def read_root(request: Request):
-    """Root endpoint for API health check"""
-    logger.info("Root endpoint accessed")
-    return {
-        "status": "healthy",
-        "message": "Timesheet Management API is running",
-        "documentation": "/docs",
-        "redoc": "/redoc"
-    }
-@app.exception_handler(Exception)
-async def global_exception_handler(request: Request, exc: Exception):
-    """Global exception handler with structured logging"""
-    correlation_id = Logger().get_correlation_id()
-    logger.error(structured_log(
-        "Unhandled exception in request",
-        correlation_id=correlation_id,
-        error_type=type(exc).__name__,
-        error_message=str(exc),
-        traceback=traceback.format_exc(),
-        path=request.url.path,
-        method=request.method
-    ))
+@app.options("/{path:path}")
+async def options_handler(request: Request):
+    """Handle OPTIONS requests explicitly"""
+    methods = "GET,POST,PUT,DELETE,OPTIONS,PATCH"
+    response = JSONResponse(content={})
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = methods
+    response.headers["Access-Control-Allow-Headers"] = "*"
+    response.headers["Access-Control-Max-Age"] = "3600"
+    response.headers["Access-Control-Allow-Credentials"] = "true"
+    response.headers["Access-Control-Expose-Headers"] = "X-Total-Count,X-Correlation-ID"
+    return response
 
+@app.middleware("http")
+async def cors_middleware(request: Request, call_next):
+    """Additional CORS middleware to ensure headers are set on all responses"""
+    response = await call_next(request)
+
+    # Ensure CORS headers are present on all responses
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS,PATCH"
+    response.headers["Access-Control-Allow-Headers"] = "*"
+    response.headers["Access-Control-Allow-Credentials"] = "true"
+    response.headers["Access-Control-Expose-Headers"] = "X-Total-Count,X-Correlation-ID"
+    return response
+
+# Move catch-all route to the end of file and update its behavior
+@app.api_route("/{path_name:path}", methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
+async def catch_all(request: Request, path_name: str):
+    """Catch-all route to handle nonexistent paths with 404"""
     return JSONResponse(
-        status_code=500,
-        content={
-            "detail": "Internal server error",
-            "correlation_id": correlation_id
-        }
+        status_code=404,
+        content={"detail": f"Path '/{path_name}' not found"}
     )
-
-@app.post("/dev/sample-data", include_in_schema=False)
-def create_sample_data(db: Session = Depends(get_db)):
-    """Create sample time entries for testing"""
-    sample_entries = [
-        schemas.TimeEntryCreate(
-            category="Development",
-            subcategory="Frontend",
-            customer="ECOLAB",
-            project="Project_Magic_Bullet",
-            task_description="Worked on React components",
-            hours=8.0,
-            date=date(2025, 2, 1)
-        ),
-        schemas.TimeEntryCreate(
-            category="Development",
-            subcategory="Backend",
-            customer="ECOLAB",
-            project="Project_Magic_Bullet",
-            task_description="Implemented API endpoints",
-            hours=6.0,
-            date=date(2025, 2, 2)
-        ),
-        schemas.TimeEntryCreate(
-            category="Testing",
-            subcategory="QA",
-            customer="ECOLAB",
-            project="Project_Magic_Bullet",
-            task_description="End-to-end testing",
-            hours=4.0,
-            date=date(2025, 2, 3)
-        )
-    ]
-
-    created_entries = []
-    for entry in sample_entries:
-        try:
-            created_entry = crud.create_time_entry(db, entry)
-            created_entries.append(created_entry)
-        except Exception as e:
-            logger.error(f"Error creating sample entry: {str(e)}")
-            continue
-
-    return {"message": f"Created {len(created_entries)} sample entries"}
-
-
-
-@app.on_event("startup")
-async def startup_event():
-    """Verify database connection and log CORS configuration on startup"""
-    logger.info("Starting FastAPI server")
-    logger.info("Verifying database connection on startup")
-    try:
-        if not verify_database():
-            logger.warning("Database verification failed - schema may need initialization")
-
-        # Log CORS configuration
-        logger.info("=== CORS Configuration ===")
-        logger.info("Allowed Origins: '*'")
-        logger.info(f"Allowed Methods: 'GET,POST,PUT,DELETE,OPTIONS,PATCH'")
-        logger.info(f"Allow Credentials: True")
-        logger.info(f"Allowed Headers: '*'")
-        logger.info(f"Expose Headers: '*', 'X-Total-Count', 'X-Correlation-ID'")
-
-    except Exception as e:
-        logger.error(f"Error during startup: {str(e)}")
-        logger.exception("Startup error details:")
-        raise
 
 @app.post("/time-entries/upload", response_model=List[schemas.TimeEntry])
 async def upload_timesheet_entries(
@@ -686,6 +643,73 @@ def get_monthly_report(
         month=month,
         year=year
     )
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    """Global exception handler with structured logging"""
+    correlation_id = Logger().get_correlation_id()
+    logger.error(structured_log(
+        "Unhandled exception in request",
+        correlation_id=correlation_id,
+        error_type=type(exc).__name__,
+        error_message=str(exc),
+        traceback=traceback.format_exc(),
+        path=request.url.path,
+        method=request.method
+    ))
+
+    return JSONResponse(
+        status_code=500,
+        content={
+            "detail": "Internal server error",
+            "correlation_id": correlation_id
+        }
+    )
+
+@app.post("/dev/sample-data", include_in_schema=False)
+def create_sample_data(db: Session = Depends(get_db)):
+    """Create sample time entries for testing"""
+    sample_entries = [
+        schemas.TimeEntryCreate(
+            category="Development",
+            subcategory="Frontend",
+            customer="ECOLAB",
+            project="Project_Magic_Bullet",
+            task_description="Worked on React components",
+            hours=8.0,
+            date=date(2025, 2, 1)
+        ),
+        schemas.TimeEntryCreate(
+            category="Development",
+            subcategory="Backend",
+            customer="ECOLAB",
+            project="Project_Magic_Bullet",
+            task_description="Implemented API endpoints",
+            hours=6.0,
+            date=date(2025, 2, 2)
+        ),
+        schemas.TimeEntryCreate(
+            category="Testing",
+            subcategory="QA",
+            customer="ECOLAB",
+            project="Project_Magic_Bullet",
+            task_description="End-to-end testing",
+            hours=4.0,
+            date=date(2025, 2, 3)
+        )
+    ]
+
+    created_entries = []
+    for entry in sample_entries:
+        try:
+            created_entry = crud.create_time_entry(db, entry)
+            created_entries.append(created_entry)
+        except Exception as e:
+            logger.error(f"Error creating sample entry: {str(e)}")
+            continue
+
+    return {"message": f"Created {len(created_entries)} sample entries"}
+
 
 if __name__ == "__main__":
     logger.info("Starting FastAPI server")

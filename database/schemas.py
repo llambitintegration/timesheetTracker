@@ -52,8 +52,7 @@ class TimeEntry(TimeEntryBase):
     week_number: int
     month: str
 
-    class Config:
-        orm_model = TimeEntryModel
+    model_config = ConfigDict(from_attributes=True, orm_mode=True)
 
 # Time Summary Schemas
 class DateRangeParams(BaseModel):
@@ -106,8 +105,7 @@ class CustomerUpdate(BaseSchema):
     phone: Optional[str] = None
 
 class Customer(CustomerBase):
-    class Config:
-        orm_model = CustomerModel
+    model_config = ConfigDict(from_attributes=True, orm_mode=True)
 
 # Project Manager Schemas
 class ProjectManagerBase(BaseSchema):
@@ -127,8 +125,7 @@ class ProjectManagerUpdate(BaseSchema):
     email: Optional[str] = None
 
 class ProjectManager(ProjectManagerBase):
-    class Config:
-        orm_model = ProjectManagerModel
+    model_config = ConfigDict(from_attributes=True, orm_mode=True)
 
 # Project Schemas
 class ProjectBase(BaseSchema):
@@ -151,9 +148,7 @@ class ProjectCreate(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 class Project(ProjectBase):
-    class Config:
-        orm_model = ProjectModel
-
+    model_config = ConfigDict(from_attributes=True, orm_mode=True)
 
 class ReportEntry(BaseModel):
     """Schema for report entries"""

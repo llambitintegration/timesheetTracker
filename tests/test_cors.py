@@ -70,3 +70,54 @@ def test_cors_allows_all_headers():
     response = client.options("/", headers=headers)
     assert response.status_code == 200
     assert response.headers["access-control-allow-headers"] == "*"
+
+# New test cases for better coverage
+
+def test_cors_expose_headers():
+    """Test that specific headers are exposed to the client"""
+    headers = {"Origin": "http://example.com"}
+    response = client.get("/", headers=headers)
+    assert response.status_code == 200
+    exposed_headers = response.headers["access-control-expose-headers"].split(",")
+    assert "X-Total-Count" in exposed_headers
+    assert "X-Correlation-ID" in exposed_headers
+
+def test_cors_max_age():
+    """Test the max-age header in preflight response"""
+    headers = {
+        "Origin": "http://example.com",
+        "Access-Control-Request-Method": "POST",
+    }
+    response = client.options("/", headers=headers)
+    assert response.status_code == 200
+    assert response.headers["access-control-max-age"] == "3600"
+
+def test_cors_credentials():
+    """Test that credentials are allowed"""
+    headers = {"Origin": "http://example.com"}
+    response = client.get("/", headers=headers)
+    assert response.status_code == 200
+    assert response.headers["access-control-allow-credentials"] == "true"
+
+def test_cors_complex_preflight():
+    """Test complex preflight request with multiple headers and methods"""
+    headers = {
+        "Origin": "http://example.com",
+        "Access-Control-Request-Method": "POST",
+        "Access-Control-Request-Headers": "content-type,x-custom-header,authorization",
+    }
+    response = client.options("/", headers=headers)
+    assert response.status_code == 200
+    assert response.headers["access-control-allow-origin"] == "*"
+    assert response.headers["access-control-allow-headers"] == "*"
+    assert "POST" in response.headers["access-control-allow-methods"]
+    assert response.headers["access-control-max-age"] == "3600"
+    assert response.headers["access-control-allow-credentials"] == "true"
+
+def test_cors_on_error_response():
+    """Test CORS headers are present even on error responses"""
+    headers = {"Origin": "http://example.com"}
+    response = client.get("/nonexistent-path", headers=headers)
+    assert response.status_code == 404
+    assert response.headers["access-control-allow-origin"] == "*"
+    assert "GET" in response.headers["access-control-allow-methods"]
