@@ -1,0 +1,31 @@
+"paths": {
+		"/{path}": {
+			"options": {
+				"summary": "Options Handler",
+				"description": "Handle OPTIONS requests explicitly",
+				"operationId": "options_handler__path__options",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				}
+			}
+		},
+
+json"}, "error_detail": null, "query_params": {}, "path_params": {"path": "health"}, "client_host": "172.31.128.36", "path": "/health", "origin": "https://kzmoahcr21tq41iiitsf.lite.vusercontent.net", "cors_method": null, "cors_headers": null}}
+INFO:     172.31.128.36:44176 - "GET /health HTTP/1.1" 405 Method Not Allowed
+INFO:     172.31.128.36:44176 - "OPTIONS /time-entries/by-month/February?year=2025 HTTP/1.1" 400 Bad Request
+INFO:     172.31.128.36:44176 - "OPTIONS /time-entries?skip=0&limit=100 HTTP/1.1" 400 Bad Request
+INFO:     172.31.128.36:44176 - "OPTIONS /time-entries/by-month/February?year=2025 HTTP/1.1" 400 Bad Request
+INFO:     172.31.128.36:44176 - "OPTIONS /time-entries?skip=0&limit=100 HTTP/1.1" 400 Bad Request
+INFO:     172.31.128.36:50718 - "OPTIONS /health-check HTTP/1.1" 400 Bad Request
+INFO:     172.31.128.36:50718 - "OPTIONS /health-check HTTP/1.1" 400 Bad Request
+INFO:     172.31.128.36:50718 - "OPTIONS /health-check HTTP/1.1" 400 Bad Request
+{"timestamp": "2025-02-10T19:03:19.830848", "level": "INFO", "correlation_id": "fa9e4ddf-038a-4a57-8b0b-52f54a51d037", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "fa9e4ddf-038a-4a57-8b0b-52f54a51d037", "method": "GET", "url": "http://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.replit.dev/docs", "client_host": "172.31.128.36", "headers": {"host": "6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.replit.dev", "user-agent": "Mozilla/5.0 (Windows
+
+Outside of the health checks, these methods should not trigger without a button press. Please debug and fix both issues.

@@ -34,6 +34,20 @@ app = FastAPI(title="Timesheet Management API")
 app.middleware("http")(logging_middleware)
 app.middleware("http")(error_logging_middleware)
 
+# Update CORS middleware configuration to match frontend exactly
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://kzmihyekikghud2klanm.lite.vusercontent.net",
+        "https://*.v0.dev"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    expose_headers=["*", "X-Total-Count", "X-Correlation-ID"],
+    max_age=3600,
+)
+
 @app.options("/{path:path}")
 async def options_handler(request: Request):
     """Handle OPTIONS requests explicitly with proper domain pattern matching"""
@@ -108,20 +122,34 @@ async def options_handler(request: Request):
         headers=response_headers
     )
 
-# Update CORS middleware configuration to match frontend exactly
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
-        "https://kzmihyekikghud2klanm.lite.vusercontent.net",
-        "https://*.v0.dev"
-    ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-    expose_headers=["*", "X-Total-Count", "X-Correlation-ID"],
-    max_age=3600,
-)
+@app.get("/health")
+@app.options("/health")
+async def health_check(request: Request):
+    """Health check endpoint supporting both GET and OPTIONS"""
+    logger.info(structured_log(
+        "Health check accessed",
+        correlation_id=Logger().get_correlation_id(),
+        method=request.method,
+        path="/health"
+    ))
 
+    return {
+        "status": "healthy",
+        "timestamp": datetime.utcnow().isoformat(),
+        "version": "1.0.0"
+    }
+
+@app.get("/")
+@app.options("/")
+async def read_root(request: Request):
+    """Root endpoint for API health check"""
+    logger.info("Root endpoint accessed")
+    return {
+        "status": "healthy",
+        "message": "Timesheet Management API is running",
+        "documentation": "/docs",
+        "redoc": "/redoc"
+    }
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
     """Global exception handler with structured logging"""
@@ -144,37 +172,6 @@ async def global_exception_handler(request: Request, exc: Exception):
         }
     )
 
-# Project endpoints using ProjectService
-@app.get("/projects/", response_model=List[schemas.Project])
-def read_projects(
-    customer_name: Optional[str] = None,
-    project_manager_name: Optional[str] = None,
-    skip: int = 0,
-    limit: int = 100,
-    db: Session = Depends(get_db)
-):
-    """Get all projects with optional filtering"""
-    try:
-        logger.info(
-            f"Fetching projects with customer={customer_name}, "
-            f"manager={project_manager_name}, skip={skip}, limit={limit}"
-        )
-        service = ProjectService(db)
-        if customer_name:
-            projects = service.get_projects_by_customer(customer_name)
-        elif project_manager_name:
-            projects = service.get_projects_by_manager(project_manager_name)
-        else:
-            projects = service.get_all_projects(skip=skip, limit=limit)
-
-        # Ensure proper serialization
-        return [project.__dict__ for project in projects]
-    except Exception as e:
-        logger.error(f"Error fetching projects: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-
 @app.on_event("startup")
 async def startup_event():
     """Verify database connection and log CORS configuration on startup"""
@@ -196,19 +193,6 @@ async def startup_event():
         logger.error(f"Error during startup: {str(e)}")
         logger.exception("Startup error details:")
         raise
-
-
-@app.get("/")
-def read_root():
-    """Root endpoint for API health check"""
-    logger.info("Root endpoint accessed")
-    return {
-        "status": "healthy",
-        "message": "Timesheet Management API is running",
-        "documentation": "/docs",
-        "redoc": "/redoc"
-    }
-
 
 @app.post("/time-entries/upload", response_model=List[schemas.TimeEntry])
 async def upload_timesheet_entries(
@@ -252,7 +236,6 @@ async def upload_timesheet(
         logger.error(f"Error processing timesheet: {str(e)}")
         raise HTTPException(status_code=400, detail=str(e))
 
-
 @app.post("/customers/", response_model=schemas.Customer)
 def create_customer(customer: schemas.CustomerCreate, db: Session = Depends(get_db)):
     """Create a new customer using CustomerService"""
@@ -267,14 +250,12 @@ def create_customer(customer: schemas.CustomerCreate, db: Session = Depends(get_
         logger.error(f"Error creating customer: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
-
 @app.get("/customers/", response_model=List[schemas.Customer])
 def read_customers(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     """Get all customers using CustomerService"""
     logger.info(f"Fetching customers with skip={skip}, limit={limit}")
     service = CustomerService(db)
     return service.get_all_customers(skip=skip, limit=limit)
-
 
 @app.get("/customers/{name}", response_model=schemas.Customer)
 def read_customer(name: str, db: Session = Depends(get_db)):
@@ -286,7 +267,6 @@ def read_customer(name: str, db: Session = Depends(get_db)):
         logger.warning(f"Customer not found: {name}")
         raise HTTPException(status_code=404, detail="Customer not found")
     return customer
-
 
 @app.patch("/customers/{name}", response_model=schemas.Customer)
 def update_customer(name: str, customer_update: schemas.CustomerUpdate, db: Session = Depends(get_db)):
@@ -302,8 +282,6 @@ def update_customer(name: str, customer_update: schemas.CustomerUpdate, db: Sess
     except Exception as e:
         logger.error(f"Error updating customer: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")
-
-
 
 @app.post("/project-managers/", response_model=schemas.ProjectManager)
 def create_project_manager(
@@ -322,14 +300,12 @@ def create_project_manager(
         logger.error(f"Error creating project manager: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
-
 @app.get("/project-managers/", response_model=List[schemas.ProjectManager])
 def read_project_managers(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     """Get all project managers with pagination"""
     logger.info(f"Fetching project managers with skip={skip}, limit={limit}")
     service = ProjectManagerService(db)
     return service.get_all_project_managers(skip=skip, limit=limit)
-
 
 @app.get("/project-managers/{email}", response_model=schemas.ProjectManager)
 def read_project_manager(email: str, db: Session = Depends(get_db)):
@@ -341,7 +317,6 @@ def read_project_manager(email: str, db: Session = Depends(get_db)):
         logger.warning(f"Project manager not found: {email}")
         raise HTTPException(status_code=404, detail="Project manager not found")
     return project_manager
-
 
 @app.patch("/project-managers/{email}", response_model=schemas.ProjectManager)
 def update_project_manager(
@@ -362,7 +337,6 @@ def update_project_manager(
         logger.error(f"Error updating project manager: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
-# Project endpoints using ProjectService
 @app.post("/projects/", response_model=schemas.Project)
 def create_project(project: schemas.ProjectCreate, db: Session = Depends(get_db)):
     """Create a new project"""
@@ -376,7 +350,6 @@ def create_project(project: schemas.ProjectCreate, db: Session = Depends(get_db)
     except Exception as e:
         logger.error(f"Error creating project: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")
-
 
 @app.get("/projects/", response_model=List[schemas.Project])
 def read_projects(
@@ -406,7 +379,6 @@ def read_projects(
         logger.error(f"Error fetching projects: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
-
 @app.get("/projects/{project_id}", response_model=schemas.Project)
 def read_project(project_id: str, db: Session = Depends(get_db)):
     """Get a project by ID"""
@@ -417,7 +389,6 @@ def read_project(project_id: str, db: Session = Depends(get_db)):
         logger.warning(f"Project not found: {project_id}")
         raise HTTPException(status_code=404, detail="Project not found")
     return project
-
 
 @app.patch("/projects/{project_id}", response_model=schemas.Project)
 def update_project(
@@ -438,7 +409,6 @@ def update_project(
         logger.error(f"Error updating project: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
-
 @app.delete("/projects/{project_id}")
 def delete_project(project_id: str, db: Session = Depends(get_db)):
     """Delete a project"""
@@ -452,7 +422,6 @@ def delete_project(project_id: str, db: Session = Depends(get_db)):
     except Exception as e:
         logger.error(f"Error deleting project: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")
-
 
 @app.post("/init-db/")
 @app.get("/init-db/")
@@ -547,12 +516,10 @@ async def initialize_database(force: bool = False, db: Session = Depends(get_db)
         logger.exception("Initialization error stack trace:")
         raise HTTPException(status_code=500, detail=error_msg)
 
-
 @app.post("/time-entries/", response_model=schemas.TimeEntry)
 def create_time_entry(entry: schemas.TimeEntryCreate, db: Session = Depends(get_db)):
     logger.info("Creating new time entry")
     return crud.create_time_entry(db, entry)
-
 
 @app.get("/time-summaries/", response_model=schemas.TimeSummary)
 def get_time_summaries(
@@ -566,7 +533,6 @@ def get_time_summaries(
     logger.info(f"Fetching time summaries from {start_date} to {end_date}")
     return crud.get_time_summaries(db, start_date, end_date, project_id, customer_name)
 
-
 @app.get("/time-entries/by-month/{month}", response_model=schemas.TimeSummary)
 def get_time_entries_by_month(
     month: str = Path(..., description="Month name (e.g., January)"),
@@ -578,7 +544,6 @@ def get_time_entries_by_month(
     logger.info(f"Fetching time entries for {month} {year}")
     return crud.get_time_entries_by_month(db, month, year, project_id)
 
-
 @app.get("/time-entries/by-week/{week_number}", response_model=schemas.TimeSummary)
 def get_time_entries_by_week(
     week_number: int = Path(..., ge=1, le=53),
@@ -589,7 +554,6 @@ def get_time_entries_by_week(
     """Get time entries for a specific week number."""
     logger.info(f"Fetching time entries for week {week_number} of {year}")
     return crud.get_time_entries_by_week(db, week_number, year, project_id)
-
 
 @app.get("/time-entries/by-date/{date}", response_model=List[schemas.TimeEntry])
 def get_time_entries_by_date(
@@ -611,7 +575,6 @@ def get_time_entries_by_date(
     except Exception as e:
         logger.error(f"Error fetching time entries for date {date}: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
-
 
 @app.get("/reports/weekly", response_model=schemas.WeeklyReport)
 def get_weekly_report(
@@ -717,8 +680,6 @@ def get_monthly_report(
         month=month,
         year=year
     )
-
-
 
 if __name__ == "__main__":
     logger.info("Starting FastAPI server")
