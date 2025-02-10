@@ -88,11 +88,19 @@ async def health_check(request: Request):
         method=request.method,
         path="/health"
     ))
-    return {
+
+    response = JSONResponse(content={
         "status": "healthy",
         "timestamp": datetime.utcnow().isoformat(),
         "version": "1.0.0"
-    }
+    })
+
+    # Ensure CORS headers are present
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Credentials"] = "false"
+    response.headers["Access-Control-Expose-Headers"] = "X-Total-Count, X-Correlation-ID"
+
+    return response
 
 # Time Entries CRUD
 @app.get("/time-entries", response_model=List[schemas.TimeEntry])
