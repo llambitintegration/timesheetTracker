@@ -1,0 +1,103 @@
+workspace$ python -m pytest tests/test_interfaces.py -v
+/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pytest_asyncio/plugin.py:207: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+============================================================================= test session starts =============================================================================
+platform linux -- Python 3.11.10, pytest-8.3.4, pluggy-1.5.0 -- /home/runner/workspace/.pythonlibs/bin/python
+cachedir: .pytest_cache
+rootdir: /home/runner/workspace
+configfile: pyproject.toml
+plugins: anyio-4.7.0, asyncio-0.25.2, cov-6.0.0
+asyncio: mode=Mode.STRICT, asyncio_default_fixture_loop_scope=None
+collected 5 items                                                                                                                                                             
+
+tests/test_interfaces.py::test_time_entry_interface FAILED                                                                                                              [ 20%]
+tests/test_interfaces.py::test_customer_interface FAILED                                                                                                                [ 40%]
+tests/test_interfaces.py::test_project_interface FAILED                                                                                                                 [ 60%]
+tests/test_interfaces.py::test_project_manager_interface FAILED                                                                                                         [ 80%]
+tests/test_interfaces.py::test_database_status_interface PASSED                                                                                                         [100%]
+
+================================================================================== FAILURES ===================================================================================
+__________________________________________________________________________ test_time_entry_interface __________________________________________________________________________
+
+    def test_time_entry_interface():
+        """Test TimeEntry interface matches API response"""
+        response = client.get("/time-entries")
+>       assert response.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests/test_interfaces.py:21: AssertionError
+---------------------------------------------------------------------------- Captured stdout call -----------------------------------------------------------------------------
+{"timestamp": "2025-02-10T21:01:34.586182", "level": "INFO", "correlation_id": "2881cc84-6e64-455c-a81e-994cbfe1abbc", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "2881cc84-6e64-455c-a81e-994cbfe1abbc", "method": "GET", "url": "http://testserver/time-entries", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries"}}
+{"timestamp": "2025-02-10T21:01:34.587131", "level": "WARNING", "correlation_id": "2881cc84-6e64-455c-a81e-994cbfe1abbc", "logger": "TimesheetTracker", "message": "Request failed with status 404", "context": {"correlation_id": "2881cc84-6e64-455c-a81e-994cbfe1abbc", "status_code": 404, "method": "GET", "url": "http://testserver/time-entries", "process_time_ms": "1.21", "response_headers": {"content-length": "43", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {"path_name": "time-entries"}, "client_host": "testclient", "path": "/time-entries", "origin": null, "cors_method": null, "cors_headers": null}}
+------------------------------------------------------------------------------ Captured log call ------------------------------------------------------------------------------
+INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-10T21:01:34.586358", "context": {"correlation_id": "2881cc84-6e64-455c-a81e-994cbfe1abbc", "method": "GET", "url": "http://testserver/time-entries", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries"}}
+WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 404", "timestamp": "2025-02-10T21:01:34.587244", "context": {"correlation_id": "2881cc84-6e64-455c-a81e-994cbfe1abbc", "status_code": 404, "method": "GET", "url": "http://testserver/time-entries", "process_time_ms": "1.21", "response_headers": {"content-length": "43", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {"path_name": "time-entries"}, "client_host": "testclient", "path": "/time-entries", "origin": null, "cors_method": null, "cors_headers": null}}
+___________________________________________________________________________ test_customer_interface ___________________________________________________________________________
+
+    def test_customer_interface():
+        """Test Customer interface matches API response"""
+        response = client.get("/customers")
+>       assert response.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests/test_interfaces.py:40: AssertionError
+---------------------------------------------------------------------------- Captured stdout call -----------------------------------------------------------------------------
+{"timestamp": "2025-02-10T21:01:34.667266", "level": "INFO", "correlation_id": "2881cc84-6e64-455c-a81e-994cbfe1abbc", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "2881cc84-6e64-455c-a81e-994cbfe1abbc", "method": "GET", "url": "http://testserver/customers", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/customers"}}
+{"timestamp": "2025-02-10T21:01:34.668280", "level": "WARNING", "correlation_id": "2881cc84-6e64-455c-a81e-994cbfe1abbc", "logger": "TimesheetTracker", "message": "Request failed with status 404", "context": {"correlation_id": "2881cc84-6e64-455c-a81e-994cbfe1abbc", "status_code": 404, "method": "GET", "url": "http://testserver/customers", "process_time_ms": "1.18", "response_headers": {"content-length": "40", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {"path_name": "customers"}, "client_host": "testclient", "path": "/customers", "origin": null, "cors_method": null, "cors_headers": null}}
+------------------------------------------------------------------------------ Captured log call ------------------------------------------------------------------------------
+INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-10T21:01:34.667427", "context": {"correlation_id": "2881cc84-6e64-455c-a81e-994cbfe1abbc", "method": "GET", "url": "http://testserver/customers", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/customers"}}
+WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 404", "timestamp": "2025-02-10T21:01:34.668422", "context": {"correlation_id": "2881cc84-6e64-455c-a81e-994cbfe1abbc", "status_code": 404, "method": "GET", "url": "http://testserver/customers", "process_time_ms": "1.18", "response_headers": {"content-length": "40", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {"path_name": "customers"}, "client_host": "testclient", "path": "/customers", "origin": null, "cors_method": null, "cors_headers": null}}
+___________________________________________________________________________ test_project_interface ____________________________________________________________________________
+
+    def test_project_interface():
+        """Test Project interface matches API response"""
+        response = client.get("/projects")
+>       assert response.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests/test_interfaces.py:55: AssertionError
+---------------------------------------------------------------------------- Captured stdout call -----------------------------------------------------------------------------
+{"timestamp": "2025-02-10T21:01:34.677635", "level": "INFO", "correlation_id": "2881cc84-6e64-455c-a81e-994cbfe1abbc", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "2881cc84-6e64-455c-a81e-994cbfe1abbc", "method": "GET", "url": "http://testserver/projects", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/projects"}}
+{"timestamp": "2025-02-10T21:01:34.678853", "level": "WARNING", "correlation_id": "2881cc84-6e64-455c-a81e-994cbfe1abbc", "logger": "TimesheetTracker", "message": "Request failed with status 404", "context": {"correlation_id": "2881cc84-6e64-455c-a81e-994cbfe1abbc", "status_code": 404, "method": "GET", "url": "http://testserver/projects", "process_time_ms": "1.31", "response_headers": {"content-length": "39", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {"path_name": "projects"}, "client_host": "testclient", "path": "/projects", "origin": null, "cors_method": null, "cors_headers": null}}
+------------------------------------------------------------------------------ Captured log call ------------------------------------------------------------------------------
+INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-10T21:01:34.677815", "context": {"correlation_id": "2881cc84-6e64-455c-a81e-994cbfe1abbc", "method": "GET", "url": "http://testserver/projects", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/projects"}}
+WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 404", "timestamp": "2025-02-10T21:01:34.679183", "context": {"correlation_id": "2881cc84-6e64-455c-a81e-994cbfe1abbc", "status_code": 404, "method": "GET", "url": "http://testserver/projects", "process_time_ms": "1.31", "response_headers": {"content-length": "39", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {"path_name": "projects"}, "client_host": "testclient", "path": "/projects", "origin": null, "cors_method": null, "cors_headers": null}}
+_______________________________________________________________________ test_project_manager_interface ________________________________________________________________________
+
+    def test_project_manager_interface():
+        """Test ProjectManager interface matches API response"""
+        response = client.get("/project-managers")
+>       assert response.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = <Response [404 Not Found]>.status_code
+
+tests/test_interfaces.py:73: AssertionError
+---------------------------------------------------------------------------- Captured stdout call -----------------------------------------------------------------------------
+{"timestamp": "2025-02-10T21:01:34.686681", "level": "INFO", "correlation_id": "2881cc84-6e64-455c-a81e-994cbfe1abbc", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "2881cc84-6e64-455c-a81e-994cbfe1abbc", "method": "GET", "url": "http://testserver/project-managers", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/project-managers"}}
+{"timestamp": "2025-02-10T21:01:34.687546", "level": "WARNING", "correlation_id": "2881cc84-6e64-455c-a81e-994cbfe1abbc", "logger": "TimesheetTracker", "message": "Request failed with status 404", "context": {"correlation_id": "2881cc84-6e64-455c-a81e-994cbfe1abbc", "status_code": 404, "method": "GET", "url": "http://testserver/project-managers", "process_time_ms": "1.49", "response_headers": {"content-length": "47", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {"path_name": "project-managers"}, "client_host": "testclient", "path": "/project-managers", "origin": null, "cors_method": null, "cors_headers": null}}
+------------------------------------------------------------------------------ Captured log call ------------------------------------------------------------------------------
+INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-10T21:01:34.686856", "context": {"correlation_id": "2881cc84-6e64-455c-a81e-994cbfe1abbc", "method": "GET", "url": "http://testserver/project-managers", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/project-managers"}}
+WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 404", "timestamp": "2025-02-10T21:01:34.687681", "context": {"correlation_id": "2881cc84-6e64-455c-a81e-994cbfe1abbc", "status_code": 404, "method": "GET", "url": "http://testserver/project-managers", "process_time_ms": "1.49", "response_headers": {"content-length": "47", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {"path_name": "project-managers"}, "client_host": "testclient", "path": "/project-managers", "origin": null, "cors_method": null, "cors_headers": null}}
+============================================================================== warnings summary ===============================================================================
+.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345
+  /home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345: UserWarning: Valid config keys have changed in V2:
+  * 'orm_mode' has been renamed to 'from_attributes'
+    warnings.warn(message, UserWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================================================================== short test summary info ===========================================================================
+FAILED tests/test_interfaces.py::test_time_entry_interface - assert 404 == 200
+ +  where 404 = <Response [404 Not Found]>.status_code
+FAILED tests/test_interfaces.py::test_customer_interface - assert 404 == 200
+ +  where 404 = <Response [404 Not Found]>.status_code
+FAILED tests/test_interfaces.py::test_project_interface - assert 404 == 200
+ +  where 404 = <Response [404 Not Found]>.status_code
+FAILED tests/test_interfaces.py::test_project_manager_interface - assert 404 == 200
+ +  where 404 = <Response [404 Not Found]>.status_code
+=================================================================== 4 failed, 1 passed, 1 warning in 0.17s ====================================================================
+ Environment updated. Reloading shell...
