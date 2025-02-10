@@ -28,14 +28,19 @@ load_dotenv()
 logger = Logger().get_logger()
 app = FastAPI(title="Timesheet Management API")
 
-# Update CORS middleware configuration to include v0.dev domains
+# Update CORS middleware configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*", "https://*.v0.dev"],  # Allow all origins and v0.dev domains
-    allow_credentials=False,  # Must be False when allow_origins contains "*"
+    allow_origins=[
+        "https://*.v0.dev",
+        "https://*.vusercontent.net",
+        "https://*.replit.dev",
+        "https://*.repl.co"
+    ],
+    allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allow_headers=["*"],
-    expose_headers=["*"],
+    expose_headers=["*", "X-Total-Count"],
     max_age=3600,
 )
 
