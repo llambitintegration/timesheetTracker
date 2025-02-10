@@ -42,6 +42,26 @@ def test_cors_exposed_headers():
     assert response.status_code == 200
     exposed_headers = response.headers["access-control-expose-headers"].split(",")
     assert "X-Total-Count" in exposed_headers
+
+
+def test_cors_on_time_entries_options():
+    """Test CORS headers on time entries OPTIONS request"""
+    headers = {
+        "Origin": "http://localhost:3000",
+        "Access-Control-Request-Method": "POST",
+        "Access-Control-Request-Headers": "content-type",
+    }
+    response = client.options("/time-entries", headers=headers)
+    assert response.status_code == 200
+    assert response.headers["access-control-allow-origin"] == "*"
+    assert "POST" in response.headers["access-control-allow-methods"]
+    assert "GET" in response.headers["access-control-allow-methods"]
+    assert response.headers["access-control-allow-headers"] == "*"
+    assert response.headers["access-control-allow-credentials"] == "false"
+    assert "X-Total-Count" in response.headers["access-control-expose-headers"]
+    assert "X-Correlation-ID" in response.headers["access-control-expose-headers"]
+
+
     assert "X-Correlation-ID" in exposed_headers
 
 def test_cors_on_time_entries():
