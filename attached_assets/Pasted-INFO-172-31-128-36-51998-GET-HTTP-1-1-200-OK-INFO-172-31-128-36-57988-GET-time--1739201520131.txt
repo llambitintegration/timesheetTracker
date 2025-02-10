@@ -1,0 +1,30 @@
+INFO:     172.31.128.36:51998 - "GET / HTTP/1.1" 200 OK
+INFO:     172.31.128.36:57988 - "GET /time-entries/?skip=0&limit=100 HTTP/1.1" 405 Method Not Allowed
+2025-02-10 15:30:43,794 - TimesheetTracker - DEBUG - Database session created
+2025-02-10 15:30:43,796 - TimesheetTracker - INFO - Fetching time summaries from 2025-02-01 to 2025-02-28
+2025-02-10 15:30:43,796 - TimesheetTracker - DEBUG - Fetching time summaries from 2025-02-01 to 2025-02-28
+INFO:     172.31.128.36:57996 - "GET /time-entries/?skip=0&limit=100 HTTP/1.1" 405 Method Not Allowed
+INFO:     172.31.128.36:57996 - "GET /time-entries/?skip=0&limit=100 HTTP/1.1" 405 Method Not Allowed
+INFO:     172.31.128.36:57996 - "GET /time-entries/?skip=0&limit=100 HTTP/1.1" 405 Method Not Allowed
+2025-02-10 15:30:44,935 - TimesheetTracker - DEBUG - Database session closed
+INFO:     172.31.128.36:57988 - "GET /time-summaries/?start_date=2025-02-01&end_date=2025-02-28 HTTP/1.1" 200 OK
+2025-02-10 15:30:46,066 - TimesheetTracker - DEBUG - Database session created
+2025-02-10 15:30:46,067 - TimesheetTracker - INFO - Fetching time summaries from 2025-02-01 to 2025-02-28
+2025-02-10 15:30:46,067 - TimesheetTracker - DEBUG - Fetching time summaries from 2025-02-01 to 2025-02-28
+2025-02-10 15:30:46,323 - TimesheetTracker - DEBUG - Database session closed
+INFO:     172.31.128.36:57988 - "GET /time-summaries/?start_date=2025-02-01&end_date=2025-02-28 HTTP/1.1" 200 OK
+2025-02-10 15:30:46,437 - TimesheetTracker - DEBUG - Database session created
+2025-02-10 15:30:46,438 - TimesheetTracker - INFO - Fetching time summaries from 2025-02-01 to 2025-02-28
+2025-02-10 15:30:46,438 - TimesheetTracker - DEBUG - Fetching time summaries from 2025-02-01 to 2025-02-28
+2025-02-10 15:30:46,519 - TimesheetTracker - DEBUG - Database session closed
+INFO:     172.31.128.36:57988 - "GET /time-summaries/?start_date=2025-02-01&end_date=2025-02-28 HTTP/1.1" 200 OK
+2025-02-10 15:30:46,628 - TimesheetTracker - DEBUG - Database session created
+2025-02-10 15:30:46,629 - TimesheetTracker - INFO - Fetching time summaries from 2025-02-01 to 2025-02-28
+2025-02-10 15:30:46,629 - TimesheetTracker - DEBUG - Fetching time summaries from 2025-02-01 to 2025-02-28
+2025-02-10 15:30:46,713 - TimesheetTracker - DEBUG - Database session closed
+INFO:     172.31.128.36:57988 - "GET /time-summaries/?start_date=2025-02-01&end_date=2025-02-28 HTTP/1.1" 200 OK
+^CINFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2407]
+INFO:     Stopping reloader process [2369]
