@@ -38,20 +38,26 @@ app.middleware("http")(error_logging_middleware)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True, 
+    allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allow_headers=["*"],
     expose_headers=["X-Total-Count", "X-Correlation-ID"],
     max_age=3600,
+    allow_origin_regex=None,
+    allow_credentials_regex=None
 )
 
 @app.options("/{path:path}")
 async def options_handler(request: Request):
     """Handle OPTIONS requests explicitly"""
-    return JSONResponse(
+    response = JSONResponse(
         content={},
         status_code=200
     )
+    response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS,PATCH"
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Headers"] = "*"
+    return response
 
 @app.get("/health")
 async def health_check(request: Request):
