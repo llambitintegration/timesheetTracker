@@ -1,0 +1,194 @@
+import type { TimeEntry, TimeSummary } from "@/types/schemas"
+import { toast } from "@/components/ui/use-toast"
+import { checkNetworkStatus } from "./network-status"
+
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_BASE_URL ||
+  "https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.replit.dev"
+
+const API_PATHS = {
+  timeEntries: "/time-entries",
+  timeEntriesByMonth: "/time-entries/by-month",
+  timeEntriesByWeek: "/time-entries/by-week",
+  timeEntriesByDate: "/time-entries/by-date",
+  timeEntriesUpload: "/time-entries/upload",
+  customers: "/customers",
+  projectManagers: "/project-managers",
+  projects: "/projects",
+  reports: {
+    weekly: "/reports/weekly",
+    monthly: "/reports/monthly",
+  },
+  initDb: "/init-db",
+} as const
+
+export class ApiError extends Error {
+  constructor(
+    public status: number,
+    message: string,
+    public data?: any,
+  ) {
+    super(message)
+    this.name = "ApiError"
+  }
+}
+
+async function handleResponse<T>(response: Response): Promise<T> {
+  if (!response.ok) {
+    const errorBody = await response.text()
+    console.error("HTTP error response:", {
+      status: response.status,
+      statusText: response.statusText,
+      body: errorBody,
+    })
+    try {
+      const errorJson = JSON.parse(errorBody)
+      throw new ApiError(response.status, errorJson.detail || `HTTP error! status: ${response.status}`, errorJson)
+    } catch (e) {
+      throw new ApiError(response.status, `HTTP error! status: ${response.status}`, errorBody)
+    }
+  }
+  const responseData = await response.json()
+  console.log("API response data:", JSON.stringify(responseData, null, 2))
+  return responseData
+}
+
+async function fetchWithRetry(url: string, options: RequestInit = {}, maxRetries = 3): Promise<Response> {
+  let retries = 0
+  while (retries < maxRetries) {
+    try {
+      const isOnline = await checkNetworkStatus()
+      if (!isOnline) {
+        console.error("Network is offline. Retrying in 5 seconds...")
+        await new Promise((resolve) => setTimeout(resolve, 5000))
+        continue
+      }
+
+      console.log("Attempting fetch to:", url, { options, retryCount: retries })
+
+      // Remove credentials mode and use simpler CORS setup
+      const headers = {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        ...options.headers,
+      }
+
+      const response = await fetch(url, {
+        ...options,
+        headers,
+        mode: "cors", // Explicit CORS mode
+        credentials: "same-origin", // Change to same-origin since we don't need credentials
+      })
+
+      if (!response.ok) {
+        const errorBody = await response.text()
+        console.error("Fetch error response body:", errorBody)
+        throw new Error(`HTTP error! status: ${response.status}, body: ${errorBody}`)
+      }
+
+      return response
+    } catch (error) {
+      console.error(`Fetch error (attempt ${retries + 1}/${maxRetries}):`, error)
+      retries++
+      if (retries >= maxRetries) {
+        throw error
+      }
+      await new Promise((resolve) => setTimeout(resolve, Math.pow(2, retries) * 1000))
+    }
+  }
+  throw new Error("Max retries reached")
+}
+
+export const apiClient = {
+  async getTimeEntries(skip = 0, limit = 100): Promise<{ data: TimeEntry[]; total: number }> {
+    const params = new URLSearchParams({
+      skip: skip.toString(),
+      limit: limit.toString(),
+    })
+
+    const response = await fetchWithRetry(`${API_BASE_URL}${API_PATHS.timeEntries}?${params}`, {
+      method: "GET",
+    })
+
+    const data = await response.json()
+    const total = Number.parseInt(response.headers.get("X-Total-Count") || "0", 10)
+
+    return { data, total }
+  },
+
+  async getTimeEntriesByMonth(month: string, year: number): Promise<TimeSummary> {
+    const formattedMonth = month.charAt(0).toUpperCase() + month.slice(1).toLowerCase()
+    const params = new URLSearchParams({ year: year.toString() })
+
+    try {
+      const response = await fetchWithRetry(
+        `${API_BASE_URL}${API_PATHS.timeEntriesByMonth}/${formattedMonth}?${params}`,
+        {
+          method: "GET",
+        },
+      )
+
+      return await response.json()
+    } catch (error) {
+      console.error("Error fetching time entries:", error)
+      throw error
+    }
+  },
+
+  // Add other methods as needed...
+
+  async checkApiStatus(): Promise<{ isAvailable: boolean; message: string }> {
+    try {
+      const response = await fetchWithRetry(`${API_BASE_URL}/health`, {
+        method: "GET",
+      })
+
+      if (response.ok) {
+        const data = await response.json()
+        return { isAvailable: true, message: data.status }
+      } else {
+        return { isAvailable: false, message: `API returned status ${response.status}` }
+      }
+    } catch (error) {
+      console.error("Error checking API status:", error)
+      return { isAvailable: false, message: `Error checking API status: ${error.message}` }
+    }
+  },
+
+  async testConnection(): Promise<boolean> {
+    try {
+      const response = await fetchWithRetry(`${API_BASE_URL}/health`, {
+        method: "GET",
+      })
+      return response.ok
+    } catch (error) {
+      console.error("API connection test failed:", error)
+      return false
+    }
+  },
+}
+
+// Error handling wrapper
+export async function withErrorHandling<T>(operation: () => Promise<T>): Promise<T> {
+  try {
+    return await operation()
+  } catch (error) {
+    if (error instanceof ApiError) {
+      toast({
+        title: "API Error",
+        description: `Status ${error.status}: ${error.message}`,
+        variant: "destructive",
+      })
+    } else {
+      toast({
+        title: "Unexpected Error",
+        description: error instanceof Error ? error.message : "An unknown error occurred",
+        variant: "destructive",
+      })
+    }
+    throw error
+  }
+}
+
+type TimeEntry = {}
+
