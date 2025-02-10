@@ -67,6 +67,17 @@ app = FastAPI(
 app.middleware("http")(logging_middleware)
 app.middleware("http")(error_logging_middleware)
 
+@app.middleware("http")
+async def add_cors_headers(request: Request, call_next):
+    """Add CORS headers to all responses"""
+    response = await call_next(request)
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS,PATCH"
+    response.headers["Access-Control-Allow-Headers"] = "*"
+    response.headers["Access-Control-Allow-Credentials"] = "false"
+    response.headers["Access-Control-Expose-Headers"] = "X-Total-Count,X-Correlation-ID"
+    return response
+
 # CORS configuration section update
 app.add_middleware(
     CORSMiddleware,
@@ -94,11 +105,6 @@ async def health_check(request: Request):
         "timestamp": datetime.utcnow().isoformat(),
         "version": "1.0.0"
     })
-
-    # Ensure CORS headers are present
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Credentials"] = "false"
-    response.headers["Access-Control-Expose-Headers"] = "X-Total-Count, X-Correlation-ID"
 
     return response
 
@@ -246,19 +252,6 @@ def get_monthly_report(
     service = ReportService(db)
     return service.get_monthly_report(year, month, project_id)
 
-
-# Update OPTIONS handler
-@app.options("/{path:path}")
-async def options_handler(request: Request):
-    """Handle OPTIONS requests explicitly"""
-    response = JSONResponse(content={})
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS,PATCH"
-    response.headers["Access-Control-Allow-Headers"] = "*"
-    response.headers["Access-Control-Max-Age"] = "3600"
-    response.headers["Access-Control-Allow-Credentials"] = "false"
-    response.headers["Access-Control-Expose-Headers"] = "X-Total-Count,X-Correlation-ID"
-    return response
 
 # Global exception handler
 @app.exception_handler(Exception)
