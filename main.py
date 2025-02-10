@@ -32,22 +32,12 @@ app = FastAPI(title="Timesheet Management API")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # In development mode, allow all origins
-    allow_credentials=False,  # Set to False since we're using allow_origins=["*"]
+    allow_credentials=False,  # Must be False when allow_origins contains "*"
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allow_headers=["*"],
     expose_headers=["*"],
     max_age=3600,
 )
-
-# Add custom middleware to handle mixed content
-@app.middleware("http")
-async def add_security_headers(request: Request, call_next):
-    response = await call_next(request)
-    # Allow mixed content during development
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Methods'] = '*'
-    response.headers['Access-Control-Allow-Headers'] = '*'
-    return response
 
 
 # Project endpoints using ProjectService
