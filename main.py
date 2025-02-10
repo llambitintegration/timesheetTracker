@@ -72,7 +72,7 @@ app.middleware("http")(error_logging_middleware)
 # Update CORS configuration with proper settings
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://kzmk61p9ygadt1kvrsrm.lite.vusercontent.net"],  # Specific origin instead of wildcard
+    allow_origins=["*.vusercontent.net","*"],  # Specific origin instead of wildcard
     allow_credentials=False,  # Must be False since frontend doesn't need credentials
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allow_headers=["*"],  # Allow all headers

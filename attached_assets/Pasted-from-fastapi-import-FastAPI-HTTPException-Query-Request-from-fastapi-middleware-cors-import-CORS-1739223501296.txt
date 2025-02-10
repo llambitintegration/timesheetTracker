@@ -1,0 +1,145 @@
+from fastapi import FastAPI, HTTPException, Query, Request
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel
+from typing import List, Optional
+from datetime import datetime, date
+import calendar
+
+app = FastAPI()
+
+# CORS middleware configuration (keep as is)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://kzmk61p9ygadt1kvrsrm.lite.vusercontent.net"],
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allow_headers=[
+        "Content-Type",
+        "Authorization",
+        "Accept",
+        "Origin",
+        "X-Requested-With",
+        "X-Total-Count",
+        "X-Correlation-ID"
+    ],
+    expose_headers=["X-Total-Count", "X-Correlation-ID"],
+    max_age=3600,
+)
+
+# Sample data with proper date formatting
+time_entries = [
+    {
+        "id": 1,
+        "date": "2025-02-01",
+        "category": "Development",
+        "subcategory": "Frontend",
+        "hours": 8,
+        "description": "Worked on React components",
+        "week_number": 5,
+        "month": "February"
+    },
+    {
+        "id": 2,
+        "date": "2025-02-02",
+        "category": "Development",
+        "subcategory": "Backend",
+        "hours": 6,
+        "description": "Implemented API endpoints",
+        "week_number": 5,
+        "month": "February"
+    }
+]
+
+class TimeEntry(BaseModel):
+    id: int
+    date: str
+    category: str
+    subcategory: str
+    hours: float
+    description: str
+    week_number: int
+    month: str
+
+class TimeEntryCreate(BaseModel):
+    date: str
+    category: str
+    subcategory: str
+    hours: float
+    description: Optional[str] = None
+
+class TimeSummaryEntry(BaseModel):
+    date: str
+    total_hours: float
+    entries: List[TimeEntry]
+
+class TimeSummary(BaseModel):
+    total_hours: float
+    entries: List[TimeSummaryEntry]
+
+@app.get("/health")
+async def health_check():
+    return {"status": "ok"}
+
+@app.get("/time-entries", response_model=List[TimeEntry])
+async def get_time_entries(
+    request: Request,
+    skip: int = Query(0, ge=0),
+    limit: int = Query(100, ge=1, le=1000)
+) -> List[TimeEntry]:
+    start = skip
+    end = skip + limit
+    entries = time_entries[start:end]
+    
+    total_count = len(time_entries)
+    return JSONResponse(
+        content=[entry for entry in entries],
+        headers={"X-Total-Count": str(total_count)}
+    )
+
+@app.get("/time-entries/by-month/{month}", response_model=TimeSummary)
+async def get_time_entries_by_month(
+    request: Request,
+    month: str,
+    year: int = Query(...),
+    project_id: Optional[str] = None
+):
+    try:
+        month_name = month.strip().title()
+        try:
+            month_number = list(calendar.month_name).index(month_name)
+            if month_number == 0:
+                raise ValueError("Invalid month name")
+        except ValueError:
+            raise HTTPException(status_code=400, detail=f"Invalid month name: {month}")
+        
+        filtered_entries = [
+            entry for entry in time_entries
+            if datetime.strptime(entry['date'], "%Y-%m-%d").month == month_number
+            and datetime.strptime(entry['date'], "%Y-%m-%d").year == year
+            and (project_id is None or entry.get('project') == project_id)
+        ]
+        
+        summary_entries = {}
+        for entry in filtered_entries:
+            date = entry['date']
+            if date not in summary_entries:
+                summary_entries[date] = {"date": date, "total_hours": 0, "entries": []}
+            summary_entries[date]["total_hours"] += entry['hours']
+            summary_entries[date]["entries"].append(entry)
+        
+        total_hours = sum(entry['hours'] for entry in filtered_entries)
+        
+        return TimeSummary(
+            total_hours=total_hours,
+            entries=[TimeSummaryEntry(**entry) for entry in summary_entries.values()]
+        )
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+# Add more endpoints as needed...
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+
