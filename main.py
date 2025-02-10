@@ -516,6 +516,11 @@ def create_time_entry(entry: schemas.TimeEntryCreate, db: Session = Depends(get_
     logger.info("Creating new time entry")
     return crud.create_time_entry(db, entry)
 
+@app.get("/time-entries/", response_model=List[schemas.TimeEntry])
+def get_time_entries(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    logger.info(f"Fetching time entries with skip={skip}, limit={limit}")
+    return crud.get_time_entries(db, skip=skip, limit=limit)
+
 @app.get("/time-summaries/", response_model=schemas.TimeSummary)
 def get_time_summaries(
     start_date: date = Query(..., description="Start date (YYYY-MM-DD)"),
