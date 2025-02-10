@@ -1,4 +1,5 @@
 import os
+import traceback
 from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, Query, Path, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -12,8 +13,8 @@ import calendar
 from dotenv import load_dotenv
 import uvicorn
 from database import schemas, crud, get_db, verify_database, engine
-from utils.logger import Logger
-from utils.middleware import logging_middleware
+from utils.logger import Logger, structured_log
+from utils.middleware import logging_middleware, error_logging_middleware
 from models.timeEntry import TimeEntry
 from models.projectModel import Project
 from models.projectManagerModel import ProjectManager
@@ -28,6 +29,10 @@ load_dotenv()
 logger = Logger().get_logger()
 app = FastAPI(title="Timesheet Management API")
 
+# Add both middleware
+app.middleware("http")(logging_middleware)
+app.middleware("http")(error_logging_middleware)
+
 # Update CORS middleware configuration
 app.add_middleware(
     CORSMiddleware,
@@ -40,19 +45,32 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allow_headers=["*"],
-    expose_headers=["*", "X-Total-Count"],
+    expose_headers=["*", "X-Total-Count", "X-Correlation-ID"],
     max_age=3600,
 )
 
-# Add development middleware to ensure CORS headers
-@app.middleware("http")
-async def add_cors_headers(request: Request, call_next):
-    response = await call_next(request)
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS, PATCH"
-    response.headers["Access-Control-Allow-Headers"] = "*"
-    response.headers["Access-Control-Max-Age"] = "3600"
-    return response
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    """Global exception handler with structured logging"""
+    correlation_id = Logger().get_correlation_id()
+    logger.error(structured_log(
+        "Unhandled exception in request",
+        correlation_id=correlation_id,
+        error_type=type(exc).__name__,
+        error_message=str(exc),
+        traceback=traceback.format_exc(),
+        path=request.url.path,
+        method=request.method
+    ))
+
+    return JSONResponse(
+        status_code=500,
+        content={
+            "detail": "Internal server error",
+            "correlation_id": correlation_id
+        }
+    )
 
 # Project endpoints using ProjectService
 @app.get("/projects/", response_model=List[schemas.Project])
@@ -97,9 +115,9 @@ async def startup_event():
         logger.info("=== CORS Configuration ===")
         logger.info("Allowed Origins: '*', 'https://*.v0.dev'")
         logger.info(f"Allowed Methods: GET, POST, PUT, DELETE, OPTIONS, PATCH")
-        logger.info(f"Allow Credentials: False")
+        logger.info(f"Allow Credentials: True")
         logger.info(f"Allowed Headers: '*'")
-        logger.info(f"Expose Headers: '*'")
+        logger.info(f"Expose Headers: '*', 'X-Total-Count', 'X-Correlation-ID'")
 
     except Exception as e:
         logger.error(f"Error during startup: {str(e)}")
