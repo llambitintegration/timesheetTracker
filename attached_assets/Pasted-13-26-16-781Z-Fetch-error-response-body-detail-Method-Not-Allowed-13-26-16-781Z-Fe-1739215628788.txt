@@ -1,0 +1,119 @@
+13:26:16.781Z
+
+Fetch
+error
+response
+body:  {"detail":"Method Not Allowed"}
+13:26:16.781Z
+
+Fetch
+error (attempt 1/3)
+: {}
+13:26:16.781Z
+Fetch error stack: Error: 
+HTTP
+error!
+status: $
+{
+  response.status
+}
+, body: $
+{
+  errorBody
+}
+;
+    at fetchWithRetry (blob:https://kzmlujlqmvbcsanq2a21.lite.vusercontent.net/f935a45f-586d-469c-8d66-85772ca3956f:126:23)
+    at async Object.getTimeEntries (blob:https://kzmlujlqmvbcsanq2a21.lite.vusercontent.net/f935a45f-586d-469c-8d66-85772ca3956f:194:26)
+    at async fetchTimeEntriesByDate (blob:https://kzmlujlqmvbcsanq2a21.lite.vusercontent.net/a8154f86-44e6-442c-8647-7b02e19bf931:96:29)
+13:26:16.781Z
+Request URL: https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.replit.dev/time-entries?skip=0&limit=100
+13:26:16.781Z
+Request options: {
+  "credentials": "include"
+}
+13:26:17.037Z
+
+Fetch
+response
+status: $
+{
+  response.status
+}
+;
+13:26:17.037Z
+
+Fetch
+response
+headers:  {"content-length":"32","content-type":"application/json","x-correlation-id":"ecaa8b92-52e8-4cb1-a5ee-cc5da04524f1"}
+13:26:17.047Z
+
+API
+response
+data:  {
+  "total_hours": 0,
+  "entries": []
+}
+13:26:17.048Z
+Time entries API response: {
+  "total_hours": 0,
+  "entries": []
+}
+13:26:17.048Z
+Received time summary: {"total_hours":0,"entries":[]}
+13:26:18.781Z
+
+Attempting
+fetch
+to
+$
+{
+  url
+}
+; {"options":{"credentials":"include"},"retryCount":1}
+13:26:18.866Z
+
+Fetch
+response
+status: $
+{
+  response.status
+}
+;
+13:26:18.866Z
+
+Fetch
+response
+headers:  {"content-length":"31","content-type":"application/json","x-correlation-id":"ecaa8b92-52e8-4cb1-a5ee-cc5da04524f1"}
+13:26:18.877Z
+
+Fetch
+error
+response
+body:  {"detail":"Method Not Allowed"}
+13:26:18.877Z
+
+Fetch
+error (attempt 2/3)
+: {}
+13:26:18.877Z
+Fetch error stack: Error: 
+HTTP
+error!
+status: $
+{
+  response.status
+}
+, body: $
+{
+  errorBody
+}
+;
+    at fetchWithRetry (blob:https://kzmlujlqmvbcsanq2a21.lite.vusercontent.net/f935a45f-586d-469c-8d66-85772ca3956f:126:23)
+    at async Object.getTimeEntries (blob:https://kzmlujlqmvbcsanq2a21.lite.vusercontent.net/f935a45f-586d-469c-8d66-85772ca3956f:194:26)
+    at async fetchTimeEntriesByDate (blob:https://kzmlujlqmvbcsanq2a21.lite.vusercontent.net/a8154f86-44e6-442c-8647-7b02e19bf931:96:29)
+13:26:18.877Z
+Request URL: https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.replit.dev/time-entries?skip=0&limit=100
+13:26:18.877Z
+Request options: {
+  "credentials": "include"
+}
