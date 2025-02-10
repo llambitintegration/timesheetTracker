@@ -167,6 +167,52 @@ async def global_exception_handler(request: Request, exc: Exception):
         }
     )
 
+@app.post("/dev/sample-data", include_in_schema=False)
+def create_sample_data(db: Session = Depends(get_db)):
+    """Create sample time entries for testing"""
+    sample_entries = [
+        schemas.TimeEntryCreate(
+            category="Development",
+            subcategory="Frontend",
+            customer="ECOLAB",
+            project="Project_Magic_Bullet",
+            task_description="Worked on React components",
+            hours=8.0,
+            date=date(2025, 2, 1)
+        ),
+        schemas.TimeEntryCreate(
+            category="Development",
+            subcategory="Backend",
+            customer="ECOLAB",
+            project="Project_Magic_Bullet",
+            task_description="Implemented API endpoints",
+            hours=6.0,
+            date=date(2025, 2, 2)
+        ),
+        schemas.TimeEntryCreate(
+            category="Testing",
+            subcategory="QA",
+            customer="ECOLAB",
+            project="Project_Magic_Bullet",
+            task_description="End-to-end testing",
+            hours=4.0,
+            date=date(2025, 2, 3)
+        )
+    ]
+    
+    created_entries = []
+    for entry in sample_entries:
+        try:
+            created_entry = crud.create_time_entry(db, entry)
+            created_entries.append(created_entry)
+        except Exception as e:
+            logger.error(f"Error creating sample entry: {str(e)}")
+            continue
+    
+    return {"message": f"Created {len(created_entries)} sample entries"}
+
+
+
 @app.on_event("startup")
 async def startup_event():
     """Verify database connection and log CORS configuration on startup"""
@@ -516,8 +562,13 @@ def create_time_entry(entry: schemas.TimeEntryCreate, db: Session = Depends(get_
     logger.info("Creating new time entry")
     return crud.create_time_entry(db, entry)
 
+@app.get("/time-entries", response_model=List[schemas.TimeEntry])
 @app.get("/time-entries/", response_model=List[schemas.TimeEntry])
-def get_time_entries(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+def get_time_entries(
+    skip: int = Query(default=0, ge=0),
+    limit: int = Query(default=100, ge=1, le=1000),
+    db: Session = Depends(get_db)
+):
     logger.info(f"Fetching time entries with skip={skip}, limit={limit}")
     return crud.get_time_entries(db, skip=skip, limit=limit)
 
