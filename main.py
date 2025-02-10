@@ -40,12 +40,14 @@ app.add_middleware(
     allow_origins=[
         "https://kzmihyekikghud2klanm.lite.vusercontent.net",
         "https://kzmoahcr21tq41iiitsf.lite.vusercontent.net",
+        "https://kzmlujlqmvbcsanq2a21.lite.vusercontent.net",
         "https://*.v0.dev",
         "https://*.worf.replit.dev",
-        "https://*.repl.co"
+        "https://*.repl.co",
+        "https://*.replit.dev"
     ],
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allow_methods=["*"],
     allow_headers=["*"],
     expose_headers=["X-Total-Count", "X-Correlation-ID"],
     max_age=3600,
@@ -59,10 +61,12 @@ async def options_handler(request: Request):
     
     allowed_origins = [
         "https://kzmihyekikghud2klanm.lite.vusercontent.net",
-        "https://kzmoahcr21tq41iiitsf.lite.vusercontent.net",
+        "https://kzmoahcr21tq41iiitsf.lite.vusercontent.net", 
+        "https://kzmlujlqmvbcsanq2a21.lite.vusercontent.net",
         "https://*.v0.dev",
         "https://*.worf.replit.dev",
-        "https://*.repl.co"
+        "https://*.repl.co",
+        "https://*.replit.dev"
     ]
 
     # Simple wildcard match function
