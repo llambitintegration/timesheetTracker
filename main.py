@@ -39,93 +39,84 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "https://kzmihyekikghud2klanm.lite.vusercontent.net",
-        "https://*.v0.dev"
+        "https://kzmoahcr21tq41iiitsf.lite.vusercontent.net",
+        "https://*.v0.dev",
+        "https://*.worf.replit.dev",
+        "https://*.repl.co"
     ],
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allow_headers=["*"],
-    expose_headers=["*", "X-Total-Count", "X-Correlation-ID"],
+    expose_headers=["X-Total-Count", "X-Correlation-ID"],
     max_age=3600,
 )
 
 @app.options("/{path:path}")
 async def options_handler(request: Request):
-    """Handle OPTIONS requests explicitly with proper domain pattern matching"""
-    logger.info(structured_log(
-        "Handling OPTIONS request",
-        correlation_id=Logger().get_correlation_id(),
-        path=request.url.path,
-        headers=dict(request.headers),
-        query_params=dict(request.query_params)
-    ))
-
-    # Get the origin from the request headers
+    """Handle OPTIONS requests explicitly"""
+    correlation_id = Logger().get_correlation_id()
     origin = request.headers.get("origin", "")
-
-    # Define allowed origins with exact patterns
+    
     allowed_origins = [
         "https://kzmihyekikghud2klanm.lite.vusercontent.net",
-        "https://*.v0.dev"
+        "https://kzmoahcr21tq41iiitsf.lite.vusercontent.net",
+        "https://*.v0.dev",
+        "https://*.worf.replit.dev",
+        "https://*.repl.co"
     ]
 
-    # Convert wildcard patterns to regex for matching
-    def pattern_to_regex(pattern):
-        if '*' in pattern:
-            # Handle .lite.vusercontent.net domains
-            pattern = pattern.replace('.', '\.')
-            pattern = pattern.replace('*', '[a-zA-Z0-9-]+')
-            return f"^{pattern}$"
-        return f"^{pattern}$"
+    # Simple wildcard match function
+    def match_origin(origin, pattern):
+        if '*' not in pattern:
+            return origin == pattern
+        prefix, suffix = pattern.split('*', 1)
+        return origin.startswith(prefix) and origin.endswith(suffix)
 
-    # Check if origin matches any allowed pattern
-    is_allowed = origin in allowed_origins or any(
-        re.match(pattern_to_regex(pattern), origin)
-        for pattern in allowed_origins
-        if '*' in pattern
-    )
+    is_allowed = any(match_origin(origin, pattern) for pattern in allowed_origins)
 
     if not is_allowed:
         logger.warning(structured_log(
-            "CORS preflight rejected - origin not allowed",
-            correlation_id=Logger().get_correlation_id(),
+            "CORS preflight rejected",
+            correlation_id=correlation_id,
             origin=origin,
-            path=request.url.path,
-            allowed_origins=allowed_origins,
-            matched_patterns=[pattern_to_regex(p) for p in allowed_origins if '*' in p]
+            path=request.url.path
         ))
         return JSONResponse(
             status_code=400,
             content={"detail": "Origin not allowed"}
         )
 
-    # Set CORS headers for allowed origin
+    requested_method = request.headers.get("access-control-request-method")
+    requested_headers = request.headers.get("access-control-request-headers")
+
     response_headers = {
         "Access-Control-Allow-Origin": origin,
-        "Access-Control-Allow-Methods": "*",
-        "Access-Control-Allow-Headers": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH",
+        "Access-Control-Allow-Headers": requested_headers or "*",
         "Access-Control-Allow-Credentials": "true",
         "Access-Control-Max-Age": "3600",
+        "Access-Control-Expose-Headers": "X-Total-Count, X-Correlation-ID",
         "Vary": "Origin"
     }
 
     logger.info(structured_log(
-        "Sending OPTIONS response",
-        correlation_id=Logger().get_correlation_id(),
+        "Preflight request approved",
+        correlation_id=correlation_id,
         origin=origin,
-        response_headers=response_headers,
-        path=request.url.path,
-        query_params=dict(request.query_params)
+        method=requested_method,
+        headers=requested_headers,
+        path=request.url.path
     ))
 
     return JSONResponse(
         content={},
-        headers=response_headers
+        headers=response_headers,
+        status_code=200
     )
 
 @app.get("/health")
-@app.options("/health")
 async def health_check(request: Request):
-    """Health check endpoint supporting both GET and OPTIONS"""
+    """Health check endpoint"""
     logger.info(structured_log(
         "Health check accessed",
         correlation_id=Logger().get_correlation_id(),
