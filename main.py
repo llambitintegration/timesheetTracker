@@ -88,29 +88,20 @@ app.add_middleware(
 @app.options("/")
 async def read_root(request: Request):
     """Root endpoint for API health check"""
-    logger.info("Root endpoint accessed")
-    return {
+    logger.info(f"Root endpoint accessed via {request.method}")
+    response = JSONResponse(content={
         "status": "healthy",
         "message": "Timesheet Management API is running",
         "documentation": "/docs",
         "redoc": "/redoc"
-    }
+    })
+    return response
 
 @app.get("/health")
-async def health_check(request: Request):
+async def health_check():
     """Health check endpoint"""
-    logger.info(structured_log(
-        "Health check accessed",
-        correlation_id=Logger().get_correlation_id(),
-        method=request.method,
-        path="/health"
-    ))
-
-    return {
-        "status": "healthy",
-        "timestamp": datetime.utcnow().isoformat(),
-        "version": "1.0.0"
-    }
+    logger.info("Health check endpoint accessed")
+    return {"status": "healthy"}
 
 @app.options("/{path:path}")
 async def options_handler(request: Request):
@@ -131,10 +122,8 @@ async def options_handler(request: Request):
 @app.api_route("/{path_name:path}", methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
 async def catch_all(request: Request, path_name: str):
     """Catch-all route to handle nonexistent paths with 404"""
-    return JSONResponse(
-        status_code=404,
-        content={"detail": f"Path '/{path_name}' not found"}
-    )
+    logger.info(f"Non-existent path accessed: /{path_name}")
+    raise HTTPException(status_code=404, detail=f"Path '/{path_name}' not found")
 
 @app.post("/time-entries/upload", response_model=List[schemas.TimeEntry])
 async def upload_timesheet_entries(
