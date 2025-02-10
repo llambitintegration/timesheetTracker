@@ -21,6 +21,8 @@ from models.projectManagerModel import ProjectManager
 from services.customer_service import CustomerService
 from services.project_manager_service import ProjectManagerService
 from services.project_service import ProjectService
+from services.timesheet_service import TimesheetService
+from services.report_service import ReportService
 import utils
 import re
 from contextlib import asynccontextmanager
@@ -134,37 +136,14 @@ async def catch_all(request: Request, path_name: str):
         content={"detail": f"Path '/{path_name}' not found"}
     )
 
-@app.post("timesheet/upload/", response_model=List[schemas.TimeEntry])
+@app.post("/timesheet/upload/", response_model=List[schemas.TimeEntry])
 async def upload_timesheet(
     file: UploadFile = File(...),
     db: Session = Depends(get_db)
 ):
     """Upload and process timesheet file"""
-    logger.info(f"Processing timesheet upload: {file.filename}")
-    try:
-        contents = await file.read()
-        # Create a temporary file-like object
-        from io import StringIO, BytesIO
-        if file.filename.endswith('.xlsx'):
-            entries = utils.parse_excel(BytesIO(contents))
-        elif file.filename.endswith('.csv'):
-            # Decode bytes to string for CSV
-            text_contents = contents.decode('utf-8')
-            entries = utils.parse_csv(StringIO(text_contents))
-        else:
-            logger.error(f"Unsupported file format: {file.filename}")
-            raise HTTPException(status_code=400, detail="Unsupported file format")
-
-        if not entries:
-            logger.warning("No valid entries found in file")
-            return []
-
-        created_entries = crud.create_time_entries(db, entries)
-        logger.info(f"Successfully created {len(created_entries)} time entries")
-        return created_entries
-    except Exception as e:
-        logger.error(f"Error processing timesheet: {str(e)}")
-        raise HTTPException(status_code=400, detail=str(e))
+    service = TimesheetService(db)
+    return await service.upload_timesheet(file)
 
 @app.post("/customers/", response_model=schemas.Customer)
 def create_customer(customer: schemas.CustomerCreate, db: Session = Depends(get_db)):
@@ -336,11 +315,6 @@ async def initialize_database(force: bool = False, db: Session = Depends(get_db)
     service = DatabaseService(db)
     return await service.initialize_database(force)
 
-@app.post("/time-entries/", response_model=schemas.TimeEntry)
-def create_time_entry(entry: schemas.TimeEntryCreate, db: Session = Depends(get_db)):
-    logger.info("Creating new time entry")
-    return crud.create_time_entry(db, entry)
-
 @app.get("/time-entries", response_model=List[schemas.TimeEntry])
 @app.get("/time-entries/", response_model=List[schemas.TimeEntry])
 def get_time_entries(
@@ -348,63 +322,18 @@ def get_time_entries(
     limit: int = Query(default=100, ge=1, le=1000),
     db: Session = Depends(get_db)
 ):
-    logger.info(f"Fetching time entries with skip={skip}, limit={limit}")
-    return crud.get_time_entries(db, skip=skip, limit=limit)
-
-@app.get("/time-summaries/", response_model=schemas.TimeSummary)
-def get_time_summaries(
-    start_date: date = Query(..., description="Start date (YYYY-MM-DD)"),
-    end_date: date = Query(..., description="End date (YYYY-MM-DD)"),
-    project_id: Optional[str] = None,
-    customer_name: Optional[str] = None,
-    db: Session = Depends(get_db)
-):
-    """Get time entries summary within a date range."""
-    logger.info(f"Fetching time summaries from {start_date} to {end_date}")
-    return crud.get_time_summaries(db, start_date, end_date, project_id, customer_name)
-
-@app.get("/time-entries/by-month/{month}", response_model=schemas.TimeSummary)
-def get_time_entries_by_month(
-    month: str = Path(..., description="Month name (e.g., January)"),
-    year: int = Query(..., description="Year (e.g., 2025)"),
-    project_id: Optional[str] = None,
-    db: Session = Depends(get_db)
-):
-    """Get time entries for a specific month."""
-    logger.info(f"Fetching time entries for {month} {year}")
-    return crud.get_time_entries_by_month(db, month, year, project_id)
-
-@app.get("/time-entries/by-week/{week_number}", response_model=schemas.TimeSummary)
-def get_time_entries_by_week(
-    week_number: int = Path(..., ge=1, le=53),
-    year: int = Query(..., description="Year (e.g., 2025)"),
-    project_id: Optional[str] = None,
-    db: Session = Depends(get_db)
-):
-    """Get time entries for a specific week number."""
-    logger.info(f"Fetching time entries for week {week_number} of {year}")
-    return crud.get_time_entries_by_week(db, week_number, year, project_id)
+    """Get paginated time entries"""
+    service = TimesheetService(db)
+    return service.get_entries(skip=skip, limit=limit)
 
 @app.get("/time-entries/by-date/{date}", response_model=List[schemas.TimeEntry])
 def get_time_entries_by_date(
     date: date,
     db: Session = Depends(get_db)
 ):
-    """
-    Get all time entries for a specific date.
-    Date format: YYYY-MM-DD
-    """
-    logger.info(f"Fetching time entries for date: {date}")
-    try:
-        entries = crud.get_time_entries_by_date(db, date)
-        if not entries:
-            logger.info(f"No entries found for date: {date}")
-            return []
-        logger.info(f"Found {len(entries)} entries for date: {date}")
-        return entries
-    except Exception as e:
-        logger.error(f"Error fetching time entries for date {date}: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
+    """Get time entries for a specific date"""
+    service = TimesheetService(db)
+    return service.get_entries_by_date(date)
 
 @app.get("/reports/weekly", response_model=schemas.WeeklyReport)
 def get_weekly_report(
@@ -412,50 +341,9 @@ def get_weekly_report(
     project_id: Optional[str] = None,
     db: Session = Depends(get_db)
 ):
-    logger.info(f"Generating weekly report for date={date}, project={project_id}")
-    if date is None:
-        date = datetime.now()
-
-    week_start = date - timedelta(days=date.weekday())
-    week_end = week_start + timedelta(days=6)
-
-    query = db.query(
-        Project.project_id,
-        Project.customer,
-        func.sum(TimeEntry.hours).label('total_hours')
-    ).join(
-        TimeEntry,
-        TimeEntry.project == Project.project_id
-    ).filter(
-        TimeEntry.date >= week_start.date(),
-        TimeEntry.date <= week_end.date()
-    ).group_by(
-        Project.project_id,
-        Project.customer
-    )
-
-    if project_id:
-        query = query.filter(Project.project_id == project_id)
-
-    results = query.all()
-    entries = [
-        schemas.ReportEntry(
-            total_hours=float(r.total_hours or 0),
-            category=r.customer or "Unassigned",
-            project=r.project_id,
-            period=f"{week_start.date()} to {week_end.date()}"
-        )
-        for r in results
-    ]
-
-    total_hours = sum(entry.total_hours for entry in entries)
-    return schemas.WeeklyReport(
-        entries=entries,
-        total_hours=total_hours,
-        week_number=week_start.isocalendar()[1],
-        month=calendar.month_name[week_start.month]
-    )
-
+    """Get weekly time report"""
+    service = ReportService(db)
+    return service.get_weekly_report(date, project_id)
 
 @app.get("/reports/monthly", response_model=schemas.MonthlyReport)
 def get_monthly_report(
@@ -464,52 +352,10 @@ def get_monthly_report(
     project_id: Optional[str] = None,
     db: Session = Depends(get_db)
 ):
-    logger.info(f"Generating monthly report for {year}-{month}, project={project_id}")
+    """Get monthly time report"""
+    service = ReportService(db)
+    return service.get_monthly_report(year, month, project_id)
 
-    # Adjust the logic to fix week start and start date
-    # Get the first and last day of the month
-    _, last_day = calendar.monthrange(year, month)
-
-    # Determine the correct week start and end based on the given year and month
-    week_start = datetime(year, month, 1).date()  # Assuming week starts from the 1st of the month
-    week_end = datetime(year, month, last_day).date()  # Assuming week ends on the last day of the month
-
-    query = db.query(
-        Project.project_id,
-        Project.customer,
-        func.sum(TimeEntry.hours).label('total_hours')
-    ).join(
-        TimeEntry,
-        TimeEntry.project == Project.project_id
-    ).filter(
-        TimeEntry.date >= week_start,
-        TimeEntry.date <= week_end
-    ).group_by(
-        Project.project_id,
-        Project.customer
-    )
-
-    if project_id:
-        query = query.filter(Project.project_id == project_id)
-
-    results = query.all()
-    entries = [
-        schemas.ReportEntry(
-            total_hours=float(r.total_hours or 0),
-            category=r.customer or "Unassigned",
-            project=r.project_id,
-            period=f"{year}-{month:02d}"
-        )
-        for r in results
-    ]
-
-    total_hours = sum(entry.total_hours for entry in entries)
-    return schemas.MonthlyReport(
-        entries=entries,
-        total_hours=total_hours,
-        month=month,
-        year=year
-    )
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
