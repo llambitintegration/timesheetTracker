@@ -34,7 +34,7 @@ app = FastAPI(title="Timesheet Management API")
 app.middleware("http")(logging_middleware)
 app.middleware("http")(error_logging_middleware)
 
-# Updated CORS configuration - removed invalid parameters
+# Updated CORS configuration with proper settings
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -48,13 +48,29 @@ app.add_middleware(
 @app.options("/{path:path}")
 async def options_handler(request: Request):
     """Handle OPTIONS requests explicitly"""
-    response = JSONResponse(
-        content={},
-        status_code=200
-    )
-    response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS,PATCH"
+    origin = request.headers.get("origin", "*")
+    methods = "GET,POST,PUT,DELETE,OPTIONS,PATCH"
+
+    response = JSONResponse(content={})
+    # Set CORS headers explicitly for OPTIONS requests
     response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = methods
     response.headers["Access-Control-Allow-Headers"] = "*"
+    response.headers["Access-Control-Max-Age"] = "3600"
+    response.headers["Access-Control-Allow-Credentials"] = "true"
+    return response
+
+@app.middleware("http")
+async def cors_middleware(request: Request, call_next):
+    """Additional CORS middleware to ensure headers are set on all responses"""
+    response = await call_next(request)
+
+    # Ensure CORS headers are present on all responses
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS,PATCH"
+    response.headers["Access-Control-Allow-Headers"] = "*"
+    response.headers["Access-Control-Allow-Credentials"] = "true"
+
     return response
 
 @app.get("/health")
@@ -163,8 +179,8 @@ async def startup_event():
 
         # Log CORS configuration
         logger.info("=== CORS Configuration ===")
-        logger.info("Allowed Origins: 'https://kzmihyekikghud2klanm.lite.vusercontent.net', 'https://*.v0.dev'")
-        logger.info(f"Allowed Methods: '*'")
+        logger.info("Allowed Origins: '*'")
+        logger.info(f"Allowed Methods: 'GET,POST,PUT,DELETE,OPTIONS,PATCH'")
         logger.info(f"Allow Credentials: True")
         logger.info(f"Allowed Headers: '*'")
         logger.info(f"Expose Headers: '*', 'X-Total-Count', 'X-Correlation-ID'")
