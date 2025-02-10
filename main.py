@@ -138,7 +138,7 @@ def create_sample_data(db: Session = Depends(get_db)):
             date=date(2025, 2, 3)
         )
     ]
-    
+
     created_entries = []
     for entry in sample_entries:
         try:
@@ -147,7 +147,7 @@ def create_sample_data(db: Session = Depends(get_db)):
         except Exception as e:
             logger.error(f"Error creating sample entry: {str(e)}")
             continue
-    
+
     return {"message": f"Created {len(created_entries)} sample entries"}
 
 
