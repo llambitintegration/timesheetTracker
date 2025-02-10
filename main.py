@@ -89,6 +89,19 @@ app.add_middleware(
     max_age=3600
 )
 
+# Options handler for preflight requests
+@app.options("/{path:path}")
+async def options_handler(request: Request):
+    """Handle OPTIONS requests explicitly"""
+    response = JSONResponse(content={})
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS,PATCH"
+    response.headers["Access-Control-Allow-Headers"] = "*"
+    response.headers["Access-Control-Allow-Credentials"] = "false"
+    response.headers["Access-Control-Expose-Headers"] = "X-Total-Count,X-Correlation-ID"
+    response.headers["Access-Control-Max-Age"] = "3600"
+    return response
+
 # Basic health check endpoint
 @app.get("/health")
 async def health_check(request: Request):
