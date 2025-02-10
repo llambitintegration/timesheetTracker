@@ -10,9 +10,21 @@ logger = Logger().get_logger()
 async def logging_middleware(request: Request, call_next: Callable):
     """Enhanced logging middleware with structured logging and request tracking"""
     start_time = time.time()
-    correlation_id = Logger().set_correlation_id()
+    correlation_id = Logger().get_correlation_id() or Logger().set_correlation_id()
 
     try:
+        # Log preflight requests specifically
+        if request.method == "OPTIONS":
+            logger.info(structured_log(
+                "CORS preflight request",
+                correlation_id=correlation_id,
+                method=request.method,
+                url=str(request.url),
+                origin=request.headers.get("origin"),
+                access_control_request_method=request.headers.get("access-control-request-method"),
+                access_control_request_headers=request.headers.get("access-control-request-headers")
+            ))
+
         # Detailed request logging with structured format
         logger.info(structured_log(
             "Incoming request",
@@ -31,21 +43,37 @@ async def logging_middleware(request: Request, call_next: Callable):
 
         # Log response details
         process_time = (time.time() - start_time) * 1000
-        logger.info(structured_log(
-            "Request completed",
-            correlation_id=correlation_id,
-            status_code=response.status_code,
-            process_time_ms=f"{process_time:.2f}",
-            response_headers=dict(response.headers),
-            content_type=response.headers.get('content-type')
-        ))
+        status_code = response.status_code
+
+        # Enhanced logging for client errors (4xx) and server errors (5xx)
+        if status_code >= 400:
+            log_level = "error" if status_code >= 500 else "warning"
+            getattr(logger, log_level)(structured_log(
+                f"Request failed with status {status_code}",
+                correlation_id=correlation_id,
+                status_code=status_code,
+                method=request.method,
+                url=str(request.url),
+                process_time_ms=f"{process_time:.2f}",
+                response_headers=dict(response.headers),
+                error_detail=response.headers.get("x-error-detail")
+            ))
+        else:
+            logger.info(structured_log(
+                "Request completed",
+                correlation_id=correlation_id,
+                status_code=status_code,
+                process_time_ms=f"{process_time:.2f}",
+                response_headers=dict(response.headers),
+                content_type=response.headers.get('content-type')
+            ))
 
         # Add correlation ID to response headers
         response.headers['X-Correlation-ID'] = correlation_id
         return response
 
     except Exception as e:
-        # Enhanced error logging
+        # Enhanced error logging with more context
         error_details = {
             'correlation_id': correlation_id,
             'error_type': type(e).__name__,
@@ -54,11 +82,13 @@ async def logging_middleware(request: Request, call_next: Callable):
             'request_method': request.method,
             'request_url': str(request.url),
             'request_headers': dict(request.headers),
-            'client_host': request.client.host if request.client else None
+            'client_host': request.client.host if request.client else None,
+            'query_params': dict(request.query_params),
+            'path_params': request.path_params
         }
 
         logger.error(structured_log(
-            "Request failed",
+            "Request failed with exception",
             **error_details
         ))
 
@@ -66,7 +96,8 @@ async def logging_middleware(request: Request, call_next: Callable):
             status_code=500,
             content={
                 "detail": "Internal server error",
-                "correlation_id": correlation_id
+                "correlation_id": correlation_id,
+                "type": type(e).__name__
             }
         )
 

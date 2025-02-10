@@ -33,14 +33,15 @@ app = FastAPI(title="Timesheet Management API")
 app.middleware("http")(logging_middleware)
 app.middleware("http")(error_logging_middleware)
 
-# Update CORS middleware configuration
+# Update the CORS middleware configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "https://*.v0.dev",
         "https://*.vusercontent.net",
         "https://*.replit.dev",
-        "https://*.repl.co"
+        "https://*.repl.co",
+        "*"  # Allow all origins in development
     ],
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
@@ -49,6 +50,24 @@ app.add_middleware(
     max_age=3600,
 )
 
+@app.options("/{path:path}")
+async def options_handler(request: Request):
+    """Handle OPTIONS requests explicitly"""
+    logger.info(structured_log(
+        "Handling OPTIONS request",
+        correlation_id=Logger().get_correlation_id(),
+        path=request.url.path,
+        headers=dict(request.headers)
+    ))
+    return JSONResponse(
+        content={},
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Max-Age": "3600",
+        }
+    )
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
