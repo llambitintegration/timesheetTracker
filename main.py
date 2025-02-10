@@ -34,20 +34,12 @@ app = FastAPI(title="Timesheet Management API")
 app.middleware("http")(logging_middleware)
 app.middleware("http")(error_logging_middleware)
 
-# Update CORS middleware configuration to match frontend exactly
+# Development CORS configuration - allow all origins
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://kzmihyekikghud2klanm.lite.vusercontent.net",
-        "https://kzmoahcr21tq41iiitsf.lite.vusercontent.net",
-        "https://kzmlujlqmvbcsanq2a21.lite.vusercontent.net",
-        "https://*.v0.dev",
-        "https://*.worf.replit.dev",
-        "https://*.repl.co",
-        "https://*.replit.dev"
-    ],
-    allow_credentials=True,
-    allow_methods=["*"],
+    allow_origins=["*"],
+    allow_credentials=True, 
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allow_headers=["*"],
     expose_headers=["X-Total-Count", "X-Correlation-ID"],
     max_age=3600,
@@ -56,65 +48,8 @@ app.add_middleware(
 @app.options("/{path:path}")
 async def options_handler(request: Request):
     """Handle OPTIONS requests explicitly"""
-    correlation_id = Logger().get_correlation_id()
-    origin = request.headers.get("origin", "")
-    
-    allowed_origins = [
-        "https://kzmihyekikghud2klanm.lite.vusercontent.net",
-        "https://kzmoahcr21tq41iiitsf.lite.vusercontent.net", 
-        "https://kzmlujlqmvbcsanq2a21.lite.vusercontent.net",
-        "https://*.v0.dev",
-        "https://*.worf.replit.dev",
-        "https://*.repl.co",
-        "https://*.replit.dev"
-    ]
-
-    # Simple wildcard match function
-    def match_origin(origin, pattern):
-        if '*' not in pattern:
-            return origin == pattern
-        prefix, suffix = pattern.split('*', 1)
-        return origin.startswith(prefix) and origin.endswith(suffix)
-
-    is_allowed = any(match_origin(origin, pattern) for pattern in allowed_origins)
-
-    if not is_allowed:
-        logger.warning(structured_log(
-            "CORS preflight rejected",
-            correlation_id=correlation_id,
-            origin=origin,
-            path=request.url.path
-        ))
-        return JSONResponse(
-            status_code=400,
-            content={"detail": "Origin not allowed"}
-        )
-
-    requested_method = request.headers.get("access-control-request-method")
-    requested_headers = request.headers.get("access-control-request-headers")
-
-    response_headers = {
-        "Access-Control-Allow-Origin": origin,
-        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH",
-        "Access-Control-Allow-Headers": requested_headers or "*",
-        "Access-Control-Allow-Credentials": "true",
-        "Access-Control-Max-Age": "3600",
-        "Access-Control-Expose-Headers": "X-Total-Count, X-Correlation-ID",
-        "Vary": "Origin"
-    }
-
-    logger.info(structured_log(
-        "Preflight request approved",
-        correlation_id=correlation_id,
-        origin=origin,
-        method=requested_method,
-        headers=requested_headers,
-        path=request.url.path
-    ))
-
     return JSONResponse(
         content={},
-        headers=response_headers,
         status_code=200
     )
 
