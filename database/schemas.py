@@ -147,6 +147,16 @@ class ProjectCreate(BaseModel):
 
     model_config = ConfigDict(from_attributes=True)
 
+class ProjectUpdate(BaseModel):
+    """Schema for updating projects"""
+    name: Optional[str] = None
+    description: Optional[str] = None
+    customer: Optional[str] = None
+    project_manager: Optional[str] = None
+    status: Optional[str] = Field(None, pattern="^(active|inactive)$")
+
+    model_config = ConfigDict(from_attributes=True)
+
 class Project(ProjectBase):
     model_config = ConfigDict(from_attributes=True, orm_mode=True)
 
