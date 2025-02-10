@@ -1,0 +1,173 @@
+12:41:19.961Z
+
+Fetch
+error (attempt 1/3)
+: {}
+12:41:19.961Z
+Fetch error stack: TypeError: Failed to fetch
+    at t.__v0__.globalThis.fetch (https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/_next/static/chunks/6910-8fc9eb426f5fc63c.js:1:46796)
+    at fetchWithRetry (blob:https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/ec5b9b1a-32bd-438b-a3ca-bc1b190bd0c4:99:36)
+    at async Object.getTimeEntries (blob:https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/ec5b9b1a-32bd-438b-a3ca-bc1b190bd0c4:193:26)
+    at async fetchTimeEntriesByDate (blob:https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/742657de-6d9a-44eb-84dd-f1785046c7c3:96:29)
+12:41:19.961Z
+Request URL: https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.replit.dev/time-entries?skip=0&limit=100
+12:41:19.961Z
+Request options: {
+  "credentials": "include"
+}
+12:41:19.961Z
+This error often indicates a network issue or CORS problem.
+12:41:19.999Z
+Error checking API status: {}
+12:41:20.028Z
+
+Fetch
+error (attempt 1/3)
+: {}
+12:41:20.028Z
+Fetch error stack: TypeError: Failed to fetch
+    at t.__v0__.globalThis.fetch (https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/_next/static/chunks/6910-8fc9eb426f5fc63c.js:1:46796)
+    at fetchWithRetry (blob:https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/ec5b9b1a-32bd-438b-a3ca-bc1b190bd0c4:99:36)
+    at async Object.getTimeEntriesByMonth (blob:https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/ec5b9b1a-32bd-438b-a3ca-bc1b190bd0c4:292:30)
+    at async fetchTimeEntriesByMonth (blob:https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/742657de-6d9a-44eb-84dd-f1785046c7c3:120:29)
+12:41:20.028Z
+Request URL: https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.replit.dev/time-entries/by-month/February?year=2025
+12:41:20.028Z
+Request options: {
+  "method": "GET",
+  "credentials": "include"
+}
+12:41:20.028Z
+This error often indicates a network issue or CORS problem.
+12:41:21.961Z
+
+Attempting
+fetch
+to
+$
+{
+  url
+}
+; {"options":{"credentials":"include"},"retryCount":1}
+12:41:22.024Z
+
+Fetch
+error (attempt 2/3)
+: {}
+12:41:22.024Z
+Fetch error stack: TypeError: Failed to fetch
+    at t.__v0__.globalThis.fetch (https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/_next/static/chunks/6910-8fc9eb426f5fc63c.js:1:46796)
+    at fetchWithRetry (blob:https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/ec5b9b1a-32bd-438b-a3ca-bc1b190bd0c4:99:36)
+    at async Object.getTimeEntries (blob:https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/ec5b9b1a-32bd-438b-a3ca-bc1b190bd0c4:193:26)
+    at async fetchTimeEntriesByDate (blob:https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/742657de-6d9a-44eb-84dd-f1785046c7c3:96:29)
+12:41:22.024Z
+Request URL: https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.replit.dev/time-entries?skip=0&limit=100
+12:41:22.024Z
+Request options: {
+  "credentials": "include"
+}
+12:41:22.024Z
+This error often indicates a network issue or CORS problem.
+12:41:22.029Z
+
+Attempting
+fetch
+to
+$
+{
+  url
+}
+; {"options":{"method":"GET","credentials":"include"},"retryCount":1}
+12:41:22.244Z
+
+Fetch
+error (attempt 2/3)
+: {}
+12:41:22.244Z
+Fetch error stack: TypeError: Failed to fetch
+    at t.__v0__.globalThis.fetch (https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/_next/static/chunks/6910-8fc9eb426f5fc63c.js:1:46796)
+    at fetchWithRetry (blob:https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/ec5b9b1a-32bd-438b-a3ca-bc1b190bd0c4:99:36)
+    at async Object.getTimeEntriesByMonth (blob:https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/ec5b9b1a-32bd-438b-a3ca-bc1b190bd0c4:292:30)
+    at async fetchTimeEntriesByMonth (blob:https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/742657de-6d9a-44eb-84dd-f1785046c7c3:120:29)
+12:41:22.244Z
+Request URL: https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.replit.dev/time-entries/by-month/February?year=2025
+12:41:22.244Z
+Request options: {
+  "method": "GET",
+  "credentials": "include"
+}
+12:41:22.244Z
+This error often indicates a network issue or CORS problem.
+12:41:26.025Z
+
+Attempting
+fetch
+to
+$
+{
+  url
+}
+; {"options":{"credentials":"include"},"retryCount":2}
+12:41:26.245Z
+
+Attempting
+fetch
+to
+$
+{
+  url
+}
+; {"options":{"method":"GET","credentials":"include"},"retryCount":2}
+12:41:26.249Z
+
+Fetch
+error (attempt 3/3)
+: {}
+12:41:26.249Z
+Fetch error stack: TypeError: Failed to fetch
+    at t.__v0__.globalThis.fetch (https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/_next/static/chunks/6910-8fc9eb426f5fc63c.js:1:46796)
+    at fetchWithRetry (blob:https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/ec5b9b1a-32bd-438b-a3ca-bc1b190bd0c4:99:36)
+    at async Object.getTimeEntries (blob:https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/ec5b9b1a-32bd-438b-a3ca-bc1b190bd0c4:193:26)
+    at async fetchTimeEntriesByDate (blob:https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/742657de-6d9a-44eb-84dd-f1785046c7c3:96:29)
+12:41:26.249Z
+Request URL: https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.replit.dev/time-entries?skip=0&limit=100
+12:41:26.250Z
+Request options: {
+  "credentials": "include"
+}
+12:41:26.250Z
+This error often indicates a network issue or CORS problem.
+12:41:26.250Z
+Error fetching time entries: {}
+12:41:26.477Z
+
+Fetch
+error (attempt 3/3)
+: {}
+12:41:26.477Z
+Fetch error stack: TypeError: Failed to fetch
+    at t.__v0__.globalThis.fetch (https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/_next/static/chunks/6910-8fc9eb426f5fc63c.js:1:46796)
+    at fetchWithRetry (blob:https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/ec5b9b1a-32bd-438b-a3ca-bc1b190bd0c4:99:36)
+    at async Object.getTimeEntriesByMonth (blob:https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/ec5b9b1a-32bd-438b-a3ca-bc1b190bd0c4:292:30)
+    at async fetchTimeEntriesByMonth (blob:https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/742657de-6d9a-44eb-84dd-f1785046c7c3:120:29)
+12:41:26.477Z
+Request URL: https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.replit.dev/time-entries/by-month/February?year=2025
+12:41:26.477Z
+Request options: {
+  "method": "GET",
+  "credentials": "include"
+}
+12:41:26.477Z
+This error often indicates a network issue or CORS problem.
+12:41:26.477Z
+Error in getTimeEntriesByMonth: {}
+12:41:26.477Z
+Error stack: TypeError: Failed to fetch
+    at t.__v0__.globalThis.fetch (https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/_next/static/chunks/6910-8fc9eb426f5fc63c.js:1:46796)
+    at fetchWithRetry (blob:https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/ec5b9b1a-32bd-438b-a3ca-bc1b190bd0c4:99:36)
+    at async Object.getTimeEntriesByMonth (blob:https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/ec5b9b1a-32bd-438b-a3ca-bc1b190bd0c4:292:30)
+    at async fetchTimeEntriesByMonth (blob:https://kzmqf1k631gz62n93fbe.lite.vusercontent.net/742657de-6d9a-44eb-84dd-f1785046c7c3:120:29)
+12:41:26.477Z
+Error fetching monthly time entries: {"status":500,"data":{"originalError":{}},"name":"ApiError"}
+12:41:26.477Z
+API Error Details: {"originalError":{}}

@@ -48,7 +48,7 @@ async def options_handler(request: Request):
     # Get the origin from the request headers
     origin = request.headers.get("origin", "")
 
-    # Define allowed origins to exactly match frontend configuration
+    # Define allowed origins with exact patterns
     allowed_origins = [
         "https://kzmihyekikghud2klanm.lite.vusercontent.net",
         "https://*.v0.dev"
@@ -57,8 +57,11 @@ async def options_handler(request: Request):
     # Convert wildcard patterns to regex for matching
     def pattern_to_regex(pattern):
         if '*' in pattern:
-            return pattern.replace('.', '\.').replace('*', '.*')
-        return pattern
+            # Handle .lite.vusercontent.net domains
+            pattern = pattern.replace('.', '\.')
+            pattern = pattern.replace('*', '[a-zA-Z0-9-]+')
+            return f"^{pattern}$"
+        return f"^{pattern}$"
 
     # Check if origin matches any allowed pattern
     is_allowed = origin in allowed_origins or any(
@@ -73,7 +76,8 @@ async def options_handler(request: Request):
             correlation_id=Logger().get_correlation_id(),
             origin=origin,
             path=request.url.path,
-            allowed_origins=allowed_origins
+            allowed_origins=allowed_origins,
+            matched_patterns=[pattern_to_regex(p) for p in allowed_origins if '*' in p]
         ))
         return JSONResponse(
             status_code=400,
@@ -104,7 +108,7 @@ async def options_handler(request: Request):
         headers=response_headers
     )
 
-# Update the CORS middleware configuration to match frontend exactly
+# Update CORS middleware configuration to match frontend exactly
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
