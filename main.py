@@ -74,7 +74,7 @@ app.middleware("http")(error_logging_middleware)
 # Update CORS configuration with proper settings
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Specific origin instead of wildcard
+    allow_origins=["https://kzmk61p9ygadt1kvrsrm.lite.vusercontent.net"],  # Specific origin instead of wildcard
     allow_credentials=False,  # Must be False since frontend doesn't need credentials
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allow_headers=["*"],  # Allow all headers
@@ -201,7 +201,8 @@ async def customers_endpoint(route: str = "", skip: int = 0, limit: int = 100, d
     raise HTTPException(status_code=404, detail="Sub-route not found")
 
 @app.route('/project-managers', methods=['GET', 'POST'])
-def manage_project_managers(
+async def manage_project_managers(
+    request: Request,  # Add request parameter
     email: Optional[str] = None,
     skip: int = 0,
     limit: int = 100,
