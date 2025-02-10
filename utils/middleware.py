@@ -22,7 +22,9 @@ async def logging_middleware(request: Request, call_next: Callable):
                 url=str(request.url),
                 origin=request.headers.get("origin"),
                 access_control_request_method=request.headers.get("access-control-request-method"),
-                access_control_request_headers=request.headers.get("access-control-request-headers")
+                access_control_request_headers=request.headers.get("access-control-request-headers"),
+                query_params=dict(request.query_params),
+                path=request.url.path
             ))
 
         # Detailed request logging with structured format
@@ -35,7 +37,8 @@ async def logging_middleware(request: Request, call_next: Callable):
             headers=dict(request.headers),
             path_params=request.path_params,
             query_params=dict(request.query_params),
-            request_id=request.headers.get('x-request-id')
+            request_id=request.headers.get('x-request-id'),
+            path=request.url.path
         ))
 
         # Process the request
@@ -45,27 +48,43 @@ async def logging_middleware(request: Request, call_next: Callable):
         process_time = (time.time() - start_time) * 1000
         status_code = response.status_code
 
-        # Enhanced logging for client errors (4xx) and server errors (5xx)
-        if status_code >= 400:
+        # Enhanced logging for all non-200 responses
+        if status_code != 200:
             log_level = "error" if status_code >= 500 else "warning"
+            log_context = {
+                "correlation_id": correlation_id,
+                "status_code": status_code,
+                "method": request.method,
+                "url": str(request.url),
+                "process_time_ms": f"{process_time:.2f}",
+                "response_headers": dict(response.headers),
+                "error_detail": response.headers.get("x-error-detail"),
+                "query_params": dict(request.query_params),
+                "path_params": request.path_params,
+                "client_host": request.client.host if request.client else None,
+                "path": request.url.path,
+                "origin": request.headers.get("origin"),
+                "cors_method": request.headers.get("access-control-request-method"),
+                "cors_headers": request.headers.get("access-control-request-headers")
+            }
+
+            if request.method == "OPTIONS":
+                log_context["request_type"] = "CORS Preflight"
+
             getattr(logger, log_level)(structured_log(
                 f"Request failed with status {status_code}",
-                correlation_id=correlation_id,
-                status_code=status_code,
-                method=request.method,
-                url=str(request.url),
-                process_time_ms=f"{process_time:.2f}",
-                response_headers=dict(response.headers),
-                error_detail=response.headers.get("x-error-detail")
+                **log_context
             ))
         else:
             logger.info(structured_log(
-                "Request completed",
+                "Request completed successfully",
                 correlation_id=correlation_id,
                 status_code=status_code,
                 process_time_ms=f"{process_time:.2f}",
                 response_headers=dict(response.headers),
-                content_type=response.headers.get('content-type')
+                content_type=response.headers.get('content-type'),
+                method=request.method,
+                path=request.url.path
             ))
 
         # Add correlation ID to response headers
@@ -84,7 +103,11 @@ async def logging_middleware(request: Request, call_next: Callable):
             'request_headers': dict(request.headers),
             'client_host': request.client.host if request.client else None,
             'query_params': dict(request.query_params),
-            'path_params': request.path_params
+            'path_params': request.path_params,
+            'path': request.url.path,
+            'origin': request.headers.get("origin"),
+            'cors_method': request.headers.get("access-control-request-method"),
+            'cors_headers': request.headers.get("access-control-request-headers")
         }
 
         logger.error(structured_log(
@@ -111,6 +134,9 @@ async def error_logging_middleware(request: Request, call_next: Callable):
             correlation_id=Logger().get_correlation_id(),
             error_type=type(e).__name__,
             error_message=str(e),
-            traceback=traceback.format_exc()
+            traceback=traceback.format_exc(),
+            path=request.url.path,
+            method=request.method,
+            query_params=dict(request.query_params)
         ))
         raise

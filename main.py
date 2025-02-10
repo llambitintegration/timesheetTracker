@@ -57,7 +57,8 @@ async def options_handler(request: Request):
         "Handling OPTIONS request",
         correlation_id=Logger().get_correlation_id(),
         path=request.url.path,
-        headers=dict(request.headers)
+        headers=dict(request.headers),
+        query_params=dict(request.query_params)
     ))
 
     # Get the origin from the request headers
@@ -82,6 +83,16 @@ async def options_handler(request: Request):
 
     # Set the specific origin instead of wildcard
     response_headers["Access-Control-Allow-Origin"] = origin
+
+    # Log the response we're about to send
+    logger.info(structured_log(
+        "Sending OPTIONS response",
+        correlation_id=Logger().get_correlation_id(),
+        origin=origin,
+        response_headers=response_headers,
+        path=request.url.path,
+        query_params=dict(request.query_params)
+    ))
 
     return JSONResponse(
         content={},
@@ -138,6 +149,7 @@ def read_projects(
     except Exception as e:
         logger.error(f"Error fetching projects: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
 
 
 @app.on_event("startup")
