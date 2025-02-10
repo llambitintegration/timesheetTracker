@@ -32,8 +32,8 @@ app = FastAPI(title="Timesheet Management API")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # In development mode, allow all origins
-    allow_credentials=True,
-    allow_methods=["*"],
+    allow_credentials=False,  # Set to False since we're using allow_origins=["*"]
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allow_headers=["*"],
     expose_headers=["*"],
     max_age=3600,

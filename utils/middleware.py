@@ -21,11 +21,8 @@ async def logging_middleware(request: Request, call_next: Callable):
         # Process the request
         response = await call_next(request)
 
-        # Always add CORS headers in development
-        response.headers["Access-Control-Allow-Origin"] = "*"
-        response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS, PATCH"
-        response.headers["Access-Control-Allow-Headers"] = "*"
-        response.headers["Access-Control-Max-Age"] = "3600"
+        # Let FastAPI CORSMiddleware handle the CORS headers
+        pass
 
         # Log response details
         process_time = (time.time() - start_time) * 1000
