@@ -46,7 +46,7 @@ task = "packager.installForAll"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "python -m pytest tests/test_cors.py -v"
+args = "python -m pytest tests/test_cors.py -v -s"
 
 [deployment]
 run = ["sh", "-c", "python main.py"]

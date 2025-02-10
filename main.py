@@ -67,16 +67,6 @@ app = FastAPI(
 app.middleware("http")(logging_middleware)
 app.middleware("http")(error_logging_middleware)
 
-@app.middleware("http")
-async def add_cors_headers(request: Request, call_next):
-    """Add CORS headers to all responses"""
-    response = await call_next(request)
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS,PATCH"
-    response.headers["Access-Control-Allow-Headers"] = "*"
-    response.headers["Access-Control-Allow-Credentials"] = "false"
-    response.headers["Access-Control-Expose-Headers"] = "X-Total-Count,X-Correlation-ID"
-    return response
 
 # CORS configuration section update
 app.add_middleware(
@@ -84,7 +74,7 @@ app.add_middleware(
     allow_origins=["*"],  # Allow all origins in development
     allow_credentials=False,  # Set to false for development
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-    allow_headers=["*"],
+    allow_headers=["*"],  # Allow all headers for development
     expose_headers=["X-Total-Count", "X-Correlation-ID"],
     max_age=3600
 )
@@ -94,12 +84,15 @@ app.add_middleware(
 async def options_handler(request: Request):
     """Handle OPTIONS requests explicitly"""
     response = JSONResponse(content={})
+
+    # Set CORS headers explicitly for OPTIONS requests
     response.headers["Access-Control-Allow-Origin"] = "*"
     response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS,PATCH"
     response.headers["Access-Control-Allow-Headers"] = "*"
     response.headers["Access-Control-Allow-Credentials"] = "false"
     response.headers["Access-Control-Expose-Headers"] = "X-Total-Count,X-Correlation-ID"
     response.headers["Access-Control-Max-Age"] = "3600"
+
     return response
 
 # Basic health check endpoint
