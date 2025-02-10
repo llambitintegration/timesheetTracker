@@ -34,7 +34,7 @@ app = FastAPI(title="Timesheet Management API")
 app.middleware("http")(logging_middleware)
 app.middleware("http")(error_logging_middleware)
 
-# Development CORS configuration - allow all origins
+# Updated CORS configuration - removed invalid parameters
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -42,9 +42,7 @@ app.add_middleware(
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allow_headers=["*"],
     expose_headers=["X-Total-Count", "X-Correlation-ID"],
-    max_age=3600,
-    allow_origin_regex=None,
-    allow_credentials_regex=None
+    max_age=3600
 )
 
 @app.options("/{path:path}")
