@@ -45,7 +45,7 @@ async def lifespan(app: FastAPI):
         logger.info("=== CORS Configuration ===")
         logger.info("Allowed Origins: '*'")
         logger.info(f"Allowed Methods: 'GET,POST,PUT,DELETE,OPTIONS,PATCH'")
-        logger.info(f"Allow Credentials: True")
+        logger.info(f"Allow Credentials: False")
         logger.info(f"Allowed Headers: '*'")
         logger.info(f"Expose Headers: 'X-Total-Count', 'X-Correlation-ID'")
 
@@ -73,7 +73,7 @@ app.middleware("http")(error_logging_middleware)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allow_headers=["*"],
     expose_headers=["X-Total-Count", "X-Correlation-ID"],
@@ -121,7 +121,7 @@ async def options_handler(request: Request):
     response.headers["Access-Control-Allow-Methods"] = methods
     response.headers["Access-Control-Allow-Headers"] = "*"
     response.headers["Access-Control-Max-Age"] = "3600"
-    response.headers["Access-Control-Allow-Credentials"] = "true"
+    response.headers["Access-Control-Allow-Credentials"] = "false"
     response.headers["Access-Control-Expose-Headers"] = "X-Total-Count,X-Correlation-ID"
     return response
 
@@ -134,7 +134,7 @@ async def cors_middleware(request: Request, call_next):
     response.headers["Access-Control-Allow-Origin"] = "*"
     response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS,PATCH"
     response.headers["Access-Control-Allow-Headers"] = "*"
-    response.headers["Access-Control-Allow-Credentials"] = "true"
+    response.headers["Access-Control-Allow-Credentials"] = "false"
     response.headers["Access-Control-Expose-Headers"] = "X-Total-Count,X-Correlation-ID"
     return response
 
