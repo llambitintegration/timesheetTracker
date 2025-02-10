@@ -82,8 +82,8 @@ async def startup_event():
         # Log CORS configuration
         logger.info("=== CORS Configuration ===")
         logger.info("Allowed Origins: '*'")
-        logger.info(f"Allowed Methods: '*'")
-        logger.info(f"Allow Credentials: True")
+        logger.info(f"Allowed Methods: GET, POST, PUT, DELETE, OPTIONS, PATCH")
+        logger.info(f"Allow Credentials: False")
         logger.info(f"Allowed Headers: '*'")
         logger.info(f"Expose Headers: '*'")
 
