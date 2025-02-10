@@ -31,8 +31,8 @@ task = "packager.installForAll"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "python main.py"
-waitForPort = 8000
+args = "uvicorn main:app --host 0.0.0.0 --port 8080 --reload"
+waitForPort = 8080
 
 [[workflows.workflow]]
 name = "pytest"
@@ -49,7 +49,7 @@ task = "shell.exec"
 args = "python -m pytest tests/test_cors.py -v"
 
 [deployment]
-run = ["sh", "-c", "python main.py"]
+run = ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port 8080 --reload"]
 
 [[ports]]
 localPort = 8000

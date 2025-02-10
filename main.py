@@ -3,17 +3,19 @@ import traceback
 from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, Query, Path, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from sqlalchemy import join, text, inspect, func
+from sqlalchemy import text
 from sqlalchemy.orm import Session
-from sqlalchemy.sql.schema import MetaData
-from alembic.migration import MigrationContext
 from typing import List, Optional
 from datetime import datetime, timedelta, date
 import calendar
 from dotenv import load_dotenv
 import uvicorn
-from database import schemas, crud, get_db, verify_database, engine
-from utils.logger import Logger, structured_log
+from contextlib import asynccontextmanager
+
+# Import local modules
+from database.database import get_db, engine
+from database import schemas, crud
+from utils.logger import Logger
 from utils.middleware import logging_middleware, error_logging_middleware
 from models.timeEntry import TimeEntry
 from models.projectModel import Project
@@ -22,108 +24,80 @@ from services.customer_service import CustomerService
 from services.project_manager_service import ProjectManagerService
 from services.project_service import ProjectService
 import utils
-import re
-from contextlib import asynccontextmanager
+from alembic import command
+from alembic.config import Config
 
 # Load environment variables
 load_dotenv()
 
 logger = Logger().get_logger()
 
-# Add lifespan context manager before app initialization
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Lifespan context manager for startup/shutdown events"""
-    # Startup logic
-    logger.info("Starting FastAPI server")
-    logger.info("Verifying database connection on startup")
     try:
-        if not verify_database():
-            logger.warning("Database verification failed - schema may need initialization")
+        logger.info("Starting FastAPI server")
 
-        # Log CORS configuration
-        logger.info("=== CORS Configuration ===")
-        logger.info(f"Allowed Origins: ['*']")  # Allow all origins
-        logger.info(f"Allowed Methods: 'GET,POST,PUT,DELETE,OPTIONS,PATCH'")
-        logger.info(f"Allow Credentials: False")
-        logger.info(f"Allowed Headers: '*'")
-        logger.info(f"Expose Headers: 'X-Total-Count', 'X-Correlation-ID'")
+        # Basic database connection test
+        logger.info("Testing database connection")
+        try:
+            with engine.connect() as connection:
+                connection.execute(text("SELECT 1"))
+                connection.commit()
+                logger.info("Database connection successful")
+        except Exception as e:
+            logger.error(f"Database connection error: {str(e)}")
+            raise
 
-    except Exception as e:
-        logger.error(f"Error during startup: {str(e)}")
-        logger.exception("Startup error details:")
-        raise
+        # Log CORS Configuration
+        logger.info("CORS Configuration enabled with credentials=False")
+        yield
+    finally:
+        logger.info("Shutting down FastAPI server")
 
-    yield  # Server runs here
-
-    # Shutdown logic (if any)
-    logger.info("Shutting down FastAPI server")
-
-# Update app initialization to use lifespan
+# Initialize FastAPI app with lifespan
 app = FastAPI(
     title="Timesheet Management API",
+    description="API for managing timesheets with CORS support",
+    version="1.0.0",
     lifespan=lifespan
 )
 
-# Add both middleware
+# Configure CORS - Must be first middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    expose_headers=["X-Total-Count", "X-Correlation-ID"]
+)
+
+# Add logging middleware after CORS
 app.middleware("http")(logging_middleware)
 app.middleware("http")(error_logging_middleware)
 
-# Update CORS configuration with more permissive settings
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins
-    allow_credentials=False,  # Must be False since frontend doesn't need credentials
-    allow_methods=["*"],  # Allow all methods
-    allow_headers=["*"],  # Allow all headers
-    expose_headers=["X-Total-Count", "X-Correlation-ID"],
-    max_age=3600
-)
-
 @app.get("/")
-@app.post("/")
-@app.put("/")
-@app.delete("/")
-@app.patch("/")
-@app.options("/")
-async def read_root(request: Request):
+async def read_root():
     """Root endpoint for API health check"""
-    logger.info(f"Root endpoint accessed via {request.method}")
-    response = JSONResponse(content={
+    return {
         "status": "healthy",
         "message": "Timesheet Management API is running",
-        "documentation": "/docs",
-        "redoc": "/redoc"
-    }, headers={"Access-Control-Allow-Origin": "*"})  # Allow CORS on response
-    return response
+        "version": "1.0.0"
+    }
 
 @app.get("/health")
 async def health_check():
     """Health check endpoint"""
-    logger.info("Health check endpoint accessed")
-    return {"status": "healthy"}
+    try:
+        with engine.connect() as connection:
+            connection.execute(text("SELECT 1"))
+            connection.commit()
+        return {"status": "healthy", "database": "connected"}
+    except Exception as e:
+        logger.error(f"Health check failed: {str(e)}")
+        return {"status": "unhealthy", "database": "disconnected"}
 
-@app.options("/{path:path}")
-async def options_handler(request: Request):
-    """Handle OPTIONS requests explicitly"""
-    methods = "GET,POST,PUT,DELETE,OPTIONS,PATCH"
-    response = JSONResponse(content={})
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Methods"] = "*"
-    response.headers["Access-Control-Allow-Headers"] = "*"
-    response.headers["Access-Control-Max-Age"] = "3600"
-    response.headers["Access-Control-Allow-Credentials"] = "false"
-    response.headers["Access-Control-Expose-Headers"] = "X-Total-Count,X-Correlation-ID"
-    return response
-
-#The cors_middleware is redundant given the CORSMiddleware above.  Removing it.
-
-# Move catch-all route to the end of file and update its behavior
-@app.api_route("/{path_name:path}", methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
-async def catch_all(request: Request, path_name: str):
-    """Catch-all route to handle nonexistent paths with 404"""
-    logger.info(f"Non-existent path accessed: /{path_name}")
-    raise HTTPException(status_code=404, detail=f"Path '/{path_name}' not found")
 
 @app.post("/time-entries/upload", response_model=List[schemas.TimeEntry])
 async def upload_timesheet_entries(
@@ -354,12 +328,18 @@ def delete_project(project_id: str, db: Session = Depends(get_db)):
         logger.error(f"Error deleting project: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
+#This section remains unchanged
+from alembic import command
+from alembic.config import Config
+
+# Fix the initialize_database function
 @app.post("/init-db/")
 @app.get("/init-db/")
 async def initialize_database(force: bool = False, db: Session = Depends(get_db)):
     """Initialize database and run migrations"""
     logger.info("Starting database initialization process")
     try:
+        # Test database connection
         logger.info("Testing database connection")
         try:
             db.execute(text("SELECT 1"))
@@ -371,6 +351,7 @@ async def initialize_database(force: bool = False, db: Session = Depends(get_db)
                 detail=f"Database connection failed: {str(conn_error)}"
             )
 
+        # Handle force flag
         if force:
             logger.info("Force flag is true, dropping existing tables")
             try:
@@ -387,5 +368,26 @@ async def initialize_database(force: bool = False, db: Session = Depends(get_db)
                 logger.error(f"Error dropping tables: {str(e)}")
                 raise HTTPException(status_code=500, detail=f"Error dropping tables: {str(e)}")
 
+        # Run Alembic migrations
         logger.info("Loading Alembic configuration")
-        from alembic import
+        try:
+            alembic_cfg = Config("alembic.ini")
+            command.upgrade(alembic_cfg, "head")
+            logger.info("Database migration completed successfully")
+            return {"status": "success", "message": "Database initialized successfully"}
+        except Exception as e:
+            logger.error(f"Error during migration: {str(e)}")
+            raise HTTPException(status_code=500, detail=f"Migration error: {str(e)}")
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Unexpected error during database initialization: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error during database initialization")
+
+if __name__ == "__main__":
+    try:
+        uvicorn.run(app, host="0.0.0.0", port=8080)
+    except Exception as e:
+        logger.error(f"Server startup failed: {str(e)}")
+        raise
