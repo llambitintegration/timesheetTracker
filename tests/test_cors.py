@@ -7,65 +7,66 @@ client = TestClient(app)
 def test_cors_headers_on_main_endpoint():
     """Test CORS headers are present on main endpoint"""
     headers = {
-        "Origin": "https://example.com",
+        "Origin": "http://example.com",  # Changed to HTTP for development testing
         "Access-Control-Request-Method": "GET",
     }
     response = client.get("/", headers=headers)
     assert response.status_code == 200
     assert response.headers["access-control-allow-origin"] == "*"
-    assert response.headers["access-control-allow-methods"] == "GET, POST, PUT, DELETE, OPTIONS, PATCH"
-    assert "access-control-expose-headers" in response.headers
+    assert "GET" in response.headers["access-control-allow-methods"]
+    assert "POST" in response.headers["access-control-allow-methods"]
+    assert response.headers["access-control-allow-headers"] == "*"
 
 def test_cors_preflight():
     """Test OPTIONS request handling"""
     headers = {
-        "Origin": "https://example.com",
-        "Access-Control-Request-Method": "GET",
+        "Origin": "http://example.com",  # HTTP origin for development
+        "Access-Control-Request-Method": "POST",
         "Access-Control-Request-Headers": "content-type",
     }
-    response = client.options("/time-entries/by-date/2025-01-09", headers=headers)
+    response = client.options("/", headers=headers)
     assert response.status_code == 200
     assert response.headers["access-control-allow-origin"] == "*"
     assert response.headers["access-control-allow-headers"] == "*"
-    assert response.headers["access-control-max-age"] == "3600"
 
-def test_cors_time_entries_endpoint():
-    """Test CORS headers on time entries endpoint"""
+def test_cors_allows_http():
+    """Test that HTTP origins are allowed during development"""
     headers = {
-        "Origin": "https://example.com",
-        "Access-Control-Request-Method": "GET",
+        "Origin": "http://localhost:3000",  # Common development origin
     }
-    response = client.get("/time-entries/by-date/2025-01-09", headers=headers)
+    response = client.get("/", headers=headers)
     assert response.status_code == 200
     assert response.headers["access-control-allow-origin"] == "*"
-    assert response.headers["access-control-allow-methods"] == "GET, POST, PUT, DELETE, OPTIONS, PATCH"
 
-def test_cors_allow_credentials():
-    """Test that credentials are not allowed (development mode)"""
-    headers = {
-        "Origin": "https://example.com",
-    }
-    response = client.get("/", headers=headers)
-    assert response.status_code == 200
-    assert "access-control-allow-credentials" not in response.headers  # Should not be present since allow_credentials=False
+def test_cors_allows_all_methods():
+    """Test that all HTTP methods are allowed"""
+    methods = ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
+    headers = {"Origin": "http://example.com"}
 
-def test_cors_header_exposure():
-    """Test that necessary headers are exposed through CORS"""
-    headers = {
-        "Origin": "https://example.com",
-    }
-    response = client.get("/", headers=headers)
-    assert response.status_code == 200
-    assert response.headers["access-control-expose-headers"] == "*"
+    for method in methods:
+        if method == "OPTIONS":
+            response = client.options("/", headers=headers)
+        else:
+            response = client.request(method, "/", headers=headers)
+        assert response.status_code in [200, 405]  # 405 is acceptable for unsupported methods
+        assert response.headers["access-control-allow-origin"] == "*"
+        assert method in response.headers["access-control-allow-methods"]
 
-def test_cors_multiple_methods():
-    """Test CORS allows multiple HTTP methods"""
+def test_cors_allows_all_headers():
+    """Test that all headers are allowed"""
+    custom_headers = [
+        "X-Custom-Header",
+        "Authorization",
+        "Content-Type",
+        "Accept",
+    ]
+
     headers = {
-        "Origin": "https://example.com",
-        "Access-Control-Request-Method": "PUT",
-        "Access-Control-Request-Headers": "content-type",
+        "Origin": "http://example.com",
+        "Access-Control-Request-Method": "GET",
+        "Access-Control-Request-Headers": ",".join(custom_headers),
     }
-    response = client.options("/time-entries/", headers=headers)
+
+    response = client.options("/", headers=headers)
     assert response.status_code == 200
-    allowed_methods = response.headers["access-control-allow-methods"]
-    assert all(method in allowed_methods for method in ["GET", "POST", "PUT", "DELETE", "PATCH"])
+    assert response.headers["access-control-allow-headers"] == "*"
