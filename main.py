@@ -332,94 +332,9 @@ async def manage_projects(
 @app.get("/init-db/")
 async def initialize_database(force: bool = False, db: Session = Depends(get_db)):
     """Initialize database and run migrations"""
-    logger.info("Starting database initialization process")
-    try:
-        logger.info("Testing database connection")
-        try:
-            db.execute(text("SELECT 1"))
-            logger.info("Database connection successful")
-        except Exception as conn_error:
-            logger.error(f"Database connection failed: {str(conn_error)}")
-            raise HTTPException(
-                status_code=500,
-                detail=f"Database connection failed: {str(conn_error)}"
-            )
-
-        if force:
-            logger.info("Force flag is true, dropping existing tables")
-            try:
-                with engine.connect() as connection:
-                    # Drop tables in correct order due to foreign key constraints
-                    connection.execute(text("DROP TABLE IF EXISTS time_entries CASCADE"))
-                    connection.execute(text("DROP TABLE IF EXISTS projects CASCADE"))
-                    connection.execute(text("DROP TABLE IF EXISTS project_managers CASCADE"))
-                    connection.execute(text("DROP TABLE IF EXISTS customers CASCADE"))
-                    connection.execute(text("DROP TABLE IF EXISTS alembic_version"))
-                    connection.commit()
-                logger.info("Existing tables dropped successfully")
-            except Exception as e:
-                logger.error(f"Error dropping tables: {str(e)}")
-                raise HTTPException(status_code=500, detail=f"Error dropping tables: {str(e)}")
-
-        logger.info("Loading Alembic configuration")
-        from alembic import command
-        from alembic.config import Config
-
-        alembic_cfg = Config("alembic.ini")
-        alembic_cfg.set_main_option("sqlalchemy.url", os.environ["DATABASE_URL"])
-
-        try:
-            logger.info("Starting migration process")
-            command.upgrade(alembic_cfg, "head")
-            logger.info("Migration completed successfully")
-        except Exception as migration_error:
-            logger.error(f"Migration failed: {str(migration_error)}")
-            logger.exception("Migration stack trace:")
-            raise HTTPException(
-                status_code=500,
-                detail=f"Migration failed: {str(migration_error)}"
-            )
-
-        # Verify database state after migration
-        logger.info("Verifying database state after migration")
-        with engine.connect() as connection:
-            inspector = inspect(engine)
-            tables = ['customers', 'project_managers', 'projects', 'time_entries']
-            missing_tables = []
-
-            for table in tables:
-                if not inspector.has_table(table):
-                    missing_tables.append(table)
-                    logger.warning(f"Table {table} not found")
-                else:
-                    logger.info(f"Table {table} exists")
-                    # Verify columns in time_entries table
-                    if table == 'time_entries':
-                        columns = [col['name'] for col in inspector.get_columns(table)]
-                        logger.info(f"Columns in time_entries: {columns}")
-                        if 'date' not in columns:
-                            missing_tables.append('time_entries (missing date column)')
-
-            if missing_tables:
-                error_msg = f"Tables missing after migration: {', '.join(missing_tables)}"
-                logger.error(error_msg)
-                raise HTTPException(status_code=500, detail=error_msg)
-
-        logger.info("Database initialization completed successfully")
-        return {
-            "status": "success",
-            "message": "Database initialized and verified",
-            "details": {
-                "tables_created": tables
-            }
-        }
-    except HTTPException:
-        raise
-    except Exception as e:
-        error_msg = f"Database initialization failed: {str(e)}"
-        logger.error(error_msg)
-        logger.exception("Initialization error stack trace:")
-        raise HTTPException(status_code=500, detail=error_msg)
+    from services.database_service import DatabaseService
+    service = DatabaseService(db)
+    return await service.initialize_database(force)
 
 @app.post("/time-entries/", response_model=schemas.TimeEntry)
 def create_time_entry(entry: schemas.TimeEntryCreate, db: Session = Depends(get_db)):
