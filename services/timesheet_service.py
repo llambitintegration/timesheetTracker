@@ -86,19 +86,6 @@ class TimesheetService:
                     detail="No valid entries found in the file"
                 )
 
-            return {
-                "message": f"Successfully imported {len(entries)} entries",
-                "entries": [self._serialize_time_entry(entry) for entry in entries],
-                "validation_errors": []
-            }
-
-            if not entries:
-                logger.warning("No valid entries found in file")
-                raise HTTPException(
-                    status_code=400,
-                    detail="No valid entries found in the file"
-                )
-
             logger.info(f"Processing {len(entries)} entries")
             validated_entries, db_validation_errors = validate_database_references(self.db, entries)
             validation_errors.extend(db_validation_errors)
@@ -170,6 +157,9 @@ class TimesheetService:
                     'hours': hours,
                     'date': pd.to_datetime(row['Date']).date()
                 }
+                customer = entry_dict.get('customer')
+                if customer == '-' or not customer:
+                    entry_dict['customer'] = None
                 valid_entries.append(schemas.TimeEntryCreate(**entry_dict))
             except Exception as e:
                 logger.error(f"Error processing row {idx + 1}: {str(e)}")

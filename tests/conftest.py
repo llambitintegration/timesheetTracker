@@ -14,14 +14,20 @@ TEST_DATABASE_URL = "sqlite:///./test.db"
 @pytest.fixture(scope="session")
 def test_engine():
     """Create test database engine"""
+    if os.path.exists("./test.db"):
+        os.remove("./test.db")
+    
     engine = create_engine(
         TEST_DATABASE_URL,
-        connect_args={"timeout": 60},  # Increase timeout
-        pool_pre_ping=True,  # Check connection before using
-        pool_recycle=3600   # Recycle connections after an hour
+        connect_args={"timeout": 60}
     )
+    
+    # Import all models to ensure they're registered
+    from models import TimeEntry, Customer, Project, ProjectManager
     Base.metadata.create_all(bind=engine)
+    
     yield engine
+    
     Base.metadata.drop_all(bind=engine)
     if os.path.exists("./test.db"):
         os.remove("./test.db")

@@ -14,12 +14,15 @@ DEFAULT_PROJECT = "Unassigned"
 DEFAULT_PROJECT_MANAGER = "Unassigned"
 
 def normalize_customer_name(name: Optional[str]) -> Optional[str]:
-    """Normalize customer name for database lookup.
-    Returns None for invalid/empty values, preserving None in database."""
-    if name is None or str(name).strip().lower() in ['', 'none', 'null', 'na', '-']:
-        logger.debug("Converting empty/invalid customer name to None")
-        return None
-    return str(name).strip()
+    """Normalize customer name, handling empty and dash values"""
+    if not name:
+        return DEFAULT_CUSTOMER
+
+    name = name.strip()
+    if name == '-':
+        return DEFAULT_CUSTOMER
+
+    return name
 
 def normalize_project_id(project_id: Optional[str]) -> str:
     """Normalize project ID for database lookup.
@@ -102,7 +105,7 @@ def ensure_default_customer(db: Session) -> Optional[Customer]:
         default_customer = db.query(Customer).filter(
             Customer.name.in_([DEFAULT_CUSTOMER, "-"])
         ).first()
-        
+
         if not default_customer:
             # Create both default entries to handle both cases
             default_customer = Customer(
@@ -111,17 +114,17 @@ def ensure_default_customer(db: Session) -> Optional[Customer]:
                 status="active"
             )
             db.add(default_customer)
-            
+
             dash_customer = Customer(
                 name="-",
                 contact_email="unassigned@company.com",
                 status="active"
             )
             db.add(dash_customer)
-            
+
             db.flush()
             logger.info("Created default customers")
-            
+
         return default_customer
     except IntegrityError as e:
         logger.warning(f"Default customer exists: {str(e)}")
