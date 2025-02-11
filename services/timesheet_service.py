@@ -50,24 +50,51 @@ class TimesheetService:
         """Bulk create time entries in a single transaction"""
         try:
             created_entries = []
+
+            # Process all entries first to ensure customers and projects exist
+            processed_entries = []
             for entry in entries:
+                # Create customer if not exists
                 if not entry.customer or entry.customer == '-':
                     entry.customer = DEFAULT_CUSTOMER
+                else:
+                    customer = self.customer_repo.get_by_name(self.db, entry.customer)
+                    if not customer:
+                        customer_data = schemas.CustomerCreate(
+                            name=entry.customer,
+                            contact_email=f"{entry.customer.lower().replace(' ', '_')}@example.com",
+                            status="active"
+                        )
+                        customer = self.customer_repo.create(self.db, customer_data)
+                        logger.info(f"Created new customer: {customer.name}")
+
+                # Create project if not exists
                 if not entry.project or entry.project == '-':
                     entry.project = DEFAULT_PROJECT
+                else:
+                    project = self.project_repo.get_by_project_id(self.db, entry.project)
+                    if not project:
+                        project_data = schemas.ProjectCreate(
+                            project_id=entry.project,
+                            name=entry.project,
+                            customer=entry.customer,
+                            status="active"
+                        )
+                        project = self.project_repo.create(self.db, project_data)
+                        logger.info(f"Created new project: {project.project_id} for customer: {entry.customer}")
 
-            # Create TimeEntry instances from the validated entries
-            db_entries = [
-                TimeEntry(**{k: v for k, v in entry.model_dump().items() if k not in {'id', 'created_at', 'updated_at'}})
-                for entry in entries
-            ]
+                processed_entries.append(entry)
 
-            # Add all entries in a single batch
-            self.db.add_all(db_entries)
+            # Now create all time entries
+            for entry in processed_entries:
+                entry_dict = {k: v for k, v in entry.model_dump().items() if k not in {'id', 'created_at', 'updated_at'}}
+                db_entry = TimeEntry(**entry_dict)
+                self.db.add(db_entry)
+                created_entries.append(db_entry)
+
             self.db.commit()
+            return [self._serialize_time_entry(entry) for entry in created_entries]
 
-            # Serialize all entries after successful commit
-            return [self._serialize_time_entry(entry) for entry in db_entries]
         except Exception as e:
             logger.error(f"Error during bulk creation: {str(e)}")
             self.db.rollback()
@@ -120,26 +147,6 @@ class TimesheetService:
             logger.error(f"Error ensuring project exists: {str(e)}")
             return DEFAULT_PROJECT
 
-    def _preprocess_entries(self, entries: List[schemas.TimeEntryCreate]) -> List[schemas.TimeEntryCreate]:
-        """Preprocess entries to ensure customers and projects exist."""
-        processed_entries = []
-        for entry in entries:
-            # Ensure customer exists
-            customer_name = self._ensure_customer_exists(entry.customer)
-
-            # Ensure project exists with correct customer association
-            project_id = self._ensure_project_exists(entry.project, customer_name)
-
-            # Update entry with validated customer and project
-            entry_dict = entry.model_dump()
-            entry_dict.update({
-                'customer': customer_name,
-                'project': project_id
-            })
-            processed_entries.append(schemas.TimeEntryCreate(**entry_dict))
-
-        return processed_entries
-
     async def upload_timesheet(self, file: UploadFile) -> Dict[str, Any]:
         """Upload and process timesheet file with bulk upload support"""
         logger.info(f"Processing timesheet upload: {file.filename}")
@@ -178,11 +185,8 @@ class TimesheetService:
                 ) for entry in entries
             ]
 
-            # Preprocess entries to ensure customers and projects exist
-            processed_entries = self._preprocess_entries(entry_creates)
-
-            # Validate the processed entries
-            validated_entries, db_validation_errors = validate_database_references(self.db, processed_entries)
+            # Validate the entries before bulk creation
+            validated_entries, db_validation_errors = validate_database_references(self.db, entry_creates)
             validation_errors.extend(db_validation_errors)
 
             if not validated_entries:

@@ -5,17 +5,18 @@ rootdir: /home/runner/workspace
 configfile: pyproject.toml
 plugins: anyio-4.7.0, asyncio-0.25.2, cov-6.0.0
 asyncio: mode=Mode.STRICT, asyncio_default_fixture_loop_scope=None
-collecting ... collected 7 items / 6 deselected / 1 selected
-run-last-failure: rerun previous 1 failure (skipped 9 files)
+collecting ... collected 8 items / 6 deselected / 2 selected
+run-last-failure: rerun previous 2 failures (skipped 8 files)
 
-tests/test_file_upload.py::test_upload_excel_creates_customers_and_projects FAILED [100%]
+tests/test_file_upload.py::test_upload_excel_creates_customers_and_projects FAILED [ 50%]
+tests/test_time_entry.py::test_create_time_entry_customer_mismatch FAILED [100%]
 
 =================================== FAILURES ===================================
 _______________ test_upload_excel_creates_customers_and_projects _______________
 
-client = <starlette.testclient.TestClient object at 0x7f0cc73335d0>
-setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7f0cc6f9ed90>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
-tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-87/test_upload_excel_creates_cust0')
+client = <starlette.testclient.TestClient object at 0x7ff424be74d0>
+setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7ff424bc9890>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
+tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-90/test_upload_excel_creates_cust0')
 
     def test_upload_excel_creates_customers_and_projects(client, setup_test_data, tmp_path):
         """Test that uploading Excel file creates new customers and projects as needed"""
@@ -49,43 +50,95 @@ E         + Unassigned
 
 tests/test_file_upload.py:187: AssertionError
 ----------------------------- Captured stdout call -----------------------------
-{"timestamp": "2025-02-11T21:33:03.269219", "level": "INFO", "correlation_id": "2af02245-3efb-4e1f-afce-a96ab3bc6cf7", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "2af02245-3efb-4e1f-afce-a96ab3bc6cf7", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5341", "content-type": "multipart/form-data; boundary=aa8092ce9bef54f5e95e3b45b41a822e"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
-{"timestamp": "2025-02-11T21:33:03.272623", "level": "INFO", "correlation_id": "2af02245-3efb-4e1f-afce-a96ab3bc6cf7", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
-{"timestamp": "2025-02-11T21:33:03.273026", "level": "DEBUG", "correlation_id": "2af02245-3efb-4e1f-afce-a96ab3bc6cf7", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
-{"timestamp": "2025-02-11T21:33:03.273260", "level": "DEBUG", "correlation_id": "2af02245-3efb-4e1f-afce-a96ab3bc6cf7", "logger": "TimesheetTracker", "message": "TimesheetService initialized", "context": {}}
-{"timestamp": "2025-02-11T21:33:03.273553", "level": "INFO", "correlation_id": "2af02245-3efb-4e1f-afce-a96ab3bc6cf7", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
-{"timestamp": "2025-02-11T21:33:03.273857", "level": "DEBUG", "correlation_id": "2af02245-3efb-4e1f-afce-a96ab3bc6cf7", "logger": "TimesheetTracker", "message": "Starting Excel file analysis", "context": {}}
-{"timestamp": "2025-02-11T21:33:03.289287", "level": "INFO", "correlation_id": "2af02245-3efb-4e1f-afce-a96ab3bc6cf7", "logger": "TimesheetTracker", "message": "Successfully parsed 1 records from Excel file", "context": {}}
-{"timestamp": "2025-02-11T21:33:03.321555", "level": "INFO", "correlation_id": "2af02245-3efb-4e1f-afce-a96ab3bc6cf7", "logger": "TimesheetTracker", "message": "Processing 1 entries", "context": {}}
-{"timestamp": "2025-02-11T21:33:03.324237", "level": "ERROR", "correlation_id": "2af02245-3efb-4e1f-afce-a96ab3bc6cf7", "logger": "TimesheetTracker", "message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "context": {}}
-{"timestamp": "2025-02-11T21:33:03.324550", "level": "DEBUG", "correlation_id": "2af02245-3efb-4e1f-afce-a96ab3bc6cf7", "logger": "TimesheetTracker", "message": "Fetching project with ID: NEW_PROJECT", "context": {}}
-{"timestamp": "2025-02-11T21:33:03.326504", "level": "DEBUG", "correlation_id": "2af02245-3efb-4e1f-afce-a96ab3bc6cf7", "logger": "TimesheetTracker", "message": "Creating new project with data: project_id='NEW_PROJECT' name='NEW_PROJECT' description=None customer='Unassigned' project_manager=None status='active'", "context": {}}
-{"timestamp": "2025-02-11T21:33:03.326814", "level": "ERROR", "correlation_id": "2af02245-3efb-4e1f-afce-a96ab3bc6cf7", "logger": "TimesheetTracker", "message": "Error creating project: 'ProjectCreate' object is not subscriptable", "context": {}}
-{"timestamp": "2025-02-11T21:33:03.327318", "level": "ERROR", "correlation_id": "2af02245-3efb-4e1f-afce-a96ab3bc6cf7", "logger": "TimesheetTracker", "message": "Error ensuring project exists: 'ProjectCreate' object is not subscriptable", "context": {}}
-{"timestamp": "2025-02-11T21:33:03.327567", "level": "DEBUG", "correlation_id": "2af02245-3efb-4e1f-afce-a96ab3bc6cf7", "logger": "TimesheetTracker", "message": "Starting database reference validation", "context": {}}
-{"timestamp": "2025-02-11T21:33:03.327739", "level": "DEBUG", "correlation_id": "2af02245-3efb-4e1f-afce-a96ab3bc6cf7", "logger": "TimesheetTracker", "message": "Processed entry: customer=Unassigned, project=Unassigned", "context": {}}
-{"timestamp": "2025-02-11T21:33:03.353170", "level": "INFO", "correlation_id": "2af02245-3efb-4e1f-afce-a96ab3bc6cf7", "logger": "TimesheetTracker", "message": "Successfully created 1 time entries in bulk", "context": {}}
-{"timestamp": "2025-02-11T21:33:03.354465", "level": "WARNING", "correlation_id": "2af02245-3efb-4e1f-afce-a96ab3bc6cf7", "logger": "TimesheetTracker", "message": "Request failed with status 201", "context": {"correlation_id": "2af02245-3efb-4e1f-afce-a96ab3bc6cf7", "status_code": 201, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "85.21", "response_headers": {"content-length": "292", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
-{"timestamp": "2025-02-11T21:33:03.355122", "level": "DEBUG", "correlation_id": "2af02245-3efb-4e1f-afce-a96ab3bc6cf7", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 201}}
+{"timestamp": "2025-02-11T22:03:27.537155", "level": "INFO", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5341", "content-type": "multipart/form-data; boundary=be2d460958f8b996c28f3dd6822bcc4f"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+{"timestamp": "2025-02-11T22:03:27.540302", "level": "INFO", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
+{"timestamp": "2025-02-11T22:03:27.540589", "level": "DEBUG", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
+{"timestamp": "2025-02-11T22:03:27.541154", "level": "DEBUG", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "TimesheetService initialized", "context": {}}
+{"timestamp": "2025-02-11T22:03:27.541444", "level": "INFO", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
+{"timestamp": "2025-02-11T22:03:27.541677", "level": "DEBUG", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "Starting Excel file analysis", "context": {}}
+{"timestamp": "2025-02-11T22:03:27.562973", "level": "INFO", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "Successfully parsed 1 records from Excel file", "context": {}}
+{"timestamp": "2025-02-11T22:03:27.621725", "level": "INFO", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "Processing 1 entries", "context": {}}
+{"timestamp": "2025-02-11T22:03:27.625396", "level": "ERROR", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "context": {}}
+{"timestamp": "2025-02-11T22:03:27.625707", "level": "DEBUG", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "Fetching project with ID: NEW_PROJECT", "context": {}}
+{"timestamp": "2025-02-11T22:03:27.629506", "level": "DEBUG", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "Creating new project with data: project_id='NEW_PROJECT' name='NEW_PROJECT' description=None customer='Unassigned' project_manager=None status='active'", "context": {}}
+{"timestamp": "2025-02-11T22:03:27.630107", "level": "ERROR", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "Error creating project: 'ProjectCreate' object is not subscriptable", "context": {}}
+{"timestamp": "2025-02-11T22:03:27.630895", "level": "ERROR", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "Error ensuring project exists: 'ProjectCreate' object is not subscriptable", "context": {}}
+{"timestamp": "2025-02-11T22:03:27.631239", "level": "DEBUG", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "Starting database reference validation", "context": {}}
+{"timestamp": "2025-02-11T22:03:27.631565", "level": "DEBUG", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "Processed entry: customer=Unassigned, project=Unassigned", "context": {}}
+{"timestamp": "2025-02-11T22:03:27.663319", "level": "INFO", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "Successfully created 1 time entries in bulk", "context": {}}
+{"timestamp": "2025-02-11T22:03:27.664387", "level": "WARNING", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "Request failed with status 201", "context": {"correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "status_code": 201, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "127.40", "response_headers": {"content-length": "292", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+{"timestamp": "2025-02-11T22:03:27.665213", "level": "DEBUG", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 201}}
 ------------------------------ Captured log call -------------------------------
-INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T21:33:03.269394", "context": {"correlation_id": "2af02245-3efb-4e1f-afce-a96ab3bc6cf7", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5341", "content-type": "multipart/form-data; boundary=aa8092ce9bef54f5e95e3b45b41a822e"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T21:33:03.272789", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T21:33:03.273121", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "TimesheetService initialized", "timestamp": "2025-02-11T21:33:03.273389", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T21:33:03.273642", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting Excel file analysis", "timestamp": "2025-02-11T21:33:03.273950", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 1 records from Excel file", "timestamp": "2025-02-11T21:33:03.289564", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Processing 1 entries", "timestamp": "2025-02-11T21:33:03.321680", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "timestamp": "2025-02-11T21:33:03.324353", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Fetching project with ID: NEW_PROJECT", "timestamp": "2025-02-11T21:33:03.324631", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Creating new project with data: project_id='NEW_PROJECT' name='NEW_PROJECT' description=None customer='Unassigned' project_manager=None status='active'", "timestamp": "2025-02-11T21:33:03.326609", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error creating project: 'ProjectCreate' object is not subscriptable", "timestamp": "2025-02-11T21:33:03.326921", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error ensuring project exists: 'ProjectCreate' object is not subscriptable", "timestamp": "2025-02-11T21:33:03.327391", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting database reference validation", "timestamp": "2025-02-11T21:33:03.327642", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Processed entry: customer=Unassigned, project=Unassigned", "timestamp": "2025-02-11T21:33:03.327810", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Successfully created 1 time entries in bulk", "timestamp": "2025-02-11T21:33:03.353303", "context": {}}
-WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 201", "timestamp": "2025-02-11T21:33:03.354685", "context": {"correlation_id": "2af02245-3efb-4e1f-afce-a96ab3bc6cf7", "status_code": 201, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "85.21", "response_headers": {"content-length": "292", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
-DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T21:33:03.355249", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 201}}
+INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T22:03:27.537362", "context": {"correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5341", "content-type": "multipart/form-data; boundary=be2d460958f8b996c28f3dd6822bcc4f"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T22:03:27.540388", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T22:03:27.540756", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "TimesheetService initialized", "timestamp": "2025-02-11T22:03:27.541217", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T22:03:27.541540", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting Excel file analysis", "timestamp": "2025-02-11T22:03:27.541740", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 1 records from Excel file", "timestamp": "2025-02-11T22:03:27.563146", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing 1 entries", "timestamp": "2025-02-11T22:03:27.621918", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "timestamp": "2025-02-11T22:03:27.625524", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Fetching project with ID: NEW_PROJECT", "timestamp": "2025-02-11T22:03:27.625796", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Creating new project with data: project_id='NEW_PROJECT' name='NEW_PROJECT' description=None customer='Unassigned' project_manager=None status='active'", "timestamp": "2025-02-11T22:03:27.629620", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error creating project: 'ProjectCreate' object is not subscriptable", "timestamp": "2025-02-11T22:03:27.630329", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error ensuring project exists: 'ProjectCreate' object is not subscriptable", "timestamp": "2025-02-11T22:03:27.630988", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting database reference validation", "timestamp": "2025-02-11T22:03:27.631347", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Processed entry: customer=Unassigned, project=Unassigned", "timestamp": "2025-02-11T22:03:27.631673", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Successfully created 1 time entries in bulk", "timestamp": "2025-02-11T22:03:27.663443", "context": {}}
+WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 201", "timestamp": "2025-02-11T22:03:27.664557", "context": {"correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "status_code": 201, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "127.40", "response_headers": {"content-length": "292", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T22:03:27.665319", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 201}}
+___________________ test_create_time_entry_customer_mismatch ___________________
+
+db_session = <sqlalchemy.orm.session.Session object at 0x7ff42479a450>
+setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7ff424723f50>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
+
+    def test_create_time_entry_customer_mismatch(db_session, setup_test_data):
+        """Test creating a time entry with mismatched customer-project relationship"""
+        service = TimeEntryService(db_session)
+        entry = TimeEntryCreate(
+            category="Development",
+            subcategory="Coding",
+            customer="ECOLAB",  # Existing customer
+            project="NonMatchingProject",  # Project not belonging to this customer
+            task_description="Testing customer-project mismatch",
+            hours=8.0,
+            date=date(2024, 1, 1)
+        )
+    
+        result = service.create_time_entry(entry)
+        assert result is not None
+>       assert result.customer == DEFAULT_CUSTOMER  # Should fall back to default
+E       AssertionError: assert 'ECOLAB' == 'Unassigned'
+E         
+E         - Unassigned
+E         + ECOLAB
+
+tests/test_time_entry.py:156: AssertionError
+----------------------------- Captured stdout call -----------------------------
+{"timestamp": "2025-02-11T22:03:30.450912", "level": "DEBUG", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
+{"timestamp": "2025-02-11T22:03:30.451307", "level": "DEBUG", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "TimeEntryService initialized with database session", "context": {}}
+{"timestamp": "2025-02-11T22:03:30.451700", "level": "DEBUG", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "Starting creation of time entry with data: {'category': 'Development', 'subcategory': 'Coding', 'customer': 'ECOLAB', 'project': 'NonMatchingProject', 'task_description': 'Testing customer-project mismatch', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}", "context": {}}
+{"timestamp": "2025-02-11T22:03:30.453361", "level": "DEBUG", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "Fetching project with ID: NonMatchingProject", "context": {}}
+{"timestamp": "2025-02-11T22:03:30.454337", "level": "DEBUG", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "Creating new project with data: project_id='NonMatchingProject' name='NonMatchingProject' description=None customer='ECOLAB' project_manager=None status='active'", "context": {}}
+{"timestamp": "2025-02-11T22:03:30.454693", "level": "ERROR", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "Error creating project: 'ProjectCreate' object is not subscriptable", "context": {}}
+{"timestamp": "2025-02-11T22:03:30.455221", "level": "ERROR", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "Error ensuring project exists: 'ProjectCreate' object is not subscriptable", "context": {}}
+{"timestamp": "2025-02-11T22:03:30.456871", "level": "DEBUG", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "Adding entry to database session", "context": {}}
+{"timestamp": "2025-02-11T22:03:30.457271", "level": "DEBUG", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "Committing transaction", "context": {}}
+{"timestamp": "2025-02-11T22:03:30.511878", "level": "DEBUG", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "Refreshing database entry", "context": {}}
+{"timestamp": "2025-02-11T22:03:30.513110", "level": "INFO", "correlation_id": "23aed571-c693-4df8-b023-c32db73a65bc", "logger": "TimesheetTracker", "message": "Successfully created time entry for ECOLAB - Unassigned", "context": {}}
+------------------------------ Captured log call -------------------------------
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T22:03:30.451064", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "TimeEntryService initialized with database session", "timestamp": "2025-02-11T22:03:30.451418", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting creation of time entry with data: {'category': 'Development', 'subcategory': 'Coding', 'customer': 'ECOLAB', 'project': 'NonMatchingProject', 'task_description': 'Testing customer-project mismatch', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}", "timestamp": "2025-02-11T22:03:30.451783", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Fetching project with ID: NonMatchingProject", "timestamp": "2025-02-11T22:03:30.453463", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Creating new project with data: project_id='NonMatchingProject' name='NonMatchingProject' description=None customer='ECOLAB' project_manager=None status='active'", "timestamp": "2025-02-11T22:03:30.454468", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error creating project: 'ProjectCreate' object is not subscriptable", "timestamp": "2025-02-11T22:03:30.454782", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error ensuring project exists: 'ProjectCreate' object is not subscriptable", "timestamp": "2025-02-11T22:03:30.455316", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Adding entry to database session", "timestamp": "2025-02-11T22:03:30.456967", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Committing transaction", "timestamp": "2025-02-11T22:03:30.457370", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Refreshing database entry", "timestamp": "2025-02-11T22:03:30.511992", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Successfully created time entry for ECOLAB - Unassigned", "timestamp": "2025-02-11T22:03:30.513209", "context": {}}
 =========================== short test summary info ============================
 FAILED tests/test_file_upload.py::test_upload_excel_creates_customers_and_projects
-======================= 1 failed, 6 deselected in 7.80s ========================
+FAILED tests/test_time_entry.py::test_create_time_entry_customer_mismatch - A...
+======================= 2 failed, 6 deselected in 3.67s ========================
