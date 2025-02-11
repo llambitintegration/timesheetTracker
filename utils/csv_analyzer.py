@@ -50,10 +50,13 @@ def analyze_timesheet_csv(file_path: str) -> Dict:
         raise
 
 def parse_raw_csv(file) -> Optional[pd.DataFrame]:
-    """Parse raw CSV file into DataFrame without validation."""
+    """Parse raw CSV or tab-delimited file into DataFrame without validation."""
     try:
-        logger.info("Starting raw CSV parsing")
+        logger.info("Starting file parsing")
         required_columns = ['Date', 'Week Number', 'Month', 'Category', 'Subcategory', 'Customer', 'Project', 'Task Description', 'Hours']
+        
+        file_ext = getattr(file, 'name', '').lower()
+        is_txt = file_ext.endswith('.txt')
         
         df = pd.read_csv(
             file,
@@ -63,7 +66,9 @@ def parse_raw_csv(file) -> Optional[pd.DataFrame]:
             skip_blank_lines=True,
             na_values=['#N/A', '-', ''],
             na_filter=True,
-            on_bad_lines='skip'
+            on_bad_lines='skip',
+            sep='\t' if is_txt else ',',
+            engine='python'
         )
         
         # Remove any completely empty rows and extra columns
