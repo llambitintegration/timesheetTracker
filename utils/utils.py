@@ -107,10 +107,9 @@ def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     logger.debug(f"Cleaned DataFrame has {len(df)} rows")
     return df
 
-# Added import for schemas -  assuming a schemas module exists.  Adjust as needed.
-import schemas # Placeholder - Replace with actual import path
+from database import schemas
 
-DEFAULT_CUSTOMER = "Default Customer" # Added default values
+DEFAULT_CUSTOMER = "Default Customer"
 DEFAULT_PROJECT = "Default Project"
 
 def parse_csv(file) -> List:
