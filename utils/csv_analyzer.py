@@ -66,9 +66,10 @@ def parse_raw_csv(file) -> Optional[pd.DataFrame]:
             skip_blank_lines=True,
             na_values=['#N/A', '-', ''],
             na_filter=True,
-            on_bad_lines='skip',
-            sep='\t' if is_txt else ',',
-            engine='python'
+            on_bad_lines='warn',
+            sep='\t',
+            engine='python',
+            quoting=3  # QUOTE_NONE
         )
         
         # Remove any completely empty rows and extra columns
