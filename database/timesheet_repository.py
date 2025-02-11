@@ -91,10 +91,15 @@ class TimeEntryRepository(BaseRepository[TimeEntry]):
                 task_description = record.get('Task Description')
                 task_description = None if pd.isna(task_description) else task_description
 
+                # Convert date to proper format
+                entry_date = record.get('Date')
+                if isinstance(entry_date, pd.Timestamp):
+                    entry_date = entry_date.date()
+
                 entry_data = schemas.TimeEntryCreate(
-                    date=record['Date'].date() if isinstance(record.get('Date'), pd.Timestamp) else record.get('Date'),
-                    week_number=int(record.get('Week Number',0)), #Handle potential NaN in Week Number
-                    month=record.get('Month', 'Unknown'), #Handle potential NaN in Month
+                    date=entry_date,
+                    week_number=int(record.get('Week Number', 0)), # Handle potential NaN in Week Number
+                    month=record.get('Month', 'Unknown'), # Handle potential NaN in Month
                     category=record.get('Category', 'Other'),
                     subcategory=record.get('Subcategory', 'General'),
                     customer=customer,

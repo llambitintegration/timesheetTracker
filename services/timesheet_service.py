@@ -47,7 +47,7 @@ class TimesheetService:
         try:
             # Prepare all entries first
             db_entries = [
-                TimeEntry(**{k: v for k, v in entry.dict().items() if k not in {'id', 'created_at', 'updated_at'}})
+                TimeEntry(**{k: v for k, v in entry.model_dump().items() if k not in {'id', 'created_at', 'updated_at'}})
                 for entry in entries
             ]
 

@@ -45,29 +45,32 @@ class TimeEntryService:
                 entry_dict['hours'] = 0.0
                 logger.debug("No hours provided, defaulting to 0.0")
 
-            # Validate customer exists and get normalized name
-            customer_name = None
-            if entry_dict.get('customer'):
-                customer = self.customer_repo.get_by_name(self.db, normalize_customer_name(entry_dict['customer']))
-                if customer:
+            # Handle None or empty string values for customer and project
+            customer_name = entry_dict.get('customer')
+            if not customer_name or customer_name == '-':
+                customer_name = DEFAULT_CUSTOMER
+                entry_dict['project'] = DEFAULT_PROJECT
+            else:
+                # Validate customer exists and get normalized name
+                customer = self.customer_repo.get_by_name(self.db, normalize_customer_name(customer_name))
+                if not customer:
+                    logger.info(f"Customer {customer_name} not found, defaulting to {DEFAULT_CUSTOMER}")
+                    customer_name = DEFAULT_CUSTOMER
+                    entry_dict['project'] = DEFAULT_PROJECT
+                else:
                     customer_name = customer.name
-                else:
-                    logger.info(f"Customer {entry_dict['customer']} not found, defaulting to {DEFAULT_CUSTOMER}")
+                    # Validate project exists and belongs to customer
+                    project_id = entry_dict.get('project')
+                    if project_id and project_id != '-':
+                        normalized_project_id = normalize_project_id(project_id)
+                        project = self.project_repo.get_by_project_id(self.db, normalized_project_id)
+                        if not project or project.customer != customer_name:
+                            logger.info(f"Project {project_id} not found or doesn't belong to customer, defaulting both customer and project to defaults")
+                            customer_name = DEFAULT_CUSTOMER
+                            entry_dict['project'] = DEFAULT_PROJECT
 
-            # Validate project exists and belongs to customer
-            project_id = None
-            if entry_dict.get('project') and customer_name:
-                normalized_project_id = normalize_project_id(entry_dict['project'])
-                project = self.project_repo.get_by_project_id(self.db, normalized_project_id)
-                if project and project.customer == customer_name:
-                    project_id = project.project_id
-                else:
-                    logger.info(f"Project {entry_dict['project']} not found or doesn't belong to customer, defaulting both customer and project to defaults")
-                    customer_name = None  # Reset customer name to trigger default
-
-            # Set defaults for missing/invalid values
-            entry_dict['customer'] = customer_name or DEFAULT_CUSTOMER
-            entry_dict['project'] = project_id or DEFAULT_PROJECT
+            # Set final customer value
+            entry_dict['customer'] = customer_name
 
             logger.debug("Validating and setting default categories")
             if not entry_dict.get('category'):

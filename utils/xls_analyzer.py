@@ -27,16 +27,6 @@ class XLSAnalyzer:
                 }
             )
 
-            # Set default values for missing columns
-            required_columns = ['Week Number', 'Month', 'Category', 'Subcategory', 
-                              'Customer', 'Project', 'Task Description', 'Date']
-            for col in required_columns:
-                if col not in df.columns:
-                    if col == 'Date':
-                        df[col] = pd.Timestamp.now().date()
-                    else:
-                        df[col] = DEFAULT_CUSTOMER if col == 'Customer' else DEFAULT_PROJECT if col == 'Project' else '-'
-
             # Drop rows where all elements are NaN
             df = df.dropna(how='all')
 
@@ -47,9 +37,9 @@ class XLSAnalyzer:
             # Convert Week Number to numeric, replacing non-numeric with 0
             df['Week Number'] = pd.to_numeric(df['Week Number'], errors='coerce').fillna(0).astype('Int64')
 
-            # Replace dash values with defaults for customer and project
-            df['Customer'] = df['Customer'].replace({'-': DEFAULT_CUSTOMER, None: DEFAULT_CUSTOMER})
-            df['Project'] = df['Project'].replace({'-': DEFAULT_PROJECT, None: DEFAULT_PROJECT})
+            # Replace NaN and dash values with None for customer and project
+            df['Customer'] = df['Customer'].replace({'-': None, 'nan': None}).fillna(None)
+            df['Project'] = df['Project'].replace({'-': None, 'nan': None}).fillna(None)
 
             # Fill missing values appropriately
             df['Task Description'] = df['Task Description'].fillna('')
