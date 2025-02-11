@@ -68,24 +68,55 @@ def validate_month(month):
     return calendar.month_name[datetime.now().month]
 
 def parse_raw_csv(file) -> Optional[pd.DataFrame]:
-    """Parse raw CSV file into DataFrame without validation."""
+    """Parse raw CSV file into DataFrame with enhanced delimiter and quote handling."""
     try:
         logger.info("Starting raw CSV parsing")
-        df = pd.read_csv(file, keep_default_na=False, encoding='utf-8')
-        logger.debug(f"Successfully read CSV with {len(df.columns)} columns")
+        # Try tab delimiter first
+        df = pd.read_csv(
+            file,
+            keep_default_na=False,
+            encoding='utf-8',
+            sep='\t',  # Use tab delimiter
+            quoting=3,  # QUOTE_NONE - disable special handling of quote chars
+            quotechar=None,  # No quote character
+            engine='python'  # Use python engine for better error handling
+        )
+        logger.debug(f"Successfully read tab-delimited file with {len(df.columns)} columns")
         return df
-    except UnicodeDecodeError:
-        try:
-            logger.warning("UTF-8 encoding failed, attempting with ISO-8859-1")
-            df = pd.read_csv(file, keep_default_na=False, encoding='ISO-8859-1')
-            logger.debug(f"Successfully read CSV with ISO-8859-1 encoding")
-            return df
-        except Exception as e:
-            logger.error(f"Failed to parse CSV with ISO-8859-1 encoding: {str(e)}")
-            return None
     except Exception as e:
-        logger.error(f"Failed to parse CSV: {str(e)}")
-        return None
+        logger.warning(f"Failed to parse with tab delimiter: {str(e)}")
+        try:
+            # Fallback to comma delimiter with quote handling
+            df = pd.read_csv(
+                file,
+                keep_default_na=False,
+                encoding='utf-8',
+                quoting=1,  # QUOTE_MINIMAL - quote fields only when needed
+                quotechar='"',
+                engine='python'
+            )
+            logger.debug(f"Successfully read CSV with comma delimiter")
+            return df
+        except UnicodeDecodeError:
+            try:
+                logger.warning("UTF-8 encoding failed, attempting with ISO-8859-1")
+                df = pd.read_csv(
+                    file,
+                    keep_default_na=False,
+                    encoding='ISO-8859-1',
+                    sep='\t',
+                    quoting=3,
+                    quotechar=None,
+                    engine='python'
+                )
+                logger.debug(f"Successfully read file with ISO-8859-1 encoding")
+                return df
+            except Exception as e:
+                logger.error(f"Failed to parse with ISO-8859-1 encoding: {str(e)}")
+                return None
+        except Exception as e:
+            logger.error(f"Failed to parse CSV: {str(e)}")
+            return None
 
 def validate_csv_structure(df: pd.DataFrame) -> bool:
     """Validate CSV structure and required columns."""

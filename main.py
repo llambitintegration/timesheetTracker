@@ -356,16 +356,32 @@ def create_sample_data(db: Session = Depends(get_db)):
 if __name__ == "__main__":
     logger.info("Starting FastAPI server")
     try:
-        port = int(os.getenv('PORT', '8000'))
-        logger.info(f"Server will start on port {port}")
+        # Try different ports if default is in use
+        ports = [8080, 8000, 8888, 9000]
+        started = False
 
-        uvicorn.run(
-            "main:app",
-            host="0.0.0.0",
-            port=port,
-            reload=True,
-            log_level="info"
-        )
+        for port in ports:
+            try:
+                logger.info(f"Attempting to start server on port {port}")
+                uvicorn.run(
+                    "main:app",
+                    host="0.0.0.0",
+                    port=port,
+                    reload=True,
+                    log_level="info"
+                )
+                started = True
+                break
+            except OSError as e:
+                if "Address already in use" in str(e):
+                    logger.warning(f"Port {port} is in use, trying next port")
+                    continue
+                raise
+
+        if not started:
+            logger.error("Could not find an available port")
+            raise RuntimeError("No available ports found")
+
     except Exception as e:
         logger.error(f"Server startup failed: {str(e)}")
         raise
