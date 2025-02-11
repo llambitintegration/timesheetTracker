@@ -10,3 +10,6 @@ class CustomerRepository(BaseRepository[Customer]):
 
     def get_by_name(self, db: Session, name: str) -> Optional[Customer]:
         return db.query(self.model).filter(self.model.name == name).first()
+
+    def get_by_id(self, db: Session, id: int) -> Optional[Customer]:
+        return db.query(self.model).filter(self.model.id == id).first()
