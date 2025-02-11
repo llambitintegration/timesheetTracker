@@ -90,9 +90,11 @@ class ProjectService:
             # Convert pydantic model to dict and create project
             project_data = project.model_dump()
             project_data['customer'] = customer_name
+            project_data['project_manager'] = project_data.get('project_manager') or '-'
 
             logger.debug(f"Creating new project with data: {project_data}")
             created_project = self.project_repo.create(self.db, project_data)
+            self.db.refresh(created_project)
 
             logger.info(f"Successfully created project: {created_project.project_id}")
             return created_project

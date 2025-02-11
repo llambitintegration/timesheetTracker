@@ -37,7 +37,8 @@ class TimeEntryService:
                     contact_email=f"{normalized_name.lower().replace(' ', '_')}@example.com",
                     status="active"
                 )
-                self.customer_repo.create(self.db, customer_data)
+                new_customer = self.customer_repo.create(self.db, customer_data.model_dump())
+                self.db.refresh(new_customer)
                 logger.info(f"Created new customer: {normalized_name}")
             return normalized_name
         except Exception as e:
