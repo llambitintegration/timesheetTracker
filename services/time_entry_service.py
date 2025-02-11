@@ -66,8 +66,8 @@ class TimeEntryService:
                     customer_name = None  # Reset customer name to trigger default
 
             # Set defaults for missing/invalid values
-            entry_dict['customer'] = customer_name
-            entry_dict['project'] = project_id
+            entry_dict['customer'] = customer_name or DEFAULT_CUSTOMER
+            entry_dict['project'] = project_id or DEFAULT_PROJECT
 
             logger.debug("Validating and setting default categories")
             if not entry_dict.get('category'):
