@@ -53,7 +53,23 @@ def parse_raw_csv(file) -> Optional[pd.DataFrame]:
     """Parse raw CSV file into DataFrame without validation."""
     try:
         logger.info("Starting raw CSV parsing")
-        df = pd.read_csv(file, keep_default_na=False, encoding='utf-8')
+        df = pd.read_csv(
+            file,
+            keep_default_na=False,
+            encoding='utf-8',
+            skip_blank_lines=True,
+            na_values=['#N/A', '-', ''],
+            na_filter=True,
+            on_bad_lines='skip'
+        )
+        # Remove any completely empty rows
+        df = df.dropna(how='all')
+        # Fill NA values with appropriate defaults
+        df = df.fillna({
+            'Customer': 'Unassigned',
+            'Project': 'Unassigned',
+            'Task Description': ''
+        })
         logger.debug(f"Successfully read CSV with {len(df.columns)} columns")
         return df
     except UnicodeDecodeError:
