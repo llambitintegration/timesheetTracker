@@ -1,0 +1,50 @@
+______________________________________________________________________________________ test_dash_customer_handling ______________________________________________________________________________________
+
+client = <starlette.testclient.TestClient object at 0x7f9788f4a390>
+setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7f97880efd90>, <models.customerModel.Customer object at 0x7f...ject_id=Unassigned, name=Unassigned)>, <Project(id=None, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
+tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-42/test_dash_customer_handling0')
+
+    def test_dash_customer_handling(client, setup_test_data, tmp_path):
+        """Test handling of dash (-) values in customer field"""
+        data = {
+            'Category': ['Development'],
+            'Customer': ['-'],
+            'Project': ['-'],
+            'Hours': [8.0],
+            'Date': ['2024-10-07']
+        }
+        excel_file = create_test_excel(tmp_path, data)
+    
+        with open(excel_file, "rb") as f:
+            response = client.post(
+                "/time-entries/upload/",
+                files={"file": ("test.xlsx", f, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
+            )
+    
+        assert response.status_code == 201
+        entries = response.json()["entries"]
+        assert len(entries) == 1
+>       assert entries[0]["customer"] is None
+E       AssertionError: assert 'Unassigned' is None
+
+tests/test_file_upload.py:96: AssertionError
+------------------------------------------------------------------------------------------- Captured log call -------------------------------------------------------------------------------------------
+INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T20:28:55.515230", "context": {"correlation_id": "192b9dae-dc46-4fae-9d43-a710c16f678d", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5237", "content-type": "multipart/form-data; boundary=99d7b721c8461ea8b6f2d251d2be5387"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:28:55.517765", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "TimesheetService initialized", "timestamp": "2025-02-11T20:28:55.518049", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:28:55.518291", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 1 records from Excel file", "timestamp": "2025-02-11T20:28:55.535223", "context": {}}
+WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 201", "timestamp": "2025-02-11T20:28:55.566348", "context": {"correlation_id": "192b9dae-dc46-4fae-9d43-a710c16f678d", "status_code": 201, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "51.30", "response_headers": {"content-length": "317", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T20:28:55.566847", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 201}}
+=========================================================================================== warnings summary ============================================================================================
+.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345
+  /home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345: UserWarning: Valid config keys have changed in V2:
+  * 'orm_mode' has been renamed to 'from_attributes'
+    warnings.warn(message, UserWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================================================================================== short test summary info ========================================================================================
+FAILED tests/test_file_upload.py::test_dash_customer_handling - AssertionError: assert 'Unassigned' is None
+===================================================================================== 1 failed, 1 warning in 0.78s ======================================================================================
+ Environment updated. Reloading shell...
+~/workspace$ 
