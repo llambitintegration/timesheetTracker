@@ -70,6 +70,9 @@ class ProjectService:
         try:
             logger.debug(f"Starting creation of project with data: {project.model_dump()}")
 
+            # Ensure default project manager exists
+            ensure_default_project_manager(self.db)
+            
             # Normalize and validate customer
             customer_name = self._ensure_customer_exists(project.customer)
             if customer_name == DEFAULT_CUSTOMER and project.customer != DEFAULT_CUSTOMER:
