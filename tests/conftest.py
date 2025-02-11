@@ -69,6 +69,7 @@ def setup_test_data(db_session):
     from models.customerModel import Customer
     from models.projectModel import Project
     from models.projectManagerModel import ProjectManager
+    from models.timeEntry import TimeEntry #Added import for TimeEntry model
 
     # Create test customers
     customers = [
