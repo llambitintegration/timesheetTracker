@@ -63,18 +63,18 @@ class XLSAnalyzer:
             # Convert to records
             records = []
             for _, row in df.iterrows():
-                record = {
-                    'Week Number': int(row['Week Number']),
-                    'Month': str(row['Month']),
-                    'Category': str(row['Category']),
-                    'Subcategory': str(row['Subcategory']),
-                    'Customer': DEFAULT_CUSTOMER if row['Customer'] in ['-', '', None] else str(row['Customer']),
-                    'Project': DEFAULT_PROJECT if row['Project'] in ['-', '', None] else str(row['Project']),
-                    'Task Description': str(row['Task Description']),
-                    'Hours': float(row['Hours']),
-                    'Date': row['Date'].strftime('%Y-%m-%d') if pd.notnull(row['Date']) else None
-                }
-                if record['Date'] is not None:  # Only include records with valid dates
+                if pd.notnull(row['Date']):  # Only include records with valid dates
+                    record = {
+                        'Week Number': int(row['Week Number']),
+                        'Month': str(row['Month']),
+                        'Category': str(row['Category']),
+                        'Subcategory': str(row['Subcategory']),
+                        'Customer': DEFAULT_CUSTOMER if str(row['Customer']).strip() in ['-', '', 'nan', 'None'] else str(row['Customer']),
+                        'Project': DEFAULT_PROJECT if str(row['Project']).strip() in ['-', '', 'nan', 'None'] else str(row['Project']),
+                        'Task Description': str(row['Task Description']),
+                        'Hours': float(row['Hours']),
+                        'Date': row['Date'].strftime('%Y-%m-%d')
+                    }
                     records.append(record)
 
             logger.info(f"Successfully parsed {len(records)} records from Excel file")

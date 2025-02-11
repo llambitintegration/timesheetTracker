@@ -97,8 +97,14 @@ class TimeEntryRepository(BaseRepository[TimeEntry]):
             for record in records:
                 if not pd.isna(record.get('Date')):  # Only process records with valid dates
                     # Normalize customer and project names
-                    customer = normalize_customer_name(record.get('Customer', DEFAULT_CUSTOMER))
-                    project = normalize_project_id(record.get('Project', DEFAULT_PROJECT))
+                    customer = normalize_customer_name(record.get('Customer', DEFAULT_CUSTOMER)) or DEFAULT_CUSTOMER
+                    project = normalize_project_id(record.get('Project', DEFAULT_PROJECT)) or DEFAULT_PROJECT
+
+                    # Handle dash values
+                    if customer == '-':
+                        customer = DEFAULT_CUSTOMER
+                    if project == '-':
+                        project = DEFAULT_PROJECT
 
                     entry_data = schemas.TimeEntryCreate(
                         date=record.get('Date'),

@@ -19,10 +19,15 @@ class TimeEntryService:
     def _ensure_customer_exists(self, customer_name: str) -> str:
         """Ensure customer exists, create if not. Return normalized customer name."""
         if not customer_name or customer_name == '-':
+            logger.debug("No customer name or dash provided, using default")
             return DEFAULT_CUSTOMER
 
         try:
             normalized_name = normalize_customer_name(customer_name)
+            if not normalized_name:
+                logger.warning("Customer name normalization failed, using default")
+                return DEFAULT_CUSTOMER
+
             # Check if customer exists
             existing = self.customer_repo.get_by_name(self.db, normalized_name)
             if not existing:
@@ -42,13 +47,17 @@ class TimeEntryService:
     def _ensure_project_exists(self, project_id: str, customer_name: str) -> str:
         """Ensure project exists, create if not. Return normalized project ID."""
         if not project_id or project_id == '-':
+            logger.debug("No project ID or dash provided, using default")
             return DEFAULT_PROJECT
 
         try:
             normalized_id = normalize_project_id(project_id)
+            if not normalized_id:
+                logger.warning("Project ID normalization failed, using default")
+                return DEFAULT_PROJECT
+
             # Check if project exists
             existing = self.project_repo.get_by_project_id(self.db, normalized_id)
-
             if existing:
                 # Verify project belongs to customer
                 if existing.customer != customer_name:
@@ -64,9 +73,10 @@ class TimeEntryService:
                         project_id=normalized_id,
                         name=normalized_id,
                         customer=customer_name,
+                        project_manager='-',  # Explicitly set default project manager
                         status="active"
                     )
-                    created = self.project_repo.create(self.db, project_data)
+                    self.project_repo.create(self.db, project_data)
                     logger.info(f"Created new project: {normalized_id} for customer: {customer_name}")
                     return normalized_id
                 except Exception as e:

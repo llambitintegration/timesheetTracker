@@ -69,21 +69,16 @@ class ProjectService:
         try:
             logger.debug(f"Starting creation of project with data: {project.model_dump()}")
 
-            # Project manager is required and must exist
-            if not project.project_manager:
-                logger.error("Project manager is required")
-                raise ValueError("Project manager is required for project creation")
-
-            # Verify project manager exists before proceeding
-            if not self._ensure_project_manager_exists(project.project_manager):
-                logger.error(f"Project manager does not exist: {project.project_manager}")
-                raise ValueError(f"Project manager not found: {project.project_manager}")
-
             # Normalize and validate customer
             customer_name = self._ensure_customer_exists(project.customer)
             if customer_name == DEFAULT_CUSTOMER and project.customer != DEFAULT_CUSTOMER:
                 logger.error(f"Failed to ensure customer exists: {project.customer}")
                 raise ValueError(f"Could not create or verify customer: {project.customer}")
+
+            # Set default project manager if not provided
+            if not project.project_manager:
+                project.project_manager = '-'
+                logger.debug("No project manager specified, using default '-'")
 
             # Check if project already exists
             existing_project = self.project_repo.get_by_project_id(self.db, project.project_id)
@@ -91,8 +86,8 @@ class ProjectService:
                 logger.warning(f"Project with ID {project.project_id} already exists")
                 raise ValueError(f"Project with ID {project.project_id} already exists")
 
-            # Convert pydantic model to dict
-            project_data = project.to_dict()
+            # Convert pydantic model to dict and create project
+            project_data = project.model_dump()
             project_data['customer'] = customer_name
 
             logger.debug(f"Creating new project with data: {project_data}")
