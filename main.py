@@ -267,8 +267,21 @@ async def upload_timesheet(
     """Upload and process timesheet file"""
     logger.info(f"Processing timesheet upload: {file.filename}")
 
-    if not file.filename:
+    if not file or not file.filename:
         raise HTTPException(status_code=400, detail="No file provided")
+
+    # Check file size (10MB limit)
+    MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
+    file_size = 0
+    contents = await file.read()
+    file_size = len(contents)
+    await file.seek(0)  # Reset file pointer
+
+    if file_size > MAX_FILE_SIZE:
+        raise HTTPException(status_code=400, detail="File size exceeds 10MB limit")
+
+    if file_size == 0:
+        raise HTTPException(status_code=400, detail="File is empty")
 
     # Check file extension with proper type handling
     allowed_extensions = {'.txt', '.csv', '.xlsx'}
@@ -279,6 +292,17 @@ async def upload_timesheet(
             status_code=400,
             detail=f"Unsupported file format. Please upload a file with one of these extensions: {', '.join(allowed_extensions)}"
         )
+
+    # Verify content type
+    content_type = file.content_type
+    allowed_content_types = {
+        'text/csv',
+        'text/plain',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    }
+
+    if content_type not in allowed_content_types:
+        raise HTTPException(status_code=400, detail="Invalid content type")
 
     try:
         service = TimesheetService(db)
