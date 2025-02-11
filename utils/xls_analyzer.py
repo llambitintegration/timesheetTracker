@@ -1,4 +1,3 @@
-
 from typing import List, Dict, Any
 import pandas as pd
 from datetime import datetime
@@ -26,7 +25,7 @@ class XLSAnalyzer:
                     'Task Description': str
                 }
             )
-            
+
             # Set default values for missing columns
             required_columns = ['Week Number', 'Month', 'Category', 'Subcategory', 
                               'Customer', 'Project', 'Task Description', 'Date']
@@ -39,28 +38,28 @@ class XLSAnalyzer:
 
             # Drop rows where all elements are NaN
             df = df.dropna(how='all')
-            
+
             # Convert date column to datetime
             df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
 
             # Fill NaN values with appropriate defaults
             # Convert Week Number to numeric, replacing non-numeric with 0
             df['Week Number'] = pd.to_numeric(df['Week Number'], errors='coerce').fillna(0).astype('Int64')
-            
-            # First replace dashes with nan
+
+            # Replace dash values with None
             df = df.replace({'-': None})
-            
-            # Then fill remaining NaN values with appropriate defaults
+
+            # Fill missing values appropriately
             df['Task Description'] = df['Task Description'].fillna('')
             df['Month'] = df['Month'].fillna('')
             df['Category'] = df['Category'].fillna('Other')
             df['Subcategory'] = df['Subcategory'].fillna('Other')
             df['Hours'] = df['Hours'].fillna(0.0)
-            # Customer and Project should remain None if they were dashes
+            # Customer and Project remain None when missing or dash
 
             # Convert DataFrame to list of dictionaries
             records = df.to_dict('records')
-            
+
             logger.info(f"Successfully parsed {len(records)} records from Excel file")
             return records
 

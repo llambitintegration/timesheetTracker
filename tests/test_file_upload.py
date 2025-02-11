@@ -1,4 +1,3 @@
-
 import pytest
 from fastapi.testclient import TestClient
 from main import app
@@ -71,8 +70,8 @@ def test_xls_analyzer_invalid_data(tmp_path, invalid_timesheet_data, setup_test_
         records = analyzer.read_excel(contents)
 
         assert len(records) == 1
-        assert records[0]['Customer'] in ['-', 'Unassigned']
-        assert records[0]['Project'] == '-'
+        assert records[0]['Customer'] is None
+        assert records[0]['Project'] is None
 
 def test_dash_customer_handling(client, setup_test_data, tmp_path):
     """Test handling of dash (-) values in customer field"""
@@ -94,7 +93,7 @@ def test_dash_customer_handling(client, setup_test_data, tmp_path):
     assert response.status_code == 201
     entries = response.json()["entries"]
     assert len(entries) == 1
-    assert entries[0]["customer"] in ['-', 'Unassigned']
+    assert entries[0]["customer"] is None
 
 def test_upload_excel_valid(client, setup_test_data, tmp_path, valid_timesheet_data):
     """Test uploading a valid Excel file"""
@@ -141,6 +140,6 @@ def test_xls_analyzer_missing_columns(tmp_path):
         records = analyzer.read_excel(contents)
 
         assert len(records) == 1
-        assert records[0]['Customer'] == '-'
-        assert records[0]['Project'] == '-'
+        assert records[0]['Customer'] is None
+        assert records[0]['Project'] is None
         assert records[0]['Week Number'] == 0
