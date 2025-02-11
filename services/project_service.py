@@ -6,7 +6,10 @@ from database.pm_repository import ProjectManagerRepository  # Added PM reposito
 from database import schemas
 from models.projectModel import Project
 from utils.logger import Logger
-from utils.validators import DEFAULT_CUSTOMER, DEFAULT_PROJECT, normalize_customer_name
+from utils.validators import (
+    DEFAULT_CUSTOMER, DEFAULT_PROJECT, 
+    normalize_customer_name, ensure_default_project_manager
+)
 
 logger = Logger().get_logger()
 
@@ -72,7 +75,7 @@ class ProjectService:
 
             # Ensure default project manager exists
             ensure_default_project_manager(self.db)
-            
+
             # Normalize and validate customer
             customer_name = self._ensure_customer_exists(project.customer)
             if customer_name == DEFAULT_CUSTOMER and project.customer != DEFAULT_CUSTOMER:
