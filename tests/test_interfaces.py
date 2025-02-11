@@ -62,7 +62,7 @@ def test_project_interface():
         assert isinstance(project.get('project_id'), str)
         assert isinstance(project.get('customer'), str)
         project_manager = project.get('project_manager')
-            assert project_manager is None or isinstance(project_manager, str)
+        assert project_manager is None or isinstance(project_manager, str)
         assert isinstance(project.get('created_at'), str)
         assert validate_timestamp(project.get('created_at'))
         if project.get('updated_at'):
