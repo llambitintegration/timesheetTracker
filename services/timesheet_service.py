@@ -1,6 +1,6 @@
 from fastapi import HTTPException, UploadFile
 from sqlalchemy.orm import Session
-from typing import List
+from typing import List, Dict, Any, Union
 from io import StringIO, BytesIO
 import utils
 from database import crud, schemas
@@ -19,9 +19,11 @@ class TimesheetService:
         """Create a new time entry"""
         return self.repository.create(self.db, entry)
 
-    async def upload_timesheet(self, file: UploadFile) -> List[schemas.TimeEntry]:
+    async def upload_timesheet(self, file: UploadFile) -> Dict[str, Any]:
         """Upload and process timesheet file"""
         logger.info(f"Processing timesheet upload: {file.filename}")
+        validation_errors = []
+
         try:
             contents = await file.read()
             # Accept both .txt and traditional spreadsheet formats
@@ -36,19 +38,33 @@ class TimesheetService:
 
             if not entries:
                 logger.warning("No valid entries found in file")
-                return []
+                return {"entries": [], "validation_errors": ["No valid entries found in the file"]}
 
-            created_entries = crud.create_time_entries(self.db, entries)
+            created_entries = []
+            for entry in entries:
+                try:
+                    created_entry = crud.create_time_entry(self.db, entry)
+                    created_entries.append(created_entry)
+                except Exception as e:
+                    logger.error(f"Error creating entry: {str(e)}")
+                    validation_errors.append({
+                        "entry": entry.dict(),
+                        "error": str(e)
+                    })
+
             logger.info(f"Successfully created {len(created_entries)} time entries")
-            return created_entries
+            return {
+                "entries": created_entries,
+                "validation_errors": validation_errors
+            }
         except Exception as e:
             logger.error(f"Error processing timesheet: {str(e)}")
             raise HTTPException(status_code=400, detail=str(e))
 
-    def get_entries(self, skip: int = 0, limit: int = 100) -> List[schemas.TimeEntry]:
+    def get_entries(self, skip: int = 0, limit: int = 100) -> List[TimeEntry]:
         return crud.get_time_entries(self.db, skip=skip, limit=limit)
 
-    def get_entries_by_date(self, date) -> List[schemas.TimeEntry]:
+    def get_entries_by_date(self, date) -> List[TimeEntry]:
         try:
             entries = crud.get_time_entries_by_date(self.db, date)
             if not entries:

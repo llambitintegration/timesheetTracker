@@ -249,14 +249,35 @@ def delete_customer(name: str, db: Session = Depends(get_db)):
     service = CustomerService(db)
     return service.delete_customer(name)
 
-@app.post("/time-entries/upload/", response_model=List[schemas.TimeEntry])
+@app.post("/time-entries/upload/")
 async def upload_timesheet(
     file: UploadFile = File(...),
     db: Session = Depends(get_db)
 ):
     """Upload and process timesheet file"""
-    service = TimesheetService(db)
-    return await service.upload_timesheet(file)
+    logger.info(f"Processing timesheet upload: {file.filename}")
+
+    # Check file extension
+    allowed_extensions = ['.txt', '.csv', '.xlsx']
+    file_extension = os.path.splitext(file.filename)[1].lower()
+
+    if file_extension not in allowed_extensions:
+        logger.error(f"Unsupported file format: {file.filename}")
+        raise HTTPException(
+            status_code=400,
+            detail=f"Unsupported file format. Please upload a file with one of these extensions: {', '.join(allowed_extensions)}"
+        )
+
+    try:
+        service = TimesheetService(db)
+        result = await service.upload_timesheet(file)
+        return {
+            "entries": result,
+            "validation_errors": []  # Add validation errors if any
+        }
+    except Exception as e:
+        logger.error(f"Error processing timesheet: {str(e)}")
+        raise HTTPException(status_code=400, detail=str(e))
 
 @app.post("/init-db/")
 async def initialize_database(force: bool = False, db: Session = Depends(get_db)):
