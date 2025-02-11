@@ -1,0 +1,237 @@
+~/workspace$ python -m pytest tests/test_cors.py -v -s
+{"timestamp": "2025-02-11T00:01:10.908966", "level": "INFO", "correlation_id": "undefined", "logger": "TimesheetTracker", "message": "Attempting to connect to database at: ep-orange-scene-a49hsza0.us-east-1.aws.neon.tech/neondb?sslmode=require", "context": {}}
+{"timestamp": "2025-02-11T00:01:11.021744", "level": "INFO", "correlation_id": "undefined", "logger": "TimesheetTracker", "message": "Database engine created successfully", "context": {}}
+/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pytest_asyncio/plugin.py:207: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+============================================================================= test session starts =============================================================================
+platform linux -- Python 3.11.10, pytest-8.3.4, pluggy-1.5.0 -- /home/runner/workspace/.pythonlibs/bin/python
+cachedir: .pytest_cache
+rootdir: /home/runner/workspace
+configfile: pyproject.toml
+plugins: anyio-4.7.0, asyncio-0.25.2, cov-6.0.0
+asyncio: mode=Mode.STRICT, asyncio_default_fixture_loop_scope=None
+collected 6 items                                                                                                                                                             
+
+tests/test_cors.py::test_cors_headers_on_health_endpoint {"timestamp": "2025-02-11T00:01:11.262853", "level": "INFO", "correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "method": "GET", "url": "http://testserver/health", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "origin": "http://localhost:3000", "access-control-request-method": "GET"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/health"}}
+{"timestamp": "2025-02-11T00:01:11.263876", "level": "INFO", "correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "logger": "TimesheetTracker", "message": "Health check accessed", "context": {"correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "method": "GET", "path": "/health"}}
+{"timestamp": "2025-02-11T00:01:11.264793", "level": "INFO", "correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "logger": "TimesheetTracker", "message": "Request completed successfully", "context": {"correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "status_code": 200, "process_time_ms": "2.49", "response_headers": {"content-length": "79", "content-type": "application/json"}, "content_type": "application/json", "method": "GET", "path": "/health"}}
+FAILED
+tests/test_cors.py::test_cors_preflight FAILED
+tests/test_cors.py::test_cors_credentials {"timestamp": "2025-02-11T00:01:11.402638", "level": "INFO", "correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "method": "GET", "url": "http://testserver/health", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "origin": "http://localhost:3000"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/health"}}
+{"timestamp": "2025-02-11T00:01:11.403711", "level": "INFO", "correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "logger": "TimesheetTracker", "message": "Health check accessed", "context": {"correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "method": "GET", "path": "/health"}}
+{"timestamp": "2025-02-11T00:01:11.405067", "level": "INFO", "correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "logger": "TimesheetTracker", "message": "Request completed successfully", "context": {"correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "status_code": 200, "process_time_ms": "2.80", "response_headers": {"content-length": "79", "content-type": "application/json"}, "content_type": "application/json", "method": "GET", "path": "/health"}}
+FAILED
+tests/test_cors.py::test_cors_exposed_headers {"timestamp": "2025-02-11T00:01:11.445100", "level": "INFO", "correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "method": "GET", "url": "http://testserver/health", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "origin": "http://localhost:3000"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/health"}}
+{"timestamp": "2025-02-11T00:01:11.446491", "level": "INFO", "correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "logger": "TimesheetTracker", "message": "Health check accessed", "context": {"correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "method": "GET", "path": "/health"}}
+{"timestamp": "2025-02-11T00:01:11.447322", "level": "INFO", "correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "logger": "TimesheetTracker", "message": "Request completed successfully", "context": {"correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "status_code": 200, "process_time_ms": "3.06", "response_headers": {"content-length": "79", "content-type": "application/json"}, "content_type": "application/json", "method": "GET", "path": "/health"}}
+PASSED
+tests/test_cors.py::test_cors_on_time_entries_options FAILED
+tests/test_cors.py::test_cors_on_time_entries {"timestamp": "2025-02-11T00:01:11.488680", "level": "INFO", "correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "method": "GET", "url": "http://testserver/time-entries", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "origin": "http://localhost:3000"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries"}}
+{"timestamp": "2025-02-11T00:01:11.494044", "level": "DEBUG", "correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "logger": "TimesheetTracker", "message": "Database session created", "context": {}}
+{"timestamp": "2025-02-11T00:01:11.495566", "level": "DEBUG", "correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
+{"timestamp": "2025-02-11T00:01:11.517338", "level": "DEBUG", "correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "logger": "TimesheetTracker", "message": "TimeEntryService initialized with database session", "context": {}}
+{"timestamp": "2025-02-11T00:01:11.527547", "level": "DEBUG", "correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "logger": "TimesheetTracker", "message": "Retrieving time entries with filters: project_id=None, customer=None", "context": {}}
+{"timestamp": "2025-02-11T00:01:11.569100", "level": "DEBUG", "correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "logger": "TimesheetTracker", "message": "Applying pagination: skip=0, limit=100", "context": {}}
+{"timestamp": "2025-02-11T00:01:11.946189", "level": "INFO", "correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "logger": "TimesheetTracker", "message": "Retrieved 0 time entries", "context": {}}
+{"timestamp": "2025-02-11T00:01:11.967566", "level": "DEBUG", "correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "logger": "TimesheetTracker", "message": "Database session closed", "context": {}}
+{"timestamp": "2025-02-11T00:01:11.968339", "level": "INFO", "correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "logger": "TimesheetTracker", "message": "Request completed successfully", "context": {"correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "status_code": 200, "process_time_ms": "480.43", "response_headers": {"content-length": "2", "content-type": "application/json"}, "content_type": "application/json", "method": "GET", "path": "/time-entries"}}
+FAILED
+
+================================================================================== FAILURES ===================================================================================
+____________________________________________________________________ test_cors_headers_on_health_endpoint _____________________________________________________________________
+
+    def test_cors_headers_on_health_endpoint():
+        """Test CORS headers are present on health endpoint"""
+        headers = {
+            "Origin": "http://localhost:3000",
+            "Access-Control-Request-Method": "GET",
+        }
+        response = client.get("/health", headers=headers)
+        assert response.status_code == 200
+        assert response.headers["access-control-allow-origin"] == "*"
+>       assert "GET" in response.headers["access-control-allow-methods"]
+
+tests/test_cors.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = Headers({'content-length': '79', 'content-type': 'application/json', 'x-correlation-id': 'd13b4526-8398-4adc-8188-10db4aeb9e86', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-Total-Count, X-Correlation-ID'})
+key = 'access-control-allow-methods'
+
+    def __getitem__(self, key: str) -> str:
+        """
+        Return a single header value.
+    
+        If there are multiple headers with the same key, then we concatenate
+        them with commas. See: https://tools.ietf.org/html/rfc7230#section-3.2.2
+        """
+        normalized_key = key.lower().encode(self.encoding)
+    
+        items = [
+            header_value.decode(self.encoding)
+            for _, header_key, header_value in self._list
+            if header_key == normalized_key
+        ]
+    
+        if items:
+            return ", ".join(items)
+    
+>       raise KeyError(key)
+E       KeyError: 'access-control-allow-methods'
+
+.pythonlibs/lib/python3.11/site-packages/httpx/_models.py:302: KeyError
+------------------------------------------------------------------------------ Captured log call ------------------------------------------------------------------------------
+INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T00:01:11.263031", "context": {"correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "method": "GET", "url": "http://testserver/health", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "origin": "http://localhost:3000", "access-control-request-method": "GET"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/health"}}
+INFO     TimesheetTracker:logger.py:29 {"message": "Health check accessed", "timestamp": "2025-02-11T00:01:11.263989", "context": {"correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "method": "GET", "path": "/health"}}
+INFO     TimesheetTracker:logger.py:29 {"message": "Request completed successfully", "timestamp": "2025-02-11T00:01:11.264927", "context": {"correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "status_code": 200, "process_time_ms": "2.49", "response_headers": {"content-length": "79", "content-type": "application/json"}, "content_type": "application/json", "method": "GET", "path": "/health"}}
+_____________________________________________________________________________ test_cors_preflight _____________________________________________________________________________
+
+    def test_cors_preflight():
+        """Test OPTIONS request handling"""
+        headers = {
+            "Origin": "http://localhost:3000",
+            "Access-Control-Request-Method": "POST",
+            "Access-Control-Request-Headers": "content-type",
+        }
+        response = client.options("/time-entries", headers=headers)
+        assert response.status_code == 200
+        assert response.headers["access-control-allow-origin"] == "*"
+>       assert response.headers["access-control-allow-headers"] == "*"
+E       AssertionError: assert 'content-type' == '*'
+E         
+E         - *
+E         + content-type
+
+tests/test_cors.py:29: AssertionError
+____________________________________________________________________________ test_cors_credentials ____________________________________________________________________________
+
+    def test_cors_credentials():
+        """Test that credentials setting matches development configuration"""
+        headers = {"Origin": "http://localhost:3000"}
+        response = client.get("/health", headers=headers)
+        assert response.status_code == 200
+>       assert response.headers["access-control-allow-credentials"] == "false"
+
+tests/test_cors.py:36: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = Headers({'content-length': '79', 'content-type': 'application/json', 'x-correlation-id': 'd13b4526-8398-4adc-8188-10db4aeb9e86', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-Total-Count, X-Correlation-ID'})
+key = 'access-control-allow-credentials'
+
+    def __getitem__(self, key: str) -> str:
+        """
+        Return a single header value.
+    
+        If there are multiple headers with the same key, then we concatenate
+        them with commas. See: https://tools.ietf.org/html/rfc7230#section-3.2.2
+        """
+        normalized_key = key.lower().encode(self.encoding)
+    
+        items = [
+            header_value.decode(self.encoding)
+            for _, header_key, header_value in self._list
+            if header_key == normalized_key
+        ]
+    
+        if items:
+            return ", ".join(items)
+    
+>       raise KeyError(key)
+E       KeyError: 'access-control-allow-credentials'
+
+.pythonlibs/lib/python3.11/site-packages/httpx/_models.py:302: KeyError
+------------------------------------------------------------------------------ Captured log call ------------------------------------------------------------------------------
+INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T00:01:11.402811", "context": {"correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "method": "GET", "url": "http://testserver/health", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "origin": "http://localhost:3000"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/health"}}
+INFO     TimesheetTracker:logger.py:29 {"message": "Health check accessed", "timestamp": "2025-02-11T00:01:11.404552", "context": {"correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "method": "GET", "path": "/health"}}
+INFO     TimesheetTracker:logger.py:29 {"message": "Request completed successfully", "timestamp": "2025-02-11T00:01:11.405174", "context": {"correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "status_code": 200, "process_time_ms": "2.80", "response_headers": {"content-length": "79", "content-type": "application/json"}, "content_type": "application/json", "method": "GET", "path": "/health"}}
+______________________________________________________________________ test_cors_on_time_entries_options ______________________________________________________________________
+
+    def test_cors_on_time_entries_options():
+        """Test CORS headers on time entries OPTIONS request"""
+        headers = {
+            "Origin": "http://localhost:3000",
+            "Access-Control-Request-Method": "POST",
+            "Access-Control-Request-Headers": "content-type",
+        }
+        response = client.options("/time-entries", headers=headers)
+        assert response.status_code == 200
+        assert response.headers["access-control-allow-origin"] == "*"
+        assert "POST" in response.headers["access-control-allow-methods"]
+        assert "GET" in response.headers["access-control-allow-methods"]
+>       assert response.headers["access-control-allow-headers"] == "*"
+E       AssertionError: assert 'content-type' == '*'
+E         
+E         - *
+E         + content-type
+
+tests/test_cors.py:59: AssertionError
+__________________________________________________________________________ test_cors_on_time_entries __________________________________________________________________________
+
+    def test_cors_on_time_entries():
+        """Test CORS headers on time entries endpoint"""
+        headers = {"Origin": "http://localhost:3000"}
+        response = client.get("/time-entries", headers=headers)
+        assert response.status_code == 200
+        assert response.headers["access-control-allow-origin"] == "*"
+>       assert response.headers["access-control-allow-credentials"] == "false"
+
+tests/test_cors.py:73: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = Headers({'content-length': '2', 'content-type': 'application/json', 'x-correlation-id': 'd13b4526-8398-4adc-8188-10db4aeb9e86', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-Total-Count, X-Correlation-ID'})
+key = 'access-control-allow-credentials'
+
+    def __getitem__(self, key: str) -> str:
+        """
+        Return a single header value.
+    
+        If there are multiple headers with the same key, then we concatenate
+        them with commas. See: https://tools.ietf.org/html/rfc7230#section-3.2.2
+        """
+        normalized_key = key.lower().encode(self.encoding)
+    
+        items = [
+            header_value.decode(self.encoding)
+            for _, header_key, header_value in self._list
+            if header_key == normalized_key
+        ]
+    
+        if items:
+            return ", ".join(items)
+    
+>       raise KeyError(key)
+E       KeyError: 'access-control-allow-credentials'
+
+.pythonlibs/lib/python3.11/site-packages/httpx/_models.py:302: KeyError
+------------------------------------------------------------------------------ Captured log call ------------------------------------------------------------------------------
+INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T00:01:11.488871", "context": {"correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "method": "GET", "url": "http://testserver/time-entries", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "origin": "http://localhost:3000"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries"}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Database session created", "timestamp": "2025-02-11T00:01:11.494233", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T00:01:11.516266", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "TimeEntryService initialized with database session", "timestamp": "2025-02-11T00:01:11.517526", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Retrieving time entries with filters: project_id=None, customer=None", "timestamp": "2025-02-11T00:01:11.527767", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Applying pagination: skip=0, limit=100", "timestamp": "2025-02-11T00:01:11.569853", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Retrieved 0 time entries", "timestamp": "2025-02-11T00:01:11.946688", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Database session closed", "timestamp": "2025-02-11T00:01:11.967680", "context": {}}
+INFO     TimesheetTracker:logger.py:29 {"message": "Request completed successfully", "timestamp": "2025-02-11T00:01:11.968460", "context": {"correlation_id": "d13b4526-8398-4adc-8188-10db4aeb9e86", "status_code": 200, "process_time_ms": "480.43", "response_headers": {"content-length": "2", "content-type": "application/json"}, "content_type": "application/json", "method": "GET", "path": "/time-entries"}}
+============================================================================== warnings summary ===============================================================================
+.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345
+  /home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345: UserWarning: Valid config keys have changed in V2:
+  * 'orm_mode' has been renamed to 'from_attributes'
+    warnings.warn(message, UserWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================================================================== short test summary info ===========================================================================
+FAILED tests/test_cors.py::test_cors_headers_on_health_endpoint - KeyError: 'access-control-allow-methods'
+FAILED tests/test_cors.py::test_cors_preflight - AssertionError: assert 'content-type' == '*'
+  
+  - *
+  + content-type
+FAILED tests/test_cors.py::test_cors_credentials - KeyError: 'access-control-allow-credentials'
+FAILED tests/test_cors.py::test_cors_on_time_entries_options - AssertionError: assert 'content-type' == '*'
+  
+  - *
+  + content-type
+FAILED tests/test_cors.py::test_cors_on_time_entries - KeyError: 'access-control-allow-credentials'
+=================================================================== 5 failed, 1 passed, 1 warning in 0.81s ====================================================================
+~/workspace$ 

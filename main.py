@@ -3,6 +3,8 @@ import traceback
 from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, Query, Path, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.types import ASGIApp
 from sqlalchemy import join, text, inspect, func
 from sqlalchemy.orm import Session
 from sqlalchemy.sql.schema import MetaData
@@ -58,26 +60,48 @@ async def lifespan(app: FastAPI):
 
     logger.info("Shutting down FastAPI server")
 
+class CORSMiddlewareWithDefaults(BaseHTTPMiddleware):
+    """Middleware to ensure CORS headers are present on all responses"""
+
+    def __init__(self, app: ASGIApp):
+        super().__init__(app)
+
+    async def dispatch(self, request, call_next):
+        response = await call_next(request)
+
+        # Add CORS headers to all responses
+        response.headers["Access-Control-Allow-Origin"] = "*"
+        response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS,PATCH"
+        response.headers["Access-Control-Allow-Headers"] = "*"
+        response.headers["Access-Control-Allow-Credentials"] = "false"
+        response.headers["Access-Control-Expose-Headers"] = "X-Total-Count,X-Correlation-ID"
+
+        return response
+
+# Create FastAPI app and add middleware
 app = FastAPI(
     title="Timesheet Management API",
     lifespan=lifespan
 )
 
-# Add middleware
-app.middleware("http")(logging_middleware)
-app.middleware("http")(error_logging_middleware)
+# Add custom CORS middleware first
+app.add_middleware(CORSMiddlewareWithDefaults)
 
-
-# CORS configuration section update
+# Add standard CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins in development
-    allow_credentials=False,  # Set to false for development
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-    allow_headers=["*"],  # Allow all headers for development
+    allow_headers=["*"],
     expose_headers=["X-Total-Count", "X-Correlation-ID"],
     max_age=3600
 )
+
+# Add logging middleware
+app.middleware("http")(logging_middleware)
+app.middleware("http")(error_logging_middleware)
+
 
 # Options handler for preflight requests
 @app.options("/{path:path}")
@@ -111,6 +135,12 @@ async def health_check(request: Request):
         "timestamp": datetime.utcnow().isoformat(),
         "version": "1.0.0"
     })
+
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS,PATCH"
+    response.headers["Access-Control-Allow-Headers"] = "*"
+    response.headers["Access-Control-Allow-Credentials"] = "false"
+    response.headers["Access-Control-Expose-Headers"] = "X-Total-Count,X-Correlation-ID"
 
     return response
 
