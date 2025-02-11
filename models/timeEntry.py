@@ -1,7 +1,8 @@
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime, Date
 from sqlalchemy.sql import func
 from models.baseModel import BaseModel
-from datetime import datetime
+from datetime import datetime, date
+from typing import Optional
 
 class TimeEntry(BaseModel):
     """Time entry model for tracking hours"""
@@ -43,11 +44,15 @@ class TimeEntry(BaseModel):
         return f"<TimeEntry(id={self.id}, date={self.date}, hours={self.hours}, project={self.project})>"
 
     @staticmethod
-    def get_week_number(entry_date: Date) -> int:
+    def get_week_number(entry_date: date) -> int:
         """Calculate ISO week number from date"""
-        return datetime.strptime(str(entry_date), '%Y-%m-%d').isocalendar()[1]
+        if isinstance(entry_date, str):
+            entry_date = datetime.strptime(entry_date, '%Y-%m-%d').date()
+        return entry_date.isocalendar()[1]
 
     @staticmethod
-    def get_month_name(entry_date: Date) -> str:
+    def get_month_name(entry_date: date) -> str:
         """Get month name from date"""
-        return datetime.strptime(str(entry_date), '%Y-%m-%d').strftime('%B')
+        if isinstance(entry_date, str):
+            entry_date = datetime.strptime(entry_date, '%Y-%m-%d').date()
+        return entry_date.strftime('%B')

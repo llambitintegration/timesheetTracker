@@ -3,6 +3,8 @@ from typing import List, Dict, Any, Optional
 from datetime import datetime, date
 import calendar
 from utils.logger import Logger
+import pandas as pd
+from io import StringIO
 
 logger = Logger().get_logger()
 
@@ -114,7 +116,7 @@ def parse_raw_csv(file) -> Optional[pd.DataFrame]:
 def validate_csv_structure(df: pd.DataFrame) -> bool:
     """Validate CSV structure and required columns."""
     required_columns = [
-        'Date', 'Week Day', 'Week Number', 'Month', 'Category', 
+        'Date', 'Week Number', 'Month', 'Category', 
         'Subcategory', 'Customer', 'Project', 'Task Description', 'Hours'
     ]
     missing_columns = [col for col in required_columns if col not in df.columns]

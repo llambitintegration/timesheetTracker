@@ -1,12 +1,42 @@
-from typing import List, Optional
+from typing import List, Optional, Dict, Any
 from sqlalchemy.orm import Session
 from datetime import datetime, date
 from models.timeEntry import TimeEntry
+from database import schemas
 from .base_repository import BaseRepository
 
 class TimeEntryRepository(BaseRepository[TimeEntry]):
     def __init__(self):
         super().__init__(TimeEntry)
+
+    def create(self, db: Session, data: schemas.TimeEntryCreate) -> TimeEntry:
+        """Create a new time entry from Pydantic model."""
+        entry_dict = data.model_dump(exclude={'id', 'created_at', 'updated_at'})
+        db_entry = TimeEntry(**entry_dict)
+        db.add(db_entry)
+        db.commit()
+        db.refresh(db_entry)
+        return db_entry
+
+    def bulk_create(self, db: Session, entries: List[schemas.TimeEntryCreate]) -> List[TimeEntry]:
+        """Bulk create time entries from list of Pydantic models."""
+        db_entries = [
+            TimeEntry(**entry.model_dump(exclude={'id', 'created_at', 'updated_at'}))
+            for entry in entries
+        ]
+        db.add_all(db_entries)
+        db.commit()
+        for entry in db_entries:
+            db.refresh(entry)
+        return db_entries
+
+    def update(self, db: Session, entry: TimeEntry, data: Dict[str, Any]) -> TimeEntry:
+        """Update an existing time entry with dictionary data."""
+        for key, value in data.items():
+            setattr(entry, key, value)
+        db.commit()
+        db.refresh(entry)
+        return entry
 
     def get_by_id(self, db: Session, id: int) -> Optional[TimeEntry]:
         """Get a time entry by ID."""
@@ -27,20 +57,6 @@ class TimeEntryRepository(BaseRepository[TimeEntry]):
     def get_all(self, db: Session, skip: int = 0, limit: int = 100) -> List[TimeEntry]:
         """Get all time entries with pagination."""
         return db.query(self.model).offset(skip).limit(limit).all()
-
-    def create(self, db: Session, entry: TimeEntry) -> TimeEntry:
-        """Create a new time entry."""
-        db.add(entry)
-        db.commit()
-        db.refresh(entry)
-        return entry
-
-    def update(self, db: Session, entry: TimeEntry) -> TimeEntry:
-        """Update an existing time entry."""
-        db.merge(entry)
-        db.commit()
-        db.refresh(entry)
-        return entry
 
     def delete(self, db: Session, id: int) -> bool:
         """Delete a time entry by ID."""

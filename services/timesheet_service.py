@@ -1,6 +1,6 @@
 from fastapi import HTTPException, UploadFile
 from sqlalchemy.orm import Session
-from typing import List, Dict, Any, Union, BinaryIO, Tuple
+from typing import List, Dict, Any, Union, BinaryIO, Tuple, Optional
 from io import StringIO, BytesIO
 import utils
 from database import crud, schemas
@@ -11,6 +11,7 @@ import pandas as pd
 from utils.validators import validate_database_references
 from datetime import datetime
 import json
+from decimal import Decimal
 
 logger = Logger().get_logger()
 
@@ -35,7 +36,7 @@ class TimesheetService:
             "customer": entry.customer,
             "project": entry.project,
             "task_description": entry.task_description,
-            "hours": float(entry.hours),
+            "hours": float(entry.hours) if entry.hours is not None else None,
             "date": entry.date.isoformat() if entry.date else None,
             "created_at": entry.created_at.isoformat() if entry.created_at else None,
             "updated_at": entry.updated_at.isoformat() if entry.updated_at else None
@@ -43,16 +44,19 @@ class TimesheetService:
 
     def _bulk_create_entries(self, entries: List[schemas.TimeEntryCreate]) -> List[Dict[str, Any]]:
         """Bulk create time entries in a single transaction"""
-        created_entries: List[TimeEntry] = []
         try:
-            for entry in entries:
-                db_entry = TimeEntry(**entry.model_dump(exclude={'id', 'created_at', 'updated_at'}))
-                self.db.add(db_entry)
-                created_entries.append(db_entry)
+            # Prepare all entries first
+            db_entries = [
+                TimeEntry(**entry.model_dump(exclude={'id', 'created_at', 'updated_at'}))
+                for entry in entries
+            ]
 
+            # Add all entries in a single batch
+            self.db.add_all(db_entries)
             self.db.commit()
-            # Serialize TimeEntry objects to dictionaries
-            return [self._serialize_time_entry(entry) for entry in created_entries]
+
+            # Serialize all entries after successful commit
+            return [self._serialize_time_entry(entry) for entry in db_entries]
         except Exception as e:
             logger.error(f"Error during bulk creation: {str(e)}")
             self.db.rollback()
@@ -65,12 +69,20 @@ class TimesheetService:
 
         try:
             contents = await file.read()
+            if not contents:
+                raise HTTPException(status_code=400, detail="Empty file provided")
+
             file_extension = file.filename.lower().split('.')[-1]
 
             if file_extension == 'xlsx':
                 entries = self._process_excel(contents)
-            else:
+            elif file_extension in ['csv', 'txt']:
                 entries = utils.parse_csv(StringIO(contents.decode('utf-8')))
+            else:
+                raise HTTPException(
+                    status_code=400,
+                    detail=f"Unsupported file format: {file_extension}. Supported formats are: xlsx, csv, txt"
+                )
 
             if not entries:
                 logger.warning("No valid entries found in file")
@@ -105,9 +117,9 @@ class TimesheetService:
             raise HTTPException(status_code=400, detail=str(e))
 
     def _process_excel(self, contents: bytes) -> List[schemas.TimeEntryCreate]:
-        """Process Excel file contents"""
+        """Process Excel file contents - first worksheet only"""
         try:
-            df = pd.read_excel(BytesIO(contents), sheet_name=0)
+            df = pd.read_excel(BytesIO(contents), sheet_name=0)  # Only read first worksheet
             return self._process_dataframe(df)
         except Exception as e:
             logger.error(f"Error processing Excel file: {str(e)}")
@@ -131,16 +143,12 @@ class TimesheetService:
             )
 
         valid_entries = []
-        validation_errors = []
 
-        for _, row in df.iterrows():
+        for idx, row in df.iterrows():
             try:
                 hours = float(row['Hours'])
                 if hours <= 0 or hours > 24:
-                    validation_errors.append({
-                        'row': dict(row),
-                        'error': f"Invalid hours value: {hours}. Hours must be between 0 and 24."
-                    })
+                    logger.warning(f"Invalid hours value in row {idx + 1}: {hours}")
                     continue
 
                 entry_dict = {
@@ -156,17 +164,8 @@ class TimesheetService:
                 }
                 valid_entries.append(schemas.TimeEntryCreate(**entry_dict))
             except Exception as e:
-                logger.error(f"Error processing row: {str(e)}")
-                validation_errors.append({
-                    'row': dict(row),
-                    'error': str(e)
-                })
+                logger.error(f"Error processing row {idx + 1}: {str(e)}")
                 continue
-
-        if validation_errors:
-            logger.warning(f"Found {len(validation_errors)} validation errors")
-            for error in validation_errors:
-                logger.warning(f"Validation error: {error}")
 
         return valid_entries
 
@@ -186,3 +185,20 @@ class TimesheetService:
         except Exception as e:
             logger.error(f"Error fetching time entries for date {date}: {str(e)}")
             raise HTTPException(status_code=500, detail=str(e))
+
+    def update_entry(self, entry_id: int, entry: schemas.TimeEntryUpdate) -> TimeEntry:
+        """Update an existing time entry"""
+        db_entry = crud.get_time_entry(self.db, entry_id)
+        if not db_entry:
+            raise HTTPException(status_code=404, detail="Time entry not found")
+
+        return crud.update_time_entry(self.db, db_entry, entry)
+
+    def delete_entry(self, entry_id: int) -> Dict[str, str]:
+        """Delete a time entry"""
+        db_entry = crud.get_time_entry(self.db, entry_id)
+        if not db_entry:
+            raise HTTPException(status_code=404, detail="Time entry not found")
+
+        crud.delete_time_entry(self.db, db_entry)
+        return {"message": "Time entry deleted successfully"}

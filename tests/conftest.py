@@ -90,12 +90,14 @@ def setup_test_data(db_session):
             project_id="Unassigned",
             name="Unassigned",
             customer="Unassigned",
+            project_manager="Unassigned",  # Add project manager
             status="active"
         ),
         Project(
             project_id="Project_Magic_Bullet",
             name="Project Magic Bullet",
             customer="ECOLAB",
+            project_manager="Test Manager",  # Add project manager
             status="active"
         )
     ]
@@ -108,8 +110,21 @@ def setup_test_data(db_session):
             # Skip if project already exists
             continue
 
+    # Create test project manager
+    project_managers = [
+        ProjectManager(name="Unassigned", email="unassigned@example.com"),
+        ProjectManager(name="Test Manager", email="test.manager@example.com")
+    ]
+    for manager in project_managers:
+        try:
+            db_session.add(manager)
+            db_session.flush()
+        except:
+            db_session.rollback()
+            continue
+
     db_session.commit()
 
-    yield {"customers": customers, "projects": projects}
+    yield {"customers": customers, "projects": projects, "project_managers": project_managers}
 
     # Cleanup handled by db_session fixture

@@ -31,7 +31,7 @@ task = "packager.installForAll"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "python -m pytest tests/test_cors.py -v -s"
+args = "python -m pytest tests/test_file_upload.py tests/test_routes.py -v"
 
 [[workflows.workflow]]
 name = "FastAPI Server"
