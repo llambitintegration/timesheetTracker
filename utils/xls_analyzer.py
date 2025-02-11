@@ -48,16 +48,15 @@ class XLSAnalyzer:
             df['Week Number'] = pd.to_numeric(df['Week Number'], errors='coerce').fillna(0).astype('Int64')
             
             # First replace dashes with nan
-            df = df.replace({'-': pd.NA})
+            df = df.replace({'-': None})
             
             # Then fill remaining NaN values with appropriate defaults
-            df['Customer'] = df['Customer'].fillna('-')
-            df['Project'] = df['Project'].fillna('-')
             df['Task Description'] = df['Task Description'].fillna('')
             df['Month'] = df['Month'].fillna('')
             df['Category'] = df['Category'].fillna('Other')
             df['Subcategory'] = df['Subcategory'].fillna('Other')
             df['Hours'] = df['Hours'].fillna(0.0)
+            # Customer and Project should remain None if they were dashes
 
             # Convert DataFrame to list of dictionaries
             records = df.to_dict('records')
