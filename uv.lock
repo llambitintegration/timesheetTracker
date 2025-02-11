@@ -892,12 +892,6 @@ http = [
 ]
 
 [[package]]
-name = "functions"
-version = "0.7.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/88/6f/7f35add5d405c189d9b9646d298bd50d5db6efdca08af77320b4b0626499/functions-0.7.0.tar.gz", hash = "sha256:5a36bd11d36bbce210fecddd9ff1a475a86035905818a4075d6c7ebb2f714181", size = 2661 }
-
-[[package]]
 name = "furl"
 version = "2.1.2"
 source = { registry = "https://pypi.org/simple" }
@@ -2391,7 +2385,6 @@ dependencies = [
     { name = "python-dotenv" },
     { name = "python-jose", extra = ["cryptography"] },
     { name = "python-multipart" },
-    { name = "schemas" },
     { name = "sendgrid" },
     { name = "sqlalchemy" },
     { name = "starlette" },
@@ -2426,7 +2419,6 @@ requires-dist = [
     { name = "python-dotenv", specifier = ">=1.0.0" },
     { name = "python-jose", extras = ["cryptography"], specifier = ">=3.3.0" },
     { name = "python-multipart", specifier = ">=0.0.6" },
-    { name = "schemas", specifier = ">=0.7.1" },
     { name = "sendgrid", specifier = ">=6.11.0" },
     { name = "sqlalchemy", specifier = ">=2.0.23" },
     { name = "starlette", specifier = ">=0.41.3" },
@@ -2524,16 +2516,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/d3/68/1166bba02f77c811d17766e54a54d7714c1276f54bfcf60d50bb9326a1b4/safetensors-0.5.0-cp38-abi3-win32.whl", hash = "sha256:b85565bc2f0456961a788d2f11d9d892eec46603db0e4923aa9512c2355aa727", size = 290608 },
     { url = "https://files.pythonhosted.org/packages/0c/ab/a428973e43a77791d2fd4b6425f4fd82e9f8559b32222c861acbbd7bc910/safetensors-0.5.0-cp38-abi3-win_amd64.whl", hash = "sha256:f451941f8aa11e7be5c3fa450e264609a2b1e65fa38ae590a74e55a94d646b76", size = 303322 },
 ]
-
-[[package]]
-name = "schemas"
-version = "0.7.1"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "functions" },
-    { name = "pytest" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/d1/51/8c8b00657e6e0822810a386e37474da322cbd609477992b3026676c90fc6/schemas-0.7.1.tar.gz", hash = "sha256:b54542abe1daa322e8229d7b952b8adecaf77c1e2439f48af72a1cb1d6f7f127", size = 2396 }
 
 [[package]]
 name = "sendgrid"

@@ -2,10 +2,11 @@ from sqlalchemy.orm import Session
 from typing import List, Optional
 from database.project_repository import ProjectRepository 
 from database.customer_repository import CustomerRepository
+from database.pm_repository import ProjectManagerRepository  # Added PM repository
 from database import schemas
 from models.projectModel import Project
 from utils.logger import Logger
-from utils.validators import DEFAULT_CUSTOMER, normalize_customer_name
+from utils.validators import DEFAULT_CUSTOMER, DEFAULT_PROJECT, normalize_customer_name
 
 logger = Logger().get_logger()
 
@@ -14,31 +15,53 @@ class ProjectService:
         self.db = db
         self.project_repo = ProjectRepository()
         self.customer_repo = CustomerRepository()
+        self.pm_repo = ProjectManagerRepository()  # Added PM repository
         logger.debug("ProjectService initialized with database session")
 
-    def _ensure_customer_exists(self, customer_name: str) -> bool:
-        """Ensure customer exists, create if not. Return True if successful."""
+    def _ensure_customer_exists(self, customer_name: str) -> str:
+        """Ensure customer exists, return normalized customer name."""
+        if not customer_name or customer_name == '-':
+            logger.debug("No customer name provided, using default")
+            return DEFAULT_CUSTOMER
+
         try:
             normalized_name = normalize_customer_name(customer_name)
             # Check if customer exists
             existing = self.customer_repo.get_by_name(self.db, normalized_name)
             if existing:
                 logger.debug(f"Found existing customer: {normalized_name}")
-                return True
+                return normalized_name
 
-            # Create new customer if not exists
+            # Create new customer using CustomerCreate schema
             customer_data = schemas.CustomerCreate(
                 name=normalized_name,
                 contact_email=f"{normalized_name.lower().replace(' ', '_')}@example.com",
                 status="active"
             )
-            # Convert Pydantic model to dict before creating customer
-            customer_dict = customer_data.model_dump(exclude={'id', 'created_at', 'updated_at'})
+
+            # Convert to dictionary for database operation
+            customer_dict = customer_data.model_dump()
             self.customer_repo.create(self.db, customer_dict)
             logger.info(f"Created new customer: {normalized_name}")
-            return True
+            return normalized_name
+
         except Exception as e:
             logger.error(f"Error ensuring customer exists: {str(e)}")
+            raise ValueError(f"Failed to validate customer: {str(e)}")
+
+    def _ensure_project_manager_exists(self, manager_name: str) -> bool:
+        """Ensure project manager exists. Return True if exists."""
+        try:
+            # Check if project manager exists
+            existing = self.pm_repo.get_by_name(self.db, manager_name)
+            if existing:
+                logger.debug(f"Found existing project manager: {manager_name}")
+                return True
+
+            logger.error(f"Project manager not found: {manager_name}")
+            return False
+        except Exception as e:
+            logger.error(f"Error verifying project manager: {str(e)}")
             return False
 
     def create_project(self, project: schemas.ProjectCreate) -> Project:
@@ -46,24 +69,38 @@ class ProjectService:
         try:
             logger.debug(f"Starting creation of project with data: {project.model_dump()}")
 
-            # First ensure customer exists
-            if not self._ensure_customer_exists(project.customer):
+            # Project manager is required and must exist
+            if not project.project_manager:
+                logger.error("Project manager is required")
+                raise ValueError("Project manager is required for project creation")
+
+            # Verify project manager exists before proceeding
+            if not self._ensure_project_manager_exists(project.project_manager):
+                logger.error(f"Project manager does not exist: {project.project_manager}")
+                raise ValueError(f"Project manager not found: {project.project_manager}")
+
+            # Normalize and validate customer
+            customer_name = self._ensure_customer_exists(project.customer)
+            if customer_name == DEFAULT_CUSTOMER and project.customer != DEFAULT_CUSTOMER:
                 logger.error(f"Failed to ensure customer exists: {project.customer}")
                 raise ValueError(f"Could not create or verify customer: {project.customer}")
 
-            # Check if project already exists with same project_id
+            # Check if project already exists
             existing_project = self.project_repo.get_by_project_id(self.db, project.project_id)
             if existing_project:
                 logger.warning(f"Project with ID {project.project_id} already exists")
                 raise ValueError(f"Project with ID {project.project_id} already exists")
 
-            # Convert pydantic model to dict and create project
-            project_data = project.model_dump(exclude={'id', 'created_at', 'updated_at'})
-            logger.debug("Adding project to database session")
+            # Convert pydantic model to dict
+            project_data = project.to_dict()
+            project_data['customer'] = customer_name
+
+            logger.debug(f"Creating new project with data: {project_data}")
             created_project = self.project_repo.create(self.db, project_data)
 
             logger.info(f"Successfully created project: {created_project.project_id}")
             return created_project
+
         except Exception as e:
             logger.error(f"Error creating project: {str(e)}")
             self.db.rollback()
@@ -71,7 +108,7 @@ class ProjectService:
 
     def get_project(self, project_id: str) -> Optional[Project]:
         """Retrieve a project by project_id."""
-        logger.debug(f"Attempting to fetch project with ID: {project_id}")
+        logger.debug(f"Fetching project with ID: {project_id}")
         project = self.project_repo.get_by_project_id(self.db, project_id)
         if project:
             logger.info(f"Found project: {project_id}")
@@ -102,9 +139,9 @@ class ProjectService:
 
     def update_project(self, project_id: str, project_update: schemas.ProjectBase) -> Optional[Project]:
         """Update an existing project."""
-        logger.debug(f"Attempting to update project {project_id} with data: {project_update.model_dump(exclude_unset=True)}")
+        logger.debug(f"Attempting to update project {project_id}")
 
-        existing_project = self.project_repo.get_by_project_id(self.db, project_id)
+        existing_project = self.get_project(project_id)
         if not existing_project:
             logger.warning(f"Project not found: {project_id}")
             return None
@@ -112,12 +149,14 @@ class ProjectService:
         try:
             # Update only the fields that are provided
             update_data = project_update.model_dump(exclude={'id', 'created_at', 'updated_at'}, exclude_unset=True)
+
             for key, value in update_data.items():
                 setattr(existing_project, key, value)
 
             updated_project = self.project_repo.update(self.db, existing_project)
             logger.info(f"Successfully updated project: {project_id}")
             return updated_project
+
         except Exception as e:
             logger.error(f"Error updating project {project_id}: {str(e)}")
             self.db.rollback()

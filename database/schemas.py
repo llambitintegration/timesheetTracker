@@ -92,6 +92,10 @@ class CustomerCreate(BaseModel):
 
     model_config = ConfigDict(from_attributes=True)
 
+    def to_dict(self) -> dict:
+        """Convert to dictionary for database operations"""
+        return self.model_dump(exclude_unset=True)
+
 class CustomerUpdate(BaseSchema):
     """Schema for updating customers"""
     name: Optional[str] = None
@@ -150,26 +154,33 @@ class MonthlyReport(BaseModel):
 
     model_config = ConfigDict(from_attributes=True)
 
-class ProjectBase(BaseSchema):
+class ProjectBase(BaseModel):
+    """Base schema for projects"""
     project_id: str
     name: str
     description: Optional[str] = None
-    customer: str
-    project_manager: Optional[str] = None
+    customer: str = Field(..., description="Customer name, required for all projects")
+    project_manager: str = Field(..., description="Project manager name, required for all projects")
     status: str = "active"
+
+    model_config = ConfigDict(from_attributes=True)
 
 class ProjectCreate(BaseModel):
     """Schema for creating new projects"""
     project_id: str
     name: str
     description: Optional[str] = None
-    customer: str
-    project_manager: Optional[str] = None
+    customer: str = Field(..., description="Customer name, required for all projects")
+    project_manager: str = Field(..., description="Project manager name, required for all projects")
     status: str = "active"
 
     model_config = ConfigDict(from_attributes=True)
 
-class ProjectUpdate(ProjectBase):
+    def to_dict(self) -> dict:
+        """Convert to dictionary for database operations"""
+        return self.model_dump(exclude_unset=True)
+
+class ProjectUpdate(BaseModel):
     """Schema for updating projects"""
     project_id: Optional[str] = None
     name: Optional[str] = None
@@ -181,4 +192,9 @@ class ProjectUpdate(ProjectBase):
     model_config = ConfigDict(from_attributes=True)
 
 class Project(ProjectBase):
+    """Full project model with all fields"""
+    id: Optional[int] = None
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
+
     model_config = ConfigDict(from_attributes=True)
