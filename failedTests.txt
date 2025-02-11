@@ -5,22 +5,17 @@ rootdir: /home/runner/workspace
 configfile: pyproject.toml
 plugins: anyio-4.7.0, asyncio-0.25.2, cov-6.0.0
 asyncio: mode=Mode.STRICT, asyncio_default_fixture_loop_scope=None
-collecting ... collected 12 items / 6 deselected / 6 selected
-run-last-failure: rerun previous 6 failures (skipped 8 files)
+collecting ... collected 7 items / 6 deselected / 1 selected
+run-last-failure: rerun previous 1 failure (skipped 10 files)
 
-tests/test_file_upload.py::test_dash_customer_handling FAILED            [ 16%]
-tests/test_services.py::test_create_time_entry_with_defaults FAILED      [ 33%]
-tests/test_time_entry.py::test_create_time_entry_with_defaults FAILED    [ 50%]
-tests/test_time_entry.py::test_create_time_entry_with_nonexistent_customer FAILED [ 66%]
-tests/test_time_entry.py::test_create_time_entry_customer_mismatch FAILED [ 83%]
-tests/test_time_entry.py::test_api_example_default_values FAILED         [100%]
+tests/test_file_upload.py::test_dash_customer_handling FAILED            [100%]
 
 =================================== FAILURES ===================================
 _________________________ test_dash_customer_handling __________________________
 
-client = <starlette.testclient.TestClient object at 0x7f21ccbb9550>
-setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7f21cc31c390>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
-tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-30/test_dash_customer_handling0')
+client = <starlette.testclient.TestClient object at 0x7f834ab907d0>
+setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7f8348f51d90>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
+tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-32/test_dash_customer_handling0')
 
     def test_dash_customer_handling(client, setup_test_data, tmp_path):
         """Test handling of dash (-) values in customer field"""
@@ -47,257 +42,21 @@ E       AssertionError: assert 'Unassigned' is None
 
 tests/test_file_upload.py:96: AssertionError
 ----------------------------- Captured stdout call -----------------------------
-{"timestamp": "2025-02-11T20:20:10.153714", "level": "INFO", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5237", "content-type": "multipart/form-data; boundary=e41fb2a8f1e10929014f4f4d85f6170a"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
-{"timestamp": "2025-02-11T20:20:10.156176", "level": "INFO", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.156551", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "TimesheetService initialized", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.156760", "level": "INFO", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.171913", "level": "INFO", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Successfully parsed 1 records from Excel file", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.255896", "level": "WARNING", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Request failed with status 201", "context": {"correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "status_code": 201, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "101.92", "response_headers": {"content-length": "317", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
-{"timestamp": "2025-02-11T20:20:10.256361", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 201}}
+{"timestamp": "2025-02-11T20:21:58.128969", "level": "INFO", "correlation_id": "6b88186d-773e-43fb-a3a2-2447cd2778e5", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "6b88186d-773e-43fb-a3a2-2447cd2778e5", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5237", "content-type": "multipart/form-data; boundary=2efbdfafa84ccf6370e8cd29d3b9771f"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+{"timestamp": "2025-02-11T20:21:58.131905", "level": "INFO", "correlation_id": "6b88186d-773e-43fb-a3a2-2447cd2778e5", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
+{"timestamp": "2025-02-11T20:21:58.132196", "level": "DEBUG", "correlation_id": "6b88186d-773e-43fb-a3a2-2447cd2778e5", "logger": "TimesheetTracker", "message": "TimesheetService initialized", "context": {}}
+{"timestamp": "2025-02-11T20:21:58.132438", "level": "INFO", "correlation_id": "6b88186d-773e-43fb-a3a2-2447cd2778e5", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
+{"timestamp": "2025-02-11T20:21:58.150137", "level": "INFO", "correlation_id": "6b88186d-773e-43fb-a3a2-2447cd2778e5", "logger": "TimesheetTracker", "message": "Successfully parsed 1 records from Excel file", "context": {}}
+{"timestamp": "2025-02-11T20:21:59.226195", "level": "WARNING", "correlation_id": "6b88186d-773e-43fb-a3a2-2447cd2778e5", "logger": "TimesheetTracker", "message": "Request failed with status 201", "context": {"correlation_id": "6b88186d-773e-43fb-a3a2-2447cd2778e5", "status_code": 201, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "1097.11", "response_headers": {"content-length": "317", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+{"timestamp": "2025-02-11T20:21:59.226794", "level": "DEBUG", "correlation_id": "6b88186d-773e-43fb-a3a2-2447cd2778e5", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 201}}
 ------------------------------ Captured log call -------------------------------
-INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T20:20:10.153871", "context": {"correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5237", "content-type": "multipart/form-data; boundary=e41fb2a8f1e10929014f4f4d85f6170a"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:20:10.156278", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "TimesheetService initialized", "timestamp": "2025-02-11T20:20:10.156631", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:20:10.156819", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 1 records from Excel file", "timestamp": "2025-02-11T20:20:10.172028", "context": {}}
-WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 201", "timestamp": "2025-02-11T20:20:10.256036", "context": {"correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "status_code": 201, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "101.92", "response_headers": {"content-length": "317", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
-DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T20:20:10.256457", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 201}}
-_____________________ test_create_time_entry_with_defaults _____________________
-
-db_session = <sqlalchemy.orm.session.Session object at 0x7f21cc376a90>
-setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7f21cc388b10>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
-
-    def test_create_time_entry_with_defaults(db_session, setup_test_data):
-        """Test creating a time entry with default values"""
-        service = TimeEntryService(db_session)
-        entry = TimeEntryCreate(
-            week_number=41,
-            month="October",
-            category="Other",
-            subcategory="Other Training",
-            customer="NonExistentCustomer",
-            project="NonExistentProject",
-            task_description="Test entry",
-            hours=8.0,
-            date=date(2024, 10, 7)
-        )
-    
-        result = service.create_time_entry(entry)
-        assert result is not None
-        assert result.customer == "Unassigned"
->       assert result.project == "Unassigned"
-E       AssertionError: assert None == 'Unassigned'
-E        +  where None = <TimeEntry(id=1, date=2024-10-07, hours=8.0, project=None)>.project
-
-tests/test_services.py:46: AssertionError
------------------------------ Captured stdout call -----------------------------
-{"timestamp": "2025-02-11T20:20:10.425244", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.425441", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "TimeEntryService initialized with database session", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.425732", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Starting creation of time entry with data: {'category': 'Other', 'subcategory': 'Other Training', 'customer': 'NonExistentCustomer', 'project': 'NonExistentProject', 'task_description': 'Test entry', 'hours': 8.0, 'date': datetime.date(2024, 10, 7)}", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.428411", "level": "INFO", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Customer NonExistentCustomer not found, defaulting to Unassigned", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.428640", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Validating and setting default categories", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.428815", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Creating TimeEntry model instance", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.430129", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Adding entry to database session", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.430390", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Committing transaction", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.454699", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Refreshing database entry", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.455673", "level": "INFO", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Successfully created time entry [1] for Unassigned - None (8.0 hours)", "context": {}}
------------------------------- Captured log call -------------------------------
-DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T20:20:10.425326", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "TimeEntryService initialized with database session", "timestamp": "2025-02-11T20:20:10.425554", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting creation of time entry with data: {'category': 'Other', 'subcategory': 'Other Training', 'customer': 'NonExistentCustomer', 'project': 'NonExistentProject', 'task_description': 'Test entry', 'hours': 8.0, 'date': datetime.date(2024, 10, 7)}", "timestamp": "2025-02-11T20:20:10.425821", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Customer NonExistentCustomer not found, defaulting to Unassigned", "timestamp": "2025-02-11T20:20:10.428516", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Validating and setting default categories", "timestamp": "2025-02-11T20:20:10.428706", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Creating TimeEntry model instance", "timestamp": "2025-02-11T20:20:10.428887", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Adding entry to database session", "timestamp": "2025-02-11T20:20:10.430227", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Committing transaction", "timestamp": "2025-02-11T20:20:10.430470", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Refreshing database entry", "timestamp": "2025-02-11T20:20:10.454768", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Successfully created time entry [1] for Unassigned - None (8.0 hours)", "timestamp": "2025-02-11T20:20:10.455773", "context": {}}
-_____________________ test_create_time_entry_with_defaults _____________________
-
-db_session = <sqlalchemy.orm.session.Session object at 0x7f21cc318490>
-
-    def test_create_time_entry_with_defaults(db_session):
-        """Test creating a time entry with default values"""
-        service = TimeEntryService(db_session)
-        entry = TimeEntryCreate(
-            category="Development",
-            subcategory="Coding",
-            task_description="Testing defaults",
-            date=date(2024, 1, 1)
-        )
-    
-        result = service.create_time_entry(entry)
-        assert result is not None
-        assert result.customer == DEFAULT_CUSTOMER
->       assert result.project == DEFAULT_PROJECT
-E       AssertionError: assert None == 'Unassigned'
-E        +  where None = <TimeEntry(id=1, date=2024-01-01, hours=0.0, project=None)>.project
-
-tests/test_time_entry.py:104: AssertionError
------------------------------ Captured stdout call -----------------------------
-{"timestamp": "2025-02-11T20:20:10.500659", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.500952", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "TimeEntryService initialized with database session", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.501287", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Starting creation of time entry with data: {'category': 'Development', 'subcategory': 'Coding', 'customer': None, 'project': None, 'task_description': 'Testing defaults', 'hours': 0.0, 'date': datetime.date(2024, 1, 1)}", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.501634", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Validating and setting default categories", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.501819", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Creating TimeEntry model instance", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.503264", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Adding entry to database session", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.503633", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Committing transaction", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.526926", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Refreshing database entry", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.528031", "level": "INFO", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Successfully created time entry [1] for Unassigned - None (0.0 hours)", "context": {}}
------------------------------- Captured log call -------------------------------
-DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T20:20:10.500768", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "TimeEntryService initialized with database session", "timestamp": "2025-02-11T20:20:10.501057", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting creation of time entry with data: {'category': 'Development', 'subcategory': 'Coding', 'customer': None, 'project': None, 'task_description': 'Testing defaults', 'hours': 0.0, 'date': datetime.date(2024, 1, 1)}", "timestamp": "2025-02-11T20:20:10.501370", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Validating and setting default categories", "timestamp": "2025-02-11T20:20:10.501705", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Creating TimeEntry model instance", "timestamp": "2025-02-11T20:20:10.501912", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Adding entry to database session", "timestamp": "2025-02-11T20:20:10.503356", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Committing transaction", "timestamp": "2025-02-11T20:20:10.503715", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Refreshing database entry", "timestamp": "2025-02-11T20:20:10.527042", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Successfully created time entry [1] for Unassigned - None (0.0 hours)", "timestamp": "2025-02-11T20:20:10.528138", "context": {}}
-_______________ test_create_time_entry_with_nonexistent_customer _______________
-
-db_session = <sqlalchemy.orm.session.Session object at 0x7f21cc782bd0>
-
-    def test_create_time_entry_with_nonexistent_customer(db_session):
-        """Test creating a time entry with a non-existent customer"""
-        service = TimeEntryService(db_session)
-        entry = TimeEntryCreate(
-            category="Development",
-            subcategory="Coding",
-            customer="NonExistentCustomer",  # Customer that doesn't exist
-            project="NonExistentProject",    # Project that doesn't exist
-            task_description="Testing foreign key handling",
-            hours=8.0,
-            date=date(2024, 1, 1)
-        )
-    
-        result = service.create_time_entry(entry)
-        assert result is not None
-        assert result.customer == DEFAULT_CUSTOMER  # Should fall back to default
->       assert result.project == DEFAULT_PROJECT    # Should fall back to default
-E       AssertionError: assert None == 'Unassigned'
-E        +  where None = <TimeEntry(id=1, date=2024-01-01, hours=8.0, project=None)>.project
-
-tests/test_time_entry.py:138: AssertionError
------------------------------ Captured stdout call -----------------------------
-{"timestamp": "2025-02-11T20:20:10.639751", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.640027", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "TimeEntryService initialized with database session", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.640282", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Starting creation of time entry with data: {'category': 'Development', 'subcategory': 'Coding', 'customer': 'NonExistentCustomer', 'project': 'NonExistentProject', 'task_description': 'Testing foreign key handling', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.641353", "level": "INFO", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Customer NonExistentCustomer not found, defaulting to Unassigned", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.641676", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Validating and setting default categories", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.641898", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Creating TimeEntry model instance", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.643378", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Adding entry to database session", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.643734", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Committing transaction", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.667881", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Refreshing database entry", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.669071", "level": "INFO", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Successfully created time entry [1] for Unassigned - None (8.0 hours)", "context": {}}
------------------------------- Captured log call -------------------------------
-DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T20:20:10.639862", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "TimeEntryService initialized with database session", "timestamp": "2025-02-11T20:20:10.640101", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting creation of time entry with data: {'category': 'Development', 'subcategory': 'Coding', 'customer': 'NonExistentCustomer', 'project': 'NonExistentProject', 'task_description': 'Testing foreign key handling', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}", "timestamp": "2025-02-11T20:20:10.640346", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Customer NonExistentCustomer not found, defaulting to Unassigned", "timestamp": "2025-02-11T20:20:10.641461", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Validating and setting default categories", "timestamp": "2025-02-11T20:20:10.641757", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Creating TimeEntry model instance", "timestamp": "2025-02-11T20:20:10.641970", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Adding entry to database session", "timestamp": "2025-02-11T20:20:10.643523", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Committing transaction", "timestamp": "2025-02-11T20:20:10.643810", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Refreshing database entry", "timestamp": "2025-02-11T20:20:10.667999", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Successfully created time entry [1] for Unassigned - None (8.0 hours)", "timestamp": "2025-02-11T20:20:10.669163", "context": {}}
-___________________ test_create_time_entry_customer_mismatch ___________________
-
-db_session = <sqlalchemy.orm.session.Session object at 0x7f21c9e38550>
-setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7f21c9e391d0>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
-
-    def test_create_time_entry_customer_mismatch(db_session, setup_test_data):
-        """Test creating a time entry with mismatched customer-project relationship"""
-        service = TimeEntryService(db_session)
-        entry = TimeEntryCreate(
-            category="Development",
-            subcategory="Coding",
-            customer="ECOLAB",  # Existing customer
-            project="NonMatchingProject",  # Project not belonging to this customer
-            task_description="Testing customer-project mismatch",
-            hours=8.0,
-            date=date(2024, 1, 1)
-        )
-    
-        result = service.create_time_entry(entry)
-        assert result is not None
-        assert result.customer == DEFAULT_CUSTOMER  # Should fall back to default
->       assert result.project == DEFAULT_PROJECT    # Should fall back to default
-E       AssertionError: assert None == 'Unassigned'
-E        +  where None = <TimeEntry(id=1, date=2024-01-01, hours=8.0, project=None)>.project
-
-tests/test_time_entry.py:157: AssertionError
------------------------------ Captured stdout call -----------------------------
-{"timestamp": "2025-02-11T20:20:10.939433", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.939842", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "TimeEntryService initialized with database session", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.940103", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Starting creation of time entry with data: {'category': 'Development', 'subcategory': 'Coding', 'customer': 'ECOLAB', 'project': 'NonMatchingProject', 'task_description': 'Testing customer-project mismatch', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.941150", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Fetching project with ID: NonMatchingProject", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.942596", "level": "INFO", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Project NonMatchingProject not found or doesn't belong to customer, defaulting both customer and project to defaults", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.942776", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Validating and setting default categories", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.942933", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Creating TimeEntry model instance", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.944261", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Adding entry to database session", "context": {}}
-{"timestamp": "2025-02-11T20:20:10.944504", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Committing transaction", "context": {}}
-{"timestamp": "2025-02-11T20:20:11.045444", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Refreshing database entry", "context": {}}
-{"timestamp": "2025-02-11T20:20:11.046466", "level": "INFO", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Successfully created time entry [1] for Unassigned - None (8.0 hours)", "context": {}}
------------------------------- Captured log call -------------------------------
-DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T20:20:10.939647", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "TimeEntryService initialized with database session", "timestamp": "2025-02-11T20:20:10.939933", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting creation of time entry with data: {'category': 'Development', 'subcategory': 'Coding', 'customer': 'ECOLAB', 'project': 'NonMatchingProject', 'task_description': 'Testing customer-project mismatch', 'hours': 8.0, 'date': datetime.date(2024, 1, 1)}", "timestamp": "2025-02-11T20:20:10.940158", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Fetching project with ID: NonMatchingProject", "timestamp": "2025-02-11T20:20:10.941234", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Project NonMatchingProject not found or doesn't belong to customer, defaulting both customer and project to defaults", "timestamp": "2025-02-11T20:20:10.942657", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Validating and setting default categories", "timestamp": "2025-02-11T20:20:10.942825", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Creating TimeEntry model instance", "timestamp": "2025-02-11T20:20:10.942992", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Adding entry to database session", "timestamp": "2025-02-11T20:20:10.944317", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Committing transaction", "timestamp": "2025-02-11T20:20:10.944595", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Refreshing database entry", "timestamp": "2025-02-11T20:20:11.045591", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Successfully created time entry [1] for Unassigned - None (8.0 hours)", "timestamp": "2025-02-11T20:20:11.046612", "context": {}}
-_______________________ test_api_example_default_values ________________________
-
-db_session = <sqlalchemy.orm.session.Session object at 0x7f21ca7c8ed0>
-
-    def test_api_example_default_values(db_session):
-        """Test the API example with default values working correctly"""
-        service = TimeEntryService(db_session)
-        entry = TimeEntryCreate(
-            category="string",
-            subcategory="string",
-            customer="string",  # Non-existent customer
-            project="string",   # Non-existent project
-            task_description="string",
-            date=date(2025, 1, 9)
-            # Not providing hours or week_number/month
-        )
-    
-        result = service.create_time_entry(entry)
-        assert result is not None
-        assert result.customer == DEFAULT_CUSTOMER
->       assert result.project == DEFAULT_PROJECT
-E       AssertionError: assert None == 'Unassigned'
-E        +  where None = <TimeEntry(id=1, date=2025-01-09, hours=0.0, project=None)>.project
-
-tests/test_time_entry.py:201: AssertionError
------------------------------ Captured stdout call -----------------------------
-{"timestamp": "2025-02-11T20:20:11.147719", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
-{"timestamp": "2025-02-11T20:20:11.148031", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "TimeEntryService initialized with database session", "context": {}}
-{"timestamp": "2025-02-11T20:20:11.148401", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Starting creation of time entry with data: {'category': 'string', 'subcategory': 'string', 'customer': 'string', 'project': 'string', 'task_description': 'string', 'hours': 0.0, 'date': datetime.date(2025, 1, 9)}", "context": {}}
-{"timestamp": "2025-02-11T20:20:11.149453", "level": "INFO", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Customer string not found, defaulting to Unassigned", "context": {}}
-{"timestamp": "2025-02-11T20:20:11.149694", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Validating and setting default categories", "context": {}}
-{"timestamp": "2025-02-11T20:20:11.149921", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Creating TimeEntry model instance", "context": {}}
-{"timestamp": "2025-02-11T20:20:11.151269", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Adding entry to database session", "context": {}}
-{"timestamp": "2025-02-11T20:20:11.151543", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Committing transaction", "context": {}}
-{"timestamp": "2025-02-11T20:20:11.200915", "level": "DEBUG", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Refreshing database entry", "context": {}}
-{"timestamp": "2025-02-11T20:20:11.202023", "level": "INFO", "correlation_id": "80853de0-818d-4307-9c69-9ad0f8cd5f36", "logger": "TimesheetTracker", "message": "Successfully created time entry [1] for Unassigned - None (0.0 hours)", "context": {}}
------------------------------- Captured log call -------------------------------
-DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T20:20:11.147851", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "TimeEntryService initialized with database session", "timestamp": "2025-02-11T20:20:11.148153", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting creation of time entry with data: {'category': 'string', 'subcategory': 'string', 'customer': 'string', 'project': 'string', 'task_description': 'string', 'hours': 0.0, 'date': datetime.date(2025, 1, 9)}", "timestamp": "2025-02-11T20:20:11.148517", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Customer string not found, defaulting to Unassigned", "timestamp": "2025-02-11T20:20:11.149572", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Validating and setting default categories", "timestamp": "2025-02-11T20:20:11.149776", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Creating TimeEntry model instance", "timestamp": "2025-02-11T20:20:11.150003", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Adding entry to database session", "timestamp": "2025-02-11T20:20:11.151352", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Committing transaction", "timestamp": "2025-02-11T20:20:11.151620", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Refreshing database entry", "timestamp": "2025-02-11T20:20:11.201040", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Successfully created time entry [1] for Unassigned - None (0.0 hours)", "timestamp": "2025-02-11T20:20:11.202101", "context": {}}
+INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T20:21:58.129186", "context": {"correlation_id": "6b88186d-773e-43fb-a3a2-2447cd2778e5", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5237", "content-type": "multipart/form-data; boundary=2efbdfafa84ccf6370e8cd29d3b9771f"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:21:58.131997", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "TimesheetService initialized", "timestamp": "2025-02-11T20:21:58.132281", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:21:58.132536", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 1 records from Excel file", "timestamp": "2025-02-11T20:21:58.150252", "context": {}}
+WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 201", "timestamp": "2025-02-11T20:21:59.226353", "context": {"correlation_id": "6b88186d-773e-43fb-a3a2-2447cd2778e5", "status_code": 201, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "1097.11", "response_headers": {"content-length": "317", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T20:21:59.226880", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 201}}
 =============================== warnings summary ===============================
 .pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345
   /home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345: UserWarning: Valid config keys have changed in V2:
@@ -307,9 +66,4 @@ INFO     TimesheetTracker:logger.py:32 {"message": "Successfully created time en
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 =========================== short test summary info ============================
 FAILED tests/test_file_upload.py::test_dash_customer_handling - AssertionErro...
-FAILED tests/test_services.py::test_create_time_entry_with_defaults - Asserti...
-FAILED tests/test_time_entry.py::test_create_time_entry_with_defaults - Asser...
-FAILED tests/test_time_entry.py::test_create_time_entry_with_nonexistent_customer
-FAILED tests/test_time_entry.py::test_create_time_entry_customer_mismatch - A...
-FAILED tests/test_time_entry.py::test_api_example_default_values - AssertionE...
-================= 6 failed, 6 deselected, 1 warning in 13.84s ==================
+================== 1 failed, 6 deselected, 1 warning in 2.82s ==================
