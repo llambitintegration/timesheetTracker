@@ -8,48 +8,74 @@ from utils.validators import DEFAULT_CUSTOMER, DEFAULT_PROJECT
 logger = Logger().get_logger()
 
 class XLSAnalyzer:
+    REQUIRED_COLUMNS = {
+        'Week Number', 'Month', 'Category', 'Subcategory',
+        'Customer', 'Project', 'Task Description', 'Hours', 'Date'
+    }
+
     @staticmethod
     def read_excel(file_contents: bytes) -> List[Dict[str, Any]]:
         """Read Excel file and return list of dictionaries with data."""
         try:
-            # Read first sheet from Excel file
+            logger.debug("Starting Excel file analysis")
+
+            # Read Excel file
             df = pd.read_excel(
                 BytesIO(file_contents),
-                sheet_name=0,
-                dtype={
-                    'Week Number': 'Int64',
-                    'Month': str,
-                    'Category': str,
-                    'Subcategory': str,
-                    'Customer': str,
-                    'Project': str,
-                    'Task Description': str
-                }
+                sheet_name=0
             )
+
+            # Verify all required columns exist
+            missing_columns = XLSAnalyzer.REQUIRED_COLUMNS - set(df.columns)
+            if missing_columns:
+                # Add missing columns with default values
+                for col in missing_columns:
+                    if col == 'Week Number':
+                        df[col] = 0
+                    elif col == 'Hours':
+                        df[col] = 0.0
+                    elif col == 'Customer' or col == 'Project':
+                        df[col] = '-'
+                    else:
+                        df[col] = ''
 
             # Drop rows where all elements are NaN
             df = df.dropna(how='all')
 
+            # Fill missing values with appropriate defaults
+            df = df.fillna({
+                'Week Number': 0,
+                'Month': '',
+                'Category': 'Other',
+                'Subcategory': 'General',
+                'Customer': '-',
+                'Project': '-',
+                'Task Description': '',
+                'Hours': 0.0
+            })
+
             # Convert date column to datetime
             df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
 
-            # Fill NaN values with appropriate defaults
-            # Convert Week Number to numeric, replacing non-numeric with 0
+            # Convert Week Number to integer
             df['Week Number'] = pd.to_numeric(df['Week Number'], errors='coerce').fillna(0).astype('Int64')
 
-            # Replace NaN and dash values with None for customer and project
-            df['Customer'] = df['Customer'].replace({'-': None, 'nan': None}).fillna(None)
-            df['Project'] = df['Project'].replace({'-': None, 'nan': None}).fillna(None)
-
-            # Fill missing values appropriately
-            df['Task Description'] = df['Task Description'].fillna('')
-            df['Month'] = df['Month'].fillna('')
-            df['Category'] = df['Category'].fillna('Other')
-            df['Subcategory'] = df['Subcategory'].fillna('Other')
-            df['Hours'] = df['Hours'].fillna(0.0)
-
-            # Convert DataFrame to list of dictionaries
-            records = df.to_dict('records')
+            # Convert to records
+            records = []
+            for _, row in df.iterrows():
+                record = {
+                    'Week Number': int(row['Week Number']),
+                    'Month': str(row['Month']),
+                    'Category': str(row['Category']),
+                    'Subcategory': str(row['Subcategory']),
+                    'Customer': DEFAULT_CUSTOMER if row['Customer'] in ['-', '', None] else str(row['Customer']),
+                    'Project': DEFAULT_PROJECT if row['Project'] in ['-', '', None] else str(row['Project']),
+                    'Task Description': str(row['Task Description']),
+                    'Hours': float(row['Hours']),
+                    'Date': row['Date'].strftime('%Y-%m-%d') if pd.notnull(row['Date']) else None
+                }
+                if record['Date'] is not None:  # Only include records with valid dates
+                    records.append(record)
 
             logger.info(f"Successfully parsed {len(records)} records from Excel file")
             return records

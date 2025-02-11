@@ -6,7 +6,7 @@ from database import schemas
 from .base_repository import BaseRepository
 from utils.xls_analyzer import XLSAnalyzer
 from utils.logger import Logger
-import pandas as pd # Added import for pandas
+import pandas as pd
 
 logger = Logger().get_logger()
 
@@ -21,6 +21,7 @@ class TimeEntryRepository(BaseRepository[TimeEntry]):
         else:
             entry_dict = data.model_dump(exclude={'id', 'created_at', 'updated_at'})
             db_entry = TimeEntry(**entry_dict)
+
         db.add(db_entry)
         db.commit()
         db.refresh(db_entry)
@@ -28,15 +29,20 @@ class TimeEntryRepository(BaseRepository[TimeEntry]):
 
     def bulk_create(self, db: Session, entries: List[schemas.TimeEntryCreate]) -> List[TimeEntry]:
         """Bulk create time entries from list of Pydantic models."""
-        db_entries = [
-            TimeEntry(**entry.model_dump(exclude={'id', 'created_at', 'updated_at'}))
-            for entry in entries
-        ]
-        db.add_all(db_entries)
-        db.commit()
-        for entry in db_entries:
-            db.refresh(entry)
-        return db_entries
+        try:
+            db_entries = [
+                TimeEntry(**entry.model_dump(exclude={'id', 'created_at', 'updated_at'}))
+                for entry in entries
+            ]
+            db.add_all(db_entries)
+            db.commit()
+            for entry in db_entries:
+                db.refresh(entry)
+            return db_entries
+        except Exception as e:
+            logger.error(f"Error in bulk create: {str(e)}")
+            db.rollback()
+            raise
 
     def update(self, db: Session, entry: TimeEntry) -> TimeEntry:
         """Update an existing time entry."""
@@ -81,33 +87,17 @@ class TimeEntryRepository(BaseRepository[TimeEntry]):
 
             entries = []
             for record in records:
-                # Convert NaN values to None for string fields
-                customer = record.get('Customer')
-                customer = None if pd.isna(customer) else customer
-
-                project = record.get('Project')
-                project = None if pd.isna(project) else project
-
-                task_description = record.get('Task Description')
-                task_description = None if pd.isna(task_description) else task_description
-
-                # Convert date to proper format
-                entry_date = record.get('Date')
-                if isinstance(entry_date, pd.Timestamp):
-                    entry_date = entry_date.date()
-
-                entry_data = schemas.TimeEntryCreate(
-                    date=entry_date,
-                    week_number=int(record.get('Week Number', 0)), # Handle potential NaN in Week Number
-                    month=record.get('Month', 'Unknown'), # Handle potential NaN in Month
-                    category=record.get('Category', 'Other'),
-                    subcategory=record.get('Subcategory', 'General'),
-                    customer=customer,
-                    project=project,
-                    task_description=task_description,
-                    hours=float(record.get('Hours', 0.0))
-                )
-                entries.append(entry_data)
+                if not pd.isna(record.get('Date')):  # Only process records with valid dates
+                    entry_data = schemas.TimeEntryCreate(
+                        date=record.get('Date'),
+                        category=record.get('Category', 'Other'),
+                        subcategory=record.get('Subcategory', 'General'),
+                        customer=record.get('Customer'),
+                        project=record.get('Project'),
+                        task_description=record.get('Task Description', ''),
+                        hours=float(record.get('Hours', 0.0))
+                    )
+                    entries.append(entry_data)
 
             # Use bulk create for better performance
             return self.bulk_create(db, entries)

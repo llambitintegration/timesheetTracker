@@ -60,7 +60,7 @@ def test_xls_analyzer_empty_file(tmp_path):
     with pytest.raises(ValueError):
         analyzer.read_excel(b'')
 
-def test_xls_analyzer_invalid_data(tmp_path, invalid_timesheet_data, setup_test_data):
+def test_xls_analyzer_invalid_data(tmp_path, invalid_timesheet_data):
     """Test XLSAnalyzer with invalid data"""
     excel_file = create_test_excel(tmp_path, invalid_timesheet_data)
 
@@ -70,15 +70,21 @@ def test_xls_analyzer_invalid_data(tmp_path, invalid_timesheet_data, setup_test_
         records = analyzer.read_excel(contents)
 
         assert len(records) == 1
-        assert records[0]['Customer'] is None
-        assert records[0]['Project'] is None
+        assert records[0]['Customer'] == 'Unassigned'
+        assert records[0]['Project'] == 'Unassigned'
+        assert records[0]['Category'] == 'Development'
+        assert records[0]['Hours'] == 8.0
 
 def test_dash_customer_handling(client, setup_test_data, tmp_path):
     """Test handling of dash (-) values in customer field"""
     data = {
+        'Week Number': [41],
+        'Month': ['October'],
         'Category': ['Development'],
+        'Subcategory': ['Backend'],
         'Customer': ['-'],
         'Project': ['-'],
+        'Task Description': ['Test task'],
         'Hours': [8.0],
         'Date': ['2024-10-07']
     }
@@ -93,8 +99,8 @@ def test_dash_customer_handling(client, setup_test_data, tmp_path):
     assert response.status_code == 201
     entries = response.json()["entries"]
     assert len(entries) == 1
-    assert entries[0]["customer"] is None
-    assert entries[0]["project"] is None
+    assert entries[0]["customer"] == "Unassigned"
+    assert entries[0]["project"] == "Unassigned"
 
 def test_upload_excel_valid(client, setup_test_data, tmp_path, valid_timesheet_data):
     """Test uploading a valid Excel file"""
@@ -114,10 +120,15 @@ def test_upload_excel_valid(client, setup_test_data, tmp_path, valid_timesheet_d
 def test_xls_analyzer_date_conversion(tmp_path):
     """Test date conversion in XLSAnalyzer"""
     data = {
-        'Date': ['2024-10-07', '2024-10-08'],
         'Week Number': [41, 41],
+        'Month': ['October', 'October'],
         'Category': ['Test', 'Test'],
-        'Hours': [8.0, 8.0]
+        'Subcategory': ['Test', 'Test'],
+        'Customer': ['ECOLAB', 'ECOLAB'],
+        'Project': ['Project_Magic_Bullet', 'Project_Magic_Bullet'],
+        'Task Description': ['Test 1', 'Test 2'],
+        'Hours': [8.0, 8.0],
+        'Date': ['2024-10-07', '2024-10-08']
     }
     excel_file = create_test_excel(tmp_path, data)
 
@@ -127,12 +138,16 @@ def test_xls_analyzer_date_conversion(tmp_path):
         records = analyzer.read_excel(contents)
 
         assert len(records) == 2
-        assert isinstance(records[0]['Date'], pd.Timestamp)
-        assert str(records[0]['Date'].date()) == '2024-10-07'
+        assert records[0]['Date'] == '2024-10-07'
+        assert records[1]['Date'] == '2024-10-08'
 
 def test_xls_analyzer_missing_columns(tmp_path):
     """Test XLSAnalyzer with missing required columns"""
-    data = {'Category': ['Test'], 'Hours': [8.0]}
+    data = {
+        'Category': ['Test'],
+        'Hours': [8.0],
+        'Date': ['2024-10-07']
+    }
     excel_file = create_test_excel(tmp_path, data)
 
     with open(excel_file, "rb") as f:
@@ -141,6 +156,6 @@ def test_xls_analyzer_missing_columns(tmp_path):
         records = analyzer.read_excel(contents)
 
         assert len(records) == 1
-        assert records[0]['Customer'] is None
-        assert records[0]['Project'] is None
+        assert records[0]['Customer'] == 'Unassigned'
+        assert records[0]['Project'] == 'Unassigned'
         assert records[0]['Week Number'] == 0

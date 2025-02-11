@@ -3,13 +3,12 @@ from datetime import datetime, date
 from services.time_entry_service import TimeEntryService
 from database.schemas import TimeEntryCreate
 from models import TimeEntry
+from utils.validators import DEFAULT_CUSTOMER, DEFAULT_PROJECT
 
 def test_create_time_entry(db_session, setup_test_data):
     """Test creating a single time entry"""
     service = TimeEntryService(db_session)
     entry = TimeEntryCreate(
-        week_number=41,
-        month="October",
         category="Other",
         subcategory="Other Training",
         customer="ECOLAB",
@@ -24,13 +23,13 @@ def test_create_time_entry(db_session, setup_test_data):
     assert result.customer == "ECOLAB"
     assert result.project == "Project_Magic_Bullet"
     assert result.hours == 8.0
+    assert result.week_number == 41
+    assert result.month == "October"
 
 def test_create_time_entry_with_defaults(db_session, setup_test_data):
     """Test creating a time entry with default values"""
     service = TimeEntryService(db_session)
     entry = TimeEntryCreate(
-        week_number=41,
-        month="October",
         category="Other",
         subcategory="Other Training",
         customer="NonExistentCustomer",
@@ -42,17 +41,17 @@ def test_create_time_entry_with_defaults(db_session, setup_test_data):
 
     result = service.create_time_entry(entry)
     assert result is not None
-    assert result.customer == "Unassigned"
-    assert result.project == "Unassigned"
+    assert result.customer == DEFAULT_CUSTOMER
+    assert result.project == DEFAULT_PROJECT
     assert result.hours == 8.0
+    assert result.week_number == 41
+    assert result.month == "October"
 
 def test_create_many_entries(db_session, setup_test_data):
     """Test bulk creation of time entries"""
     service = TimeEntryService(db_session)
     entries = [
         TimeEntryCreate(
-            week_number=41,
-            month="October",
             category="Other",
             subcategory="Other Training",
             customer="ECOLAB",
@@ -62,8 +61,6 @@ def test_create_many_entries(db_session, setup_test_data):
             date=date(2024, 10, 7)
         ),
         TimeEntryCreate(
-            week_number=41,
-            month="October",
             category="Other",
             subcategory="Other Training",
             customer="NonExistentCustomer",
@@ -77,16 +74,16 @@ def test_create_many_entries(db_session, setup_test_data):
     results = service.create_many_entries(entries)
     assert len(results) == 2
     assert results[0].customer == "ECOLAB"
-    assert results[1].customer == "Unassigned"
+    assert results[1].customer == DEFAULT_CUSTOMER
+    assert results[0].project == "Project_Magic_Bullet"
+    assert results[1].project == DEFAULT_PROJECT
 
 def test_get_time_entries(db_session, setup_test_data):
     """Test retrieving time entries with filters"""
     service = TimeEntryService(db_session)
-    
+
     # Create some test entries first
     entry = TimeEntryCreate(
-        week_number=41,
-        month="October",
         category="Other",
         subcategory="Other Training",
         customer="ECOLAB",
@@ -114,13 +111,11 @@ def test_get_time_entries(db_session, setup_test_data):
 def test_get_time_entries_pagination(db_session, setup_test_data):
     """Test time entries pagination"""
     service = TimeEntryService(db_session)
-    
+
     # Create multiple test entries
     entries = []
     for i in range(5):
         entry = TimeEntryCreate(
-            week_number=41,
-            month="October",
             category="Other",
             subcategory="Other Training",
             customer="ECOLAB",

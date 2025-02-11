@@ -8,9 +8,6 @@ class TimeEntry(BaseModel):
     """Time entry model for tracking hours"""
     __tablename__ = "time_entries"
 
-    # Removing explicit id setting to let database handle it
-    # id = Column(Integer, primary_key=True, autoincrement=True)  # Now inherited from BaseModel
-
     # These will be auto-calculated based on date
     week_number = Column(Integer, nullable=False)
     month = Column(String, nullable=False)
@@ -36,7 +33,13 @@ class TimeEntry(BaseModel):
 
         # Set default hours if not provided
         if 'hours' not in kwargs:
-            kwargs['hours'] = 0
+            kwargs['hours'] = 0.0
+
+        # Handle None or empty string values for customer and project
+        if not kwargs.get('customer') or kwargs.get('customer') == '-':
+            kwargs['customer'] = 'Unassigned'
+        if not kwargs.get('project') or kwargs.get('project') == '-':
+            kwargs['project'] = 'Unassigned'
 
         super().__init__(**kwargs)
 

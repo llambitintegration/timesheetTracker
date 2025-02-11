@@ -8,7 +8,7 @@ from utils.logger import Logger
 from models.timeEntry import TimeEntry
 from database.timesheet_repository import TimeEntryRepository
 import pandas as pd
-from utils.validators import validate_database_references
+from utils.validators import validate_database_references, DEFAULT_CUSTOMER, DEFAULT_PROJECT
 from datetime import datetime
 import json
 from decimal import Decimal
@@ -45,7 +45,14 @@ class TimesheetService:
     def _bulk_create_entries(self, entries: List[schemas.TimeEntryCreate]) -> List[Dict[str, Any]]:
         """Bulk create time entries in a single transaction"""
         try:
-            # Prepare all entries first
+            created_entries = []
+            for entry in entries:
+                if not entry.customer or entry.customer == '-':
+                    entry.customer = DEFAULT_CUSTOMER
+                if not entry.project or entry.project == '-':
+                    entry.project = DEFAULT_PROJECT
+
+            # Create TimeEntry instances from the validated entries
             db_entries = [
                 TimeEntry(**{k: v for k, v in entry.model_dump().items() if k not in {'id', 'created_at', 'updated_at'}})
                 for entry in entries
@@ -87,7 +94,19 @@ class TimesheetService:
                 )
 
             logger.info(f"Processing {len(entries)} entries")
-            validated_entries, db_validation_errors = validate_database_references(self.db, entries)
+            # Convert TimeEntry objects to TimeEntryCreate objects for validation
+            entry_creates = [
+                schemas.TimeEntryCreate(
+                    category=entry.category,
+                    subcategory=entry.subcategory,
+                    customer=entry.customer if entry.customer not in ['-', '', None] else DEFAULT_CUSTOMER,
+                    project=entry.project if entry.project not in ['-', '', None] else DEFAULT_PROJECT,
+                    task_description=entry.task_description,
+                    hours=entry.hours,
+                    date=entry.date
+                ) for entry in entries
+            ]
+            validated_entries, db_validation_errors = validate_database_references(self.db, entry_creates)
             validation_errors.extend(db_validation_errors)
 
             if not validated_entries:
@@ -104,12 +123,46 @@ class TimesheetService:
                 "validation_errors": validation_errors
             }
 
-        except HTTPException as e:
+        except ValueError as e:
             logger.error(f"Error processing timesheet: {str(e)}")
+            raise HTTPException(status_code=400, detail=str(e))
+        except HTTPException:
             raise
         except Exception as e:
             logger.error(f"Error processing timesheet: {str(e)}")
             raise HTTPException(status_code=400, detail=str(e))
+
+    def get_entries(self, skip: int = 0, limit: int = 100) -> List[TimeEntry]:
+        """Get paginated time entries"""
+        return crud.get_time_entries(self.db, skip=skip, limit=limit)
+
+    def get_entries_by_date(self, date: datetime) -> List[TimeEntry]:
+        """Get time entries for a specific date"""
+        try:
+            entries = crud.get_time_entries_by_date(self.db, date)
+            if not entries:
+                logger.info(f"No entries found for date: {date}")
+                return []
+            logger.info(f"Found {len(entries)} entries for date: {date}")
+            return entries
+        except Exception as e:
+            logger.error(f"Error fetching time entries for date {date}: {str(e)}")
+            raise HTTPException(status_code=500, detail=str(e))
+
+    def update_entry(self, entry_id: int, entry: schemas.TimeEntryUpdate) -> TimeEntry:
+        """Update an existing time entry"""
+        db_entry = crud.get_time_entry(self.db, entry_id)
+        if not db_entry:
+            raise HTTPException(status_code=404, detail="Time entry not found")
+        return crud.update_time_entry(self.db, db_entry, entry)
+
+    def delete_entry(self, entry_id: int) -> Dict[str, str]:
+        """Delete a time entry"""
+        db_entry = crud.get_time_entry(self.db, entry_id)
+        if not db_entry:
+            raise HTTPException(status_code=404, detail="Time entry not found")
+        crud.delete_time_entry(self.db, db_entry)
+        return {"message": "Time entry deleted successfully"}
 
     def _process_excel(self, contents: bytes) -> List[schemas.TimeEntryCreate]:
         """Process Excel file contents - first worksheet only"""
@@ -138,7 +191,6 @@ class TimesheetService:
             )
 
         valid_entries = []
-
         for idx, row in df.iterrows():
             try:
                 hours = float(row['Hours'])
@@ -163,37 +215,3 @@ class TimesheetService:
                 continue
 
         return valid_entries
-
-    def get_entries(self, skip: int = 0, limit: int = 100) -> List[TimeEntry]:
-        """Get paginated time entries"""
-        return crud.get_time_entries(self.db, skip=skip, limit=limit)
-
-    def get_entries_by_date(self, date: datetime) -> List[TimeEntry]:
-        """Get time entries for a specific date"""
-        try:
-            entries = crud.get_time_entries_by_date(self.db, date)
-            if not entries:
-                logger.info(f"No entries found for date: {date}")
-                return []
-            logger.info(f"Found {len(entries)} entries for date: {date}")
-            return entries
-        except Exception as e:
-            logger.error(f"Error fetching time entries for date {date}: {str(e)}")
-            raise HTTPException(status_code=500, detail=str(e))
-
-    def update_entry(self, entry_id: int, entry: schemas.TimeEntryUpdate) -> TimeEntry:
-        """Update an existing time entry"""
-        db_entry = crud.get_time_entry(self.db, entry_id)
-        if not db_entry:
-            raise HTTPException(status_code=404, detail="Time entry not found")
-
-        return crud.update_time_entry(self.db, db_entry, entry)
-
-    def delete_entry(self, entry_id: int) -> Dict[str, str]:
-        """Delete a time entry"""
-        db_entry = crud.get_time_entry(self.db, entry_id)
-        if not db_entry:
-            raise HTTPException(status_code=404, detail="Time entry not found")
-
-        crud.delete_time_entry(self.db, db_entry)
-        return {"message": "Time entry deleted successfully"}
