@@ -5,60 +5,58 @@ rootdir: /home/runner/workspace
 configfile: pyproject.toml
 plugins: anyio-4.7.0, asyncio-0.25.2, cov-6.0.0
 asyncio: mode=Mode.STRICT, asyncio_default_fixture_loop_scope=None
-collecting ... collected 8 items / 6 deselected / 2 selected
-run-last-failure: rerun previous 2 failures (skipped 10 files)
+collecting ... collected 7 items / 6 deselected / 1 selected
+run-last-failure: rerun previous 1 failure (skipped 10 files)
 
-tests/test_file_upload.py::test_xls_analyzer_invalid_data FAILED         [ 50%]
-tests/test_file_upload.py::test_xls_analyzer_missing_columns FAILED      [100%]
+tests/test_file_upload.py::test_dash_customer_handling FAILED            [100%]
 
 =================================== FAILURES ===================================
-________________________ test_xls_analyzer_invalid_data ________________________
+_________________________ test_dash_customer_handling __________________________
 
-tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-22/test_xls_analyzer_invalid_data0')
-invalid_timesheet_data = {'Category': ['Development'], 'Date': ['2024-10-07'], 'Hours': [8.0]}
-setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7f86ae77c190>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
+client = <starlette.testclient.TestClient object at 0x7f8dd7f74810>
+setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7f8dd772e550>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
+tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-24/test_dash_customer_handling0')
 
-    def test_xls_analyzer_invalid_data(tmp_path, invalid_timesheet_data, setup_test_data):
-        """Test XLSAnalyzer with invalid data"""
-        excel_file = create_test_excel(tmp_path, invalid_timesheet_data)
-    
-        with open(excel_file, "rb") as f:
-            contents = f.read()
-            analyzer = XLSAnalyzer()
-            records = analyzer.read_excel(contents)
-    
-            assert len(records) == 1
->           assert records[0]['Customer'] in ['-', 'Unassigned']
-E           AssertionError: assert None in ['-', 'Unassigned']
-
-tests/test_file_upload.py:74: AssertionError
------------------------------ Captured stdout call -----------------------------
-{"timestamp": "2025-02-11T20:14:24.483294", "level": "INFO", "correlation_id": "undefined", "logger": "TimesheetTracker", "message": "Successfully parsed 1 records from Excel file", "context": {}}
------------------------------- Captured log call -------------------------------
-INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 1 records from Excel file", "timestamp": "2025-02-11T20:14:24.483442", "context": {}}
-______________________ test_xls_analyzer_missing_columns _______________________
-
-tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-22/test_xls_analyzer_missing_colu0')
-
-    def test_xls_analyzer_missing_columns(tmp_path):
-        """Test XLSAnalyzer with missing required columns"""
-        data = {'Category': ['Test'], 'Hours': [8.0]}
+    def test_dash_customer_handling(client, setup_test_data, tmp_path):
+        """Test handling of dash (-) values in customer field"""
+        data = {
+            'Category': ['Development'],
+            'Customer': ['-'],
+            'Project': ['-'],
+            'Hours': [8.0],
+            'Date': ['2024-10-07']
+        }
         excel_file = create_test_excel(tmp_path, data)
     
         with open(excel_file, "rb") as f:
-            contents = f.read()
-            analyzer = XLSAnalyzer()
-            records = analyzer.read_excel(contents)
+            response = client.post(
+                "/time-entries/upload/",
+                files={"file": ("test.xlsx", f, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
+            )
     
-            assert len(records) == 1
->           assert records[0]['Customer'] == '-'
-E           AssertionError: assert None == '-'
+        assert response.status_code == 201
+        entries = response.json()["entries"]
+        assert len(entries) == 1
+>       assert entries[0]["customer"] is None
+E       AssertionError: assert 'Unassigned' is None
 
-tests/test_file_upload.py:144: AssertionError
+tests/test_file_upload.py:96: AssertionError
 ----------------------------- Captured stdout call -----------------------------
-{"timestamp": "2025-02-11T20:14:24.587837", "level": "INFO", "correlation_id": "undefined", "logger": "TimesheetTracker", "message": "Successfully parsed 1 records from Excel file", "context": {}}
+{"timestamp": "2025-02-11T20:16:18.172680", "level": "INFO", "correlation_id": "09477493-ed8c-4fa8-9a88-6f671445af84", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "09477493-ed8c-4fa8-9a88-6f671445af84", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5237", "content-type": "multipart/form-data; boundary=b1eff563d7518b6691dff82c68c8f91c"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+{"timestamp": "2025-02-11T20:16:18.175185", "level": "INFO", "correlation_id": "09477493-ed8c-4fa8-9a88-6f671445af84", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
+{"timestamp": "2025-02-11T20:16:18.175596", "level": "DEBUG", "correlation_id": "09477493-ed8c-4fa8-9a88-6f671445af84", "logger": "TimesheetTracker", "message": "TimesheetService initialized", "context": {}}
+{"timestamp": "2025-02-11T20:16:18.175786", "level": "INFO", "correlation_id": "09477493-ed8c-4fa8-9a88-6f671445af84", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
+{"timestamp": "2025-02-11T20:16:18.190035", "level": "INFO", "correlation_id": "09477493-ed8c-4fa8-9a88-6f671445af84", "logger": "TimesheetTracker", "message": "Successfully parsed 1 records from Excel file", "context": {}}
+{"timestamp": "2025-02-11T20:16:18.216821", "level": "WARNING", "correlation_id": "09477493-ed8c-4fa8-9a88-6f671445af84", "logger": "TimesheetTracker", "message": "Request failed with status 201", "context": {"correlation_id": "09477493-ed8c-4fa8-9a88-6f671445af84", "status_code": 201, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "44.12", "response_headers": {"content-length": "317", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+{"timestamp": "2025-02-11T20:16:18.217392", "level": "DEBUG", "correlation_id": "09477493-ed8c-4fa8-9a88-6f671445af84", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 201}}
 ------------------------------ Captured log call -------------------------------
-INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 1 records from Excel file", "timestamp": "2025-02-11T20:14:24.587978", "context": {}}
+INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T20:16:18.172874", "context": {"correlation_id": "09477493-ed8c-4fa8-9a88-6f671445af84", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5237", "content-type": "multipart/form-data; boundary=b1eff563d7518b6691dff82c68c8f91c"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:16:18.175286", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "TimesheetService initialized", "timestamp": "2025-02-11T20:16:18.175670", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:16:18.175842", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 1 records from Excel file", "timestamp": "2025-02-11T20:16:18.190123", "context": {}}
+WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 201", "timestamp": "2025-02-11T20:16:18.216985", "context": {"correlation_id": "09477493-ed8c-4fa8-9a88-6f671445af84", "status_code": 201, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "44.12", "response_headers": {"content-length": "317", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T20:16:18.217519", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 201}}
 =============================== warnings summary ===============================
 .pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345
   /home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345: UserWarning: Valid config keys have changed in V2:
@@ -67,6 +65,5 @@ INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 1 record
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 =========================== short test summary info ============================
-FAILED tests/test_file_upload.py::test_xls_analyzer_invalid_data - AssertionE...
-FAILED tests/test_file_upload.py::test_xls_analyzer_missing_columns - Asserti...
-================== 2 failed, 6 deselected, 1 warning in 0.61s ==================
+FAILED tests/test_file_upload.py::test_dash_customer_handling - AssertionErro...
+================== 1 failed, 6 deselected, 1 warning in 0.58s ==================
