@@ -390,7 +390,12 @@ if __name__ == "__main__":
             port=port,
             log_level="info",
             access_log=True,
-            timeout_keep_alive=30
+            reload=True,
+            workers=1,
+            reload_dirs=[".", "database", "models", "services", "utils"],
+            timeout_keep_alive=30,
+            proxy_headers=True,
+            forwarded_allow_ips="*"
         )
         server = uvicorn.Server(config)
         server.run()
