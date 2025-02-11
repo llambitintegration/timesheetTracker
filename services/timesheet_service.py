@@ -26,21 +26,19 @@ class TimesheetService:
 
         try:
             contents = await file.read()
-            # Accept both .txt and traditional spreadsheet formats
-            if file.filename.endswith(('.txt', '.csv')):
-                text_contents = contents.decode('utf-8')
-                entries = utils.parse_csv(StringIO(text_contents))
-            elif file.filename.endswith('.xlsx'):
-                entries = utils.parse_excel(BytesIO(contents))
-            else:
-                logger.error(f"Unsupported file format: {file.filename}")
-                raise HTTPException(status_code=400, detail="Unsupported file format. Please upload a .txt, .csv, or .xlsx file.")
+            text_contents = contents.decode('utf-8')
+            entries = utils.parse_csv(StringIO(text_contents))
 
             if not entries:
                 logger.warning("No valid entries found in file")
-                return {"entries": [], "validation_errors": ["No valid entries found in the file"]}
+                return {
+                    "entries": [],
+                    "validation_errors": ["No valid entries found in the file"]
+                }
 
+            logger.info(f"Processing {len(entries)} entries")
             created_entries = []
+
             for entry in entries:
                 try:
                     created_entry = crud.create_time_entry(self.db, entry)
@@ -57,6 +55,7 @@ class TimesheetService:
                 "entries": created_entries,
                 "validation_errors": validation_errors
             }
+
         except Exception as e:
             logger.error(f"Error processing timesheet: {str(e)}")
             raise HTTPException(status_code=400, detail=str(e))

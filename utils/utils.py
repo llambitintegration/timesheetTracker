@@ -97,23 +97,6 @@ def parse_raw_csv(file) -> Optional[pd.DataFrame]:
             )
             logger.debug(f"Successfully read CSV with comma delimiter")
             return df
-        except UnicodeDecodeError:
-            try:
-                logger.warning("UTF-8 encoding failed, attempting with ISO-8859-1")
-                df = pd.read_csv(
-                    file,
-                    keep_default_na=False,
-                    encoding='ISO-8859-1',
-                    sep='\t',
-                    quoting=3,
-                    quotechar=None,
-                    engine='python'
-                )
-                logger.debug(f"Successfully read file with ISO-8859-1 encoding")
-                return df
-            except Exception as e:
-                logger.error(f"Failed to parse with ISO-8859-1 encoding: {str(e)}")
-                return None
         except Exception as e:
             logger.error(f"Failed to parse CSV: {str(e)}")
             return None
@@ -150,67 +133,82 @@ def parse_csv(file) -> List:
     """Parse CSV file with enhanced validation and normalization."""
     logger.info("Starting CSV parsing process")
 
-    df = parse_raw_csv(file)
-    if df is None:
-        logger.error("Failed to parse CSV file")
-        return []
-
     try:
-        validate_csv_structure(df)
-    except ValueError as e:
-        logger.error(f"CSV structure validation failed: {str(e)}")
-        raise
+        # First try reading with tab delimiter
+        df = pd.read_csv(
+            file,
+            sep='\t',
+            keep_default_na=False,
+            encoding='utf-8',
+            quoting=3,  # QUOTE_NONE
+            engine='python'
+        )
 
-    df = clean_dataframe(df)
+        # Verify required columns
+        required_columns = [
+            'Date', 'Week Day', 'Week Number', 'Month', 'Category', 
+            'Subcategory', 'Customer', 'Project', 'Task Description', 'Hours'
+        ]
+        missing_columns = [col for col in required_columns if col not in df.columns]
 
-    if df.empty:
-        logger.warning("No valid entries found in CSV file")
-        return []
+        if missing_columns:
+            logger.error(f"Missing required columns: {', '.join(missing_columns)}")
+            raise ValueError(f"Missing required columns: {', '.join(missing_columns)}")
 
-    entries = []
-    logger.info(f"Processing {len(df)} rows from CSV file")
+        df = clean_dataframe(df)
 
-    for index, row in df.iterrows():
-        try:
-            # Process date field
-            date_str = str(row.get('Date', ''))
+        if df.empty:
+            logger.warning("No valid entries found in CSV file")
+            return []
 
-            # Validate hours first as it's critical
-            hours = clean_numeric_value(row.get('Hours', 0))
-            if hours <= 0 or hours > 24:
-                logger.warning(f"Skipping row {index + 1} due to invalid hours: {hours}")
+        entries = []
+        logger.info(f"Processing {len(df)} rows from CSV file")
+
+        for index, row in df.iterrows():
+            try:
+                # Process date field
+                date_str = str(row.get('Date', ''))
+
+                # Validate hours first as it's critical
+                hours = clean_numeric_value(row.get('Hours', 0))
+                if hours <= 0 or hours > 24:
+                    logger.warning(f"Skipping row {index + 1} due to invalid hours: {hours}")
+                    continue
+
+                # Handle special cases for customer and project
+                customer = clean_string_value(row.get('Customer', ''))
+                project = clean_string_value(row.get('Project', ''))
+
+                # Convert '-' to empty string for customer and project
+                if customer == '-':
+                    customer = ''
+                if project == '-':
+                    project = ''
+
+                entry = schemas.TimeEntryCreate(
+                    week_number=validate_week_number(row.get('Week Number')),
+                    month=validate_month(row.get('Month')),
+                    category=clean_string_value(row.get('Category'), "category"),
+                    subcategory=clean_string_value(row.get('Subcategory'), "category"),
+                    customer=customer or "Unassigned",  # Default to "Unassigned" if empty
+                    project=project or "Unassigned",    # Default to "Unassigned" if empty
+                    task_description=clean_string_value(row.get('Task Description')),
+                    hours=hours,
+                    date=parse_date(date_str)
+                )
+                entries.append(entry)
+                logger.debug(f"Successfully processed row {index + 1}")
+
+            except Exception as e:
+                logger.error(f"Error processing row {index + 1}: {str(e)}")
                 continue
 
-            # Handle special cases for customer and project
-            customer = clean_string_value(row.get('Customer', ''))
-            project = clean_string_value(row.get('Project', ''))
+        logger.info(f"Successfully processed {len(entries)} valid entries from CSV")
+        return entries
 
-            # Convert '-' to empty string for customer and project
-            if customer == '-':
-                customer = ''
-            if project == '-':
-                project = ''
-
-            entry = schemas.TimeEntryCreate(
-                week_number=validate_week_number(row.get('Week Number')),
-                month=validate_month(row.get('Month')),
-                category=clean_string_value(row.get('Category'), "category"),
-                subcategory=clean_string_value(row.get('Subcategory'), "category"),
-                customer=customer,
-                project=project,
-                task_description=clean_string_value(row.get('Task Description')),
-                hours=hours,
-                date=parse_date(date_str)
-            )
-            entries.append(entry)
-            logger.debug(f"Successfully processed row {index + 1}")
-
-        except Exception as e:
-            logger.error(f"Error processing row {index + 1}: {str(e)}")
-            continue
-
-    logger.info(f"Successfully processed {len(entries)} valid entries from CSV")
-    return entries
+    except Exception as e:
+        logger.error(f"Failed to parse CSV: {str(e)}")
+        raise ValueError(f"Failed to parse file: {str(e)}")
 
 def parse_excel(file) -> List:
     """Parse Excel file with enhanced date handling."""
