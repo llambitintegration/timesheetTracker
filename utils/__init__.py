@@ -1,7 +1,9 @@
 
-from .logger import Logger
+from .logger import Logger, StructuredMessage, structured_log
 from .utils import *
 
 __all__ = [
-    'Logger'
+    'Logger',
+    'StructuredMessage',
+    'structured_log'
 ]
