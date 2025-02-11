@@ -183,6 +183,6 @@ def ensure_default_project(db: Session) -> Optional[Project]:
 
 def normalize_project_manager(manager: Optional[str]) -> str:
     """Normalize project manager name for database lookup."""
-    if not manager or str(manager).strip() in ['-', '', 'None', 'null', 'NA']:
+    if not manager or str(manager).strip() in ['-', '', 'None', 'null', 'NA', 'Unassigned']:
         return DEFAULT_PROJECT_MANAGER
     return str(manager).strip()
