@@ -5,6 +5,7 @@ from io import StringIO, BytesIO
 import utils
 from database import crud, schemas
 from utils.logger import Logger
+from models.timeEntry import TimeEntry
 
 logger = Logger().get_logger()
 
