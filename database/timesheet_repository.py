@@ -1,9 +1,13 @@
-from typing import List, Optional, Dict, Any
+from typing import List, Optional, Dict, Any, BinaryIO
 from sqlalchemy.orm import Session
 from datetime import datetime, date
 from models.timeEntry import TimeEntry
 from database import schemas
 from .base_repository import BaseRepository
+from utils.xls_analyzer import XLSAnalyzer
+from utils.logger import Logger
+
+logger = Logger().get_logger()
 
 class TimeEntryRepository(BaseRepository[TimeEntry]):
     def __init__(self):
@@ -63,6 +67,35 @@ class TimeEntryRepository(BaseRepository[TimeEntry]):
         entry = self.get_by_id(db, id)
         if entry:
             db.delete(entry)
+
+    def import_excel(self, db: Session, file_contents: bytes) -> List[TimeEntry]:
+        """Import time entries from Excel file."""
+        try:
+            analyzer = XLSAnalyzer()
+            records = analyzer.read_excel(file_contents)
+            
+            entries = []
+            for record in records:
+                entry_data = schemas.TimeEntryCreate(
+                    date=record['Date'].date(),
+                    week_number=int(record['Week Number']),
+                    month=record['Month'],
+                    category=record['Category'],
+                    subcategory=record['Subcategory'],
+                    customer=record['Customer'],
+                    project=record['Project'],
+                    task_description=record['Task Description'],
+                    hours=float(record.get('Hours', 0))
+                )
+                entries.append(entry_data)
+
+            # Use bulk create for better performance
+            return self.bulk_create(db, entries)
+            
+        except Exception as e:
+            logger.error(f"Error importing Excel data: {str(e)}")
+            raise
+
             db.commit()
             return True
         return False

@@ -72,17 +72,24 @@ class TimesheetService:
             if not contents:
                 raise HTTPException(status_code=400, detail="Empty file provided")
 
-            file_extension = file.filename.lower().split('.')[-1]
-
-            if file_extension == 'xlsx':
-                entries = self._process_excel(contents)
-            elif file_extension in ['csv', 'txt']:
-                entries = utils.parse_csv(StringIO(contents.decode('utf-8')))
-            else:
+            if not file.filename.lower().endswith('.xlsx'):
                 raise HTTPException(
                     status_code=400,
-                    detail=f"Unsupported file format: {file_extension}. Supported formats are: xlsx, csv, txt"
+                    detail="Only Excel (.xlsx) files are supported"
                 )
+
+            entries = self.repository.import_excel(self.db, contents)
+            if not entries:
+                logger.warning("No valid entries found in file")
+                raise HTTPException(
+                    status_code=400,
+                    detail="No valid entries found in the file"
+                )
+
+            return {
+                "message": f"Successfully imported {len(entries)} entries",
+                "entries": [self._serialize_time_entry(entry) for entry in entries]
+            }
 
             if not entries:
                 logger.warning("No valid entries found in file")
