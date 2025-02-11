@@ -1,0 +1,330 @@
+/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pytest_asyncio/plugin.py:207: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+============================= test session starts ==============================
+platform linux -- Python 3.11.10, pytest-8.3.4, pluggy-1.5.0 -- /home/runner/workspace/.pythonlibs/bin/python
+cachedir: .pytest_cache
+rootdir: /home/runner/workspace
+configfile: pyproject.toml
+plugins: anyio-4.7.0, asyncio-0.25.2, cov-6.0.0
+asyncio: mode=Mode.STRICT, asyncio_default_fixture_loop_scope=None
+collecting ... collected 105 items
+
+tests/test_cors.py::test_cors_headers_on_health_endpoint PASSED          [  0%]
+tests/test_cors.py::test_cors_preflight PASSED                           [  1%]
+tests/test_cors.py::test_cors_credentials PASSED                         [  2%]
+tests/test_cors.py::test_cors_exposed_headers PASSED                     [  3%]
+tests/test_cors.py::test_cors_on_time_entries_options PASSED             [  4%]
+tests/test_cors.py::test_cors_on_time_entries PASSED                     [  5%]
+tests/test_customer_service.py::test_create_customer PASSED              [  6%]
+tests/test_customer_service.py::test_create_duplicate_customer PASSED    [  7%]
+tests/test_customer_service.py::test_get_customer PASSED                 [  8%]
+tests/test_customer_service.py::test_get_nonexistent_customer PASSED     [  9%]
+tests/test_customer_service.py::test_get_all_customers PASSED            [ 10%]
+tests/test_customer_service.py::test_update_customer PASSED              [ 11%]
+tests/test_customer_service.py::test_update_nonexistent_customer PASSED  [ 12%]
+tests/test_file_upload.py::test_xls_analyzer_valid PASSED                [ 13%]
+tests/test_file_upload.py::test_xls_analyzer_empty_file PASSED           [ 14%]
+tests/test_file_upload.py::test_xls_analyzer_invalid_data PASSED         [ 15%]
+tests/test_file_upload.py::test_dash_customer_handling PASSED            [ 16%]
+tests/test_file_upload.py::test_upload_excel_valid PASSED                [ 17%]
+tests/test_file_upload.py::test_xls_analyzer_date_conversion PASSED      [ 18%]
+tests/test_file_upload.py::test_xls_analyzer_missing_columns PASSED      [ 19%]
+tests/test_file_upload.py::test_upload_excel_creates_customers_and_projects FAILED [ 20%]
+tests/test_interfaces.py::test_time_entry_interface PASSED               [ 20%]
+tests/test_interfaces.py::test_customer_interface PASSED                 [ 21%]
+tests/test_interfaces.py::test_project_interface FAILED                  [ 22%]
+tests/test_interfaces.py::test_project_manager_interface PASSED          [ 23%]
+tests/test_interfaces.py::test_database_status_interface PASSED          [ 24%]
+tests/test_models.py::test_time_entry_creation PASSED                    [ 25%]
+tests/test_models.py::test_customer_creation PASSED                      [ 26%]
+tests/test_models.py::test_customer_default_status PASSED                [ 27%]
+tests/test_models.py::test_project_creation PASSED                       [ 28%]
+tests/test_models.py::test_project_manager_creation PASSED               [ 29%]
+tests/test_models.py::test_project_default_status PASSED                 [ 30%]
+tests/test_models.py::test_time_entry_repr PASSED                        [ 31%]
+tests/test_models.py::test_project_repr PASSED                           [ 32%]
+tests/test_models.py::test_model_timestamps PASSED                       [ 33%]
+tests/test_project_manager_service.py::test_create_project_manager PASSED [ 34%]
+tests/test_project_manager_service.py::test_create_duplicate_project_manager PASSED [ 35%]
+tests/test_project_manager_service.py::test_get_project_manager PASSED   [ 36%]
+tests/test_project_manager_service.py::test_get_nonexistent_project_manager PASSED [ 37%]
+tests/test_project_manager_service.py::test_get_all_project_managers PASSED [ 38%]
+tests/test_project_manager_service.py::test_update_project_manager PASSED [ 39%]
+tests/test_project_manager_service.py::test_update_nonexistent_project_manager PASSED [ 40%]
+tests/test_project_service.py::test_create_project PASSED                [ 40%]
+tests/test_project_service.py::test_create_duplicate_project PASSED      [ 41%]
+tests/test_project_service.py::test_get_project PASSED                   [ 42%]
+tests/test_project_service.py::test_get_nonexistent_project PASSED       [ 43%]
+tests/test_project_service.py::test_get_all_projects PASSED              [ 44%]
+tests/test_project_service.py::test_get_projects_by_customer PASSED      [ 45%]
+tests/test_project_service.py::test_get_projects_by_manager PASSED       [ 46%]
+tests/test_project_service.py::test_update_project PASSED                [ 47%]
+tests/test_project_service.py::test_create_project_without_project_manager FAILED [ 48%]
+tests/test_project_service.py::test_create_project_with_nonexistent_project_manager PASSED [ 49%]
+tests/test_project_service.py::test_create_project_with_invalid_customer FAILED [ 50%]
+tests/test_project_service.py::test_update_nonexistent_project PASSED    [ 51%]
+tests/test_project_service.py::test_delete_project PASSED                [ 52%]
+tests/test_project_service.py::test_delete_nonexistent_project PASSED    [ 53%]
+tests/test_project_service.py::test_create_project_with_new_customer PASSED [ 54%]
+tests/test_project_service.py::test_create_project_without_customer PASSED [ 55%]
+tests/test_repositories.py::test_customer_repository_create PASSED       [ 56%]
+tests/test_repositories.py::test_customer_repository_get_by_id PASSED    [ 57%]
+tests/test_repositories.py::test_customer_repository_get_by_name PASSED  [ 58%]
+tests/test_repositories.py::test_customer_repository_get_all PASSED      [ 59%]
+tests/test_repositories.py::test_customer_repository_update PASSED       [ 60%]
+tests/test_repositories.py::test_customer_repository_delete PASSED       [ 60%]
+tests/test_repositories.py::test_customer_repository_unique_name_constraint PASSED [ 61%]
+tests/test_repositories.py::test_customer_repository_pagination PASSED   [ 62%]
+tests/test_repositories.py::test_time_entry_repository_create PASSED     [ 63%]
+tests/test_repositories.py::test_time_entry_repository_get_by_id PASSED  [ 64%]
+tests/test_repositories.py::test_time_entry_repository_get_by_date PASSED [ 65%]
+tests/test_repositories.py::test_time_entry_repository_get_all PASSED    [ 66%]
+tests/test_repositories.py::test_time_entry_repository_update PASSED     [ 67%]
+tests/test_repositories.py::test_time_entry_repository_delete PASSED     [ 68%]
+tests/test_repositories.py::test_time_entry_repository_pagination PASSED [ 69%]
+tests/test_routes.py::test_root_endpoint PASSED                          [ 70%]
+tests/test_routes.py::test_get_time_entries_empty PASSED                 [ 71%]
+tests/test_routes.py::test_create_time_entry PASSED                      [ 72%]
+tests/test_routes.py::test_get_time_entries_with_database_query PASSED   [ 73%]
+tests/test_routes.py::test_get_time_entries_complex_filtering PASSED     [ 74%]
+tests/test_routes.py::test_get_time_entries_empty_database PASSED        [ 75%]
+tests/test_routes.py::test_get_time_entries_invalid_filters PASSED       [ 76%]
+tests/test_routes.py::test_create_time_entry_invalid_data PASSED         [ 77%]
+tests/test_routes.py::test_upload_excel_valid PASSED                     [ 78%]
+tests/test_routes.py::test_get_time_entries_with_filters PASSED          [ 79%]
+tests/test_routes.py::test_get_time_entries_pagination PASSED            [ 80%]
+tests/test_services.py::test_create_time_entry PASSED                    [ 80%]
+tests/test_services.py::test_create_time_entry_with_defaults PASSED      [ 81%]
+tests/test_services.py::test_create_many_entries PASSED                  [ 82%]
+tests/test_services.py::test_get_time_entries PASSED                     [ 83%]
+tests/test_services.py::test_get_time_entries_pagination PASSED          [ 84%]
+tests/test_time_entry.py::test_create_time_entry_auto_calculations PASSED [ 85%]
+tests/test_time_entry.py::test_create_time_entry_default_hours PASSED    [ 86%]
+tests/test_time_entry.py::test_create_time_entry_auto_id PASSED          [ 87%]
+tests/test_time_entry.py::test_create_single_time_entry PASSED           [ 88%]
+tests/test_time_entry.py::test_create_time_entry_with_defaults PASSED    [ 89%]
+tests/test_time_entry.py::test_create_time_entry_invalid_hours PASSED    [ 90%]
+tests/test_time_entry.py::test_create_time_entry_with_nonexistent_customer PASSED [ 91%]
+tests/test_time_entry.py::test_create_time_entry_customer_mismatch PASSED [ 92%]
+tests/test_time_entry.py::test_get_time_entries_with_filters PASSED      [ 93%]
+tests/test_time_entry.py::test_api_example_default_values PASSED         [ 94%]
+tests/test_time_entry.py::test_time_entry_date_validation PASSED         [ 95%]
+tests/test_time_entry.py::test_create_time_entry_zero_hours PASSED       [ 96%]
+tests/test_time_entry.py::test_create_time_entry_auto_date_calculations PASSED [ 97%]
+tests/test_time_entry.py::test_time_entry_with_invalid_project PASSED    [ 98%]
+tests/test_validators.py::test_normalize_customer_name_dash_conversion PASSED [ 99%]
+tests/test_xls_analyzer.py::test_xls_analyzer_dash_to_default_conversion PASSED [100%]
+
+=================================== FAILURES ===================================
+_______________ test_upload_excel_creates_customers_and_projects _______________
+
+client = <starlette.testclient.TestClient object at 0x7f36d2a841d0>
+setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7f36d2a75050>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
+tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-121/test_upload_excel_creates_cust0')
+
+    def test_upload_excel_creates_customers_and_projects(client, setup_test_data, tmp_path):
+        """Test that uploading Excel file creates new customers and projects as needed"""
+        data = {
+            'Week Number': [41],
+            'Month': ['October'],
+            'Category': ['Development'],
+            'Subcategory': ['Backend'],
+            'Customer': ['NEW_CUSTOMER'],  # New customer that doesn't exist
+            'Project': ['NEW_PROJECT'],    # New project that doesn't exist
+            'Task Description': ['Test task'],
+            'Hours': [8.0],
+            'Date': ['2024-10-07']
+        }
+        excel_file = create_test_excel(tmp_path, data)
+    
+        with open(excel_file, "rb") as f:
+            response = client.post(
+                "/time-entries/upload/",
+                files={"file": ("test.xlsx", f, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
+            )
+    
+        assert response.status_code == 201
+        data = response.json()
+        assert len(data["entries"]) == 1
+>       assert data["entries"][0]["customer"] == "NEW_CUSTOMER"
+E       AssertionError: assert 'Unassigned' == 'NEW_CUSTOMER'
+E         
+E         - NEW_CUSTOMER
+E         + Unassigned
+
+tests/test_file_upload.py:187: AssertionError
+----------------------------- Captured stdout call -----------------------------
+{"timestamp": "2025-02-11T23:24:59.533384", "level": "INFO", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5342", "content-type": "multipart/form-data; boundary=08f7a492e8fe6b58d3ed103070fb4cc3"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+{"timestamp": "2025-02-11T23:24:59.535275", "level": "INFO", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.535539", "level": "DEBUG", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.535716", "level": "DEBUG", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "TimesheetService initialized", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.535885", "level": "INFO", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.536050", "level": "DEBUG", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Starting Excel file analysis", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.544223", "level": "INFO", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Successfully parsed 1 records from Excel file", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.544544", "level": "DEBUG", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.544726", "level": "DEBUG", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "TimeEntryService initialized with database session", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.545018", "level": "DEBUG", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Starting creation of time entry with data: {'category': 'Development', 'subcategory': 'Backend', 'customer': 'NEW_CUSTOMER', 'project': 'NEW_PROJECT', 'task_description': 'Test task', 'hours': 8.0, 'date': datetime.date(2024, 10, 7)}", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.546022", "level": "ERROR", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.546186", "level": "DEBUG", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Fetching project with ID: NEW_PROJECT", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.546790", "level": "WARNING", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Retry 1 for project creation NEW_PROJECT: 1 validation error for ProjectCreate\nproject_manager\n  Field required [type=missing, input_value={'project_id': 'NEW_PROJE...ed', 'status': 'active'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.10/v/missing", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.547134", "level": "WARNING", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Retry 2 for project creation NEW_PROJECT: 1 validation error for ProjectCreate\nproject_manager\n  Field required [type=missing, input_value={'project_id': 'NEW_PROJE...ed', 'status': 'active'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.10/v/missing", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.547329", "level": "ERROR", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Failed to create project NEW_PROJECT after 3 attempts: 1 validation error for ProjectCreate\nproject_manager\n  Field required [type=missing, input_value={'project_id': 'NEW_PROJE...ed', 'status': 'active'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.10/v/missing", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.548736", "level": "DEBUG", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Adding entry to database session", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.578830", "level": "INFO", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Successfully created time entry for Unassigned - Unassigned", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.579085", "level": "INFO", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Processing 1 entries", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.579812", "level": "DEBUG", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Fetching project with ID: Unassigned", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.605285", "level": "INFO", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Successfully created 1 time entries in bulk", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.606459", "level": "WARNING", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Request failed with status 201", "context": {"correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "status_code": 201, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "73.01", "response_headers": {"content-length": "292", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+{"timestamp": "2025-02-11T23:24:59.607005", "level": "DEBUG", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "method": "POST", "path": "/time-entries/upload/", "status_code": 201}}
+------------------------------ Captured log call -------------------------------
+INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T23:24:59.533598", "context": {"correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5342", "content-type": "multipart/form-data; boundary=08f7a492e8fe6b58d3ed103070fb4cc3"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T23:24:59.535342", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T23:24:59.535612", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "TimesheetService initialized", "timestamp": "2025-02-11T23:24:59.535776", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T23:24:59.535941", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting Excel file analysis", "timestamp": "2025-02-11T23:24:59.536100", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 1 records from Excel file", "timestamp": "2025-02-11T23:24:59.544305", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T23:24:59.544613", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "TimeEntryService initialized with database session", "timestamp": "2025-02-11T23:24:59.544788", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting creation of time entry with data: {'category': 'Development', 'subcategory': 'Backend', 'customer': 'NEW_CUSTOMER', 'project': 'NEW_PROJECT', 'task_description': 'Test task', 'hours': 8.0, 'date': datetime.date(2024, 10, 7)}", "timestamp": "2025-02-11T23:24:59.545077", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "timestamp": "2025-02-11T23:24:59.546077", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Fetching project with ID: NEW_PROJECT", "timestamp": "2025-02-11T23:24:59.546234", "context": {}}
+WARNING  TimesheetTracker:logger.py:32 {"message": "Retry 1 for project creation NEW_PROJECT: 1 validation error for ProjectCreate\nproject_manager\n  Field required [type=missing, input_value={'project_id': 'NEW_PROJE...ed', 'status': 'active'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.10/v/missing", "timestamp": "2025-02-11T23:24:59.546848", "context": {}}
+WARNING  TimesheetTracker:logger.py:32 {"message": "Retry 2 for project creation NEW_PROJECT: 1 validation error for ProjectCreate\nproject_manager\n  Field required [type=missing, input_value={'project_id': 'NEW_PROJE...ed', 'status': 'active'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.10/v/missing", "timestamp": "2025-02-11T23:24:59.547209", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Failed to create project NEW_PROJECT after 3 attempts: 1 validation error for ProjectCreate\nproject_manager\n  Field required [type=missing, input_value={'project_id': 'NEW_PROJE...ed', 'status': 'active'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.10/v/missing", "timestamp": "2025-02-11T23:24:59.547394", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Adding entry to database session", "timestamp": "2025-02-11T23:24:59.548788", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Successfully created time entry for Unassigned - Unassigned", "timestamp": "2025-02-11T23:24:59.578947", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing 1 entries", "timestamp": "2025-02-11T23:24:59.579138", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Fetching project with ID: Unassigned", "timestamp": "2025-02-11T23:24:59.579884", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Successfully created 1 time entries in bulk", "timestamp": "2025-02-11T23:24:59.605423", "context": {}}
+WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 201", "timestamp": "2025-02-11T23:24:59.606617", "context": {"correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "status_code": 201, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "73.01", "response_headers": {"content-length": "292", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T23:24:59.607110", "context": {"correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "method": "POST", "path": "/time-entries/upload/", "status_code": 201}}
+____________________________ test_project_interface ____________________________
+
+    def test_project_interface():
+        """Test Project interface matches API response"""
+        response = client.get("/projects")
+>       assert response.status_code == 200
+E       assert 500 == 200
+E        +  where 500 = <Response [500 Internal Server Error]>.status_code
+
+tests/test_interfaces.py:55: AssertionError
+----------------------------- Captured stdout call -----------------------------
+{"timestamp": "2025-02-11T23:24:59.894649", "level": "INFO", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "method": "GET", "url": "http://testserver/projects", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/projects"}}
+{"timestamp": "2025-02-11T23:24:59.895624", "level": "DEBUG", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Database session created", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.896137", "level": "DEBUG", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.896385", "level": "DEBUG", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "ProjectService initialized with database session", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.896688", "level": "DEBUG", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Fetching projects with offset=0, limit=100", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.896939", "level": "DEBUG", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Fetching all projects with skip=0, limit=100", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.960083", "level": "INFO", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Retrieved 6 projects", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.960354", "level": "INFO", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Retrieved 6 projects", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.961285", "level": "ERROR", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Database session error: 6 validation errors:\n  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.962885", "level": "ERROR", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Database session error details:", "context": {}, "exception": "Traceback (most recent call last):\n  File \"/home/runner/workspace/database/database.py\", line 113, in get_db\n    yield db\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/concurrency.py\", line 27, in contextmanager_in_threadpool\n    yield await run_in_threadpool(cm.__enter__)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py\", line 327, in app\n    content = await serialize_response(\n              ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py\", line 176, in serialize_response\n    raise ResponseValidationError(\nfastapi.exceptions.ResponseValidationError: 6 validation errors:\n  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n"}
+{"timestamp": "2025-02-11T23:24:59.983946", "level": "DEBUG", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Database session closed", "context": {}}
+{"timestamp": "2025-02-11T23:24:59.986145", "level": "ERROR", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Request failed with exception", "context": {"correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "error_type": "ResponseValidationError", "error_message": "6 validation errors:\n  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n", "traceback": "Traceback (most recent call last):\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py\", line 111, in receive\n    return self.receive_nowait()\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py\", line 106, in receive_nowait\n    raise WouldBlock\nanyio.WouldBlock\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py\", line 124, in receive\n    return receiver.item\n           ^^^^^^^^^^^^^\nAttributeError: 'MemoryObjectItemReceiver' object has no attribute 'item'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py\", line 157, in call_next\n    message = await recv_stream.receive()\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py\", line 126, in receive\n    raise EndOfStream\nanyio.EndOfStream\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/workspace/utils/middleware.py\", line 45, in logging_middleware\n    response = await call_next(request)\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py\", line 163, in call_next\n    raise app_exc\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py\", line 149, in coro\n    await self.app(scope, receive_or_disconnect, send_no_error)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/cors.py\", line 85, in __call__\n    await self.app(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/exceptions.py\", line 62, in __call__\n    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py\", line 53, in wrapped_app\n    raise exc\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py\", line 42, in wrapped_app\n    await app(scope, receive, sender)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 715, in __call__\n    await self.middleware_stack(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 735, in app\n    await route.handle(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 288, in handle\n    await self.app(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 76, in app\n    await wrap_app_handling_exceptions(app, request)(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py\", line 53, in wrapped_app\n    raise exc\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py\", line 42, in wrapped_app\n    await app(scope, receive, sender)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 73, in app\n    response = await f(request)\n               ^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py\", line 327, in app\n    content = await serialize_response(\n              ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py\", line 176, in serialize_response\n    raise ResponseValidationError(\nfastapi.exceptions.ResponseValidationError: 6 validation errors:\n  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n\n", "request_method": "GET", "request_url": "http://testserver/projects", "request_headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient"}, "client_host": "testclient", "query_params": {}, "path_params": {}, "path": "/projects", "origin": null, "cors_method": null, "cors_headers": null}}
+{"timestamp": "2025-02-11T23:24:59.986797", "level": "DEBUG", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "method": "GET", "path": "/projects", "status_code": 500}}
+------------------------------ Captured log call -------------------------------
+INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T23:24:59.894764", "context": {"correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "method": "GET", "url": "http://testserver/projects", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/projects"}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Database session created", "timestamp": "2025-02-11T23:24:59.895731", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T23:24:59.896225", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectService initialized with database session", "timestamp": "2025-02-11T23:24:59.896465", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Fetching projects with offset=0, limit=100", "timestamp": "2025-02-11T23:24:59.896773", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Fetching all projects with skip=0, limit=100", "timestamp": "2025-02-11T23:24:59.897029", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Retrieved 6 projects", "timestamp": "2025-02-11T23:24:59.960210", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Retrieved 6 projects", "timestamp": "2025-02-11T23:24:59.960426", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Database session error: 6 validation errors:\n  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n", "timestamp": "2025-02-11T23:24:59.961370", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Database session error details:", "timestamp": "2025-02-11T23:24:59.963533", "context": {}}
+Traceback (most recent call last):
+  File "/home/runner/workspace/database/database.py", line 113, in get_db
+    yield db
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/concurrency.py", line 27, in contextmanager_in_threadpool
+    yield await run_in_threadpool(cm.__enter__)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py", line 327, in app
+    content = await serialize_response(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py", line 176, in serialize_response
+    raise ResponseValidationError(
+fastapi.exceptions.ResponseValidationError: 6 validation errors:
+  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
+
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Database session closed", "timestamp": "2025-02-11T23:24:59.984055", "context": {}}
+ERROR    TimesheetTracker:logger.py:29 {"message": "Request failed with exception", "timestamp": "2025-02-11T23:24:59.986415", "context": {"correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "error_type": "ResponseValidationError", "error_message": "6 validation errors:\n  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n", "traceback": "Traceback (most recent call last):\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py\", line 111, in receive\n    return self.receive_nowait()\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py\", line 106, in receive_nowait\n    raise WouldBlock\nanyio.WouldBlock\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py\", line 124, in receive\n    return receiver.item\n           ^^^^^^^^^^^^^\nAttributeError: 'MemoryObjectItemReceiver' object has no attribute 'item'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py\", line 157, in call_next\n    message = await recv_stream.receive()\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py\", line 126, in receive\n    raise EndOfStream\nanyio.EndOfStream\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/workspace/utils/middleware.py\", line 45, in logging_middleware\n    response = await call_next(request)\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py\", line 163, in call_next\n    raise app_exc\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py\", line 149, in coro\n    await self.app(scope, receive_or_disconnect, send_no_error)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/cors.py\", line 85, in __call__\n    await self.app(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/exceptions.py\", line 62, in __call__\n    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py\", line 53, in wrapped_app\n    raise exc\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py\", line 42, in wrapped_app\n    await app(scope, receive, sender)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 715, in __call__\n    await self.middleware_stack(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 735, in app\n    await route.handle(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 288, in handle\n    await self.app(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 76, in app\n    await wrap_app_handling_exceptions(app, request)(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py\", line 53, in wrapped_app\n    raise exc\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py\", line 42, in wrapped_app\n    await app(scope, receive, sender)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 73, in app\n    response = await f(request)\n               ^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py\", line 327, in app\n    content = await serialize_response(\n              ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py\", line 176, in serialize_response\n    raise ResponseValidationError(\nfastapi.exceptions.ResponseValidationError: 6 validation errors:\n  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n\n", "request_method": "GET", "request_url": "http://testserver/projects", "request_headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient"}, "client_host": "testclient", "query_params": {}, "path_params": {}, "path": "/projects", "origin": null, "cors_method": null, "cors_headers": null}}
+DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T23:24:59.986918", "context": {"correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "method": "GET", "path": "/projects", "status_code": 500}}
+_________________ test_create_project_without_project_manager __________________
+
+db_session = <sqlalchemy.orm.session.Session object at 0x7f36d2a22f10>
+
+    def test_create_project_without_project_manager(db_session):
+        """Test creating a project without a project manager should fail"""
+        service = ProjectService(db_session)
+>       project_data = ProjectCreate(
+            project_id="PM-001",
+            name="No Manager Project",
+            description="Test Description",
+            customer="Test Customer",
+            project_manager=None,  # This should cause validation error
+            status="active"
+        )
+E       pydantic_core._pydantic_core.ValidationError: 1 validation error for ProjectCreate
+E       project_manager
+E         Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+E           For further information visit https://errors.pydantic.dev/2.10/v/string_type
+
+tests/test_project_service.py:202: ValidationError
+----------------------------- Captured stdout call -----------------------------
+{"timestamp": "2025-02-11T23:25:02.715139", "level": "DEBUG", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
+{"timestamp": "2025-02-11T23:25:02.715406", "level": "DEBUG", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "ProjectService initialized with database session", "context": {}}
+------------------------------ Captured log call -------------------------------
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T23:25:02.715247", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectService initialized with database session", "timestamp": "2025-02-11T23:25:02.715514", "context": {}}
+__________________ test_create_project_with_invalid_customer ___________________
+
+db_session = <sqlalchemy.orm.session.Session object at 0x7f36d2abb810>
+
+    def test_create_project_with_invalid_customer(db_session):
+        """Test creating a project with an invalid customer"""
+        create_test_project_manager(db_session)
+        service = ProjectService(db_session)
+>       project_data = ProjectCreate(
+            project_id="INVCUST-001",
+            name="Invalid Customer Project",
+            description="Test Description",
+            customer=None,  # Invalid customer
+            project_manager="test_manager",
+            status="active"
+        )
+E       pydantic_core._pydantic_core.ValidationError: 1 validation error for ProjectCreate
+E       customer
+E         Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+E           For further information visit https://errors.pydantic.dev/2.10/v/string_type
+
+tests/test_project_service.py:235: ValidationError
+----------------------------- Captured stdout call -----------------------------
+{"timestamp": "2025-02-11T23:25:02.796541", "level": "DEBUG", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
+{"timestamp": "2025-02-11T23:25:02.796831", "level": "DEBUG", "correlation_id": "3331fe06-375a-4ed0-8228-d6c3312ba4ae", "logger": "TimesheetTracker", "message": "ProjectService initialized with database session", "context": {}}
+------------------------------ Captured log call -------------------------------
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T23:25:02.796665", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectService initialized with database session", "timestamp": "2025-02-11T23:25:02.796927", "context": {}}
+=========================== short test summary info ============================
+FAILED tests/test_file_upload.py::test_upload_excel_creates_customers_and_projects - AssertionError: assert 'Unassigned' == 'NEW_CUSTOMER'
+  
+  - NEW_CUSTOMER
+  + Unassigned
+FAILED tests/test_interfaces.py::test_project_interface - assert 500 == 200
+ +  where 500 = <Response [500 Internal Server Error]>.status_code
+FAILED tests/test_project_service.py::test_create_project_without_project_manager - pydantic_core._pydantic_core.ValidationError: 1 validation error for ProjectCreate
+project_manager
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.10/v/string_type
+FAILED tests/test_project_service.py::test_create_project_with_invalid_customer - pydantic_core._pydantic_core.ValidationError: 1 validation error for ProjectCreate
+customer
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.10/v/string_type
+======================== 4 failed, 101 passed in 8.87s =========================

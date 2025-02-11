@@ -4,7 +4,7 @@ modules = ["python-3.11", "postgresql-16", "nodejs-20"]
 channel = "stable-24_05"
 
 [workflows]
-runButton = "Project"
+runButton = "pytestDebug"
 
 [[workflows.workflow]]
 name = "Project"
@@ -47,6 +47,15 @@ task = "packager.installForAll"
 task = "shell.exec"
 args = "uvicorn main:app --host 0.0.0.0 --port 8080"
 waitForPort = 8080
+
+[[workflows.workflow]]
+name = "pytestDebug"
+mode = "sequential"
+author = 37467400
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python -m pytest tests -v -rFE --no-pass-lone --showlocals > failed_tests.txt 2>&1"
 
 [deployment]
 run = ["sh", "-c", "python main.py"]
