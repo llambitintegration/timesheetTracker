@@ -1,7 +1,7 @@
 """Database validation utilities for CSV data"""
 from typing import List, Dict, Optional, Tuple, Union
 from sqlalchemy.orm import Session
-from models import Customer, Project
+from models import Customer, Project, ProjectManager
 from utils.logger import Logger
 from database.schemas import TimeEntryCreate
 from sqlalchemy.exc import IntegrityError
