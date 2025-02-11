@@ -94,6 +94,7 @@ def test_dash_customer_handling(client, setup_test_data, tmp_path):
     entries = response.json()["entries"]
     assert len(entries) == 1
     assert entries[0]["customer"] is None
+    assert entries[0]["project"] is None
 
 def test_upload_excel_valid(client, setup_test_data, tmp_path, valid_timesheet_data):
     """Test uploading a valid Excel file"""

@@ -65,9 +65,9 @@ class TimeEntryService:
                     logger.info(f"Project {entry_dict['project']} not found or doesn't belong to customer, defaulting both customer and project to defaults")
                     customer_name = None  # Reset customer name to trigger default
 
-            # Apply defaults if either validation failed
-            entry_dict['customer'] = customer_name or DEFAULT_CUSTOMER
-            entry_dict['project'] = project_id or DEFAULT_PROJECT
+            # Set to None for dash or missing values
+            entry_dict['customer'] = customer_name
+            entry_dict['project'] = project_id
 
             logger.debug("Validating and setting default categories")
             if not entry_dict.get('category'):
