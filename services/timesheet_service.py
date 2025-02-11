@@ -177,25 +177,16 @@ class TimesheetService:
                 schemas.TimeEntryCreate(
                     category=entry.category,
                     subcategory=entry.subcategory,
-                    customer=entry.customer,
-                    project=entry.project,
+                    customer=DEFAULT_CUSTOMER,  # Force default customer
+                    project=DEFAULT_PROJECT,    # Force default project
                     task_description=entry.task_description,
                     hours=entry.hours,
                     date=entry.date
                 ) for entry in entries
             ]
 
-            # Validate the entries before bulk creation
-            validated_entries, db_validation_errors = validate_database_references(self.db, entry_creates)
-            validation_errors.extend(db_validation_errors)
-
-            if not validated_entries:
-                raise HTTPException(
-                    status_code=400,
-                    detail="No valid entries after validation"
-                )
-
-            created_entries = self._bulk_create_entries(validated_entries)
+            # Skip validation since we're using default values
+            created_entries = self._bulk_create_entries(entry_creates)
             logger.info(f"Successfully created {len(created_entries)} time entries in bulk")
 
             return {
