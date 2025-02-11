@@ -5,7 +5,936 @@ rootdir: /home/runner/workspace
 configfile: pyproject.toml
 plugins: anyio-4.7.0, asyncio-0.25.2, cov-6.0.0
 asyncio: mode=Mode.STRICT, asyncio_default_fixture_loop_scope=None
-collecting ... collected 13 items / 12 deselected / 1 selected
-run-last-failure: rerun previous 1 failure (skipped 6 files)
+collecting ... collected 14 items / 6 deselected / 8 selected
+run-last-failure: rerun previous 8 failures (skipped 9 files)
 
-tests/test_models.py::test_model_timestamps FAILED                       [100%]
+tests/test_file_upload.py::test_xls_analyzer_valid FAILED                [ 12%]
+tests/test_file_upload.py::test_xls_analyzer_invalid_data FAILED         [ 25%]
+tests/test_file_upload.py::test_dash_customer_handling FAILED            [ 37%]
+tests/test_file_upload.py::test_upload_excel_valid FAILED                [ 50%]
+tests/test_file_upload.py::test_xls_analyzer_date_conversion FAILED      [ 62%]
+tests/test_file_upload.py::test_xls_analyzer_missing_columns FAILED      [ 75%]
+tests/test_routes.py::test_upload_excel_valid FAILED                     [ 87%]
+tests/test_xls_analyzer.py::test_xls_analyzer_dash_to_none_conversion FAILED [100%]
+
+=================================== FAILURES ===================================
+___________________________ test_xls_analyzer_valid ____________________________
+
+file_contents = b'PK\x03\x04\x14\x00\x00\x00\x08\x00)\xa1KZF\xc7MH\x95\x00\x00\x00\xcd\x00\x00\x00\x10\x00\x00\x00docProps/app.xmlM\xc...\x80\x01\x95\x10\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00>\x02\x00\x00\xdf\x11\x00\x00\x00\x00'
+
+    @staticmethod
+    def read_excel(file_contents: bytes) -> List[Dict[str, Any]]:
+        """Read Excel file and return list of dictionaries with data."""
+        try:
+            # Read first sheet from Excel file
+            df = pd.read_excel(
+                BytesIO(file_contents),
+                sheet_name=0,
+                dtype={
+                    'Week Number': 'Int64',
+                    'Month': str,
+                    'Category': str,
+                    'Subcategory': str,
+                    'Customer': str,
+                    'Project': str,
+                    'Task Description': str
+                }
+            )
+    
+            # Set default values for missing columns
+            required_columns = ['Week Number', 'Month', 'Category', 'Subcategory',
+                              'Customer', 'Project', 'Task Description', 'Date']
+            for col in required_columns:
+                if col not in df.columns:
+                    if col == 'Date':
+                        df[col] = pd.Timestamp.now().date()
+                    else:
+                        df[col] = '-'
+    
+            # Drop rows where all elements are NaN
+            df = df.dropna(how='all')
+    
+            # Convert date column to datetime
+            df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
+    
+            # Fill NaN values with appropriate defaults
+            # Convert Week Number to numeric, replacing non-numeric with 0
+            df['Week Number'] = pd.to_numeric(df['Week Number'], errors='coerce').fillna(0).astype('Int64')
+    
+            # Convert '-' to None first
+            df = df.replace({'-': None})
+    
+            # Then fill remaining NaN values
+>           df = df.fillna({
+                'Customer': None,
+                'Project': None,
+                'Task Description': '',
+                'Month': '',
+                'Category': 'Other',
+                'Subcategory': 'Other',
+                'Hours': 0.0
+            })
+
+utils/xls_analyzer.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.pythonlibs/lib/python3.11/site-packages/pandas/core/generic.py:7384: in fillna
+    res_k = result[k].fillna(v, limit=limit, downcast=downcast_k)
+.pythonlibs/lib/python3.11/site-packages/pandas/core/generic.py:7293: in fillna
+    value, method = validate_fillna_kwargs(value, method)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+value = None, method = None, validate_scalar_dict_value = True
+
+    def validate_fillna_kwargs(value, method, validate_scalar_dict_value: bool = True):
+        """
+        Validate the keyword arguments to 'fillna'.
+    
+        This checks that exactly one of 'value' and 'method' is specified.
+        If 'method' is specified, this validates that it's a valid method.
+    
+        Parameters
+        ----------
+        value, method : object
+            The 'value' and 'method' keyword arguments for 'fillna'.
+        validate_scalar_dict_value : bool, default True
+            Whether to validate that 'value' is a scalar or dict. Specifically,
+            validate that it is not a list or tuple.
+    
+        Returns
+        -------
+        value, method : object
+        """
+        from pandas.core.missing import clean_fill_method
+    
+        if value is None and method is None:
+>           raise ValueError("Must specify a fill 'value' or 'method'.")
+E           ValueError: Must specify a fill 'value' or 'method'.
+
+.pythonlibs/lib/python3.11/site-packages/pandas/util/_validators.py:293: ValueError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-14/test_xls_analyzer_valid0')
+valid_timesheet_data = {'Category': ['Development', 'Testing'], 'Customer': ['ECOLAB', 'ECOLAB'], 'Date': ['2024-10-07', '2024-10-07'], 'Hours': [8.0, 4.0], ...}
+
+    def test_xls_analyzer_valid(tmp_path, valid_timesheet_data):
+        """Test XLSAnalyzer with valid data"""
+        excel_file = create_test_excel(tmp_path, valid_timesheet_data)
+    
+        with open(excel_file, "rb") as f:
+            contents = f.read()
+            analyzer = XLSAnalyzer()
+>           records = analyzer.read_excel(contents)
+
+tests/test_file_upload.py:50: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+file_contents = b'PK\x03\x04\x14\x00\x00\x00\x08\x00)\xa1KZF\xc7MH\x95\x00\x00\x00\xcd\x00\x00\x00\x10\x00\x00\x00docProps/app.xmlM\xc...\x80\x01\x95\x10\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00>\x02\x00\x00\xdf\x11\x00\x00\x00\x00'
+
+    @staticmethod
+    def read_excel(file_contents: bytes) -> List[Dict[str, Any]]:
+        """Read Excel file and return list of dictionaries with data."""
+        try:
+            # Read first sheet from Excel file
+            df = pd.read_excel(
+                BytesIO(file_contents),
+                sheet_name=0,
+                dtype={
+                    'Week Number': 'Int64',
+                    'Month': str,
+                    'Category': str,
+                    'Subcategory': str,
+                    'Customer': str,
+                    'Project': str,
+                    'Task Description': str
+                }
+            )
+    
+            # Set default values for missing columns
+            required_columns = ['Week Number', 'Month', 'Category', 'Subcategory',
+                              'Customer', 'Project', 'Task Description', 'Date']
+            for col in required_columns:
+                if col not in df.columns:
+                    if col == 'Date':
+                        df[col] = pd.Timestamp.now().date()
+                    else:
+                        df[col] = '-'
+    
+            # Drop rows where all elements are NaN
+            df = df.dropna(how='all')
+    
+            # Convert date column to datetime
+            df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
+    
+            # Fill NaN values with appropriate defaults
+            # Convert Week Number to numeric, replacing non-numeric with 0
+            df['Week Number'] = pd.to_numeric(df['Week Number'], errors='coerce').fillna(0).astype('Int64')
+    
+            # Convert '-' to None first
+            df = df.replace({'-': None})
+    
+            # Then fill remaining NaN values
+            df = df.fillna({
+                'Customer': None,
+                'Project': None,
+                'Task Description': '',
+                'Month': '',
+                'Category': 'Other',
+                'Subcategory': 'Other',
+                'Hours': 0.0
+            })
+    
+            # Convert DataFrame to list of dictionaries
+            records = df.to_dict('records')
+    
+            logger.info(f"Successfully parsed {len(records)} records from Excel file")
+            return records
+    
+        except Exception as e:
+            logger.error(f"Error parsing Excel file: {str(e)}")
+>           raise ValueError(f"Failed to parse Excel file: {str(e)}")
+E           ValueError: Failed to parse Excel file: Must specify a fill 'value' or 'method'.
+
+utils/xls_analyzer.py:72: ValueError
+----------------------------- Captured stdout call -----------------------------
+{"timestamp": "2025-02-11T20:09:18.746325", "level": "ERROR", "correlation_id": "undefined", "logger": "TimesheetTracker", "message": "Error parsing Excel file: Must specify a fill 'value' or 'method'.", "context": {}}
+------------------------------ Captured log call -------------------------------
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error parsing Excel file: Must specify a fill 'value' or 'method'.", "timestamp": "2025-02-11T20:09:18.746501", "context": {}}
+________________________ test_xls_analyzer_invalid_data ________________________
+
+file_contents = b'PK\x03\x04\x14\x00\x00\x00\x08\x00*\xa1KZF\xc7MH\x95\x00\x00\x00\xcd\x00\x00\x00\x10\x00\x00\x00docProps/app.xmlM\xc...\x80\x01\xd5\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00>\x02\x00\x00\x1f\x11\x00\x00\x00\x00'
+
+    @staticmethod
+    def read_excel(file_contents: bytes) -> List[Dict[str, Any]]:
+        """Read Excel file and return list of dictionaries with data."""
+        try:
+            # Read first sheet from Excel file
+            df = pd.read_excel(
+                BytesIO(file_contents),
+                sheet_name=0,
+                dtype={
+                    'Week Number': 'Int64',
+                    'Month': str,
+                    'Category': str,
+                    'Subcategory': str,
+                    'Customer': str,
+                    'Project': str,
+                    'Task Description': str
+                }
+            )
+    
+            # Set default values for missing columns
+            required_columns = ['Week Number', 'Month', 'Category', 'Subcategory',
+                              'Customer', 'Project', 'Task Description', 'Date']
+            for col in required_columns:
+                if col not in df.columns:
+                    if col == 'Date':
+                        df[col] = pd.Timestamp.now().date()
+                    else:
+                        df[col] = '-'
+    
+            # Drop rows where all elements are NaN
+            df = df.dropna(how='all')
+    
+            # Convert date column to datetime
+            df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
+    
+            # Fill NaN values with appropriate defaults
+            # Convert Week Number to numeric, replacing non-numeric with 0
+            df['Week Number'] = pd.to_numeric(df['Week Number'], errors='coerce').fillna(0).astype('Int64')
+    
+            # Convert '-' to None first
+            df = df.replace({'-': None})
+    
+            # Then fill remaining NaN values
+>           df = df.fillna({
+                'Customer': None,
+                'Project': None,
+                'Task Description': '',
+                'Month': '',
+                'Category': 'Other',
+                'Subcategory': 'Other',
+                'Hours': 0.0
+            })
+
+utils/xls_analyzer.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.pythonlibs/lib/python3.11/site-packages/pandas/core/generic.py:7384: in fillna
+    res_k = result[k].fillna(v, limit=limit, downcast=downcast_k)
+.pythonlibs/lib/python3.11/site-packages/pandas/core/generic.py:7293: in fillna
+    value, method = validate_fillna_kwargs(value, method)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+value = None, method = None, validate_scalar_dict_value = True
+
+    def validate_fillna_kwargs(value, method, validate_scalar_dict_value: bool = True):
+        """
+        Validate the keyword arguments to 'fillna'.
+    
+        This checks that exactly one of 'value' and 'method' is specified.
+        If 'method' is specified, this validates that it's a valid method.
+    
+        Parameters
+        ----------
+        value, method : object
+            The 'value' and 'method' keyword arguments for 'fillna'.
+        validate_scalar_dict_value : bool, default True
+            Whether to validate that 'value' is a scalar or dict. Specifically,
+            validate that it is not a list or tuple.
+    
+        Returns
+        -------
+        value, method : object
+        """
+        from pandas.core.missing import clean_fill_method
+    
+        if value is None and method is None:
+>           raise ValueError("Must specify a fill 'value' or 'method'.")
+E           ValueError: Must specify a fill 'value' or 'method'.
+
+.pythonlibs/lib/python3.11/site-packages/pandas/util/_validators.py:293: ValueError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-14/test_xls_analyzer_invalid_data0')
+invalid_timesheet_data = {'Category': ['Development'], 'Date': ['2024-10-07'], 'Hours': [8.0]}
+setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7f93fc27dcd0>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
+
+    def test_xls_analyzer_invalid_data(tmp_path, invalid_timesheet_data, setup_test_data):
+        """Test XLSAnalyzer with invalid data"""
+        excel_file = create_test_excel(tmp_path, invalid_timesheet_data)
+    
+        with open(excel_file, "rb") as f:
+            contents = f.read()
+            analyzer = XLSAnalyzer()
+>           records = analyzer.read_excel(contents)
+
+tests/test_file_upload.py:71: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+file_contents = b'PK\x03\x04\x14\x00\x00\x00\x08\x00*\xa1KZF\xc7MH\x95\x00\x00\x00\xcd\x00\x00\x00\x10\x00\x00\x00docProps/app.xmlM\xc...\x80\x01\xd5\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00>\x02\x00\x00\x1f\x11\x00\x00\x00\x00'
+
+    @staticmethod
+    def read_excel(file_contents: bytes) -> List[Dict[str, Any]]:
+        """Read Excel file and return list of dictionaries with data."""
+        try:
+            # Read first sheet from Excel file
+            df = pd.read_excel(
+                BytesIO(file_contents),
+                sheet_name=0,
+                dtype={
+                    'Week Number': 'Int64',
+                    'Month': str,
+                    'Category': str,
+                    'Subcategory': str,
+                    'Customer': str,
+                    'Project': str,
+                    'Task Description': str
+                }
+            )
+    
+            # Set default values for missing columns
+            required_columns = ['Week Number', 'Month', 'Category', 'Subcategory',
+                              'Customer', 'Project', 'Task Description', 'Date']
+            for col in required_columns:
+                if col not in df.columns:
+                    if col == 'Date':
+                        df[col] = pd.Timestamp.now().date()
+                    else:
+                        df[col] = '-'
+    
+            # Drop rows where all elements are NaN
+            df = df.dropna(how='all')
+    
+            # Convert date column to datetime
+            df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
+    
+            # Fill NaN values with appropriate defaults
+            # Convert Week Number to numeric, replacing non-numeric with 0
+            df['Week Number'] = pd.to_numeric(df['Week Number'], errors='coerce').fillna(0).astype('Int64')
+    
+            # Convert '-' to None first
+            df = df.replace({'-': None})
+    
+            # Then fill remaining NaN values
+            df = df.fillna({
+                'Customer': None,
+                'Project': None,
+                'Task Description': '',
+                'Month': '',
+                'Category': 'Other',
+                'Subcategory': 'Other',
+                'Hours': 0.0
+            })
+    
+            # Convert DataFrame to list of dictionaries
+            records = df.to_dict('records')
+    
+            logger.info(f"Successfully parsed {len(records)} records from Excel file")
+            return records
+    
+        except Exception as e:
+            logger.error(f"Error parsing Excel file: {str(e)}")
+>           raise ValueError(f"Failed to parse Excel file: {str(e)}")
+E           ValueError: Failed to parse Excel file: Must specify a fill 'value' or 'method'.
+
+utils/xls_analyzer.py:72: ValueError
+----------------------------- Captured stdout call -----------------------------
+{"timestamp": "2025-02-11T20:09:21.880834", "level": "ERROR", "correlation_id": "undefined", "logger": "TimesheetTracker", "message": "Error parsing Excel file: Must specify a fill 'value' or 'method'.", "context": {}}
+------------------------------ Captured log call -------------------------------
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error parsing Excel file: Must specify a fill 'value' or 'method'.", "timestamp": "2025-02-11T20:09:21.880960", "context": {}}
+_________________________ test_dash_customer_handling __________________________
+
+client = <starlette.testclient.TestClient object at 0x7f93fc3ce350>
+setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7f93fc3ce910>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
+tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-14/test_dash_customer_handling0')
+
+    def test_dash_customer_handling(client, setup_test_data, tmp_path):
+        """Test handling of dash (-) values in customer field"""
+        data = {
+            'Category': ['Development'],
+            'Customer': ['-'],
+            'Project': ['-'],
+            'Hours': [8.0],
+            'Date': ['2024-10-07']
+        }
+        excel_file = create_test_excel(tmp_path, data)
+    
+        with open(excel_file, "rb") as f:
+            response = client.post(
+                "/time-entries/upload/",
+                files={"file": ("test.xlsx", f, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
+            )
+    
+>       assert response.status_code == 201
+E       assert 400 == 201
+E        +  where 400 = <Response [400 Bad Request]>.status_code
+
+tests/test_file_upload.py:94: AssertionError
+----------------------------- Captured stdout call -----------------------------
+{"timestamp": "2025-02-11T20:09:22.095708", "level": "INFO", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5237", "content-type": "multipart/form-data; boundary=3c4acfdbabdf3781895b59c6516de3e1"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+{"timestamp": "2025-02-11T20:09:22.098951", "level": "INFO", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
+{"timestamp": "2025-02-11T20:09:22.099387", "level": "DEBUG", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "TimesheetService initialized", "context": {}}
+{"timestamp": "2025-02-11T20:09:22.099708", "level": "INFO", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
+{"timestamp": "2025-02-11T20:09:22.109386", "level": "ERROR", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Error parsing Excel file: Must specify a fill 'value' or 'method'.", "context": {}}
+{"timestamp": "2025-02-11T20:09:22.109672", "level": "ERROR", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Error importing Excel data: Failed to parse Excel file: Must specify a fill 'value' or 'method'.", "context": {}}
+{"timestamp": "2025-02-11T20:09:22.109927", "level": "ERROR", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Error processing timesheet: Failed to parse Excel file: Must specify a fill 'value' or 'method'.", "context": {}}
+{"timestamp": "2025-02-11T20:09:22.110137", "level": "ERROR", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Error processing timesheet: 400: Failed to parse Excel file: Must specify a fill 'value' or 'method'.", "context": {}}
+{"timestamp": "2025-02-11T20:09:22.110873", "level": "WARNING", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Request failed with status 400", "context": {"correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "status_code": 400, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "15.41", "response_headers": {"content-length": "81", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+{"timestamp": "2025-02-11T20:09:22.111341", "level": "DEBUG", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 400}}
+------------------------------ Captured log call -------------------------------
+INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T20:09:22.095857", "context": {"correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5237", "content-type": "multipart/form-data; boundary=3c4acfdbabdf3781895b59c6516de3e1"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:09:22.099185", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "TimesheetService initialized", "timestamp": "2025-02-11T20:09:22.099546", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:09:22.099833", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error parsing Excel file: Must specify a fill 'value' or 'method'.", "timestamp": "2025-02-11T20:09:22.109526", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error importing Excel data: Failed to parse Excel file: Must specify a fill 'value' or 'method'.", "timestamp": "2025-02-11T20:09:22.109788", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error processing timesheet: Failed to parse Excel file: Must specify a fill 'value' or 'method'.", "timestamp": "2025-02-11T20:09:22.109998", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error processing timesheet: 400: Failed to parse Excel file: Must specify a fill 'value' or 'method'.", "timestamp": "2025-02-11T20:09:22.110215", "context": {}}
+WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 400", "timestamp": "2025-02-11T20:09:22.110987", "context": {"correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "status_code": 400, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "15.41", "response_headers": {"content-length": "81", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T20:09:22.111449", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 400}}
+___________________________ test_upload_excel_valid ____________________________
+
+client = <starlette.testclient.TestClient object at 0x7f93fc3cf690>
+setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7f93fc5b2550>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
+tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-14/test_upload_excel_valid0')
+valid_timesheet_data = {'Category': ['Development', 'Testing'], 'Customer': ['ECOLAB', 'ECOLAB'], 'Date': ['2024-10-07', '2024-10-07'], 'Hours': [8.0, 4.0], ...}
+
+    def test_upload_excel_valid(client, setup_test_data, tmp_path, valid_timesheet_data):
+        """Test uploading a valid Excel file"""
+        excel_file = create_test_excel(tmp_path, valid_timesheet_data)
+    
+        with open(excel_file, "rb") as f:
+            response = client.post(
+                "/time-entries/upload/",
+                files={"file": ("test.xlsx", f, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
+            )
+    
+>       assert response.status_code == 201
+E       assert 400 == 201
+E        +  where 400 = <Response [400 Bad Request]>.status_code
+
+tests/test_file_upload.py:109: AssertionError
+----------------------------- Captured stdout call -----------------------------
+{"timestamp": "2025-02-11T20:09:22.189005", "level": "INFO", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5397", "content-type": "multipart/form-data; boundary=f62fbde23b0242c1dba454c510260c89"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+{"timestamp": "2025-02-11T20:09:22.191111", "level": "INFO", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
+{"timestamp": "2025-02-11T20:09:22.191318", "level": "DEBUG", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "TimesheetService initialized", "context": {}}
+{"timestamp": "2025-02-11T20:09:22.191556", "level": "INFO", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
+{"timestamp": "2025-02-11T20:09:22.199991", "level": "ERROR", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Error parsing Excel file: Must specify a fill 'value' or 'method'.", "context": {}}
+{"timestamp": "2025-02-11T20:09:22.200265", "level": "ERROR", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Error importing Excel data: Failed to parse Excel file: Must specify a fill 'value' or 'method'.", "context": {}}
+{"timestamp": "2025-02-11T20:09:22.200457", "level": "ERROR", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Error processing timesheet: Failed to parse Excel file: Must specify a fill 'value' or 'method'.", "context": {}}
+{"timestamp": "2025-02-11T20:09:22.200704", "level": "ERROR", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Error processing timesheet: 400: Failed to parse Excel file: Must specify a fill 'value' or 'method'.", "context": {}}
+{"timestamp": "2025-02-11T20:09:22.201287", "level": "WARNING", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Request failed with status 400", "context": {"correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "status_code": 400, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "12.34", "response_headers": {"content-length": "81", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+{"timestamp": "2025-02-11T20:09:22.201729", "level": "DEBUG", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "method": "POST", "path": "/time-entries/upload/", "status_code": 400}}
+------------------------------ Captured log call -------------------------------
+INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T20:09:22.189134", "context": {"correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5397", "content-type": "multipart/form-data; boundary=f62fbde23b0242c1dba454c510260c89"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:09:22.191191", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "TimesheetService initialized", "timestamp": "2025-02-11T20:09:22.191401", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:09:22.191608", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error parsing Excel file: Must specify a fill 'value' or 'method'.", "timestamp": "2025-02-11T20:09:22.200108", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error importing Excel data: Failed to parse Excel file: Must specify a fill 'value' or 'method'.", "timestamp": "2025-02-11T20:09:22.200325", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error processing timesheet: Failed to parse Excel file: Must specify a fill 'value' or 'method'.", "timestamp": "2025-02-11T20:09:22.200565", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error processing timesheet: 400: Failed to parse Excel file: Must specify a fill 'value' or 'method'.", "timestamp": "2025-02-11T20:09:22.200766", "context": {}}
+WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 400", "timestamp": "2025-02-11T20:09:22.201366", "context": {"correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "status_code": 400, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "12.34", "response_headers": {"content-length": "81", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T20:09:22.201804", "context": {"correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "method": "POST", "path": "/time-entries/upload/", "status_code": 400}}
+______________________ test_xls_analyzer_date_conversion _______________________
+
+file_contents = b'PK\x03\x04\x14\x00\x00\x00\x08\x00+\xa1KZF\xc7MH\x95\x00\x00\x00\xcd\x00\x00\x00\x10\x00\x00\x00docProps/app.xmlM\xc...x00\x80\x01\xea\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00>\x02\x00\x004\x11\x00\x00\x00\x00'
+
+    @staticmethod
+    def read_excel(file_contents: bytes) -> List[Dict[str, Any]]:
+        """Read Excel file and return list of dictionaries with data."""
+        try:
+            # Read first sheet from Excel file
+            df = pd.read_excel(
+                BytesIO(file_contents),
+                sheet_name=0,
+                dtype={
+                    'Week Number': 'Int64',
+                    'Month': str,
+                    'Category': str,
+                    'Subcategory': str,
+                    'Customer': str,
+                    'Project': str,
+                    'Task Description': str
+                }
+            )
+    
+            # Set default values for missing columns
+            required_columns = ['Week Number', 'Month', 'Category', 'Subcategory',
+                              'Customer', 'Project', 'Task Description', 'Date']
+            for col in required_columns:
+                if col not in df.columns:
+                    if col == 'Date':
+                        df[col] = pd.Timestamp.now().date()
+                    else:
+                        df[col] = '-'
+    
+            # Drop rows where all elements are NaN
+            df = df.dropna(how='all')
+    
+            # Convert date column to datetime
+            df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
+    
+            # Fill NaN values with appropriate defaults
+            # Convert Week Number to numeric, replacing non-numeric with 0
+            df['Week Number'] = pd.to_numeric(df['Week Number'], errors='coerce').fillna(0).astype('Int64')
+    
+            # Convert '-' to None first
+            df = df.replace({'-': None})
+    
+            # Then fill remaining NaN values
+>           df = df.fillna({
+                'Customer': None,
+                'Project': None,
+                'Task Description': '',
+                'Month': '',
+                'Category': 'Other',
+                'Subcategory': 'Other',
+                'Hours': 0.0
+            })
+
+utils/xls_analyzer.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.pythonlibs/lib/python3.11/site-packages/pandas/core/generic.py:7384: in fillna
+    res_k = result[k].fillna(v, limit=limit, downcast=downcast_k)
+.pythonlibs/lib/python3.11/site-packages/pandas/core/generic.py:7293: in fillna
+    value, method = validate_fillna_kwargs(value, method)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+value = None, method = None, validate_scalar_dict_value = True
+
+    def validate_fillna_kwargs(value, method, validate_scalar_dict_value: bool = True):
+        """
+        Validate the keyword arguments to 'fillna'.
+    
+        This checks that exactly one of 'value' and 'method' is specified.
+        If 'method' is specified, this validates that it's a valid method.
+    
+        Parameters
+        ----------
+        value, method : object
+            The 'value' and 'method' keyword arguments for 'fillna'.
+        validate_scalar_dict_value : bool, default True
+            Whether to validate that 'value' is a scalar or dict. Specifically,
+            validate that it is not a list or tuple.
+    
+        Returns
+        -------
+        value, method : object
+        """
+        from pandas.core.missing import clean_fill_method
+    
+        if value is None and method is None:
+>           raise ValueError("Must specify a fill 'value' or 'method'.")
+E           ValueError: Must specify a fill 'value' or 'method'.
+
+.pythonlibs/lib/python3.11/site-packages/pandas/util/_validators.py:293: ValueError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-14/test_xls_analyzer_date_convers0')
+
+    def test_xls_analyzer_date_conversion(tmp_path):
+        """Test date conversion in XLSAnalyzer"""
+        data = {
+            'Date': ['2024-10-07', '2024-10-08'],
+            'Week Number': [41, 41],
+            'Category': ['Test', 'Test']
+        }
+        excel_file = create_test_excel(tmp_path, data)
+    
+        with open(excel_file, "rb") as f:
+            contents = f.read()
+            analyzer = XLSAnalyzer()
+>           records = analyzer.read_excel(contents)
+
+tests/test_file_upload.py:126: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+file_contents = b'PK\x03\x04\x14\x00\x00\x00\x08\x00+\xa1KZF\xc7MH\x95\x00\x00\x00\xcd\x00\x00\x00\x10\x00\x00\x00docProps/app.xmlM\xc...x00\x80\x01\xea\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00>\x02\x00\x004\x11\x00\x00\x00\x00'
+
+    @staticmethod
+    def read_excel(file_contents: bytes) -> List[Dict[str, Any]]:
+        """Read Excel file and return list of dictionaries with data."""
+        try:
+            # Read first sheet from Excel file
+            df = pd.read_excel(
+                BytesIO(file_contents),
+                sheet_name=0,
+                dtype={
+                    'Week Number': 'Int64',
+                    'Month': str,
+                    'Category': str,
+                    'Subcategory': str,
+                    'Customer': str,
+                    'Project': str,
+                    'Task Description': str
+                }
+            )
+    
+            # Set default values for missing columns
+            required_columns = ['Week Number', 'Month', 'Category', 'Subcategory',
+                              'Customer', 'Project', 'Task Description', 'Date']
+            for col in required_columns:
+                if col not in df.columns:
+                    if col == 'Date':
+                        df[col] = pd.Timestamp.now().date()
+                    else:
+                        df[col] = '-'
+    
+            # Drop rows where all elements are NaN
+            df = df.dropna(how='all')
+    
+            # Convert date column to datetime
+            df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
+    
+            # Fill NaN values with appropriate defaults
+            # Convert Week Number to numeric, replacing non-numeric with 0
+            df['Week Number'] = pd.to_numeric(df['Week Number'], errors='coerce').fillna(0).astype('Int64')
+    
+            # Convert '-' to None first
+            df = df.replace({'-': None})
+    
+            # Then fill remaining NaN values
+            df = df.fillna({
+                'Customer': None,
+                'Project': None,
+                'Task Description': '',
+                'Month': '',
+                'Category': 'Other',
+                'Subcategory': 'Other',
+                'Hours': 0.0
+            })
+    
+            # Convert DataFrame to list of dictionaries
+            records = df.to_dict('records')
+    
+            logger.info(f"Successfully parsed {len(records)} records from Excel file")
+            return records
+    
+        except Exception as e:
+            logger.error(f"Error parsing Excel file: {str(e)}")
+>           raise ValueError(f"Failed to parse Excel file: {str(e)}")
+E           ValueError: Failed to parse Excel file: Must specify a fill 'value' or 'method'.
+
+utils/xls_analyzer.py:72: ValueError
+----------------------------- Captured stdout call -----------------------------
+{"timestamp": "2025-02-11T20:09:22.224721", "level": "ERROR", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Error parsing Excel file: Must specify a fill 'value' or 'method'.", "context": {}}
+------------------------------ Captured log call -------------------------------
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error parsing Excel file: Must specify a fill 'value' or 'method'.", "timestamp": "2025-02-11T20:09:22.224835", "context": {}}
+______________________ test_xls_analyzer_missing_columns _______________________
+
+file_contents = b'PK\x03\x04\x14\x00\x00\x00\x08\x00+\xa1KZF\xc7MH\x95\x00\x00\x00\xcd\x00\x00\x00\x10\x00\x00\x00docProps/app.xmlM\xc...\x80\x01\xb8\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00>\x02\x00\x00\x02\x11\x00\x00\x00\x00'
+
+    @staticmethod
+    def read_excel(file_contents: bytes) -> List[Dict[str, Any]]:
+        """Read Excel file and return list of dictionaries with data."""
+        try:
+            # Read first sheet from Excel file
+            df = pd.read_excel(
+                BytesIO(file_contents),
+                sheet_name=0,
+                dtype={
+                    'Week Number': 'Int64',
+                    'Month': str,
+                    'Category': str,
+                    'Subcategory': str,
+                    'Customer': str,
+                    'Project': str,
+                    'Task Description': str
+                }
+            )
+    
+            # Set default values for missing columns
+            required_columns = ['Week Number', 'Month', 'Category', 'Subcategory',
+                              'Customer', 'Project', 'Task Description', 'Date']
+            for col in required_columns:
+                if col not in df.columns:
+                    if col == 'Date':
+                        df[col] = pd.Timestamp.now().date()
+                    else:
+                        df[col] = '-'
+    
+            # Drop rows where all elements are NaN
+            df = df.dropna(how='all')
+    
+            # Convert date column to datetime
+            df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
+    
+            # Fill NaN values with appropriate defaults
+            # Convert Week Number to numeric, replacing non-numeric with 0
+            df['Week Number'] = pd.to_numeric(df['Week Number'], errors='coerce').fillna(0).astype('Int64')
+    
+            # Convert '-' to None first
+            df = df.replace({'-': None})
+    
+            # Then fill remaining NaN values
+>           df = df.fillna({
+                'Customer': None,
+                'Project': None,
+                'Task Description': '',
+                'Month': '',
+                'Category': 'Other',
+                'Subcategory': 'Other',
+                'Hours': 0.0
+            })
+
+utils/xls_analyzer.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.pythonlibs/lib/python3.11/site-packages/pandas/core/generic.py:7384: in fillna
+    res_k = result[k].fillna(v, limit=limit, downcast=downcast_k)
+.pythonlibs/lib/python3.11/site-packages/pandas/core/generic.py:7293: in fillna
+    value, method = validate_fillna_kwargs(value, method)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+value = None, method = None, validate_scalar_dict_value = True
+
+    def validate_fillna_kwargs(value, method, validate_scalar_dict_value: bool = True):
+        """
+        Validate the keyword arguments to 'fillna'.
+    
+        This checks that exactly one of 'value' and 'method' is specified.
+        If 'method' is specified, this validates that it's a valid method.
+    
+        Parameters
+        ----------
+        value, method : object
+            The 'value' and 'method' keyword arguments for 'fillna'.
+        validate_scalar_dict_value : bool, default True
+            Whether to validate that 'value' is a scalar or dict. Specifically,
+            validate that it is not a list or tuple.
+    
+        Returns
+        -------
+        value, method : object
+        """
+        from pandas.core.missing import clean_fill_method
+    
+        if value is None and method is None:
+>           raise ValueError("Must specify a fill 'value' or 'method'.")
+E           ValueError: Must specify a fill 'value' or 'method'.
+
+.pythonlibs/lib/python3.11/site-packages/pandas/util/_validators.py:293: ValueError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-14/test_xls_analyzer_missing_colu0')
+
+    def test_xls_analyzer_missing_columns(tmp_path):
+        """Test XLSAnalyzer with missing required columns"""
+        data = {'Category': ['Test'], 'Hours': [8.0]}
+        excel_file = create_test_excel(tmp_path, data)
+    
+        with open(excel_file, "rb") as f:
+            contents = f.read()
+            analyzer = XLSAnalyzer()
+>           records = analyzer.read_excel(contents)
+
+tests/test_file_upload.py:140: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+file_contents = b'PK\x03\x04\x14\x00\x00\x00\x08\x00+\xa1KZF\xc7MH\x95\x00\x00\x00\xcd\x00\x00\x00\x10\x00\x00\x00docProps/app.xmlM\xc...\x80\x01\xb8\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00>\x02\x00\x00\x02\x11\x00\x00\x00\x00'
+
+    @staticmethod
+    def read_excel(file_contents: bytes) -> List[Dict[str, Any]]:
+        """Read Excel file and return list of dictionaries with data."""
+        try:
+            # Read first sheet from Excel file
+            df = pd.read_excel(
+                BytesIO(file_contents),
+                sheet_name=0,
+                dtype={
+                    'Week Number': 'Int64',
+                    'Month': str,
+                    'Category': str,
+                    'Subcategory': str,
+                    'Customer': str,
+                    'Project': str,
+                    'Task Description': str
+                }
+            )
+    
+            # Set default values for missing columns
+            required_columns = ['Week Number', 'Month', 'Category', 'Subcategory',
+                              'Customer', 'Project', 'Task Description', 'Date']
+            for col in required_columns:
+                if col not in df.columns:
+                    if col == 'Date':
+                        df[col] = pd.Timestamp.now().date()
+                    else:
+                        df[col] = '-'
+    
+            # Drop rows where all elements are NaN
+            df = df.dropna(how='all')
+    
+            # Convert date column to datetime
+            df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
+    
+            # Fill NaN values with appropriate defaults
+            # Convert Week Number to numeric, replacing non-numeric with 0
+            df['Week Number'] = pd.to_numeric(df['Week Number'], errors='coerce').fillna(0).astype('Int64')
+    
+            # Convert '-' to None first
+            df = df.replace({'-': None})
+    
+            # Then fill remaining NaN values
+            df = df.fillna({
+                'Customer': None,
+                'Project': None,
+                'Task Description': '',
+                'Month': '',
+                'Category': 'Other',
+                'Subcategory': 'Other',
+                'Hours': 0.0
+            })
+    
+            # Convert DataFrame to list of dictionaries
+            records = df.to_dict('records')
+    
+            logger.info(f"Successfully parsed {len(records)} records from Excel file")
+            return records
+    
+        except Exception as e:
+            logger.error(f"Error parsing Excel file: {str(e)}")
+>           raise ValueError(f"Failed to parse Excel file: {str(e)}")
+E           ValueError: Failed to parse Excel file: Must specify a fill 'value' or 'method'.
+
+utils/xls_analyzer.py:72: ValueError
+----------------------------- Captured stdout call -----------------------------
+{"timestamp": "2025-02-11T20:09:22.429269", "level": "ERROR", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Error parsing Excel file: Must specify a fill 'value' or 'method'.", "context": {}}
+------------------------------ Captured log call -------------------------------
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error parsing Excel file: Must specify a fill 'value' or 'method'.", "timestamp": "2025-02-11T20:09:22.429408", "context": {}}
+___________________________ test_upload_excel_valid ____________________________
+
+client = <starlette.testclient.TestClient object at 0x7f93fb92e090>
+setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7f93fb92d9d0>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
+tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-14/test_upload_excel_valid1')
+
+    def test_upload_excel_valid(client, setup_test_data, tmp_path):
+        """Test uploading a valid Excel file"""
+        import pandas as pd
+    
+        # Create test Excel file
+        excel_data = {
+            'Week Number': [41, 41],
+            'Month': ['October', 'October'],
+            'Category': ['Other', 'Other'],
+            'Subcategory': ['Other Training', 'Other Training'],
+            'Customer': ['ECOLAB', 'ECOLAB'],
+            'Project': ['Project_Magic_Bullet', 'Project_Magic_Bullet'],
+            'Task Description': ['Test task', 'Another task'],
+            'Hours': [8.0, 4.0],
+            'Date': ['2024-10-07', '2024-10-07']
+        }
+        df = pd.DataFrame(excel_data)
+        excel_file = tmp_path / "test.xlsx"
+        df.to_excel(excel_file, index=False)
+    
+        with open(excel_file, "rb") as f:
+            response = client.post(
+                "/time-entries/upload/",
+                files={"file": ("test.xlsx", f, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
+            )
+    
+>       assert response.status_code == 201
+E       assert 400 == 201
+E        +  where 400 = <Response [400 Bad Request]>.status_code
+
+tests/test_routes.py:196: AssertionError
+----------------------------- Captured stdout call -----------------------------
+{"timestamp": "2025-02-11T20:09:22.694011", "level": "INFO", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5382", "content-type": "multipart/form-data; boundary=5d79a9197785fcdd3e4f92018bcb6a05"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+{"timestamp": "2025-02-11T20:09:22.696849", "level": "INFO", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
+{"timestamp": "2025-02-11T20:09:22.697144", "level": "DEBUG", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "TimesheetService initialized", "context": {}}
+{"timestamp": "2025-02-11T20:09:22.697382", "level": "INFO", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
+{"timestamp": "2025-02-11T20:09:22.708021", "level": "ERROR", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Error parsing Excel file: Must specify a fill 'value' or 'method'.", "context": {}}
+{"timestamp": "2025-02-11T20:09:22.708255", "level": "ERROR", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Error importing Excel data: Failed to parse Excel file: Must specify a fill 'value' or 'method'.", "context": {}}
+{"timestamp": "2025-02-11T20:09:22.708455", "level": "ERROR", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Error processing timesheet: Failed to parse Excel file: Must specify a fill 'value' or 'method'.", "context": {}}
+{"timestamp": "2025-02-11T20:09:22.708745", "level": "ERROR", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Error processing timesheet: 400: Failed to parse Excel file: Must specify a fill 'value' or 'method'.", "context": {}}
+{"timestamp": "2025-02-11T20:09:22.709321", "level": "WARNING", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Request failed with status 400", "context": {"correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "status_code": 400, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "15.65", "response_headers": {"content-length": "81", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+{"timestamp": "2025-02-11T20:09:22.709805", "level": "DEBUG", "correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "method": "POST", "path": "/time-entries/upload/", "status_code": 400}}
+------------------------------ Captured log call -------------------------------
+INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T20:09:22.694199", "context": {"correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5382", "content-type": "multipart/form-data; boundary=5d79a9197785fcdd3e4f92018bcb6a05"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:09:22.696960", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "TimesheetService initialized", "timestamp": "2025-02-11T20:09:22.697229", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:09:22.697470", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error parsing Excel file: Must specify a fill 'value' or 'method'.", "timestamp": "2025-02-11T20:09:22.708118", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error importing Excel data: Failed to parse Excel file: Must specify a fill 'value' or 'method'.", "timestamp": "2025-02-11T20:09:22.708326", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error processing timesheet: Failed to parse Excel file: Must specify a fill 'value' or 'method'.", "timestamp": "2025-02-11T20:09:22.708585", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error processing timesheet: 400: Failed to parse Excel file: Must specify a fill 'value' or 'method'.", "timestamp": "2025-02-11T20:09:22.708829", "context": {}}
+WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 400", "timestamp": "2025-02-11T20:09:22.709457", "context": {"correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "status_code": 400, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "15.65", "response_headers": {"content-length": "81", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T20:09:22.709889", "context": {"correlation_id": "09a12cd7-54fb-448d-afac-0d1608642089", "method": "POST", "path": "/time-entries/upload/", "status_code": 400}}
+__________________ test_xls_analyzer_dash_to_none_conversion ___________________
+
+tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-14/test_xls_analyzer_dash_to_none0')
+
+    def test_xls_analyzer_dash_to_none_conversion(tmp_path):
+        """Test that dash values are converted to None during Excel parsing"""
+        data = {
+            'Category': ['Development'],
+            'Customer': ['-'],
+            'Project': ['-'],
+            'Hours': [8.0],
+            'Date': ['2024-10-07']
+        }
+>       excel_file = create_test_excel(tmp_path, data)
+E       NameError: name 'create_test_excel' is not defined
+
+tests/test_xls_analyzer.py:11: NameError
+=============================== warnings summary ===============================
+.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345
+  /home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345: UserWarning: Valid config keys have changed in V2:
+  * 'orm_mode' has been renamed to 'from_attributes'
+    warnings.warn(message, UserWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_file_upload.py::test_xls_analyzer_valid - ValueError: Faile...
+FAILED tests/test_file_upload.py::test_xls_analyzer_invalid_data - ValueError...
+FAILED tests/test_file_upload.py::test_dash_customer_handling - assert 400 ==...
+FAILED tests/test_file_upload.py::test_upload_excel_valid - assert 400 == 201
+FAILED tests/test_file_upload.py::test_xls_analyzer_date_conversion - ValueEr...
+FAILED tests/test_file_upload.py::test_xls_analyzer_missing_columns - ValueEr...
+FAILED tests/test_routes.py::test_upload_excel_valid - assert 400 == 201
+FAILED tests/test_xls_analyzer.py::test_xls_analyzer_dash_to_none_conversion
+================== 8 failed, 6 deselected, 1 warning in 4.22s ==================
