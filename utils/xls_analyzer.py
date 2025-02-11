@@ -47,19 +47,17 @@ class XLSAnalyzer:
             # Convert Week Number to numeric, replacing non-numeric with 0
             df['Week Number'] = pd.to_numeric(df['Week Number'], errors='coerce').fillna(0).astype('Int64')
             
-            # Convert '-' to None first
-            df = df.replace({'-': None})
+            # First replace dashes with nan
+            df = df.replace({'-': pd.NA})
             
-            # Then fill remaining NaN values
-            df = df.fillna({
-                'Customer': None,
-                'Project': None,
-                'Task Description': '',
-                'Month': '',
-                'Category': 'Other',
-                'Subcategory': 'Other',
-                'Hours': 0.0
-            })
+            # Then fill remaining NaN values with appropriate defaults
+            df['Customer'] = df['Customer'].fillna('-')
+            df['Project'] = df['Project'].fillna('-')
+            df['Task Description'] = df['Task Description'].fillna('')
+            df['Month'] = df['Month'].fillna('')
+            df['Category'] = df['Category'].fillna('Other')
+            df['Subcategory'] = df['Subcategory'].fillna('Other')
+            df['Hours'] = df['Hours'].fillna(0.0)
 
             # Convert DataFrame to list of dictionaries
             records = df.to_dict('records')

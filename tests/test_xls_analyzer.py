@@ -1,4 +1,6 @@
 
+from tests.test_file_upload import create_test_excel
+
 def test_xls_analyzer_dash_to_none_conversion(tmp_path):
     """Test that dash values are converted to None during Excel parsing"""
     data = {
