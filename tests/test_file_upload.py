@@ -1,3 +1,4 @@
+
 import pytest
 from fastapi.testclient import TestClient
 from main import app
@@ -73,9 +74,9 @@ def test_xls_analyzer_invalid_data(tmp_path, invalid_timesheet_data):
         assert records[0]['Customer'] == '-'
         assert records[0]['Project'] == '-'
 
-def test_upload_excel_valid(client, setup_test_data, tmp_path):
+def test_upload_excel_valid(client, setup_test_data, tmp_path, valid_timesheet_data):
     """Test uploading a valid Excel file"""
-    excel_file = create_test_excel(tmp_path, valid_timesheet_data())
+    excel_file = create_test_excel(tmp_path, valid_timesheet_data)
 
     with open(excel_file, "rb") as f:
         response = client.post(

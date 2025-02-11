@@ -23,8 +23,7 @@ class XLSAnalyzer:
                     'Customer': str,
                     'Project': str,
                     'Task Description': str
-                },
-                encoding='utf-8'
+                }
             )
 
             # Drop rows where all elements are NaN
