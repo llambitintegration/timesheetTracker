@@ -5,418 +5,17 @@ rootdir: /home/runner/workspace
 configfile: pyproject.toml
 plugins: anyio-4.7.0, asyncio-0.25.2, cov-6.0.0
 asyncio: mode=Mode.STRICT, asyncio_default_fixture_loop_scope=None
-collecting ... collected 15 items / 6 deselected / 9 selected
-run-last-failure: rerun previous 9 failures (skipped 5 files)
+collecting ... collected 9 items / 6 deselected / 3 selected
+run-last-failure: rerun previous 3 failures (skipped 6 files)
 
-tests/test_file_upload.py::test_xls_analyzer_valid FAILED                [ 11%]
-tests/test_file_upload.py::test_xls_analyzer_invalid_data FAILED         [ 22%]
-tests/test_file_upload.py::test_upload_excel_valid FAILED                [ 33%]
-tests/test_file_upload.py::test_xls_analyzer_date_conversion FAILED      [ 44%]
-tests/test_file_upload.py::test_xls_analyzer_missing_columns FAILED      [ 55%]
+tests/test_file_upload.py::test_xls_analyzer_missing_columns FAILED      [ 33%]
 tests/test_interfaces.py::test_project_interface FAILED                  [ 66%]
-tests/test_models.py::test_model_timestamps FAILED                       [ 77%]
-tests/test_repositories.py::test_time_entry_repository_update FAILED     [ 88%]
-tests/test_routes.py::test_upload_excel_valid FAILED                     [100%]
+tests/test_models.py::test_model_timestamps FAILED                       [100%]
 
 =================================== FAILURES ===================================
-___________________________ test_xls_analyzer_valid ____________________________
-
-file_contents = b'PK\x03\x04\x14\x00\x00\x00\x08\x005\x9eKZF\xc7MH\x95\x00\x00\x00\xcd\x00\x00\x00\x10\x00\x00\x00docProps/app.xmlM\xc...\x80\x01\x95\x10\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00>\x02\x00\x00\xdf\x11\x00\x00\x00\x00'
-
-    @staticmethod
-    def read_excel(file_contents: bytes) -> List[Dict[str, Any]]:
-        """Read Excel file and return list of dictionaries with data."""
-        try:
-            # Read first sheet from Excel file
-            df = pd.read_excel(
->               BytesIO(file_contents),
-                sheet_name=0,
-                dtype={
-                    'Week Number': 'Int64',
-                    'Month': str,
-                    'Category': str,
-                    'Subcategory': str,
-                    'Customer': str,
-                    'Project': str,
-                    'Task Description': str
-                }
-            )
-E           NameError: name 'BytesIO' is not defined
-
-utils/xls_analyzer.py:16: NameError
-
-During handling of the above exception, another exception occurred:
-
-tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-5/test_xls_analyzer_valid0')
-valid_timesheet_data = {'Category': ['Development', 'Testing'], 'Customer': ['ECOLAB', 'ECOLAB'], 'Date': ['2024-10-07', '2024-10-07'], 'Hours': [8.0, 4.0], ...}
-
-    def test_xls_analyzer_valid(tmp_path, valid_timesheet_data):
-        """Test XLSAnalyzer with valid data"""
-        excel_file = create_test_excel(tmp_path, valid_timesheet_data)
-    
-        with open(excel_file, "rb") as f:
-            contents = f.read()
-            analyzer = XLSAnalyzer()
->           records = analyzer.read_excel(contents)
-
-tests/test_file_upload.py:50: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-file_contents = b'PK\x03\x04\x14\x00\x00\x00\x08\x005\x9eKZF\xc7MH\x95\x00\x00\x00\xcd\x00\x00\x00\x10\x00\x00\x00docProps/app.xmlM\xc...\x80\x01\x95\x10\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00>\x02\x00\x00\xdf\x11\x00\x00\x00\x00'
-
-    @staticmethod
-    def read_excel(file_contents: bytes) -> List[Dict[str, Any]]:
-        """Read Excel file and return list of dictionaries with data."""
-        try:
-            # Read first sheet from Excel file
-            df = pd.read_excel(
-                BytesIO(file_contents),
-                sheet_name=0,
-                dtype={
-                    'Week Number': 'Int64',
-                    'Month': str,
-                    'Category': str,
-                    'Subcategory': str,
-                    'Customer': str,
-                    'Project': str,
-                    'Task Description': str
-                }
-            )
-    
-            # Set default values for missing columns
-            required_columns = ['Week Number', 'Month', 'Category', 'Subcategory',
-                              'Customer', 'Project', 'Task Description', 'Date']
-            for col in required_columns:
-                if col not in df.columns:
-                    if col == 'Date':
-                        df[col] = pd.Timestamp.now().date()
-                    else:
-                        df[col] = '-'
-    
-            # Drop rows where all elements are NaN
-            df = df.dropna(how='all')
-    
-            # Convert date column to datetime
-            df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
-    
-            # Fill NaN values with appropriate defaults
-            df = df.fillna({
-                'Customer': '-',
-                'Project': '-',
-                'Task Description': '',
-                'Week Number': 0,
-                'Month': '',
-                'Category': 'Other',
-                'Subcategory': 'Other'
-            })
-    
-            # Convert DataFrame to list of dictionaries
-            records = df.to_dict('records')
-    
-            logger.info(f"Successfully parsed {len(records)} records from Excel file")
-            return records
-    
-        except Exception as e:
-            logger.error(f"Error parsing Excel file: {str(e)}")
->           raise ValueError(f"Failed to parse Excel file: {str(e)}")
-E           ValueError: Failed to parse Excel file: name 'BytesIO' is not defined
-
-utils/xls_analyzer.py:64: ValueError
------------------------------ Captured stdout call -----------------------------
-{"timestamp": "2025-02-11T19:49:42.470971", "level": "ERROR", "correlation_id": "undefined", "logger": "TimesheetTracker", "message": "Error parsing Excel file: name 'BytesIO' is not defined", "context": {}}
------------------------------- Captured log call -------------------------------
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error parsing Excel file: name 'BytesIO' is not defined", "timestamp": "2025-02-11T19:49:42.471116", "context": {}}
-________________________ test_xls_analyzer_invalid_data ________________________
-
-file_contents = b'PK\x03\x04\x14\x00\x00\x00\x08\x005\x9eKZF\xc7MH\x95\x00\x00\x00\xcd\x00\x00\x00\x10\x00\x00\x00docProps/app.xmlM\xc...\x80\x01\xd5\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00>\x02\x00\x00\x1f\x11\x00\x00\x00\x00'
-
-    @staticmethod
-    def read_excel(file_contents: bytes) -> List[Dict[str, Any]]:
-        """Read Excel file and return list of dictionaries with data."""
-        try:
-            # Read first sheet from Excel file
-            df = pd.read_excel(
->               BytesIO(file_contents),
-                sheet_name=0,
-                dtype={
-                    'Week Number': 'Int64',
-                    'Month': str,
-                    'Category': str,
-                    'Subcategory': str,
-                    'Customer': str,
-                    'Project': str,
-                    'Task Description': str
-                }
-            )
-E           NameError: name 'BytesIO' is not defined
-
-utils/xls_analyzer.py:16: NameError
-
-During handling of the above exception, another exception occurred:
-
-tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-5/test_xls_analyzer_invalid_data0')
-invalid_timesheet_data = {'Category': ['Development'], 'Date': ['2024-10-07'], 'Hours': [8.0]}
-
-    def test_xls_analyzer_invalid_data(tmp_path, invalid_timesheet_data):
-        """Test XLSAnalyzer with invalid data"""
-        excel_file = create_test_excel(tmp_path, invalid_timesheet_data)
-    
-        with open(excel_file, "rb") as f:
-            contents = f.read()
-            analyzer = XLSAnalyzer()
->           records = analyzer.read_excel(contents)
-
-tests/test_file_upload.py:71: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-file_contents = b'PK\x03\x04\x14\x00\x00\x00\x08\x005\x9eKZF\xc7MH\x95\x00\x00\x00\xcd\x00\x00\x00\x10\x00\x00\x00docProps/app.xmlM\xc...\x80\x01\xd5\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00>\x02\x00\x00\x1f\x11\x00\x00\x00\x00'
-
-    @staticmethod
-    def read_excel(file_contents: bytes) -> List[Dict[str, Any]]:
-        """Read Excel file and return list of dictionaries with data."""
-        try:
-            # Read first sheet from Excel file
-            df = pd.read_excel(
-                BytesIO(file_contents),
-                sheet_name=0,
-                dtype={
-                    'Week Number': 'Int64',
-                    'Month': str,
-                    'Category': str,
-                    'Subcategory': str,
-                    'Customer': str,
-                    'Project': str,
-                    'Task Description': str
-                }
-            )
-    
-            # Set default values for missing columns
-            required_columns = ['Week Number', 'Month', 'Category', 'Subcategory',
-                              'Customer', 'Project', 'Task Description', 'Date']
-            for col in required_columns:
-                if col not in df.columns:
-                    if col == 'Date':
-                        df[col] = pd.Timestamp.now().date()
-                    else:
-                        df[col] = '-'
-    
-            # Drop rows where all elements are NaN
-            df = df.dropna(how='all')
-    
-            # Convert date column to datetime
-            df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
-    
-            # Fill NaN values with appropriate defaults
-            df = df.fillna({
-                'Customer': '-',
-                'Project': '-',
-                'Task Description': '',
-                'Week Number': 0,
-                'Month': '',
-                'Category': 'Other',
-                'Subcategory': 'Other'
-            })
-    
-            # Convert DataFrame to list of dictionaries
-            records = df.to_dict('records')
-    
-            logger.info(f"Successfully parsed {len(records)} records from Excel file")
-            return records
-    
-        except Exception as e:
-            logger.error(f"Error parsing Excel file: {str(e)}")
->           raise ValueError(f"Failed to parse Excel file: {str(e)}")
-E           ValueError: Failed to parse Excel file: name 'BytesIO' is not defined
-
-utils/xls_analyzer.py:64: ValueError
------------------------------ Captured stdout call -----------------------------
-{"timestamp": "2025-02-11T19:49:42.559067", "level": "ERROR", "correlation_id": "undefined", "logger": "TimesheetTracker", "message": "Error parsing Excel file: name 'BytesIO' is not defined", "context": {}}
------------------------------- Captured log call -------------------------------
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error parsing Excel file: name 'BytesIO' is not defined", "timestamp": "2025-02-11T19:49:42.559199", "context": {}}
-___________________________ test_upload_excel_valid ____________________________
-
-client = <starlette.testclient.TestClient object at 0x7fd057d35d10>
-setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7fd057d15310>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
-tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-5/test_upload_excel_valid0')
-valid_timesheet_data = {'Category': ['Development', 'Testing'], 'Customer': ['ECOLAB', 'ECOLAB'], 'Date': ['2024-10-07', '2024-10-07'], 'Hours': [8.0, 4.0], ...}
-
-    def test_upload_excel_valid(client, setup_test_data, tmp_path, valid_timesheet_data):
-        """Test uploading a valid Excel file"""
-        excel_file = create_test_excel(tmp_path, valid_timesheet_data)
-    
-        with open(excel_file, "rb") as f:
-            response = client.post(
-                "/time-entries/upload/",
-                files={"file": ("test.xlsx", f, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
-            )
-    
->       assert response.status_code == 201
-E       assert 400 == 201
-E        +  where 400 = <Response [400 Bad Request]>.status_code
-
-tests/test_file_upload.py:87: AssertionError
------------------------------ Captured stdout call -----------------------------
-{"timestamp": "2025-02-11T19:49:46.103997", "level": "INFO", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5397", "content-type": "multipart/form-data; boundary=4745213fb09230fdff5c21e8f4a25ba1"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
-{"timestamp": "2025-02-11T19:49:46.106328", "level": "INFO", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
-{"timestamp": "2025-02-11T19:49:46.106671", "level": "DEBUG", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "TimesheetService initialized", "context": {}}
-{"timestamp": "2025-02-11T19:49:46.106868", "level": "INFO", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
-{"timestamp": "2025-02-11T19:49:46.107120", "level": "ERROR", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Error parsing Excel file: name 'BytesIO' is not defined", "context": {}}
-{"timestamp": "2025-02-11T19:49:46.107303", "level": "ERROR", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Error importing Excel data: Failed to parse Excel file: name 'BytesIO' is not defined", "context": {}}
-{"timestamp": "2025-02-11T19:49:46.107513", "level": "ERROR", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Error processing timesheet: Failed to parse Excel file: name 'BytesIO' is not defined", "context": {}}
-{"timestamp": "2025-02-11T19:49:46.107693", "level": "ERROR", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Error processing timesheet: 400: Failed to parse Excel file: name 'BytesIO' is not defined", "context": {}}
-{"timestamp": "2025-02-11T19:49:46.108256", "level": "WARNING", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Request failed with status 400", "context": {"correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "status_code": 400, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "4.33", "response_headers": {"content-length": "70", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
-{"timestamp": "2025-02-11T19:49:46.108691", "level": "DEBUG", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 400}}
------------------------------- Captured log call -------------------------------
-INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T19:49:46.104157", "context": {"correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5397", "content-type": "multipart/form-data; boundary=4745213fb09230fdff5c21e8f4a25ba1"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T19:49:46.106464", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "TimesheetService initialized", "timestamp": "2025-02-11T19:49:46.106736", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T19:49:46.106971", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error parsing Excel file: name 'BytesIO' is not defined", "timestamp": "2025-02-11T19:49:46.107190", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error importing Excel data: Failed to parse Excel file: name 'BytesIO' is not defined", "timestamp": "2025-02-11T19:49:46.107369", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error processing timesheet: Failed to parse Excel file: name 'BytesIO' is not defined", "timestamp": "2025-02-11T19:49:46.107575", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error processing timesheet: 400: Failed to parse Excel file: name 'BytesIO' is not defined", "timestamp": "2025-02-11T19:49:46.107751", "context": {}}
-WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 400", "timestamp": "2025-02-11T19:49:46.108347", "context": {"correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "status_code": 400, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "4.33", "response_headers": {"content-length": "70", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
-DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T19:49:46.108752", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 400}}
-______________________ test_xls_analyzer_date_conversion _______________________
-
-file_contents = b'PK\x03\x04\x14\x00\x00\x00\x08\x007\x9eKZF\xc7MH\x95\x00\x00\x00\xcd\x00\x00\x00\x10\x00\x00\x00docProps/app.xmlM\xc...x00\x80\x01\xea\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00>\x02\x00\x004\x11\x00\x00\x00\x00'
-
-    @staticmethod
-    def read_excel(file_contents: bytes) -> List[Dict[str, Any]]:
-        """Read Excel file and return list of dictionaries with data."""
-        try:
-            # Read first sheet from Excel file
-            df = pd.read_excel(
->               BytesIO(file_contents),
-                sheet_name=0,
-                dtype={
-                    'Week Number': 'Int64',
-                    'Month': str,
-                    'Category': str,
-                    'Subcategory': str,
-                    'Customer': str,
-                    'Project': str,
-                    'Task Description': str
-                }
-            )
-E           NameError: name 'BytesIO' is not defined
-
-utils/xls_analyzer.py:16: NameError
-
-During handling of the above exception, another exception occurred:
-
-tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-5/test_xls_analyzer_date_convers0')
-
-    def test_xls_analyzer_date_conversion(tmp_path):
-        """Test date conversion in XLSAnalyzer"""
-        data = {
-            'Date': ['2024-10-07', '2024-10-08'],
-            'Week Number': [41, 41],
-            'Category': ['Test', 'Test']
-        }
-        excel_file = create_test_excel(tmp_path, data)
-    
-        with open(excel_file, "rb") as f:
-            contents = f.read()
-            analyzer = XLSAnalyzer()
->           records = analyzer.read_excel(contents)
-
-tests/test_file_upload.py:104: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-file_contents = b'PK\x03\x04\x14\x00\x00\x00\x08\x007\x9eKZF\xc7MH\x95\x00\x00\x00\xcd\x00\x00\x00\x10\x00\x00\x00docProps/app.xmlM\xc...x00\x80\x01\xea\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00>\x02\x00\x004\x11\x00\x00\x00\x00'
-
-    @staticmethod
-    def read_excel(file_contents: bytes) -> List[Dict[str, Any]]:
-        """Read Excel file and return list of dictionaries with data."""
-        try:
-            # Read first sheet from Excel file
-            df = pd.read_excel(
-                BytesIO(file_contents),
-                sheet_name=0,
-                dtype={
-                    'Week Number': 'Int64',
-                    'Month': str,
-                    'Category': str,
-                    'Subcategory': str,
-                    'Customer': str,
-                    'Project': str,
-                    'Task Description': str
-                }
-            )
-    
-            # Set default values for missing columns
-            required_columns = ['Week Number', 'Month', 'Category', 'Subcategory',
-                              'Customer', 'Project', 'Task Description', 'Date']
-            for col in required_columns:
-                if col not in df.columns:
-                    if col == 'Date':
-                        df[col] = pd.Timestamp.now().date()
-                    else:
-                        df[col] = '-'
-    
-            # Drop rows where all elements are NaN
-            df = df.dropna(how='all')
-    
-            # Convert date column to datetime
-            df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
-    
-            # Fill NaN values with appropriate defaults
-            df = df.fillna({
-                'Customer': '-',
-                'Project': '-',
-                'Task Description': '',
-                'Week Number': 0,
-                'Month': '',
-                'Category': 'Other',
-                'Subcategory': 'Other'
-            })
-    
-            # Convert DataFrame to list of dictionaries
-            records = df.to_dict('records')
-    
-            logger.info(f"Successfully parsed {len(records)} records from Excel file")
-            return records
-    
-        except Exception as e:
-            logger.error(f"Error parsing Excel file: {str(e)}")
->           raise ValueError(f"Failed to parse Excel file: {str(e)}")
-E           ValueError: Failed to parse Excel file: name 'BytesIO' is not defined
-
-utils/xls_analyzer.py:64: ValueError
------------------------------ Captured stdout call -----------------------------
-{"timestamp": "2025-02-11T19:49:46.123617", "level": "ERROR", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Error parsing Excel file: name 'BytesIO' is not defined", "context": {}}
------------------------------- Captured log call -------------------------------
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error parsing Excel file: name 'BytesIO' is not defined", "timestamp": "2025-02-11T19:49:46.123721", "context": {}}
 ______________________ test_xls_analyzer_missing_columns _______________________
 
-file_contents = b'PK\x03\x04\x14\x00\x00\x00\x08\x007\x9eKZF\xc7MH\x95\x00\x00\x00\xcd\x00\x00\x00\x10\x00\x00\x00docProps/app.xmlM\xc...\x80\x01\xb8\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00>\x02\x00\x00\x02\x11\x00\x00\x00\x00'
-
-    @staticmethod
-    def read_excel(file_contents: bytes) -> List[Dict[str, Any]]:
-        """Read Excel file and return list of dictionaries with data."""
-        try:
-            # Read first sheet from Excel file
-            df = pd.read_excel(
->               BytesIO(file_contents),
-                sheet_name=0,
-                dtype={
-                    'Week Number': 'Int64',
-                    'Month': str,
-                    'Category': str,
-                    'Subcategory': str,
-                    'Customer': str,
-                    'Project': str,
-                    'Task Description': str
-                }
-            )
-E           NameError: name 'BytesIO' is not defined
-
-utils/xls_analyzer.py:16: NameError
-
-During handling of the above exception, another exception occurred:
-
-tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-5/test_xls_analyzer_missing_colu0')
+tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-7/test_xls_analyzer_missing_colu0')
 
     def test_xls_analyzer_missing_columns(tmp_path):
         """Test XLSAnalyzer with missing required columns"""
@@ -426,75 +25,19 @@ tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-5/test_xls_analyzer_missing_c
         with open(excel_file, "rb") as f:
             contents = f.read()
             analyzer = XLSAnalyzer()
->           records = analyzer.read_excel(contents)
+            records = analyzer.read_excel(contents)
+    
+            assert len(records) == 1
+            assert records[0]['Customer'] == '-'
+            assert records[0]['Project'] == '-'
+>           assert records[0]['Week Number'] == 0
+E           AssertionError: assert '-' == 0
 
-tests/test_file_upload.py:118: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-file_contents = b'PK\x03\x04\x14\x00\x00\x00\x08\x007\x9eKZF\xc7MH\x95\x00\x00\x00\xcd\x00\x00\x00\x10\x00\x00\x00docProps/app.xmlM\xc...\x80\x01\xb8\x0f\x00\x00[Content_Types].xmlPK\x05\x06\x00\x00\x00\x00\t\x00\t\x00>\x02\x00\x00\x02\x11\x00\x00\x00\x00'
-
-    @staticmethod
-    def read_excel(file_contents: bytes) -> List[Dict[str, Any]]:
-        """Read Excel file and return list of dictionaries with data."""
-        try:
-            # Read first sheet from Excel file
-            df = pd.read_excel(
-                BytesIO(file_contents),
-                sheet_name=0,
-                dtype={
-                    'Week Number': 'Int64',
-                    'Month': str,
-                    'Category': str,
-                    'Subcategory': str,
-                    'Customer': str,
-                    'Project': str,
-                    'Task Description': str
-                }
-            )
-    
-            # Set default values for missing columns
-            required_columns = ['Week Number', 'Month', 'Category', 'Subcategory',
-                              'Customer', 'Project', 'Task Description', 'Date']
-            for col in required_columns:
-                if col not in df.columns:
-                    if col == 'Date':
-                        df[col] = pd.Timestamp.now().date()
-                    else:
-                        df[col] = '-'
-    
-            # Drop rows where all elements are NaN
-            df = df.dropna(how='all')
-    
-            # Convert date column to datetime
-            df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
-    
-            # Fill NaN values with appropriate defaults
-            df = df.fillna({
-                'Customer': '-',
-                'Project': '-',
-                'Task Description': '',
-                'Week Number': 0,
-                'Month': '',
-                'Category': 'Other',
-                'Subcategory': 'Other'
-            })
-    
-            # Convert DataFrame to list of dictionaries
-            records = df.to_dict('records')
-    
-            logger.info(f"Successfully parsed {len(records)} records from Excel file")
-            return records
-    
-        except Exception as e:
-            logger.error(f"Error parsing Excel file: {str(e)}")
->           raise ValueError(f"Failed to parse Excel file: {str(e)}")
-E           ValueError: Failed to parse Excel file: name 'BytesIO' is not defined
-
-utils/xls_analyzer.py:64: ValueError
+tests/test_file_upload.py:123: AssertionError
 ----------------------------- Captured stdout call -----------------------------
-{"timestamp": "2025-02-11T19:49:46.135664", "level": "ERROR", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Error parsing Excel file: name 'BytesIO' is not defined", "context": {}}
+{"timestamp": "2025-02-11T19:52:19.664186", "level": "INFO", "correlation_id": "undefined", "logger": "TimesheetTracker", "message": "Successfully parsed 1 records from Excel file", "context": {}}
 ------------------------------ Captured log call -------------------------------
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error parsing Excel file: name 'BytesIO' is not defined", "timestamp": "2025-02-11T19:49:46.135751", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 1 records from Excel file", "timestamp": "2025-02-11T19:52:19.664329", "context": {}}
 ____________________________ test_project_interface ____________________________
 
     def test_project_interface():
@@ -506,30 +49,30 @@ E        +  where 500 = <Response [500 Internal Server Error]>.status_code
 
 tests/test_interfaces.py:55: AssertionError
 ----------------------------- Captured stdout call -----------------------------
-{"timestamp": "2025-02-11T19:49:46.142453", "level": "INFO", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "method": "GET", "url": "http://testserver/projects", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/projects"}}
-{"timestamp": "2025-02-11T19:49:46.143313", "level": "DEBUG", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Database session created", "context": {}}
-{"timestamp": "2025-02-11T19:49:46.143711", "level": "DEBUG", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
-{"timestamp": "2025-02-11T19:49:46.143891", "level": "DEBUG", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "ProjectService initialized with database session", "context": {}}
-{"timestamp": "2025-02-11T19:49:46.144069", "level": "DEBUG", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Fetching projects with offset=0, limit=100", "context": {}}
-{"timestamp": "2025-02-11T19:49:46.144252", "level": "DEBUG", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Fetching all projects with skip=0, limit=100", "context": {}}
-{"timestamp": "2025-02-11T19:49:46.514173", "level": "INFO", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Retrieved 6 projects", "context": {}}
-{"timestamp": "2025-02-11T19:49:46.514457", "level": "INFO", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Retrieved 6 projects", "context": {}}
-{"timestamp": "2025-02-11T19:49:46.515537", "level": "ERROR", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Database session error: 6 validation errors:\n  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n", "context": {}}
-{"timestamp": "2025-02-11T19:49:46.517244", "level": "ERROR", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Database session error details:", "context": {}, "exception": "Traceback (most recent call last):\n  File \"/home/runner/workspace/database/database.py\", line 113, in get_db\n    yield db\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/concurrency.py\", line 27, in contextmanager_in_threadpool\n    yield await run_in_threadpool(cm.__enter__)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py\", line 327, in app\n    content = await serialize_response(\n              ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py\", line 176, in serialize_response\n    raise ResponseValidationError(\nfastapi.exceptions.ResponseValidationError: 6 validation errors:\n  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n"}
-{"timestamp": "2025-02-11T19:49:46.539041", "level": "DEBUG", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Database session closed", "context": {}}
-{"timestamp": "2025-02-11T19:49:46.541317", "level": "ERROR", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Request failed with exception", "context": {"correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "error_type": "ResponseValidationError", "error_message": "6 validation errors:\n  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n", "traceback": "Traceback (most recent call last):\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py\", line 111, in receive\n    return self.receive_nowait()\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py\", line 106, in receive_nowait\n    raise WouldBlock\nanyio.WouldBlock\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py\", line 124, in receive\n    return receiver.item\n           ^^^^^^^^^^^^^\nAttributeError: 'MemoryObjectItemReceiver' object has no attribute 'item'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py\", line 157, in call_next\n    message = await recv_stream.receive()\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py\", line 126, in receive\n    raise EndOfStream\nanyio.EndOfStream\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/workspace/utils/middleware.py\", line 45, in logging_middleware\n    response = await call_next(request)\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py\", line 163, in call_next\n    raise app_exc\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py\", line 149, in coro\n    await self.app(scope, receive_or_disconnect, send_no_error)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/cors.py\", line 85, in __call__\n    await self.app(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/exceptions.py\", line 62, in __call__\n    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py\", line 53, in wrapped_app\n    raise exc\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py\", line 42, in wrapped_app\n    await app(scope, receive, sender)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 715, in __call__\n    await self.middleware_stack(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 735, in app\n    await route.handle(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 288, in handle\n    await self.app(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 76, in app\n    await wrap_app_handling_exceptions(app, request)(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py\", line 53, in wrapped_app\n    raise exc\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py\", line 42, in wrapped_app\n    await app(scope, receive, sender)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 73, in app\n    response = await f(request)\n               ^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py\", line 327, in app\n    content = await serialize_response(\n              ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py\", line 176, in serialize_response\n    raise ResponseValidationError(\nfastapi.exceptions.ResponseValidationError: 6 validation errors:\n  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n\n", "request_method": "GET", "request_url": "http://testserver/projects", "request_headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient"}, "client_host": "testclient", "query_params": {}, "path_params": {}, "path": "/projects", "origin": null, "cors_method": null, "cors_headers": null}}
-{"timestamp": "2025-02-11T19:49:46.541874", "level": "DEBUG", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "method": "GET", "path": "/projects", "status_code": 500}}
+{"timestamp": "2025-02-11T19:52:19.740298", "level": "INFO", "correlation_id": "93c4d491-f23f-4019-a871-fe0a965eb0df", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "93c4d491-f23f-4019-a871-fe0a965eb0df", "method": "GET", "url": "http://testserver/projects", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/projects"}}
+{"timestamp": "2025-02-11T19:52:19.741421", "level": "DEBUG", "correlation_id": "93c4d491-f23f-4019-a871-fe0a965eb0df", "logger": "TimesheetTracker", "message": "Database session created", "context": {}}
+{"timestamp": "2025-02-11T19:52:19.741994", "level": "DEBUG", "correlation_id": "93c4d491-f23f-4019-a871-fe0a965eb0df", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
+{"timestamp": "2025-02-11T19:52:19.742203", "level": "DEBUG", "correlation_id": "93c4d491-f23f-4019-a871-fe0a965eb0df", "logger": "TimesheetTracker", "message": "ProjectService initialized with database session", "context": {}}
+{"timestamp": "2025-02-11T19:52:19.742395", "level": "DEBUG", "correlation_id": "93c4d491-f23f-4019-a871-fe0a965eb0df", "logger": "TimesheetTracker", "message": "Fetching projects with offset=0, limit=100", "context": {}}
+{"timestamp": "2025-02-11T19:52:19.742612", "level": "DEBUG", "correlation_id": "93c4d491-f23f-4019-a871-fe0a965eb0df", "logger": "TimesheetTracker", "message": "Fetching all projects with skip=0, limit=100", "context": {}}
+{"timestamp": "2025-02-11T19:52:20.104707", "level": "INFO", "correlation_id": "93c4d491-f23f-4019-a871-fe0a965eb0df", "logger": "TimesheetTracker", "message": "Retrieved 6 projects", "context": {}}
+{"timestamp": "2025-02-11T19:52:20.105026", "level": "INFO", "correlation_id": "93c4d491-f23f-4019-a871-fe0a965eb0df", "logger": "TimesheetTracker", "message": "Retrieved 6 projects", "context": {}}
+{"timestamp": "2025-02-11T19:52:20.106282", "level": "ERROR", "correlation_id": "93c4d491-f23f-4019-a871-fe0a965eb0df", "logger": "TimesheetTracker", "message": "Database session error: 6 validation errors:\n  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n", "context": {}}
+{"timestamp": "2025-02-11T19:52:20.108093", "level": "ERROR", "correlation_id": "93c4d491-f23f-4019-a871-fe0a965eb0df", "logger": "TimesheetTracker", "message": "Database session error details:", "context": {}, "exception": "Traceback (most recent call last):\n  File \"/home/runner/workspace/database/database.py\", line 113, in get_db\n    yield db\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/concurrency.py\", line 27, in contextmanager_in_threadpool\n    yield await run_in_threadpool(cm.__enter__)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py\", line 327, in app\n    content = await serialize_response(\n              ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py\", line 176, in serialize_response\n    raise ResponseValidationError(\nfastapi.exceptions.ResponseValidationError: 6 validation errors:\n  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n"}
+{"timestamp": "2025-02-11T19:52:20.129240", "level": "DEBUG", "correlation_id": "93c4d491-f23f-4019-a871-fe0a965eb0df", "logger": "TimesheetTracker", "message": "Database session closed", "context": {}}
+{"timestamp": "2025-02-11T19:52:20.131529", "level": "ERROR", "correlation_id": "93c4d491-f23f-4019-a871-fe0a965eb0df", "logger": "TimesheetTracker", "message": "Request failed with exception", "context": {"correlation_id": "93c4d491-f23f-4019-a871-fe0a965eb0df", "error_type": "ResponseValidationError", "error_message": "6 validation errors:\n  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n", "traceback": "Traceback (most recent call last):\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py\", line 111, in receive\n    return self.receive_nowait()\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py\", line 106, in receive_nowait\n    raise WouldBlock\nanyio.WouldBlock\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py\", line 124, in receive\n    return receiver.item\n           ^^^^^^^^^^^^^\nAttributeError: 'MemoryObjectItemReceiver' object has no attribute 'item'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py\", line 157, in call_next\n    message = await recv_stream.receive()\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py\", line 126, in receive\n    raise EndOfStream\nanyio.EndOfStream\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/workspace/utils/middleware.py\", line 45, in logging_middleware\n    response = await call_next(request)\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py\", line 163, in call_next\n    raise app_exc\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py\", line 149, in coro\n    await self.app(scope, receive_or_disconnect, send_no_error)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/cors.py\", line 85, in __call__\n    await self.app(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/exceptions.py\", line 62, in __call__\n    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py\", line 53, in wrapped_app\n    raise exc\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py\", line 42, in wrapped_app\n    await app(scope, receive, sender)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 715, in __call__\n    await self.middleware_stack(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 735, in app\n    await route.handle(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 288, in handle\n    await self.app(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 76, in app\n    await wrap_app_handling_exceptions(app, request)(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py\", line 53, in wrapped_app\n    raise exc\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py\", line 42, in wrapped_app\n    await app(scope, receive, sender)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 73, in app\n    response = await f(request)\n               ^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py\", line 327, in app\n    content = await serialize_response(\n              ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py\", line 176, in serialize_response\n    raise ResponseValidationError(\nfastapi.exceptions.ResponseValidationError: 6 validation errors:\n  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n\n", "request_method": "GET", "request_url": "http://testserver/projects", "request_headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient"}, "client_host": "testclient", "query_params": {}, "path_params": {}, "path": "/projects", "origin": null, "cors_method": null, "cors_headers": null}}
+{"timestamp": "2025-02-11T19:52:20.132115", "level": "DEBUG", "correlation_id": "93c4d491-f23f-4019-a871-fe0a965eb0df", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": null, "method": "GET", "path": "/projects", "status_code": 500}}
 ------------------------------ Captured log call -------------------------------
-INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T19:49:46.142596", "context": {"correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "method": "GET", "url": "http://testserver/projects", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/projects"}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Database session created", "timestamp": "2025-02-11T19:49:46.143394", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T19:49:46.143776", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectService initialized with database session", "timestamp": "2025-02-11T19:49:46.143952", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Fetching projects with offset=0, limit=100", "timestamp": "2025-02-11T19:49:46.144151", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Fetching all projects with skip=0, limit=100", "timestamp": "2025-02-11T19:49:46.144311", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Retrieved 6 projects", "timestamp": "2025-02-11T19:49:46.514305", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Retrieved 6 projects", "timestamp": "2025-02-11T19:49:46.514578", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Database session error: 6 validation errors:\n  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n", "timestamp": "2025-02-11T19:49:46.515682", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Database session error details:", "timestamp": "2025-02-11T19:49:46.517926", "context": {}}
+INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T19:52:19.740425", "context": {"correlation_id": "93c4d491-f23f-4019-a871-fe0a965eb0df", "method": "GET", "url": "http://testserver/projects", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/projects"}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Database session created", "timestamp": "2025-02-11T19:52:19.741575", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T19:52:19.742056", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectService initialized with database session", "timestamp": "2025-02-11T19:52:19.742257", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Fetching projects with offset=0, limit=100", "timestamp": "2025-02-11T19:52:19.742450", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Fetching all projects with skip=0, limit=100", "timestamp": "2025-02-11T19:52:19.742660", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Retrieved 6 projects", "timestamp": "2025-02-11T19:52:20.104851", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Retrieved 6 projects", "timestamp": "2025-02-11T19:52:20.105109", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Database session error: 6 validation errors:\n  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n", "timestamp": "2025-02-11T19:52:20.106370", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Database session error details:", "timestamp": "2025-02-11T19:52:20.108826", "context": {}}
 Traceback (most recent call last):
   File "/home/runner/workspace/database/database.py", line 113, in get_db
     yield db
@@ -548,12 +91,12 @@ fastapi.exceptions.ResponseValidationError: 6 validation errors:
   {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
   {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}
 
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Database session closed", "timestamp": "2025-02-11T19:49:46.539166", "context": {}}
-ERROR    TimesheetTracker:logger.py:29 {"message": "Request failed with exception", "timestamp": "2025-02-11T19:49:46.541533", "context": {"correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "error_type": "ResponseValidationError", "error_message": "6 validation errors:\n  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n", "traceback": "Traceback (most recent call last):\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py\", line 111, in receive\n    return self.receive_nowait()\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py\", line 106, in receive_nowait\n    raise WouldBlock\nanyio.WouldBlock\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py\", line 124, in receive\n    return receiver.item\n           ^^^^^^^^^^^^^\nAttributeError: 'MemoryObjectItemReceiver' object has no attribute 'item'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py\", line 157, in call_next\n    message = await recv_stream.receive()\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py\", line 126, in receive\n    raise EndOfStream\nanyio.EndOfStream\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/workspace/utils/middleware.py\", line 45, in logging_middleware\n    response = await call_next(request)\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py\", line 163, in call_next\n    raise app_exc\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py\", line 149, in coro\n    await self.app(scope, receive_or_disconnect, send_no_error)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/cors.py\", line 85, in __call__\n    await self.app(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/exceptions.py\", line 62, in __call__\n    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py\", line 53, in wrapped_app\n    raise exc\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py\", line 42, in wrapped_app\n    await app(scope, receive, sender)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 715, in __call__\n    await self.middleware_stack(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 735, in app\n    await route.handle(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 288, in handle\n    await self.app(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 76, in app\n    await wrap_app_handling_exceptions(app, request)(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py\", line 53, in wrapped_app\n    raise exc\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py\", line 42, in wrapped_app\n    await app(scope, receive, sender)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 73, in app\n    response = await f(request)\n               ^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py\", line 327, in app\n    content = await serialize_response(\n              ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py\", line 176, in serialize_response\n    raise ResponseValidationError(\nfastapi.exceptions.ResponseValidationError: 6 validation errors:\n  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n\n", "request_method": "GET", "request_url": "http://testserver/projects", "request_headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient"}, "client_host": "testclient", "query_params": {}, "path_params": {}, "path": "/projects", "origin": null, "cors_method": null, "cors_headers": null}}
-DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T19:49:46.541950", "context": {"correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "method": "GET", "path": "/projects", "status_code": 500}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Database session closed", "timestamp": "2025-02-11T19:52:20.129384", "context": {}}
+ERROR    TimesheetTracker:logger.py:29 {"message": "Request failed with exception", "timestamp": "2025-02-11T19:52:20.131740", "context": {"correlation_id": "93c4d491-f23f-4019-a871-fe0a965eb0df", "error_type": "ResponseValidationError", "error_message": "6 validation errors:\n  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n", "traceback": "Traceback (most recent call last):\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py\", line 111, in receive\n    return self.receive_nowait()\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py\", line 106, in receive_nowait\n    raise WouldBlock\nanyio.WouldBlock\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py\", line 124, in receive\n    return receiver.item\n           ^^^^^^^^^^^^^\nAttributeError: 'MemoryObjectItemReceiver' object has no attribute 'item'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py\", line 157, in call_next\n    message = await recv_stream.receive()\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/anyio/streams/memory.py\", line 126, in receive\n    raise EndOfStream\nanyio.EndOfStream\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/workspace/utils/middleware.py\", line 45, in logging_middleware\n    response = await call_next(request)\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py\", line 163, in call_next\n    raise app_exc\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/base.py\", line 149, in coro\n    await self.app(scope, receive_or_disconnect, send_no_error)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/cors.py\", line 85, in __call__\n    await self.app(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/middleware/exceptions.py\", line 62, in __call__\n    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py\", line 53, in wrapped_app\n    raise exc\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py\", line 42, in wrapped_app\n    await app(scope, receive, sender)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 715, in __call__\n    await self.middleware_stack(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 735, in app\n    await route.handle(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 288, in handle\n    await self.app(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 76, in app\n    await wrap_app_handling_exceptions(app, request)(scope, receive, send)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py\", line 53, in wrapped_app\n    raise exc\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/_exception_handler.py\", line 42, in wrapped_app\n    await app(scope, receive, sender)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/starlette/routing.py\", line 73, in app\n    response = await f(request)\n               ^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py\", line 327, in app\n    content = await serialize_response(\n              ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/fastapi/routing.py\", line 176, in serialize_response\n    raise ResponseValidationError(\nfastapi.exceptions.ResponseValidationError: 6 validation errors:\n  {'type': 'string_type', 'loc': ('response', 0, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 1, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 2, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 3, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 4, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n  {'type': 'string_type', 'loc': ('response', 5, 'project_manager'), 'msg': 'Input should be a valid string', 'input': None}\n\n", "request_method": "GET", "request_url": "http://testserver/projects", "request_headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient"}, "client_host": "testclient", "query_params": {}, "path_params": {}, "path": "/projects", "origin": null, "cors_method": null, "cors_headers": null}}
+DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T19:52:20.132224", "context": {"correlation_id": null, "method": "GET", "path": "/projects", "status_code": 500}}
 ____________________________ test_model_timestamps _____________________________
 
-db_session = <sqlalchemy.orm.session.Session object at 0x7fd057de8590>
+db_session = <sqlalchemy.orm.session.Session object at 0x7feed4679b50>
 
     def test_model_timestamps(db_session):
         """Test model timestamps are automatically set"""
@@ -572,96 +115,11 @@ db_session = <sqlalchemy.orm.session.Session object at 0x7fd057de8590>
     
         assert customer.updated_at is not None  # Should be set after update
 >       assert customer.updated_at > customer.created_at
-E       assert datetime.datetime(2025, 2, 11, 19, 49, 46) > datetime.datetime(2025, 2, 11, 19, 49, 46)
-E        +  where datetime.datetime(2025, 2, 11, 19, 49, 46) = <models.customerModel.Customer object at 0x7fd057433910>.updated_at
-E        +  and   datetime.datetime(2025, 2, 11, 19, 49, 46) = <models.customerModel.Customer object at 0x7fd057433910>.created_at
+E       assert datetime.datetime(2025, 2, 11, 19, 52, 20) > datetime.datetime(2025, 2, 11, 19, 52, 20)
+E        +  where datetime.datetime(2025, 2, 11, 19, 52, 20) = <models.customerModel.Customer object at 0x7feed5fa5ed0>.updated_at
+E        +  and   datetime.datetime(2025, 2, 11, 19, 52, 20) = <models.customerModel.Customer object at 0x7feed5fa5ed0>.created_at
 
 tests/test_models.py:130: AssertionError
-______________________ test_time_entry_repository_update _______________________
-
-db_session = <sqlalchemy.orm.session.Session object at 0x7fd0574d6350>
-
-    def test_time_entry_repository_update(db_session):
-        """Test updating a time entry"""
-        repo = TimeEntryRepository()
-        entry = TimeEntry(
-            week_number=1,
-            month="January",
-            category="Development",
-            subcategory="Coding",
-            customer="TestCustomer",
-            project="TestProject",
-            task_description="Original description",
-            hours=8.0,
-            date=date(2024, 1, 1)
-        )
-    
-        created = repo.create(db_session, entry)
-        created.task_description = "Updated description"
-        created.hours = 4.0
->       updated = repo.update(db_session, created)
-E       TypeError: TimeEntryRepository.update() missing 1 required positional argument: 'data'
-
-tests/test_repositories.py:254: TypeError
-___________________________ test_upload_excel_valid ____________________________
-
-client = <starlette.testclient.TestClient object at 0x7fd0574e2d50>
-setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7fd0574f2390>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
-tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-5/test_upload_excel_valid1')
-
-    def test_upload_excel_valid(client, setup_test_data, tmp_path):
-        """Test uploading a valid Excel file"""
-        import pandas as pd
-    
-        # Create test Excel file
-        excel_data = {
-            'Week Number': [41, 41],
-            'Month': ['October', 'October'],
-            'Category': ['Other', 'Other'],
-            'Subcategory': ['Other Training', 'Other Training'],
-            'Customer': ['ECOLAB', 'ECOLAB'],
-            'Project': ['Project_Magic_Bullet', 'Project_Magic_Bullet'],
-            'Task Description': ['Test task', 'Another task'],
-            'Hours': [8.0, 4.0],
-            'Date': ['2024-10-07', '2024-10-07']
-        }
-        df = pd.DataFrame(excel_data)
-        excel_file = tmp_path / "test.xlsx"
-        df.to_excel(excel_file, index=False)
-    
-        with open(excel_file, "rb") as f:
-            response = client.post(
-                "/time-entries/upload/",
-                files={"file": ("test.xlsx", f, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
-            )
-    
->       assert response.status_code == 201
-E       assert 400 == 201
-E        +  where 400 = <Response [400 Bad Request]>.status_code
-
-tests/test_routes.py:196: AssertionError
------------------------------ Captured stdout call -----------------------------
-{"timestamp": "2025-02-11T19:49:46.810035", "level": "INFO", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5382", "content-type": "multipart/form-data; boundary=946174657fbe60d338583b76847f1ad7"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
-{"timestamp": "2025-02-11T19:49:46.812090", "level": "INFO", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
-{"timestamp": "2025-02-11T19:49:46.812329", "level": "DEBUG", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "TimesheetService initialized", "context": {}}
-{"timestamp": "2025-02-11T19:49:46.812557", "level": "INFO", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
-{"timestamp": "2025-02-11T19:49:46.812880", "level": "ERROR", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Error parsing Excel file: name 'BytesIO' is not defined", "context": {}}
-{"timestamp": "2025-02-11T19:49:46.813177", "level": "ERROR", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Error importing Excel data: Failed to parse Excel file: name 'BytesIO' is not defined", "context": {}}
-{"timestamp": "2025-02-11T19:49:46.813445", "level": "ERROR", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Error processing timesheet: Failed to parse Excel file: name 'BytesIO' is not defined", "context": {}}
-{"timestamp": "2025-02-11T19:49:46.813727", "level": "ERROR", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Error processing timesheet: 400: Failed to parse Excel file: name 'BytesIO' is not defined", "context": {}}
-{"timestamp": "2025-02-11T19:49:46.814284", "level": "WARNING", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Request failed with status 400", "context": {"correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "status_code": 400, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "4.36", "response_headers": {"content-length": "70", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
-{"timestamp": "2025-02-11T19:49:46.814750", "level": "DEBUG", "correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "method": "POST", "path": "/time-entries/upload/", "status_code": 400}}
------------------------------- Captured log call -------------------------------
-INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T19:49:46.810179", "context": {"correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5382", "content-type": "multipart/form-data; boundary=946174657fbe60d338583b76847f1ad7"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T19:49:46.812181", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "TimesheetService initialized", "timestamp": "2025-02-11T19:49:46.812401", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T19:49:46.812661", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error parsing Excel file: name 'BytesIO' is not defined", "timestamp": "2025-02-11T19:49:46.813027", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error importing Excel data: Failed to parse Excel file: name 'BytesIO' is not defined", "timestamp": "2025-02-11T19:49:46.813277", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error processing timesheet: Failed to parse Excel file: name 'BytesIO' is not defined", "timestamp": "2025-02-11T19:49:46.813566", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error processing timesheet: 400: Failed to parse Excel file: name 'BytesIO' is not defined", "timestamp": "2025-02-11T19:49:46.813821", "context": {}}
-WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 400", "timestamp": "2025-02-11T19:49:46.814422", "context": {"correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "status_code": 400, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "4.36", "response_headers": {"content-length": "70", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
-DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T19:49:46.814859", "context": {"correlation_id": "c11ff71a-f480-4846-b312-f38f5c697033", "method": "POST", "path": "/time-entries/upload/", "status_code": 400}}
 =============================== warnings summary ===============================
 .pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345
   /home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345: UserWarning: Valid config keys have changed in V2:
@@ -670,13 +128,7 @@ DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to respo
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 =========================== short test summary info ============================
-FAILED tests/test_file_upload.py::test_xls_analyzer_valid - ValueError: Faile...
-FAILED tests/test_file_upload.py::test_xls_analyzer_invalid_data - ValueError...
-FAILED tests/test_file_upload.py::test_upload_excel_valid - assert 400 == 201
-FAILED tests/test_file_upload.py::test_xls_analyzer_date_conversion - ValueEr...
-FAILED tests/test_file_upload.py::test_xls_analyzer_missing_columns - ValueEr...
+FAILED tests/test_file_upload.py::test_xls_analyzer_missing_columns - Asserti...
 FAILED tests/test_interfaces.py::test_project_interface - assert 500 == 200
 FAILED tests/test_models.py::test_model_timestamps - assert datetime.datetime...
-FAILED tests/test_repositories.py::test_time_entry_repository_update - TypeEr...
-FAILED tests/test_routes.py::test_upload_excel_valid - assert 400 == 201
-================== 9 failed, 6 deselected, 1 warning in 4.62s ==================
+================== 3 failed, 6 deselected, 1 warning in 0.95s ==================
