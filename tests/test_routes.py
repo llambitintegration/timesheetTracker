@@ -6,17 +6,19 @@ import io
 import csv
 from pathlib import Path
 
-# Using the existing test client fixture from conftest.py
+# Test root endpoint
 def test_root_endpoint(client):
     """Test the root endpoint returns correct welcome message"""
     response = client.get("/")
     assert response.status_code == 200
     assert "Welcome" in response.json()["message"]
 
+# Time entries tests
 def test_get_time_entries_empty(client):
     """Test getting time entries when database is empty"""
     response = client.get("/time-entries/")
     assert response.status_code == 200
+    assert isinstance(response.json(), list)
     assert len(response.json()) == 0
 
 def test_create_time_entry(client, setup_test_data):
@@ -38,6 +40,117 @@ def test_create_time_entry(client, setup_test_data):
     assert data["customer"] == "ECOLAB"
     assert data["project"] == "Project_Magic_Bullet"
     assert data["hours"] == 8.0
+
+def test_get_time_entries_with_database_query(client, setup_test_data):
+    """Test getting time entries with database query verification"""
+    # Create multiple test entries first
+    entries = [
+        {
+            "week_number": 41,
+            "month": "October",
+            "category": "Development",
+            "subcategory": "Coding",
+            "customer": "ECOLAB",
+            "project": "Project_Magic_Bullet",
+            "task_description": "Task 1",
+            "hours": 8.0,
+            "date": "2024-10-07"
+        },
+        {
+            "week_number": 41,
+            "month": "October",
+            "category": "Development",
+            "subcategory": "Testing",
+            "customer": "ECOLAB",
+            "project": "Project_Magic_Bullet",
+            "task_description": "Task 2",
+            "hours": 4.0,
+            "date": "2024-10-07"
+        }
+    ]
+
+    # Add entries to database
+    for entry in entries:
+        response = client.post("/time-entries/", json=entry)
+        assert response.status_code == 201
+
+    # Test database query
+    response = client.get("/time-entries/")
+    assert response.status_code == 200
+    data = response.json()
+
+    # Verify query results
+    assert len(data) >= 2  # Should have at least our 2 entries
+    assert any(entry["customer"] == "ECOLAB" for entry in data)
+    assert any(entry["project"] == "Project_Magic_Bullet" for entry in data)
+    assert any(entry["category"] == "Development" for entry in data)
+
+def test_get_time_entries_complex_filtering(client, setup_test_data):
+    """Test time entries with multiple filter combinations"""
+    # Create test entries with different combinations
+    entries = [
+        {
+            "week_number": 41,
+            "month": "October",
+            "category": "Development",
+            "subcategory": "Coding",
+            "customer": "ECOLAB",
+            "project": "Project_Magic_Bullet",
+            "task_description": "Dev Task",
+            "hours": 8.0,
+            "date": "2024-10-07"
+        },
+        {
+            "week_number": 41,
+            "month": "October",
+            "category": "QA",
+            "subcategory": "Testing",
+            "customer": "ECOLAB",
+            "project": "Project_Magic_Bullet",
+            "task_description": "QA Task",
+            "hours": 4.0,
+            "date": "2024-10-07"
+        }
+    ]
+
+    for entry in entries:
+        response = client.post("/time-entries/", json=entry)
+        assert response.status_code == 201
+
+    # Test filtering by multiple parameters
+    response = client.get("/time-entries/", params={
+        "customer_name": "ECOLAB",
+        "project_id": "Project_Magic_Bullet",
+        "skip": 0,
+        "limit": 10
+    })
+
+    assert response.status_code == 200
+    data = response.json()
+    assert len(data) >= 2
+
+    # Verify all entries match filter criteria
+    for entry in data:
+        assert entry["customer"] == "ECOLAB"
+        assert entry["project"] == "Project_Magic_Bullet"
+
+def test_get_time_entries_empty_database(client):
+    """Test time entries endpoint with empty database"""
+    response = client.get("/time-entries/")
+    assert response.status_code == 200
+    data = response.json()
+    assert isinstance(data, list)
+    assert len(data) == 0
+
+def test_get_time_entries_invalid_filters(client):
+    """Test time entries endpoint with invalid filter parameters"""
+    response = client.get("/time-entries/", params={
+        "customer_name": "NonExistentCustomer",
+        "project_id": "NonExistentProject"
+    })
+    assert response.status_code == 200
+    data = response.json()
+    assert len(data) == 0
 
 def test_create_time_entry_invalid_data(client):
     """Test creating a time entry with invalid data"""
@@ -252,3 +365,6 @@ def test_get_time_entries_pagination(client, setup_test_data):
     assert response.status_code == 200
     data = response.json()
     assert len(data) == 2
+
+if __name__ == "__main__":
+    pytest.main(["-v"])
