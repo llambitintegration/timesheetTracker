@@ -5,17 +5,18 @@ rootdir: /home/runner/workspace
 configfile: pyproject.toml
 plugins: anyio-4.7.0, asyncio-0.25.2, cov-6.0.0
 asyncio: mode=Mode.STRICT, asyncio_default_fixture_loop_scope=None
-collecting ... collected 7 items / 6 deselected / 1 selected
-run-last-failure: rerun previous 1 failure (skipped 10 files)
+collecting ... collected 8 items / 6 deselected / 2 selected
+run-last-failure: rerun previous 2 failures (skipped 9 files)
 
-tests/test_file_upload.py::test_dash_customer_handling FAILED            [100%]
+tests/test_file_upload.py::test_dash_customer_handling FAILED            [ 50%]
+tests/test_validators.py::test_normalize_customer_name_dash_conversion FAILED [100%]
 
 =================================== FAILURES ===================================
 _________________________ test_dash_customer_handling __________________________
 
-client = <starlette.testclient.TestClient object at 0x7f0b183d4a10>
-setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7f0b17f81990>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
-tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-38/test_dash_customer_handling0')
+client = <starlette.testclient.TestClient object at 0x7f75ccdfaa50>
+setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7f75cc95de50>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
+tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-40/test_dash_customer_handling0')
 
     def test_dash_customer_handling(client, setup_test_data, tmp_path):
         """Test handling of dash (-) values in customer field"""
@@ -42,21 +43,37 @@ E       AssertionError: assert 'Unassigned' is None
 
 tests/test_file_upload.py:96: AssertionError
 ----------------------------- Captured stdout call -----------------------------
-{"timestamp": "2025-02-11T20:27:03.604280", "level": "INFO", "correlation_id": "788988ca-9894-40c8-afe5-898099495ad6", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "788988ca-9894-40c8-afe5-898099495ad6", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5236", "content-type": "multipart/form-data; boundary=c6c068bbe0f3c022e96be4f03254458f"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
-{"timestamp": "2025-02-11T20:27:03.607000", "level": "INFO", "correlation_id": "788988ca-9894-40c8-afe5-898099495ad6", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
-{"timestamp": "2025-02-11T20:27:03.607316", "level": "DEBUG", "correlation_id": "788988ca-9894-40c8-afe5-898099495ad6", "logger": "TimesheetTracker", "message": "TimesheetService initialized", "context": {}}
-{"timestamp": "2025-02-11T20:27:03.607655", "level": "INFO", "correlation_id": "788988ca-9894-40c8-afe5-898099495ad6", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
-{"timestamp": "2025-02-11T20:27:03.624842", "level": "INFO", "correlation_id": "788988ca-9894-40c8-afe5-898099495ad6", "logger": "TimesheetTracker", "message": "Successfully parsed 1 records from Excel file", "context": {}}
-{"timestamp": "2025-02-11T20:27:03.656023", "level": "WARNING", "correlation_id": "788988ca-9894-40c8-afe5-898099495ad6", "logger": "TimesheetTracker", "message": "Request failed with status 201", "context": {"correlation_id": "788988ca-9894-40c8-afe5-898099495ad6", "status_code": 201, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "51.77", "response_headers": {"content-length": "317", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
-{"timestamp": "2025-02-11T20:27:03.656474", "level": "DEBUG", "correlation_id": "788988ca-9894-40c8-afe5-898099495ad6", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 201}}
+{"timestamp": "2025-02-11T20:28:12.883911", "level": "INFO", "correlation_id": "f267fd94-54cb-4184-9584-0c1b1c3a97a2", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "f267fd94-54cb-4184-9584-0c1b1c3a97a2", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5237", "content-type": "multipart/form-data; boundary=83a651c8609eebb7b71ab2a55b13f6d3"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+{"timestamp": "2025-02-11T20:28:12.886760", "level": "INFO", "correlation_id": "f267fd94-54cb-4184-9584-0c1b1c3a97a2", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
+{"timestamp": "2025-02-11T20:28:12.887166", "level": "DEBUG", "correlation_id": "f267fd94-54cb-4184-9584-0c1b1c3a97a2", "logger": "TimesheetTracker", "message": "TimesheetService initialized", "context": {}}
+{"timestamp": "2025-02-11T20:28:12.887504", "level": "INFO", "correlation_id": "f267fd94-54cb-4184-9584-0c1b1c3a97a2", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
+{"timestamp": "2025-02-11T20:28:12.903199", "level": "INFO", "correlation_id": "f267fd94-54cb-4184-9584-0c1b1c3a97a2", "logger": "TimesheetTracker", "message": "Successfully parsed 1 records from Excel file", "context": {}}
+{"timestamp": "2025-02-11T20:28:12.931561", "level": "WARNING", "correlation_id": "f267fd94-54cb-4184-9584-0c1b1c3a97a2", "logger": "TimesheetTracker", "message": "Request failed with status 201", "context": {"correlation_id": "f267fd94-54cb-4184-9584-0c1b1c3a97a2", "status_code": 201, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "47.77", "response_headers": {"content-length": "317", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+{"timestamp": "2025-02-11T20:28:12.932039", "level": "DEBUG", "correlation_id": "f267fd94-54cb-4184-9584-0c1b1c3a97a2", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 201}}
 ------------------------------ Captured log call -------------------------------
-INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T20:27:03.604435", "context": {"correlation_id": "788988ca-9894-40c8-afe5-898099495ad6", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5236", "content-type": "multipart/form-data; boundary=c6c068bbe0f3c022e96be4f03254458f"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:27:03.607112", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "TimesheetService initialized", "timestamp": "2025-02-11T20:27:03.607412", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:27:03.607747", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 1 records from Excel file", "timestamp": "2025-02-11T20:27:03.624958", "context": {}}
-WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 201", "timestamp": "2025-02-11T20:27:03.656160", "context": {"correlation_id": "788988ca-9894-40c8-afe5-898099495ad6", "status_code": 201, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "51.77", "response_headers": {"content-length": "317", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
-DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T20:27:03.656557", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 201}}
+INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T20:28:12.884125", "context": {"correlation_id": "f267fd94-54cb-4184-9584-0c1b1c3a97a2", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5237", "content-type": "multipart/form-data; boundary=83a651c8609eebb7b71ab2a55b13f6d3"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:28:12.886916", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "TimesheetService initialized", "timestamp": "2025-02-11T20:28:12.887334", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:28:12.887608", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 1 records from Excel file", "timestamp": "2025-02-11T20:28:12.903318", "context": {}}
+WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 201", "timestamp": "2025-02-11T20:28:12.931715", "context": {"correlation_id": "f267fd94-54cb-4184-9584-0c1b1c3a97a2", "status_code": 201, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "47.77", "response_headers": {"content-length": "317", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T20:28:12.932123", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 201}}
+_________________ test_normalize_customer_name_dash_conversion _________________
+
+    def test_normalize_customer_name_dash_conversion():
+        """Test that dash values are properly normalized to default customer"""
+        from utils.validators import normalize_customer_name, DEFAULT_CUSTOMER
+    
+        # Test various dash/empty scenarios
+>       assert normalize_customer_name('-') == DEFAULT_CUSTOMER
+E       AssertionError: assert None == 'Unassigned'
+E        +  where None = <function normalize_customer_name at 0x7f75ce580680>('-')
+
+tests/test_validators.py:7: AssertionError
+----------------------------- Captured stdout call -----------------------------
+{"timestamp": "2025-02-11T20:28:13.004306", "level": "DEBUG", "correlation_id": "f267fd94-54cb-4184-9584-0c1b1c3a97a2", "logger": "TimesheetTracker", "message": "Converting empty/invalid customer name to None", "context": {}}
+------------------------------ Captured log call -------------------------------
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Converting empty/invalid customer name to None", "timestamp": "2025-02-11T20:28:13.004419", "context": {}}
 =============================== warnings summary ===============================
 .pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345
   /home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345: UserWarning: Valid config keys have changed in V2:
@@ -66,4 +83,5 @@ DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to respo
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 =========================== short test summary info ============================
 FAILED tests/test_file_upload.py::test_dash_customer_handling - AssertionErro...
-================== 1 failed, 6 deselected, 1 warning in 0.71s ==================
+FAILED tests/test_validators.py::test_normalize_customer_name_dash_conversion
+================== 2 failed, 6 deselected, 1 warning in 0.61s ==================

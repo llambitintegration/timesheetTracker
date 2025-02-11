@@ -1,0 +1,204 @@
+_____________________________________________________________________________ ERROR at setup of test_dash_customer_handling _____________________________________________________________________________
+
+self = <sqlalchemy.engine.base.Connection object at 0x7fc266f3e8d0>, dialect = <sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x7fc266f3e610>
+context = <sqlalchemy.dialects.sqlite.base.SQLiteExecutionContext object at 0x7fc265b26d10>, statement = 'PRAGMA main.table_info("customers")', parameters = [()]
+
+    def _exec_single_context(
+        self,
+        dialect: Dialect,
+        context: ExecutionContext,
+        statement: Union[str, Compiled],
+        parameters: Optional[_AnyMultiExecuteParams],
+    ) -> CursorResult[Any]:
+        """continue the _execute_context() method for a single DBAPI
+        cursor.execute() or cursor.executemany() call.
+    
+        """
+        if dialect.bind_typing is BindTyping.SETINPUTSIZES:
+            generic_setinputsizes = context._prepare_set_input_sizes()
+    
+            if generic_setinputsizes:
+                try:
+                    dialect.do_set_input_sizes(
+                        context.cursor, generic_setinputsizes, context
+                    )
+                except BaseException as e:
+                    self._handle_dbapi_exception(
+                        e, str(statement), parameters, None, context
+                    )
+    
+        cursor, str_statement, parameters = (
+            context.cursor,
+            context.statement,
+            context.parameters,
+        )
+    
+        effective_parameters: Optional[_AnyExecuteParams]
+    
+        if not context.executemany:
+            effective_parameters = parameters[0]
+        else:
+            effective_parameters = parameters
+    
+        if self._has_events or self.engine._has_events:
+            for fn in self.dispatch.before_cursor_execute:
+                str_statement, effective_parameters = fn(
+                    self,
+                    cursor,
+                    str_statement,
+                    effective_parameters,
+                    context,
+                    context.executemany,
+                )
+    
+        if self._echo:
+            self._log_info(str_statement)
+    
+            stats = context._get_cache_stats()
+    
+            if not self.engine.hide_parameters:
+                self._log_info(
+                    "[%s] %r",
+                    stats,
+                    sql_util._repr_params(
+                        effective_parameters,
+                        batches=10,
+                        ismulti=context.executemany,
+                    ),
+                )
+            else:
+                self._log_info(
+                    "[%s] [SQL parameters hidden due to hide_parameters=True]",
+                    stats,
+                )
+    
+        evt_handled: bool = False
+        try:
+            if context.execute_style is ExecuteStyle.EXECUTEMANY:
+                effective_parameters = cast(
+                    "_CoreMultiExecuteParams", effective_parameters
+                )
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_executemany:
+                        if fn(
+                            cursor,
+                            str_statement,
+                            effective_parameters,
+                            context,
+                        ):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+                    self.dialect.do_executemany(
+                        cursor,
+                        str_statement,
+                        effective_parameters,
+                        context,
+                    )
+            elif not effective_parameters and context.no_parameters:
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_execute_no_params:
+                        if fn(cursor, str_statement, context):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+                    self.dialect.do_execute_no_params(
+                        cursor, str_statement, context
+                    )
+            else:
+                effective_parameters = cast(
+                    "_CoreSingleExecuteParams", effective_parameters
+                )
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_execute:
+                        if fn(
+                            cursor,
+                            str_statement,
+                            effective_parameters,
+                            context,
+                        ):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+>                   self.dialect.do_execute(
+                        cursor, str_statement, effective_parameters, context
+                    )
+
+.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py:1967: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x7fc266f3e610>, cursor = <sqlite3.Cursor object at 0x7fc2657b71c0>, statement = 'PRAGMA main.table_info("customers")'
+parameters = (), context = <sqlalchemy.dialects.sqlite.base.SQLiteExecutionContext object at 0x7fc265b26d10>
+
+    def do_execute(self, cursor, statement, parameters, context=None):
+>       cursor.execute(statement, parameters)
+E       sqlite3.OperationalError: database is locked
+
+.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py:941: OperationalError
+
+The above exception was the direct cause of the following exception:
+
+    @pytest.fixture(scope="session")
+    def test_engine():
+        """Create test database engine"""
+        engine = create_engine(TEST_DATABASE_URL)
+>       Base.metadata.create_all(bind=engine)
+
+tests/conftest.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.pythonlibs/lib/python3.11/site-packages/sqlalchemy/sql/schema.py:5868: in create_all
+    bind._run_ddl_visitor(
+.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py:3253: in _run_ddl_visitor
+    conn._run_ddl_visitor(visitorcallable, element, **kwargs)
+.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py:2459: in _run_ddl_visitor
+    visitorcallable(self.dialect, self, **kwargs).traverse_single(element)
+.pythonlibs/lib/python3.11/site-packages/sqlalchemy/sql/visitors.py:664: in traverse_single
+    return meth(obj, **kw)
+.pythonlibs/lib/python3.11/site-packages/sqlalchemy/sql/ddl.py:897: in visit_metadata
+    [t for t in tables if self._can_create_table(t)]
+.pythonlibs/lib/python3.11/site-packages/sqlalchemy/sql/ddl.py:897: in <listcomp>
+    [t for t in tables if self._can_create_table(t)]
+.pythonlibs/lib/python3.11/site-packages/sqlalchemy/sql/ddl.py:862: in _can_create_table
+    return not self.checkfirst or not self.dialect.has_table(
+.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/reflection.py:89: in cache
+    return fn(self, con, *args, **kw)
+.pythonlibs/lib/python3.11/site-packages/sqlalchemy/dialects/sqlite/base.py:2156: in has_table
+    info = self._get_table_pragma(
+.pythonlibs/lib/python3.11/site-packages/sqlalchemy/dialects/sqlite/base.py:2794: in _get_table_pragma
+    cursor = connection.exec_driver_sql(statement)
+.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py:1779: in exec_driver_sql
+    ret = self._execute_context(
+.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py:1846: in _execute_context
+    return self._exec_single_context(
+.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py:1986: in _exec_single_context
+    self._handle_dbapi_exception(
+.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py:2355: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/base.py:1967: in _exec_single_context
+    self.dialect.do_execute(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x7fc266f3e610>, cursor = <sqlite3.Cursor object at 0x7fc2657b71c0>, statement = 'PRAGMA main.table_info("customers")'
+parameters = (), context = <sqlalchemy.dialects.sqlite.base.SQLiteExecutionContext object at 0x7fc265b26d10>
+
+    def do_execute(self, cursor, statement, parameters, context=None):
+>       cursor.execute(statement, parameters)
+E       sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) database is locked
+E       [SQL: PRAGMA main.table_info("customers")]
+E       (Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+.pythonlibs/lib/python3.11/site-packages/sqlalchemy/engine/default.py:941: OperationalError
+=========================================================================================== warnings summary ============================================================================================
+.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345
+  /home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345: UserWarning: Valid config keys have changed in V2:
+  * 'orm_mode' has been renamed to 'from_attributes'
+    warnings.warn(message, UserWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================================================================================== short test summary info ========================================================================================
+ERROR tests/test_file_upload.py::test_dash_customer_handling - sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) database is locked
+[SQL: PRAGMA main.table_info("customers")]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+===================================================================================== 1 warning, 1 error in 13.62s ======================================================================================
+ Environment updated. Reloading shell...
+~/workspace$ 
