@@ -1,0 +1,157 @@
+import axios, { type AxiosInstance, type AxiosResponse } from "axios"
+import type {
+  TimeEntry,
+  TimeEntryCreate,
+  TimeEntryUpdate,
+  Project,
+  ProjectCreate,
+  ProjectUpdate,
+  ProjectManager,
+  ProjectManagerCreate,
+  ProjectManagerUpdate,
+  Customer,
+  CustomerCreate,
+  WeeklyReport,
+  MonthlyReport,
+} from "@/types/schemas"
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000"
+
+class ApiClient {
+  private axiosInstance: AxiosInstance
+
+  constructor() {
+    this.axiosInstance = axios.create({
+      baseURL: API_BASE_URL,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+  }
+
+  async uploadTimeEntries(file: File): Promise<TimeEntry[]> {
+    const formData = new FormData()
+    formData.append("file", file)
+
+    const response: AxiosResponse<TimeEntry[]> = await this.axiosInstance.post("/time-entries/upload/", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    return response.data
+  }
+
+  // Time Entries
+  async getTimeEntries(skip = 0, limit = 100): Promise<TimeEntry[]> {
+    const response: AxiosResponse<TimeEntry[]> = await this.axiosInstance.get("/time-entries", {
+      params: { skip, limit },
+    })
+    return response.data
+  }
+
+  async createTimeEntry(entry: TimeEntryCreate): Promise<TimeEntry> {
+    const response: AxiosResponse<TimeEntry> = await this.axiosInstance.post("/time-entries", entry)
+    return response.data
+  }
+
+  async updateTimeEntry(entryId: number, entry: TimeEntryUpdate): Promise<TimeEntry> {
+    const response: AxiosResponse<TimeEntry> = await this.axiosInstance.put(`/time-entries/${entryId}`, entry)
+    return response.data
+  }
+
+  async deleteTimeEntry(entryId: number): Promise<void> {
+    await this.axiosInstance.delete(`/time-entries/${entryId}`)
+  }
+
+  // Projects
+  async getProjects(): Promise<Project[]> {
+    const response: AxiosResponse<Project[]> = await this.axiosInstance.get("/projects")
+    return response.data
+  }
+
+  async createProject(project: ProjectCreate): Promise<Project> {
+    const response: AxiosResponse<Project> = await this.axiosInstance.post("/projects", project)
+    return response.data
+  }
+
+  async updateProject(projectId: string, project: ProjectUpdate): Promise<Project> {
+    const response: AxiosResponse<Project> = await this.axiosInstance.put(`/projects/${projectId}`, project)
+    return response.data
+  }
+
+  async deleteProject(projectId: string): Promise<void> {
+    await this.axiosInstance.delete(`/projects/${projectId}`)
+  }
+
+  // Project Managers
+  async getProjectManagers(skip = 0, limit = 100): Promise<{ data: ProjectManager[]; total: number }> {
+    const response: AxiosResponse<{ data: ProjectManager[]; total: number }> = await this.axiosInstance.get(
+      "/project-managers",
+      {
+        params: { skip, limit },
+      },
+    )
+    return response.data
+  }
+
+  async createProjectManager(manager: ProjectManagerCreate): Promise<ProjectManager> {
+    const response: AxiosResponse<ProjectManager> = await this.axiosInstance.post("/project-managers", manager)
+    return response.data
+  }
+
+  async updateProjectManager(email: string, manager: ProjectManagerUpdate): Promise<ProjectManager> {
+    const response: AxiosResponse<ProjectManager> = await this.axiosInstance.put(`/project-managers/${email}`, manager)
+    return response.data
+  }
+
+  async deleteProjectManager(email: string): Promise<void> {
+    await this.axiosInstance.delete(`/project-managers/${email}`)
+  }
+
+  // Customers
+  async getCustomers(skip = 0, limit = 100): Promise<{ data: Customer[]; total: number }> {
+    const response: AxiosResponse<{ data: Customer[]; total: number }> = await this.axiosInstance.get("/customers", {
+      params: { skip, limit },
+    })
+    return response.data
+  }
+
+  async createCustomer(customer: CustomerCreate): Promise<Customer> {
+    const response: AxiosResponse<Customer> = await this.axiosInstance.post("/customers", customer)
+    return response.data
+  }
+
+  // Reports
+  async getWeeklyReport(date: string): Promise<WeeklyReport> {
+    const response: AxiosResponse<WeeklyReport> = await this.axiosInstance.get("/reports/weekly", {
+      params: { date },
+    })
+    return response.data
+  }
+
+  async getMonthlyReport(year: number, month: number): Promise<MonthlyReport> {
+    const response: AxiosResponse<MonthlyReport> = await this.axiosInstance.get("/reports/monthly", {
+      params: { year, month },
+    })
+    return response.data
+  }
+
+  // Database
+  async initializeDatabase(): Promise<void> {
+    await this.axiosInstance.post("/init-db")
+  }
+}
+
+export const apiClient = new ApiClient()
+
+export async function withErrorHandling<T>(fn: () => Promise<T>): Promise<T> {
+  try {
+    return await fn()
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const errorMessage = error.response?.data?.detail || error.message
+      throw new Error(`API Error: ${errorMessage}`)
+    }
+    throw error
+  }
+}

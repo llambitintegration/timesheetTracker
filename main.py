@@ -64,14 +64,14 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# CORS middleware configuration
+# CORS middleware configuration with specific file upload headers
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=False,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allow_headers=["*"],
-    expose_headers=["X-Total-Count", "X-Correlation-ID"]
+    expose_headers=["X-Total-Count", "X-Correlation-ID", "Content-Length", "Content-Type"]
 )
 
 # Add other middleware after CORS
@@ -356,32 +356,14 @@ def create_sample_data(db: Session = Depends(get_db)):
 if __name__ == "__main__":
     logger.info("Starting FastAPI server")
     try:
-        # Try different ports if default is in use
-        ports = [8080, 8000, 8888, 9000]
-        started = False
-
-        for port in ports:
-            try:
-                logger.info(f"Attempting to start server on port {port}")
-                uvicorn.run(
-                    "main:app",
-                    host="0.0.0.0",
-                    port=port,
-                    reload=True,
-                    log_level="info"
-                )
-                started = True
-                break
-            except OSError as e:
-                if "Address already in use" in str(e):
-                    logger.warning(f"Port {port} is in use, trying next port")
-                    continue
-                raise
-
-        if not started:
-            logger.error("Could not find an available port")
-            raise RuntimeError("No available ports found")
-
+        port = int(os.getenv("PORT", 8080))
+        logger.info(f"Attempting to start server on port {port}")
+        uvicorn.run(
+            app,
+            host="0.0.0.0",
+            port=port,
+            log_level="info"
+        )
     except Exception as e:
         logger.error(f"Server startup failed: {str(e)}")
         raise
