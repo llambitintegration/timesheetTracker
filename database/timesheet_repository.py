@@ -6,6 +6,7 @@ from database import schemas
 from .base_repository import BaseRepository
 from utils.xls_analyzer import XLSAnalyzer
 from utils.logger import Logger
+from utils.validators import DEFAULT_CUSTOMER, DEFAULT_PROJECT, normalize_project_id, normalize_customer_name
 import pandas as pd
 
 logger = Logger().get_logger()
@@ -30,14 +31,21 @@ class TimeEntryRepository(BaseRepository[TimeEntry]):
     def bulk_create(self, db: Session, entries: List[schemas.TimeEntryCreate]) -> List[TimeEntry]:
         """Bulk create time entries from list of Pydantic models."""
         try:
-            db_entries = [
-                TimeEntry(**entry.model_dump(exclude={'id', 'created_at', 'updated_at'}))
-                for entry in entries
-            ]
-            db.add_all(db_entries)
-            db.commit()
-            for entry in db_entries:
-                db.refresh(entry)
+            # Initialize service for handling customer/project creation
+            from services.time_entry_service import TimeEntryService
+            service = TimeEntryService(db)
+
+            db_entries = []
+            for entry in entries:
+                try:
+                    # Use service to create entry with proper validation
+                    db_entry = service.create_time_entry(entry)
+                    db_entries.append(db_entry)
+                except Exception as e:
+                    logger.error(f"Error creating entry: {str(e)}")
+                    # Continue with next entry instead of failing entire batch
+                    continue
+
             return db_entries
         except Exception as e:
             logger.error(f"Error in bulk create: {str(e)}")
@@ -88,12 +96,16 @@ class TimeEntryRepository(BaseRepository[TimeEntry]):
             entries = []
             for record in records:
                 if not pd.isna(record.get('Date')):  # Only process records with valid dates
+                    # Normalize customer and project names
+                    customer = normalize_customer_name(record.get('Customer', DEFAULT_CUSTOMER))
+                    project = normalize_project_id(record.get('Project', DEFAULT_PROJECT))
+
                     entry_data = schemas.TimeEntryCreate(
                         date=record.get('Date'),
                         category=record.get('Category', 'Other'),
                         subcategory=record.get('Subcategory', 'General'),
-                        customer=record.get('Customer'),
-                        project=record.get('Project'),
+                        customer=customer,
+                        project=project,
                         task_description=record.get('Task Description', ''),
                         hours=float(record.get('Hours', 0.0))
                     )

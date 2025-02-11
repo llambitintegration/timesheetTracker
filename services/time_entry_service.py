@@ -56,20 +56,25 @@ class TimeEntryService:
                     return DEFAULT_PROJECT
                 return normalized_id
 
-            # Create new project if it doesn't exist
-            try:
-                project_data = schemas.ProjectCreate(
-                    project_id=normalized_id,
-                    name=normalized_id,
-                    customer=customer_name,
-                    status="active"
-                )
-                self.project_repo.create(self.db, project_data)
-                logger.info(f"Created new project: {normalized_id} for customer: {customer_name}")
-                return normalized_id
-            except Exception as e:
-                logger.error(f"Failed to create project {normalized_id}: {str(e)}")
-                return DEFAULT_PROJECT
+            # Create new project with retry logic
+            max_retries = 3
+            for attempt in range(max_retries):
+                try:
+                    project_data = schemas.ProjectCreate(
+                        project_id=normalized_id,
+                        name=normalized_id,
+                        customer=customer_name,
+                        status="active"
+                    )
+                    created = self.project_repo.create(self.db, project_data)
+                    logger.info(f"Created new project: {normalized_id} for customer: {customer_name}")
+                    return normalized_id
+                except Exception as e:
+                    if attempt == max_retries - 1:
+                        logger.error(f"Failed to create project {normalized_id} after {max_retries} attempts: {str(e)}")
+                        return DEFAULT_PROJECT
+                    logger.warning(f"Retry {attempt + 1} for project creation {normalized_id}: {str(e)}")
+                    self.db.rollback()
 
         except Exception as e:
             logger.error(f"Error ensuring project exists: {str(e)}")
@@ -138,20 +143,21 @@ class TimeEntryService:
         """Create multiple time entries with proper validation."""
         created_entries = []
         logger.info(f"Beginning bulk creation of {len(entries)} time entries")
-        try:
-            for idx, entry in enumerate(entries, 1):
+
+        for idx, entry in enumerate(entries, 1):
+            try:
                 logger.debug(f"Processing entry {idx}/{len(entries)}")
                 db_entry = self.create_time_entry(entry)
                 created_entries.append(db_entry)
                 logger.debug(f"Added entry {idx} to session: {db_entry.customer} - {db_entry.project}")
+            except Exception as e:
+                logger.error(f"Error processing entry {idx}: {str(e)}")
+                # Continue with next entry instead of failing entire batch
+                continue
 
-            total_hours = sum(entry.hours for entry in created_entries)
-            logger.info(f"Successfully created {len(created_entries)} time entries (Total: {total_hours} hours)")
-            return created_entries
-        except Exception as e:
-            logger.error(f"Error during bulk creation: {str(e)}")
-            self.db.rollback()
-            raise
+        total_hours = sum(entry.hours for entry in created_entries)
+        logger.info(f"Successfully created {len(created_entries)} time entries (Total: {total_hours} hours)")
+        return created_entries
 
     def get_time_entries(
         self,
