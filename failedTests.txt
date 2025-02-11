@@ -5,17 +5,25 @@ rootdir: /home/runner/workspace
 configfile: pyproject.toml
 plugins: anyio-4.7.0, asyncio-0.25.2, cov-6.0.0
 asyncio: mode=Mode.STRICT, asyncio_default_fixture_loop_scope=None
-collecting ... collected 7 items / 6 deselected / 1 selected
-run-last-failure: rerun previous 1 failure (skipped 9 files)
+collecting ... collected 15 items / 6 deselected / 9 selected
+run-last-failure: rerun previous 9 failures (skipped 8 files)
 
-tests/test_file_upload.py::test_upload_excel_creates_customers_and_projects FAILED [100%]
+tests/test_file_upload.py::test_upload_excel_creates_customers_and_projects FAILED [ 11%]
+tests/test_project_service.py::test_create_project FAILED                [ 22%]
+tests/test_project_service.py::test_create_duplicate_project FAILED      [ 33%]
+tests/test_project_service.py::test_get_project FAILED                   [ 44%]
+tests/test_project_service.py::test_get_all_projects FAILED              [ 55%]
+tests/test_project_service.py::test_get_projects_by_customer FAILED      [ 66%]
+tests/test_project_service.py::test_get_projects_by_manager FAILED       [ 77%]
+tests/test_project_service.py::test_update_project FAILED                [ 88%]
+tests/test_project_service.py::test_delete_project FAILED                [100%]
 
 =================================== FAILURES ===================================
 _______________ test_upload_excel_creates_customers_and_projects _______________
 
-client = <starlette.testclient.TestClient object at 0x7fad58b9b4d0>
-setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7fad5bb3bdd0>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
-tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-109/test_upload_excel_creates_cust0')
+client = <starlette.testclient.TestClient object at 0x7fa09e71b990>
+setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7fa09ebba290>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
+tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-111/test_upload_excel_creates_cust0')
 
     def test_upload_excel_creates_customers_and_projects(client, setup_test_data, tmp_path):
         """Test that uploading Excel file creates new customers and projects as needed"""
@@ -49,63 +57,473 @@ E         + Unassigned
 
 tests/test_file_upload.py:187: AssertionError
 ----------------------------- Captured stdout call -----------------------------
-{"timestamp": "2025-02-11T22:33:26.163978", "level": "INFO", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5341", "content-type": "multipart/form-data; boundary=c0172a4078876183197888d148400976"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
-{"timestamp": "2025-02-11T22:33:26.166768", "level": "INFO", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
-{"timestamp": "2025-02-11T22:33:26.167161", "level": "DEBUG", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
-{"timestamp": "2025-02-11T22:33:26.167459", "level": "DEBUG", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "TimesheetService initialized", "context": {}}
-{"timestamp": "2025-02-11T22:33:26.167855", "level": "INFO", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
-{"timestamp": "2025-02-11T22:33:26.168101", "level": "DEBUG", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "Starting Excel file analysis", "context": {}}
-{"timestamp": "2025-02-11T22:33:26.181977", "level": "INFO", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "Successfully parsed 1 records from Excel file", "context": {}}
-{"timestamp": "2025-02-11T22:33:26.182642", "level": "DEBUG", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
-{"timestamp": "2025-02-11T22:33:26.183000", "level": "DEBUG", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "TimeEntryService initialized with database session", "context": {}}
-{"timestamp": "2025-02-11T22:33:26.183318", "level": "DEBUG", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "Starting creation of time entry with data: {'category': 'Development', 'subcategory': 'Backend', 'customer': 'NEW_CUSTOMER', 'project': 'NEW_PROJECT', 'task_description': 'Test task', 'hours': 8.0, 'date': datetime.date(2024, 10, 7)}", "context": {}}
-{"timestamp": "2025-02-11T22:33:26.190381", "level": "ERROR", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "context": {}}
-{"timestamp": "2025-02-11T22:33:26.190952", "level": "DEBUG", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "Fetching project with ID: NEW_PROJECT", "context": {}}
-{"timestamp": "2025-02-11T22:33:26.194791", "level": "DEBUG", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "Creating new project with data: project_id='NEW_PROJECT' name='NEW_PROJECT' description=None customer='Unassigned' project_manager=None status='active'", "context": {}}
-{"timestamp": "2025-02-11T22:33:26.195005", "level": "ERROR", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "Error creating project: 'ProjectCreate' object is not subscriptable", "context": {}}
-{"timestamp": "2025-02-11T22:33:26.195389", "level": "WARNING", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "Retry 1 for project creation NEW_PROJECT: 'ProjectCreate' object is not subscriptable", "context": {}}
-{"timestamp": "2025-02-11T22:33:26.195649", "level": "DEBUG", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "Creating new project with data: project_id='NEW_PROJECT' name='NEW_PROJECT' description=None customer='Unassigned' project_manager=None status='active'", "context": {}}
-{"timestamp": "2025-02-11T22:33:26.195893", "level": "ERROR", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "Error creating project: 'ProjectCreate' object is not subscriptable", "context": {}}
-{"timestamp": "2025-02-11T22:33:26.196120", "level": "WARNING", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "Retry 2 for project creation NEW_PROJECT: 'ProjectCreate' object is not subscriptable", "context": {}}
-{"timestamp": "2025-02-11T22:33:26.196385", "level": "DEBUG", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "Creating new project with data: project_id='NEW_PROJECT' name='NEW_PROJECT' description=None customer='Unassigned' project_manager=None status='active'", "context": {}}
-{"timestamp": "2025-02-11T22:33:26.196636", "level": "ERROR", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "Error creating project: 'ProjectCreate' object is not subscriptable", "context": {}}
-{"timestamp": "2025-02-11T22:33:26.196849", "level": "ERROR", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "Failed to create project NEW_PROJECT after 3 attempts: 'ProjectCreate' object is not subscriptable", "context": {}}
-{"timestamp": "2025-02-11T22:33:26.198291", "level": "DEBUG", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "Adding entry to database session", "context": {}}
-{"timestamp": "2025-02-11T22:33:26.265877", "level": "INFO", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "Successfully created time entry for Unassigned - Unassigned", "context": {}}
-{"timestamp": "2025-02-11T22:33:26.266255", "level": "INFO", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "Processing 1 entries", "context": {}}
-{"timestamp": "2025-02-11T22:33:26.267198", "level": "DEBUG", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "Fetching project with ID: Unassigned", "context": {}}
-{"timestamp": "2025-02-11T22:33:26.307987", "level": "INFO", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "Successfully created 1 time entries in bulk", "context": {}}
-{"timestamp": "2025-02-11T22:33:26.309031", "level": "WARNING", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "Request failed with status 201", "context": {"correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "status_code": 201, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "145.15", "response_headers": {"content-length": "292", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
-{"timestamp": "2025-02-11T22:33:26.309688", "level": "DEBUG", "correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 201}}
+{"timestamp": "2025-02-11T22:38:00.082074", "level": "INFO", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5340", "content-type": "multipart/form-data; boundary=d14ce7be8cf117444c1e2faaaca9dd64"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+{"timestamp": "2025-02-11T22:38:00.085103", "level": "INFO", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.085592", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.085891", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "TimesheetService initialized", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.086168", "level": "INFO", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.086506", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Starting Excel file analysis", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.100580", "level": "INFO", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Successfully parsed 1 records from Excel file", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.100949", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.101258", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "TimeEntryService initialized with database session", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.101632", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Starting creation of time entry with data: {'category': 'Development', 'subcategory': 'Backend', 'customer': 'NEW_CUSTOMER', 'project': 'NEW_PROJECT', 'task_description': 'Test task', 'hours': 8.0, 'date': datetime.date(2024, 10, 7)}", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.105370", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.105963", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Fetching project with ID: NEW_PROJECT", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.108141", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Creating new project with data: project_id='NEW_PROJECT' name='NEW_PROJECT' description=None customer='Unassigned' project_manager=None status='active'", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.108376", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Error creating project: 'ProjectCreate' object is not subscriptable", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.108903", "level": "WARNING", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Retry 1 for project creation NEW_PROJECT: 'ProjectCreate' object is not subscriptable", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.109178", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Creating new project with data: project_id='NEW_PROJECT' name='NEW_PROJECT' description=None customer='Unassigned' project_manager=None status='active'", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.109465", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Error creating project: 'ProjectCreate' object is not subscriptable", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.109730", "level": "WARNING", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Retry 2 for project creation NEW_PROJECT: 'ProjectCreate' object is not subscriptable", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.109972", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Creating new project with data: project_id='NEW_PROJECT' name='NEW_PROJECT' description=None customer='Unassigned' project_manager=None status='active'", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.110259", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Error creating project: 'ProjectCreate' object is not subscriptable", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.110515", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Failed to create project NEW_PROJECT after 3 attempts: 'ProjectCreate' object is not subscriptable", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.111878", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Adding entry to database session", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.173835", "level": "INFO", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Successfully created time entry for Unassigned - Unassigned", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.174180", "level": "INFO", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Processing 1 entries", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.175083", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Fetching project with ID: Unassigned", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.249516", "level": "INFO", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Successfully created 1 time entries in bulk", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.250534", "level": "WARNING", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Request failed with status 201", "context": {"correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "status_code": 201, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "168.55", "response_headers": {"content-length": "292", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+{"timestamp": "2025-02-11T22:38:00.251044", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 201}}
 ------------------------------ Captured log call -------------------------------
-INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T22:33:26.164173", "context": {"correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5341", "content-type": "multipart/form-data; boundary=c0172a4078876183197888d148400976"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T22:33:26.166891", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T22:33:26.167268", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "TimesheetService initialized", "timestamp": "2025-02-11T22:33:26.167652", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T22:33:26.167926", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting Excel file analysis", "timestamp": "2025-02-11T22:33:26.168195", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 1 records from Excel file", "timestamp": "2025-02-11T22:33:26.182207", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T22:33:26.182787", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "TimeEntryService initialized with database session", "timestamp": "2025-02-11T22:33:26.183098", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting creation of time entry with data: {'category': 'Development', 'subcategory': 'Backend', 'customer': 'NEW_CUSTOMER', 'project': 'NEW_PROJECT', 'task_description': 'Test task', 'hours': 8.0, 'date': datetime.date(2024, 10, 7)}", "timestamp": "2025-02-11T22:33:26.183421", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "timestamp": "2025-02-11T22:33:26.190535", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Fetching project with ID: NEW_PROJECT", "timestamp": "2025-02-11T22:33:26.191047", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Creating new project with data: project_id='NEW_PROJECT' name='NEW_PROJECT' description=None customer='Unassigned' project_manager=None status='active'", "timestamp": "2025-02-11T22:33:26.194862", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error creating project: 'ProjectCreate' object is not subscriptable", "timestamp": "2025-02-11T22:33:26.195076", "context": {}}
-WARNING  TimesheetTracker:logger.py:32 {"message": "Retry 1 for project creation NEW_PROJECT: 'ProjectCreate' object is not subscriptable", "timestamp": "2025-02-11T22:33:26.195478", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Creating new project with data: project_id='NEW_PROJECT' name='NEW_PROJECT' description=None customer='Unassigned' project_manager=None status='active'", "timestamp": "2025-02-11T22:33:26.195754", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error creating project: 'ProjectCreate' object is not subscriptable", "timestamp": "2025-02-11T22:33:26.195969", "context": {}}
-WARNING  TimesheetTracker:logger.py:32 {"message": "Retry 2 for project creation NEW_PROJECT: 'ProjectCreate' object is not subscriptable", "timestamp": "2025-02-11T22:33:26.196215", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Creating new project with data: project_id='NEW_PROJECT' name='NEW_PROJECT' description=None customer='Unassigned' project_manager=None status='active'", "timestamp": "2025-02-11T22:33:26.196473", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error creating project: 'ProjectCreate' object is not subscriptable", "timestamp": "2025-02-11T22:33:26.196716", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Failed to create project NEW_PROJECT after 3 attempts: 'ProjectCreate' object is not subscriptable", "timestamp": "2025-02-11T22:33:26.196913", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Adding entry to database session", "timestamp": "2025-02-11T22:33:26.198387", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Successfully created time entry for Unassigned - Unassigned", "timestamp": "2025-02-11T22:33:26.266036", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Processing 1 entries", "timestamp": "2025-02-11T22:33:26.266372", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Fetching project with ID: Unassigned", "timestamp": "2025-02-11T22:33:26.267309", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Successfully created 1 time entries in bulk", "timestamp": "2025-02-11T22:33:26.308099", "context": {}}
-WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 201", "timestamp": "2025-02-11T22:33:26.309174", "context": {"correlation_id": "f09c8020-a1f0-4ff5-87b2-0569481cc668", "status_code": 201, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "145.15", "response_headers": {"content-length": "292", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
-DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T22:33:26.309812", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 201}}
+INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T22:38:00.082300", "context": {"correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5340", "content-type": "multipart/form-data; boundary=d14ce7be8cf117444c1e2faaaca9dd64"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T22:38:00.085217", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T22:38:00.085717", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "TimesheetService initialized", "timestamp": "2025-02-11T22:38:00.085978", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T22:38:00.086265", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting Excel file analysis", "timestamp": "2025-02-11T22:38:00.086598", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 1 records from Excel file", "timestamp": "2025-02-11T22:38:00.100698", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T22:38:00.101049", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "TimeEntryService initialized with database session", "timestamp": "2025-02-11T22:38:00.101406", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting creation of time entry with data: {'category': 'Development', 'subcategory': 'Backend', 'customer': 'NEW_CUSTOMER', 'project': 'NEW_PROJECT', 'task_description': 'Test task', 'hours': 8.0, 'date': datetime.date(2024, 10, 7)}", "timestamp": "2025-02-11T22:38:00.101740", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "timestamp": "2025-02-11T22:38:00.105539", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Fetching project with ID: NEW_PROJECT", "timestamp": "2025-02-11T22:38:00.106051", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Creating new project with data: project_id='NEW_PROJECT' name='NEW_PROJECT' description=None customer='Unassigned' project_manager=None status='active'", "timestamp": "2025-02-11T22:38:00.108228", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error creating project: 'ProjectCreate' object is not subscriptable", "timestamp": "2025-02-11T22:38:00.108451", "context": {}}
+WARNING  TimesheetTracker:logger.py:32 {"message": "Retry 1 for project creation NEW_PROJECT: 'ProjectCreate' object is not subscriptable", "timestamp": "2025-02-11T22:38:00.108999", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Creating new project with data: project_id='NEW_PROJECT' name='NEW_PROJECT' description=None customer='Unassigned' project_manager=None status='active'", "timestamp": "2025-02-11T22:38:00.109260", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error creating project: 'ProjectCreate' object is not subscriptable", "timestamp": "2025-02-11T22:38:00.109584", "context": {}}
+WARNING  TimesheetTracker:logger.py:32 {"message": "Retry 2 for project creation NEW_PROJECT: 'ProjectCreate' object is not subscriptable", "timestamp": "2025-02-11T22:38:00.109800", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Creating new project with data: project_id='NEW_PROJECT' name='NEW_PROJECT' description=None customer='Unassigned' project_manager=None status='active'", "timestamp": "2025-02-11T22:38:00.110094", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error creating project: 'ProjectCreate' object is not subscriptable", "timestamp": "2025-02-11T22:38:00.110332", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Failed to create project NEW_PROJECT after 3 attempts: 'ProjectCreate' object is not subscriptable", "timestamp": "2025-02-11T22:38:00.110591", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Adding entry to database session", "timestamp": "2025-02-11T22:38:00.111971", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Successfully created time entry for Unassigned - Unassigned", "timestamp": "2025-02-11T22:38:00.173974", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing 1 entries", "timestamp": "2025-02-11T22:38:00.174308", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Fetching project with ID: Unassigned", "timestamp": "2025-02-11T22:38:00.175167", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Successfully created 1 time entries in bulk", "timestamp": "2025-02-11T22:38:00.249654", "context": {}}
+WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 201", "timestamp": "2025-02-11T22:38:00.250671", "context": {"correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "status_code": 201, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "168.55", "response_headers": {"content-length": "292", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T22:38:00.251138", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 201}}
+_____________________________ test_create_project ______________________________
+
+db_session = <sqlalchemy.orm.session.Session object at 0x7fa09c8836d0>
+
+    def test_create_project(db_session):
+        """Test creating a project through service"""
+        service = ProjectService(db_session)
+        project_data = ProjectCreate(
+            project_id="TEST-001",
+            name="Test Project",
+            description="Test Description",
+            customer="Test Customer",
+            project_manager="Test Manager",
+            status="active"
+        )
+    
+>       result = service.create_project(project_data)
+
+tests/test_project_service.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <services.project_service.ProjectService object at 0x7fa09c886710>
+project = ProjectCreate(project_id='TEST-001', name='Test Project', description='Test Description', customer='Test Customer', project_manager='Test Manager', status='active')
+
+    def create_project(self, project: schemas.ProjectCreate) -> Project:
+        """Create a new project with validation."""
+        try:
+            logger.debug(f"Starting creation of project with data: {project.model_dump()}")
+    
+            # First ensure customer exists
+            if not self._ensure_customer_exists(project.customer):
+                logger.error(f"Failed to ensure customer exists: {project.customer}")
+>               raise ValueError(f"Could not create or verify customer: {project.customer}")
+E               ValueError: Could not create or verify customer: Test Customer
+
+services/project_service.py:50: ValueError
+----------------------------- Captured stdout call -----------------------------
+{"timestamp": "2025-02-11T22:38:00.382768", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.383167", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "ProjectService initialized with database session", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.383469", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Starting creation of project with data: {'project_id': 'TEST-001', 'name': 'Test Project', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.384623", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.384871", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Failed to ensure customer exists: Test Customer", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.385074", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Error creating project: Could not create or verify customer: Test Customer", "context": {}}
+------------------------------ Captured log call -------------------------------
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T22:38:00.382921", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectService initialized with database session", "timestamp": "2025-02-11T22:38:00.383269", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting creation of project with data: {'project_id': 'TEST-001', 'name': 'Test Project', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}", "timestamp": "2025-02-11T22:38:00.383641", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "timestamp": "2025-02-11T22:38:00.384709", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Failed to ensure customer exists: Test Customer", "timestamp": "2025-02-11T22:38:00.384925", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error creating project: Could not create or verify customer: Test Customer", "timestamp": "2025-02-11T22:38:00.385259", "context": {}}
+________________________ test_create_duplicate_project _________________________
+
+db_session = <sqlalchemy.orm.session.Session object at 0x7fa09ebd7c10>
+
+    def test_create_duplicate_project(db_session):
+        """Test attempting to create a project with duplicate project_id"""
+        service = ProjectService(db_session)
+        project_data = ProjectCreate(
+            project_id="DUP-001",
+            name="Duplicate Test",
+            description="Test Description",
+            customer="Test Customer",
+            project_manager="Test Manager"
+        )
+    
+        # Create first project
+>       service.create_project(project_data)
+
+tests/test_project_service.py:36: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <services.project_service.ProjectService object at 0x7fa09c7382d0>
+project = ProjectCreate(project_id='DUP-001', name='Duplicate Test', description='Test Description', customer='Test Customer', project_manager='Test Manager', status='active')
+
+    def create_project(self, project: schemas.ProjectCreate) -> Project:
+        """Create a new project with validation."""
+        try:
+            logger.debug(f"Starting creation of project with data: {project.model_dump()}")
+    
+            # First ensure customer exists
+            if not self._ensure_customer_exists(project.customer):
+                logger.error(f"Failed to ensure customer exists: {project.customer}")
+>               raise ValueError(f"Could not create or verify customer: {project.customer}")
+E               ValueError: Could not create or verify customer: Test Customer
+
+services/project_service.py:50: ValueError
+----------------------------- Captured stdout call -----------------------------
+{"timestamp": "2025-02-11T22:38:00.433310", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.433705", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "ProjectService initialized with database session", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.434025", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Starting creation of project with data: {'project_id': 'DUP-001', 'name': 'Duplicate Test', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.435024", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.435340", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Failed to ensure customer exists: Test Customer", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.435618", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Error creating project: Could not create or verify customer: Test Customer", "context": {}}
+------------------------------ Captured log call -------------------------------
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T22:38:00.433463", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectService initialized with database session", "timestamp": "2025-02-11T22:38:00.433807", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting creation of project with data: {'project_id': 'DUP-001', 'name': 'Duplicate Test', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}", "timestamp": "2025-02-11T22:38:00.434098", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "timestamp": "2025-02-11T22:38:00.435130", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Failed to ensure customer exists: Test Customer", "timestamp": "2025-02-11T22:38:00.435434", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error creating project: Could not create or verify customer: Test Customer", "timestamp": "2025-02-11T22:38:00.435720", "context": {}}
+_______________________________ test_get_project _______________________________
+
+db_session = <sqlalchemy.orm.session.Session object at 0x7fa09c722890>
+
+    def test_get_project(db_session):
+        """Test retrieving a project by project_id"""
+        service = ProjectService(db_session)
+        project_data = ProjectCreate(
+            project_id="GET-001",
+            name="Get Test",
+            description="Test Description",
+            customer="Test Customer",
+            project_manager="Test Manager"
+        )
+    
+>       created = service.create_project(project_data)
+
+tests/test_project_service.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <services.project_service.ProjectService object at 0x7fa09c721650>
+project = ProjectCreate(project_id='GET-001', name='Get Test', description='Test Description', customer='Test Customer', project_manager='Test Manager', status='active')
+
+    def create_project(self, project: schemas.ProjectCreate) -> Project:
+        """Create a new project with validation."""
+        try:
+            logger.debug(f"Starting creation of project with data: {project.model_dump()}")
+    
+            # First ensure customer exists
+            if not self._ensure_customer_exists(project.customer):
+                logger.error(f"Failed to ensure customer exists: {project.customer}")
+>               raise ValueError(f"Could not create or verify customer: {project.customer}")
+E               ValueError: Could not create or verify customer: Test Customer
+
+services/project_service.py:50: ValueError
+----------------------------- Captured stdout call -----------------------------
+{"timestamp": "2025-02-11T22:38:00.472685", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.473080", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "ProjectService initialized with database session", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.473461", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Starting creation of project with data: {'project_id': 'GET-001', 'name': 'Get Test', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.474985", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.475330", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Failed to ensure customer exists: Test Customer", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.475640", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Error creating project: Could not create or verify customer: Test Customer", "context": {}}
+------------------------------ Captured log call -------------------------------
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T22:38:00.472781", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectService initialized with database session", "timestamp": "2025-02-11T22:38:00.473219", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting creation of project with data: {'project_id': 'GET-001', 'name': 'Get Test', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}", "timestamp": "2025-02-11T22:38:00.473677", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "timestamp": "2025-02-11T22:38:00.475096", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Failed to ensure customer exists: Test Customer", "timestamp": "2025-02-11T22:38:00.475433", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error creating project: Could not create or verify customer: Test Customer", "timestamp": "2025-02-11T22:38:00.475713", "context": {}}
+____________________________ test_get_all_projects _____________________________
+
+db_session = <sqlalchemy.orm.session.Session object at 0x7fa09eb7bb50>
+
+    def test_get_all_projects(db_session):
+        """Test retrieving all projects with pagination"""
+        service = ProjectService(db_session)
+    
+        # Create multiple projects
+        projects = [
+            ProjectCreate(
+                project_id=f"ALL-00{i}",
+                name=f"Test Project {i}",
+                description="Test Description",
+                customer="Test Customer",
+                project_manager="Test Manager"
+            )
+            for i in range(3)
+        ]
+        for project in projects:
+>           service.create_project(project)
+
+tests/test_project_service.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <services.project_service.ProjectService object at 0x7fa09e791f90>
+project = ProjectCreate(project_id='ALL-000', name='Test Project 0', description='Test Description', customer='Test Customer', project_manager='Test Manager', status='active')
+
+    def create_project(self, project: schemas.ProjectCreate) -> Project:
+        """Create a new project with validation."""
+        try:
+            logger.debug(f"Starting creation of project with data: {project.model_dump()}")
+    
+            # First ensure customer exists
+            if not self._ensure_customer_exists(project.customer):
+                logger.error(f"Failed to ensure customer exists: {project.customer}")
+>               raise ValueError(f"Could not create or verify customer: {project.customer}")
+E               ValueError: Could not create or verify customer: Test Customer
+
+services/project_service.py:50: ValueError
+----------------------------- Captured stdout call -----------------------------
+{"timestamp": "2025-02-11T22:38:00.514297", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.514741", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "ProjectService initialized with database session", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.515016", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Starting creation of project with data: {'project_id': 'ALL-000', 'name': 'Test Project 0', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.516584", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.516870", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Failed to ensure customer exists: Test Customer", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.517091", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Error creating project: Could not create or verify customer: Test Customer", "context": {}}
+------------------------------ Captured log call -------------------------------
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T22:38:00.514563", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectService initialized with database session", "timestamp": "2025-02-11T22:38:00.514816", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting creation of project with data: {'project_id': 'ALL-000', 'name': 'Test Project 0', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}", "timestamp": "2025-02-11T22:38:00.515096", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "timestamp": "2025-02-11T22:38:00.516699", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Failed to ensure customer exists: Test Customer", "timestamp": "2025-02-11T22:38:00.516942", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error creating project: Could not create or verify customer: Test Customer", "timestamp": "2025-02-11T22:38:00.517182", "context": {}}
+________________________ test_get_projects_by_customer _________________________
+
+db_session = <sqlalchemy.orm.session.Session object at 0x7fa09c88b790>
+
+    def test_get_projects_by_customer(db_session):
+        """Test retrieving projects by customer"""
+        service = ProjectService(db_session)
+    
+        # Create project with specific customer
+        project_data = ProjectCreate(
+            project_id="CUST-001",
+            name="Customer Test",
+            description="Test Description",
+            customer="Special Customer",
+            project_manager="Test Manager"
+        )
+>       service.create_project(project_data)
+
+tests/test_project_service.py:107: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <services.project_service.ProjectService object at 0x7fa09c87c110>
+project = ProjectCreate(project_id='CUST-001', name='Customer Test', description='Test Description', customer='Special Customer', project_manager='Test Manager', status='active')
+
+    def create_project(self, project: schemas.ProjectCreate) -> Project:
+        """Create a new project with validation."""
+        try:
+            logger.debug(f"Starting creation of project with data: {project.model_dump()}")
+    
+            # First ensure customer exists
+            if not self._ensure_customer_exists(project.customer):
+                logger.error(f"Failed to ensure customer exists: {project.customer}")
+>               raise ValueError(f"Could not create or verify customer: {project.customer}")
+E               ValueError: Could not create or verify customer: Special Customer
+
+services/project_service.py:50: ValueError
+----------------------------- Captured stdout call -----------------------------
+{"timestamp": "2025-02-11T22:38:00.544766", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.545047", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "ProjectService initialized with database session", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.545320", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Starting creation of project with data: {'project_id': 'CUST-001', 'name': 'Customer Test', 'description': 'Test Description', 'customer': 'Special Customer', 'project_manager': 'Test Manager', 'status': 'active'}", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.546518", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.546764", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Failed to ensure customer exists: Special Customer", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.546936", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Error creating project: Could not create or verify customer: Special Customer", "context": {}}
+------------------------------ Captured log call -------------------------------
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T22:38:00.544875", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectService initialized with database session", "timestamp": "2025-02-11T22:38:00.545120", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting creation of project with data: {'project_id': 'CUST-001', 'name': 'Customer Test', 'description': 'Test Description', 'customer': 'Special Customer', 'project_manager': 'Test Manager', 'status': 'active'}", "timestamp": "2025-02-11T22:38:00.545426", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "timestamp": "2025-02-11T22:38:00.546604", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Failed to ensure customer exists: Special Customer", "timestamp": "2025-02-11T22:38:00.546825", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error creating project: Could not create or verify customer: Special Customer", "timestamp": "2025-02-11T22:38:00.546993", "context": {}}
+_________________________ test_get_projects_by_manager _________________________
+
+db_session = <sqlalchemy.orm.session.Session object at 0x7fa09c8851d0>
+
+    def test_get_projects_by_manager(db_session):
+        """Test retrieving projects by project manager"""
+        service = ProjectService(db_session)
+    
+        # Create project with specific manager
+        project_data = ProjectCreate(
+            project_id="MGR-001",
+            name="Manager Test",
+            description="Test Description",
+            customer="Test Customer",
+            project_manager="Special Manager"
+        )
+>       service.create_project(project_data)
+
+tests/test_project_service.py:126: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <services.project_service.ProjectService object at 0x7fa09c73aa10>
+project = ProjectCreate(project_id='MGR-001', name='Manager Test', description='Test Description', customer='Test Customer', project_manager='Special Manager', status='active')
+
+    def create_project(self, project: schemas.ProjectCreate) -> Project:
+        """Create a new project with validation."""
+        try:
+            logger.debug(f"Starting creation of project with data: {project.model_dump()}")
+    
+            # First ensure customer exists
+            if not self._ensure_customer_exists(project.customer):
+                logger.error(f"Failed to ensure customer exists: {project.customer}")
+>               raise ValueError(f"Could not create or verify customer: {project.customer}")
+E               ValueError: Could not create or verify customer: Test Customer
+
+services/project_service.py:50: ValueError
+----------------------------- Captured stdout call -----------------------------
+{"timestamp": "2025-02-11T22:38:00.581055", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.581421", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "ProjectService initialized with database session", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.581755", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Starting creation of project with data: {'project_id': 'MGR-001', 'name': 'Manager Test', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Special Manager', 'status': 'active'}", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.582992", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.583165", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Failed to ensure customer exists: Test Customer", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.583326", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Error creating project: Could not create or verify customer: Test Customer", "context": {}}
+------------------------------ Captured log call -------------------------------
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T22:38:00.581218", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectService initialized with database session", "timestamp": "2025-02-11T22:38:00.581543", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting creation of project with data: {'project_id': 'MGR-001', 'name': 'Manager Test', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Special Manager', 'status': 'active'}", "timestamp": "2025-02-11T22:38:00.581850", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "timestamp": "2025-02-11T22:38:00.583063", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Failed to ensure customer exists: Test Customer", "timestamp": "2025-02-11T22:38:00.583219", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error creating project: Could not create or verify customer: Test Customer", "timestamp": "2025-02-11T22:38:00.583396", "context": {}}
+_____________________________ test_update_project ______________________________
+
+db_session = <sqlalchemy.orm.session.Session object at 0x7fa09ebaa590>
+
+    def test_update_project(db_session):
+        """Test updating a project"""
+        service = ProjectService(db_session)
+        project_data = ProjectCreate(
+            project_id="UPDATE-001",
+            name="Update Test",
+            description="Test Description",
+            customer="Test Customer",
+            project_manager="Test Manager"
+        )
+    
+>       created = service.create_project(project_data)
+
+tests/test_project_service.py:144: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <services.project_service.ProjectService object at 0x7fa09c756d50>
+project = ProjectCreate(project_id='UPDATE-001', name='Update Test', description='Test Description', customer='Test Customer', project_manager='Test Manager', status='active')
+
+    def create_project(self, project: schemas.ProjectCreate) -> Project:
+        """Create a new project with validation."""
+        try:
+            logger.debug(f"Starting creation of project with data: {project.model_dump()}")
+    
+            # First ensure customer exists
+            if not self._ensure_customer_exists(project.customer):
+                logger.error(f"Failed to ensure customer exists: {project.customer}")
+>               raise ValueError(f"Could not create or verify customer: {project.customer}")
+E               ValueError: Could not create or verify customer: Test Customer
+
+services/project_service.py:50: ValueError
+----------------------------- Captured stdout call -----------------------------
+{"timestamp": "2025-02-11T22:38:00.621589", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.621824", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "ProjectService initialized with database session", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.622060", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Starting creation of project with data: {'project_id': 'UPDATE-001', 'name': 'Update Test', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.623082", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.623295", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Failed to ensure customer exists: Test Customer", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.623522", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Error creating project: Could not create or verify customer: Test Customer", "context": {}}
+------------------------------ Captured log call -------------------------------
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T22:38:00.621691", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectService initialized with database session", "timestamp": "2025-02-11T22:38:00.621895", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting creation of project with data: {'project_id': 'UPDATE-001', 'name': 'Update Test', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}", "timestamp": "2025-02-11T22:38:00.622120", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "timestamp": "2025-02-11T22:38:00.623177", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Failed to ensure customer exists: Test Customer", "timestamp": "2025-02-11T22:38:00.623366", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error creating project: Could not create or verify customer: Test Customer", "timestamp": "2025-02-11T22:38:00.623590", "context": {}}
+_____________________________ test_delete_project ______________________________
+
+db_session = <sqlalchemy.orm.session.Session object at 0x7fa09c87d310>
+
+    def test_delete_project(db_session):
+        """Test deleting a project"""
+        service = ProjectService(db_session)
+        project_data = ProjectCreate(
+            project_id="DELETE-001",
+            name="Delete Test",
+            description="Test Description",
+            customer="Test Customer",
+            project_manager="Test Manager"
+        )
+    
+        # Create and then delete
+>       service.create_project(project_data)
+
+tests/test_project_service.py:184: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <services.project_service.ProjectService object at 0x7fa09ebd5010>
+project = ProjectCreate(project_id='DELETE-001', name='Delete Test', description='Test Description', customer='Test Customer', project_manager='Test Manager', status='active')
+
+    def create_project(self, project: schemas.ProjectCreate) -> Project:
+        """Create a new project with validation."""
+        try:
+            logger.debug(f"Starting creation of project with data: {project.model_dump()}")
+    
+            # First ensure customer exists
+            if not self._ensure_customer_exists(project.customer):
+                logger.error(f"Failed to ensure customer exists: {project.customer}")
+>               raise ValueError(f"Could not create or verify customer: {project.customer}")
+E               ValueError: Could not create or verify customer: Test Customer
+
+services/project_service.py:50: ValueError
+----------------------------- Captured stdout call -----------------------------
+{"timestamp": "2025-02-11T22:38:00.653399", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.653733", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "ProjectService initialized with database session", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.654010", "level": "DEBUG", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Starting creation of project with data: {'project_id': 'DELETE-001', 'name': 'Delete Test', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.655247", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.655561", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Failed to ensure customer exists: Test Customer", "context": {}}
+{"timestamp": "2025-02-11T22:38:00.655829", "level": "ERROR", "correlation_id": "9a7297e3-85e4-472b-9e83-28bf924e2a0d", "logger": "TimesheetTracker", "message": "Error creating project: Could not create or verify customer: Test Customer", "context": {}}
+------------------------------ Captured log call -------------------------------
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T22:38:00.653549", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectService initialized with database session", "timestamp": "2025-02-11T22:38:00.653814", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting creation of project with data: {'project_id': 'DELETE-001', 'name': 'Delete Test', 'description': 'Test Description', 'customer': 'Test Customer', 'project_manager': 'Test Manager', 'status': 'active'}", "timestamp": "2025-02-11T22:38:00.654086", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "timestamp": "2025-02-11T22:38:00.655344", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Failed to ensure customer exists: Test Customer", "timestamp": "2025-02-11T22:38:00.655667", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error creating project: Could not create or verify customer: Test Customer", "timestamp": "2025-02-11T22:38:00.655899", "context": {}}
 =========================== short test summary info ============================
 FAILED tests/test_file_upload.py::test_upload_excel_creates_customers_and_projects
-======================= 1 failed, 6 deselected in 8.60s ========================
+FAILED tests/test_project_service.py::test_create_project - ValueError: Could...
+FAILED tests/test_project_service.py::test_create_duplicate_project - ValueEr...
+FAILED tests/test_project_service.py::test_get_project - ValueError: Could no...
+FAILED tests/test_project_service.py::test_get_all_projects - ValueError: Cou...
+FAILED tests/test_project_service.py::test_get_projects_by_customer - ValueEr...
+FAILED tests/test_project_service.py::test_get_projects_by_manager - ValueErr...
+FAILED tests/test_project_service.py::test_update_project - ValueError: Could...
+FAILED tests/test_project_service.py::test_delete_project - ValueError: Could...
+======================= 9 failed, 6 deselected in 4.96s ========================

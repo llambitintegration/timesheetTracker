@@ -32,7 +32,9 @@ class ProjectService:
                 contact_email=f"{normalized_name.lower().replace(' ', '_')}@example.com",
                 status="active"
             )
-            self.customer_repo.create(self.db, customer_data)
+            # Convert Pydantic model to dict before creating customer
+            customer_dict = customer_data.model_dump(exclude={'id', 'created_at', 'updated_at'})
+            self.customer_repo.create(self.db, customer_dict)
             logger.info(f"Created new customer: {normalized_name}")
             return True
         except Exception as e:
