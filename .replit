@@ -41,8 +41,12 @@ author = "agent"
 agentRequireRestartOnSave = false
 
 [[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "(python -m pytest tests/ || (python -m pytest tests/ --last-failed > failedTests.txt)) && python main.py"
+args = "uvicorn main:app --host 0.0.0.0 --port 8080"
+waitForPort = 8080
 
 [deployment]
 run = ["sh", "-c", "python main.py"]

@@ -1,0 +1,61 @@
+___________________________________________________________________________ test_upload_excel_creates_customers_and_projects ____________________________________________________________________________
+
+client = <starlette.testclient.TestClient object at 0x7fdef5b76110>
+setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7fdef5b161d0>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
+tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-88/test_upload_excel_creates_cust0')
+
+    def test_upload_excel_creates_customers_and_projects(client, setup_test_data, tmp_path):
+        """Test that uploading Excel file creates new customers and projects as needed"""
+        data = {
+            'Week Number': [41],
+            'Month': ['October'],
+            'Category': ['Development'],
+            'Subcategory': ['Backend'],
+            'Customer': ['NEW_CUSTOMER'],  # New customer that doesn't exist
+            'Project': ['NEW_PROJECT'],    # New project that doesn't exist
+            'Task Description': ['Test task'],
+            'Hours': [8.0],
+            'Date': ['2024-10-07']
+        }
+        excel_file = create_test_excel(tmp_path, data)
+    
+        with open(excel_file, "rb") as f:
+            response = client.post(
+                "/time-entries/upload/",
+                files={"file": ("test.xlsx", f, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
+            )
+    
+        assert response.status_code == 201
+        data = response.json()
+        assert len(data["entries"]) == 1
+>       assert data["entries"][0]["customer"] == "NEW_CUSTOMER"
+E       AssertionError: assert 'Unassigned' == 'NEW_CUSTOMER'
+E         
+E         - NEW_CUSTOMER
+E         + Unassigned
+
+tests/test_file_upload.py:187: AssertionError
+------------------------------------------------------------------------------------------- Captured log call -------------------------------------------------------------------------------------------
+INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T21:59:10.295536", "context": {"correlation_id": "518b2f1d-8688-435f-9ecd-cfef2551d2c0", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5341", "content-type": "multipart/form-data; boundary=898fa543d8388ed07ee5e86e94be890e"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T21:59:10.297310", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T21:59:10.297657", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "TimesheetService initialized", "timestamp": "2025-02-11T21:59:10.297843", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T21:59:10.298062", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting Excel file analysis", "timestamp": "2025-02-11T21:59:10.298313", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 1 records from Excel file", "timestamp": "2025-02-11T21:59:10.308571", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing 1 entries", "timestamp": "2025-02-11T21:59:10.350573", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error ensuring customer exists: models.customerModel.Customer() argument after ** must be a mapping, not CustomerCreate", "timestamp": "2025-02-11T21:59:10.351647", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Fetching project with ID: NEW_PROJECT", "timestamp": "2025-02-11T21:59:10.351888", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Creating new project with data: project_id='NEW_PROJECT' name='NEW_PROJECT' description=None customer='Unassigned' project_manager=None status='active'", "timestamp": "2025-02-11T21:59:10.352556", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error creating project: 'ProjectCreate' object is not subscriptable", "timestamp": "2025-02-11T21:59:10.352751", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error ensuring project exists: 'ProjectCreate' object is not subscriptable", "timestamp": "2025-02-11T21:59:10.353109", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting database reference validation", "timestamp": "2025-02-11T21:59:10.353331", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Processed entry: customer=Unassigned, project=Unassigned", "timestamp": "2025-02-11T21:59:10.353569", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Successfully created 1 time entries in bulk", "timestamp": "2025-02-11T21:59:10.383919", "context": {}}
+WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 201", "timestamp": "2025-02-11T21:59:10.384723", "context": {"correlation_id": "518b2f1d-8688-435f-9ecd-cfef2551d2c0", "status_code": 201, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "89.30", "response_headers": {"content-length": "292", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T21:59:10.385222", "context": {"correlation_id": "518b2f1d-8688-435f-9ecd-cfef2551d2c0", "method": "POST", "path": "/time-entries/upload/", "status_code": 201}}
+======================================================================================== short test summary info ========================================================================================
+FAILED tests/test_file_upload.py::test_upload_excel_creates_customers_and_projects - AssertionError: assert 'Unassigned' == 'NEW_CUSTOMER'
+  
+  - NEW_CUSTOMER
+  + Unassigned

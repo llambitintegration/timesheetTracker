@@ -159,3 +159,41 @@ def test_xls_analyzer_missing_columns(tmp_path):
         assert records[0]['Customer'] == 'Unassigned'
         assert records[0]['Project'] == 'Unassigned'
         assert records[0]['Week Number'] == 0
+
+def test_upload_excel_creates_customers_and_projects(client, setup_test_data, tmp_path):
+    """Test that uploading Excel file creates new customers and projects as needed"""
+    data = {
+        'Week Number': [41],
+        'Month': ['October'],
+        'Category': ['Development'],
+        'Subcategory': ['Backend'],
+        'Customer': ['NEW_CUSTOMER'],  # New customer that doesn't exist
+        'Project': ['NEW_PROJECT'],    # New project that doesn't exist
+        'Task Description': ['Test task'],
+        'Hours': [8.0],
+        'Date': ['2024-10-07']
+    }
+    excel_file = create_test_excel(tmp_path, data)
+
+    with open(excel_file, "rb") as f:
+        response = client.post(
+            "/time-entries/upload/",
+            files={"file": ("test.xlsx", f, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
+        )
+
+    assert response.status_code == 201
+    data = response.json()
+    assert len(data["entries"]) == 1
+    assert data["entries"][0]["customer"] == "NEW_CUSTOMER"
+    assert data["entries"][0]["project"] == "NEW_PROJECT"
+
+    # Verify customer was created
+    response = client.get("/customers/NEW_CUSTOMER")
+    assert response.status_code == 200
+    assert response.json()["name"] == "NEW_CUSTOMER"
+
+    # Verify project was created
+    response = client.get("/projects/NEW_PROJECT")
+    assert response.status_code == 200
+    assert response.json()["project_id"] == "NEW_PROJECT"
+    assert response.json()["customer"] == "NEW_CUSTOMER"
