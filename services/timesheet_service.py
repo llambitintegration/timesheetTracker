@@ -254,7 +254,7 @@ class TimesheetService:
             'Task Description', 'Hours', 'Date'
         }
 
-        # Check for required columns, excluding customer and project
+        # Check for required columns
         missing_columns = required_columns - set(df.columns)
         if missing_columns:
             raise HTTPException(

@@ -14,8 +14,8 @@ class TimeEntry(BaseModel):
 
     category = Column(String, nullable=False)
     subcategory = Column(String, nullable=False)
-    customer = Column(String, ForeignKey('customers.name', ondelete='SET NULL'), nullable=True, server_default='Unassigned')
-    project = Column(String, ForeignKey('projects.project_id', ondelete='SET NULL'), nullable=True)
+    customer = Column(String, nullable=True, server_default='Unassigned')  # Remove ForeignKey
+    project = Column(String, nullable=True, server_default='Unassigned')   # Remove ForeignKey
     task_description = Column(String, nullable=True)
     hours = Column(Float, nullable=False, server_default='0')  # Default to 0
     date = Column(Date, nullable=False)  # Explicit date field for timesheet entries
