@@ -99,11 +99,11 @@ async def cors_headers_middleware(request: Request, call_next):
             content={},
             headers={
                 "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH",
+                "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS,PATCH",
                 "Access-Control-Allow-Headers": "*",
                 "Access-Control-Max-Age": "3600",
                 "Access-Control-Allow-Credentials": "false",
-                "Access-Control-Expose-Headers": "X-Total-Count, X-Correlation-ID"
+                "Access-Control-Expose-Headers": "X-Total-Count,X-Correlation-ID"
             }
         )
 
@@ -123,7 +123,7 @@ async def cors_headers_middleware(request: Request, call_next):
     response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS,PATCH"
     response.headers["Access-Control-Allow-Headers"] = "*"
     response.headers["Access-Control-Allow-Credentials"] = "false"
-    response.headers["Access-Control-Expose-Headers"] = "X-Total-Count, X-Correlation-ID"
+    response.headers["Access-Control-Expose-Headers"] = "X-Total-Count,X-Correlation-ID"
 
     return response
 
