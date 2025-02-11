@@ -251,9 +251,10 @@ class TimesheetService:
         """Process pandas DataFrame into time entries"""
         required_columns = {
             'Week Number', 'Month', 'Category', 'Subcategory',
-            'Customer', 'Project', 'Task Description', 'Hours', 'Date'
+            'Task Description', 'Hours', 'Date'
         }
 
+        # Check for required columns, excluding customer and project
         missing_columns = required_columns - set(df.columns)
         if missing_columns:
             raise HTTPException(
@@ -274,8 +275,8 @@ class TimesheetService:
                     'month': str(row['Month']) if 'Month' in row else '',
                     'category': str(row['Category']),
                     'subcategory': str(row['Subcategory']) if 'Subcategory' in row else '',
-                    'customer': None if str(row['Customer']).strip() == '-' else str(row['Customer']),
-                    'project': None if str(row['Project']).strip() == '-' else str(row['Project']),
+                    'customer': DEFAULT_CUSTOMER,  # Always use default customer
+                    'project': DEFAULT_PROJECT,    # Always use default project
                     'task_description': str(row['Task Description']) if 'Task Description' in row else '',
                     'hours': hours,
                     'date': pd.to_datetime(row['Date']).date()
