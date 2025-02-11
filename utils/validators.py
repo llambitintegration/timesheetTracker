@@ -98,24 +98,37 @@ def validate_database_references(
 def ensure_default_customer(db: Session) -> Optional[Customer]:
     """Ensure default customer exists in database."""
     try:
-        # Check for both default customer and "-" customer
+        # Try to get either default customer or "-" customer
         default_customer = db.query(Customer).filter(
             Customer.name.in_([DEFAULT_CUSTOMER, "-"])
         ).first()
+        
         if not default_customer:
+            # Create both default entries to handle both cases
             default_customer = Customer(
-                name="-",
+                name=DEFAULT_CUSTOMER,
                 contact_email="unassigned@company.com",
                 status="active"
             )
             db.add(default_customer)
+            
+            dash_customer = Customer(
+                name="-",
+                contact_email="unassigned@company.com",
+                status="active"
+            )
+            db.add(dash_customer)
+            
             db.flush()
-            logger.info(f"Created default customer: {default_customer.name}")
+            logger.info("Created default customers")
+            
         return default_customer
     except IntegrityError as e:
-        logger.warning(f"Default customer already exists: {str(e)}")
+        logger.warning(f"Default customer exists: {str(e)}")
         db.rollback()
-        return db.query(Customer).filter(Customer.name == DEFAULT_CUSTOMER).first()
+        return db.query(Customer).filter(
+            Customer.name.in_([DEFAULT_CUSTOMER, "-"])
+        ).first()
     except Exception as e:
         logger.error(f"Failed to create default customer: {str(e)}")
         db.rollback()

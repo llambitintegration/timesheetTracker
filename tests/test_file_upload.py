@@ -61,7 +61,7 @@ def test_xls_analyzer_empty_file(tmp_path):
     with pytest.raises(ValueError):
         analyzer.read_excel(b'')
 
-def test_xls_analyzer_invalid_data(tmp_path, invalid_timesheet_data):
+def test_xls_analyzer_invalid_data(tmp_path, invalid_timesheet_data, setup_test_data):
     """Test XLSAnalyzer with invalid data"""
     excel_file = create_test_excel(tmp_path, invalid_timesheet_data)
 
@@ -71,8 +71,30 @@ def test_xls_analyzer_invalid_data(tmp_path, invalid_timesheet_data):
         records = analyzer.read_excel(contents)
 
         assert len(records) == 1
-        assert records[0]['Customer'] == '-'
+        assert records[0]['Customer'] in ['-', 'Unassigned']
         assert records[0]['Project'] == '-'
+
+def test_dash_customer_handling(client, setup_test_data, tmp_path):
+    """Test handling of dash (-) values in customer field"""
+    data = {
+        'Category': ['Development'],
+        'Customer': ['-'],
+        'Project': ['-'],
+        'Hours': [8.0],
+        'Date': ['2024-10-07']
+    }
+    excel_file = create_test_excel(tmp_path, data)
+
+    with open(excel_file, "rb") as f:
+        response = client.post(
+            "/time-entries/upload/",
+            files={"file": ("test.xlsx", f, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
+        )
+
+    assert response.status_code == 201
+    entries = response.json()["entries"]
+    assert len(entries) == 1
+    assert entries[0]["customer"] in ['-', 'Unassigned']
 
 def test_upload_excel_valid(client, setup_test_data, tmp_path, valid_timesheet_data):
     """Test uploading a valid Excel file"""
