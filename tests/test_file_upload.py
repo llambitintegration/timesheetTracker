@@ -1,13 +1,9 @@
-
 import pytest
 from fastapi.testclient import TestClient
 from main import app
-import io
 import pandas as pd
 from pathlib import Path
 import logging
-import asyncio
-import httpx
 from utils.xls_analyzer import XLSAnalyzer
 
 logger = logging.getLogger(__name__)
@@ -76,6 +72,21 @@ def test_xls_analyzer_invalid_data(tmp_path, invalid_timesheet_data):
         assert len(records) == 1
         assert records[0]['Customer'] == '-'
         assert records[0]['Project'] == '-'
+
+def test_upload_excel_valid(client, setup_test_data, tmp_path):
+    """Test uploading a valid Excel file"""
+    excel_file = create_test_excel(tmp_path, valid_timesheet_data())
+
+    with open(excel_file, "rb") as f:
+        response = client.post(
+            "/time-entries/upload/",
+            files={"file": ("test.xlsx", f, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
+        )
+
+    assert response.status_code == 201
+    data = response.json()
+    assert len(data["entries"]) == 2
+    assert data["validation_errors"] == []
 
 def test_xls_analyzer_date_conversion(tmp_path):
     """Test date conversion in XLSAnalyzer"""

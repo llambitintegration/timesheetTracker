@@ -1,68 +1,23 @@
-from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, Query, Path, Request
+from fastapi import FastAPI, HTTPException, Depends, File, UploadFile, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
-from sqlalchemy import text, inspect
 from sqlalchemy.orm import Session
 from typing import List, Optional
-from datetime import datetime, timedelta, date
-import calendar
+from datetime import datetime, date
 import os
-import traceback
-from dotenv import load_dotenv
-import uvicorn
-from database import schemas, crud, get_db, verify_database, engine
-from utils.logger import Logger, structured_log
-from utils.middleware import logging_middleware, error_logging_middleware
-from models.timeEntry import TimeEntry
-from models.projectModel import Project
-from models.projectManagerModel import ProjectManager
-from services.customer_service import CustomerService
-from services.project_manager_service import ProjectManagerService
-from services.project_service import ProjectService
+from database import crud, schemas, get_db
 from services.timesheet_service import TimesheetService
-from services.report_service import ReportService
-import utils
-import re
-from contextlib import asynccontextmanager
+from services.customer_service import CustomerService
+from services.project_service import ProjectService
+from services.project_manager_service import ProjectManagerService
+from services.database_service import DatabaseService
+from utils.logger import Logger
+from utils.middleware import logging_middleware, error_logging_middleware
 
-# Load environment variables
-load_dotenv()
 
+app = FastAPI()
 logger = Logger().get_logger()
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    """Lifespan context manager for startup/shutdown events"""
-    try:
-        logger.info("Starting FastAPI server")
-        logger.info("Verifying database connection on startup")
-        if not verify_database():
-            logger.warning("Database verification failed - schema may need initialization")
-
-        # Log CORS configuration
-        logger.info("=== CORS Configuration ===")
-        logger.info("Allowed Origins: '*'")
-        logger.info("Allowed Methods: 'GET, POST, PUT, DELETE, OPTIONS, PATCH'")
-        logger.info("Allow Credentials: False")
-        logger.info("Allowed Headers: '*'")
-        logger.info("Expose Headers: 'X-Total-Count, X-Correlation-ID'")
-
-        yield
-
-    except Exception as e:
-        logger.error(f"Error during startup: {str(e)}")
-        logger.exception("Startup error details:")
-        raise
-    finally:
-        logger.info("Shutting down FastAPI server")
-
-# Create FastAPI app
-app = FastAPI(
-    title="Timesheet Management API",
-    lifespan=lifespan
-)
-
-# CORS middleware configuration
+# CORS configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -124,6 +79,7 @@ async def cors_headers_middleware(request: Request, call_next):
     response.headers["Access-Control-Expose-Headers"] = "X-Total-Count,X-Correlation-ID"
 
     return response
+
 
 
 @app.get("/")
@@ -283,25 +239,19 @@ async def upload_timesheet(
     if file_size == 0:
         raise HTTPException(status_code=400, detail="File is empty")
 
-    # Check file extension with proper type handling
-    allowed_extensions = {'.txt', '.csv', '.xlsx'}
-    file_extension = os.path.splitext(str(file.filename))[1].lower()
-
-    if file_extension not in allowed_extensions:
+    # Check file extension
+    if not file.filename.lower().endswith('.xlsx'):
         raise HTTPException(
             status_code=400,
-            detail=f"Unsupported file format. Please upload a file with one of these extensions: {', '.join(allowed_extensions)}"
+            detail="Only Excel (.xlsx) files are supported"
         )
 
     # Verify content type
-    content_type = file.content_type
     allowed_content_types = {
-        'text/csv',
-        'text/plain',
         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     }
 
-    if content_type not in allowed_content_types:
+    if file.content_type not in allowed_content_types:
         raise HTTPException(status_code=400, detail="Invalid content type")
 
     try:
@@ -322,7 +272,6 @@ async def upload_timesheet(
 @app.post("/init-db/")
 async def initialize_database(force: bool = False, db: Session = Depends(get_db)):
     """Initialize database and run migrations"""
-    from services.database_service import DatabaseService
     service = DatabaseService(db)
     return await service.initialize_database(force)
 
@@ -413,6 +362,16 @@ def create_sample_data(db: Session = Depends(get_db)):
             continue
 
     return {"message": f"Created {len(created_entries)} sample entries"}
+
+from fastapi.responses import JSONResponse
+import traceback
+from utils import structured_log
+
+from models.timeEntry import TimeEntry
+from models.projectModel import Project
+from models.projectManagerModel import ProjectManager
+from services.report_service import ReportService
+import uvicorn
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
