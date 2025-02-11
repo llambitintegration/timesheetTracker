@@ -47,7 +47,7 @@ class TimesheetService:
         try:
             # Prepare all entries first
             db_entries = [
-                TimeEntry(**entry.model_dump(exclude={'id', 'created_at', 'updated_at'}))
+                TimeEntry(**{k: v for k, v in entry.dict().items() if k not in {'id', 'created_at', 'updated_at'}})
                 for entry in entries
             ]
 
@@ -147,19 +147,16 @@ class TimesheetService:
                     continue
 
                 entry_dict = {
-                    'week_number': int(row['Week Number']),
-                    'month': str(row['Month']),
+                    'week_number': int(row['Week Number']) if 'Week Number' in row else 0,
+                    'month': str(row['Month']) if 'Month' in row else '',
                     'category': str(row['Category']),
-                    'subcategory': str(row['Subcategory']),
-                    'customer': str(row['Customer']),
-                    'project': str(row['Project']),
-                    'task_description': str(row['Task Description']),
+                    'subcategory': str(row['Subcategory']) if 'Subcategory' in row else '',
+                    'customer': None if str(row['Customer']).strip() == '-' else str(row['Customer']),
+                    'project': None if str(row['Project']).strip() == '-' else str(row['Project']),
+                    'task_description': str(row['Task Description']) if 'Task Description' in row else '',
                     'hours': hours,
                     'date': pd.to_datetime(row['Date']).date()
                 }
-                customer = entry_dict.get('customer')
-                if customer == '-' or not customer:
-                    entry_dict['customer'] = None
                 valid_entries.append(schemas.TimeEntryCreate(**entry_dict))
             except Exception as e:
                 logger.error(f"Error processing row {idx + 1}: {str(e)}")

@@ -62,7 +62,7 @@ def validate_database_references(
             customer = db.query(Customer).filter(Customer.name == entry.customer).first()
             if not customer:
                 validation_errors.append({
-                    'entry': entry.model_dump(),
+                    'entry': entry.dict(),
                     'error': f"Customer '{original_customer}' not found in database",
                     'type': 'invalid_customer'
                 })
