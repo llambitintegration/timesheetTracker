@@ -2,6 +2,7 @@
 from typing import List, Dict, Any
 import pandas as pd
 from datetime import datetime
+from io import BytesIO
 from utils.logger import Logger
 
 logger = Logger().get_logger()

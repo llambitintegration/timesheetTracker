@@ -37,10 +37,8 @@ class TimeEntryRepository(BaseRepository[TimeEntry]):
             db.refresh(entry)
         return db_entries
 
-    def update(self, db: Session, entry: TimeEntry, data: Dict[str, Any]) -> TimeEntry:
-        """Update an existing time entry with dictionary data."""
-        for key, value in data.items():
-            setattr(entry, key, value)
+    def update(self, db: Session, entry: TimeEntry) -> TimeEntry:
+        """Update an existing time entry."""
         db.commit()
         db.refresh(entry)
         return entry

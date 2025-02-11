@@ -16,3 +16,5 @@ class Customer(BaseModel):
         super().__init__(**kwargs)
         if self.status is None:
             self.status = 'active'
+        if 'updated_at' in kwargs:
+            self.updated_at = kwargs['updated_at']
