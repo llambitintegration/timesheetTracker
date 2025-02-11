@@ -5,84 +5,34 @@ rootdir: /home/runner/workspace
 configfile: pyproject.toml
 plugins: anyio-4.7.0, asyncio-0.25.2, cov-6.0.0
 asyncio: mode=Mode.STRICT, asyncio_default_fixture_loop_scope=None
-collecting ... collected 9 items / 6 deselected / 3 selected
-run-last-failure: rerun previous 3 failures (skipped 6 files)
+collecting ... collected 7 items / 1 error / 6 deselected / 1 selected
+run-last-failure: rerun previous 1 failure (skipped 7 files)
 
-tests/test_file_upload.py::test_xls_analyzer_missing_columns FAILED      [ 33%]
-tests/test_interfaces.py::test_project_interface FAILED                  [ 66%]
-tests/test_models.py::test_model_timestamps PASSED                       [100%]
-
-=================================== FAILURES ===================================
-______________________ test_xls_analyzer_missing_columns _______________________
-
-tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-9/test_xls_analyzer_missing_colu0')
-
-    def test_xls_analyzer_missing_columns(tmp_path):
-        """Test XLSAnalyzer with missing required columns"""
-        data = {'Category': ['Test'], 'Hours': [8.0]}
-        excel_file = create_test_excel(tmp_path, data)
-    
-        with open(excel_file, "rb") as f:
-            contents = f.read()
-            analyzer = XLSAnalyzer()
-            records = analyzer.read_excel(contents)
-    
-            assert len(records) == 1
-            assert records[0]['Customer'] == '-'
-            assert records[0]['Project'] == '-'
->           assert records[0]['Week Number'] == 0
-E           AssertionError: assert '-' == 0
-
-tests/test_file_upload.py:123: AssertionError
------------------------------ Captured stdout call -----------------------------
-{"timestamp": "2025-02-11T19:53:57.090810", "level": "INFO", "correlation_id": "undefined", "logger": "TimesheetTracker", "message": "Successfully parsed 1 records from Excel file", "context": {}}
------------------------------- Captured log call -------------------------------
-INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 1 records from Excel file", "timestamp": "2025-02-11T19:53:57.090946", "context": {}}
-____________________________ test_project_interface ____________________________
-
-    def test_project_interface():
-        """Test Project interface matches API response"""
-        response = client.get("/projects")
-        assert response.status_code == 200
-        projects = response.json()
-    
-        if projects:
-            project = projects[0]
-            assert isinstance(project.get('id'), (int, str))
-            assert isinstance(project.get('name'), str)
-            assert isinstance(project.get('project_id'), str)
-            assert isinstance(project.get('customer'), str)
->           assert isinstance(project.get('project_manager'), str)
-E           AssertionError: assert False
-E            +  where False = isinstance(None, str)
-E            +    where None = <built-in method get of dict object at 0x7f9bb9dad6c0>('project_manager')
-E            +      where <built-in method get of dict object at 0x7f9bb9dad6c0> = {'created_at': '2025-02-10T15:23:01.836318Z', 'customer': 'Unassigned', 'description': 'Default project for unassigned entries', 'id': 1, ...}.get
-
-tests/test_interfaces.py:64: AssertionError
------------------------------ Captured stdout call -----------------------------
-{"timestamp": "2025-02-11T19:53:57.192685", "level": "INFO", "correlation_id": "b0071514-48cd-4fd4-ae2b-41d03613ae8a", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "b0071514-48cd-4fd4-ae2b-41d03613ae8a", "method": "GET", "url": "http://testserver/projects", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/projects"}}
-{"timestamp": "2025-02-11T19:53:57.193670", "level": "DEBUG", "correlation_id": "b0071514-48cd-4fd4-ae2b-41d03613ae8a", "logger": "TimesheetTracker", "message": "Database session created", "context": {}}
-{"timestamp": "2025-02-11T19:53:57.194173", "level": "DEBUG", "correlation_id": "b0071514-48cd-4fd4-ae2b-41d03613ae8a", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
-{"timestamp": "2025-02-11T19:53:57.194411", "level": "DEBUG", "correlation_id": "b0071514-48cd-4fd4-ae2b-41d03613ae8a", "logger": "TimesheetTracker", "message": "ProjectService initialized with database session", "context": {}}
-{"timestamp": "2025-02-11T19:53:57.194699", "level": "DEBUG", "correlation_id": "b0071514-48cd-4fd4-ae2b-41d03613ae8a", "logger": "TimesheetTracker", "message": "Fetching projects with offset=0, limit=100", "context": {}}
-{"timestamp": "2025-02-11T19:53:57.194966", "level": "DEBUG", "correlation_id": "b0071514-48cd-4fd4-ae2b-41d03613ae8a", "logger": "TimesheetTracker", "message": "Fetching all projects with skip=0, limit=100", "context": {}}
-{"timestamp": "2025-02-11T19:53:57.627460", "level": "INFO", "correlation_id": "b0071514-48cd-4fd4-ae2b-41d03613ae8a", "logger": "TimesheetTracker", "message": "Retrieved 6 projects", "context": {}}
-{"timestamp": "2025-02-11T19:53:57.627873", "level": "INFO", "correlation_id": "b0071514-48cd-4fd4-ae2b-41d03613ae8a", "logger": "TimesheetTracker", "message": "Retrieved 6 projects", "context": {}}
-{"timestamp": "2025-02-11T19:53:57.651071", "level": "DEBUG", "correlation_id": "b0071514-48cd-4fd4-ae2b-41d03613ae8a", "logger": "TimesheetTracker", "message": "Database session closed", "context": {}}
-{"timestamp": "2025-02-11T19:53:57.651754", "level": "INFO", "correlation_id": "b0071514-48cd-4fd4-ae2b-41d03613ae8a", "logger": "TimesheetTracker", "message": "Request completed successfully", "context": {"correlation_id": "b0071514-48cd-4fd4-ae2b-41d03613ae8a", "status_code": 200, "process_time_ms": "459.25", "response_headers": {"content-length": "1355", "content-type": "application/json"}, "content_type": "application/json", "method": "GET", "path": "/projects"}}
-{"timestamp": "2025-02-11T19:53:57.652269", "level": "DEBUG", "correlation_id": "b0071514-48cd-4fd4-ae2b-41d03613ae8a", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": null, "method": "GET", "path": "/projects", "status_code": 200}}
------------------------------- Captured log call -------------------------------
-INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T19:53:57.192835", "context": {"correlation_id": "b0071514-48cd-4fd4-ae2b-41d03613ae8a", "method": "GET", "url": "http://testserver/projects", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/projects"}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Database session created", "timestamp": "2025-02-11T19:53:57.193743", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectRepository initialized", "timestamp": "2025-02-11T19:53:57.194270", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "ProjectService initialized with database session", "timestamp": "2025-02-11T19:53:57.194558", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Fetching projects with offset=0, limit=100", "timestamp": "2025-02-11T19:53:57.194776", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Fetching all projects with skip=0, limit=100", "timestamp": "2025-02-11T19:53:57.195046", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Retrieved 6 projects", "timestamp": "2025-02-11T19:53:57.627650", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Retrieved 6 projects", "timestamp": "2025-02-11T19:53:57.627990", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Database session closed", "timestamp": "2025-02-11T19:53:57.651190", "context": {}}
-INFO     TimesheetTracker:logger.py:29 {"message": "Request completed successfully", "timestamp": "2025-02-11T19:53:57.651872", "context": {"correlation_id": "b0071514-48cd-4fd4-ae2b-41d03613ae8a", "status_code": 200, "process_time_ms": "459.25", "response_headers": {"content-length": "1355", "content-type": "application/json"}, "content_type": "application/json", "method": "GET", "path": "/projects"}}
-DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T19:53:57.652365", "context": {"correlation_id": null, "method": "GET", "path": "/projects", "status_code": 200}}
+==================================== ERRORS ====================================
+__________________ ERROR collecting tests/test_interfaces.py ___________________
+.pythonlibs/lib/python3.11/site-packages/_pytest/python.py:493: in importtestmodule
+    mod = import_path(
+.pythonlibs/lib/python3.11/site-packages/_pytest/pathlib.py:587: in import_path
+    importlib.import_module(module_name)
+/nix/store/clx0mcir7qw8zk36zbr4jra789g3knf6-python3-3.11.10/lib/python3.11/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+<frozen importlib._bootstrap>:1204: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1176: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1147: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:690: in _load_unlocked
+    ???
+.pythonlibs/lib/python3.11/site-packages/_pytest/assertion/rewrite.py:175: in exec_module
+    source_stat, co = _rewrite_test(fn, self.config)
+.pythonlibs/lib/python3.11/site-packages/_pytest/assertion/rewrite.py:355: in _rewrite_test
+    tree = ast.parse(source, filename=strfn)
+/nix/store/clx0mcir7qw8zk36zbr4jra789g3knf6-python3-3.11.10/lib/python3.11/ast.py:50: in parse
+    return compile(source, filename, mode, flags,
+E     File "/home/runner/workspace/tests/test_interfaces.py", line 65
+E       assert project_manager is None or isinstance(project_manager, str)
+E   IndentationError: unexpected indent
 =============================== warnings summary ===============================
 .pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345
   /home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345: UserWarning: Valid config keys have changed in V2:
@@ -91,6 +41,6 @@ DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to respo
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 =========================== short test summary info ============================
-FAILED tests/test_file_upload.py::test_xls_analyzer_missing_columns - Asserti...
-FAILED tests/test_interfaces.py::test_project_interface - AssertionError: ass...
-============= 2 failed, 1 passed, 6 deselected, 1 warning in 2.16s =============
+ERROR tests/test_interfaces.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+================== 6 deselected, 1 warning, 1 error in 0.34s ===================
