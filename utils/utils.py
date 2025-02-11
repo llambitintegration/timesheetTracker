@@ -27,10 +27,10 @@ def clean_string_value(value, field_type=None):
 def parse_date(date_value) -> datetime.date:
     """Parse and validate date values."""
     if pd.isna(date_value) or date_value == '':
-        return datetime.now().date()
+        return datetime.now().date()  # Correct returned value type
     try:
         if isinstance(date_value, datetime):
-            return date_value.date()
+            return date_value.date()  # Correct usage of .date() method
         elif isinstance(date_value, str):
             for fmt in ['%m/%d/%y', '%Y-%m-%d', '%m/%d/%Y', '%d-%m-%Y', '%Y/%m/%d']:
                 try:
@@ -79,7 +79,6 @@ def parse_raw_csv(file) -> Optional[pd.DataFrame]:
                 encoding='utf-8',
                 sep='\t',  # Use tab delimiter
                 quoting=3,  # QUOTE_NONE - disable special handling of quote chars
-                quotechar=None,  # No quote character
                 engine='python',  # Use python engine for better error handling
                 on_bad_lines='warn'  # Warn about problematic lines instead of failing
             )
