@@ -3,8 +3,6 @@ import traceback
 from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, Query, Path, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from starlette.middleware.base import BaseHTTPMiddleware
-from starlette.types import ASGIApp
 from sqlalchemy import join, text, inspect, func
 from sqlalchemy.orm import Session
 from sqlalchemy.sql.schema import MetaData
@@ -46,10 +44,10 @@ async def lifespan(app: FastAPI):
         # Log CORS configuration
         logger.info("=== CORS Configuration ===")
         logger.info(f"Allowed Origins: '*'")
-        logger.info(f"Allowed Methods: 'GET,POST,PUT,DELETE,OPTIONS,PATCH'")
+        logger.info(f"Allowed Methods: 'GET, POST, PUT, DELETE, OPTIONS, PATCH'")
         logger.info(f"Allow Credentials: False")
         logger.info(f"Allowed Headers: '*'")
-        logger.info(f"Expose Headers: 'X-Total-Count', 'X-Correlation-ID'")
+        logger.info(f"Expose Headers: 'X-Total-Count, X-Correlation-ID'")
 
     except Exception as e:
         logger.error(f"Error during startup: {str(e)}")
@@ -60,34 +58,13 @@ async def lifespan(app: FastAPI):
 
     logger.info("Shutting down FastAPI server")
 
-class CORSMiddlewareWithDefaults(BaseHTTPMiddleware):
-    """Middleware to ensure CORS headers are present on all responses"""
-
-    def __init__(self, app: ASGIApp):
-        super().__init__(app)
-
-    async def dispatch(self, request, call_next):
-        response = await call_next(request)
-
-        # Add CORS headers to all responses
-        response.headers["Access-Control-Allow-Origin"] = "*"
-        response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS,PATCH"
-        response.headers["Access-Control-Allow-Headers"] = "*"
-        response.headers["Access-Control-Allow-Credentials"] = "false"
-        response.headers["Access-Control-Expose-Headers"] = "X-Total-Count,X-Correlation-ID"
-
-        return response
-
-# Create FastAPI app and add middleware
+# Create FastAPI app
 app = FastAPI(
     title="Timesheet Management API",
     lifespan=lifespan
 )
 
-# Add custom CORS middleware first
-app.add_middleware(CORSMiddlewareWithDefaults)
-
-# Add standard CORS middleware
+# CORS middleware configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -102,20 +79,34 @@ app.add_middleware(
 app.middleware("http")(logging_middleware)
 app.middleware("http")(error_logging_middleware)
 
-
 # Options handler for preflight requests
 @app.options("/{path:path}")
 async def options_handler(request: Request):
     """Handle OPTIONS requests explicitly"""
-    response = JSONResponse(content={})
+    logger.info(structured_log(
+        "CORS preflight request",
+        correlation_id=Logger().get_correlation_id(),
+        method=request.method,
+        url=str(request.url),
+        origin=request.headers.get("Origin"),
+        access_control_request_method=request.headers.get("Access-Control-Request-Method"),
+        access_control_request_headers=request.headers.get("Access-Control-Request-Headers"),
+        query_params=dict(request.query_params),
+        path=request.url.path
+    ))
 
-    # Set CORS headers explicitly for OPTIONS requests
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS,PATCH"
-    response.headers["Access-Control-Allow-Headers"] = "*"
-    response.headers["Access-Control-Allow-Credentials"] = "false"
-    response.headers["Access-Control-Expose-Headers"] = "X-Total-Count,X-Correlation-ID"
-    response.headers["Access-Control-Max-Age"] = "3600"
+    # Get the requested headers from the preflight request
+    requested_headers = request.headers.get("Access-Control-Request-Headers", "*")
+
+    response = JSONResponse(content={})
+    response.headers.update({
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH",
+        "Access-Control-Allow-Headers": requested_headers,
+        "Access-Control-Allow-Credentials": "false",
+        "Access-Control-Expose-Headers": "X-Total-Count, X-Correlation-ID",
+        "Access-Control-Max-Age": "3600"
+    })
 
     return response
 
@@ -136,12 +127,7 @@ async def health_check(request: Request):
         "version": "1.0.0"
     })
 
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS,PATCH"
-    response.headers["Access-Control-Allow-Headers"] = "*"
-    response.headers["Access-Control-Allow-Credentials"] = "false"
-    response.headers["Access-Control-Expose-Headers"] = "X-Total-Count,X-Correlation-ID"
-
+    # No need to manually set CORS headers here - the middleware will handle it
     return response
 
 # Time Entries CRUD
