@@ -41,7 +41,8 @@ class ProjectService:
 
             # Convert to dictionary for database operation
             customer_dict = customer_data.model_dump()
-            self.customer_repo.create(self.db, customer_dict)
+            new_customer = self.customer_repo.create(self.db, customer_dict)
+            self.db.refresh(new_customer)
             logger.info(f"Created new customer: {normalized_name}")
             return normalized_name
 
@@ -75,10 +76,10 @@ class ProjectService:
                 logger.error(f"Failed to ensure customer exists: {project.customer}")
                 raise ValueError(f"Could not create or verify customer: {project.customer}")
 
-            # Set default project manager if not provided
-            if not project.project_manager:
-                project.project_manager = '-'
-                logger.debug("No project manager specified, using default '-'")
+            # Validate project manager if not default
+            if project.project_manager != '-' and not self._ensure_project_manager_exists(project.project_manager):
+                logger.error(f"Project manager not found: {project.project_manager}")
+                raise ValueError(f"Project manager not found: {project.project_manager}")
 
             # Check if project already exists
             existing_project = self.project_repo.get_by_project_id(self.db, project.project_id)

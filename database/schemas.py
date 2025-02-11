@@ -171,7 +171,7 @@ class ProjectCreate(BaseModel):
     name: str
     description: Optional[str] = None
     customer: str = Field(..., description="Customer name, required for all projects")
-    project_manager: str = Field(..., description="Project manager name, required for all projects")
+    project_manager: str = Field(default='-', description="Project manager name, defaults to '-'")
     status: str = "active"
 
     model_config = ConfigDict(from_attributes=True)
