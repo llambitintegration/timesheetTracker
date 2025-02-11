@@ -16,7 +16,7 @@ DEFAULT_PROJECT_MANAGER = "Unassigned"
 def normalize_customer_name(name: Optional[str]) -> str:
     """Normalize customer name for database lookup.
     Returns DEFAULT_CUSTOMER if name is invalid or not found."""
-    if not name or str(name).strip() in ['-', '', 'None', 'null', 'NA']:
+    if name is None or str(name).strip().lower() in ['', 'none', 'null', 'na', '-']:
         logger.debug(f"Converting empty/invalid customer name to {DEFAULT_CUSTOMER}")
         return DEFAULT_CUSTOMER
     return str(name).strip()

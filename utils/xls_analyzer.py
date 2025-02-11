@@ -47,9 +47,13 @@ class XLSAnalyzer:
             # Convert Week Number to numeric, replacing non-numeric with 0
             df['Week Number'] = pd.to_numeric(df['Week Number'], errors='coerce').fillna(0).astype('Int64')
             
+            # Convert '-' to None first
+            df = df.replace({'-': None})
+            
+            # Then fill remaining NaN values
             df = df.fillna({
-                'Customer': '-',
-                'Project': '-',
+                'Customer': None,
+                'Project': None,
                 'Task Description': '',
                 'Month': '',
                 'Category': 'Other',
