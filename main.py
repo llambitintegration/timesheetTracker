@@ -33,28 +33,28 @@ logger = Logger().get_logger()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Lifespan context manager for startup/shutdown events"""
-    logger.info("Starting FastAPI server")
-    logger.info("Verifying database connection on startup")
     try:
+        logger.info("Starting FastAPI server")
+        logger.info("Verifying database connection on startup")
         if not verify_database():
             logger.warning("Database verification failed - schema may need initialization")
 
         # Log CORS configuration
         logger.info("=== CORS Configuration ===")
-        logger.info(f"Allowed Origins: '*'")
-        logger.info(f"Allowed Methods: 'GET, POST, PUT, DELETE, OPTIONS, PATCH'")
-        logger.info(f"Allow Credentials: False")
-        logger.info(f"Allowed Headers: '*'")
-        logger.info(f"Expose Headers: 'X-Total-Count, X-Correlation-ID'")
+        logger.info("Allowed Origins: '*'")
+        logger.info("Allowed Methods: 'GET, POST, PUT, DELETE, OPTIONS, PATCH'")
+        logger.info("Allow Credentials: False")
+        logger.info("Allowed Headers: '*'")
+        logger.info("Expose Headers: 'X-Total-Count, X-Correlation-ID'")
+
+        yield
 
     except Exception as e:
         logger.error(f"Error during startup: {str(e)}")
         logger.exception("Startup error details:")
         raise
-
-    yield
-
-    logger.info("Shutting down FastAPI server")
+    finally:
+        logger.info("Shutting down FastAPI server")
 
 # Create FastAPI app
 app = FastAPI(
@@ -62,17 +62,17 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# CORS middleware configuration with specific file upload headers
+# CORS middleware configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=False,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allow_headers=["*"],
-    expose_headers=["X-Total-Count", "X-Correlation-ID", "Content-Length", "Content-Type"]
+    expose_headers=["X-Total-Count", "X-Correlation-ID"]
 )
 
-# Add other middleware after CORS
+# Add logging middleware
 app.middleware("http")(logging_middleware)
 app.middleware("http")(error_logging_middleware)
 
@@ -212,7 +212,11 @@ def create_project_manager(manager: schemas.ProjectManagerCreate, db: Session = 
     return service.create_project_manager(manager)
 
 @app.put("/project-managers/{email}", response_model=schemas.ProjectManager)
-def update_project_manager(email: str, manager: schemas.ProjectManagerUpdate, db: Session = Depends(get_db)):
+def update_project_manager(
+    email: str,
+    manager: schemas.ProjectManagerUpdate,
+    db: Session = Depends(get_db)
+):
     """Update an existing project manager"""
     service = ProjectManagerService(db)
     return service.update_project_manager(email, manager)
@@ -221,6 +225,8 @@ def update_project_manager(email: str, manager: schemas.ProjectManagerUpdate, db
 def delete_project_manager(email: str, db: Session = Depends(get_db)):
     """Delete a project manager"""
     service = ProjectManagerService(db)
+    if not email:
+        raise HTTPException(status_code=400, detail="Project manager email is required")
     return service.delete_project_manager(email)
 
 @app.get("/customers", response_model=List[schemas.Customer])
@@ -236,7 +242,11 @@ def create_customer(customer: schemas.CustomerCreate, db: Session = Depends(get_
     return service.create_customer(customer)
 
 @app.put("/customers/{name}", response_model=schemas.Customer)
-def update_customer(name: str, customer: schemas.CustomerUpdate, db: Session = Depends(get_db)):
+def update_customer(
+    name: str,
+    customer: schemas.CustomerUpdate,
+    db: Session = Depends(get_db)
+):
     """Update an existing customer"""
     service = CustomerService(db)
     return service.update_customer(name, customer)
@@ -245,6 +255,8 @@ def update_customer(name: str, customer: schemas.CustomerUpdate, db: Session = D
 def delete_customer(name: str, db: Session = Depends(get_db)):
     """Delete a customer"""
     service = CustomerService(db)
+    if not name:
+        raise HTTPException(status_code=400, detail="Customer name is required")
     return service.delete_customer(name)
 
 @app.post("/time-entries/upload/")
@@ -255,12 +267,14 @@ async def upload_timesheet(
     """Upload and process timesheet file"""
     logger.info(f"Processing timesheet upload: {file.filename}")
 
-    # Check file extension
-    allowed_extensions = ['.txt', '.csv', '.xlsx']
-    file_extension = os.path.splitext(file.filename)[1].lower()
+    if not file.filename:
+        raise HTTPException(status_code=400, detail="No file provided")
+
+    # Check file extension with proper type handling
+    allowed_extensions = {'.txt', '.csv', '.xlsx'}
+    file_extension = os.path.splitext(str(file.filename))[1].lower()
 
     if file_extension not in allowed_extensions:
-        logger.error(f"Unsupported file format: {file.filename}")
         raise HTTPException(
             status_code=400,
             detail=f"Unsupported file format. Please upload a file with one of these extensions: {', '.join(allowed_extensions)}"
@@ -270,14 +284,13 @@ async def upload_timesheet(
         service = TimesheetService(db)
         result = await service.upload_timesheet(file)
 
-        # result already contains serialized entries and validation errors
         return JSONResponse(
             status_code=201,
             content=result
         )
     except HTTPException as e:
         logger.error(f"Error processing timesheet: {str(e)}")
-        raise e
+        raise
     except Exception as e:
         logger.error(f"Error processing timesheet: {str(e)}")
         raise HTTPException(status_code=400, detail=str(e))
@@ -385,17 +398,17 @@ if __name__ == "__main__":
         logger.info(f"Attempting to start server on {host}:{port}")
 
         config = uvicorn.Config(
-            app=app,
+            app="main:app",
             host=host,
             port=port,
             log_level="info",
             access_log=True,
             reload=True,
             workers=1,
-            reload_dirs=[".", "database", "models", "services", "utils"],
             timeout_keep_alive=30,
             proxy_headers=True,
-            forwarded_allow_ips="*"
+            forwarded_allow_ips="*",
+            reload_dirs=[".", "database", "models", "services", "utils"]
         )
         server = uvicorn.Server(config)
         server.run()

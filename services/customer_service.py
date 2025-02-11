@@ -4,6 +4,7 @@ from database.customer_repository import CustomerRepository
 from database import schemas
 from models.customerModel import Customer
 from utils.logger import Logger
+from fastapi import HTTPException
 
 logger = Logger().get_logger()
 
@@ -66,7 +67,8 @@ class CustomerService:
             # Exclude ID and timestamps from update data
             update_data = customer_update.model_dump(exclude={'id', 'created_at', 'updated_at'}, exclude_unset=True)
             for key, value in update_data.items():
-                setattr(existing_customer, key, value)
+                if value is not None:  # Only update non-None values
+                    setattr(existing_customer, key, value)
 
             updated_customer = self.customer_repo.update(self.db, existing_customer)
             logger.info(f"Successfully updated customer: {name}")
@@ -75,3 +77,18 @@ class CustomerService:
             logger.error(f"Error updating customer {name}: {str(e)}")
             self.db.rollback()
             raise
+
+    def delete_customer(self, name: str) -> bool:
+        """Delete a customer by name."""
+        logger.debug(f"Attempting to delete customer with name: {name}")
+        try:
+            success = self.customer_repo.delete(self.db, name)
+            if success:
+                logger.info(f"Successfully deleted customer: {name}")
+            else:
+                logger.warning(f"Customer not found for deletion: {name}")
+            return success
+        except Exception as e:
+            logger.error(f"Error deleting customer {name}: {str(e)}")
+            self.db.rollback()
+            raise HTTPException(status_code=500, detail=f"Error deleting customer: {str(e)}")

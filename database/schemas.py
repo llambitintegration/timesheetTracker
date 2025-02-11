@@ -14,6 +14,40 @@ class BaseSchema(BaseModel):
 
     model_config = ConfigDict(from_attributes=True)
 
+# Project Schemas
+class ProjectBase(BaseSchema):
+    project_id: str
+    name: str
+    description: Optional[str] = None
+    customer: str
+    project_manager: str
+    status: str = "active"
+
+class ProjectCreate(BaseModel):
+    """Schema for creating new projects"""
+    project_id: str
+    name: str
+    description: Optional[str] = None
+    customer: str
+    project_manager: str
+    status: str = "active"
+
+    model_config = ConfigDict(from_attributes=True)
+
+class ProjectUpdate(ProjectBase):
+    """Schema for updating projects"""
+    project_id: Optional[str] = None
+    name: Optional[str] = None
+    description: Optional[str] = None
+    customer: Optional[str] = None
+    project_manager: Optional[str] = None
+    status: Optional[str] = Field(None, pattern="^(active|inactive)$")
+
+    model_config = ConfigDict(from_attributes=True)
+
+class Project(ProjectBase):
+    model_config = ConfigDict(from_attributes=True, orm_mode=True)
+
 # Time Entry Schemas
 class TimeEntryBase(BaseSchema):
     """Base schema for time entries"""
@@ -125,39 +159,6 @@ class ProjectManagerUpdate(BaseSchema):
     email: Optional[str] = None
 
 class ProjectManager(ProjectManagerBase):
-    model_config = ConfigDict(from_attributes=True, orm_mode=True)
-
-# Project Schemas
-class ProjectBase(BaseSchema):
-    project_id: str
-    name: str
-    description: Optional[str] = None
-    customer: str
-    project_manager: str
-    status: str = "active"
-
-class ProjectCreate(BaseModel):
-    """Schema for creating new projects"""
-    project_id: str
-    name: str
-    description: Optional[str] = None
-    customer: str
-    project_manager: str
-    status: str = "active"
-
-    model_config = ConfigDict(from_attributes=True)
-
-class ProjectUpdate(BaseModel):
-    """Schema for updating projects"""
-    name: Optional[str] = None
-    description: Optional[str] = None
-    customer: Optional[str] = None
-    project_manager: Optional[str] = None
-    status: Optional[str] = Field(None, pattern="^(active|inactive)$")
-
-    model_config = ConfigDict(from_attributes=True)
-
-class Project(ProjectBase):
     model_config = ConfigDict(from_attributes=True, orm_mode=True)
 
 class ReportEntry(BaseModel):

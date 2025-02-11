@@ -4,6 +4,7 @@ from database.pm_repository import ProjectManagerRepository
 from database import schemas
 from models.projectManagerModel import ProjectManager
 from utils.logger import Logger
+from fastapi import HTTPException
 
 logger = Logger().get_logger()
 
@@ -63,15 +64,33 @@ class ProjectManagerService:
             return None
 
         try:
-            # Exclude ID and timestamps from update data
             update_data = pm_update.model_dump(exclude={'id', 'created_at', 'updated_at'}, exclude_unset=True)
-            for key, value in update_data.items():
-                setattr(existing_pm, key, value)
-
             updated_pm = self.pm_repo.update(self.db, existing_pm)
+
+            for key, value in update_data.items():
+                if value is not None:  # Only update non-None values
+                    setattr(existing_pm, key, value)
+
+            self.db.commit()
+            self.db.refresh(existing_pm)
             logger.info(f"Successfully updated project manager: {email}")
-            return updated_pm
+            return existing_pm
         except Exception as e:
             logger.error(f"Error updating project manager {email}: {str(e)}")
             self.db.rollback()
             raise
+
+    def delete_project_manager(self, email: str) -> bool:
+        """Delete a project manager by email."""
+        logger.debug(f"Attempting to delete project manager with email: {email}")
+        try:
+            success = self.pm_repo.delete(self.db, email)
+            if success:
+                logger.info(f"Successfully deleted project manager: {email}")
+            else:
+                logger.warning(f"Project manager not found for deletion: {email}")
+            return success
+        except Exception as e:
+            logger.error(f"Error deleting project manager {email}: {str(e)}")
+            self.db.rollback()
+            raise HTTPException(status_code=500, detail=f"Error deleting project manager: {str(e)}")
