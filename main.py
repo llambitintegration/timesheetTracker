@@ -128,6 +128,11 @@ async def cors_headers_middleware(request: Request, call_next):
     return response
 
 
+@app.get("/")
+async def root():
+    """Root endpoint"""
+    return {"message": "Welcome to the Timesheet Management API"}
+
 @app.get("/health")
 async def health_check(request: Request):
     """Health check endpoint"""
@@ -244,7 +249,7 @@ def delete_customer(name: str, db: Session = Depends(get_db)):
     service = CustomerService(db)
     return service.delete_customer(name)
 
-@app.post("/timesheet/upload/", response_model=List[schemas.TimeEntry])
+@app.post("/time-entries/upload/", response_model=List[schemas.TimeEntry])
 async def upload_timesheet(
     file: UploadFile = File(...),
     db: Session = Depends(get_db)

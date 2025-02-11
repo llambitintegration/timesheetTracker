@@ -15,12 +15,14 @@ def clean_numeric_value(value, default=0):
     except (ValueError, TypeError):
         return default
 
-def clean_string_value(value, default=""):
-    """Clean and validate string values"""
+def clean_string_value(value, field_type=None):
+    """Clean and standardize string values"""
     if pd.isna(value) or value is None or str(value).strip() in ['', '-', 'None', 'null', 'NA']:
-        return default
-
-    return str(value).strip()
+        return ""
+    value = str(value).strip()
+    if field_type == "category":
+        return value.title()
+    return value
 
 def parse_date(date_value) -> datetime.date:
     """Parse and validate date values."""
@@ -105,6 +107,12 @@ def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     logger.debug(f"Cleaned DataFrame has {len(df)} rows")
     return df
 
+# Added import for schemas -  assuming a schemas module exists.  Adjust as needed.
+import schemas # Placeholder - Replace with actual import path
+
+DEFAULT_CUSTOMER = "Default Customer" # Added default values
+DEFAULT_PROJECT = "Default Project"
+
 def parse_csv(file) -> List:
     """Parse CSV file with enhanced validation and normalization."""
     logger.info("Starting CSV parsing process")
@@ -164,11 +172,11 @@ def parse_csv(file) -> List:
             entry = schemas.TimeEntryCreate(
                 week_number=validate_week_number(row.get('Week Number')),
                 month=validate_month(row.get('Month')),
-                category=clean_string_value(row.get('Category'), "Other"),
-                subcategory=clean_string_value(row.get('Subcategory'), "General"),
+                category=clean_string_value(row.get('Category'), "category"), # Added field_type
+                subcategory=clean_string_value(row.get('Subcategory'), "category"), # Added field_type
                 customer=customer,
                 project=project,
-                task_description=clean_string_value(row.get('Task Description'), ""),
+                task_description=clean_string_value(row.get('Task Description')),
                 hours=hours,
                 date=parse_date(row.get('Date'))
             )

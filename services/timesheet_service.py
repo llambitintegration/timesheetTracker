@@ -1,4 +1,3 @@
-
 from fastapi import HTTPException, UploadFile
 from sqlalchemy.orm import Session
 from typing import List
@@ -12,6 +11,11 @@ logger = Logger().get_logger()
 class TimesheetService:
     def __init__(self, db: Session):
         self.db = db
+        self.repository = TimeEntryRepository()
+
+    def create_entry(self, entry: schemas.TimeEntryCreate) -> TimeEntry:
+        """Create a new time entry"""
+        return self.repository.create(self.db, entry)
 
     async def upload_timesheet(self, file: UploadFile) -> List[schemas.TimeEntry]:
         """Upload and process timesheet file"""
