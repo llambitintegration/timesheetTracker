@@ -1,0 +1,85 @@
+python -m pytest tests/test_cors.py -v -s
+{"timestamp": "2025-02-11T01:03:09.147142", "level": "INFO", "correlation_id": "undefined", "logger": "TimesheetTracker", "message": "Attempting to connect to database at: ep-orange-scene-a49hsza0.us-east-1.aws.neon.tech/neondb?sslmode=require", "context": {}}
+{"timestamp": "2025-02-11T01:03:09.241275", "level": "INFO", "correlation_id": "undefined", "logger": "TimesheetTracker", "message": "Database engine created successfully", "context": {}}
+/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pytest_asyncio/plugin.py:207: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+============================================================================= test session starts =============================================================================
+platform linux -- Python 3.11.10, pytest-8.3.4, pluggy-1.5.0 -- /home/runner/workspace/.pythonlibs/bin/python
+cachedir: .pytest_cache
+rootdir: /home/runner/workspace
+configfile: pyproject.toml
+plugins: anyio-4.7.0, asyncio-0.25.2, cov-6.0.0
+asyncio: mode=Mode.STRICT, asyncio_default_fixture_loop_scope=None
+collected 6 items                                                                                                                                                             
+
+tests/test_cors.py::test_cors_headers_on_health_endpoint {"timestamp": "2025-02-11T01:03:09.416018", "level": "INFO", "correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "method": "GET", "url": "http://testserver/health", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "origin": "http://localhost:3000", "access-control-request-method": "GET"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/health"}}
+{"timestamp": "2025-02-11T01:03:09.416944", "level": "INFO", "correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "logger": "TimesheetTracker", "message": "Health check accessed", "context": {"correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "method": "GET", "path": "/health"}}
+{"timestamp": "2025-02-11T01:03:09.417522", "level": "INFO", "correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "logger": "TimesheetTracker", "message": "Request completed successfully", "context": {"correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "status_code": 200, "process_time_ms": "1.59", "response_headers": {"content-length": "79", "content-type": "application/json", "access-control-allow-origin": "*", "access-control-expose-headers": "X-Total-Count, X-Correlation-ID"}, "content_type": "application/json", "method": "GET", "path": "/health"}}
+{"timestamp": "2025-02-11T01:03:09.418136", "level": "DEBUG", "correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": null, "method": "GET", "path": "/health", "status_code": 200}}
+PASSED
+tests/test_cors.py::test_cors_preflight {"timestamp": "2025-02-11T01:03:09.422141", "level": "INFO", "correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "logger": "TimesheetTracker", "message": "Processing CORS preflight request", "context": {"correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "method": "OPTIONS", "path": "/time-entries", "origin": "http://localhost:3000", "request_method": "POST", "request_headers": "content-type"}}
+PASSED
+tests/test_cors.py::test_cors_credentials {"timestamp": "2025-02-11T01:03:09.425666", "level": "INFO", "correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "method": "GET", "url": "http://testserver/health", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "origin": "http://localhost:3000"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/health"}}
+{"timestamp": "2025-02-11T01:03:09.426351", "level": "INFO", "correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "logger": "TimesheetTracker", "message": "Health check accessed", "context": {"correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "method": "GET", "path": "/health"}}
+{"timestamp": "2025-02-11T01:03:09.426883", "level": "INFO", "correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "logger": "TimesheetTracker", "message": "Request completed successfully", "context": {"correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "status_code": 200, "process_time_ms": "1.32", "response_headers": {"content-length": "79", "content-type": "application/json", "access-control-allow-origin": "*", "access-control-expose-headers": "X-Total-Count, X-Correlation-ID"}, "content_type": "application/json", "method": "GET", "path": "/health"}}
+{"timestamp": "2025-02-11T01:03:09.427505", "level": "DEBUG", "correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "method": "GET", "path": "/health", "status_code": 200}}
+PASSED
+tests/test_cors.py::test_cors_exposed_headers {"timestamp": "2025-02-11T01:03:09.431503", "level": "INFO", "correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "method": "GET", "url": "http://testserver/health", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "origin": "http://localhost:3000"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/health"}}
+{"timestamp": "2025-02-11T01:03:09.432163", "level": "INFO", "correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "logger": "TimesheetTracker", "message": "Health check accessed", "context": {"correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "method": "GET", "path": "/health"}}
+{"timestamp": "2025-02-11T01:03:09.432734", "level": "INFO", "correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "logger": "TimesheetTracker", "message": "Request completed successfully", "context": {"correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "status_code": 200, "process_time_ms": "1.47", "response_headers": {"content-length": "79", "content-type": "application/json", "access-control-allow-origin": "*", "access-control-expose-headers": "X-Total-Count, X-Correlation-ID"}, "content_type": "application/json", "method": "GET", "path": "/health"}}
+{"timestamp": "2025-02-11T01:03:09.433232", "level": "DEBUG", "correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "method": "GET", "path": "/health", "status_code": 200}}
+PASSED
+tests/test_cors.py::test_cors_on_time_entries_options {"timestamp": "2025-02-11T01:03:09.436397", "level": "INFO", "correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "logger": "TimesheetTracker", "message": "Processing CORS preflight request", "context": {"correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "method": "OPTIONS", "path": "/time-entries", "origin": "http://localhost:3000", "request_method": "POST", "request_headers": "content-type"}}
+FAILED
+tests/test_cors.py::test_cors_on_time_entries {"timestamp": "2025-02-11T01:03:09.507438", "level": "INFO", "correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "method": "GET", "url": "http://testserver/time-entries", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "origin": "http://localhost:3000"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries"}}
+{"timestamp": "2025-02-11T01:03:09.508563", "level": "DEBUG", "correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "logger": "TimesheetTracker", "message": "Database session created", "context": {}}
+{"timestamp": "2025-02-11T01:03:09.509418", "level": "DEBUG", "correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "logger": "TimesheetTracker", "message": "ProjectRepository initialized", "context": {}}
+{"timestamp": "2025-02-11T01:03:09.509826", "level": "DEBUG", "correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "logger": "TimesheetTracker", "message": "TimeEntryService initialized with database session", "context": {}}
+{"timestamp": "2025-02-11T01:03:09.510063", "level": "DEBUG", "correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "logger": "TimesheetTracker", "message": "Retrieving time entries with filters: project_id=None, customer=None", "context": {}}
+{"timestamp": "2025-02-11T01:03:09.514300", "level": "DEBUG", "correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "logger": "TimesheetTracker", "message": "Applying pagination: skip=0, limit=100", "context": {}}
+{"timestamp": "2025-02-11T01:03:09.887679", "level": "INFO", "correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "logger": "TimesheetTracker", "message": "Retrieved 0 time entries", "context": {}}
+{"timestamp": "2025-02-11T01:03:09.908998", "level": "DEBUG", "correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "logger": "TimesheetTracker", "message": "Database session closed", "context": {}}
+{"timestamp": "2025-02-11T01:03:09.910418", "level": "INFO", "correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "logger": "TimesheetTracker", "message": "Request completed successfully", "context": {"correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "status_code": 200, "process_time_ms": "403.15", "response_headers": {"content-length": "2", "content-type": "application/json", "access-control-allow-origin": "*", "access-control-expose-headers": "X-Total-Count, X-Correlation-ID"}, "content_type": "application/json", "method": "GET", "path": "/time-entries"}}
+{"timestamp": "2025-02-11T01:03:09.910872", "level": "DEBUG", "correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "method": "GET", "path": "/time-entries", "status_code": 200}}
+PASSED
+
+================================================================================== FAILURES ===================================================================================
+______________________________________________________________________ test_cors_on_time_entries_options ______________________________________________________________________
+
+    def test_cors_on_time_entries_options():
+        """Test CORS headers on time entries OPTIONS request"""
+        headers = {
+            "Origin": "http://localhost:3000",
+            "Access-Control-Request-Method": "POST",
+            "Access-Control-Request-Headers": "content-type",
+        }
+        response = client.options("/time-entries", headers=headers)
+        assert response.status_code == 200
+        assert response.headers["access-control-allow-origin"] == "*"
+        assert "POST" in response.headers["access-control-allow-methods"]
+        assert "GET" in response.headers["access-control-allow-methods"]
+        assert response.headers["access-control-allow-headers"] == "*"
+        assert response.headers["access-control-allow-credentials"] == "false"
+        assert "X-Total-Count" in response.headers["access-control-expose-headers"]
+        assert "X-Correlation-ID" in response.headers["access-control-expose-headers"]
+    
+    
+>       assert "X-Correlation-ID" in exposed_headers
+E       NameError: name 'exposed_headers' is not defined
+
+tests/test_cors.py:65: NameError
+------------------------------------------------------------------------------ Captured log call ------------------------------------------------------------------------------
+INFO     TimesheetTracker:logger.py:29 {"message": "Processing CORS preflight request", "timestamp": "2025-02-11T01:03:09.436524", "context": {"correlation_id": "7ca0fd1b-d675-426f-a25c-b1b75c36d1e9", "method": "OPTIONS", "path": "/time-entries", "origin": "http://localhost:3000", "request_method": "POST", "request_headers": "content-type"}}
+============================================================================== warnings summary ===============================================================================
+.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345
+  /home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345: UserWarning: Valid config keys have changed in V2:
+  * 'orm_mode' has been renamed to 'from_attributes'
+    warnings.warn(message, UserWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================================================================== short test summary info ===========================================================================
+FAILED tests/test_cors.py::test_cors_on_time_entries_options - NameError: name 'exposed_headers' is not defined
+=================================================================== 1 failed, 5 passed, 1 warning in 0.56s ====================================================================
+~/workspace$ 

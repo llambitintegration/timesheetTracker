@@ -58,10 +58,10 @@ def test_cors_on_time_entries_options():
     assert "GET" in response.headers["access-control-allow-methods"]
     assert response.headers["access-control-allow-headers"] == "*"
     assert response.headers["access-control-allow-credentials"] == "false"
-    assert "X-Total-Count" in response.headers["access-control-expose-headers"]
-    assert "X-Correlation-ID" in response.headers["access-control-expose-headers"]
 
-
+    # Extract and verify exposed headers
+    exposed_headers = response.headers["access-control-expose-headers"].split(",")
+    assert "X-Total-Count" in exposed_headers
     assert "X-Correlation-ID" in exposed_headers
 
 def test_cors_on_time_entries():
