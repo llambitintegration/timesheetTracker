@@ -37,9 +37,9 @@ class TimesheetService:
             "project": entry.project,
             "task_description": entry.task_description,
             "hours": float(entry.hours) if entry.hours is not None else None,
-            "date": entry.date.isoformat() if entry.date else None,
-            "created_at": entry.created_at.isoformat() if entry.created_at else None,
-            "updated_at": entry.updated_at.isoformat() if entry.updated_at else None
+            "date": entry.date.strftime("%Y-%m-%d") if entry.date else None,
+            "created_at": entry.created_at.strftime("%Y-%m-%dT%H:%M:%S") if entry.created_at else None,
+            "updated_at": entry.updated_at.strftime("%Y-%m-%dT%H:%M:%S") if entry.updated_at else None
         }
 
     def _bulk_create_entries(self, entries: List[schemas.TimeEntryCreate]) -> List[Dict[str, Any]]:
