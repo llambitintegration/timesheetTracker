@@ -258,3 +258,23 @@ def test_create_time_entry_auto_date_calculations(db_session):
     assert result.month == "February"
     # Original date should be preserved
     assert result.date == date(2024, 2, 1)
+
+def test_time_entry_with_invalid_project(db_session, setup_test_data):
+    """Test that creating a time entry with an invalid project falls back to default"""
+    service = TimeEntryService(db_session)
+    entry = TimeEntryCreate(
+        category="Development",
+        subcategory="Coding",
+        customer="ECOLAB",  # Using existing customer
+        project="Wichita, KS",  # Invalid project name that's causing the error
+        task_description="Testing invalid project handling",
+        hours=8.0,
+        date=date(2024, 1, 1)
+    )
+
+    # This should not raise an exception, but fall back to default project
+    result = service.create_time_entry(entry)
+    assert result is not None
+    assert result.project == DEFAULT_PROJECT  # Should fall back to default project
+    assert result.hours == 8.0
+    assert result.date == date(2024, 1, 1)
