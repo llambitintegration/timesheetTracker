@@ -71,46 +71,47 @@ app.add_middleware(
     allow_credentials=False,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allow_headers=["*"],
-    expose_headers=["X-Total-Count", "X-Correlation-ID"],
-    max_age=3600
+    expose_headers=["X-Total-Count", "X-Correlation-ID"]
 )
 
-# Add logging middleware
+# Add other middleware after CORS
 app.middleware("http")(logging_middleware)
 app.middleware("http")(error_logging_middleware)
 
-# Options handler for preflight requests
-@app.options("/{path:path}")
-async def options_handler(request: Request):
-    """Handle OPTIONS requests explicitly"""
-    logger.info(structured_log(
-        "CORS preflight request",
-        correlation_id=Logger().get_correlation_id(),
-        method=request.method,
-        url=str(request.url),
-        origin=request.headers.get("Origin"),
-        access_control_request_method=request.headers.get("Access-Control-Request-Method"),
-        access_control_request_headers=request.headers.get("Access-Control-Request-Headers"),
-        query_params=dict(request.query_params),
-        path=request.url.path
-    ))
+@app.middleware("http")
+async def cors_headers_middleware(request: Request, call_next):
+    """Ensure consistent CORS headers across all responses"""
+    # Handle preflight requests specially
+    if request.method == "OPTIONS":
+        requested_headers = request.headers.get("Access-Control-Request-Headers")
+        # If specific headers are requested, reflect them back
+        allow_headers = requested_headers if requested_headers else "*"
 
-    # Get the requested headers from the preflight request
-    requested_headers = request.headers.get("Access-Control-Request-Headers", "*")
+        return JSONResponse(
+            content={},
+            headers={
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH",
+                "Access-Control-Allow-Headers": allow_headers,
+                "Access-Control-Allow-Credentials": "false",
+                "Access-Control-Max-Age": "3600",
+                "Access-Control-Expose-Headers": "X-Total-Count, X-Correlation-ID"
+            }
+        )
 
-    response = JSONResponse(content={})
-    response.headers.update({
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH",
-        "Access-Control-Allow-Headers": requested_headers,
-        "Access-Control-Allow-Credentials": "false",
-        "Access-Control-Expose-Headers": "X-Total-Count, X-Correlation-ID",
-        "Access-Control-Max-Age": "3600"
-    })
+    # Handle regular requests
+    response = await call_next(request)
+
+    # Ensure CORS headers are present and consistent
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS, PATCH"
+    response.headers["Access-Control-Allow-Headers"] = "*"
+    response.headers["Access-Control-Allow-Credentials"] = "false"
+    response.headers["Access-Control-Expose-Headers"] = "X-Total-Count, X-Correlation-ID"
 
     return response
 
-# Basic health check endpoint
+
 @app.get("/health")
 async def health_check(request: Request):
     """Health check endpoint"""
@@ -121,16 +122,12 @@ async def health_check(request: Request):
         path="/health"
     ))
 
-    response = JSONResponse(content={
+    return JSONResponse(content={
         "status": "healthy",
         "timestamp": datetime.utcnow().isoformat(),
         "version": "1.0.0"
     })
 
-    # No need to manually set CORS headers here - the middleware will handle it
-    return response
-
-# Time Entries CRUD
 @app.get("/time-entries", response_model=List[schemas.TimeEntry])
 def get_time_entries(
     skip: int = Query(default=0, ge=0),
@@ -159,7 +156,6 @@ def delete_time_entry(entry_id: int, db: Session = Depends(get_db)):
     service = TimesheetService(db)
     return service.delete_entry(entry_id)
 
-# Project CRUD
 @app.get("/projects", response_model=List[schemas.Project])
 def get_projects(db: Session = Depends(get_db)):
     """Get all projects"""
@@ -184,7 +180,6 @@ def delete_project(project_id: str, db: Session = Depends(get_db)):
     service = ProjectService(db)
     return service.delete_project(project_id)
 
-# Project Managers CRUD
 @app.get("/project-managers", response_model=List[schemas.ProjectManager])
 def get_project_managers(db: Session = Depends(get_db)):
     """Get all project managers"""
@@ -209,7 +204,6 @@ def delete_project_manager(email: str, db: Session = Depends(get_db)):
     service = ProjectManagerService(db)
     return service.delete_project_manager(email)
 
-# Customers CRUD
 @app.get("/customers", response_model=List[schemas.Customer])
 def get_customers(db: Session = Depends(get_db)):
     """Get all customers"""
@@ -234,7 +228,6 @@ def delete_customer(name: str, db: Session = Depends(get_db)):
     service = CustomerService(db)
     return service.delete_customer(name)
 
-# CSV Upload
 @app.post("/timesheet/upload/", response_model=List[schemas.TimeEntry])
 async def upload_timesheet(
     file: UploadFile = File(...),
@@ -244,7 +237,6 @@ async def upload_timesheet(
     service = TimesheetService(db)
     return await service.upload_timesheet(file)
 
-# Database Initialization
 @app.post("/init-db/")
 async def initialize_database(force: bool = False, db: Session = Depends(get_db)):
     """Initialize database and run migrations"""
@@ -252,7 +244,6 @@ async def initialize_database(force: bool = False, db: Session = Depends(get_db)
     service = DatabaseService(db)
     return await service.initialize_database(force)
 
-# Reports
 @app.get("/reports/weekly", response_model=schemas.WeeklyReport)
 def get_weekly_report(
     date: datetime = Query(default=None),
@@ -275,7 +266,6 @@ def get_monthly_report(
     return service.get_monthly_report(year, month, project_id)
 
 
-# Global exception handler
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
     """Global exception handler with structured logging"""
