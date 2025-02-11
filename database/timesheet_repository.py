@@ -6,6 +6,7 @@ from database import schemas
 from .base_repository import BaseRepository
 from utils.xls_analyzer import XLSAnalyzer
 from utils.logger import Logger
+import pandas as pd # Added import for pandas
 
 logger = Logger().get_logger()
 
@@ -68,35 +69,44 @@ class TimeEntryRepository(BaseRepository[TimeEntry]):
         entry = self.get_by_id(db, id)
         if entry:
             db.delete(entry)
+            db.commit()
+            return True
+        return False
 
     def import_excel(self, db: Session, file_contents: bytes) -> List[TimeEntry]:
         """Import time entries from Excel file."""
         try:
             analyzer = XLSAnalyzer()
             records = analyzer.read_excel(file_contents)
-            
+
             entries = []
             for record in records:
+                # Convert NaN values to None for string fields
+                customer = record.get('Customer')
+                customer = None if pd.isna(customer) else customer
+
+                project = record.get('Project')
+                project = None if pd.isna(project) else project
+
+                task_description = record.get('Task Description')
+                task_description = None if pd.isna(task_description) else task_description
+
                 entry_data = schemas.TimeEntryCreate(
-                    date=record['Date'].date(),
-                    week_number=int(record['Week Number']),
-                    month=record['Month'],
-                    category=record['Category'],
-                    subcategory=record['Subcategory'],
-                    customer=record['Customer'],
-                    project=record['Project'],
-                    task_description=record['Task Description'],
-                    hours=float(record.get('Hours', 0))
+                    date=record['Date'].date() if isinstance(record.get('Date'), pd.Timestamp) else record.get('Date'),
+                    week_number=int(record.get('Week Number',0)), #Handle potential NaN in Week Number
+                    month=record.get('Month', 'Unknown'), #Handle potential NaN in Month
+                    category=record.get('Category', 'Other'),
+                    subcategory=record.get('Subcategory', 'General'),
+                    customer=customer,
+                    project=project,
+                    task_description=task_description,
+                    hours=float(record.get('Hours', 0.0))
                 )
                 entries.append(entry_data)
 
             # Use bulk create for better performance
             return self.bulk_create(db, entries)
-            
+
         except Exception as e:
             logger.error(f"Error importing Excel data: {str(e)}")
             raise
-
-            db.commit()
-            return True
-        return False
