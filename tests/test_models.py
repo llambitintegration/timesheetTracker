@@ -123,10 +123,13 @@ def test_model_timestamps(db_session):
     assert customer.created_at is not None
     assert customer.updated_at is None  # Should be None until updated
 
-    import time
-    time.sleep(0.1)  # Ensure timestamp difference
+    # Ensure enough time passes between operations
+    import asyncio
+    asyncio.run(asyncio.sleep(1))
+    
     customer.industry = "Updated Industry"
     db_session.commit()
+    db_session.refresh(customer)  # Refresh to get the latest timestamp
 
-    assert customer.updated_at is not None  # Should be set after update
+    assert customer.updated_at is not None
     assert customer.updated_at > customer.created_at
