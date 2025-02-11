@@ -1,0 +1,75 @@
+python -m pytest tests/test_file_upload.py::test_dash_customer_handling -v -s
+{"timestamp": "2025-02-11T20:25:31.865470", "level": "INFO", "correlation_id": "undefined", "logger": "TimesheetTracker", "message": "Attempting to connect to database at: ep-orange-scene-a49hsza0.us-east-1.aws.neon.tech/neondb?sslmode=require", "context": {}}
+{"timestamp": "2025-02-11T20:25:31.980899", "level": "INFO", "correlation_id": "undefined", "logger": "TimesheetTracker", "message": "Database engine created successfully", "context": {}}
+/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pytest_asyncio/plugin.py:207: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the fixture caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to function scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+========================================================================================== test session starts ==========================================================================================
+platform linux -- Python 3.11.10, pytest-8.3.4, pluggy-1.5.0 -- /home/runner/workspace/.pythonlibs/bin/python
+cachedir: .pytest_cache
+rootdir: /home/runner/workspace
+configfile: pyproject.toml
+plugins: anyio-4.7.0, asyncio-0.25.2, cov-6.0.0
+asyncio: mode=Mode.STRICT, asyncio_default_fixture_loop_scope=None
+collected 1 item                                                                                                                                                                                        
+
+tests/test_file_upload.py::test_dash_customer_handling {"timestamp": "2025-02-11T20:25:32.628496", "level": "INFO", "correlation_id": "3cd3c797-a465-4340-8b93-c50f294d4ae4", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "3cd3c797-a465-4340-8b93-c50f294d4ae4", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5237", "content-type": "multipart/form-data; boundary=e0fd79c4a345d20d7007dff0fc73d243"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+{"timestamp": "2025-02-11T20:25:32.631015", "level": "INFO", "correlation_id": "3cd3c797-a465-4340-8b93-c50f294d4ae4", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
+{"timestamp": "2025-02-11T20:25:32.631302", "level": "DEBUG", "correlation_id": "3cd3c797-a465-4340-8b93-c50f294d4ae4", "logger": "TimesheetTracker", "message": "TimesheetService initialized", "context": {}}
+{"timestamp": "2025-02-11T20:25:32.631653", "level": "INFO", "correlation_id": "3cd3c797-a465-4340-8b93-c50f294d4ae4", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
+{"timestamp": "2025-02-11T20:25:32.648809", "level": "INFO", "correlation_id": "3cd3c797-a465-4340-8b93-c50f294d4ae4", "logger": "TimesheetTracker", "message": "Successfully parsed 1 records from Excel file", "context": {}}
+{"timestamp": "2025-02-11T20:25:32.674070", "level": "WARNING", "correlation_id": "3cd3c797-a465-4340-8b93-c50f294d4ae4", "logger": "TimesheetTracker", "message": "Request failed with status 201", "context": {"correlation_id": "3cd3c797-a465-4340-8b93-c50f294d4ae4", "status_code": 201, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "45.60", "response_headers": {"content-length": "317", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+{"timestamp": "2025-02-11T20:25:32.674796", "level": "DEBUG", "correlation_id": "3cd3c797-a465-4340-8b93-c50f294d4ae4", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 201}}
+FAILED
+
+=============================================================================================== FAILURES ================================================================================================
+______________________________________________________________________________________ test_dash_customer_handling ______________________________________________________________________________________
+
+client = <starlette.testclient.TestClient object at 0x7fbd3e76a0d0>
+setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7fbd3df3ee10>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
+tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-35/test_dash_customer_handling0')
+
+    def test_dash_customer_handling(client, setup_test_data, tmp_path):
+        """Test handling of dash (-) values in customer field"""
+        data = {
+            'Category': ['Development'],
+            'Customer': ['-'],
+            'Project': ['-'],
+            'Hours': [8.0],
+            'Date': ['2024-10-07']
+        }
+        excel_file = create_test_excel(tmp_path, data)
+    
+        with open(excel_file, "rb") as f:
+            response = client.post(
+                "/time-entries/upload/",
+                files={"file": ("test.xlsx", f, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
+            )
+    
+        assert response.status_code == 201
+        entries = response.json()["entries"]
+        assert len(entries) == 1
+>       assert entries[0]["customer"] is None
+E       AssertionError: assert 'Unassigned' is None
+
+tests/test_file_upload.py:96: AssertionError
+------------------------------------------------------------------------------------------- Captured log call -------------------------------------------------------------------------------------------
+INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T20:25:32.628676", "context": {"correlation_id": "3cd3c797-a465-4340-8b93-c50f294d4ae4", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5237", "content-type": "multipart/form-data; boundary=e0fd79c4a345d20d7007dff0fc73d243"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:25:32.631126", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "TimesheetService initialized", "timestamp": "2025-02-11T20:25:32.631404", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:25:32.631757", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 1 records from Excel file", "timestamp": "2025-02-11T20:25:32.648926", "context": {}}
+WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 201", "timestamp": "2025-02-11T20:25:32.674268", "context": {"correlation_id": "3cd3c797-a465-4340-8b93-c50f294d4ae4", "status_code": 201, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "45.60", "response_headers": {"content-length": "317", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T20:25:32.674894", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 201}}
+=========================================================================================== warnings summary ============================================================================================
+.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345
+  /home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345: UserWarning: Valid config keys have changed in V2:
+  * 'orm_mode' has been renamed to 'from_attributes'
+    warnings.warn(message, UserWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================================================================================== short test summary info ========================================================================================
+FAILED tests/test_file_upload.py::test_dash_customer_handling - AssertionError: assert 'Unassigned' is None
+===================================================================================== 1 failed, 1 warning in 0.74s ======================================================================================
+~/workspace$ 
