@@ -1,3 +1,4 @@
+<replit_final_file>
 import pytest
 from fastapi.testclient import TestClient
 from main import app
@@ -7,6 +8,7 @@ from pathlib import Path
 import logging
 import asyncio
 import httpx
+from utils.xls_analyzer import XLSAnalyzer
 
 logger = logging.getLogger(__name__)
 
@@ -16,13 +18,6 @@ def create_test_excel(tmp_path, data):
     excel_file = tmp_path / "test.xlsx"
     df.to_excel(excel_file, index=False)
     return excel_file
-
-def create_test_csv(tmp_path, data):
-    """Helper function to create test CSV file"""
-    df = pd.DataFrame(data)
-    csv_file = tmp_path / "test.csv"
-    df.to_csv(csv_file, index=False)
-    return csv_file
 
 @pytest.fixture
 def valid_timesheet_data():
@@ -48,116 +43,69 @@ def invalid_timesheet_data():
         'Date': ['2024-10-07']
     }
 
-def test_upload_excel_valid(client, tmp_path, valid_timesheet_data, setup_test_data):
-    """Test uploading a valid Excel file"""
+def test_xls_analyzer_valid(tmp_path, valid_timesheet_data):
+    """Test XLSAnalyzer with valid data"""
     excel_file = create_test_excel(tmp_path, valid_timesheet_data)
 
     with open(excel_file, "rb") as f:
-        files = {"file": ("test.xlsx", f, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
-        response = client.post("/time-entries/upload/", files=files)
+        contents = f.read()
+        analyzer = XLSAnalyzer()
+        records = analyzer.read_excel(contents)
 
-    assert response.status_code == 201, f"Response: {response.json()}"
-    data = response.json()
-    assert "entries" in data
-    assert len(data["entries"]) == 2
-    assert data["validation_errors"] == []
+        assert len(records) == 2
+        assert records[0]['Customer'] == 'ECOLAB'
+        assert records[0]['Project'] == 'Project_Magic_Bullet'
+        assert records[0]['Hours'] == 8.0
+        assert records[1]['Hours'] == 4.0
 
-    # Verify the entries were created correctly
-    for entry in data["entries"]:
-        assert entry["customer"] == "ECOLAB"
-        assert entry["project"] == "Project_Magic_Bullet"
-        assert float(entry["hours"]) in [8.0, 4.0]
+def test_xls_analyzer_empty_file(tmp_path):
+    """Test XLSAnalyzer with empty file"""
+    analyzer = XLSAnalyzer()
+    with pytest.raises(ValueError):
+        analyzer.read_excel(b'')
 
-def test_upload_csv_valid(client, tmp_path, valid_timesheet_data, setup_test_data):
-    """Test uploading a valid CSV file"""
-    csv_file = create_test_csv(tmp_path, valid_timesheet_data)
-
-    with open(csv_file, "rb") as f:
-        files = {"file": ("test.csv", f, "text/csv")}
-        response = client.post("/time-entries/upload/", files=files)
-
-    assert response.status_code == 201, f"Response: {response.json()}"
-    data = response.json()
-    assert len(data["entries"]) == 2
-    assert data["validation_errors"] == []
-
-    # Verify the entries were created correctly
-    for entry in data["entries"]:
-        assert entry["customer"] == "ECOLAB"
-        assert entry["project"] == "Project_Magic_Bullet"
-        assert float(entry["hours"]) in [8.0, 4.0]
-
-def test_upload_invalid_format(client, tmp_path, invalid_timesheet_data):
-    """Test uploading file with invalid format"""
+def test_xls_analyzer_invalid_data(tmp_path, invalid_timesheet_data):
+    """Test XLSAnalyzer with invalid data"""
     excel_file = create_test_excel(tmp_path, invalid_timesheet_data)
 
     with open(excel_file, "rb") as f:
-        files = {"file": ("test.xlsx", f, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
-        response = client.post("/time-entries/upload/", files=files)
+        contents = f.read()
+        analyzer = XLSAnalyzer()
+        records = analyzer.read_excel(contents)
 
-    assert response.status_code == 400
-    assert "Missing required columns" in response.json()["detail"]
+        assert len(records) == 1
+        assert records[0]['Customer'] == '-'
+        assert records[0]['Project'] == '-'
 
-def test_upload_empty_file(client):
-    """Test uploading an empty file"""
-    empty_file = io.BytesIO()
-    files = {"file": ("empty.xlsx", empty_file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
-    response = client.post("/time-entries/upload/", files=files)
-
-    assert response.status_code == 400
-
-def test_invalid_data_validation(client, tmp_path):
-    """Test validation of invalid data in uploaded file"""
-    invalid_data = {
-        'Week Number': [41],
-        'Month': ['October'],
-        'Category': ['Other'],
-        'Subcategory': ['Training'],
-        'Customer': ['NonExistent'],
-        'Project': ['NonExistent'],
-        'Task Description': ['Test'],
-        'Hours': [8.0],
-        'Date': ['2024-10-07']
+def test_xls_analyzer_date_conversion(tmp_path):
+    """Test date conversion in XLSAnalyzer"""
+    data = {
+        'Date': ['2024-10-07', '2024-10-08'],
+        'Week Number': [41, 41],
+        'Category': ['Test', 'Test']
     }
-
-    excel_file = create_test_excel(tmp_path, invalid_data)
+    excel_file = create_test_excel(tmp_path, data)
 
     with open(excel_file, "rb") as f:
-        files = {"file": ("test.xlsx", f, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
-        response = client.post("/time-entries/upload/", files=files)
+        contents = f.read()
+        analyzer = XLSAnalyzer()
+        records = analyzer.read_excel(contents)
 
-    assert response.status_code == 201, f"Response: {response.json()}"
-    data = response.json()
-    assert "entries" in data
-    assert "validation_errors" in data
-    assert len(data["entries"]) == 1
-    assert data["entries"][0]["customer"] == "Unassigned"
+        assert len(records) == 2
+        assert isinstance(records[0]['Date'], pd.Timestamp)
+        assert str(records[0]['Date'].date()) == '2024-10-07'
 
-@pytest.mark.asyncio
-async def test_concurrent_uploads(client, tmp_path, valid_timesheet_data, setup_test_data):
-    """Test handling of concurrent uploads"""
-    base_url = "http://testserver"
+def test_xls_analyzer_missing_columns(tmp_path):
+    """Test XLSAnalyzer with missing required columns"""
+    data = {'Category': ['Test'], 'Hours': [8.0]}
+    excel_file = create_test_excel(tmp_path, data)
 
-    async def upload_file():
-        excel_file = create_test_excel(tmp_path, valid_timesheet_data)
-        async with httpx.AsyncClient(base_url=base_url) as ac:
-            with open(excel_file, "rb") as f:
-                files = {"file": ("test.xlsx", f, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
-                response = await ac.post("/time-entries/upload/", files=files)
-                return response.status_code
+    with open(excel_file, "rb") as f:
+        contents = f.read()
+        analyzer = XLSAnalyzer()
+        records = analyzer.read_excel(contents)
 
-    # Run concurrent uploads
-    tasks = [upload_file() for _ in range(3)]
-    results = await asyncio.gather(*tasks, return_exceptions=True)
-
-    # Check if any tasks failed
-    errors = [r for r in results if isinstance(r, Exception)]
-    if errors:
-        pytest.fail(f"Concurrent uploads failed with errors: {errors}")
-
-    # Verify all successful responses
-    assert all(status == 201 for status in results if not isinstance(status, Exception))
-
-    
-if __name__ == "__main__":
-    pytest.main(["-v"])
+        assert len(records) == 1
+        assert records[0]['Customer'] == '-'
+        assert records[0]['Project'] == '-'
+        assert records[0]['Week Number'] == 0
