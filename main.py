@@ -415,28 +415,4 @@ def create_sample_data(db: Session = Depends(get_db)):
     return {"message": f"Created {len(created_entries)} sample entries"}
 
 if __name__ == "__main__":
-    logger.info("Starting FastAPI server")
-    try:
-        port = int(os.getenv("PORT", 8080))
-        host = "0.0.0.0"
-        logger.info(f"Attempting to start server on {host}:{port}")
-
-        config = uvicorn.Config(
-            app="main:app",
-            host=host,
-            port=port,
-            log_level="info",
-            access_log=True,
-            reload=True,
-            workers=1,
-            timeout_keep_alive=30,
-            proxy_headers=True,
-            forwarded_allow_ips="*",
-            reload_dirs=[".", "database", "models", "services", "utils"]
-        )
-        server = uvicorn.Server(config)
-        server.run()
-    except Exception as e:
-        logger.error(f"Server startup failed: {str(e)}")
-        logger.exception("Full server startup error:")
-        raise
+    uvicorn.run(app, host="0.0.0.0", port=8000)
