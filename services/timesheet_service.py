@@ -6,6 +6,7 @@ import utils
 from database import crud, schemas
 from utils.logger import Logger
 from models.timeEntry import TimeEntry
+from database.timesheet_repository import TimeEntryRepository
 
 logger = Logger().get_logger()
 
