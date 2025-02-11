@@ -1,0 +1,52 @@
+______________________________________________________________________________________ test_dash_customer_handling ______________________________________________________________________________________
+
+client = <starlette.testclient.TestClient object at 0x7fef6c5dbf50>
+setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7fef745d9090>, <models.customerModel.Customer object at 0x7f...]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)") raised in repr()] Project object at 0x7fef6c196090>]}
+tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-37/test_dash_customer_handling0')
+
+    def test_dash_customer_handling(client, setup_test_data, tmp_path):
+        """Test handling of dash (-) values in customer field"""
+        data = {
+            'Category': ['Development'],
+            'Customer': ['-'],
+            'Project': ['-'],
+            'Hours': [8.0],
+            'Date': ['2024-10-07']
+        }
+        excel_file = create_test_excel(tmp_path, data)
+    
+        with open(excel_file, "rb") as f:
+            response = client.post(
+                "/time-entries/upload/",
+                files={"file": ("test.xlsx", f, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
+            )
+    
+>       assert response.status_code == 201
+E       assert 400 == 201
+E        +  where 400 = <Response [400 Bad Request]>.status_code
+
+tests/test_file_upload.py:93: AssertionError
+------------------------------------------------------------------------------------------- Captured log call -------------------------------------------------------------------------------------------
+INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T20:27:00.830605", "context": {"correlation_id": "bb4a6166-9c26-4286-9621-fc23bd6a12af", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5237", "content-type": "multipart/form-data; boundary=adc492276bd84a69ad770704599679c8"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:27:00.833764", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "TimesheetService initialized", "timestamp": "2025-02-11T20:27:00.834052", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:27:00.834330", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 1 records from Excel file", "timestamp": "2025-02-11T20:27:00.852926", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error importing Excel data: (sqlite3.OperationalError) no such table: time_entries\n[SQL: INSERT INTO time_entries (week_number, month, category, subcategory, project, task_description, hours, date, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING customer, id]\n[parameters: (41, 'October', 'Development', 'Other', None, '', 8.0, '2024-10-07', '2025-02-11 20:27:00.853156', None)]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)", "timestamp": "2025-02-11T20:27:00.891413", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error processing timesheet: (sqlite3.OperationalError) no such table: time_entries\n[SQL: INSERT INTO time_entries (week_number, month, category, subcategory, project, task_description, hours, date, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING customer, id]\n[parameters: (41, 'October', 'Development', 'Other', None, '', 8.0, '2024-10-07', '2025-02-11 20:27:00.853156', None)]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)", "timestamp": "2025-02-11T20:27:00.891805", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error processing timesheet: 400: (sqlite3.OperationalError) no such table: time_entries\n[SQL: INSERT INTO time_entries (week_number, month, category, subcategory, project, task_description, hours, date, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING customer, id]\n[parameters: (41, 'October', 'Development', 'Other', None, '', 8.0, '2024-10-07', '2025-02-11 20:27:00.853156', None)]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)", "timestamp": "2025-02-11T20:27:00.892172", "context": {}}
+WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 400", "timestamp": "2025-02-11T20:27:00.893045", "context": {"correlation_id": "bb4a6166-9c26-4286-9621-fc23bd6a12af", "status_code": 400, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "62.94", "response_headers": {"content-length": "451", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T20:27:00.893573", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 400}}
+=========================================================================================== warnings summary ============================================================================================
+.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345
+  /home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345: UserWarning: Valid config keys have changed in V2:
+  * 'orm_mode' has been renamed to 'from_attributes'
+    warnings.warn(message, UserWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================================================================================== short test summary info ========================================================================================
+FAILED tests/test_file_upload.py::test_dash_customer_handling - assert 400 == 201
+ +  where 400 = <Response [400 Bad Request]>.status_code
+===================================================================================== 1 failed, 1 warning in 1.48s ======================================================================================
+ Environment updated. Reloading shell...
+~/workspace$ 
