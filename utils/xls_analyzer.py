@@ -44,14 +44,17 @@ class XLSAnalyzer:
             df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
 
             # Fill NaN values with appropriate defaults
+            # Convert Week Number to numeric, replacing non-numeric with 0
+            df['Week Number'] = pd.to_numeric(df['Week Number'], errors='coerce').fillna(0).astype('Int64')
+            
             df = df.fillna({
                 'Customer': '-',
                 'Project': '-',
                 'Task Description': '',
-                'Week Number': 0,
                 'Month': '',
                 'Category': 'Other',
-                'Subcategory': 'Other'
+                'Subcategory': 'Other',
+                'Hours': 0.0
             })
 
             # Convert DataFrame to list of dictionaries

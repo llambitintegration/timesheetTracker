@@ -123,6 +123,8 @@ def test_model_timestamps(db_session):
     assert customer.created_at is not None
     assert customer.updated_at is None  # Should be None until updated
 
+    import time
+    time.sleep(0.1)  # Ensure timestamp difference
     customer.industry = "Updated Industry"
     db_session.commit()
 
