@@ -24,14 +24,15 @@ class TimesheetService:
         logger.info(f"Processing timesheet upload: {file.filename}")
         try:
             contents = await file.read()
-            if file.filename.endswith('.xlsx'):
-                entries = utils.parse_excel(BytesIO(contents))
-            elif file.filename.endswith('.csv'):
+            # Accept both .txt and traditional spreadsheet formats
+            if file.filename.endswith(('.txt', '.csv')):
                 text_contents = contents.decode('utf-8')
                 entries = utils.parse_csv(StringIO(text_contents))
+            elif file.filename.endswith('.xlsx'):
+                entries = utils.parse_excel(BytesIO(contents))
             else:
                 logger.error(f"Unsupported file format: {file.filename}")
-                raise HTTPException(status_code=400, detail="Unsupported file format")
+                raise HTTPException(status_code=400, detail="Unsupported file format. Please upload a .txt, .csv, or .xlsx file.")
 
             if not entries:
                 logger.warning("No valid entries found in file")

@@ -120,7 +120,10 @@ def parse_raw_csv(file) -> Optional[pd.DataFrame]:
 
 def validate_csv_structure(df: pd.DataFrame) -> bool:
     """Validate CSV structure and required columns."""
-    required_columns = ['Week Number', 'Hours', 'Customer', 'Project', 'Date']
+    required_columns = [
+        'Date', 'Week Day', 'Week Number', 'Month', 'Category', 
+        'Subcategory', 'Customer', 'Project', 'Task Description', 'Hours'
+    ]
     missing_columns = [col for col in required_columns if col not in df.columns]
 
     if missing_columns:
@@ -169,46 +172,35 @@ def parse_csv(file) -> List:
 
     for index, row in df.iterrows():
         try:
+            # Process date field
+            date_str = str(row.get('Date', ''))
+
             # Validate hours first as it's critical
             hours = clean_numeric_value(row.get('Hours', 0))
             if hours <= 0 or hours > 24:
                 logger.warning(f"Skipping row {index + 1} due to invalid hours: {hours}")
                 continue
 
-            # Process customer and project with proper field type handling
-            raw_customer = str(row.get('Customer', '')).strip()
-            raw_project = str(row.get('Project', '')).strip()
+            # Handle special cases for customer and project
+            customer = clean_string_value(row.get('Customer', ''))
+            project = clean_string_value(row.get('Project', ''))
 
-            # Check for various validation issues
-            has_validation_issues = (
-                'Project' in raw_customer or  # Customer name contains 'Project'
-                'NonExistent' in raw_project or  # Project contains 'NonExistent'
-                raw_customer in ['', '-', 'None', 'null', 'NA'] or  # Invalid customer
-                raw_project in ['', '-', 'None', 'null', 'NA'] or  # Invalid project
-                raw_customer == DEFAULT_CUSTOMER or  # Already default customer
-                raw_project == DEFAULT_PROJECT  # Already default project
-            )
-
-            if has_validation_issues:
-                logger.debug(f"Validation issues detected in row {index + 1}, using defaults")
-                customer = DEFAULT_CUSTOMER
-                project = DEFAULT_PROJECT
-            else:
-                customer = clean_string_value(raw_customer)
-                project = clean_string_value(raw_project)
-
-            logger.debug(f"Processed row {index + 1} - customer: {customer}, project: {project}")
+            # Convert '-' to empty string for customer and project
+            if customer == '-':
+                customer = ''
+            if project == '-':
+                project = ''
 
             entry = schemas.TimeEntryCreate(
                 week_number=validate_week_number(row.get('Week Number')),
                 month=validate_month(row.get('Month')),
-                category=clean_string_value(row.get('Category'), "category"), # Added field_type
-                subcategory=clean_string_value(row.get('Subcategory'), "category"), # Added field_type
+                category=clean_string_value(row.get('Category'), "category"),
+                subcategory=clean_string_value(row.get('Subcategory'), "category"),
                 customer=customer,
                 project=project,
                 task_description=clean_string_value(row.get('Task Description')),
                 hours=hours,
-                date=parse_date(row.get('Date'))
+                date=parse_date(date_str)
             )
             entries.append(entry)
             logger.debug(f"Successfully processed row {index + 1}")
