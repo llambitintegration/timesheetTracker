@@ -1,9 +1,11 @@
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from database.project_repository import ProjectRepository 
+from database.customer_repository import CustomerRepository
 from database import schemas
 from models.projectModel import Project
 from utils.logger import Logger
+from utils.validators import DEFAULT_CUSTOMER, normalize_customer_name
 
 logger = Logger().get_logger()
 
@@ -11,12 +13,41 @@ class ProjectService:
     def __init__(self, db: Session):
         self.db = db
         self.project_repo = ProjectRepository()
+        self.customer_repo = CustomerRepository()
         logger.debug("ProjectService initialized with database session")
+
+    def _ensure_customer_exists(self, customer_name: str) -> bool:
+        """Ensure customer exists, create if not. Return True if successful."""
+        try:
+            normalized_name = normalize_customer_name(customer_name)
+            # Check if customer exists
+            existing = self.customer_repo.get_by_name(self.db, normalized_name)
+            if existing:
+                logger.debug(f"Found existing customer: {normalized_name}")
+                return True
+
+            # Create new customer if not exists
+            customer_data = schemas.CustomerCreate(
+                name=normalized_name,
+                contact_email=f"{normalized_name.lower().replace(' ', '_')}@example.com",
+                status="active"
+            )
+            self.customer_repo.create(self.db, customer_data)
+            logger.info(f"Created new customer: {normalized_name}")
+            return True
+        except Exception as e:
+            logger.error(f"Error ensuring customer exists: {str(e)}")
+            return False
 
     def create_project(self, project: schemas.ProjectCreate) -> Project:
         """Create a new project with validation."""
         try:
             logger.debug(f"Starting creation of project with data: {project.model_dump()}")
+
+            # First ensure customer exists
+            if not self._ensure_customer_exists(project.customer):
+                logger.error(f"Failed to ensure customer exists: {project.customer}")
+                raise ValueError(f"Could not create or verify customer: {project.customer}")
 
             # Check if project already exists with same project_id
             existing_project = self.project_repo.get_by_project_id(self.db, project.project_id)
