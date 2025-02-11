@@ -71,21 +71,28 @@ def parse_raw_csv(file) -> Optional[pd.DataFrame]:
     """Parse raw CSV file into DataFrame with enhanced delimiter and quote handling."""
     try:
         logger.info("Starting raw CSV parsing")
-        # Try tab delimiter first
-        df = pd.read_csv(
-            file,
-            keep_default_na=False,
-            encoding='utf-8',
-            sep='\t',  # Use tab delimiter
-            quoting=3,  # QUOTE_NONE - disable special handling of quote chars
-            quotechar=None,  # No quote character
-            engine='python'  # Use python engine for better error handling
-        )
-        logger.debug(f"Successfully read tab-delimited file with {len(df.columns)} columns")
-        return df
-    except Exception as e:
-        logger.warning(f"Failed to parse with tab delimiter: {str(e)}")
+        # Try tab delimiter first with more robust error handling
         try:
+            df = pd.read_csv(
+                file,
+                keep_default_na=False,
+                encoding='utf-8',
+                sep='\t',  # Use tab delimiter
+                quoting=3,  # QUOTE_NONE - disable special handling of quote chars
+                quotechar=None,  # No quote character
+                engine='python',  # Use python engine for better error handling
+                on_bad_lines='warn'  # Warn about problematic lines instead of failing
+            )
+            if len(df.columns) > 1:  # Verify we got multiple columns
+                logger.debug(f"Successfully read tab-delimited file with {len(df.columns)} columns")
+                return df
+            else:
+                logger.warning("Tab delimiter resulted in single column, trying comma delimiter")
+                raise ValueError("Single column result indicates incorrect delimiter")
+        except Exception as tab_error:
+            logger.warning(f"Failed to parse with tab delimiter: {str(tab_error)}")
+            # Reset file pointer for next attempt
+            file.seek(0)
             # Fallback to comma delimiter with quote handling
             df = pd.read_csv(
                 file,
@@ -93,13 +100,14 @@ def parse_raw_csv(file) -> Optional[pd.DataFrame]:
                 encoding='utf-8',
                 quoting=1,  # QUOTE_MINIMAL - quote fields only when needed
                 quotechar='"',
-                engine='python'
+                engine='python',
+                on_bad_lines='warn'
             )
             logger.debug(f"Successfully read CSV with comma delimiter")
             return df
-        except Exception as e:
-            logger.error(f"Failed to parse CSV: {str(e)}")
-            return None
+    except Exception as e:
+        logger.error(f"Failed to parse CSV: {str(e)}")
+        return None
 
 def validate_csv_structure(df: pd.DataFrame) -> bool:
     """Validate CSV structure and required columns."""

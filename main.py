@@ -378,13 +378,20 @@ if __name__ == "__main__":
     logger.info("Starting FastAPI server")
     try:
         port = int(os.getenv("PORT", 8080))
-        logger.info(f"Attempting to start server on port {port}")
-        uvicorn.run(
-            app,
-            host="0.0.0.0",
+        host = "0.0.0.0"
+        logger.info(f"Attempting to start server on {host}:{port}")
+
+        config = uvicorn.Config(
+            app=app,
+            host=host,
             port=port,
-            log_level="info"
+            log_level="info",
+            access_log=True,
+            timeout_keep_alive=30
         )
+        server = uvicorn.Server(config)
+        server.run()
     except Exception as e:
         logger.error(f"Server startup failed: {str(e)}")
+        logger.exception("Full server startup error:")
         raise

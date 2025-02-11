@@ -26,8 +26,21 @@ class TimesheetService:
 
         try:
             contents = await file.read()
-            text_contents = contents.decode('utf-8')
-            entries = utils.parse_csv(StringIO(text_contents))
+            # Try UTF-8 first
+            try:
+                text_contents = contents.decode('utf-8')
+            except UnicodeDecodeError:
+                # Fallback to ISO-8859-1 if UTF-8 fails
+                text_contents = contents.decode('iso-8859-1')
+                logger.warning("Falling back to ISO-8859-1 encoding")
+
+            # Create StringIO object with the text contents
+            file_obj = StringIO(text_contents)
+
+            # Set filename attribute for format detection
+            file_obj.name = file.filename
+
+            entries = utils.parse_csv(file_obj)
 
             if not entries:
                 logger.warning("No valid entries found in file")
