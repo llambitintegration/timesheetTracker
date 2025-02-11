@@ -20,7 +20,7 @@ class ProjectBase(BaseSchema):
     name: str
     description: Optional[str] = None
     customer: str
-    project_manager: str
+    project_manager: Optional[str] = None #Modified to make project_manager optional
     status: str = "active"
 
 class ProjectCreate(BaseModel):
@@ -29,7 +29,7 @@ class ProjectCreate(BaseModel):
     name: str
     description: Optional[str] = None
     customer: str
-    project_manager: str
+    project_manager: Optional[str] = None #Modified to make project_manager optional
     status: str = "active"
 
     model_config = ConfigDict(from_attributes=True)
