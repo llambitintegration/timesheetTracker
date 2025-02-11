@@ -1,6 +1,6 @@
 import pandas as pd
 from typing import List, Dict, Any, Optional
-from datetime import datetime
+from datetime import datetime, date
 import calendar
 from utils.logger import Logger
 
@@ -8,105 +8,108 @@ logger = Logger().get_logger()
 
 def clean_numeric_value(value, default=0):
     """Clean and validate numeric values."""
-    if pd.isna(value) or value == '':
+    if pd.isna(value) or value == '' or value is None:
         return default
     try:
-        return float(value) if isinstance(value, (int, float, str)) else default
-    except (ValueError, TypeError):
+        cleaned = float(str(value).replace(',', '').strip())
+        return cleaned if 0 <= cleaned <= 24 else default
+    except (ValueError, TypeError, AttributeError):
         return default
 
 def clean_string_value(value, field_type=None):
     """Clean and standardize string values"""
     if pd.isna(value) or value is None or str(value).strip() in ['', '-', 'None', 'null', 'NA']:
         return ""
-    value = str(value).strip()
-    if field_type == "category":
-        return value.title()
-    return value
+    cleaned = str(value).strip()
+    return cleaned.title() if field_type == "category" else cleaned
 
-def parse_date(date_value) -> datetime.date:
+def parse_date(date_value) -> date:
     """Parse and validate date values."""
-    if pd.isna(date_value) or date_value == '':
-        return datetime.now().date()  # Correct returned value type
+    if pd.isna(date_value) or date_value == '' or date_value is None:
+        return datetime.now().date()
+
     try:
         if isinstance(date_value, datetime):
-            return date_value.date()  # Correct usage of .date() method
+            return date_value.date()
+        elif isinstance(date_value, date):
+            return date_value
         elif isinstance(date_value, str):
+            date_str = date_value.strip()
             for fmt in ['%m/%d/%y', '%Y-%m-%d', '%m/%d/%Y', '%d-%m-%Y', '%Y/%m/%d']:
                 try:
-                    return datetime.strptime(date_value, fmt).date()
+                    return datetime.strptime(date_str, fmt).date()
                 except ValueError:
                     continue
-            return pd.to_datetime(date_value).date()
+            return pd.to_datetime(date_str).date()
         raise ValueError(f"Could not parse date: {date_value}")
     except Exception as e:
         logger.warning(f"Error parsing date '{date_value}': {str(e)}")
         return datetime.now().date()
 
-def validate_week_number(week_number):
+def validate_week_number(week_number) -> int:
     """Validate week number is between 1 and 53."""
     try:
-        week = int(week_number)
-        if 1 <= week <= 53:
-            return week
-    except (ValueError, TypeError):
-        pass
-    current_week = datetime.now().isocalendar()[1]
-    return current_week
+        week = int(float(str(week_number).strip()))
+        return week if 1 <= week <= 53 else datetime.now().isocalendar()[1]
+    except (ValueError, TypeError, AttributeError):
+        return datetime.now().isocalendar()[1]
 
-def validate_month(month):
+def validate_month(month) -> str:
     """Validate month name."""
-    if pd.isna(month) or month == '':
+    if pd.isna(month) or not month:
         return calendar.month_name[datetime.now().month]
 
     try:
-        month_str = str(month).strip().capitalize()
+        month_str = str(month).strip().title()
         if month_str in calendar.month_name:
             return month_str
-    except (ValueError, TypeError):
+        # Try converting month number to name
+        month_num = int(month_str)
+        if 1 <= month_num <= 12:
+            return calendar.month_name[month_num]
+    except (ValueError, TypeError, AttributeError):
         pass
     return calendar.month_name[datetime.now().month]
 
 def parse_raw_csv(file) -> Optional[pd.DataFrame]:
-    """Parse raw CSV file into DataFrame with enhanced delimiter and quote handling."""
-    try:
-        logger.info("Starting raw CSV parsing")
-        # Try tab delimiter first with more robust error handling
+    """Parse raw CSV file into DataFrame with enhanced error handling."""
+    encodings = ['utf-8', 'iso-8859-1', 'cp1252']
+
+    for encoding in encodings:
         try:
-            df = pd.read_csv(
-                file,
-                keep_default_na=False,
-                encoding='utf-8',
-                sep='\t',  # Use tab delimiter
-                quoting=3,  # QUOTE_NONE - disable special handling of quote chars
-                engine='python',  # Use python engine for better error handling
-                on_bad_lines='warn'  # Warn about problematic lines instead of failing
-            )
-            if len(df.columns) > 1:  # Verify we got multiple columns
-                logger.debug(f"Successfully read tab-delimited file with {len(df.columns)} columns")
-                return df
-            else:
-                logger.warning("Tab delimiter resulted in single column, trying comma delimiter")
-                raise ValueError("Single column result indicates incorrect delimiter")
-        except Exception as tab_error:
-            logger.warning(f"Failed to parse with tab delimiter: {str(tab_error)}")
-            # Reset file pointer for next attempt
             file.seek(0)
-            # Fallback to comma delimiter with quote handling
             df = pd.read_csv(
                 file,
                 keep_default_na=False,
-                encoding='utf-8',
-                quoting=1,  # QUOTE_MINIMAL - quote fields only when needed
-                quotechar='"',
+                encoding=encoding,
+                sep='\t',
+                quoting=3,
                 engine='python',
                 on_bad_lines='warn'
             )
-            logger.debug(f"Successfully read CSV with comma delimiter")
-            return df
-    except Exception as e:
-        logger.error(f"Failed to parse CSV: {str(e)}")
-        return None
+            if len(df.columns) > 1:
+                logger.debug(f"Successfully read file with {encoding} encoding")
+                return df
+
+            # Try comma delimiter
+            file.seek(0)
+            df = pd.read_csv(
+                file,
+                keep_default_na=False,
+                encoding=encoding,
+                quoting=1,
+                engine='python',
+                on_bad_lines='warn'
+            )
+            if len(df.columns) > 1:
+                logger.debug(f"Successfully read CSV with comma delimiter")
+                return df
+        except Exception as e:
+            logger.warning(f"Failed with {encoding} encoding: {str(e)}")
+            continue
+
+    logger.error("Failed to parse CSV with all attempted encodings")
+    return None
 
 def validate_csv_structure(df: pd.DataFrame) -> bool:
     """Validate CSV structure and required columns."""
@@ -126,82 +129,51 @@ def validate_csv_structure(df: pd.DataFrame) -> bool:
 def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     """Clean the DataFrame before processing."""
     logger.debug("Starting DataFrame cleaning")
-    df = df.dropna(how='all')  # Drop rows that are all NA
+    df = df.dropna(how='all')
     df = df.reset_index(drop=True)
     logger.debug(f"Cleaned DataFrame has {len(df)} rows")
     return df
 
-from database import schemas
-
-DEFAULT_CUSTOMER = "Default Customer"
-DEFAULT_PROJECT = "Default Project"
-
 def parse_csv(file) -> List:
-    """Parse CSV file with enhanced validation and normalization."""
+    """Parse CSV file with enhanced validation."""
     logger.info("Starting CSV parsing process")
 
     try:
-        # First try reading with tab delimiter
-        df = pd.read_csv(
-            file,
-            sep='\t',
-            keep_default_na=False,
-            encoding='utf-8',
-            quoting=3,  # QUOTE_NONE
-            engine='python'
-        )
+        df = parse_raw_csv(file)
+        if df is None:
+            raise ValueError("Failed to parse CSV file")
 
-        # Verify required columns
-        required_columns = [
-            'Date', 'Week Day', 'Week Number', 'Month', 'Category', 
-            'Subcategory', 'Customer', 'Project', 'Task Description', 'Hours'
-        ]
-        missing_columns = [col for col in required_columns if col not in df.columns]
-
-        if missing_columns:
-            logger.error(f"Missing required columns: {', '.join(missing_columns)}")
-            raise ValueError(f"Missing required columns: {', '.join(missing_columns)}")
-
+        validate_csv_structure(df)
         df = clean_dataframe(df)
 
         if df.empty:
             logger.warning("No valid entries found in CSV file")
             return []
 
+        from database import schemas
         entries = []
         logger.info(f"Processing {len(df)} rows from CSV file")
 
         for index, row in df.iterrows():
             try:
-                # Process date field
-                date_str = str(row.get('Date', ''))
-
-                # Validate hours first as it's critical
                 hours = clean_numeric_value(row.get('Hours', 0))
                 if hours <= 0 or hours > 24:
                     logger.warning(f"Skipping row {index + 1} due to invalid hours: {hours}")
                     continue
 
-                # Handle special cases for customer and project
                 customer = clean_string_value(row.get('Customer', ''))
                 project = clean_string_value(row.get('Project', ''))
 
-                # Convert '-' to empty string for customer and project
-                if customer == '-':
-                    customer = ''
-                if project == '-':
-                    project = ''
-
                 entry = schemas.TimeEntryCreate(
+                    date=parse_date(row.get('Date')),
                     week_number=validate_week_number(row.get('Week Number')),
                     month=validate_month(row.get('Month')),
                     category=clean_string_value(row.get('Category'), "category"),
                     subcategory=clean_string_value(row.get('Subcategory'), "category"),
-                    customer=customer or "Unassigned",  # Default to "Unassigned" if empty
-                    project=project or "Unassigned",    # Default to "Unassigned" if empty
+                    customer=customer or "Unassigned",
+                    project=project or "Unassigned",
                     task_description=clean_string_value(row.get('Task Description')),
-                    hours=hours,
-                    date=parse_date(date_str)
+                    hours=hours
                 )
                 entries.append(entry)
                 logger.debug(f"Successfully processed row {index + 1}")
@@ -210,7 +182,7 @@ def parse_csv(file) -> List:
                 logger.error(f"Error processing row {index + 1}: {str(e)}")
                 continue
 
-        logger.info(f"Successfully processed {len(entries)} valid entries from CSV")
+        logger.info(f"Successfully processed {len(entries)} valid entries")
         return entries
 
     except Exception as e:
@@ -218,10 +190,8 @@ def parse_csv(file) -> List:
         raise ValueError(f"Failed to parse file: {str(e)}")
 
 def parse_excel(file) -> List:
-    """Parse Excel file with enhanced date handling."""
+    """Parse Excel file."""
     logger.info("Starting Excel parsing")
-    logger.debug("Reading Excel file into pandas DataFrame")
-
     df = pd.read_excel(file, parse_dates=['Date'])
     df.to_csv('temp.csv', index=False)
     with open('temp.csv', 'r') as csv_file:
