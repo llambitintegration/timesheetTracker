@@ -81,20 +81,28 @@ app.middleware("http")(error_logging_middleware)
 @app.middleware("http")
 async def cors_headers_middleware(request: Request, call_next):
     """Ensure consistent CORS headers across all responses"""
+    correlation_id = Logger().get_correlation_id()
+
     # Handle preflight requests specially
     if request.method == "OPTIONS":
-        requested_headers = request.headers.get("Access-Control-Request-Headers")
-        # If specific headers are requested, reflect them back
-        allow_headers = requested_headers if requested_headers else "*"
+        logger.info(structured_log(
+            "Processing CORS preflight request",
+            correlation_id=correlation_id,
+            method=request.method,
+            path=request.url.path,
+            origin=request.headers.get("origin"),
+            request_method=request.headers.get("access-control-request-method"),
+            request_headers=request.headers.get("access-control-request-headers")
+        ))
 
         return JSONResponse(
             content={},
             headers={
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH",
-                "Access-Control-Allow-Headers": allow_headers,
-                "Access-Control-Allow-Credentials": "false",
+                "Access-Control-Allow-Headers": "*",
                 "Access-Control-Max-Age": "3600",
+                "Access-Control-Allow-Credentials": "false",
                 "Access-Control-Expose-Headers": "X-Total-Count, X-Correlation-ID"
             }
         )
@@ -102,9 +110,17 @@ async def cors_headers_middleware(request: Request, call_next):
     # Handle regular requests
     response = await call_next(request)
 
+    logger.debug(structured_log(
+        "Adding CORS headers to response",
+        correlation_id=correlation_id,
+        method=request.method,
+        path=request.url.path,
+        status_code=response.status_code
+    ))
+
     # Ensure CORS headers are present and consistent
     response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS, PATCH"
+    response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS,PATCH"
     response.headers["Access-Control-Allow-Headers"] = "*"
     response.headers["Access-Control-Allow-Credentials"] = "false"
     response.headers["Access-Control-Expose-Headers"] = "X-Total-Count, X-Correlation-ID"
