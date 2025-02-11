@@ -167,6 +167,37 @@ def test_create_time_entry_invalid_data(client):
     response = client.post("/time-entries/", json=invalid_entry)
     assert response.status_code == 422
 
+def test_upload_excel_valid(client, setup_test_data, tmp_path):
+    """Test uploading a valid Excel file"""
+    import pandas as pd
+
+    # Create test Excel file
+    excel_data = {
+        'Week Number': [41, 41],
+        'Month': ['October', 'October'],
+        'Category': ['Other', 'Other'],
+        'Subcategory': ['Other Training', 'Other Training'],
+        'Customer': ['ECOLAB', 'ECOLAB'],
+        'Project': ['Project_Magic_Bullet', 'Project_Magic_Bullet'],
+        'Task Description': ['Test task', 'Another task'],
+        'Hours': [8.0, 4.0],
+        'Date': ['2024-10-07', '2024-10-07']
+    }
+    df = pd.DataFrame(excel_data)
+    excel_file = tmp_path / "test.xlsx"
+    df.to_excel(excel_file, index=False)
+
+    with open(excel_file, "rb") as f:
+        response = client.post(
+            "/time-entries/upload/",
+            files={"file": ("test.xlsx", f, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
+        )
+
+    assert response.status_code == 201
+    data = response.json()
+    assert len(data["entries"]) == 2
+    assert data["validation_errors"] == []
+
 def test_upload_csv_valid(client, setup_test_data, tmp_path):
     """Test uploading a valid CSV file"""
     csv_content = """Week Number,Month,Category,Subcategory,Customer,Project,Task Description,Hours,Date

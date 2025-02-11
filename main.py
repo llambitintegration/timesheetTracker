@@ -1,15 +1,13 @@
-import os
-import traceback
 from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, Query, Path, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from sqlalchemy import join, text, inspect, func
+from sqlalchemy import text, inspect
 from sqlalchemy.orm import Session
-from sqlalchemy.sql.schema import MetaData
-from alembic.migration import MigrationContext
 from typing import List, Optional
 from datetime import datetime, timedelta, date
 import calendar
+import os
+import traceback
 from dotenv import load_dotenv
 import uvicorn
 from database import schemas, crud, get_db, verify_database, engine
@@ -271,10 +269,15 @@ async def upload_timesheet(
     try:
         service = TimesheetService(db)
         result = await service.upload_timesheet(file)
-        return {
-            "entries": result,
-            "validation_errors": []  # Add validation errors if any
-        }
+
+        # result already contains serialized entries and validation errors
+        return JSONResponse(
+            status_code=201,
+            content=result
+        )
+    except HTTPException as e:
+        logger.error(f"Error processing timesheet: {str(e)}")
+        raise e
     except Exception as e:
         logger.error(f"Error processing timesheet: {str(e)}")
         raise HTTPException(status_code=400, detail=str(e))

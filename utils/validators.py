@@ -1,5 +1,5 @@
 """Database validation utilities for CSV data"""
-from typing import List, Dict, Optional, Tuple
+from typing import List, Dict, Optional, Tuple, Union
 from sqlalchemy.orm import Session
 from models import Customer, Project
 from utils.logger import Logger
@@ -13,7 +13,7 @@ DEFAULT_CUSTOMER = "Unassigned"
 DEFAULT_PROJECT = "Unassigned"
 DEFAULT_PROJECT_MANAGER = "Unassigned"
 
-def normalize_customer_name(name: str) -> str:
+def normalize_customer_name(name: Optional[str]) -> str:
     """Normalize customer name for database lookup.
     Returns DEFAULT_CUSTOMER if name is invalid or not found."""
     if not name or str(name).strip() in ['-', '', 'None', 'null', 'NA']:
@@ -21,7 +21,7 @@ def normalize_customer_name(name: str) -> str:
         return DEFAULT_CUSTOMER
     return str(name).strip()
 
-def normalize_project_id(project_id: str) -> str:
+def normalize_project_id(project_id: Optional[str]) -> str:
     """Normalize project ID for database lookup.
     Converts spaces and hyphens to underscores.
     Returns DEFAULT_PROJECT if project_id is invalid or not found."""
@@ -143,7 +143,7 @@ def ensure_default_project(db: Session) -> Optional[Project]:
         db.rollback()
         return None
 
-def normalize_project_manager(manager: str) -> str:
+def normalize_project_manager(manager: Optional[str]) -> str:
     """Normalize project manager name for database lookup."""
     if not manager or str(manager).strip() in ['-', '', 'None', 'null', 'NA']:
         return DEFAULT_PROJECT_MANAGER

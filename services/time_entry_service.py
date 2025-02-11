@@ -16,6 +16,22 @@ class TimeEntryService:
         self.project_repo = ProjectRepository()
         logger.debug("TimeEntryService initialized with database session")
 
+    def _bulk_create_entries(self, entries: List[schemas.TimeEntryCreate]) -> List[TimeEntry]:
+        """Create multiple time entries in a single transaction."""
+        created_entries = []
+        try:
+            self.db.begin()
+            for entry in entries:
+                db_entry = TimeEntry(**entry.model_dump(exclude={'id', 'created_at', 'updated_at'}))
+                self.db.add(db_entry)
+                created_entries.append(db_entry)
+            self.db.commit()
+            return created_entries
+        except Exception as e:
+            logger.error(f"Error during bulk creation: {str(e)}")
+            self.db.rollback()
+            raise
+
     def create_time_entry(self, entry: schemas.TimeEntryCreate) -> TimeEntry:
         """Create a new time entry with proper validation and defaults."""
         try:
