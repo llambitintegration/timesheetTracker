@@ -116,7 +116,8 @@ def test_xls_analyzer_date_conversion(tmp_path):
     data = {
         'Date': ['2024-10-07', '2024-10-08'],
         'Week Number': [41, 41],
-        'Category': ['Test', 'Test']
+        'Category': ['Test', 'Test'],
+        'Hours': [8.0, 8.0]
     }
     excel_file = create_test_excel(tmp_path, data)
 
