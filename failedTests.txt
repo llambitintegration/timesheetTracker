@@ -5,19 +5,46 @@ rootdir: /home/runner/workspace
 configfile: pyproject.toml
 plugins: anyio-4.7.0, asyncio-0.25.2, cov-6.0.0
 asyncio: mode=Mode.STRICT, asyncio_default_fixture_loop_scope=None
-collecting ... collected 9 items / 6 deselected / 3 selected
-run-last-failure: rerun previous 3 failures (skipped 10 files)
+collecting ... collected 12 items / 6 deselected / 6 selected
+run-last-failure: rerun previous 6 failures (skipped 9 files)
 
+tests/test_file_upload.py::test_xls_analyzer_invalid_data FAILED         [ 16%]
 tests/test_file_upload.py::test_dash_customer_handling FAILED            [ 33%]
-tests/test_file_upload.py::test_upload_excel_valid FAILED                [ 66%]
-tests/test_routes.py::test_upload_excel_valid FAILED                     [100%]
+tests/test_file_upload.py::test_upload_excel_valid FAILED                [ 50%]
+tests/test_file_upload.py::test_xls_analyzer_missing_columns FAILED      [ 66%]
+tests/test_routes.py::test_upload_excel_valid FAILED                     [ 83%]
+tests/test_xls_analyzer.py::test_xls_analyzer_dash_to_none_conversion FAILED [100%]
 
 =================================== FAILURES ===================================
+________________________ test_xls_analyzer_invalid_data ________________________
+
+tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-54/test_xls_analyzer_invalid_data0')
+invalid_timesheet_data = {'Category': ['Development'], 'Date': ['2024-10-07'], 'Hours': [8.0]}
+setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7f5d43fc4450>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
+
+    def test_xls_analyzer_invalid_data(tmp_path, invalid_timesheet_data, setup_test_data):
+        """Test XLSAnalyzer with invalid data"""
+        excel_file = create_test_excel(tmp_path, invalid_timesheet_data)
+    
+        with open(excel_file, "rb") as f:
+            contents = f.read()
+            analyzer = XLSAnalyzer()
+            records = analyzer.read_excel(contents)
+    
+            assert len(records) == 1
+>           assert records[0]['Customer'] is None
+E           AssertionError: assert 'Unassigned' is None
+
+tests/test_file_upload.py:73: AssertionError
+----------------------------- Captured stdout call -----------------------------
+{"timestamp": "2025-02-11T20:40:31.471909", "level": "INFO", "correlation_id": "undefined", "logger": "TimesheetTracker", "message": "Successfully parsed 1 records from Excel file", "context": {}}
+------------------------------ Captured log call -------------------------------
+INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 1 records from Excel file", "timestamp": "2025-02-11T20:40:31.472076", "context": {}}
 _________________________ test_dash_customer_handling __________________________
 
-client = <starlette.testclient.TestClient object at 0x7fe88d357950>
-setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7fe88cb86790>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
-tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-50/test_dash_customer_handling0')
+client = <starlette.testclient.TestClient object at 0x7f5d42be3f50>
+setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7f5d42a0c150>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
+tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-54/test_dash_customer_handling0')
 
     def test_dash_customer_handling(client, setup_test_data, tmp_path):
         """Test handling of dash (-) values in customer field"""
@@ -42,40 +69,38 @@ E        +  where 400 = <Response [400 Bad Request]>.status_code
 
 tests/test_file_upload.py:93: AssertionError
 ----------------------------- Captured stdout call -----------------------------
-{"timestamp": "2025-02-11T20:37:40.819869", "level": "INFO", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5238", "content-type": "multipart/form-data; boundary=a8bd0ada4800ba7415768438cc7c7211"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
-{"timestamp": "2025-02-11T20:37:40.822668", "level": "INFO", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
-{"timestamp": "2025-02-11T20:37:40.823031", "level": "DEBUG", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "TimesheetService initialized", "context": {}}
-{"timestamp": "2025-02-11T20:37:40.823331", "level": "INFO", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
-{"timestamp": "2025-02-11T20:37:40.841968", "level": "INFO", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Successfully parsed 1 records from Excel file", "context": {}}
-{"timestamp": "2025-02-11T20:37:40.871059", "level": "INFO", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Processing 1 entries", "context": {}}
-{"timestamp": "2025-02-11T20:37:40.871379", "level": "DEBUG", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Starting database reference validation", "context": {}}
-{"timestamp": "2025-02-11T20:37:40.871641", "level": "DEBUG", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Converting empty/invalid project ID to Unassigned", "context": {}}
-{"timestamp": "2025-02-11T20:37:40.873788", "level": "DEBUG", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Processed entry: customer=Unassigned, project=None", "context": {}}
-{"timestamp": "2025-02-11T20:37:40.874031", "level": "ERROR", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "context": {}}
-{"timestamp": "2025-02-11T20:37:40.874402", "level": "ERROR", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Error processing timesheet: 400: Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "context": {}}
-{"timestamp": "2025-02-11T20:37:40.874665", "level": "ERROR", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Error processing timesheet: 400: Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "context": {}}
-{"timestamp": "2025-02-11T20:37:40.875447", "level": "WARNING", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Request failed with status 400", "context": {"correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "status_code": 400, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "55.64", "response_headers": {"content-length": "83", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
-{"timestamp": "2025-02-11T20:37:40.875924", "level": "DEBUG", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 400}}
+{"timestamp": "2025-02-11T20:40:31.645657", "level": "INFO", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5237", "content-type": "multipart/form-data; boundary=88dc27d77c637f9d281d12851e39e37d"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+{"timestamp": "2025-02-11T20:40:31.648590", "level": "INFO", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
+{"timestamp": "2025-02-11T20:40:31.648894", "level": "DEBUG", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "TimesheetService initialized", "context": {}}
+{"timestamp": "2025-02-11T20:40:31.649155", "level": "INFO", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
+{"timestamp": "2025-02-11T20:40:31.662938", "level": "INFO", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Successfully parsed 1 records from Excel file", "context": {}}
+{"timestamp": "2025-02-11T20:40:31.699361", "level": "INFO", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Processing 1 entries", "context": {}}
+{"timestamp": "2025-02-11T20:40:31.699738", "level": "DEBUG", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Starting database reference validation", "context": {}}
+{"timestamp": "2025-02-11T20:40:31.700049", "level": "DEBUG", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Processed entry: customer=Unassigned, project=Unassigned", "context": {}}
+{"timestamp": "2025-02-11T20:40:31.700351", "level": "ERROR", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "context": {}}
+{"timestamp": "2025-02-11T20:40:31.700847", "level": "ERROR", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Error processing timesheet: 400: Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "context": {}}
+{"timestamp": "2025-02-11T20:40:31.701172", "level": "ERROR", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Error processing timesheet: 400: Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "context": {}}
+{"timestamp": "2025-02-11T20:40:31.702011", "level": "WARNING", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Request failed with status 400", "context": {"correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "status_code": 400, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "56.59", "response_headers": {"content-length": "83", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+{"timestamp": "2025-02-11T20:40:31.702583", "level": "DEBUG", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 400}}
 ------------------------------ Captured log call -------------------------------
-INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T20:37:40.820083", "context": {"correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5238", "content-type": "multipart/form-data; boundary=a8bd0ada4800ba7415768438cc7c7211"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:37:40.822785", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "TimesheetService initialized", "timestamp": "2025-02-11T20:37:40.823133", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:37:40.823445", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 1 records from Excel file", "timestamp": "2025-02-11T20:37:40.842083", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Processing 1 entries", "timestamp": "2025-02-11T20:37:40.871173", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting database reference validation", "timestamp": "2025-02-11T20:37:40.871464", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Converting empty/invalid project ID to Unassigned", "timestamp": "2025-02-11T20:37:40.871740", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Processed entry: customer=Unassigned, project=None", "timestamp": "2025-02-11T20:37:40.873884", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "timestamp": "2025-02-11T20:37:40.874089", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error processing timesheet: 400: Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "timestamp": "2025-02-11T20:37:40.874462", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error processing timesheet: 400: Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "timestamp": "2025-02-11T20:37:40.874730", "context": {}}
-WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 400", "timestamp": "2025-02-11T20:37:40.875612", "context": {"correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "status_code": 400, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "55.64", "response_headers": {"content-length": "83", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
-DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T20:37:40.876014", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 400}}
+INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T20:40:31.645812", "context": {"correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5237", "content-type": "multipart/form-data; boundary=88dc27d77c637f9d281d12851e39e37d"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:40:31.648697", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "TimesheetService initialized", "timestamp": "2025-02-11T20:40:31.648998", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:40:31.649247", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 1 records from Excel file", "timestamp": "2025-02-11T20:40:31.663059", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing 1 entries", "timestamp": "2025-02-11T20:40:31.699552", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting database reference validation", "timestamp": "2025-02-11T20:40:31.699865", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Processed entry: customer=Unassigned, project=Unassigned", "timestamp": "2025-02-11T20:40:31.700153", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "timestamp": "2025-02-11T20:40:31.700477", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error processing timesheet: 400: Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "timestamp": "2025-02-11T20:40:31.700965", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error processing timesheet: 400: Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "timestamp": "2025-02-11T20:40:31.701275", "context": {}}
+WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 400", "timestamp": "2025-02-11T20:40:31.702160", "context": {"correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "status_code": 400, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "56.59", "response_headers": {"content-length": "83", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T20:40:31.702691", "context": {"correlation_id": null, "method": "POST", "path": "/time-entries/upload/", "status_code": 400}}
 ___________________________ test_upload_excel_valid ____________________________
 
-client = <starlette.testclient.TestClient object at 0x7fe88b53e0d0>
-setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7fe88afa48d0>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
-tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-50/test_upload_excel_valid0')
+client = <starlette.testclient.TestClient object at 0x7f5d42abbe90>
+setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7f5d431c8790>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
+tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-54/test_upload_excel_valid0')
 valid_timesheet_data = {'Category': ['Development', 'Testing'], 'Customer': ['ECOLAB', 'ECOLAB'], 'Date': ['2024-10-07', '2024-10-07'], 'Hours': [8.0, 4.0], ...}
 
     def test_upload_excel_valid(client, setup_test_data, tmp_path, valid_timesheet_data):
@@ -94,40 +119,63 @@ E        +  where 400 = <Response [400 Bad Request]>.status_code
 
 tests/test_file_upload.py:109: AssertionError
 ----------------------------- Captured stdout call -----------------------------
-{"timestamp": "2025-02-11T20:37:41.009558", "level": "INFO", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5398", "content-type": "multipart/form-data; boundary=f88b379cf7cceda4b0d3e60c35d32bef"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
-{"timestamp": "2025-02-11T20:37:41.011818", "level": "INFO", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
-{"timestamp": "2025-02-11T20:37:41.012084", "level": "DEBUG", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "TimesheetService initialized", "context": {}}
-{"timestamp": "2025-02-11T20:37:41.012343", "level": "INFO", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
-{"timestamp": "2025-02-11T20:37:41.022573", "level": "INFO", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Successfully parsed 2 records from Excel file", "context": {}}
-{"timestamp": "2025-02-11T20:37:41.046011", "level": "INFO", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Processing 2 entries", "context": {}}
-{"timestamp": "2025-02-11T20:37:41.046291", "level": "DEBUG", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Starting database reference validation", "context": {}}
-{"timestamp": "2025-02-11T20:37:41.048509", "level": "DEBUG", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Processed entry: customer=ECOLAB, project=Project_Magic_Bullet", "context": {}}
-{"timestamp": "2025-02-11T20:37:41.049437", "level": "DEBUG", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Processed entry: customer=ECOLAB, project=Project_Magic_Bullet", "context": {}}
-{"timestamp": "2025-02-11T20:37:41.049777", "level": "ERROR", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "context": {}}
-{"timestamp": "2025-02-11T20:37:41.050223", "level": "ERROR", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Error processing timesheet: 400: Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "context": {}}
-{"timestamp": "2025-02-11T20:37:41.050567", "level": "ERROR", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Error processing timesheet: 400: Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "context": {}}
-{"timestamp": "2025-02-11T20:37:41.051426", "level": "WARNING", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Request failed with status 400", "context": {"correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "status_code": 400, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "42.01", "response_headers": {"content-length": "83", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
-{"timestamp": "2025-02-11T20:37:41.052045", "level": "DEBUG", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "method": "POST", "path": "/time-entries/upload/", "status_code": 400}}
+{"timestamp": "2025-02-11T20:40:31.791921", "level": "INFO", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5397", "content-type": "multipart/form-data; boundary=bffe2cadf700b4039ddc34cea64753dd"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+{"timestamp": "2025-02-11T20:40:31.794158", "level": "INFO", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
+{"timestamp": "2025-02-11T20:40:31.794374", "level": "DEBUG", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "TimesheetService initialized", "context": {}}
+{"timestamp": "2025-02-11T20:40:31.794587", "level": "INFO", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
+{"timestamp": "2025-02-11T20:40:31.803857", "level": "INFO", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Successfully parsed 2 records from Excel file", "context": {}}
+{"timestamp": "2025-02-11T20:40:31.844783", "level": "INFO", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Processing 2 entries", "context": {}}
+{"timestamp": "2025-02-11T20:40:31.845084", "level": "DEBUG", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Starting database reference validation", "context": {}}
+{"timestamp": "2025-02-11T20:40:31.848803", "level": "DEBUG", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Processed entry: customer=ECOLAB, project=Project_Magic_Bullet", "context": {}}
+{"timestamp": "2025-02-11T20:40:31.849929", "level": "DEBUG", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Processed entry: customer=ECOLAB, project=Project_Magic_Bullet", "context": {}}
+{"timestamp": "2025-02-11T20:40:31.850292", "level": "ERROR", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "context": {}}
+{"timestamp": "2025-02-11T20:40:31.850759", "level": "ERROR", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Error processing timesheet: 400: Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "context": {}}
+{"timestamp": "2025-02-11T20:40:31.851037", "level": "ERROR", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Error processing timesheet: 400: Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "context": {}}
+{"timestamp": "2025-02-11T20:40:31.851818", "level": "WARNING", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Request failed with status 400", "context": {"correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "status_code": 400, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "59.97", "response_headers": {"content-length": "83", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+{"timestamp": "2025-02-11T20:40:31.852426", "level": "DEBUG", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "method": "POST", "path": "/time-entries/upload/", "status_code": 400}}
 ------------------------------ Captured log call -------------------------------
-INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T20:37:41.009698", "context": {"correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5398", "content-type": "multipart/form-data; boundary=f88b379cf7cceda4b0d3e60c35d32bef"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:37:41.011906", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "TimesheetService initialized", "timestamp": "2025-02-11T20:37:41.012180", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:37:41.012402", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 2 records from Excel file", "timestamp": "2025-02-11T20:37:41.022646", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Processing 2 entries", "timestamp": "2025-02-11T20:37:41.046128", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting database reference validation", "timestamp": "2025-02-11T20:37:41.046382", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Processed entry: customer=ECOLAB, project=Project_Magic_Bullet", "timestamp": "2025-02-11T20:37:41.048615", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Processed entry: customer=ECOLAB, project=Project_Magic_Bullet", "timestamp": "2025-02-11T20:37:41.049568", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "timestamp": "2025-02-11T20:37:41.049888", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error processing timesheet: 400: Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "timestamp": "2025-02-11T20:37:41.050324", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error processing timesheet: 400: Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "timestamp": "2025-02-11T20:37:41.050667", "context": {}}
-WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 400", "timestamp": "2025-02-11T20:37:41.051639", "context": {"correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "status_code": 400, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "42.01", "response_headers": {"content-length": "83", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
-DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T20:37:41.052120", "context": {"correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "method": "POST", "path": "/time-entries/upload/", "status_code": 400}}
+INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T20:40:31.792067", "context": {"correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5397", "content-type": "multipart/form-data; boundary=bffe2cadf700b4039ddc34cea64753dd"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:40:31.794232", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "TimesheetService initialized", "timestamp": "2025-02-11T20:40:31.794448", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:40:31.794638", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 2 records from Excel file", "timestamp": "2025-02-11T20:40:31.803970", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing 2 entries", "timestamp": "2025-02-11T20:40:31.844927", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting database reference validation", "timestamp": "2025-02-11T20:40:31.845176", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Processed entry: customer=ECOLAB, project=Project_Magic_Bullet", "timestamp": "2025-02-11T20:40:31.848937", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Processed entry: customer=ECOLAB, project=Project_Magic_Bullet", "timestamp": "2025-02-11T20:40:31.850051", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "timestamp": "2025-02-11T20:40:31.850405", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error processing timesheet: 400: Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "timestamp": "2025-02-11T20:40:31.850867", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error processing timesheet: 400: Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "timestamp": "2025-02-11T20:40:31.851137", "context": {}}
+WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 400", "timestamp": "2025-02-11T20:40:31.851972", "context": {"correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "status_code": 400, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "59.97", "response_headers": {"content-length": "83", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T20:40:31.852579", "context": {"correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "method": "POST", "path": "/time-entries/upload/", "status_code": 400}}
+______________________ test_xls_analyzer_missing_columns _______________________
+
+tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-54/test_xls_analyzer_missing_colu0')
+
+    def test_xls_analyzer_missing_columns(tmp_path):
+        """Test XLSAnalyzer with missing required columns"""
+        data = {'Category': ['Test'], 'Hours': [8.0]}
+        excel_file = create_test_excel(tmp_path, data)
+    
+        with open(excel_file, "rb") as f:
+            contents = f.read()
+            analyzer = XLSAnalyzer()
+            records = analyzer.read_excel(contents)
+    
+            assert len(records) == 1
+>           assert records[0]['Customer'] is None
+E           AssertionError: assert 'Unassigned' is None
+
+tests/test_file_upload.py:144: AssertionError
+----------------------------- Captured stdout call -----------------------------
+{"timestamp": "2025-02-11T20:40:31.877051", "level": "INFO", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Successfully parsed 1 records from Excel file", "context": {}}
+------------------------------ Captured log call -------------------------------
+INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 1 records from Excel file", "timestamp": "2025-02-11T20:40:31.877168", "context": {}}
 ___________________________ test_upload_excel_valid ____________________________
 
-client = <starlette.testclient.TestClient object at 0x7fe88afd22d0>
-setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7fe88afa5190>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
-tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-50/test_upload_excel_valid1')
+client = <starlette.testclient.TestClient object at 0x7f5d42af6b50>
+setup_test_data = {'customers': [<models.customerModel.Customer object at 0x7f5d4193a390>, <models.customerModel.Customer object at 0x7f...project_id=Unassigned, name=Unassigned)>, <Project(id=2, project_id=Project_Magic_Bullet, name=Project Magic Bullet)>]}
+tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-54/test_upload_excel_valid1')
 
     def test_upload_excel_valid(client, setup_test_data, tmp_path):
         """Test uploading a valid Excel file"""
@@ -161,35 +209,64 @@ E        +  where 400 = <Response [400 Bad Request]>.status_code
 
 tests/test_routes.py:196: AssertionError
 ----------------------------- Captured stdout call -----------------------------
-{"timestamp": "2025-02-11T20:37:41.124746", "level": "INFO", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5383", "content-type": "multipart/form-data; boundary=68e7cf15ef912b2b22701c26d594d60d"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
-{"timestamp": "2025-02-11T20:37:41.126907", "level": "INFO", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
-{"timestamp": "2025-02-11T20:37:41.127252", "level": "DEBUG", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "TimesheetService initialized", "context": {}}
-{"timestamp": "2025-02-11T20:37:41.127605", "level": "INFO", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
-{"timestamp": "2025-02-11T20:37:41.137860", "level": "INFO", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Successfully parsed 2 records from Excel file", "context": {}}
-{"timestamp": "2025-02-11T20:37:41.159936", "level": "INFO", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Processing 2 entries", "context": {}}
-{"timestamp": "2025-02-11T20:37:41.160251", "level": "DEBUG", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Starting database reference validation", "context": {}}
-{"timestamp": "2025-02-11T20:37:41.161357", "level": "DEBUG", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Processed entry: customer=ECOLAB, project=Project_Magic_Bullet", "context": {}}
-{"timestamp": "2025-02-11T20:37:41.162393", "level": "DEBUG", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Processed entry: customer=ECOLAB, project=Project_Magic_Bullet", "context": {}}
-{"timestamp": "2025-02-11T20:37:41.162784", "level": "ERROR", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "context": {}}
-{"timestamp": "2025-02-11T20:37:41.163216", "level": "ERROR", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Error processing timesheet: 400: Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "context": {}}
-{"timestamp": "2025-02-11T20:37:41.163521", "level": "ERROR", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Error processing timesheet: 400: Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "context": {}}
-{"timestamp": "2025-02-11T20:37:41.164263", "level": "WARNING", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Request failed with status 400", "context": {"correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "status_code": 400, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "39.60", "response_headers": {"content-length": "83", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
-{"timestamp": "2025-02-11T20:37:41.164784", "level": "DEBUG", "correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "method": "POST", "path": "/time-entries/upload/", "status_code": 400}}
+{"timestamp": "2025-02-11T20:40:31.981722", "level": "INFO", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Incoming request", "context": {"correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5382", "content-type": "multipart/form-data; boundary=df9d7cc16d5fcca039451974dee49f7f"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+{"timestamp": "2025-02-11T20:40:31.983744", "level": "INFO", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
+{"timestamp": "2025-02-11T20:40:31.983969", "level": "DEBUG", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "TimesheetService initialized", "context": {}}
+{"timestamp": "2025-02-11T20:40:31.984200", "level": "INFO", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Processing timesheet upload: test.xlsx", "context": {}}
+{"timestamp": "2025-02-11T20:40:31.993714", "level": "INFO", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Successfully parsed 2 records from Excel file", "context": {}}
+{"timestamp": "2025-02-11T20:40:32.028817", "level": "INFO", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Processing 2 entries", "context": {}}
+{"timestamp": "2025-02-11T20:40:32.029218", "level": "DEBUG", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Starting database reference validation", "context": {}}
+{"timestamp": "2025-02-11T20:40:32.030363", "level": "DEBUG", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Processed entry: customer=ECOLAB, project=Project_Magic_Bullet", "context": {}}
+{"timestamp": "2025-02-11T20:40:32.031464", "level": "DEBUG", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Processed entry: customer=ECOLAB, project=Project_Magic_Bullet", "context": {}}
+{"timestamp": "2025-02-11T20:40:32.031768", "level": "ERROR", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "context": {}}
+{"timestamp": "2025-02-11T20:40:32.032220", "level": "ERROR", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Error processing timesheet: 400: Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "context": {}}
+{"timestamp": "2025-02-11T20:40:32.032536", "level": "ERROR", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Error processing timesheet: 400: Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "context": {}}
+{"timestamp": "2025-02-11T20:40:32.033265", "level": "WARNING", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Request failed with status 400", "context": {"correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "status_code": 400, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "51.71", "response_headers": {"content-length": "83", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+{"timestamp": "2025-02-11T20:40:32.033842", "level": "DEBUG", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Adding CORS headers to response", "context": {"correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "method": "POST", "path": "/time-entries/upload/", "status_code": 400}}
 ------------------------------ Captured log call -------------------------------
-INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T20:37:41.125017", "context": {"correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5383", "content-type": "multipart/form-data; boundary=68e7cf15ef912b2b22701c26d594d60d"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:37:41.127021", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "TimesheetService initialized", "timestamp": "2025-02-11T20:37:41.127347", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:37:41.127696", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 2 records from Excel file", "timestamp": "2025-02-11T20:37:41.137972", "context": {}}
-INFO     TimesheetTracker:logger.py:32 {"message": "Processing 2 entries", "timestamp": "2025-02-11T20:37:41.160084", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting database reference validation", "timestamp": "2025-02-11T20:37:41.160347", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Processed entry: customer=ECOLAB, project=Project_Magic_Bullet", "timestamp": "2025-02-11T20:37:41.161470", "context": {}}
-DEBUG    TimesheetTracker:logger.py:32 {"message": "Processed entry: customer=ECOLAB, project=Project_Magic_Bullet", "timestamp": "2025-02-11T20:37:41.162556", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "timestamp": "2025-02-11T20:37:41.162887", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error processing timesheet: 400: Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "timestamp": "2025-02-11T20:37:41.163314", "context": {}}
-ERROR    TimesheetTracker:logger.py:32 {"message": "Error processing timesheet: 400: Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "timestamp": "2025-02-11T20:37:41.163619", "context": {}}
-WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 400", "timestamp": "2025-02-11T20:37:41.164397", "context": {"correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "status_code": 400, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "39.60", "response_headers": {"content-length": "83", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
-DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T20:37:41.164913", "context": {"correlation_id": "8a7bce4b-1f96-4dfa-aee2-3423b0dd99db", "method": "POST", "path": "/time-entries/upload/", "status_code": 400}}
+INFO     TimesheetTracker:logger.py:29 {"message": "Incoming request", "timestamp": "2025-02-11T20:40:31.981898", "context": {"correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "method": "POST", "url": "http://testserver/time-entries/upload/", "client_host": "testclient", "headers": {"host": "testserver", "accept": "*/*", "accept-encoding": "gzip, deflate", "connection": "keep-alive", "user-agent": "testclient", "content-length": "5382", "content-type": "multipart/form-data; boundary=df9d7cc16d5fcca039451974dee49f7f"}, "path_params": {}, "query_params": {}, "request_id": null, "path": "/time-entries/upload/"}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:40:31.983815", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "TimesheetService initialized", "timestamp": "2025-02-11T20:40:31.984078", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing timesheet upload: test.xlsx", "timestamp": "2025-02-11T20:40:31.984250", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 2 records from Excel file", "timestamp": "2025-02-11T20:40:31.993818", "context": {}}
+INFO     TimesheetTracker:logger.py:32 {"message": "Processing 2 entries", "timestamp": "2025-02-11T20:40:32.029021", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Starting database reference validation", "timestamp": "2025-02-11T20:40:32.029343", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Processed entry: customer=ECOLAB, project=Project_Magic_Bullet", "timestamp": "2025-02-11T20:40:32.030549", "context": {}}
+DEBUG    TimesheetTracker:logger.py:32 {"message": "Processed entry: customer=ECOLAB, project=Project_Magic_Bullet", "timestamp": "2025-02-11T20:40:32.031598", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "timestamp": "2025-02-11T20:40:32.031869", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error processing timesheet: 400: Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "timestamp": "2025-02-11T20:40:32.032335", "context": {}}
+ERROR    TimesheetTracker:logger.py:32 {"message": "Error processing timesheet: 400: Error during bulk creation: 'TimeEntry' object has no attribute 'dict'", "timestamp": "2025-02-11T20:40:32.032649", "context": {}}
+WARNING  TimesheetTracker:logger.py:29 {"message": "Request failed with status 400", "timestamp": "2025-02-11T20:40:32.033436", "context": {"correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "status_code": 400, "method": "POST", "url": "http://testserver/time-entries/upload/", "process_time_ms": "51.71", "response_headers": {"content-length": "83", "content-type": "application/json"}, "error_detail": null, "query_params": {}, "path_params": {}, "client_host": "testclient", "path": "/time-entries/upload/", "origin": null, "cors_method": null, "cors_headers": null}}
+DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to response", "timestamp": "2025-02-11T20:40:32.033994", "context": {"correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "method": "POST", "path": "/time-entries/upload/", "status_code": 400}}
+__________________ test_xls_analyzer_dash_to_none_conversion ___________________
+
+tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-54/test_xls_analyzer_dash_to_none0')
+
+    def test_xls_analyzer_dash_to_none_conversion(tmp_path):
+        """Test that dash values are converted to None during Excel parsing"""
+        data = {
+            'Category': ['Development'],
+            'Customer': ['-'],
+            'Project': ['-'],
+            'Hours': [8.0],
+            'Date': ['2024-10-07']
+        }
+        excel_file = create_test_excel(tmp_path, data)
+    
+        with open(excel_file, "rb") as f:
+            contents = f.read()
+            analyzer = XLSAnalyzer()
+            records = analyzer.read_excel(contents)
+    
+            assert len(records) == 1
+>           assert records[0]['Customer'] is None
+E           AssertionError: assert 'Unassigned' is None
+
+tests/test_xls_analyzer.py:22: AssertionError
+----------------------------- Captured stdout call -----------------------------
+{"timestamp": "2025-02-11T20:40:32.058399", "level": "INFO", "correlation_id": "f63ec2c2-ebe3-467e-8b66-0acb2d2a0d01", "logger": "TimesheetTracker", "message": "Successfully parsed 1 records from Excel file", "context": {}}
+------------------------------ Captured log call -------------------------------
+INFO     TimesheetTracker:logger.py:32 {"message": "Successfully parsed 1 records from Excel file", "timestamp": "2025-02-11T20:40:32.058598", "context": {}}
 =============================== warnings summary ===============================
 .pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345
   /home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_config.py:345: UserWarning: Valid config keys have changed in V2:
@@ -198,7 +275,10 @@ DEBUG    TimesheetTracker:logger.py:29 {"message": "Adding CORS headers to respo
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 =========================== short test summary info ============================
+FAILED tests/test_file_upload.py::test_xls_analyzer_invalid_data - AssertionE...
 FAILED tests/test_file_upload.py::test_dash_customer_handling - assert 400 ==...
 FAILED tests/test_file_upload.py::test_upload_excel_valid - assert 400 == 201
+FAILED tests/test_file_upload.py::test_xls_analyzer_missing_columns - Asserti...
 FAILED tests/test_routes.py::test_upload_excel_valid - assert 400 == 201
-================== 3 failed, 6 deselected, 1 warning in 0.81s ==================
+FAILED tests/test_xls_analyzer.py::test_xls_analyzer_dash_to_none_conversion
+================== 6 failed, 6 deselected, 1 warning in 1.12s ==================

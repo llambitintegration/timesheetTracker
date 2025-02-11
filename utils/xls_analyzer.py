@@ -3,6 +3,7 @@ import pandas as pd
 from datetime import datetime
 from io import BytesIO
 from utils.logger import Logger
+from utils.validators import DEFAULT_CUSTOMER, DEFAULT_PROJECT
 
 logger = Logger().get_logger()
 
@@ -34,7 +35,7 @@ class XLSAnalyzer:
                     if col == 'Date':
                         df[col] = pd.Timestamp.now().date()
                     else:
-                        df[col] = '-'
+                        df[col] = DEFAULT_CUSTOMER if col == 'Customer' else DEFAULT_PROJECT if col == 'Project' else '-'
 
             # Drop rows where all elements are NaN
             df = df.dropna(how='all')
@@ -46,8 +47,9 @@ class XLSAnalyzer:
             # Convert Week Number to numeric, replacing non-numeric with 0
             df['Week Number'] = pd.to_numeric(df['Week Number'], errors='coerce').fillna(0).astype('Int64')
 
-            # Replace dash values with None
-            df = df.replace({'-': None})
+            # Replace dash values with defaults for customer and project
+            df['Customer'] = df['Customer'].replace({'-': DEFAULT_CUSTOMER, None: DEFAULT_CUSTOMER})
+            df['Project'] = df['Project'].replace({'-': DEFAULT_PROJECT, None: DEFAULT_PROJECT})
 
             # Fill missing values appropriately
             df['Task Description'] = df['Task Description'].fillna('')
@@ -55,7 +57,6 @@ class XLSAnalyzer:
             df['Category'] = df['Category'].fillna('Other')
             df['Subcategory'] = df['Subcategory'].fillna('Other')
             df['Hours'] = df['Hours'].fillna(0.0)
-            # Customer and Project remain None when missing or dash
 
             # Convert DataFrame to list of dictionaries
             records = df.to_dict('records')
