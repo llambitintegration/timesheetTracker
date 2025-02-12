@@ -247,15 +247,19 @@ class TimeEntryService:
 
     def get_time_entries(
         self,
+        date: Optional[date] = None,
         project_id: Optional[str] = None,
         customer_name: Optional[str] = None,
         skip: int = 0,
         limit: int = 100
     ) -> List[TimeEntry]:
         """Retrieve time entries with filters."""
-        logger.debug(f"Retrieving time entries with filters: project_id={project_id}, customer={customer_name}")
+        logger.debug(f"Retrieving time entries with filters: date={date}, project_id={project_id}, customer={customer_name}")
         query = self.db.query(TimeEntry)
 
+        if date:
+            logger.debug(f"Applying date filter: {date}")
+            query = query.filter(TimeEntry.date == date)
         if project_id:
             logger.debug(f"Applying project filter: {project_id}")
             query = query.filter(TimeEntry.project == normalize_project_id(project_id))

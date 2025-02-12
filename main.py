@@ -113,13 +113,14 @@ async def health_check(request: Request):
 
 @app.get("/time-entries", response_model=List[schemas.TimeEntry])
 def get_time_entries(
+    date: date = Query(default=None),
     skip: int = Query(default=0, ge=0),
     limit: int = Query(default=100, ge=1, le=1000),
     db: Session = Depends(get_db)
 ):
-    """Get paginated time entries"""
-    service = TimesheetService(db)
-    return service.get_entries(skip=skip, limit=limit)
+    """Get paginated time entries for a specific date"""
+    service = TimeEntryService(db)
+    return service.get_time_entries(date=date, skip=skip, limit=limit)
 
 @app.post("/time-entries", response_model=schemas.TimeEntry, status_code=201)
 def create_time_entry(entry: schemas.TimeEntryCreate, db: Session = Depends(get_db)):
