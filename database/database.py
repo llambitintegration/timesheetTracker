@@ -12,7 +12,10 @@ load_dotenv()
 logger = Logger().get_logger()
 
 # Database configuration
-DATABASE_URL = "postgresql://neondb_owner:****************@ep-damp-art-a8ixdln.eastus2.azure.neon.tech/neondb?sslmode=require"
+DATABASE_URL = os.environ.get('DATABASE_URL')
+if not DATABASE_URL:
+    logger.error("DATABASE_URL environment variable is not set")
+    raise ValueError("DATABASE_URL environment variable is required")
 
 try:
     logger.info("Creating database engine with connection settings")
