@@ -11,16 +11,25 @@ load_dotenv()
 
 logger = Logger().get_logger()
 
-# Get database URL from environment with proper error handling
-DATABASE_URL = os.environ.get('DATABASE_URL')
-if not DATABASE_URL:
-    logger.error("DATABASE_URL not found in environment")
-    raise ValueError("DATABASE_URL environment variable is not set. Please add it to your environment variables.")
+# Get database credentials from environment variables
+PGHOST = os.environ.get('PGHOST')
+PGDATABASE = os.environ.get('PGDATABASE')
+PGUSER = os.environ.get('PGUSER')
+PGPASSWORD = os.environ.get('PGPASSWORD')
 
-# Ensure proper PostgreSQL driver and log the connection attempt
-logger.info(f"Attempting to connect to database at: {DATABASE_URL.split('@')[1]}")  # Log only host/db part
-if DATABASE_URL.startswith('postgresql://'):
-    DATABASE_URL = DATABASE_URL.replace('postgresql://', 'postgresql+psycopg2://')
+# Validate all required environment variables are present
+missing_vars = []
+for var in ['PGHOST', 'PGDATABASE', 'PGUSER', 'PGPASSWORD']:
+    if not os.environ.get(var):
+        missing_vars.append(var)
+
+if missing_vars:
+    error_msg = f"Missing required environment variables: {', '.join(missing_vars)}"
+    logger.error(error_msg)
+    raise ValueError(error_msg)
+
+# Construct DATABASE_URL from individual credentials
+DATABASE_URL = f"postgresql+psycopg2://{PGUSER}:{PGPASSWORD}@{PGHOST}/{PGDATABASE}"
 
 try:
     # Create engine with proper configuration and connection pooling
@@ -34,7 +43,8 @@ try:
             "keepalives": 1,
             "keepalives_idle": 30,
             "keepalives_interval": 10,
-            "keepalives_count": 5
+            "keepalives_count": 5,
+            "sslmode": 'require'  # Added for Neon.tech requirement
         }
     )
     logger.info("Database engine created successfully")
@@ -46,7 +56,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 def verify_database():
     """Verify database connection and schema"""
-    logger.info(f"Verifying database connection and schema")
+    logger.info("Verifying database connection and schema")
     try:
         with engine.connect() as conn:
             # Test basic connection

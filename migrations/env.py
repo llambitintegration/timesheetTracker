@@ -20,12 +20,25 @@ load_dotenv()
 # access to the values within the .ini file in use.
 config = context.config
 
-# Fetch the DATABASE_URL from environment variables
-database_url = os.environ.get('DATABASE_URL')
-if database_url is None:
-    raise ValueError("DATABASE_URL environment variable is not set")
+# Get database credentials from environment
+PGHOST = os.environ.get('PGHOST')
+PGDATABASE = os.environ.get('PGDATABASE')
+PGUSER = os.environ.get('PGUSER')
+PGPASSWORD = os.environ.get('PGPASSWORD')
 
-# Override sqlalchemy.url with DATABASE_URL environment variable
+# Validate all required environment variables are present
+missing_vars = []
+for var in ['PGHOST', 'PGDATABASE', 'PGUSER', 'PGPASSWORD']:
+    if not os.environ.get(var):
+        missing_vars.append(var)
+
+if missing_vars:
+    raise ValueError(f"Missing required environment variables: {', '.join(missing_vars)}")
+
+# Construct database URL
+database_url = f"postgresql+psycopg2://{PGUSER}:{PGPASSWORD}@{PGHOST}/{PGDATABASE}"
+
+# Override sqlalchemy.url with constructed database URL
 config.set_main_option('sqlalchemy.url', database_url)
 
 # Setup custom logger
@@ -56,7 +69,11 @@ def run_migrations_online() -> None:
         configuration = config.get_section(config.config_ini_section)
         if not isinstance(configuration, dict):
             configuration = {}
-        configuration["sqlalchemy.url"] = database_url
+
+        # Add SSL mode for Neon.tech
+        if 'sqlalchemy.url' not in configuration:
+            configuration['sqlalchemy.url'] = database_url
+        configuration['sqlalchemy.connect_args'] = {'sslmode': 'require'}
 
         # Create our connectable
         connectable = engine_from_config(

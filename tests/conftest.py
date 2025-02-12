@@ -8,29 +8,37 @@ from models.baseModel import Base
 from database.database import get_db
 from main import app
 
-# Test database URL - using SQLite for tests
-TEST_DATABASE_URL = "sqlite:///./test.db"
+# Use environment variables for test database
+PGHOST = os.environ.get('PGHOST')
+PGDATABASE = os.environ.get('PGDATABASE', 'test_db')
+PGUSER = os.environ.get('PGUSER')
+PGPASSWORD = os.environ.get('PGPASSWORD')
+
+# Construct test database URL
+TEST_DATABASE_URL = f"postgresql+psycopg2://{PGUSER}:{PGPASSWORD}@{PGHOST}/{PGDATABASE}"
 
 @pytest.fixture(scope="session")
 def test_engine():
     """Create test database engine"""
-    if os.path.exists("./test.db"):
-        os.remove("./test.db")
-    
     engine = create_engine(
         TEST_DATABASE_URL,
-        connect_args={"timeout": 60}
+        pool_pre_ping=True,
+        connect_args={
+            "sslmode": "require",
+            "keepalives": 1,
+            "keepalives_idle": 30,
+            "keepalives_interval": 10,
+            "keepalives_count": 5
+        }
     )
-    
+
     # Import all models to ensure they're registered
     from models import TimeEntry, Customer, Project, ProjectManager
     Base.metadata.create_all(bind=engine)
-    
+
     yield engine
-    
+
     Base.metadata.drop_all(bind=engine)
-    if os.path.exists("./test.db"):
-        os.remove("./test.db")
 
 @pytest.fixture(scope="function")
 def db_session(test_engine):
