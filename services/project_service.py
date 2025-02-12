@@ -160,6 +160,17 @@ class ProjectService:
             # Update only the fields that are provided
             update_data = project_update.model_dump(exclude={'id', 'created_at', 'updated_at'}, exclude_unset=True)
 
+            # If project manager is being updated, ensure they exist
+            if 'project_manager' in update_data and update_data['project_manager'] != '-':
+                if not self._ensure_project_manager_exists(update_data['project_manager']):
+                    # Auto-create project manager
+                    pm_data = schemas.ProjectManagerCreate(
+                        name=update_data['project_manager'],
+                        email=f"{update_data['project_manager'].lower().replace(' ', '.')}@company.com"
+                    )
+                    self.pm_repo.create(self.db, pm_data.model_dump())
+                    logger.info(f"Created new project manager: {update_data['project_manager']}")
+
             for key, value in update_data.items():
                 setattr(existing_project, key, value)
 
