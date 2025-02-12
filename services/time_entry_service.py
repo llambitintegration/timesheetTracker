@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from typing import List, Optional, Dict, Any
 from fastapi import HTTPException, BackgroundTasks
-from datetime import datetime
+from datetime import datetime, date
 from database import schemas
 from models.timeEntry import TimeEntry
 from utils.logger import Logger
