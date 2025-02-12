@@ -122,6 +122,10 @@ def init_database():
         logger.info("Initializing database tables")
         # Import all models to ensure they're registered with metadata
         from models import Customer, ProjectManager, Project, TimeEntry
+        from utils.validators import DEFAULT_CUSTOMER, DEFAULT_PROJECT
+        from database.customer_repository import CustomerRepository
+        from database.project_repository import ProjectRepository
+        from database import schemas
 
         inspector = inspect(engine)
         existing_tables = inspector.get_table_names()
@@ -131,6 +135,33 @@ def init_database():
         # Create all tables
         Base.metadata.create_all(bind=engine)
         logger.info("Database tables created successfully")
+
+        # Create default customer and project if they don't exist
+        with SessionLocal() as db:
+            customer_repo = CustomerRepository()
+            project_repo = ProjectRepository()
+
+            # Create default customer
+            if not customer_repo.get_by_name(db, DEFAULT_CUSTOMER):
+                default_customer = schemas.CustomerCreate(
+                    name=DEFAULT_CUSTOMER,
+                    contact_email="unassigned@example.com",
+                    status="active"
+                )
+                customer_repo.create(db, default_customer)
+                logger.info(f"Created default customer: {DEFAULT_CUSTOMER}")
+
+            # Create default project
+            if not project_repo.get_by_project_id(db, DEFAULT_PROJECT):
+                default_project = schemas.ProjectCreate(
+                    project_id=DEFAULT_PROJECT,
+                    name=DEFAULT_PROJECT,
+                    customer=DEFAULT_CUSTOMER,
+                    project_manager="-",
+                    status="active"
+                )
+                project_repo.create(db, default_project)
+                logger.info(f"Created default project: {DEFAULT_PROJECT}")
 
         # Verify tables were created
         new_tables = inspector.get_table_names()
