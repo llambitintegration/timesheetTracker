@@ -12,10 +12,10 @@ load_dotenv()
 logger = Logger().get_logger()
 
 # Get database credentials from environment variables
-PGHOST = os.environ.get('PGHOST')
-PGDATABASE = os.environ.get('PGDATABASE')
-PGUSER = os.environ.get('PGUSER')
-PGPASSWORD = os.environ.get('PGPASSWORD')
+PGHOST = os.environ.get('NEON_HOST', os.environ.get('PGHOST'))
+PGDATABASE = os.environ.get('NEON_DATABASE', os.environ.get('PGDATABASE'))
+PGUSER = os.environ.get('NEON_USER', os.environ.get('PGUSER'))
+PGPASSWORD = os.environ.get('NEON_PASSWORD', os.environ.get('PGPASSWORD'))
 
 # Validate all required environment variables are present
 missing_vars = []
