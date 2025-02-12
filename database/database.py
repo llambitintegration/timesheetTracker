@@ -59,10 +59,13 @@ def verify_database():
     logger.info("Verifying database connection and schema")
     try:
         with engine.connect() as conn:
-            # Test basic connection
-            conn.execute(text("SELECT 1"))
-            logger.info(f"Database driver: {engine.driver}")
-            logger.info(f"Database dialect: {engine.dialect.name}")
+            # Test basic connection and log connection details
+            result = conn.execute(text("SELECT current_database(), current_user, inet_server_addr()::text, version()"))
+            db_info = result.fetchone()
+            logger.info(f"Connected to database: {db_info[0]}")
+            logger.info(f"Database user: {db_info[1]}")
+            logger.info(f"Server address: {db_info[2]}")
+            logger.info(f"Database version: {db_info[3]}")
             logger.info("Successfully connected to database")
 
             # Use SQLAlchemy inspector for schema verification
@@ -84,7 +87,9 @@ def verify_database():
             for table_name in all_tables:
                 if table_name in expected_tables:
                     columns = inspector.get_columns(table_name)
-                    logger.debug(f"Table {table_name} exists with {len(columns)} columns")
+                    logger.info(f"Table {table_name} exists with {len(columns)} columns")
+                    for column in columns:
+                        logger.debug(f"Column in {table_name}: {column['name']} ({column['type']})")
 
             logger.info("Database verification completed successfully")
             return True
@@ -103,12 +108,16 @@ def init_database():
         inspector = inspect(engine)
         existing_tables = inspector.get_table_names()
 
-        if not existing_tables:
-            # Create all tables only if none exist
-            Base.metadata.create_all(bind=engine)
-            logger.info("Database tables created successfully")
-        else:
-            logger.info("Tables already exist, skipping creation")
+        logger.info(f"Current tables in database: {', '.join(existing_tables)}")
+
+        # Create all tables
+        Base.metadata.create_all(bind=engine)
+        logger.info("Database tables created successfully")
+
+        # Verify tables were created
+        new_tables = inspector.get_table_names()
+        logger.info(f"Tables after initialization: {', '.join(new_tables)}")
+
         return True
     except Exception as e:
         logger.error(f"Failed to initialize database: {str(e)}")
