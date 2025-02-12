@@ -27,6 +27,9 @@ class XLSAnalyzer:
         try:
             logger.debug("Starting Excel file analysis")
 
+            if not file_contents:
+                raise ValueError("Empty file contents provided")
+
             # Read Excel file efficiently with specified data types
             df = pd.read_excel(
                 BytesIO(file_contents),
@@ -46,9 +49,6 @@ class XLSAnalyzer:
                 keep_default_na=True
             )
 
-            total_rows = len(df)
-            logger.info(f"Found {total_rows} rows in Excel file")
-
             # Verify all required columns exist
             missing_columns = XLSAnalyzer.REQUIRED_COLUMNS - set(df.columns)
             if missing_columns:
@@ -57,30 +57,23 @@ class XLSAnalyzer:
                         df[col] = 0
                     elif col == 'Hours':
                         df[col] = 0.0
-                    elif col == 'Customer' or col == 'Project':
-                        df[col] = DEFAULT_CUSTOMER if col == 'Customer' else DEFAULT_PROJECT
+                    elif col == 'Customer':
+                        df[col] = DEFAULT_CUSTOMER
+                    elif col == 'Project':
+                        df[col] = DEFAULT_PROJECT
                     else:
                         df[col] = ''
 
             # Drop completely empty rows
             df = df.dropna(how='all')
 
-            # Fill missing values vectorized with defaults
-            default_values = {
-                'Week Number': 0,
-                'Month': '',
-                'Category': 'Other',
-                'Subcategory': 'General',
-                'Customer': DEFAULT_CUSTOMER,
-                'Project': DEFAULT_PROJECT,
-                'Task Description': '',
-                'Hours': 0.0
-            }
-
             # Clean string columns using vectorized operations
             string_columns = ['Month', 'Category', 'Subcategory', 'Customer', 'Project', 'Task Description']
             for col in string_columns:
-                df[col] = XLSAnalyzer.clean_string_column(df[col], default_values.get(col, ''))
+                df[col] = XLSAnalyzer.clean_string_column(
+                    df[col],
+                    DEFAULT_CUSTOMER if col == 'Customer' else DEFAULT_PROJECT if col == 'Project' else ''
+                )
 
             # Handle numeric columns with vectorized operations
             df['Week Number'] = pd.to_numeric(df['Week Number'], errors='coerce').fillna(0).astype(int)
@@ -102,11 +95,11 @@ class XLSAnalyzer:
                     processed_record = {
                         'Week Number': int(record['Week Number']),
                         'Month': str(record['Month']),
-                        'Category': str(record['Category']),
-                        'Subcategory': str(record['Subcategory']),
-                        'Customer': str(record['Customer']),
-                        'Project': str(record['Project']),
-                        'Task Description': str(record['Task Description']),
+                        'Category': str(record['Category'] or 'Other'),
+                        'Subcategory': str(record['Subcategory'] or 'General'),
+                        'Customer': str(record['Customer'] if record['Customer'] != '-' else DEFAULT_CUSTOMER),
+                        'Project': str(record['Project'] if record['Project'] != '-' else DEFAULT_PROJECT),
+                        'Task Description': str(record['Task Description'] or ''),
                         'Hours': float(record['Hours']),
                         'Date': record['Date'].strftime('%Y-%m-%d')
                     }

@@ -96,11 +96,25 @@ def test_dash_customer_handling(client, setup_test_data, tmp_path):
             files={"file": ("test.xlsx", f, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
         )
 
-    assert response.status_code == 201
-    entries = response.json()["entries"]
-    assert len(entries) == 1
-    assert entries[0]["customer"] == "Unassigned"
-    assert entries[0]["project"] == "Unassigned"
+    assert response.status_code == 202  # Changed to 202 for async processing
+    data = response.json()
+    assert "progress_key" in data
+    assert "total_records" in data
+    assert data["message"] == "Upload processing started"
+
+    # Wait for background processing to complete
+    import time
+    time.sleep(2)
+
+    # Verify entries were created with default values
+    response = client.get("/time-entries")
+    entries = response.json()
+    assert len(entries) > 0
+
+    # Check the most recent entry has default values
+    latest_entry = entries[-1]
+    assert latest_entry["customer"] == "Unassigned"
+    assert latest_entry["project"] == "Unassigned"
 
 def test_upload_excel_valid(client, setup_test_data, tmp_path, valid_timesheet_data):
     """Test uploading a valid Excel file"""
@@ -112,10 +126,11 @@ def test_upload_excel_valid(client, setup_test_data, tmp_path, valid_timesheet_d
             files={"file": ("test.xlsx", f, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
         )
 
-    assert response.status_code == 201
+    assert response.status_code == 202  # Changed from 201 to 202 for async processing
     data = response.json()
-    assert len(data["entries"]) == 2
-    assert data["validation_errors"] == []
+    assert "progress_key" in data
+    assert "total_records" in data
+    assert data["message"] == "Upload processing started"
 
 def test_xls_analyzer_date_conversion(tmp_path):
     """Test date conversion in XLSAnalyzer"""
@@ -181,11 +196,14 @@ def test_upload_excel_creates_customers_and_projects(client, setup_test_data, tm
             files={"file": ("test.xlsx", f, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")}
         )
 
-    assert response.status_code == 201
+    assert response.status_code == 202
     data = response.json()
-    assert len(data["entries"]) == 1
-    assert data["entries"][0]["customer"] == "NEW_CUSTOMER"
-    assert data["entries"][0]["project"] == "NEW_PROJECT"
+    assert "progress_key" in data
+    assert "total_records" in data
+
+    # Wait a bit for background processing
+    import time
+    time.sleep(2)
 
     # Verify customer was created
     response = client.get("/customers/NEW_CUSTOMER")

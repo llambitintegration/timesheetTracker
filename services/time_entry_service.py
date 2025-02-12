@@ -50,11 +50,11 @@ class TimeEntryService:
 
     def _ensure_project_exists(self, project_id: str, customer_name: str) -> str:
         """Ensure project exists, create if not. Return normalized project ID."""
-        if not project_id or project_id == '-':
-            logger.debug("No project ID or dash provided, using default")
-            return DEFAULT_PROJECT
-
         try:
+            if not project_id or project_id == '-':
+                logger.debug("No project ID or dash provided, using default")
+                return DEFAULT_PROJECT
+
             normalized_id = normalize_project_id(project_id)
             if not normalized_id:
                 logger.warning("Project ID normalization failed, using default")
@@ -89,18 +89,20 @@ class TimeEntryService:
         try:
             # Pre-process unique customers and projects for batch creation
             unique_customers = {
-                normalize_customer_name(entry.customer) 
-                for entry in entries 
+                normalize_customer_name(entry.customer)
+                for entry in entries
                 if entry.customer and entry.customer != DEFAULT_CUSTOMER
             }
             unique_projects = {
-                normalize_project_id(entry.project) 
-                for entry in entries 
+                normalize_project_id(entry.project)
+                for entry in entries
                 if entry.project and entry.project != DEFAULT_PROJECT
             }
 
             # Create customers in bulk
             for customer_name in unique_customers:
+                if not customer_name:
+                    continue
                 try:
                     if not self.customer_repo.get_by_name(self.db, customer_name):
                         customer_data = schemas.CustomerCreate(
@@ -115,6 +117,8 @@ class TimeEntryService:
 
             # Create projects in bulk
             for project_id in unique_projects:
+                if not project_id:
+                    continue
                 try:
                     if not self.project_repo.get_by_project_id(self.db, project_id):
                         # Find the associated customer for this project
@@ -124,7 +128,7 @@ class TimeEntryService:
                             project_data = schemas.ProjectCreate(
                                 project_id=project_id,
                                 name=project_id,
-                                customer=customer_name,
+                                customer=customer_name or DEFAULT_CUSTOMER,
                                 status="active"
                             )
                             self.project_repo.create(self.db, project_data)
@@ -218,16 +222,23 @@ class TimeEntryService:
             chunk_size = 100
             chunks = [entries[i:i + chunk_size] for i in range(0, len(entries), chunk_size)]
 
-            created_entries = []
-            for chunk in chunks:
-                processed_entries = await self.process_entries_chunk(chunk, progress_key)
-                created_entries.extend(processed_entries)
+            # Add background task for processing chunks
+            async def process_chunks():
+                created_entries = []
+                for chunk in chunks:
+                    processed_entries = await self.process_entries_chunk(chunk, progress_key)
+                    created_entries.extend(processed_entries)
+                    # Update progress after each chunk
+                    progress = (len(created_entries) / len(entries)) * 100
+                    await self.update_progress(progress_key, progress)
+
+            if background_tasks:
+                background_tasks.add_task(process_chunks)
 
             return {
-                "status": "success",
-                "total_processed": len(created_entries),
-                "total_records": len(records),
-                "progress_key": progress_key
+                "message": "Upload processing started",
+                "progress_key": progress_key,
+                "total_records": len(records)
             }
 
         except Exception as e:
