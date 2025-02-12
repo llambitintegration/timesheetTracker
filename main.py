@@ -98,27 +98,27 @@ async def upload_timesheet(
         logger.error(f"Error processing timesheet: {str(e)}")
         raise HTTPException(status_code=400, detail=str(e))
 
-# Placeholder for GET /projects endpoint
-@app.get("/projects")
-async def get_projects(db: Session = Depends(get_db)):
-    """Get all projects."""
-    #Implementation needed here.
-    return []
+# Projects endpoints
+@app.get("/projects", response_model=List[schemas.Project])
+def get_projects(db: Session = Depends(get_db)):
+    """Get all projects"""
+    from services.project_service import ProjectService
+    service = ProjectService(db)
+    return service.get_projects()
 
-# Placeholder for POST /projects endpoint
-@app.post("/projects")
-async def create_project(project: schemas.ProjectCreate, db: Session = Depends(get_db)):
-    """Create a new project."""
-    #Implementation needed here.
-    return {}
+@app.post("/projects", response_model=schemas.Project)
+def create_project(project: schemas.ProjectCreate, db: Session = Depends(get_db)):
+    """Create a new project"""
+    from services.project_service import ProjectService
+    service = ProjectService(db)
+    return service.create_project(project)
 
-# Placeholder for PUT /projects/{project_id} endpoint
-@app.put("/projects/{project_id}")
-async def update_project(project_id: int, project: schemas.ProjectUpdate, db: Session = Depends(get_db)):
-    """Update an existing project."""
-    #Implementation needed here.
-    return {}
-
+@app.put("/projects/{project_id}", response_model=schemas.Project)
+def update_project(project_id: str, project: schemas.ProjectUpdate, db: Session = Depends(get_db)):
+    """Update an existing project"""
+    from services.project_service import ProjectService
+    service = ProjectService(db)
+    return service.update_project(project_id, project)
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
