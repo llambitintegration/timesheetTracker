@@ -23,7 +23,7 @@ try:
 
     # Create engine with PG secrets from App secrets
     engine = create_engine(
-        f"postgresql://{{os.environ.get('DB_USER')}}:{{os.environ.get('DB_PASSWORD')}}@{{os.environ.get('DB_HOST')}}/{{os.environ.get('DB_NAME')}}",
+        f"postgresql://{os.environ.get('PGUSER')}:{os.environ.get('PGPASSWORD')}@{os.environ.get('PGHOST')}/{os.environ.get('PGDATABASE')}",
         pool_pre_ping=True,
         pool_size=5,
         max_overflow=10,
