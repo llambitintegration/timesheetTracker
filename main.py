@@ -158,15 +158,15 @@ def update_time_entry(
 ):
     """
     Update an existing time entry
-    
+
     Args:
         entry_id: ID of the time entry to update
         entry: TimeEntryUpdate schema containing fields to update
         db: Database session
-        
+
     Returns:
         Updated time entry
-        
+
     Raises:
         HTTPException: If entry not found or validation fails
     """
@@ -186,28 +186,46 @@ def delete_time_entry(entry_id: int, db: Session = Depends(get_db)):
     return service.delete_entry(entry_id)
 
 @app.get("/projects", response_model=List[schemas.Project])
-def get_projects(db: Session = Depends(get_db)):
-    """Get all projects"""
+def get_projects(
+    skip: int = Query(default=0, ge=0),
+    limit: int = Query(default=100, ge=1, le=1000),
+    db: Session = Depends(get_db)
+):
+    """Get all projects with pagination"""
     service = ProjectService(db)
-    return service.get_all_projects()
+    return service.get_all_projects(skip=skip, limit=limit)
 
-@app.post("/projects", response_model=schemas.Project)
+@app.post("/projects", response_model=schemas.Project, status_code=201)
 def create_project(project: schemas.ProjectCreate, db: Session = Depends(get_db)):
     """Create a new project"""
     service = ProjectService(db)
     return service.create_project(project)
 
+@app.get("/projects/{project_id}", response_model=schemas.Project)
+def get_project(project_id: str, db: Session = Depends(get_db)):
+    """Get a specific project by ID"""
+    service = ProjectService(db)
+    project = service.get_project(project_id)
+    if not project:
+        raise HTTPException(status_code=404, detail="Project not found")
+    return project
+
 @app.put("/projects/{project_id}", response_model=schemas.Project)
 def update_project(project_id: str, project: schemas.ProjectUpdate, db: Session = Depends(get_db)):
     """Update an existing project"""
     service = ProjectService(db)
-    return service.update_project(project_id, project)
+    updated_project = service.update_project(project_id, project)
+    if not updated_project:
+        raise HTTPException(status_code=404, detail="Project not found")
+    return updated_project
 
-@app.delete("/projects/{project_id}")
+@app.delete("/projects/{project_id}", status_code=204)
 def delete_project(project_id: str, db: Session = Depends(get_db)):
     """Delete a project"""
     service = ProjectService(db)
-    return service.delete_project(project_id)
+    if not service.delete_project(project_id):
+        raise HTTPException(status_code=404, detail="Project not found")
+    return None
 
 @app.get("/project-managers", response_model=List[schemas.ProjectManager])
 def get_project_managers(db: Session = Depends(get_db)):
@@ -215,11 +233,20 @@ def get_project_managers(db: Session = Depends(get_db)):
     service = ProjectManagerService(db)
     return service.get_all_project_managers()
 
-@app.post("/project-managers", response_model=schemas.ProjectManager)
+@app.post("/project-managers", response_model=schemas.ProjectManager, status_code=201)
 def create_project_manager(manager: schemas.ProjectManagerCreate, db: Session = Depends(get_db)):
     """Create a new project manager"""
     service = ProjectManagerService(db)
     return service.create_project_manager(manager)
+
+@app.get("/project-managers/{email}", response_model=schemas.ProjectManager)
+def get_project_manager(email: str, db: Session = Depends(get_db)):
+    """Get a specific project manager by email"""
+    service = ProjectManagerService(db)
+    manager = service.get_project_manager(email)
+    if not manager:
+        raise HTTPException(status_code=404, detail="Project manager not found")
+    return manager
 
 @app.put("/project-managers/{email}", response_model=schemas.ProjectManager)
 def update_project_manager(
@@ -228,16 +255,27 @@ def update_project_manager(
     db: Session = Depends(get_db)
 ):
     """Update an existing project manager"""
-    service = ProjectManagerService(db)
-    return service.update_project_manager(email, manager)
+    try:
+        service = ProjectManagerService(db)
+        updated_manager = service.update_project_manager(email, manager)
+        if not updated_manager:
+            raise HTTPException(status_code=404, detail="Project manager not found")
+        return updated_manager
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
-@app.delete("/project-managers/{email}")
+@app.delete("/project-managers/{email}", status_code=204)
 def delete_project_manager(email: str, db: Session = Depends(get_db)):
     """Delete a project manager"""
-    service = ProjectManagerService(db)
-    if not email:
-        raise HTTPException(status_code=400, detail="Project manager email is required")
-    return service.delete_project_manager(email)
+    try:
+        service = ProjectManagerService(db)
+        if not email:
+            raise HTTPException(status_code=400, detail="Project manager email is required")
+        if not service.delete_project_manager(email):
+            raise HTTPException(status_code=404, detail="Project manager not found")
+        return None
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
 @app.get("/customers", response_model=List[schemas.Customer])
 def get_customers(db: Session = Depends(get_db)):

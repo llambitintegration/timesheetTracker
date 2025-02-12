@@ -24,7 +24,7 @@ def test_get_project_manager(test_client: TestClient, test_db):
     create_response = test_client.post("/project-managers", json=pm_data)
     assert create_response.status_code == 201  # Changed to 201 for resource creation
 
-    response = test_client.get(f"/project-managers/{pm_data['name']}")
+    response = test_client.get(f"/project-managers/{pm_data['email']}")
     assert response.status_code == 200
     data = response.json()
     assert data["name"] == pm_data["name"]
@@ -32,7 +32,7 @@ def test_get_project_manager(test_client: TestClient, test_db):
 
 def test_get_nonexistent_project_manager(test_client: TestClient, test_db):
     """Test retrieving a non-existent project manager"""
-    response = test_client.get("/project-managers/nonexistent")
+    response = test_client.get("/project-managers/nonexistent@example.com")
     assert response.status_code == 404
     assert "Project manager not found" in response.json()["detail"]
 
@@ -43,23 +43,23 @@ def test_update_project_manager(test_client: TestClient, test_db):
         "email": "update_test.manager@example.com"
     }
     create_response = test_client.post("/project-managers", json=pm_data)
-    assert create_response.status_code == 201  # Changed to 201 for resource creation
+    assert create_response.status_code == 201
 
     update_data = {
-        "email": "updated.manager@example.com"
+        "name": "Updated Manager Name"
     }
-    response = test_client.put(f"/project-managers/{pm_data['name']}", json=update_data)
+    response = test_client.put(f"/project-managers/{pm_data['email']}", json=update_data)
     assert response.status_code == 200
     data = response.json()
-    assert data["email"] == update_data["email"]
-    assert data["name"] == pm_data["name"]
+    assert data["name"] == update_data["name"]
+    assert data["email"] == pm_data["email"]
 
 def test_update_nonexistent_project_manager(test_client: TestClient, test_db):
     """Test updating a non-existent project manager"""
     update_data = {
-        "email": "updated.manager@example.com"
+        "name": "Updated Name"
     }
-    response = test_client.put("/project-managers/nonexistent", json=update_data)
+    response = test_client.put("/project-managers/nonexistent@example.com", json=update_data)
     assert response.status_code == 404
     assert "Project manager not found" in response.json()["detail"]
 
@@ -70,18 +70,18 @@ def test_delete_project_manager(test_client: TestClient, test_db):
         "email": "delete_test.manager@example.com"
     }
     create_response = test_client.post("/project-managers", json=pm_data)
-    assert create_response.status_code == 201  # Changed to 201 for resource creation
+    assert create_response.status_code == 201
 
-    response = test_client.delete(f"/project-managers/{pm_data['name']}")
-    assert response.status_code == 204  # Changed to 204 for successful deletion
+    response = test_client.delete(f"/project-managers/{pm_data['email']}")
+    assert response.status_code == 204
 
     # Verify project manager is deleted
-    get_response = test_client.get(f"/project-managers/{pm_data['name']}")
+    get_response = test_client.get(f"/project-managers/{pm_data['email']}")
     assert get_response.status_code == 404
 
 def test_delete_nonexistent_project_manager(test_client: TestClient, test_db):
     """Test deleting a non-existent project manager"""
-    response = test_client.delete("/project-managers/nonexistent")
+    response = test_client.delete("/project-managers/nonexistent@example.com")
     assert response.status_code == 404
     assert "Project manager not found" in response.json()["detail"]
 

@@ -10,6 +10,7 @@ from utils.validators import (
     DEFAULT_CUSTOMER, DEFAULT_PROJECT, 
     normalize_customer_name, ensure_default_project_manager
 )
+from fastapi import HTTPException
 
 logger = Logger().get_logger()
 
@@ -19,7 +20,7 @@ class ProjectService:
         self.project_repo = ProjectRepository()
         self.customer_repo = CustomerRepository()
         self.pm_repo = ProjectManagerRepository()  # Added PM repository
-        logger.debug("ProjectService initialized with database session")
+        logger.debug("ProjectService initialized")
 
     def _ensure_customer_exists(self, customer_name: str) -> str:
         """Ensure customer exists, return normalized customer name."""
@@ -51,7 +52,7 @@ class ProjectService:
 
         except Exception as e:
             logger.error(f"Error ensuring customer exists: {str(e)}")
-            raise ValueError(f"Failed to validate customer: {str(e)}")
+            raise HTTPException(status_code=500, detail=f"Failed to validate customer: {str(e)}")
 
     def _ensure_project_manager_exists(self, manager_name: str) -> bool:
         """Ensure project manager exists. Return True if exists."""
@@ -62,11 +63,18 @@ class ProjectService:
                 logger.debug(f"Found existing project manager: {manager_name}")
                 return True
 
-            logger.error(f"Project manager not found: {manager_name}")
-            return False
+            # Create project manager if not exists
+            pm_data = schemas.ProjectManagerCreate(
+                name=manager_name,
+                email=f"{manager_name.lower().replace(' ', '.')}@company.com"
+            )
+            self.pm_repo.create(self.db, pm_data.model_dump())
+            logger.info(f"Created new project manager: {manager_name}")
+            return True
+
         except Exception as e:
             logger.error(f"Error verifying project manager: {str(e)}")
-            return False
+            raise HTTPException(status_code=500, detail=f"Failed to verify project manager: {str(e)}")
 
     def create_project(self, project: schemas.ProjectCreate) -> Project:
         """Create a new project with validation."""
@@ -77,27 +85,17 @@ class ProjectService:
             ensure_default_project_manager(self.db)
 
             # Normalize and validate customer
-            customer_name = self._ensure_customer_exists(project.customer)
-            if customer_name == DEFAULT_CUSTOMER and project.customer != DEFAULT_CUSTOMER:
-                logger.error(f"Failed to ensure customer exists: {project.customer}")
-                raise ValueError(f"Could not create or verify customer: {project.customer}")
+            customer_name = self._ensure_customer_exists(project.customer or 'Unassigned')
 
             # Create or validate project manager
-            if project.project_manager != '-':
-                if not self._ensure_project_manager_exists(project.project_manager):
-                    # Auto-create project manager
-                    pm_data = schemas.ProjectManagerCreate(
-                        name=project.project_manager,
-                        email=f"{project.project_manager.lower().replace(' ', '.')}@company.com"
-                    )
-                    self.pm_repo.create(self.db, pm_data.model_dump())
-                    logger.info(f"Created new project manager: {project.project_manager}")
+            if project.project_manager and project.project_manager != '-':
+                self._ensure_project_manager_exists(project.project_manager)
 
             # Check if project already exists
             existing_project = self.project_repo.get_by_project_id(self.db, project.project_id)
             if existing_project:
                 logger.warning(f"Project with ID {project.project_id} already exists")
-                raise ValueError(f"Project with ID {project.project_id} already exists")
+                raise HTTPException(status_code=400, detail=f"Project with ID {project.project_id} already exists")
 
             # Convert pydantic model to dict and create project
             project_data = project.model_dump()
@@ -111,52 +109,44 @@ class ProjectService:
             logger.info(f"Successfully created project: {created_project.project_id}")
             return created_project
 
+        except HTTPException:
+            raise
         except Exception as e:
             logger.error(f"Error creating project: {str(e)}")
             self.db.rollback()
-            raise
+            raise HTTPException(status_code=500, detail=str(e))
 
     def get_project(self, project_id: str) -> Optional[Project]:
         """Retrieve a project by project_id."""
         logger.debug(f"Fetching project with ID: {project_id}")
         project = self.project_repo.get_by_project_id(self.db, project_id)
-        if project:
-            logger.info(f"Found project: {project_id}")
-        else:
-            logger.info(f"No project found with ID: {project_id}")
+        if not project:
+            logger.warning(f"Project not found: {project_id}")
+            raise HTTPException(status_code=404, detail="Project not found")
+        logger.info(f"Found project: {project_id}")
         return project
 
     def get_all_projects(self, skip: int = 0, limit: int = 100) -> List[Project]:
         """Retrieve all projects with pagination."""
         logger.debug(f"Fetching projects with offset={skip}, limit={limit}")
-        projects = self.project_repo.get_all(self.db, skip=skip, limit=limit)
-        logger.info(f"Retrieved {len(projects)} projects")
-        return projects
+        try:
+            projects = self.project_repo.get_all(self.db, skip=skip, limit=limit)
+            logger.info(f"Retrieved {len(projects)} projects")
+            return projects
+        except Exception as e:
+            logger.error(f"Error fetching projects: {str(e)}")
+            raise HTTPException(status_code=500, detail=str(e))
 
-    def get_projects_by_customer(self, customer_name: str) -> List[Project]:
-        """Get all projects for a specific customer."""
-        logger.debug(f"Fetching projects for customer: {customer_name}")
-        projects = self.project_repo.get_by_customer(self.db, customer_name)
-        logger.info(f"Retrieved {len(projects)} projects for customer {customer_name}")
-        return projects
-
-    def get_projects_by_manager(self, manager_name: str) -> List[Project]:
-        """Get all projects for a specific project manager."""
-        logger.debug(f"Fetching projects for manager: {manager_name}")
-        projects = self.project_repo.get_by_project_manager(self.db, manager_name)
-        logger.info(f"Retrieved {len(projects)} projects for manager {manager_name}")
-        return projects
-
-    def update_project(self, project_id: str, project_update: schemas.ProjectBase) -> Optional[Project]:
+    def update_project(self, project_id: str, project_update: schemas.ProjectUpdate) -> Optional[Project]:
         """Update an existing project."""
         logger.debug(f"Attempting to update project {project_id}")
 
-        existing_project = self.get_project(project_id)
-        if not existing_project:
-            logger.warning(f"Project not found: {project_id}")
-            return None
-
         try:
+            existing_project = self.get_project(project_id)
+            if not existing_project:
+                logger.warning(f"Project not found: {project_id}")
+                raise HTTPException(status_code=404, detail="Project not found")
+
             # Update only the fields that are provided
             update_data = project_update.model_dump(exclude={'id', 'created_at', 'updated_at'}, exclude_unset=True)
 
@@ -164,15 +154,8 @@ class ProjectService:
             if 'project_manager' in update_data:
                 if update_data['project_manager'] is None or update_data['project_manager'] == '-':
                     update_data['project_manager'] = DEFAULT_PROJECT_MANAGER
-                elif not self._ensure_project_manager_exists(update_data['project_manager']):
-                    # Auto-create project manager
-                    pm_name = update_data['project_manager']
-                    pm_data = schemas.ProjectManagerCreate(
-                        name=pm_name,
-                        email=f"{pm_name.lower().replace(' ', '.')}@company.com"
-                    )
-                    self.pm_repo.create(self.db, pm_data.model_dump())
-                    logger.info(f"Created new project manager: {pm_name}")
+                else:
+                    self._ensure_project_manager_exists(update_data['project_manager'])
 
             for key, value in update_data.items():
                 setattr(existing_project, key, value)
@@ -181,22 +164,33 @@ class ProjectService:
             logger.info(f"Successfully updated project: {project_id}")
             return updated_project
 
+        except HTTPException:
+            raise
         except Exception as e:
             logger.error(f"Error updating project {project_id}: {str(e)}")
             self.db.rollback()
-            raise
+            raise HTTPException(status_code=500, detail=str(e))
 
     def delete_project(self, project_id: str) -> bool:
         """Delete a project."""
         logger.debug(f"Attempting to delete project: {project_id}")
         try:
+            # First check if project exists
+            existing_project = self.get_project(project_id)
+            if not existing_project:
+                logger.warning(f"Project not found: {project_id}")
+                raise HTTPException(status_code=404, detail="Project not found")
+
             result = self.project_repo.delete(self.db, project_id)
             if result:
                 logger.info(f"Successfully deleted project: {project_id}")
-            else:
-                logger.warning(f"Project not found for deletion: {project_id}")
-            return result
+                return True
+
+            logger.error(f"Failed to delete project: {project_id}")
+            raise HTTPException(status_code=500, detail="Failed to delete project")
+        except HTTPException:
+            raise
         except Exception as e:
             logger.error(f"Error deleting project {project_id}: {str(e)}")
             self.db.rollback()
-            raise
+            raise HTTPException(status_code=500, detail=str(e))
