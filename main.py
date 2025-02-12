@@ -227,7 +227,7 @@ def delete_customer(name: str, db: Session = Depends(get_db)):
 def get_customer(name: str, db: Session = Depends(get_db)):
     """Get a specific customer by name"""
     service = CustomerService(db)
-    customer = service.get_customer_by_name(name)
+    customer = service.get_customer(name)
     if not customer:
         raise HTTPException(status_code=404, detail="Customer not found")
     return customer

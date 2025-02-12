@@ -26,9 +26,14 @@ class CustomerService:
                 raise ValueError(f"Customer with name {customer.name} already exists")
 
             # Convert pydantic model to dict and create customer, excluding ID and timestamps
-            customer_data = customer.model_dump(exclude={'id', 'created_at', 'updated_at'})
+            customer_dict = {
+                "name": customer.name,
+                "contact_email": customer.contact_email,
+                "industry": customer.industry,
+                "status": customer.status 
+            }
             logger.debug("Adding customer to database session")
-            created_customer = self.customer_repo.create(self.db, customer_data)
+            created_customer = self.customer_repo.create(self.db, Customer(**customer_dict))
 
             logger.info(f"Successfully created customer: {created_customer.name}")
             return created_customer
