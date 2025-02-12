@@ -82,10 +82,16 @@ class ProjectService:
                 logger.error(f"Failed to ensure customer exists: {project.customer}")
                 raise ValueError(f"Could not create or verify customer: {project.customer}")
 
-            # Validate project manager if not default
-            if project.project_manager != '-' and not self._ensure_project_manager_exists(project.project_manager):
-                logger.error(f"Project manager not found: {project.project_manager}")
-                raise ValueError(f"Project manager not found: {project.project_manager}")
+            # Create or validate project manager
+            if project.project_manager != '-':
+                if not self._ensure_project_manager_exists(project.project_manager):
+                    # Auto-create project manager
+                    pm_data = schemas.ProjectManagerCreate(
+                        name=project.project_manager,
+                        email=f"{project.project_manager.lower().replace(' ', '.')}@company.com"
+                    )
+                    self.pm_repo.create(self.db, pm_data.model_dump())
+                    logger.info(f"Created new project manager: {project.project_manager}")
 
             # Check if project already exists
             existing_project = self.project_repo.get_by_project_id(self.db, project.project_id)
