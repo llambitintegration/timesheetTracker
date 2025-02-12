@@ -18,6 +18,11 @@ from utils.logger import Logger
 from utils.middleware import logging_middleware, error_logging_middleware
 from utils.structured_log import structured_log
 
+from models.timeEntry import TimeEntry
+from models.projectModel import Project
+from models.projectManagerModel import ProjectManager
+import uvicorn
+
 app = FastAPI()
 logger = Logger().get_logger()
 
@@ -218,6 +223,15 @@ def delete_customer(name: str, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="Customer name is required")
     return service.delete_customer(name)
 
+@app.get("/customers/{name}", response_model=schemas.Customer)
+def get_customer(name: str, db: Session = Depends(get_db)):
+    """Get a specific customer by name"""
+    service = CustomerService(db)
+    customer = service.get_customer_by_name(name)
+    if not customer:
+        raise HTTPException(status_code=404, detail="Customer not found")
+    return customer
+
 @app.post("/time-entries/upload/")
 async def upload_timesheet(
     file: UploadFile = File(...),
@@ -381,10 +395,7 @@ def create_sample_data(db: Session = Depends(get_db)):
 
     return {"message": f"Created {len(created_entries)} sample entries"}
 
-from models.timeEntry import TimeEntry
-from models.projectModel import Project
-from models.projectManagerModel import ProjectManager
-import uvicorn
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)

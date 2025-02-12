@@ -35,14 +35,14 @@ class XLSAnalyzer:
                 BytesIO(file_contents),
                 sheet_name=0,
                 dtype={
-                    'Week Number': 'Int64',
+                    'Week Number': 'object',  # Changed from Int64 to handle invalid data
                     'Month': 'str',
                     'Category': 'str',
                     'Subcategory': 'str',
                     'Customer': 'str',
                     'Project': 'str',
                     'Task Description': 'str',
-                    'Hours': 'float64',
+                    'Hours': 'object',  # Changed from float64 to handle invalid data
                     'Date': 'datetime64[ns]'
                 },
                 na_values=['', '-', 'NA', 'N/A', '#N/A'],
@@ -75,7 +75,7 @@ class XLSAnalyzer:
                     DEFAULT_CUSTOMER if col == 'Customer' else DEFAULT_PROJECT if col == 'Project' else ''
                 )
 
-            # Handle numeric columns with vectorized operations
+            # Handle numeric columns with more robust error handling
             df['Week Number'] = pd.to_numeric(df['Week Number'], errors='coerce').fillna(0).astype(int)
             df['Hours'] = pd.to_numeric(df['Hours'], errors='coerce').fillna(0.0).astype(float)
 
