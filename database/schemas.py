@@ -38,13 +38,13 @@ class TimeEntryCreate(BaseModel):
 
 class TimeEntryUpdate(BaseSchema):
     """Schema for updating time entries"""
-    category: Optional[str] = None
-    subcategory: Optional[str] = None
-    customer: Optional[str] = None
-    project: Optional[str] = None
-    task_description: Optional[str] = None
-    hours: Optional[float] = Field(None, ge=0, le=24)
-    date: Optional[date] = None
+    category: Optional[str] = Field(None, example="Development")
+    subcategory: Optional[str] = Field(None, example="Backend")
+    customer: Optional[str] = Field(None, example="ECOLAB")
+    project: Optional[str] = Field(None, example="Project_Magic_Bullet")
+    task_description: Optional[str] = Field(None, example="Implemented API endpoints")
+    hours: Optional[float] = Field(None, ge=0, le=24, example=8.0)
+    date: Optional[date] = Field(None, example="2025-02-12")
 
 class TimeEntry(TimeEntryBase):
     """Schema for time entry responses"""
