@@ -4,7 +4,6 @@ modules = ["python-3.11", "postgresql-16", "nodejs-20"]
 channel = "stable-24_05"
 
 [workflows]
-runButton = "Project"
 
 [[workflows.workflow]]
 name = "Project"
@@ -46,7 +45,7 @@ task = "packager.installForAll"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "uvicorn main:app --host 0.0.0.0 --port 8080 --reload --log-level debug"
-waitForPort = 8080
+waitForPort = 8000
 
 [[workflows.workflow]]
 name = "pytestDebug"
@@ -65,5 +64,5 @@ localPort = 8000
 externalPort = 80
 
 [[ports]]
-localPort = 8080
-externalPort = 8080
+localPort = 8000
+externalPort = 8000
