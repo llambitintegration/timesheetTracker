@@ -21,9 +21,9 @@ try:
     logger.info("Creating database engine with connection settings")
     logger.debug(f"Connection parameters: pool_size=5, max_overflow=10, pool_timeout=30")
 
-    # Create engine with proper configuration and connection pooling
+    # Create engine with PG secrets from App secrets
     engine = create_engine(
-        DATABASE_URL,
+        f"postgresql://{{os.environ.get('DB_USER')}}:{{os.environ.get('DB_PASSWORD')}}@{{os.environ.get('DB_HOST')}}/{{os.environ.get('DB_NAME')}}",
         pool_pre_ping=True,
         pool_size=5,
         max_overflow=10,
