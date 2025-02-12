@@ -29,7 +29,7 @@ class CustomerService:
                 )
 
             # Convert pydantic model to dict and create customer
-            customer_dict = customer.model_dump(exclude_unset=True)
+            customer_dict = customer.model_dump()
             created_customer = self.customer_repo.create(self.db, customer_dict)
 
             logger.info(f"Successfully created customer: {created_customer.name}")
@@ -44,11 +44,11 @@ class CustomerService:
         """Retrieve a customer by name."""
         logger.debug(f"Attempting to fetch customer with name: {name}")
         customer = self.customer_repo.get_by_name(self.db, name)
-        if customer:
-            logger.info(f"Found customer: {name}")
-            return customer
-        logger.warning(f"No customer found with name: {name}")
-        raise HTTPException(status_code=404, detail=f"Customer not found: {name}")
+        if not customer:
+            logger.warning(f"No customer found with name: {name}")
+            raise HTTPException(status_code=404, detail=f"Customer not found: {name}")
+        logger.info(f"Found customer: {name}")
+        return customer
 
     def get_all_customers(self, skip: int = 0, limit: int = 100) -> List[Customer]:
         """Retrieve all customers with pagination."""
@@ -85,7 +85,9 @@ class CustomerService:
         try:
             success = self.customer_repo.delete_by_name(self.db, name)
             if not success:
+                logger.warning(f"Customer not found for deletion: {name}")
                 raise HTTPException(status_code=404, detail=f"Customer not found: {name}")
+            logger.info(f"Successfully deleted customer: {name}")
             return success
         except HTTPException:
             raise

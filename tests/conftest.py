@@ -70,17 +70,6 @@ def client(db_session):
         yield test_client
     app.dependency_overrides.clear()
 
-@pytest.fixture(scope="function")
-def test_csv_file():
-    """Create a test CSV file with sample data"""
-    csv_content = """Week Number,Month,Category,Subcategory,Customer,Project,Task Description,Hours,Date
-41,October,Other,Other Training,Unassigned,Unassigned,New hire orientation,6.0,2024-10-07
-41,October,Other,Other Training,ECOLAB,Project Magic Bullet,Training session,2.0,2024-10-07
-"""
-    csv_path = Path("tests/data/test_timesheet.csv")
-    csv_path.parent.mkdir(parents=True, exist_ok=True)
-    csv_path.write_text(csv_content)
-    return csv_path
 
 @pytest.fixture(scope="function")
 def setup_test_data(db_session):

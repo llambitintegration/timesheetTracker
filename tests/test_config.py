@@ -21,14 +21,22 @@ def override_get_db():
 
 app.dependency_overrides[get_db] = override_get_db
 
-@pytest.fixture
+@pytest.fixture(scope="function")
 def test_client():
     return TestClient(app)
 
-@pytest.fixture
+@pytest.fixture(scope="function")
 def test_db():
-    db = TestingSessionLocal()
+    """Create a fresh database session for each test"""
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    # Clear tables before each test
+    for table in reversed(Base.metadata.sorted_tables):
+        session.execute(table.delete())
+    session.commit()
+
     try:
-        yield db
+        yield session
     finally:
-        db.close()
+        session.close()

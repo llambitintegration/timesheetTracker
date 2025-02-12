@@ -1,9 +1,8 @@
 import pytest
-from datetime import datetime
+from fastapi import HTTPException
 from services.customer_service import CustomerService
 from database.schemas import CustomerCreate, CustomerUpdate
 from models.customerModel import Customer
-from sqlalchemy.exc import IntegrityError
 
 def test_create_customer(db_session):
     """Test creating a customer through service"""
@@ -34,9 +33,10 @@ def test_create_duplicate_customer(db_session):
     service.create_customer(customer_data)
 
     # Attempt to create duplicate
-    with pytest.raises(ValueError) as exc_info:
+    with pytest.raises(HTTPException) as exc_info:
         service.create_customer(customer_data)
-    assert "Customer with name Duplicate Test already exists" in str(exc_info.value)
+    assert exc_info.value.status_code == 400
+    assert "Customer with name Duplicate Test already exists" in str(exc_info.value.detail)
 
 def test_get_customer(db_session):
     """Test retrieving a customer by name"""
@@ -56,13 +56,15 @@ def test_get_customer(db_session):
 def test_get_nonexistent_customer(db_session):
     """Test retrieving a non-existent customer"""
     service = CustomerService(db_session)
-    result = service.get_customer("NonexistentCustomer")
-    assert result is None
+    with pytest.raises(HTTPException) as exc_info:
+        service.get_customer("NonexistentCustomer")
+    assert exc_info.value.status_code == 404
+    assert "Customer not found: NonexistentCustomer" in str(exc_info.value.detail)
 
 def test_get_all_customers(db_session):
     """Test retrieving all customers with pagination"""
     service = CustomerService(db_session)
-    
+
     # Create multiple customers
     customers = [
         CustomerCreate(name=f"Test Customer {i}", contact_email=f"test{i}@example.com")
@@ -97,10 +99,33 @@ def test_update_customer(db_session):
     assert updated is not None
     assert updated.industry == "New Industry"
     assert updated.contact_email == "update@test.com"  # Unchanged field
-    
+
 def test_update_nonexistent_customer(db_session):
     """Test attempting to update a non-existent customer"""
     service = CustomerService(db_session)
     update_data = CustomerUpdate(industry="New Industry")
-    result = service.update_customer("NonexistentCustomer", update_data)
-    assert result is None
+    with pytest.raises(HTTPException) as exc_info:
+        service.update_customer("NonexistentCustomer", update_data)
+    assert exc_info.value.status_code == 404
+    assert "Customer not found: NonexistentCustomer" in str(exc_info.value.detail)
+
+def test_delete_customer(db_session):
+    """Test deleting a customer"""
+    service = CustomerService(db_session)
+    customer_data = CustomerCreate(
+        name="Delete Test",
+        contact_email="delete@test.com"
+    )
+
+    # Create and verify customer exists
+    created = service.create_customer(customer_data)
+    assert service.get_customer("Delete Test") is not None
+
+    # Delete customer
+    result = service.delete_customer("Delete Test")
+    assert result is True
+
+    # Verify customer is deleted
+    with pytest.raises(HTTPException) as exc_info:
+        service.get_customer("Delete Test")
+    assert exc_info.value.status_code == 404
