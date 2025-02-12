@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Depends, Query, Request
+from fastapi import FastAPI, HTTPException, Depends, Query, Request, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
@@ -83,6 +83,22 @@ def delete_time_entry(entry_id: int, db: Session = Depends(get_db)):
     service = TimeEntryService(db)
     return service.delete_time_entry(entry_id)
 
+@app.post("/time-entries/upload", status_code=202)
+async def upload_timesheet(
+    file: UploadFile = File(...),
+    db: Session = Depends(get_db)
+):
+    """Upload timesheet file (Excel/CSV)"""
+    try:
+        contents = await file.read()
+        service = TimeEntryService(db)
+        entries = service.import_timesheet(contents, file.filename)
+        return {"message": "File processed successfully", "entries_created": len(entries)}
+    except Exception as e:
+        logger.error(f"Error processing timesheet: {str(e)}")
+        raise HTTPException(status_code=400, detail=str(e))
+
+
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
     """Global exception handler"""
@@ -97,4 +113,4 @@ async def global_exception_handler(request: Request, exc: Exception):
     )
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8080)
+    uvicorn.run(app, host="0.0.0.0", port=8000)

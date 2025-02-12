@@ -9,6 +9,7 @@ from utils.validators import DEFAULT_CUSTOMER, DEFAULT_PROJECT, normalize_custom
 from database.customer_repository import CustomerRepository
 from database.project_repository import ProjectRepository
 from tqdm import tqdm
+import pandas as pd
 
 logger = Logger().get_logger()
 
@@ -19,230 +20,38 @@ class TimeEntryService:
         self.project_repo = ProjectRepository()
         logger.debug("TimeEntryService initialized with database session")
 
-    def _ensure_customer_exists(self, customer_name: str) -> str:
-        """Ensure customer exists, create if not. Return normalized customer name."""
-        if not customer_name or customer_name == '-':
-            logger.debug("No customer name or dash provided, using default")
-            return DEFAULT_CUSTOMER
+    def import_timesheet(self, file_contents: bytes, filename: str) -> List[TimeEntry]:
+        """Import timesheet from uploaded file."""
+        logger.debug(f"Processing timesheet file: {filename}")
 
         try:
-            normalized_name = normalize_customer_name(customer_name)
-            if not normalized_name:
-                logger.warning("Customer name normalization failed, using default")
-                return DEFAULT_CUSTOMER
-
-            # Check if customer exists
-            existing = self.customer_repo.get_by_name(self.db, normalized_name)
-            if not existing:
-                # Create new customer
-                customer_data = schemas.CustomerCreate(
-                    name=normalized_name,
-                    contact_email=f"{normalized_name.lower().replace(' ', '_')}@example.com",
-                    status="active"
-                )
-                new_customer = self.customer_repo.create(self.db, customer_data)
-                logger.info(f"Created new customer: {normalized_name}")
-            return normalized_name
-        except Exception as e:
-            logger.error(f"Error ensuring customer exists: {str(e)}")
-            return DEFAULT_CUSTOMER
-
-    def _ensure_project_exists(self, project_id: str, customer_name: str) -> str:
-        """Ensure project exists, create if not. Return normalized project ID."""
-        try:
-            if not project_id or project_id == '-':
-                logger.debug("No project ID or dash provided, using default")
-                return DEFAULT_PROJECT
-
-            normalized_id = normalize_project_id(project_id)
-            if not normalized_id:
-                logger.warning("Project ID normalization failed, using default")
-                return DEFAULT_PROJECT
-
-            # Check if project exists
-            existing = self.project_repo.get_by_project_id(self.db, normalized_id)
-            if not existing:
-                # Create new project
-                project_data = schemas.ProjectCreate(
-                    project_id=normalized_id,
-                    name=normalized_id,
-                    customer=customer_name,
-                    status="active"
-                )
-                self.project_repo.create(self.db, project_data)
-                logger.info(f"Created new project: {normalized_id} for customer: {customer_name}")
-            return normalized_id
-        except Exception as e:
-            logger.error(f"Error ensuring project exists: {str(e)}")
-            return DEFAULT_PROJECT
-
-    async def process_entries_chunk(
-        self,
-        entries: List[schemas.TimeEntryCreate],
-        progress_key: str
-    ) -> List[TimeEntry]:
-        """Process a chunk of entries with progress tracking."""
-        created_entries = []
-        total = len(entries)
-
-        try:
-            # Pre-process unique customers and projects for batch creation
-            unique_customers = {
-                normalize_customer_name(entry.customer)
-                for entry in entries
-                if entry.customer and entry.customer != DEFAULT_CUSTOMER
-            }
-            unique_projects = {
-                normalize_project_id(entry.project)
-                for entry in entries
-                if entry.project and entry.project != DEFAULT_PROJECT
-            }
-
-            # Create customers in bulk
-            for customer_name in unique_customers:
-                if not customer_name:
-                    continue
-                try:
-                    if not self.customer_repo.get_by_name(self.db, customer_name):
-                        customer_data = schemas.CustomerCreate(
-                            name=customer_name,
-                            contact_email=f"{customer_name.lower().replace(' ', '_')}@example.com",
-                            status="active"
-                        )
-                        self.customer_repo.create(self.db, customer_data)
-                        logger.info(f"Created new customer: {customer_name}")
-                except Exception as e:
-                    logger.error(f"Error creating customer {customer_name}: {str(e)}")
-
-            # Create projects in bulk
-            for project_id in unique_projects:
-                if not project_id:
-                    continue
-                try:
-                    if not self.project_repo.get_by_project_id(self.db, project_id):
-                        # Find the associated customer for this project
-                        project_entries = [e for e in entries if normalize_project_id(e.project) == project_id]
-                        if project_entries:
-                            customer_name = normalize_customer_name(project_entries[0].customer)
-                            project_data = schemas.ProjectCreate(
-                                project_id=project_id,
-                                name=project_id,
-                                customer=customer_name or DEFAULT_CUSTOMER,
-                                status="active"
-                            )
-                            self.project_repo.create(self.db, project_data)
-                            logger.info(f"Created new project: {project_id} for customer: {customer_name}")
-                except Exception as e:
-                    logger.error(f"Error creating project {project_id}: {str(e)}")
-
-            # Prepare time entries for bulk insert
-            entries_to_create = []
-            for entry in entries:
-                try:
-                    # Normalize and validate customer and project
-                    normalized_customer = normalize_customer_name(entry.customer) if entry.customer else DEFAULT_CUSTOMER
-                    normalized_project = normalize_project_id(entry.project) if entry.project else DEFAULT_PROJECT
-
-                    # If project doesn't exist, use default project and customer
-                    if not self.project_repo.get_by_project_id(self.db, normalized_project):
-                        normalized_project = DEFAULT_PROJECT
-                        normalized_customer = DEFAULT_CUSTOMER
-
-                    entry_dict = entry.model_dump(exclude={'id', 'created_at', 'updated_at'})
-                    entry_dict.update({
-                        'customer': normalized_customer,
-                        'project': normalized_project
-                    })
-                    entries_to_create.append(TimeEntry(**entry_dict))
-                except Exception as e:
-                    logger.error(f"Error preparing entry: {str(e)}")
-                    continue
-
-            # Bulk insert time entries
-            if entries_to_create:
-                self.db.bulk_save_objects(entries_to_create)
-                self.db.commit()
-                created_entries.extend(entries_to_create)
-
-            # Update progress
-            progress = (len(created_entries) / total) * 100 if total > 0 else 100
-            await self.update_progress(progress_key, progress)
-
-            return created_entries
-
-        except Exception as e:
-            logger.error(f"Error in bulk processing: {str(e)}")
-            self.db.rollback()
-            raise
-
-    async def update_progress(self, progress_key: str, progress: float):
-        """Update progress in Redis or similar storage."""
-        # In a real implementation, this would store progress in Redis or similar
-        # For now, we'll just log it
-        logger.info(f"Upload progress {progress_key}: {progress:.2f}%")
-
-    async def process_excel_upload(
-        self,
-        file_contents: bytes,
-        background_tasks: BackgroundTasks
-    ) -> Dict[str, Any]:
-        """Process Excel upload with progress tracking."""
-        try:
+            from utils.xls_analyzer import XLSAnalyzer
             analyzer = XLSAnalyzer()
-            records = analyzer.read_excel(file_contents)
 
-            if not records:
-                raise ValueError("No valid records found in Excel file")
+            if filename.endswith('.xlsx'):
+                records = analyzer.read_excel(file_contents)
+            else:
+                raise ValueError("Unsupported file format. Please upload an Excel (.xlsx) file.")
 
-            # Generate unique progress key
-            progress_key = f"upload_{datetime.now().strftime('%Y%m%d%H%M%S')}"
-
-            # Convert records to TimeEntryCreate instances
             entries = []
             for record in records:
-                try:
+                if not pd.isna(record.get('Date')):
                     entry_data = schemas.TimeEntryCreate(
-                        date=record['Date'],
-                        week_number=record['Week Number'],
-                        month=record['Month'],
-                        category=record['Category'],
-                        subcategory=record.get('Subcategory', ''),
-                        customer=record['Customer'],
-                        project=record['Project'],
-                        task_description=record['Task Description'],
-                        hours=record['Hours']
+                        date=record.get('Date'),
+                        category=record.get('Category', 'Other'),
+                        subcategory=record.get('Subcategory', 'General'),
+                        customer=normalize_customer_name(record.get('Customer', DEFAULT_CUSTOMER)) or DEFAULT_CUSTOMER,
+                        project=normalize_project_id(record.get('Project', DEFAULT_PROJECT)) or DEFAULT_PROJECT,
+                        task_description=record.get('Task Description', ''),
+                        hours=float(record.get('Hours', 0.0))
                     )
-                    entries.append(entry_data)
-                except Exception as e:
-                    logger.error(f"Error creating entry data: {str(e)}")
-                    continue
+                    db_entry = self.create_time_entry(entry_data)
+                    entries.append(db_entry)
 
-            # Process in chunks of 100 entries
-            chunk_size = 100
-            chunks = [entries[i:i + chunk_size] for i in range(0, len(entries), chunk_size)]
-
-            # Add background task for processing chunks
-            async def process_chunks():
-                created_entries = []
-                for chunk in chunks:
-                    processed_entries = await self.process_entries_chunk(chunk, progress_key)
-                    created_entries.extend(processed_entries)
-                    # Update progress after each chunk
-                    progress = (len(created_entries) / len(entries)) * 100
-                    await self.update_progress(progress_key, progress)
-
-            if background_tasks:
-                background_tasks.add_task(process_chunks)
-
-            return {
-                "message": "Upload processing started",
-                "progress_key": progress_key,
-                "total_records": len(records)
-            }
-
+            return entries
         except Exception as e:
-            logger.error(f"Error processing Excel upload: {str(e)}")
-            raise HTTPException(status_code=400, detail=str(e))
+            logger.error(f"Error importing timesheet: {str(e)}")
+            raise HTTPException(status_code=500, detail=str(e))
 
     def get_time_entries(
         self,
