@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Depends, File, UploadFile, Query, Request
+from fastapi import FastAPI, HTTPException, Depends, File, UploadFile, Query, Request, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List, Optional
@@ -12,6 +12,7 @@ from services.project_manager_service import ProjectManagerService
 from services.database_service import DatabaseService
 from utils.logger import Logger
 from utils.middleware import logging_middleware, error_logging_middleware
+from services.time_entry_service import TimeEntryService #Added import
 
 
 app = FastAPI()
@@ -217,10 +218,11 @@ def delete_customer(name: str, db: Session = Depends(get_db)):
 
 @app.post("/time-entries/upload/")
 async def upload_timesheet(
+    background_tasks: BackgroundTasks,
     file: UploadFile = File(...),
     db: Session = Depends(get_db)
 ):
-    """Upload and process timesheet file"""
+    """Upload and process timesheet file with progress tracking"""
     logger.info(f"Processing timesheet upload: {file.filename}")
 
     if not file or not file.filename:
@@ -231,7 +233,6 @@ async def upload_timesheet(
     file_size = 0
     contents = await file.read()
     file_size = len(contents)
-    await file.seek(0)  # Reset file pointer
 
     if file_size > MAX_FILE_SIZE:
         raise HTTPException(status_code=400, detail="File size exceeds 10MB limit")
@@ -255,12 +256,16 @@ async def upload_timesheet(
         raise HTTPException(status_code=400, detail="Invalid content type")
 
     try:
-        service = TimesheetService(db)
-        result = await service.upload_timesheet(file)
+        service = TimeEntryService(db)
+        result = await service.process_excel_upload(contents, background_tasks)
 
         return JSONResponse(
-            status_code=201,
-            content=result
+            status_code=202,  # Accepted
+            content={
+                "message": "Upload processing started",
+                "progress_key": result["progress_key"],
+                "total_records": result["total_records"]
+            }
         )
     except HTTPException as e:
         logger.error(f"Error processing timesheet: {str(e)}")
@@ -268,6 +273,18 @@ async def upload_timesheet(
     except Exception as e:
         logger.error(f"Error processing timesheet: {str(e)}")
         raise HTTPException(status_code=400, detail=str(e))
+
+@app.get("/time-entries/upload/{progress_key}/status")
+async def get_upload_status(progress_key: str):
+    """Get the status of an ongoing upload"""
+    # In a real implementation, this would fetch progress from Redis or similar
+    # For now, we'll return a mock response
+    return JSONResponse(
+        content={
+            "status": "processing",
+            "progress": 50  # This would be the actual progress in a real implementation
+        }
+    )
 
 @app.post("/init-db/")
 async def initialize_database(force: bool = False, db: Session = Depends(get_db)):

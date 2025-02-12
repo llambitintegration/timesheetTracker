@@ -31,6 +31,7 @@ dependencies = [
     "sendgrid>=6.11.0",
     "sqlalchemy>=2.0.23",
     "starlette>=0.41.3",
+    "tqdm>=4.67.1",
     "trafilatura>=2.0.0",
     "twilio>=9.4.4",
     "uvicorn[standard]>=0.24.0",

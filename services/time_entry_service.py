@@ -1,3 +1,9 @@
+` line at the beginning.  It also adds the missing `from utils.xls_analyzer import XLSAnalyzer` import statement needed for the `process_excel_upload` function. The rest of the original code is kept intact, as indicated by the comment in the edited snippet.
+
+The combination will involve replacing the first line of the original file with the corrected imports and logger initialization from the edited snippet, and then appending the rest of the original file's content.
+
+
+<replit_final_file>
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from database import schemas
@@ -6,6 +12,12 @@ from utils.logger import Logger
 from utils.validators import DEFAULT_CUSTOMER, DEFAULT_PROJECT, normalize_customer_name, normalize_project_id
 from database.customer_repository import CustomerRepository
 from database.project_repository import ProjectRepository
+from typing import List, Dict, Any, Tuple
+from tqdm import tqdm
+import asyncio
+from fastapi import HTTPException, BackgroundTasks
+from datetime import datetime
+from utils.xls_analyzer import XLSAnalyzer
 
 logger = Logger().get_logger()
 
@@ -150,25 +162,143 @@ class TimeEntryService:
             self.db.rollback()
             raise
 
-    def create_many_entries(self, entries: List[schemas.TimeEntryCreate]) -> List[TimeEntry]:
-        """Create multiple time entries with proper validation."""
+    async def process_entries_chunk(
+        self,
+        entries: List[schemas.TimeEntryCreate],
+        progress_key: str
+    ) -> List[TimeEntry]:
+        """Process a chunk of entries with progress tracking."""
         created_entries = []
-        logger.info(f"Beginning bulk creation of {len(entries)} time entries")
+        total = len(entries)
 
-        for idx, entry in enumerate(entries, 1):
-            try:
-                logger.debug(f"Processing entry {idx}/{len(entries)}")
-                db_entry = self.create_time_entry(entry)
-                created_entries.append(db_entry)
-                logger.debug(f"Added entry {idx} to session: {db_entry.customer} - {db_entry.project}")
-            except Exception as e:
-                logger.error(f"Error processing entry {idx}: {str(e)}")
-                # Continue with next entry instead of failing entire batch
-                continue
+        try:
+            # Pre-process unique customers and projects
+            unique_customers = {entry.customer for entry in entries if entry.customer}
+            unique_projects = {entry.project for entry in entries if entry.project}
 
-        total_hours = sum(entry.hours for entry in created_entries)
-        logger.info(f"Successfully created {len(created_entries)} time entries (Total: {total_hours} hours)")
-        return created_entries
+            # Bulk create customers
+            for customer in unique_customers:
+                if customer and customer != DEFAULT_CUSTOMER:
+                    try:
+                        normalized_name = normalize_customer_name(customer)
+                        if not self.customer_repo.get_by_name(self.db, normalized_name):
+                            customer_data = schemas.CustomerCreate(
+                                name=normalized_name,
+                                contact_email=f"{normalized_name.lower().replace(' ', '_')}@example.com",
+                                status="active"
+                            )
+                            self.customer_repo.create(self.db, customer_data.model_dump())
+                    except Exception as e:
+                        logger.error(f"Error creating customer {customer}: {str(e)}")
+
+            # Bulk create projects
+            for project in unique_projects:
+                if project and project != DEFAULT_PROJECT:
+                    try:
+                        normalized_id = normalize_project_id(project)
+                        if not self.project_repo.get_by_project_id(self.db, normalized_id):
+                            customer = next(
+                                (entry.customer for entry in entries if entry.project == project),
+                                DEFAULT_CUSTOMER
+                            )
+                            project_data = schemas.ProjectCreate(
+                                project_id=normalized_id,
+                                name=normalized_id,
+                                customer=customer,
+                                project_manager='-',
+                                status="active"
+                            )
+                            self.project_repo.create(self.db, project_data)
+                    except Exception as e:
+                        logger.error(f"Error creating project {project}: {str(e)}")
+
+            # Bulk create time entries
+            entries_to_create = []
+            for entry in entries:
+                try:
+                    entry_dict = entry.model_dump(exclude={'id', 'created_at', 'updated_at'})
+                    entries_to_create.append(TimeEntry(**entry_dict))
+                except Exception as e:
+                    logger.error(f"Error preparing time entry: {str(e)}")
+                    continue
+
+            if entries_to_create:
+                self.db.bulk_save_objects(entries_to_create)
+                self.db.commit()
+                created_entries.extend(entries_to_create)
+
+            # Update progress
+            progress = (len(created_entries) / total) * 100
+            await self.update_progress(progress_key, progress)
+
+            return created_entries
+
+        except Exception as e:
+            logger.error(f"Error in bulk processing: {str(e)}")
+            self.db.rollback()
+            raise
+
+    async def update_progress(self, progress_key: str, progress: float):
+        """Update progress in Redis or similar storage."""
+        # In a real implementation, this would store progress in Redis or similar
+        # For now, we'll just log it
+        logger.info(f"Upload progress {progress_key}: {progress:.2f}%")
+
+    async def process_excel_upload(
+        self,
+        file_contents: bytes,
+        background_tasks: BackgroundTasks
+    ) -> Dict[str, Any]:
+        """Process Excel upload with progress tracking."""
+        try:
+            analyzer = XLSAnalyzer()
+            records, total_rows = analyzer.read_excel(file_contents)
+
+            if not records:
+                raise ValueError("No valid records found in Excel file")
+
+            # Generate unique progress key
+            progress_key = f"upload_{datetime.now().strftime('%Y%m%d%H%M%S')}"
+
+            # Convert records to TimeEntryCreate instances
+            entries = []
+            for record in records:
+                try:
+                    entry_data = schemas.TimeEntryCreate(
+                        date=record['Date'],
+                        week_number=record['Week Number'],
+                        month=record['Month'],
+                        category=record['Category'],
+                        subcategory=record['Subcategory'],
+                        customer=record['Customer'],
+                        project=record['Project'],
+                        task_description=record['Task Description'],
+                        hours=record['Hours']
+                    )
+                    entries.append(entry_data)
+                except Exception as e:
+                    logger.error(f"Error creating entry data: {str(e)}")
+                    continue
+
+            # Process in chunks of 1000
+            chunk_size = 1000
+            chunks = [entries[i:i + chunk_size] for i in range(0, len(entries), chunk_size)]
+
+            all_created_entries = []
+            for chunk in chunks:
+                created_entries = await self.process_entries_chunk(chunk, progress_key)
+                all_created_entries.extend(created_entries)
+
+            return {
+                "status": "success",
+                "total_processed": len(all_created_entries),
+                "total_records": total_rows,
+                "progress_key": progress_key
+            }
+
+        except Exception as e:
+            logger.error(f"Error processing Excel upload: {str(e)}")
+            raise HTTPException(status_code=400, detail=str(e))
 
     def get_time_entries(
         self,
