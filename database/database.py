@@ -35,6 +35,9 @@ logger.debug(f"Database name: {PGDATABASE}")
 logger.debug(f"Database user: {PGUSER}")
 
 try:
+    logger.info("Creating database engine with connection settings")
+    logger.debug(f"Connection parameters: pool_size=5, max_overflow=10, pool_timeout=30")
+    
     # Create engine with proper configuration and connection pooling
     engine = create_engine(
         DATABASE_URL,
@@ -50,9 +53,21 @@ try:
             "sslmode": 'require'  # Required for Neon.tech
         }
     )
-    logger.info("Database engine created successfully")
+    
+    # Test connection and log database details
+    with engine.connect() as conn:
+        version = conn.execute(text("SELECT version()")).scalar()
+        current_db = conn.execute(text("SELECT current_database()")).scalar()
+        logger.info(f"Connected to database: {current_db}")
+        logger.info(f"PostgreSQL version: {version}")
+        
+        # Log database permissions
+        logger.debug("Checking database permissions")
+        conn.execute(text("SELECT has_database_privilege(current_user, current_database(), 'CREATE')")).scalar()
+        logger.info("Database engine created and tested successfully")
 except Exception as e:
     logger.error(f"Failed to create database engine: {str(e)}")
+    logger.exception("Database initialization error details:")
     raise
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

@@ -95,7 +95,36 @@ class DatabaseService:
 
         try:
             logger.info("Starting migration process")
+            logger.debug("Checking current database schema")
+            
+            # Log existing tables before migration
+            with engine.connect() as connection:
+                inspector = inspect(engine)
+                existing_tables = inspector.get_table_names()
+                logger.info(f"Existing tables before migration: {existing_tables}")
+                
+                # Check if alembic_version table exists
+                if 'alembic_version' in existing_tables:
+                    result = connection.execute(text("SELECT version_num FROM alembic_version")).fetchone()
+                    logger.info(f"Current migration version: {result[0] if result else 'None'}")
+                else:
+                    logger.info("No alembic_version table found - fresh database")
+
+            # Run migration
+            logger.info("Executing alembic upgrade command")
             command.upgrade(alembic_cfg, "head")
+            
+            # Verify tables after migration
+            with engine.connect() as connection:
+                inspector = inspect(engine)
+                final_tables = inspector.get_table_names()
+                logger.info(f"Tables after migration: {final_tables}")
+                
+                # Log table structures
+                for table in final_tables:
+                    columns = inspector.get_columns(table)
+                    logger.debug(f"Table {table} columns: {[col['name'] for col in columns]}")
+                    
             logger.info("Migration completed successfully")
         except Exception as migration_error:
             logger.error(f"Migration failed: {str(migration_error)}")
