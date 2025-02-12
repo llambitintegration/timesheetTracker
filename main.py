@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Depends, File, UploadFile, Query, Request, BackgroundTasks
+from fastapi import FastAPI, HTTPException, Depends, File, UploadFile, Query, Request, BackgroundTasks, Body
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
@@ -150,9 +150,9 @@ def create_time_entry(entry: schemas.TimeEntryCreate, db: Session = Depends(get_
     service = TimesheetService(db)
     return service.create_entry(entry)
 
-@app.put("/time-entries/{entry_id}", response_model=schemas.TimeEntry, description="Update an existing time entry")
+@app.put("/time-entries/{entry_id}", response_model=schemas.TimeEntry)
 def update_time_entry(
-    entry_id: int, 
+    entry_id: int,
     entry: schemas.TimeEntryUpdate = Body(
         example={
             "category": "Other",
@@ -162,13 +162,33 @@ def update_time_entry(
             "task_description": "VPN for Hiland",
             "hours": 2.5,
             "date": "2024-12-17"
-        }
+        },
+        description="Time entry fields to update. All fields are optional."
     ),
     db: Session = Depends(get_db)
 ):
-    """Update an existing time entry"""
+    """
+    Update an existing time entry
+    
+    Args:
+        entry_id: ID of the time entry to update
+        entry: TimeEntryUpdate schema containing fields to update
+        db: Database session
+        
+    Returns:
+        Updated time entry
+        
+    Raises:
+        HTTPException: If entry not found or validation fails
+    """
     service = TimesheetService(db)
-    return service.update_entry(entry_id, entry)
+    try:
+        updated_entry = service.update_entry(entry_id, entry)
+        if not updated_entry:
+            raise HTTPException(status_code=404, detail=f"Time entry {entry_id} not found")
+        return updated_entry
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
 @app.delete("/time-entries/{entry_id}")
 def delete_time_entry(entry_id: int, db: Session = Depends(get_db)):
