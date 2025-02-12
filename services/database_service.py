@@ -1,4 +1,3 @@
-
 import os
 from alembic import command
 from alembic.config import Config
@@ -18,7 +17,7 @@ class DatabaseService:
         logger.info("Starting database initialization process")
         try:
             await self._test_connection()
-            
+
             if force:
                 await self._drop_tables()
 
@@ -44,8 +43,20 @@ class DatabaseService:
         """Test database connection"""
         logger.info("Testing database connection")
         try:
-            self.db.execute(text("SELECT 1"))
+            # Execute a test query and fetch connection details
+            result = self.db.execute(text("""
+                SELECT current_database(), current_user, inet_server_addr()::text, 
+                       inet_server_port()::text, version();
+            """)).fetchone()
+
+            logger.info("Database connection details:")
+            logger.info(f"Database: {result[0]}")
+            logger.info(f"User: {result[1]}")
+            logger.info(f"Server: {result[2]}:{result[3]}")
+            logger.info(f"Version: {result[4]}")
+
             logger.info("Database connection successful")
+            return result
         except Exception as conn_error:
             logger.error(f"Database connection failed: {str(conn_error)}")
             raise HTTPException(
@@ -73,7 +84,15 @@ class DatabaseService:
         """Run database migrations"""
         logger.info("Loading Alembic configuration")
         alembic_cfg = Config("alembic.ini")
-        alembic_cfg.set_main_option("sqlalchemy.url", os.environ["DATABASE_URL"])
+
+        # Construct database URL from PG environment variables
+        PGHOST = os.environ.get('PGHOST')
+        PGDATABASE = os.environ.get('PGDATABASE')
+        PGUSER = os.environ.get('PGUSER')
+        PGPASSWORD = os.environ.get('PGPASSWORD')
+
+        database_url = f"postgresql+psycopg2://{PGUSER}:{PGPASSWORD}@{PGHOST}/{PGDATABASE}"
+        alembic_cfg.set_main_option("sqlalchemy.url", database_url)
 
         try:
             logger.info("Starting migration process")

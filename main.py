@@ -111,6 +111,27 @@ async def health_check(request: Request):
         "version": "1.0.0"
     })
 
+@app.get("/debug/database", include_in_schema=False)
+async def debug_database(request: Request, db: Session = Depends(get_db)):
+    """Debug endpoint to verify database connection"""
+    logger.info(structured_log(
+        "Database debug endpoint accessed",
+        correlation_id=Logger().get_correlation_id(),
+        method=request.method,
+        path="/debug/database"
+    ))
+
+    service = DatabaseService(db)
+    connection_info = await service._test_connection()
+
+    return JSONResponse(content={
+        "status": "connected",
+        "database": connection_info[0],
+        "user": connection_info[1],
+        "server": f"{connection_info[2]}:{connection_info[3]}",
+        "version": connection_info[4]
+    })
+
 @app.get("/time-entries", response_model=List[schemas.TimeEntry])
 def get_time_entries(
     date: date = Query(default=None),
@@ -395,7 +416,6 @@ def create_sample_data(db: Session = Depends(get_db)):
             continue
 
     return {"message": f"Created {len(created_entries)} sample entries"}
-
 
 
 if __name__ == "__main__":
