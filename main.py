@@ -29,11 +29,12 @@ logger = Logger().get_logger()
 # CORS configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=False,
+    allow_origins=["*", "https://kzml2wd4s8uiq7pm0sj5.lite.vusercontent.net"],
+    allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-    allow_headers=["*"],
-    expose_headers=["X-Total-Count", "X-Correlation-ID"]
+    allow_headers=["*", "Content-Type", "Authorization"],
+    expose_headers=["X-Total-Count", "X-Correlation-ID"],
+    max_age=3600
 )
 
 # Add logging middleware

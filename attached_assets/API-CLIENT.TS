@@ -18,6 +18,14 @@ import { toast } from "@/components/ui/use-toast"
 
 const API_BASE_URL = "https://6ed7ce35-85b3-498b-9e9b-4d63631ed8e3-00-2owzgyvztotfg.worf.replit.dev"
 
+// Add withCredentials to all requests
+const axiosConfig = {
+  withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json'
+  }
+}
+
 const API_PATHS = {
   timeEntries: "/time-entries",
   timeEntriesByMonth: "/time-entries/by-month",
