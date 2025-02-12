@@ -1,0 +1,257 @@
+{"timestamp": "2025-02-12T22:53:39.122754", "level": "INFO", "correlation_id": "undefined", "logger": "TimesheetTracker", "message": "Creating database engine with connection settings", "context": {}}
+{"timestamp": "2025-02-12T22:53:39.123101", "level": "DEBUG", "correlation_id": "undefined", "logger": "TimesheetTracker", "message": "Connection parameters: pool_size=5, max_overflow=10, pool_timeout=30", "context": {}}
+{"timestamp": "2025-02-12T22:53:40.454688", "level": "INFO", "correlation_id": "undefined", "logger": "TimesheetTracker", "message": "Connected to database: neondb", "context": {}}
+{"timestamp": "2025-02-12T22:53:40.455047", "level": "INFO", "correlation_id": "undefined", "logger": "TimesheetTracker", "message": "PostgreSQL version: PostgreSQL 17.2 on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit", "context": {}}
+{"timestamp": "2025-02-12T22:53:40.455299", "level": "DEBUG", "correlation_id": "undefined", "logger": "TimesheetTracker", "message": "Checking database permissions", "context": {}}
+{"timestamp": "2025-02-12T22:53:40.479236", "level": "INFO", "correlation_id": "undefined", "logger": "TimesheetTracker", "message": "Database engine created and tested successfully", "context": {}}
+Traceback (most recent call last):
+  File "/home/runner/workspace/main.py", line 9, in <module>
+    from database import crud, schemas, get_db
+  File "/home/runner/workspace/database/__init__.py", line 2, in <module>
+    from . import schemas
+  File "/home/runner/workspace/database/schemas.py", line 39, in <module>
+    class TimeEntryUpdate(BaseSchema):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_model_construction.py", line 226, in __new__
+    complete_model_class(
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_model_construction.py", line 658, in complete_model_class
+    schema = cls.__get_pydantic_core_schema__(cls, handler)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/main.py", line 702, in __get_pydantic_core_schema__
+    return handler(source)
+           ^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_schema_generation_shared.py", line 84, in __call__
+    schema = self._handler(source_type)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py", line 610, in generate_schema
+    schema = self._generate_schema_inner(obj)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py", line 879, in _generate_schema_inner
+    return self._model_schema(obj)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py", line 691, in _model_schema
+    {k: self._generate_md_field_schema(k, v, decorators) for k, v in fields.items()},
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py", line 691, in <dictcomp>
+    {k: self._generate_md_field_schema(k, v, decorators) for k, v in fields.items()},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py", line 1071, in _generate_md_field_schema
+    common_field = self._common_field_schema(name, field_info, decorators)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py", line 1263, in _common_field_schema
+    schema = self._apply_annotations(
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py", line 2056, in _apply_annotations
+    schema = get_inner_schema(source_type)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_schema_generation_shared.py", line 84, in __call__
+    schema = self._handler(source_type)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py", line 2035, in inner_handler
+    from_property = self._generate_schema_from_property(obj, source_type)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py", line 748, in _generate_schema_from_property
+    with self.defs.get_schema_or_ref(obj) as (_, maybe_schema):
+  File "/nix/store/clx0mcir7qw8zk36zbr4jra789g3knf6-python3-3.11.10/lib/python3.11/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py", line 2466, in get_schema_or_ref
+    ref = get_type_ref(tp)
+          ^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_core_utils.py", line 100, in get_type_ref
+    arg_ref = f'{_repr.display_as_type(arg)}:{id(arg)}'
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 101, in display_as_type
+    return repr(obj)
+           ^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 88, in __repr__
+    return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+                                     ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 61, in __repr_str__
+    return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 61, in <genexpr>
+    return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/fields.py", line 673, in __repr_args__
+    yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 109, in display_as_type
+    args = ', '.join(map(display_as_type, typing_extensions.get_args(obj)))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 101, in display_as_type
+    return repr(obj)
+           ^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 88, in __repr__
+    return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+                                     ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 61, in __repr_str__
+    return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 61, in <genexpr>
+    return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/fields.py", line 673, in __repr_args__
+    yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 109, in display_as_type
+    args = ', '.join(map(display_as_type, typing_extensions.get_args(obj)))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 101, in display_as_type
+    return repr(obj)
+           ^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 88, in __repr__
+    return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+                                     ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 61, in __repr_str__
+    return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 61, in <genexpr>
+    return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/fields.py", line 673, in __repr_args__
+    yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 109, in display_as_type
+    args = ', '.join(map(display_as_type, typing_extensions.get_args(obj)))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 101, in display_as_type
+    return repr(obj)
+           ^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 88, in __repr__
+    return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+                                     ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 61, in __repr_str__
+    return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 61, in <genexpr>
+    return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/fields.py", line 673, in __repr_args__
+    yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 109, in display_as_type
+    args = ', '.join(map(display_as_type, typing_extensions.get_args(obj)))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 101, in display_as_type
+    return repr(obj)
+           ^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 88, in __repr__
+    return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+                                     ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 61, in __repr_str__
+    return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 61, in <genexpr>
+    return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/fields.py", line 673, in __repr_args__
+    yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 109, in display_as_type
+    args = ', '.join(map(display_as_type, typing_extensions.get_args(obj)))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 101, in display_as_type
+    return repr(obj)
+           ^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 88, in __repr__
+    return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+                                     ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 61, in __repr_str__
+    return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 61, in <genexpr>
+    return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/fields.py", line 673, in __repr_args__
+    yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 109, in display_as_type
+    args = ', '.join(map(display_as_type, typing_extensions.get_args(obj)))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 101, in display_as_type
+    return repr(obj)
+           ^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 88, in __repr__
+    return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+                                     ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 61, in __repr_str__
+    return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 61, in <genexpr>
+    return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/fields.py", line 673, in __repr_args__
+    yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 109, in display_as_type
+    args = ', '.join(map(display_as_type, typing_extensions.get_args(obj)))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 101, in display_as_type
+    return repr(obj)
+           ^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 88, in __repr__
+    return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+                                     ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 61, in __repr_str__
+    return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 61, in <genexpr>
+    return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/fields.py", line 673, in __repr_args__
+    yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 109, in display_as_type
+    args = ', '.join(map(display_as_type, typing_extensions.get_args(obj)))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 101, in display_as_type
+    return repr(obj)
+           ^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 88, in __repr__
+    return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+                                     ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 61, in __repr_str__
+    return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 61, in <genexpr>
+    return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/fields.py", line 673, in __repr_args__
+    yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 109, in display_as_type
+    args = ', '.join(map(display_as_type, typing_extensions.get_args(obj)))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 101, in display_as_type
+    return repr(obj)
+           ^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 88, in __repr__
+    return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+                                     ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 61, in __repr_str__
+    return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 61, in <genexpr>
+    return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/fields.py", line 673, in __repr_args__
+    yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 109, in display_as_type
+    args = ', '.join(map(display_as_type, typing_extensions.get_args(obj)))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 101, in display_as_type
+    return repr(obj)
+           ^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 88, in __repr__
+    return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+                                     ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 61, in __repr_str__
+    return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 61, in <genexpr>
+    return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/pydantic/fields.py", line 673, in __repr_args__
+    yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+                                        ^^^^^^^^^^^^^^^
