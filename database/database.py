@@ -11,56 +11,29 @@ load_dotenv()
 
 logger = Logger().get_logger()
 
-# Get database credentials from environment variables
-PGHOST = os.environ.get('NEON_HOST', os.environ.get('PGHOST'))
-PGDATABASE = os.environ.get('NEON_DATABASE', os.environ.get('PGDATABASE'))
-PGUSER = os.environ.get('NEON_USER', os.environ.get('PGUSER'))
-PGPASSWORD = os.environ.get('NEON_PASSWORD', os.environ.get('PGPASSWORD'))
-
-# Validate all required environment variables are present
-missing_vars = []
-for var in ['PGHOST', 'PGDATABASE', 'PGUSER', 'PGPASSWORD']:
-    if not os.environ.get(var):
-        missing_vars.append(var)
-
-if missing_vars:
-    error_msg = f"Missing required environment variables: {', '.join(missing_vars)}"
-    logger.error(error_msg)
-    raise ValueError(error_msg)
-
-# Construct DATABASE_URL from individual credentials
-DATABASE_URL = f"postgresql+psycopg2://{PGUSER}:{PGPASSWORD}@{PGHOST}/{PGDATABASE}"
-logger.debug(f"Connecting to database host: {PGHOST}")
-logger.debug(f"Database name: {PGDATABASE}")
-logger.debug(f"Database user: {PGUSER}")
+# Database configuration
+DATABASE_URL = "postgresql://neondb_owner:****************@ep-damp-art-a8ixdln.eastus2.azure.neon.tech/neondb?sslmode=require"
 
 try:
     logger.info("Creating database engine with connection settings")
     logger.debug(f"Connection parameters: pool_size=5, max_overflow=10, pool_timeout=30")
-    
+
     # Create engine with proper configuration and connection pooling
     engine = create_engine(
         DATABASE_URL,
         pool_pre_ping=True,
         pool_size=5,
         max_overflow=10,
-        pool_timeout=30,
-        connect_args={
-            "keepalives": 1,
-            "keepalives_idle": 30,
-            "keepalives_interval": 10,
-            "keepalives_count": 5,
-            "sslmode": 'require'  # Required for Neon.tech
-        }
+        pool_timeout=30
     )
-    
+
     # Test connection and log database details
     with engine.connect() as conn:
         version = conn.execute(text("SELECT version()")).scalar()
         current_db = conn.execute(text("SELECT current_database()")).scalar()
         logger.info(f"Connected to database: {current_db}")
         logger.info(f"PostgreSQL version: {version}")
-        
+
         # Log database permissions
         logger.debug("Checking database permissions")
         conn.execute(text("SELECT has_database_privilege(current_user, current_database(), 'CREATE')")).scalar()
