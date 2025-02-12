@@ -44,7 +44,7 @@ try:
             "keepalives_idle": 30,
             "keepalives_interval": 10,
             "keepalives_count": 5,
-            "sslmode": 'require'  # Added for Neon.tech requirement
+            "sslmode": 'require'  # Required for Neon.tech
         }
     )
     logger.info("Database engine created successfully")

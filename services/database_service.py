@@ -43,7 +43,6 @@ class DatabaseService:
         """Test database connection"""
         logger.info("Testing database connection")
         try:
-            # Execute a test query and fetch connection details
             result = self.db.execute(text("""
                 SELECT current_database(), current_user, inet_server_addr()::text, 
                        inet_server_port()::text, version();
