@@ -87,62 +87,82 @@ class TimeEntryService:
         total = len(entries)
 
         try:
-            # Pre-process unique customers and projects
-            unique_customers = {entry.customer for entry in entries if entry.customer}
-            unique_projects = {entry.project for entry in entries if entry.project}
+            # Pre-process unique customers and projects for batch creation
+            unique_customers = {
+                normalize_customer_name(entry.customer) 
+                for entry in entries 
+                if entry.customer and entry.customer != DEFAULT_CUSTOMER
+            }
+            unique_projects = {
+                normalize_project_id(entry.project) 
+                for entry in entries 
+                if entry.project and entry.project != DEFAULT_PROJECT
+            }
 
-            # Bulk create customers
-            for customer in unique_customers:
-                if customer and customer != DEFAULT_CUSTOMER:
-                    try:
-                        normalized_name = normalize_customer_name(customer)
-                        if not self.customer_repo.get_by_name(self.db, normalized_name):
-                            customer_data = schemas.CustomerCreate(
-                                name=normalized_name,
-                                contact_email=f"{normalized_name.lower().replace(' ', '_')}@example.com",
-                                status="active"
-                            )
-                            self.customer_repo.create(self.db, customer_data)
-                    except Exception as e:
-                        logger.error(f"Error creating customer {customer}: {str(e)}")
+            # Create customers in bulk
+            for customer_name in unique_customers:
+                try:
+                    if not self.customer_repo.get_by_name(self.db, customer_name):
+                        customer_data = schemas.CustomerCreate(
+                            name=customer_name,
+                            contact_email=f"{customer_name.lower().replace(' ', '_')}@example.com",
+                            status="active"
+                        )
+                        self.customer_repo.create(self.db, customer_data)
+                        logger.info(f"Created new customer: {customer_name}")
+                except Exception as e:
+                    logger.error(f"Error creating customer {customer_name}: {str(e)}")
 
-            # Bulk create projects
-            for project in unique_projects:
-                if project and project != DEFAULT_PROJECT:
-                    try:
-                        normalized_id = normalize_project_id(project)
-                        if not self.project_repo.get_by_project_id(self.db, normalized_id):
-                            customer = next(
-                                (entry.customer for entry in entries if entry.project == project),
-                                DEFAULT_CUSTOMER
-                            )
+            # Create projects in bulk
+            for project_id in unique_projects:
+                try:
+                    if not self.project_repo.get_by_project_id(self.db, project_id):
+                        # Find the associated customer for this project
+                        project_entries = [e for e in entries if normalize_project_id(e.project) == project_id]
+                        if project_entries:
+                            customer_name = normalize_customer_name(project_entries[0].customer)
                             project_data = schemas.ProjectCreate(
-                                project_id=normalized_id,
-                                name=normalized_id,
-                                customer=customer,
+                                project_id=project_id,
+                                name=project_id,
+                                customer=customer_name,
                                 status="active"
                             )
                             self.project_repo.create(self.db, project_data)
-                    except Exception as e:
-                        logger.error(f"Error creating project {project}: {str(e)}")
+                            logger.info(f"Created new project: {project_id} for customer: {customer_name}")
+                except Exception as e:
+                    logger.error(f"Error creating project {project_id}: {str(e)}")
 
-            # Bulk create time entries
+            # Prepare time entries for bulk insert
             entries_to_create = []
             for entry in entries:
                 try:
+                    # Normalize and validate customer and project
+                    normalized_customer = normalize_customer_name(entry.customer) if entry.customer else DEFAULT_CUSTOMER
+                    normalized_project = normalize_project_id(entry.project) if entry.project else DEFAULT_PROJECT
+
+                    # If project doesn't exist, use default project and customer
+                    if not self.project_repo.get_by_project_id(self.db, normalized_project):
+                        normalized_project = DEFAULT_PROJECT
+                        normalized_customer = DEFAULT_CUSTOMER
+
                     entry_dict = entry.model_dump(exclude={'id', 'created_at', 'updated_at'})
+                    entry_dict.update({
+                        'customer': normalized_customer,
+                        'project': normalized_project
+                    })
                     entries_to_create.append(TimeEntry(**entry_dict))
                 except Exception as e:
-                    logger.error(f"Error preparing time entry: {str(e)}")
+                    logger.error(f"Error preparing entry: {str(e)}")
                     continue
 
+            # Bulk insert time entries
             if entries_to_create:
                 self.db.bulk_save_objects(entries_to_create)
                 self.db.commit()
                 created_entries.extend(entries_to_create)
 
             # Update progress
-            progress = (len(created_entries) / total) * 100
+            progress = (len(created_entries) / total) * 100 if total > 0 else 100
             await self.update_progress(progress_key, progress)
 
             return created_entries
@@ -166,7 +186,7 @@ class TimeEntryService:
         """Process Excel upload with progress tracking."""
         try:
             analyzer = XLSAnalyzer()
-            records, total_rows = analyzer.read_excel(file_contents)
+            records = analyzer.read_excel(file_contents)
 
             if not records:
                 raise ValueError("No valid records found in Excel file")
@@ -183,7 +203,7 @@ class TimeEntryService:
                         week_number=record['Week Number'],
                         month=record['Month'],
                         category=record['Category'],
-                        subcategory=record['Subcategory'],
+                        subcategory=record.get('Subcategory', ''),
                         customer=record['Customer'],
                         project=record['Project'],
                         task_description=record['Task Description'],
@@ -194,19 +214,19 @@ class TimeEntryService:
                     logger.error(f"Error creating entry data: {str(e)}")
                     continue
 
-            # Process in chunks of 1000
-            chunk_size = 1000
+            # Process in chunks of 100 entries
+            chunk_size = 100
             chunks = [entries[i:i + chunk_size] for i in range(0, len(entries), chunk_size)]
 
-            all_created_entries = []
+            created_entries = []
             for chunk in chunks:
-                created_entries = await self.process_entries_chunk(chunk, progress_key)
-                all_created_entries.extend(created_entries)
+                processed_entries = await self.process_entries_chunk(chunk, progress_key)
+                created_entries.extend(processed_entries)
 
             return {
                 "status": "success",
-                "total_processed": len(all_created_entries),
-                "total_records": total_rows,
+                "total_processed": len(created_entries),
+                "total_records": len(records),
                 "progress_key": progress_key
             }
 
