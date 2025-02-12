@@ -30,6 +30,9 @@ if missing_vars:
 
 # Construct DATABASE_URL from individual credentials
 DATABASE_URL = f"postgresql+psycopg2://{PGUSER}:{PGPASSWORD}@{PGHOST}/{PGDATABASE}"
+logger.debug(f"Connecting to database host: {PGHOST}")
+logger.debug(f"Database name: {PGDATABASE}")
+logger.debug(f"Database user: {PGUSER}")
 
 try:
     # Create engine with proper configuration and connection pooling
