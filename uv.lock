@@ -2392,6 +2392,7 @@ dependencies = [
     { name = "trafilatura" },
     { name = "twilio" },
     { name = "uvicorn", extra = ["standard"] },
+    { name = "xlrd" },
 ]
 
 [package.metadata]
@@ -2427,6 +2428,7 @@ requires-dist = [
     { name = "trafilatura", specifier = ">=2.0.0" },
     { name = "twilio", specifier = ">=9.4.4" },
     { name = "uvicorn", extras = ["standard"], specifier = ">=0.24.0" },
+    { name = "xlrd", specifier = ">=2.0.1" },
 ]
 
 [[package]]
@@ -3186,6 +3188,15 @@ sdist = { url = "https://files.pythonhosted.org/packages/95/59/565d6320975f7bfbf
 wheels = [
     { url = "https://files.pythonhosted.org/packages/86/32/23609dddc560a6f16a8256465e25a4225708ee4bc72386ca160256ffea57/xformers-0.0.22-cp311-cp311-manylinux2014_x86_64.whl", hash = "sha256:bab75fdcf36250fdcc6b5aeee455e857cd86030b3b476799b938d7018f746571", size = 211568305 },
     { url = "https://files.pythonhosted.org/packages/8e/28/bb4362c05723324e4b66b3d6ffc901a1ca6382dbf47758d4e8340dcd71a5/xformers-0.0.22-cp311-cp311-win_amd64.whl", hash = "sha256:d6f8cf506ea91b49a1f18e414e7945fe1cb312bcd8026cb8a72e494259f64a46", size = 97576595 },
+]
+
+[[package]]
+name = "xlrd"
+version = "2.0.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/a6/b3/19a2540d21dea5f908304375bd43f5ed7a4c28a370dc9122c565423e6b44/xlrd-2.0.1.tar.gz", hash = "sha256:f72f148f54442c6b056bf931dbc34f986fd0c3b0b6b5a58d013c9aef274d0c88", size = 100259 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/a6/0c/c2a72d51fe56e08a08acc85d13013558a2d793028ae7385448a6ccdfae64/xlrd-2.0.1-py2.py3-none-any.whl", hash = "sha256:6a33ee89877bd9abc1158129f6e94be74e2679636b8a205b43b85206c3f0bbdd", size = 96531 },
 ]
 
 [[package]]

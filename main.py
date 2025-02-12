@@ -1,19 +1,22 @@
 from fastapi import FastAPI, HTTPException, Depends, File, UploadFile, Query, Request, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from datetime import datetime, date
 import os
+import traceback
 from database import crud, schemas, get_db
 from services.timesheet_service import TimesheetService
 from services.customer_service import CustomerService
 from services.project_service import ProjectService
 from services.project_manager_service import ProjectManagerService
 from services.database_service import DatabaseService
+from services.time_entry_service import TimeEntryService
+from services.report_service import ReportService
 from utils.logger import Logger
 from utils.middleware import logging_middleware, error_logging_middleware
-from services.time_entry_service import TimeEntryService #Added import
-
+from utils.structured_log import structured_log
 
 app = FastAPI()
 logger = Logger().get_logger()
@@ -80,7 +83,6 @@ async def cors_headers_middleware(request: Request, call_next):
     response.headers["Access-Control-Expose-Headers"] = "X-Total-Count,X-Correlation-ID"
 
     return response
-
 
 
 @app.get("/")
@@ -218,8 +220,8 @@ def delete_customer(name: str, db: Session = Depends(get_db)):
 
 @app.post("/time-entries/upload/")
 async def upload_timesheet(
-    background_tasks: BackgroundTasks,
     file: UploadFile = File(...),
+    background_tasks: BackgroundTasks = None,
     db: Session = Depends(get_db)
 ):
     """Upload and process timesheet file with progress tracking"""
@@ -267,8 +269,7 @@ async def upload_timesheet(
                 "total_records": result["total_records"]
             }
         )
-    except HTTPException as e:
-        logger.error(f"Error processing timesheet: {str(e)}")
+    except HTTPException:
         raise
     except Exception as e:
         logger.error(f"Error processing timesheet: {str(e)}")
@@ -380,14 +381,9 @@ def create_sample_data(db: Session = Depends(get_db)):
 
     return {"message": f"Created {len(created_entries)} sample entries"}
 
-from fastapi.responses import JSONResponse
-import traceback
-from utils import structured_log
-
 from models.timeEntry import TimeEntry
 from models.projectModel import Project
 from models.projectManagerModel import ProjectManager
-from services.report_service import ReportService
 import uvicorn
 
 if __name__ == "__main__":

@@ -1,23 +1,15 @@
-` line at the beginning.  It also adds the missing `from utils.xls_analyzer import XLSAnalyzer` import statement needed for the `process_excel_upload` function. The rest of the original code is kept intact, as indicated by the comment in the edited snippet.
-
-The combination will involve replacing the first line of the original file with the corrected imports and logger initialization from the edited snippet, and then appending the rest of the original file's content.
-
-
-<replit_final_file>
 from sqlalchemy.orm import Session
-from typing import List, Optional
+from typing import List, Optional, Dict, Any
+from fastapi import HTTPException, BackgroundTasks
+from datetime import datetime
 from database import schemas
 from models.timeEntry import TimeEntry
 from utils.logger import Logger
 from utils.validators import DEFAULT_CUSTOMER, DEFAULT_PROJECT, normalize_customer_name, normalize_project_id
 from database.customer_repository import CustomerRepository
 from database.project_repository import ProjectRepository
-from typing import List, Dict, Any, Tuple
-from tqdm import tqdm
-import asyncio
-from fastapi import HTTPException, BackgroundTasks
-from datetime import datetime
 from utils.xls_analyzer import XLSAnalyzer
+from tqdm import tqdm
 
 logger = Logger().get_logger()
 
@@ -49,8 +41,7 @@ class TimeEntryService:
                     contact_email=f"{normalized_name.lower().replace(' ', '_')}@example.com",
                     status="active"
                 )
-                new_customer = self.customer_repo.create(self.db, customer_data.model_dump())
-                self.db.refresh(new_customer)
+                new_customer = self.customer_repo.create(self.db, customer_data)
                 logger.info(f"Created new customer: {normalized_name}")
             return normalized_name
         except Exception as e:
@@ -71,96 +62,20 @@ class TimeEntryService:
 
             # Check if project exists
             existing = self.project_repo.get_by_project_id(self.db, normalized_id)
-            if existing:
-                # Verify project belongs to customer
-                if existing.customer != customer_name:
-                    logger.warning(f"Project {normalized_id} does not belong to customer {customer_name}")
-                    return DEFAULT_PROJECT
-                return normalized_id
-
-            # Create new project with retry logic
-            max_retries = 3
-            for attempt in range(max_retries):
-                try:
-                    project_data = schemas.ProjectCreate(
-                        project_id=normalized_id,
-                        name=normalized_id,
-                        customer=customer_name,
-                        project_manager='-',  # Explicitly set default project manager
-                        status="active"
-                    )
-                    self.project_repo.create(self.db, project_data)
-                    logger.info(f"Created new project: {normalized_id} for customer: {customer_name}")
-                    return normalized_id
-                except Exception as e:
-                    if attempt == max_retries - 1:
-                        logger.error(f"Failed to create project {normalized_id} after {max_retries} attempts: {str(e)}")
-                        return DEFAULT_PROJECT
-                    logger.warning(f"Retry {attempt + 1} for project creation {normalized_id}: {str(e)}")
-                    self.db.rollback()
-
+            if not existing:
+                # Create new project
+                project_data = schemas.ProjectCreate(
+                    project_id=normalized_id,
+                    name=normalized_id,
+                    customer=customer_name,
+                    status="active"
+                )
+                self.project_repo.create(self.db, project_data)
+                logger.info(f"Created new project: {normalized_id} for customer: {customer_name}")
+            return normalized_id
         except Exception as e:
             logger.error(f"Error ensuring project exists: {str(e)}")
             return DEFAULT_PROJECT
-
-    def create_time_entry(self, entry: schemas.TimeEntryCreate) -> TimeEntry:
-        """Create a new time entry with proper validation."""
-        try:
-            logger.debug(f"Starting creation of time entry with data: {entry.model_dump()}")
-
-            # Ensure customer exists and get normalized name
-            customer_name = self._ensure_customer_exists(entry.customer)
-
-            # Ensure project exists with correct customer association
-            project_id = self._ensure_project_exists(entry.project, customer_name)
-
-            # If project validation failed, also reset customer to default
-            if project_id == DEFAULT_PROJECT:
-                customer_name = DEFAULT_CUSTOMER
-
-            # Set default hours if not provided
-            if entry.hours is None:
-                entry.hours = 0.0
-                logger.debug("No hours provided, defaulting to 0.0")
-
-            # Update entry with validated customer and project
-            entry_dict = entry.model_dump(exclude={'id', 'created_at', 'updated_at'})
-            entry_dict.update({
-                'customer': customer_name,
-                'project': project_id
-            })
-
-            # Create TimeEntry instance
-            db_entry = TimeEntry(**entry_dict)
-
-            logger.debug("Adding entry to database session")
-            try:
-                self.db.add(db_entry)
-                self.db.commit()
-                self.db.refresh(db_entry)
-            except Exception as e:
-                logger.error(f"Database error while creating time entry: {str(e)}")
-                self.db.rollback()
-                # If there's a database error, try one more time with default project and customer
-                if project_id != DEFAULT_PROJECT:
-                    entry_dict.update({
-                        'customer': DEFAULT_CUSTOMER,
-                        'project': DEFAULT_PROJECT
-                    })
-                    db_entry = TimeEntry(**entry_dict)
-                    self.db.add(db_entry)
-                    self.db.commit()
-                    self.db.refresh(db_entry)
-                else:
-                    raise
-
-            logger.info(f"Successfully created time entry for {customer_name} - {project_id}")
-            return db_entry
-
-        except Exception as e:
-            logger.error(f"Error creating time entry: {str(e)}")
-            self.db.rollback()
-            raise
 
     async def process_entries_chunk(
         self,
@@ -187,7 +102,7 @@ class TimeEntryService:
                                 contact_email=f"{normalized_name.lower().replace(' ', '_')}@example.com",
                                 status="active"
                             )
-                            self.customer_repo.create(self.db, customer_data.model_dump())
+                            self.customer_repo.create(self.db, customer_data)
                     except Exception as e:
                         logger.error(f"Error creating customer {customer}: {str(e)}")
 
@@ -205,7 +120,6 @@ class TimeEntryService:
                                 project_id=normalized_id,
                                 name=normalized_id,
                                 customer=customer,
-                                project_manager='-',
                                 status="active"
                             )
                             self.project_repo.create(self.db, project_data)
@@ -322,3 +236,62 @@ class TimeEntryService:
         results = query.offset(skip).limit(limit).all()
         logger.info(f"Retrieved {len(results)} time entries")
         return results
+
+    def create_time_entry(self, entry: schemas.TimeEntryCreate) -> TimeEntry:
+        """Create a new time entry with proper validation."""
+        try:
+            logger.debug(f"Starting creation of time entry with data: {entry.model_dump()}")
+
+            # Ensure customer exists and get normalized name
+            customer_name = self._ensure_customer_exists(entry.customer)
+
+            # Ensure project exists with correct customer association
+            project_id = self._ensure_project_exists(entry.project, customer_name)
+
+            # If project validation failed, also reset customer to default
+            if project_id == DEFAULT_PROJECT:
+                customer_name = DEFAULT_CUSTOMER
+
+            # Set default hours if not provided
+            if entry.hours is None:
+                entry.hours = 0.0
+                logger.debug("No hours provided, defaulting to 0.0")
+
+            # Update entry with validated customer and project
+            entry_dict = entry.model_dump(exclude={'id', 'created_at', 'updated_at'})
+            entry_dict.update({
+                'customer': customer_name,
+                'project': project_id
+            })
+
+            # Create TimeEntry instance
+            db_entry = TimeEntry(**entry_dict)
+
+            logger.debug("Adding entry to database session")
+            try:
+                self.db.add(db_entry)
+                self.db.commit()
+                self.db.refresh(db_entry)
+            except Exception as e:
+                logger.error(f"Database error while creating time entry: {str(e)}")
+                self.db.rollback()
+                # If there's a database error, try one more time with default project and customer
+                if project_id != DEFAULT_PROJECT:
+                    entry_dict.update({
+                        'customer': DEFAULT_CUSTOMER,
+                        'project': DEFAULT_PROJECT
+                    })
+                    db_entry = TimeEntry(**entry_dict)
+                    self.db.add(db_entry)
+                    self.db.commit()
+                    self.db.refresh(db_entry)
+                else:
+                    raise
+
+            logger.info(f"Successfully created time entry for {customer_name} - {project_id}")
+            return db_entry
+
+        except Exception as e:
+            logger.error(f"Error creating time entry: {str(e)}")
+            self.db.rollback()
+            raise
