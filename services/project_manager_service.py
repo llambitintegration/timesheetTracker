@@ -54,27 +54,25 @@ class ProjectManagerService:
         logger.info(f"Retrieved {len(pms)} project managers")
         return pms
 
-    def update_project_manager(self, email: str, pm_update: schemas.ProjectManagerUpdate) -> Optional[ProjectManager]:
+    def update_project_manager(self, email: str, pm_update: schemas.ProjectManagerUpdate) -> ProjectManager:
         """Update an existing project manager."""
         logger.debug(f"Attempting to update project manager {email} with data: {pm_update.model_dump(exclude_unset=True)}")
 
         existing_pm = self.pm_repo.get_by_email(self.db, email)
         if not existing_pm:
             logger.warning(f"Project manager not found: {email}")
-            return None
+            raise ValueError(f"Project manager not found: {email}")
 
         try:
             update_data = pm_update.model_dump(exclude={'id', 'created_at', 'updated_at'}, exclude_unset=True)
-            updated_pm = self.pm_repo.update(self.db, existing_pm)
 
             for key, value in update_data.items():
                 if value is not None:  # Only update non-None values
                     setattr(existing_pm, key, value)
 
-            self.db.commit()
-            self.db.refresh(existing_pm)
+            updated_pm = self.pm_repo.update(self.db, existing_pm)
             logger.info(f"Successfully updated project manager: {email}")
-            return existing_pm
+            return updated_pm
         except Exception as e:
             logger.error(f"Error updating project manager {email}: {str(e)}")
             self.db.rollback()
