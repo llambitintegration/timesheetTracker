@@ -4,6 +4,7 @@ modules = ["python-3.11", "postgresql-16", "nodejs-20"]
 channel = "stable-24_05"
 
 [workflows]
+runButton = "FastAPI Server"
 
 [[workflows.workflow]]
 name = "Project"
@@ -61,8 +62,4 @@ run = ["sh", "-c", "python main.py"]
 
 [[ports]]
 localPort = 8000
-externalPort = 80
-
-[[ports]]
-localPort = 8080
 externalPort = 8080
