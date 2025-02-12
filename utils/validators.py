@@ -33,23 +33,15 @@ def normalize_project_id(project_id: Optional[str]) -> str:
         return DEFAULT_PROJECT
 
 
-def ensure_default_project_manager(db: Session) -> Optional[ProjectManager]:
-    """Ensure default project manager exists in database."""
-    try:
-        default_pm = db.query(ProjectManager).filter(ProjectManager.name == DEFAULT_PROJECT_MANAGER).first()
-        if not default_pm:
-            default_pm = ProjectManager(
-                name=DEFAULT_PROJECT_MANAGER,
-                email="unassigned@example.com"
-            )
-            db.add(default_pm)
-            db.flush()
-            logger.info(f"Created default project manager: {DEFAULT_PROJECT_MANAGER}")
-        return default_pm
-    except Exception as e:
-        logger.error(f"Failed to create default project manager: {str(e)}")
-        db.rollback()
-        return None
+def ensure_default_project_manager(db: Session):
+    """Ensure default project manager exists."""
+    pm_repo = ProjectManagerRepository()
+    if not pm_repo.get_by_name(db, DEFAULT_PROJECT_MANAGER):
+        pm = ProjectManagerCreate(
+            name=DEFAULT_PROJECT_MANAGER, 
+            email='unassigned@company.com'
+        )
+        pm_repo.create(db, pm.model_dump())
 
     # Replace both hyphens and spaces with underscores
     normalized = str(project_id).strip()

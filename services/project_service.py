@@ -163,7 +163,7 @@ class ProjectService:
             # If project manager is being updated, ensure they exist
             if 'project_manager' in update_data:
                 if update_data['project_manager'] is None or update_data['project_manager'] == '-':
-                    update_data['project_manager'] = '-'
+                    update_data['project_manager'] = DEFAULT_PROJECT_MANAGER
                 elif not self._ensure_project_manager_exists(update_data['project_manager']):
                     # Auto-create project manager
                     pm_name = update_data['project_manager']
