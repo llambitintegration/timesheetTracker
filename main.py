@@ -150,8 +150,22 @@ def create_time_entry(entry: schemas.TimeEntryCreate, db: Session = Depends(get_
     service = TimesheetService(db)
     return service.create_entry(entry)
 
-@app.put("/time-entries/{entry_id}", response_model=schemas.TimeEntry)
-def update_time_entry(entry_id: int, entry: schemas.TimeEntryUpdate, db: Session = Depends(get_db)):
+@app.put("/time-entries/{entry_id}", response_model=schemas.TimeEntry, description="Update an existing time entry")
+def update_time_entry(
+    entry_id: int, 
+    entry: schemas.TimeEntryUpdate = Body(
+        example={
+            "category": "Other",
+            "subcategory": "PC Upgrades/Support",
+            "customer": "Unassigned",
+            "project": "Unassigned",
+            "task_description": "VPN for Hiland",
+            "hours": 2.5,
+            "date": "2024-12-17"
+        }
+    ),
+    db: Session = Depends(get_db)
+):
     """Update an existing time entry"""
     service = TimesheetService(db)
     return service.update_entry(entry_id, entry)
