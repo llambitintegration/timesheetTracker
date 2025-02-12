@@ -12,7 +12,7 @@ def test_create_customer(test_client: TestClient, test_db):
         "status": "active"
     }
     response = test_client.post("/customers", json=customer_data)
-    assert response.status_code == 200
+    assert response.status_code == 201  # Changed to 201 for resource creation
     data = response.json()
     assert data["name"] == customer_data["name"]
     assert data["contact_email"] == customer_data["contact_email"]
@@ -29,7 +29,7 @@ def test_get_customer(test_client: TestClient, test_db):
         "status": "active"
     }
     create_response = test_client.post("/customers", json=customer_data)
-    assert create_response.status_code == 200
+    assert create_response.status_code == 201  # Changed to 201 for resource creation
 
     # Then get the customer
     response = test_client.get(f"/customers/{customer_data['name']}")
@@ -49,7 +49,7 @@ def test_update_customer(test_client: TestClient, test_db):
         "status": "active"
     }
     create_response = test_client.post("/customers", json=customer_data)
-    assert create_response.status_code == 200
+    assert create_response.status_code == 201  # Changed to 201 for resource creation
 
     # Update the customer
     update_data = {
@@ -73,11 +73,11 @@ def test_delete_customer(test_client: TestClient, test_db):
         "status": "active"
     }
     create_response = test_client.post("/customers", json=customer_data)
-    assert create_response.status_code == 200
+    assert create_response.status_code == 201  # Changed to 201 for resource creation
 
     # Delete the customer
     response = test_client.delete(f"/customers/{customer_data['name']}")
-    assert response.status_code == 200
+    assert response.status_code == 204  # Changed to 204 for successful deletion
 
     # Verify customer is deleted
     get_response = test_client.get(f"/customers/{customer_data['name']}")
@@ -98,7 +98,7 @@ def test_get_all_customers(test_client: TestClient, test_db):
 
     for customer in customers:
         response = test_client.post("/customers", json=customer)
-        assert response.status_code == 200
+        assert response.status_code == 201  # Changed to 201 for resource creation
 
     # Get all customers
     response = test_client.get("/customers")
@@ -118,7 +118,7 @@ def test_create_duplicate_customer(test_client: TestClient, test_db):
 
     # Create first customer
     response = test_client.post("/customers", json=customer_data)
-    assert response.status_code == 200
+    assert response.status_code == 201  # Changed to 201 for resource creation
 
     # Try to create duplicate
     response = test_client.post("/customers", json=customer_data)

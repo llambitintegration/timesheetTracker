@@ -4,6 +4,7 @@ from database.schemas import ProjectCreate, ProjectBase, CustomerCreate
 from models.projectModel import Project
 from models.projectManagerModel import ProjectManager
 from models.customerModel import Customer as CustomerModel
+from fastapi import HTTPException
 
 def create_test_project_manager(db_session):
     """Helper function to create a test project manager"""
@@ -52,33 +53,36 @@ def test_create_project(db_session):
 def test_create_duplicate_project(db_session):
     """Test attempting to create a project with duplicate project_id"""
     create_test_project_manager(db_session)  # Create test project manager first
+    create_test_customer(db_session)  # Create test customer first
     service = ProjectService(db_session)
     project_data = ProjectCreate(
         project_id="DUP-001",
         name="Duplicate Test",
         description="Test Description",
         customer="Test Customer",
-        project_manager="test_manager"  # Use existing project manager
+        project_manager="test_manager"
     )
 
     # Create first project
     service.create_project(project_data)
 
     # Attempt to create duplicate
-    with pytest.raises(ValueError) as exc_info:
+    with pytest.raises(HTTPException) as exc_info:
         service.create_project(project_data)
-    assert "Project with ID DUP-001 already exists" in str(exc_info.value)
+    assert exc_info.value.status_code == 400
+    assert "Project with ID DUP-001 already exists" in str(exc_info.value.detail)
 
 def test_get_project(db_session):
     """Test retrieving a project by project_id"""
-    create_test_project_manager(db_session)  # Create test project manager first
+    create_test_project_manager(db_session)
+    create_test_customer(db_session)
     service = ProjectService(db_session)
     project_data = ProjectCreate(
         project_id="GET-001",
         name="Get Test",
         description="Test Description",
         customer="Test Customer",
-        project_manager="test_manager"  # Use existing project manager
+        project_manager="test_manager"
     )
 
     created = service.create_project(project_data)
@@ -91,8 +95,46 @@ def test_get_project(db_session):
 def test_get_nonexistent_project(db_session):
     """Test retrieving a non-existent project"""
     service = ProjectService(db_session)
-    result = service.get_project("NONEXISTENT-001")
-    assert result is None
+    with pytest.raises(HTTPException) as exc_info:
+        service.get_project("NONEXISTENT-001")
+    assert exc_info.value.status_code == 404
+    assert "Project not found" in str(exc_info.value.detail)
+
+def test_create_project_without_project_manager(db_session):
+    """Test creating a project without a project manager should fail"""
+    create_test_customer(db_session)  # Create test customer first
+    service = ProjectService(db_session)
+    project_data = ProjectCreate(
+        project_id="PM-001",
+        name="No Manager Project",
+        description="Test Description",
+        customer="Test Customer",
+        project_manager=None,
+        status="active"
+    )
+
+    with pytest.raises(HTTPException) as exc_info:
+        service.create_project(project_data)
+    assert exc_info.value.status_code == 400
+    assert "Project manager is required" in str(exc_info.value.detail)
+
+def test_create_project_with_nonexistent_project_manager(db_session):
+    """Test creating a project with a non-existent project manager should fail"""
+    create_test_customer(db_session)  # Create test customer first
+    service = ProjectService(db_session)
+    project_data = ProjectCreate(
+        project_id="PM-002",
+        name="Invalid Manager Project",
+        description="Test Description",
+        customer="Test Customer",
+        project_manager="nonexistent_manager",
+        status="active"
+    )
+
+    with pytest.raises(HTTPException) as exc_info:
+        service.create_project(project_data)
+    assert exc_info.value.status_code == 404
+    assert "Project manager not found" in str(exc_info.value.detail)
 
 def test_get_all_projects(db_session):
     """Test retrieving all projects with pagination"""
@@ -195,38 +237,6 @@ def test_update_project(db_session):
     assert updated.description == "Updated Description"
     assert updated.project_id == "UPDATE-001"  # Unchanged field
     assert updated.project_manager == "test_manager"
-
-def test_create_project_without_project_manager(db_session):
-    """Test creating a project without a project manager should fail"""
-    service = ProjectService(db_session)
-    project_data = ProjectCreate(
-        project_id="PM-001",
-        name="No Manager Project",
-        description="Test Description",
-        customer="Test Customer",
-        project_manager=None,  # This should cause validation error
-        status="active"
-    )
-
-    with pytest.raises(ValueError) as exc_info:
-        service.create_project(project_data)
-    assert "Project manager is required" in str(exc_info.value)
-
-def test_create_project_with_nonexistent_project_manager(db_session):
-    """Test creating a project with a non-existent project manager should fail"""
-    service = ProjectService(db_session)
-    project_data = ProjectCreate(
-        project_id="PM-002",
-        name="Invalid Manager Project",
-        description="Test Description",
-        customer="Test Customer",
-        project_manager="nonexistent_manager",  # Non-existent manager
-        status="active"
-    )
-
-    with pytest.raises(ValueError) as exc_info:
-        service.create_project(project_data)
-    assert "Project manager not found" in str(exc_info.value)
 
 def test_create_project_with_invalid_customer(db_session):
     """Test creating a project with an invalid customer"""

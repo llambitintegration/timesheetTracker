@@ -14,7 +14,7 @@ def test_create_project(test_client: TestClient, test_db):
         "status": "active"
     }
     response = test_client.post("/projects", json=project_data)
-    assert response.status_code == 200
+    assert response.status_code == 201  # Changed to 201 for resource creation
     data = response.json()
     assert data["project_id"] == project_data["project_id"]
     assert data["name"] == project_data["name"]
@@ -25,7 +25,6 @@ def test_create_project(test_client: TestClient, test_db):
 
 def test_get_project(test_client: TestClient, test_db):
     """Test retrieving a project"""
-    # First create a project
     project_data = {
         "project_id": "TEST_002",
         "name": "Get Test Project",
@@ -35,9 +34,8 @@ def test_get_project(test_client: TestClient, test_db):
         "status": "active"
     }
     create_response = test_client.post("/projects", json=project_data)
-    assert create_response.status_code == 200
+    assert create_response.status_code == 201  # Changed to 201 for resource creation
 
-    # Then get the project
     response = test_client.get(f"/projects/{project_data['project_id']}")
     assert response.status_code == 200
     data = response.json()
@@ -47,7 +45,6 @@ def test_get_project(test_client: TestClient, test_db):
 
 def test_update_project(test_client: TestClient, test_db):
     """Test updating a project"""
-    # First create a project
     project_data = {
         "project_id": "TEST_003",
         "name": "Update Test Project",
@@ -57,9 +54,8 @@ def test_update_project(test_client: TestClient, test_db):
         "status": "active"
     }
     create_response = test_client.post("/projects", json=project_data)
-    assert create_response.status_code == 200
+    assert create_response.status_code == 201  # Changed to 201 for resource creation
 
-    # Update the project
     update_data = {
         "name": "Updated Project Name",
         "description": "Updated Description"
@@ -69,11 +65,10 @@ def test_update_project(test_client: TestClient, test_db):
     data = response.json()
     assert data["name"] == update_data["name"]
     assert data["description"] == update_data["description"]
-    assert data["project_id"] == project_data["project_id"]  # ID should remain unchanged
+    assert data["project_id"] == project_data["project_id"]
 
 def test_delete_project(test_client: TestClient, test_db):
     """Test deleting a project"""
-    # First create a project
     project_data = {
         "project_id": "TEST_004",
         "name": "Delete Test Project",
@@ -83,11 +78,10 @@ def test_delete_project(test_client: TestClient, test_db):
         "status": "active"
     }
     create_response = test_client.post("/projects", json=project_data)
-    assert create_response.status_code == 200
+    assert create_response.status_code == 201  # Changed to 201 for resource creation
 
-    # Delete the project
     response = test_client.delete(f"/projects/{project_data['project_id']}")
-    assert response.status_code == 200
+    assert response.status_code == 204  # Changed to 204 for successful deletion
 
     # Verify project is deleted
     get_response = test_client.get(f"/projects/{project_data['project_id']}")
@@ -95,7 +89,6 @@ def test_delete_project(test_client: TestClient, test_db):
 
 def test_get_all_projects(test_client: TestClient, test_db):
     """Test retrieving all projects"""
-    # Create some test projects first
     projects = [
         {
             "project_id": f"TEST_{i:03d}",
@@ -110,14 +103,13 @@ def test_get_all_projects(test_client: TestClient, test_db):
 
     for project in projects:
         response = test_client.post("/projects", json=project)
-        assert response.status_code == 200
+        assert response.status_code == 201  # Changed to 201 for resource creation
 
-    # Get all projects
     response = test_client.get("/projects")
     assert response.status_code == 200
     data = response.json()
     assert isinstance(data, list)
-    assert len(data) >= len(projects)  # Should at least contain our test projects
+    assert len(data) >= len(projects)
 
 def test_create_duplicate_project(test_client: TestClient, test_db):
     """Test creating a project with duplicate project_id"""
@@ -132,8 +124,9 @@ def test_create_duplicate_project(test_client: TestClient, test_db):
 
     # Create first project
     response = test_client.post("/projects", json=project_data)
-    assert response.status_code == 200
+    assert response.status_code == 201  # Changed to 201 for resource creation
 
     # Try to create duplicate
     response = test_client.post("/projects", json=project_data)
     assert response.status_code == 400
+    assert "already exists" in response.json()["detail"]

@@ -38,7 +38,7 @@ task = "packager.installForAll"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "PYTHONPATH=. pytest tests/test_customer_service.py -v"
+args = "PYTHONPATH=. pytest tests/test_customer_service.py tests/test_project_service.py tests/test_project_manager_endpoints.py tests/test_time_entry_endpoints.py -v"
 
 [[workflows.workflow]]
 name = "Database Init"
