@@ -27,25 +27,27 @@ class ProjectRepository(BaseRepository[Project]):
         logger.debug(f"Fetching projects for manager: {manager_name}")
         return db.query(self.model).filter(self.model.project_manager == manager_name).all()
 
-    def create(self, db: Session, data: Dict[str, Any] | schemas.ProjectCreate) -> Project:
+    def create(self, db: Session, data: Dict[str, Any] | schemas.ProjectCreate | Project) -> Project:
         """Create a new project with schema support."""
         logger.debug(f"Creating new project with data: {data}")
         try:
-            # Convert to dict if it's a schema object
-            if hasattr(data, 'model_dump'):
+            # Convert input to project instance
+            if isinstance(data, Project):
+                db_project = data
+            elif hasattr(data, 'model_dump'):
                 project_data = data.model_dump()
+                db_project = Project(**project_data)
             elif isinstance(data, dict):
-                project_data = data
+                db_project = Project(**data)
             else:
-                raise ValueError("Invalid data type for project creation")
+                raise ValueError(f"Invalid data type for project creation: {type(data)}")
 
             # Check if project with same ID already exists
-            existing_project = self.get_by_project_id(db, project_data['project_id'])
+            existing_project = self.get_by_project_id(db, db_project.project_id)
             if existing_project:
-                logger.warning(f"Project with ID {project_data['project_id']} already exists")
-                raise ValueError(f"Project with ID {project_data['project_id']} already exists")
+                logger.warning(f"Project with ID {db_project.project_id} already exists")
+                raise ValueError(f"Project with ID {db_project.project_id} already exists")
 
-            db_project = Project(**project_data)
             db.add(db_project)
             db.commit()
             db.refresh(db_project)
@@ -57,9 +59,21 @@ class ProjectRepository(BaseRepository[Project]):
             raise
 
     def update(self, db: Session, item: Project) -> Project:
-        """Update an existing project."""
+        """Update an existing project with better error handling."""
         logger.debug(f"Updating project: {item.project_id}")
         try:
+            # Check if project exists
+            existing = self.get_by_project_id(db, item.project_id)
+            if not existing:
+                raise ValueError(f"Project with ID {item.project_id} not found")
+
+            # Check if project_id is being changed and if new ID exists
+            if existing.project_id != item.project_id:
+                duplicate = self.get_by_project_id(db, item.project_id)
+                if duplicate:
+                    raise ValueError(f"Project with ID {item.project_id} already exists")
+
+            # Perform the update
             db.merge(item)
             db.commit()
             db.refresh(item)
@@ -70,17 +84,17 @@ class ProjectRepository(BaseRepository[Project]):
             db.rollback()
             raise
 
-    def delete(self, db: Session, project_id: str) -> bool:
-        """Delete a project by its project_id."""
-        logger.debug(f"Attempting to delete project: {project_id}")
+    def delete(self, db: Session, id: str) -> bool:
+        """Delete a project by its project_id with enhanced error handling."""
+        logger.debug(f"Attempting to delete project: {id}")
         try:
-            project = self.get_by_project_id(db, project_id)
+            project = self.get_by_project_id(db, id)
             if project:
                 db.delete(project)
                 db.commit()
-                logger.info(f"Successfully deleted project: {project_id}")
+                logger.info(f"Successfully deleted project: {id}")
                 return True
-            logger.warning(f"Project not found for deletion: {project_id}")
+            logger.warning(f"Project not found for deletion: {id}")
             return False
         except Exception as e:
             logger.error(f"Error deleting project: {str(e)}")

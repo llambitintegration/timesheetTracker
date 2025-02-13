@@ -25,28 +25,39 @@ class CustomerRepository(BaseRepository[Customer]):
     def delete_by_name(self, db: Session, name: str) -> bool:
         """Delete a customer by name."""
         logger.debug(f"Attempting to delete customer by name: {name}")
-        customer = self.get_by_name(db, name)
-        if customer:
-            db.delete(customer)
-            db.commit()
-            logger.info(f"Successfully deleted customer: {name}")
-            return True
-        logger.warning(f"Customer not found for deletion: {name}")
-        return False
+        try:
+            customer = self.get_by_name(db, name)
+            if customer:
+                db.delete(customer)
+                db.commit()
+                logger.info(f"Successfully deleted customer: {name}")
+                return True
+            logger.warning(f"Customer not found for deletion: {name}")
+            return False
+        except Exception as e:
+            logger.error(f"Error deleting customer: {str(e)}")
+            db.rollback()
+            raise
 
-    def create(self, db: Session, data: Dict[str, Any] | schemas.CustomerCreate) -> Customer:
+    def create(self, db: Session, data: Dict[str, Any] | schemas.CustomerCreate | Customer) -> Customer:
         """Create a new customer with improved error handling."""
         logger.debug(f"Creating customer with data: {data}")
         try:
-            # Convert to dict if it's a schema object
-            if hasattr(data, 'model_dump'):
+            if isinstance(data, Customer):
+                db_customer = data
+            elif hasattr(data, 'model_dump'):
                 customer_data = data.model_dump()
+                db_customer = Customer(**customer_data)
             elif isinstance(data, dict):
-                customer_data = data
+                db_customer = Customer(**data)
             else:
-                raise ValueError("Invalid data type for customer creation")
+                raise ValueError(f"Invalid data type for customer creation: {type(data)}")
 
-            db_customer = Customer(**customer_data)
+            # Check for existing customer with same name
+            existing = self.get_by_name(db, db_customer.name)
+            if existing:
+                raise ValueError(f"Customer with name '{db_customer.name}' already exists")
+
             db.add(db_customer)
             db.commit()
             db.refresh(db_customer)
@@ -54,5 +65,31 @@ class CustomerRepository(BaseRepository[Customer]):
             return db_customer
         except Exception as e:
             logger.error(f"Error creating customer: {str(e)}")
+            db.rollback()
+            raise
+
+    def update(self, db: Session, item: Customer) -> Customer:
+        """Update an existing customer with cascade handling."""
+        logger.debug(f"Updating customer: {item.name}")
+        try:
+            # Get the current customer to check for name changes
+            current = self.get_by_id(db, item.id)
+            if not current:
+                raise ValueError(f"Customer with ID {item.id} not found")
+
+            # If name is being changed, ensure new name doesn't exist
+            if current.name != item.name:
+                existing = self.get_by_name(db, item.name)
+                if existing and existing.id != item.id:
+                    raise ValueError(f"Customer with name '{item.name}' already exists")
+
+            # Perform the update
+            db.merge(item)
+            db.commit()
+            db.refresh(item)
+            logger.info(f"Successfully updated customer: {item.name}")
+            return item
+        except Exception as e:
+            logger.error(f"Error updating customer: {str(e)}")
             db.rollback()
             raise
