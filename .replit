@@ -11,7 +11,7 @@ localPort = 8000
 externalPort = 80
 
 [workflows]
-runButton = "Project"
+runButton = "Run"
 
 [[workflows.workflow]]
 name = "Project"
@@ -53,3 +53,11 @@ task = "packager.installForAll"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "python -c \"from database.database import verify_database; verify_database()\""
+
+[[workflows.workflow]]
+name = "Run"
+author = 37467400
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "uvicorn main:app --host 0.0.0.0 --port 8000"
