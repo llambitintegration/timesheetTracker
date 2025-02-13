@@ -351,13 +351,17 @@ async def upload_timesheet(
             detail="Only Excel (.xlsx) files are supported"
         )
 
-    # Verify content type
+    # Accept both standard Excel content types
     allowed_content_types = {
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        'application/vnd.ms-excel',
+        'multipart/form-data'
     }
 
-    if file.content_type not in allowed_content_types:
-        raise HTTPException(status_code=400, detail="Invalid content type")
+    content_type = file.content_type.split(';')[0].strip()
+    if content_type not in allowed_content_types:
+        logger.warning(f"Received content type: {content_type}")
+        logger.warning(f"Allowed content types: {allowed_content_types}")
 
     try:
         service = TimeEntryService(db)
