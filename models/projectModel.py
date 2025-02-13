@@ -9,13 +9,12 @@ class Project(BaseModel):
     name = Column(String, nullable=False)
     description = Column(String, nullable=True)
     customer = Column(String, ForeignKey('customers.name', ondelete='SET NULL'), nullable=True)
-    project_manager = Column(String, ForeignKey('project_managers.name', ondelete='SET NULL'), nullable=False, server_default=text("'-'"))
+    project_manager = Column(String, ForeignKey('project_managers.name', ondelete='SET NULL'), nullable=True, server_default=text("'-'"))
     status = Column(String, nullable=False, server_default=text("'active'"))
 
     def __init__(self, **kwargs):
-        # Ensure project_manager has a default value
-        kwargs['project_manager'] = kwargs.get('project_manager') or '-'
-        kwargs['status'] = kwargs.get('status') or 'active'
+        # Set defaults if not provided
+        kwargs['status'] = kwargs.get('status', 'active')
         super().__init__(**kwargs)
 
     def __repr__(self):

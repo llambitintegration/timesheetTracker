@@ -161,8 +161,8 @@ class ProjectBase(BaseModel):
     project_id: str
     name: str
     description: Optional[str] = None
-    customer: str = Field(..., description="Customer name, required for all projects")
-    project_manager: Optional[str] = Field(default='-', description="Project manager name")
+    customer: Optional[str] = None
+    project_manager: Optional[str] = None
     status: str = "active"
 
     model_config = ConfigDict(from_attributes=True)
@@ -172,8 +172,8 @@ class ProjectCreate(BaseModel):
     project_id: str
     name: str
     description: Optional[str] = None
-    customer: Optional[str] = Field(default='Unassigned', description="Customer name")
-    project_manager: Optional[str] = Field(default='-', description="Project manager name")
+    customer: Optional[str] = None
+    project_manager: Optional[str] = None
     status: str = "active"
 
     model_config = ConfigDict(from_attributes=True)

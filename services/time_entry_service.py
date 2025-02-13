@@ -5,7 +5,7 @@ from datetime import datetime, date
 from database import schemas
 from models.timeEntry import TimeEntry
 from utils.logger import Logger
-from utils.validators import DEFAULT_CUSTOMER, DEFAULT_PROJECT, normalize_customer_name, normalize_project_id
+from utils.validators import normalize_customer_name, normalize_project_id
 from database.customer_repository import CustomerRepository
 from database.project_repository import ProjectRepository
 from utils.xls_analyzer import XLSAnalyzer
@@ -20,17 +20,13 @@ class TimeEntryService:
         self.project_repo = ProjectRepository()
         logger.debug("TimeEntryService initialized with database session")
 
-    def _ensure_customer_exists(self, customer_name: str) -> str:
+    def _ensure_customer_exists(self, customer_name: Optional[str]) -> Optional[str]:
         """Ensure customer exists, create if not. Return normalized customer name."""
-        if not customer_name or customer_name == '-':
-            logger.debug("No customer name or dash provided, using default")
-            return DEFAULT_CUSTOMER
-
         try:
             normalized_name = normalize_customer_name(customer_name)
             if not normalized_name:
-                logger.warning("Customer name normalization failed, using default")
-                return DEFAULT_CUSTOMER
+                logger.debug("No valid customer name provided")
+                return None
 
             # Check if customer exists
             existing = self.customer_repo.get_by_name(self.db, normalized_name)
@@ -46,19 +42,15 @@ class TimeEntryService:
             return normalized_name
         except Exception as e:
             logger.error(f"Error ensuring customer exists: {str(e)}")
-            return DEFAULT_CUSTOMER
+            return None
 
-    def _ensure_project_exists(self, project_id: str, customer_name: str) -> str:
+    def _ensure_project_exists(self, project_id: Optional[str], customer_name: Optional[str]) -> Optional[str]:
         """Ensure project exists, create if not. Return normalized project ID."""
         try:
-            if not project_id or project_id == '-':
-                logger.debug("No project ID or dash provided, using default")
-                return DEFAULT_PROJECT
-
             normalized_id = normalize_project_id(project_id)
             if not normalized_id:
-                logger.warning("Project ID normalization failed, using default")
-                return DEFAULT_PROJECT
+                logger.debug("No valid project ID provided")
+                return None
 
             # Check if project exists
             existing = self.project_repo.get_by_project_id(self.db, normalized_id)
@@ -75,7 +67,7 @@ class TimeEntryService:
             return normalized_id
         except Exception as e:
             logger.error(f"Error ensuring project exists: {str(e)}")
-            return DEFAULT_PROJECT
+            return None
 
     async def process_entries_chunk(
         self,
@@ -91,12 +83,12 @@ class TimeEntryService:
             unique_customers = {
                 normalize_customer_name(entry.customer)
                 for entry in entries
-                if entry.customer and entry.customer != DEFAULT_CUSTOMER
+                if entry.customer
             }
             unique_projects = {
                 normalize_project_id(entry.project)
                 for entry in entries
-                if entry.project and entry.project != DEFAULT_PROJECT
+                if entry.project
             }
 
             # Create customers in bulk
@@ -128,7 +120,7 @@ class TimeEntryService:
                             project_data = schemas.ProjectCreate(
                                 project_id=project_id,
                                 name=project_id,
-                                customer=customer_name or DEFAULT_CUSTOMER,
+                                customer=customer_name,
                                 status="active"
                             )
                             self.project_repo.create(self.db, project_data)
@@ -141,13 +133,8 @@ class TimeEntryService:
             for entry in entries:
                 try:
                     # Normalize and validate customer and project
-                    normalized_customer = normalize_customer_name(entry.customer) if entry.customer else DEFAULT_CUSTOMER
-                    normalized_project = normalize_project_id(entry.project) if entry.project else DEFAULT_PROJECT
-
-                    # If project doesn't exist, use default project and customer
-                    if not self.project_repo.get_by_project_id(self.db, normalized_project):
-                        normalized_project = DEFAULT_PROJECT
-                        normalized_customer = DEFAULT_CUSTOMER
+                    normalized_customer = normalize_customer_name(entry.customer)
+                    normalized_project = normalize_project_id(entry.project)
 
                     entry_dict = entry.model_dump(exclude={'id', 'created_at', 'updated_at'})
                     entry_dict.update({
@@ -283,10 +270,6 @@ class TimeEntryService:
             # Ensure project exists with correct customer association
             project_id = self._ensure_project_exists(entry.project, customer_name)
 
-            # If project validation failed, also reset customer to default
-            if project_id == DEFAULT_PROJECT:
-                customer_name = DEFAULT_CUSTOMER
-
             # Set default hours if not provided
             if entry.hours is None:
                 entry.hours = 0.0
@@ -303,25 +286,9 @@ class TimeEntryService:
             db_entry = TimeEntry(**entry_dict)
 
             logger.debug("Adding entry to database session")
-            try:
-                self.db.add(db_entry)
-                self.db.commit()
-                self.db.refresh(db_entry)
-            except Exception as e:
-                logger.error(f"Database error while creating time entry: {str(e)}")
-                self.db.rollback()
-                # If there's a database error, try one more time with default project and customer
-                if project_id != DEFAULT_PROJECT:
-                    entry_dict.update({
-                        'customer': DEFAULT_CUSTOMER,
-                        'project': DEFAULT_PROJECT
-                    })
-                    db_entry = TimeEntry(**entry_dict)
-                    self.db.add(db_entry)
-                    self.db.commit()
-                    self.db.refresh(db_entry)
-                else:
-                    raise
+            self.db.add(db_entry)
+            self.db.commit()
+            self.db.refresh(db_entry)
 
             logger.info(f"Successfully created time entry for {customer_name} - {project_id}")
             return db_entry

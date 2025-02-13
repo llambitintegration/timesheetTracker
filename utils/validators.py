@@ -8,45 +8,30 @@ from sqlalchemy.exc import IntegrityError
 
 logger = Logger().get_logger()
 
-# Default values for missing entries
-DEFAULT_CUSTOMER = "Unassigned"
-DEFAULT_PROJECT = "Unassigned"
-DEFAULT_PROJECT_MANAGER = "Unassigned"
-
 def normalize_customer_name(name: Optional[str]) -> Optional[str]:
     """Normalize customer name, handling empty and dash values"""
-    if not name:
-        return DEFAULT_CUSTOMER
+    if not name or str(name).strip() in ['-', '', 'None', 'null', 'NA']:
+        return None
+    return str(name).strip()
 
-    name = name.strip()
-    if name == '-':
-        return DEFAULT_CUSTOMER
-
-    return name
-
-def normalize_project_id(project_id: Optional[str]) -> str:
+def normalize_project_id(project_id: Optional[str]) -> Optional[str]:
     """Normalize project ID for database lookup.
     Converts spaces and hyphens to underscores.
-    Returns DEFAULT_PROJECT if project_id is invalid or not found."""
+    Returns None if project_id is invalid."""
     if not project_id or str(project_id).strip() in ['-', '', 'None', 'null', 'NA']:
-        logger.debug(f"Converting empty/invalid project ID to {DEFAULT_PROJECT}")
-        return DEFAULT_PROJECT
-
-
-def ensure_default_project_manager(db: Session):
-    """Ensure default project manager exists."""
-    pm_repo = ProjectManagerRepository()
-    if not pm_repo.get_by_name(db, DEFAULT_PROJECT_MANAGER):
-        pm = ProjectManagerCreate(
-            name=DEFAULT_PROJECT_MANAGER, 
-            email='unassigned@company.com'
-        )
-        pm_repo.create(db, pm.model_dump())
+        logger.debug(f"Converting empty/invalid project ID to None")
+        return None
 
     # Replace both hyphens and spaces with underscores
     normalized = str(project_id).strip()
     normalized = normalized.replace('-', '_').replace(' ', '_')
     return normalized
+
+def normalize_project_manager(manager: Optional[str]) -> Optional[str]:
+    """Normalize project manager name for database lookup."""
+    if not manager or str(manager).strip() in ['-', '', 'None', 'null', 'NA']:
+        return None
+    return str(manager).strip()
 
 def validate_database_references(
     db: Session,
@@ -55,7 +40,6 @@ def validate_database_references(
     """
     Validate database references in time entries.
     Returns tuple of (valid_entries, validation_errors).
-    On validation failure, defaults to Unassigned customer and project.
     """
     processed_entries = []
     validation_errors = []
@@ -68,21 +52,25 @@ def validate_database_references(
         original_project = entry.project
         has_validation_error = False
 
-        # Check customer existence
-        if entry.customer != DEFAULT_CUSTOMER:
-            customer = db.query(Customer).filter(Customer.name == entry.customer).first()
+        # Normalize values
+        normalized_customer = normalize_customer_name(entry.customer)
+        normalized_project = normalize_project_id(entry.project)
+
+        # Check customer existence if provided
+        if normalized_customer:
+            customer = db.query(Customer).filter(Customer.name == normalized_customer).first()
             if not customer:
                 validation_errors.append({
-                    'entry': entry.dict(),
+                    'entry': entry.model_dump(),
                     'error': f"Customer '{original_customer}' not found in database",
                     'type': 'invalid_customer'
                 })
                 has_validation_error = True
+                normalized_customer = None
 
-        # Check project existence
-        if entry.project != DEFAULT_PROJECT:
-            normalized_project_id = normalize_project_id(entry.project)
-            project = db.query(Project).filter(Project.project_id == normalized_project_id).first()
+        # Check project existence if provided
+        if normalized_project:
+            project = db.query(Project).filter(Project.project_id == normalized_project).first()
             if not project:
                 validation_errors.append({
                     'entry': entry.model_dump(),
@@ -90,24 +78,34 @@ def validate_database_references(
                     'type': 'invalid_project'
                 })
                 has_validation_error = True
-            elif project.customer != entry.customer:
+                normalized_project = None
+            elif project.customer and normalized_customer and project.customer != normalized_customer:
                 validation_errors.append({
                     'entry': entry.model_dump(),
                     'error': f"Project '{original_project}' does not belong to customer '{original_customer}'",
                     'type': 'invalid_project_customer_relationship'
                 })
                 has_validation_error = True
+                normalized_project = None
+                normalized_customer = None
 
-        # If any validation error occurred, use default values
-        if has_validation_error:
-            entry.customer = DEFAULT_CUSTOMER
-            entry.project = DEFAULT_PROJECT
-            logger.warning(f"Validation failed for entry. Using defaults: customer={DEFAULT_CUSTOMER}, project={DEFAULT_PROJECT}")
-
+        # Update entry with normalized values
+        entry.customer = normalized_customer
+        entry.project = normalized_project
         processed_entries.append(entry)
         logger.debug(f"Processed entry: customer={entry.customer}, project={entry.project}")
 
     return processed_entries, validation_errors
+
+def ensure_default_project_manager(db: Session):
+    """Ensure default project manager exists."""
+    pm_repo = ProjectManagerRepository()
+    if not pm_repo.get_by_name(db, DEFAULT_PROJECT_MANAGER):
+        pm = ProjectManagerCreate(
+            name=DEFAULT_PROJECT_MANAGER, 
+            email='unassigned@company.com'
+        )
+        pm_repo.create(db, pm.model_dump())
 
 def ensure_default_customer(db: Session) -> Optional[Customer]:
     """Ensure default customer exists in database."""
@@ -172,9 +170,3 @@ def ensure_default_project(db: Session) -> Optional[Project]:
         logger.error(f"Failed to create default project: {str(e)}")
         db.rollback()
         return None
-
-def normalize_project_manager(manager: Optional[str]) -> str:
-    """Normalize project manager name for database lookup."""
-    if not manager or str(manager).strip() in ['-', '', 'None', 'null', 'NA', 'Unassigned']:
-        return DEFAULT_PROJECT_MANAGER
-    return str(manager).strip()

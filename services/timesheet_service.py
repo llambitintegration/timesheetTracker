@@ -1,3 +1,4 @@
+<replit_final_file>
 from fastapi import HTTPException, UploadFile
 from sqlalchemy.orm import Session
 from typing import List, Dict, Any, Union, BinaryIO, Tuple, Optional
@@ -9,8 +10,8 @@ from models.timeEntry import TimeEntry
 from database.timesheet_repository import TimeEntryRepository
 from database.customer_repository import CustomerRepository
 from database.project_repository import ProjectRepository
-import pandas as pd
-from utils.validators import validate_database_references, DEFAULT_CUSTOMER, DEFAULT_PROJECT
+from utils.xls_analyzer import XLSAnalyzer
+from utils.validators import normalize_customer_name, normalize_project_id
 from datetime import datetime
 import json
 from decimal import Decimal
@@ -27,7 +28,16 @@ class TimesheetService:
 
     def create_entry(self, entry: schemas.TimeEntryCreate) -> TimeEntry:
         """Create a new time entry"""
-        return self.repository.create(self.db, entry)
+        try:
+            # Normalize customer and project values
+            entry.customer = normalize_customer_name(entry.customer)
+            entry.project = normalize_project_id(entry.project)
+
+            # Create entry in the database
+            return self.repository.create(self.db, entry)
+        except Exception as e:
+            logger.error(f"Error creating time entry: {str(e)}")
+            raise HTTPException(status_code=400, detail=str(e))
 
     def _serialize_time_entry(self, entry: TimeEntry) -> Dict[str, Any]:
         """Serialize a TimeEntry object to a dictionary"""
@@ -54,10 +64,8 @@ class TimesheetService:
             # Process all entries first to ensure customers and projects exist
             processed_entries = []
             for entry in entries:
-                # Create customer if not exists
-                if not entry.customer or entry.customer == '-':
-                    entry.customer = DEFAULT_CUSTOMER
-                else:
+                # Create customer if not exists and customer is provided
+                if entry.customer:
                     customer = self.customer_repo.get_by_name(self.db, entry.customer)
                     if not customer:
                         customer_data = schemas.CustomerCreate(
@@ -68,10 +76,8 @@ class TimesheetService:
                         customer = self.customer_repo.create(self.db, customer_data)
                         logger.info(f"Created new customer: {customer.name}")
 
-                # Create project if not exists
-                if not entry.project or entry.project == '-':
-                    entry.project = DEFAULT_PROJECT
-                else:
+                # Create project if not exists and project is provided
+                if entry.project and entry.customer:
                     project = self.project_repo.get_by_project_id(self.db, entry.project)
                     if not project:
                         project_data = schemas.ProjectCreate(
@@ -100,57 +106,9 @@ class TimesheetService:
             self.db.rollback()
             raise HTTPException(status_code=400, detail=f"Error during bulk creation: {str(e)}")
 
-    def _ensure_customer_exists(self, customer_name: str) -> str:
-        """Ensure customer exists, create if not. Return normalized customer name."""
-        if not customer_name or customer_name == '-':
-            return DEFAULT_CUSTOMER
-
-        try:
-            # Check if customer exists
-            existing = self.customer_repo.get_by_name(self.db, customer_name)
-            if not existing:
-                # Create new customer with proper schema handling
-                customer_data = {
-                    "name": customer_name,
-                    "contact_email": f"{customer_name.lower().replace(' ', '_')}@placeholder.com",
-                    "status": "active"
-                }
-                new_customer = schemas.CustomerCreate(**customer_data)
-                self.customer_repo.create(self.db, new_customer)
-                logger.info(f"Created new customer: {customer_name}")
-            return customer_name
-        except Exception as e:
-            logger.error(f"Error ensuring customer exists: {str(e)}")
-            return DEFAULT_CUSTOMER
-
-    def _ensure_project_exists(self, project_id: str, customer_name: str) -> str:
-        """Ensure project exists, create if not. Return normalized project ID."""
-        if not project_id or project_id == '-':
-            return DEFAULT_PROJECT
-
-        try:
-            # Check if project exists
-            existing = self.project_repo.get_by_project_id(self.db, project_id)
-            if not existing:
-                # Create new project with proper schema handling
-                project_data = {
-                    "project_id": project_id,
-                    "name": project_id,  # Use ID as name initially
-                    "customer": customer_name,
-                    "status": "active"
-                }
-                new_project = schemas.ProjectCreate(**project_data)
-                self.project_repo.create(self.db, new_project)
-                logger.info(f"Created new project: {project_id} for customer: {customer_name}")
-            return project_id
-        except Exception as e:
-            logger.error(f"Error ensuring project exists: {str(e)}")
-            return DEFAULT_PROJECT
-
     async def upload_timesheet(self, file: UploadFile) -> Dict[str, Any]:
-        """Upload and process timesheet file with bulk upload support"""
+        """Upload and process timesheet file"""
         logger.info(f"Processing timesheet upload: {file.filename}")
-        validation_errors: List[Dict[str, Any]] = []
 
         try:
             contents = await file.read()
@@ -172,26 +130,24 @@ class TimesheetService:
                 )
 
             logger.info(f"Processing {len(entries)} entries")
-            # Convert TimeEntry objects to TimeEntryCreate objects and preprocess
             entry_creates = [
                 schemas.TimeEntryCreate(
                     category=entry.category,
                     subcategory=entry.subcategory,
-                    customer=DEFAULT_CUSTOMER,  # Force default customer
-                    project=DEFAULT_PROJECT,    # Force default project
+                    customer=normalize_customer_name(entry.customer),
+                    project=normalize_project_id(entry.project),
                     task_description=entry.task_description,
                     hours=entry.hours,
                     date=entry.date
                 ) for entry in entries
             ]
 
-            # Skip validation since we're using default values
             created_entries = self._bulk_create_entries(entry_creates)
-            logger.info(f"Successfully created {len(created_entries)} time entries in bulk")
+            logger.info(f"Successfully created {len(created_entries)} time entries")
 
             return {
                 "entries": created_entries,
-                "validation_errors": validation_errors
+                "message": "Upload successful"
             }
 
         except ValueError as e:
@@ -275,8 +231,8 @@ class TimesheetService:
                     'month': str(row['Month']) if 'Month' in row else '',
                     'category': str(row['Category']),
                     'subcategory': str(row['Subcategory']) if 'Subcategory' in row else '',
-                    'customer': DEFAULT_CUSTOMER,  # Always use default customer
-                    'project': DEFAULT_PROJECT,    # Always use default project
+                    'customer': normalize_customer_name(row['Customer']) if 'Customer' in row else None,
+                    'project': normalize_project_id(row['Project']) if 'Project' in row else None,
                     'task_description': str(row['Task Description']) if 'Task Description' in row else '',
                     'hours': hours,
                     'date': pd.to_datetime(row['Date']).date()

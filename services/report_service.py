@@ -1,4 +1,3 @@
-
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy import func
@@ -26,7 +25,7 @@ class ReportService:
         query = self._build_report_query(week_start.date(), week_end.date(), project_id)
         results = query.all()
         entries = self._create_report_entries(results, f"{week_start.date()} to {week_end.date()}")
-        
+
         return schemas.WeeklyReport(
             entries=entries,
             total_hours=sum(entry.total_hours for entry in entries),
@@ -75,7 +74,7 @@ class ReportService:
         return [
             schemas.ReportEntry(
                 total_hours=float(r.total_hours or 0),
-                category=r.customer or "Unassigned",
+                category=r.customer or "No Customer",
                 project=r.project_id,
                 period=period
             )

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime, Date
+from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime, Date, text
 from sqlalchemy.sql import func
 from models.baseModel import BaseModel
 from datetime import datetime, date
@@ -14,11 +14,11 @@ class TimeEntry(BaseModel):
 
     category = Column(String, nullable=False)
     subcategory = Column(String, nullable=False)
-    customer = Column(String, nullable=True, server_default='Unassigned')  # Remove ForeignKey
-    project = Column(String, nullable=True, server_default='Unassigned')   # Remove ForeignKey
+    customer = Column(String, ForeignKey('customers.name', ondelete='SET NULL'), nullable=True)
+    project = Column(String, ForeignKey('projects.project_id', ondelete='SET NULL'), nullable=True)
     task_description = Column(String, nullable=True)
-    hours = Column(Float, nullable=False, server_default='0')  # Default to 0
-    date = Column(Date, nullable=False)  # Explicit date field for timesheet entries
+    hours = Column(Float, nullable=False, server_default=text('0'))
+    date = Column(Date, nullable=False)
 
     def __init__(self, **kwargs):
         # Calculate week_number and month from date if not provided
@@ -32,14 +32,7 @@ class TimeEntry(BaseModel):
                 kwargs['month'] = self.get_month_name(entry_date)
 
         # Set default hours if not provided
-        if 'hours' not in kwargs:
-            kwargs['hours'] = 0.0
-
-        # Handle None or empty string values for customer and project
-        if not kwargs.get('customer') or kwargs.get('customer') == '-':
-            kwargs['customer'] = 'Unassigned'
-        if not kwargs.get('project') or kwargs.get('project') == '-':
-            kwargs['project'] = 'Unassigned'
+        kwargs['hours'] = kwargs.get('hours', 0.0)
 
         super().__init__(**kwargs)
 

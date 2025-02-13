@@ -70,13 +70,13 @@ def test_xls_analyzer_invalid_data(tmp_path, invalid_timesheet_data):
         records = analyzer.read_excel(contents)
 
         assert len(records) == 1
-        assert records[0]['Customer'] == 'Unassigned'
-        assert records[0]['Project'] == 'Unassigned'
+        assert records[0]['Customer'] is None
+        assert records[0]['Project'] is None
         assert records[0]['Category'] == 'Development'
         assert records[0]['Hours'] == 8.0
 
-def test_dash_customer_handling(client, setup_test_data, tmp_path):
-    """Test handling of dash (-) values in customer field"""
+def test_null_customer_handling(client, setup_test_data, tmp_path):
+    """Test handling of null values in customer field"""
     data = {
         'Week Number': [41],
         'Month': ['October'],
@@ -106,15 +106,15 @@ def test_dash_customer_handling(client, setup_test_data, tmp_path):
     import time
     time.sleep(2)
 
-    # Verify entries were created with default values
+    # Verify entries were created with null values
     response = client.get("/time-entries")
     entries = response.json()
     assert len(entries) > 0
 
-    # Check the most recent entry has default values
+    # Check the most recent entry has null values
     latest_entry = entries[-1]
-    assert latest_entry["customer"] == "Unassigned"
-    assert latest_entry["project"] == "Unassigned"
+    assert latest_entry["customer"] is None
+    assert latest_entry["project"] is None
 
 def test_upload_excel_valid(client, setup_test_data, tmp_path, valid_timesheet_data):
     """Test uploading a valid Excel file"""
@@ -171,11 +171,11 @@ def test_xls_analyzer_missing_columns(tmp_path):
         records = analyzer.read_excel(contents)
 
         assert len(records) == 1
-        assert records[0]['Customer'] == 'Unassigned'
-        assert records[0]['Project'] == 'Unassigned'
+        assert records[0]['Customer'] is None
+        assert records[0]['Project'] is None
         assert records[0]['Week Number'] == 0
 
-def test_upload_excel_creates_customers_and_projects(client, setup_test_data, tmp_path):
+def test_upload_excel_new_entities(client, setup_test_data, tmp_path):
     """Test that uploading Excel file creates new customers and projects as needed"""
     data = {
         'Week Number': [41],
@@ -201,7 +201,7 @@ def test_upload_excel_creates_customers_and_projects(client, setup_test_data, tm
     assert "progress_key" in data
     assert "total_records" in data
 
-    # Wait a bit for background processing
+    # Wait for background processing
     import time
     time.sleep(2)
 

@@ -2,14 +2,11 @@ from sqlalchemy.orm import Session
 from typing import List, Optional
 from database.project_repository import ProjectRepository 
 from database.customer_repository import CustomerRepository
-from database.pm_repository import ProjectManagerRepository  # Added PM repository
+from database.pm_repository import ProjectManagerRepository
 from database import schemas
 from models.projectModel import Project
 from utils.logger import Logger
-from utils.validators import (
-    DEFAULT_CUSTOMER, DEFAULT_PROJECT, 
-    normalize_customer_name, ensure_default_project_manager
-)
+from utils.validators import normalize_customer_name, normalize_project_id, normalize_project_manager
 from fastapi import HTTPException
 
 logger = Logger().get_logger()
@@ -19,17 +16,19 @@ class ProjectService:
         self.db = db
         self.project_repo = ProjectRepository()
         self.customer_repo = CustomerRepository()
-        self.pm_repo = ProjectManagerRepository()  # Added PM repository
+        self.pm_repo = ProjectManagerRepository()
         logger.debug("ProjectService initialized")
 
-    def _ensure_customer_exists(self, customer_name: str) -> str:
+    def _ensure_customer_exists(self, customer_name: Optional[str]) -> Optional[str]:
         """Ensure customer exists, return normalized customer name."""
-        if not customer_name or customer_name == '-':
-            logger.debug("No customer name provided, using default")
-            return DEFAULT_CUSTOMER
+        if not customer_name:
+            return None
 
         try:
             normalized_name = normalize_customer_name(customer_name)
+            if not normalized_name:
+                return None
+
             # Check if customer exists
             existing = self.customer_repo.get_by_name(self.db, normalized_name)
             if existing:
@@ -54,22 +53,29 @@ class ProjectService:
             logger.error(f"Error ensuring customer exists: {str(e)}")
             raise HTTPException(status_code=500, detail=f"Failed to validate customer: {str(e)}")
 
-    def _ensure_project_manager_exists(self, manager_name: str) -> bool:
-        """Ensure project manager exists. Return True if exists."""
+    def _ensure_project_manager_exists(self, manager_name: Optional[str]) -> bool:
+        """Ensure project manager exists. Return True if exists or created."""
+        if not manager_name:
+            return True
+
         try:
-            # Check if project manager exists
-            existing = self.pm_repo.get_by_name(self.db, manager_name)
-            if existing:
-                logger.debug(f"Found existing project manager: {manager_name}")
+            normalized_name = normalize_project_manager(manager_name)
+            if not normalized_name:
                 return True
 
-            # Create project manager if not exists
+            # Check if project manager exists
+            existing = self.pm_repo.get_by_name(self.db, normalized_name)
+            if existing:
+                logger.debug(f"Found existing project manager: {normalized_name}")
+                return True
+
+            # Create project manager
             pm_data = schemas.ProjectManagerCreate(
-                name=manager_name,
-                email=f"{manager_name.lower().replace(' ', '.')}@company.com"
+                name=normalized_name,
+                email=f"{normalized_name.lower().replace(' ', '.')}@company.com"
             )
             self.pm_repo.create(self.db, pm_data.model_dump())
-            logger.info(f"Created new project manager: {manager_name}")
+            logger.info(f"Created new project manager: {normalized_name}")
             return True
 
         except Exception as e:
@@ -81,14 +87,11 @@ class ProjectService:
         try:
             logger.debug(f"Starting creation of project with data: {project.model_dump()}")
 
-            # Ensure default project manager exists
-            ensure_default_project_manager(self.db)
+            # Normalize and validate customer if provided
+            customer_name = self._ensure_customer_exists(project.customer)
 
-            # Normalize and validate customer
-            customer_name = self._ensure_customer_exists(project.customer or 'Unassigned')
-
-            # Create or validate project manager
-            if project.project_manager and project.project_manager != '-':
+            # Create or validate project manager if provided
+            if project.project_manager:
                 self._ensure_project_manager_exists(project.project_manager)
 
             # Check if project already exists
@@ -100,7 +103,7 @@ class ProjectService:
             # Convert pydantic model to dict and create project
             project_data = project.model_dump()
             project_data['customer'] = customer_name
-            project_data['project_manager'] = project_data.get('project_manager') or 'Unassigned'
+            project_data['project_manager'] = normalize_project_manager(project_data.get('project_manager'))
 
             logger.debug(f"Creating new project with data: {project_data}")
             created_project = self.project_repo.create(self.db, project_data)
@@ -152,10 +155,15 @@ class ProjectService:
 
             # If project manager is being updated, ensure they exist
             if 'project_manager' in update_data:
-                if update_data['project_manager'] is None or update_data['project_manager'] == '-':
-                    update_data['project_manager'] = DEFAULT_PROJECT_MANAGER
-                else:
-                    self._ensure_project_manager_exists(update_data['project_manager'])
+                manager_name = normalize_project_manager(update_data['project_manager'])
+                update_data['project_manager'] = manager_name
+                if manager_name:
+                    self._ensure_project_manager_exists(manager_name)
+
+            # If customer is being updated, ensure they exist
+            if 'customer' in update_data:
+                customer_name = self._ensure_customer_exists(update_data['customer'])
+                update_data['customer'] = customer_name
 
             for key, value in update_data.items():
                 setattr(existing_project, key, value)

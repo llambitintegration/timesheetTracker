@@ -218,7 +218,7 @@ def test_update_project(db_session):
         project_id="UPDATE-001",
         name="Update Test",
         description="Test Description",
-        customer="Test Customer",
+        customer=None,
         project_manager="test_manager"  # Use existing project manager
     )
 
@@ -227,7 +227,7 @@ def test_update_project(db_session):
         project_id="UPDATE-001",
         name="Updated Name",
         description="Updated Description",
-        customer="Test Customer",
+        customer=None,
         project_manager="test_manager"  # Use existing project manager
     )
     updated = service.update_project("UPDATE-001", update_data)
@@ -237,6 +237,7 @@ def test_update_project(db_session):
     assert updated.description == "Updated Description"
     assert updated.project_id == "UPDATE-001"  # Unchanged field
     assert updated.project_manager == "test_manager"
+    assert updated.customer is None
 
 def test_create_project_with_invalid_customer(db_session):
     """Test creating a project with an invalid customer"""
@@ -277,7 +278,7 @@ def test_delete_project(db_session):
         project_id="DELETE-001",
         name="Delete Test",
         description="Test Description",
-        customer="Test Customer",
+        customer=None,
         project_manager="test_manager"
     )
 
@@ -287,14 +288,16 @@ def test_delete_project(db_session):
     assert result is True
 
     # Verify deletion
-    deleted_project = service.get_project("DELETE-001")
-    assert deleted_project is None
+    with pytest.raises(HTTPException) as exc_info:
+        service.get_project("DELETE-001")
+    assert exc_info.value.status_code == 404
 
 def test_delete_nonexistent_project(db_session):
     """Test attempting to delete a non-existent project"""
     service = ProjectService(db_session)
-    result = service.delete_project("NONEXISTENT-001")
-    assert result is False
+    with pytest.raises(HTTPException) as exc_info:
+        service.delete_project("NONEXISTENT-001")
+    assert exc_info.value.status_code == 404
 
 def test_create_project_with_new_customer(db_session):
     """Test creating a project with a new customer that doesn't exist yet"""
@@ -342,3 +345,37 @@ def test_create_project_without_customer(db_session):
     assert result.project_id == "DEFAULT-001"
     assert result.customer == DEFAULT_CUSTOMER
     assert result.project_manager == "test_manager"
+
+def test_create_project_with_no_customer(db_session):
+    """Test creating a project without a customer"""
+    create_test_project_manager(db_session)
+    service = ProjectService(db_session)
+    project_data = ProjectCreate(
+        project_id="NOCUST-001",
+        name="No Customer Project",
+        description="Test Description",
+        project_manager="test_manager",
+        status="active"
+    )
+
+    result = service.create_project(project_data)
+    assert result is not None
+    assert result.project_id == "NOCUST-001"
+    assert result.customer is None
+
+def test_create_project_with_no_manager(db_session):
+    """Test creating a project without a project manager"""
+    create_test_customer(db_session)
+    service = ProjectService(db_session)
+    project_data = ProjectCreate(
+        project_id="NOMGR-001",
+        name="No Manager Project",
+        description="Test Description",
+        customer="Test Customer",
+        status="active"
+    )
+
+    result = service.create_project(project_data)
+    assert result is not None
+    assert result.project_id == "NOMGR-001"
+    assert result.project_manager is None

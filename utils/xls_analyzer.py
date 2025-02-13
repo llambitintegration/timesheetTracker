@@ -3,7 +3,6 @@ import pandas as pd
 from datetime import datetime
 from io import BytesIO
 from utils.logger import Logger
-from utils.validators import DEFAULT_CUSTOMER, DEFAULT_PROJECT
 from tqdm import tqdm
 
 logger = Logger().get_logger()
@@ -15,10 +14,10 @@ class XLSAnalyzer:
     }
 
     @staticmethod
-    def clean_string_column(series: pd.Series, default_value: str = '') -> pd.Series:
+    def clean_string_column(series: pd.Series) -> pd.Series:
         """Clean string columns efficiently using vectorized operations."""
-        return series.fillna(default_value).astype(str).apply(
-            lambda x: default_value if x.strip() in ['-', '', 'nan', 'None'] else x.strip()
+        return series.fillna(None).astype(str).apply(
+            lambda x: None if x.strip() in ['-', '', 'nan', 'None', 'null'] else x.strip()
         )
 
     @staticmethod
@@ -57,12 +56,8 @@ class XLSAnalyzer:
                         df[col] = 0
                     elif col == 'Hours':
                         df[col] = 0.0
-                    elif col == 'Customer':
-                        df[col] = DEFAULT_CUSTOMER
-                    elif col == 'Project':
-                        df[col] = DEFAULT_PROJECT
                     else:
-                        df[col] = ''
+                        df[col] = None
 
             # Drop completely empty rows
             df = df.dropna(how='all')
@@ -70,10 +65,7 @@ class XLSAnalyzer:
             # Clean string columns using vectorized operations
             string_columns = ['Month', 'Category', 'Subcategory', 'Customer', 'Project', 'Task Description']
             for col in string_columns:
-                df[col] = XLSAnalyzer.clean_string_column(
-                    df[col],
-                    DEFAULT_CUSTOMER if col == 'Customer' else DEFAULT_PROJECT if col == 'Project' else ''
-                )
+                df[col] = XLSAnalyzer.clean_string_column(df[col])
 
             # Handle numeric columns with more robust error handling
             df['Week Number'] = pd.to_numeric(df['Week Number'], errors='coerce').fillna(0).astype(int)
@@ -94,11 +86,11 @@ class XLSAnalyzer:
                 for record in chunk_records:
                     processed_record = {
                         'Week Number': int(record['Week Number']),
-                        'Month': str(record['Month']),
+                        'Month': str(record['Month'] if pd.notna(record['Month']) else ''),
                         'Category': str(record['Category'] or 'Other'),
                         'Subcategory': str(record['Subcategory'] or 'General'),
-                        'Customer': str(record['Customer'] if record['Customer'] != '-' else DEFAULT_CUSTOMER),
-                        'Project': str(record['Project'] if record['Project'] != '-' else DEFAULT_PROJECT),
+                        'Customer': record['Customer'] if pd.notna(record['Customer']) else None,
+                        'Project': record['Project'] if pd.notna(record['Project']) else None,
                         'Task Description': str(record['Task Description'] or ''),
                         'Hours': float(record['Hours']),
                         'Date': record['Date'].strftime('%Y-%m-%d')
