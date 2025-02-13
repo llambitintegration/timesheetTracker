@@ -330,3 +330,67 @@ class TimeEntryService:
             logger.error(f"Error creating time entry: {str(e)}")
             self.db.rollback()
             raise
+
+    def update_entry(self, entry_id: int, entry: schemas.TimeEntryUpdate) -> Optional[TimeEntry]:
+        """Update an existing time entry."""
+        try:
+            logger.debug(f"Attempting to update time entry {entry_id}")
+            db_entry = self.db.query(TimeEntry).filter(TimeEntry.id == entry_id).first()
+
+            if not db_entry:
+                logger.warning(f"Time entry {entry_id} not found")
+                return None
+
+            update_data = entry.model_dump(exclude_unset=True)
+
+            # Validate and normalize customer if provided
+            if 'customer' in update_data:
+                update_data['customer'] = self._ensure_customer_exists(update_data['customer'])
+
+            # Validate and normalize project if provided
+            if 'project' in update_data:
+                update_data['project'] = self._ensure_project_exists(
+                    update_data['project'],
+                    update_data.get('customer', db_entry.customer)
+                )
+
+            # Validate hours
+            if 'hours' in update_data and (
+                update_data['hours'] < 0 or 
+                update_data['hours'] > 24
+            ):
+                raise ValueError("Hours must be between 0 and 24")
+
+            # Update the entry
+            for key, value in update_data.items():
+                setattr(db_entry, key, value)
+
+            self.db.commit()
+            self.db.refresh(db_entry)
+            logger.info(f"Successfully updated time entry {entry_id}")
+            return db_entry
+
+        except Exception as e:
+            logger.error(f"Error updating time entry {entry_id}: {str(e)}")
+            self.db.rollback()
+            raise ValueError(str(e))
+
+    def delete_entry(self, entry_id: int) -> bool:
+        """Delete a time entry."""
+        try:
+            logger.debug(f"Attempting to delete time entry {entry_id}")
+            db_entry = self.db.query(TimeEntry).filter(TimeEntry.id == entry_id).first()
+
+            if not db_entry:
+                logger.warning(f"Time entry {entry_id} not found")
+                return False
+
+            self.db.delete(db_entry)
+            self.db.commit()
+            logger.info(f"Successfully deleted time entry {entry_id}")
+            return True
+
+        except Exception as e:
+            logger.error(f"Error deleting time entry {entry_id}: {str(e)}")
+            self.db.rollback()
+            raise

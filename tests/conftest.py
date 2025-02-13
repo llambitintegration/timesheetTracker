@@ -61,8 +61,11 @@ def test_db():
     finally:
         session.close()
         # Clean up tables after test
-        for table in reversed(Base.metadata.sorted_tables):
-            session.execute(table.delete())
+        session.execute(text("SET CONSTRAINTS ALL DEFERRED"))
+        session.execute(text("TRUNCATE TABLE time_entries RESTART IDENTITY CASCADE"))
+        session.execute(text("TRUNCATE TABLE projects RESTART IDENTITY CASCADE"))
+        session.execute(text("TRUNCATE TABLE customers RESTART IDENTITY CASCADE"))
+        session.execute(text("TRUNCATE TABLE project_managers RESTART IDENTITY CASCADE"))
         session.commit()
         session.close()
 
@@ -84,49 +87,58 @@ def test_client(test_db):
 def setup_test_data(test_db):
     """Set up test data in the database"""
     try:
-        # Create test project managers first
-        project_managers = [
-            ProjectManager(name="Unassigned", email="unassigned@example.com"),
-            ProjectManager(name="Test Manager", email="test.manager@example.com")
-        ]
-        for manager in project_managers:
-            test_db.add(manager)
-        test_db.commit()  # Commit project managers first
+        # First check if data already exists
+        existing_pm = test_db.query(ProjectManager).filter(ProjectManager.name == "Unassigned").first()
 
-        # Create test customers
-        customers = [
-            Customer(name="Unassigned", contact_email="unassigned@example.com", status="active"),
-            Customer(name="ECOLAB", contact_email="ecolab@example.com", status="active")
-        ]
-        for customer in customers:
-            test_db.add(customer)
-        test_db.commit()  # Commit customers before projects
+        # Create test project managers if they don't exist
+        if not existing_pm:
+            project_managers = [
+                ProjectManager(name="Unassigned", email="unassigned@example.com"),
+                ProjectManager(name="Test Manager", email="test.manager@example.com")
+            ]
+            for manager in project_managers:
+                test_db.add(manager)
+            test_db.commit()  # Commit project managers first
 
-        # Create test projects
-        projects = [
-            Project(
-                project_id="Unassigned",
-                name="Unassigned",
-                customer="Unassigned",
-                project_manager="Unassigned",
-                status="active"
-            ),
-            Project(
-                project_id="Project_Magic_Bullet",
-                name="Project Magic Bullet",
-                customer="ECOLAB",
-                project_manager="Test Manager",
-                status="active"
-            )
-        ]
-        for project in projects:
-            test_db.add(project)
-        test_db.commit()
+        # Create test customers if they don't exist
+        existing_customer = test_db.query(Customer).filter(Customer.name == "Unassigned").first()
+        if not existing_customer:
+            customers = [
+                Customer(name="Unassigned", contact_email="unassigned@example.com", status="active"),
+                Customer(name="ECOLAB", contact_email="ecolab@example.com", status="active")
+            ]
+            for customer in customers:
+                test_db.add(customer)
+            test_db.commit()  # Commit customers before projects
 
+        # Create test projects if they don't exist
+        existing_project = test_db.query(Project).filter(Project.project_id == "Unassigned").first()
+        if not existing_project:
+            projects = [
+                Project(
+                    project_id="Unassigned",
+                    name="Unassigned",
+                    customer="Unassigned",
+                    project_manager="Unassigned",
+                    status="active"
+                ),
+                Project(
+                    project_id="Project_Magic_Bullet",
+                    name="Project Magic Bullet",
+                    customer="ECOLAB",
+                    project_manager="Test Manager",
+                    status="active"
+                )
+            ]
+            for project in projects:
+                test_db.add(project)
+            test_db.commit()
+
+        # Query and return the created data
         return {
-            "customers": customers,
-            "project_managers": project_managers,
-            "projects": projects
+            "customers": test_db.query(Customer).all(),
+            "project_managers": test_db.query(ProjectManager).all(),
+            "projects": test_db.query(Project).all()
         }
     except Exception as e:
         test_db.rollback()

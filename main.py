@@ -150,40 +150,44 @@ def create_time_entry(entry: schemas.TimeEntryCreate, db: Session = Depends(get_
     service = TimesheetService(db)
     return service.create_entry(entry)
 
+@app.get("/time-entries/{entry_id}", response_model=schemas.TimeEntry)
+def get_time_entry(entry_id: int, db: Session = Depends(get_db)):
+    """Get a specific time entry by ID"""
+    entry = crud.get_time_entry(db, entry_id)
+    if not entry:
+        raise HTTPException(status_code=404, detail="Time entry not found")
+    return entry
+
 @app.put("/time-entries/{entry_id}", response_model=schemas.TimeEntry)
 def update_time_entry(
     entry_id: int,
     entry: schemas.TimeEntryUpdate,
     db: Session = Depends(get_db)
 ):
-    """
-    Update an existing time entry
-
-    Args:
-        entry_id: ID of the time entry to update
-        entry: TimeEntryUpdate schema containing fields to update
-        db: Database session
-
-    Returns:
-        Updated time entry
-
-    Raises:
-        HTTPException: If entry not found or validation fails
-    """
-    service = TimesheetService(db)
+    """Update an existing time entry"""
     try:
+        service = TimeEntryService(db)
         updated_entry = service.update_entry(entry_id, entry)
         if not updated_entry:
-            raise HTTPException(status_code=404, detail=f"Time entry {entry_id} not found")
+            raise HTTPException(status_code=404, detail="Time entry not found")
         return updated_entry
     except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=422, detail=str(e))
+    except Exception as e:
+        logger.error(f"Error updating time entry {entry_id}: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
 
-@app.delete("/time-entries/{entry_id}")
+@app.delete("/time-entries/{entry_id}", status_code=204)
 def delete_time_entry(entry_id: int, db: Session = Depends(get_db)):
     """Delete a time entry"""
-    service = TimesheetService(db)
-    return service.delete_entry(entry_id)
+    try:
+        service = TimeEntryService(db)
+        if not service.delete_entry(entry_id):
+            raise HTTPException(status_code=404, detail="Time entry not found")
+        return None
+    except Exception as e:
+        logger.error(f"Error deleting time entry {entry_id}: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
 
 @app.get("/projects", response_model=List[schemas.Project])
 def get_projects(

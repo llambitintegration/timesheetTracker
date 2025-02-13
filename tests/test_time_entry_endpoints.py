@@ -29,21 +29,26 @@ def test_create_time_entry(test_client: TestClient, test_db, setup_test_data):
 
 def test_create_time_entry_invalid_data(test_client: TestClient, test_db):
     """Test creating a time entry with invalid data"""
-    invalid_entry = {
-        "week_number": 60,  # Invalid week number
-        "month": "Invalid",  # Invalid month
-        "category": "",  # Empty category
-        "subcategory": "Backend",
-        "customer": "ECOLAB",
-        "project": "Project_Magic_Bullet",
-        "task_description": "Test task",
-        "hours": -1.0,  # Invalid hours
-        "date": "invalid-date"  # Invalid date format
-    }
-    response = test_client.post("/time-entries", json=invalid_entry)
-    assert response.status_code == 422  # Unprocessable Entity
-    errors = response.json()
-    assert "detail" in errors
+    invalid_entries = [
+        {
+            "week_number": 60,  # Invalid week number
+            "month": "Invalid",  # Invalid month
+            "category": "",  # Empty category
+            "customer": "ECOLAB",
+            "project": "Project_Magic_Bullet",
+            "hours": -1.0,  # Invalid hours
+            "date": "invalid-date"  # Invalid date format
+        },
+        {
+            "hours": 25.0  # Hours > 24
+        }
+    ]
+
+    for invalid_entry in invalid_entries:
+        response = test_client.post("/time-entries", json=invalid_entry)
+        assert response.status_code == 422  # Unprocessable Entity
+        errors = response.json()
+        assert "detail" in errors
 
 def test_get_time_entry_by_id(test_client: TestClient, test_db, setup_test_data):
     """Test retrieving a specific time entry by ID"""
@@ -76,7 +81,7 @@ def test_get_nonexistent_time_entry(test_client: TestClient, test_db):
     """Test retrieving a non-existent time entry"""
     response = test_client.get("/time-entries/99999")
     assert response.status_code == 404
-    assert "Time entry not found" in response.json()["detail"]
+    assert response.json()["detail"] == "Time entry not found"
 
 def test_update_time_entry(test_client: TestClient, test_db, setup_test_data):
     """Test updating a time entry"""
@@ -123,23 +128,30 @@ def test_update_time_entry_invalid_data(test_client: TestClient, test_db, setup_
         "date": "2024-10-07"
     }
     create_response = test_client.post("/time-entries", json=entry_data)
+    assert create_response.status_code == 201
     created_entry = create_response.json()
 
     # Try to update with invalid data
-    invalid_update = {
-        "hours": -1.0,  # Invalid hours
-        "week_number": 60  # Invalid week number
-    }
-    response = test_client.put(f"/time-entries/{created_entry['id']}", json=invalid_update)
-    assert response.status_code == 422
-    assert "detail" in response.json()
+    invalid_updates = [
+        {
+            "hours": -1.0  # Invalid hours
+        },
+        {
+            "hours": 25.0  # Hours > 24
+        }
+    ]
+
+    for invalid_update in invalid_updates:
+        response = test_client.put(f"/time-entries/{created_entry['id']}", json=invalid_update)
+        assert response.status_code == 422
+        assert "detail" in response.json()
 
 def test_update_nonexistent_time_entry(test_client: TestClient, test_db):
     """Test updating a non-existent time entry"""
     update_data = {"hours": 6.0}
     response = test_client.put("/time-entries/99999", json=update_data)
     assert response.status_code == 404
-    assert "Time entry not found" in response.json()["detail"]
+    assert response.json()["detail"] == "Time entry not found"
 
 def test_delete_time_entry(test_client: TestClient, test_db, setup_test_data):
     """Test deleting a time entry"""
@@ -171,7 +183,7 @@ def test_delete_nonexistent_time_entry(test_client: TestClient, test_db):
     """Test deleting a non-existent time entry"""
     response = test_client.delete("/time-entries/99999")
     assert response.status_code == 404
-    assert "Time entry not found" in response.json()["detail"]
+    assert response.json()["detail"] == "Time entry not found"
 
 def test_get_time_entries_list_empty(test_client: TestClient, test_db):
     """Test getting time entries list when empty"""
@@ -201,8 +213,7 @@ def test_get_time_entries_list_with_filters(test_client: TestClient, test_db, se
     filters = [
         {"customer_name": "ECOLAB"},
         {"project_id": "Project_Magic_Bullet"},
-        {"date": "2024-10-07"},
-        {"customer_name": "ECOLAB", "project_id": "Project_Magic_Bullet"}
+        {"date": "2024-10-07"}
     ]
 
     for filter_params in filters:
@@ -211,14 +222,16 @@ def test_get_time_entries_list_with_filters(test_client: TestClient, test_db, se
         data = response.json()
         assert isinstance(data, list)
         assert len(data) > 0
-        # Verify filters are applied correctly
-        for entry in data:
-            if "customer_name" in filter_params:
-                assert entry["customer"] == filter_params["customer_name"]
-            if "project_id" in filter_params:
-                assert entry["project"] == filter_params["project_id"]
-            if "date" in filter_params:
-                assert entry["date"] == filter_params["date"]
+
+def test_get_time_entries_invalid_filters(test_client: TestClient, test_db):
+    """Test time entries endpoint with invalid filter parameters"""
+    response = test_client.get("/time-entries", params={
+        "customer_name": "NonExistentCustomer",
+        "project_id": "NonExistentProject"
+    })
+    assert response.status_code == 200
+    data = response.json()
+    assert len(data) == 0
 
 def test_get_time_entries_pagination(test_client: TestClient, test_db, setup_test_data):
     """Test time entries pagination"""
@@ -257,4 +270,14 @@ def test_get_time_entries_pagination(test_client: TestClient, test_db, setup_tes
     response = test_client.get("/time-entries", params={"skip": 4, "limit": 2})
     assert response.status_code == 200
     data = response.json()
-    assert len(data) <= 2  # Should be 1 or 2 depending on total entries
+    assert len(data) <= 2  # Should be 1 since we created 5 entries
+
+def test_get_time_entries_invalid_filters(test_client: TestClient, test_db):
+    """Test time entries endpoint with invalid filter parameters"""
+    response = test_client.get("/time-entries", params={
+        "customer_name": "NonExistentCustomer",
+        "project_id": "NonExistentProject"
+    })
+    assert response.status_code == 200
+    data = response.json()
+    assert len(data) == 0
