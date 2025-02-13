@@ -10,8 +10,12 @@ run = ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port 8000"]
 localPort = 8000
 externalPort = 80
 
+[[ports]]
+localPort = 8080
+externalPort = 8080
+
 [workflows]
-runButton = "Run"
+runButton = "Project"
 
 [[workflows.workflow]]
 name = "Project"
@@ -25,6 +29,10 @@ args = "Test Runner"
 [[workflows.workflow.tasks]]
 task = "workflow.run"
 args = "Database Init"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "FastAPI Server"
 
 [[workflows.workflow]]
 name = "Test Runner"
@@ -61,3 +69,18 @@ author = 37467400
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "uvicorn main:app --host 0.0.0.0 --port 8000"
+
+[[workflows.workflow]]
+name = "FastAPI Server"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "uvicorn main:app --host 0.0.0.0 --port 8080 --reload --log-level debug"
+waitForPort = 8080
