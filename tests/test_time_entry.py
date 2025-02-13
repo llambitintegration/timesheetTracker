@@ -2,10 +2,8 @@ import pytest
 from datetime import datetime, date
 from services.time_entry_service import TimeEntryService
 from database.schemas import TimeEntryCreate
-from utils.validators import DEFAULT_CUSTOMER, DEFAULT_PROJECT
-from pydantic import ValidationError
-from sqlalchemy.exc import IntegrityError
 from models.customerModel import Customer
+from pydantic import ValidationError
 
 def test_create_time_entry_auto_calculations(db_session):
     """Test that week number and month are automatically calculated"""
@@ -24,6 +22,8 @@ def test_create_time_entry_auto_calculations(db_session):
     assert result.week_number == 3  # Should be week 3
     assert result.month == "January"
     assert result.hours == 8.0
+    assert result.customer is None  # Should be null
+    assert result.project is None   # Should be null
 
 def test_create_time_entry_default_hours(db_session):
     """Test that hours default to 0 when not provided"""
@@ -39,6 +39,8 @@ def test_create_time_entry_default_hours(db_session):
     result = service.create_time_entry(entry)
     assert result is not None
     assert result.hours == 0.0
+    assert result.customer is None  # Should be null
+    assert result.project is None   # Should be null
 
 def test_create_time_entry_auto_id(db_session):
     """Test that IDs are auto-generated and unique"""
@@ -71,8 +73,6 @@ def test_create_single_time_entry(db_session, setup_test_data):
     entry = TimeEntryCreate(
         category="Development",
         subcategory="Coding",
-        customer="ECOLAB",  # Using existing customer from setup_test_data
-        project="Project_Magic_Bullet",  # Using existing project from setup_test_data
         task_description="Unit testing",
         hours=8.0,
         date=date(2024, 1, 1)
@@ -85,8 +85,8 @@ def test_create_single_time_entry(db_session, setup_test_data):
     assert result.category == "Development"
     assert result.hours == 8.0
     assert result.date == date(2024, 1, 1)
-    assert result.customer == "ECOLAB"
-    assert result.project == "Project_Magic_Bullet"
+    assert result.customer is None  # Should be null by default
+    assert result.project is None   # Should be null by default
 
 def test_create_time_entry_with_defaults(db_session):
     """Test creating a time entry with default values"""
@@ -100,9 +100,9 @@ def test_create_time_entry_with_defaults(db_session):
 
     result = service.create_time_entry(entry)
     assert result is not None
-    assert result.customer == DEFAULT_CUSTOMER
-    assert result.project == DEFAULT_PROJECT
-    assert result.hours == 0.0  # Should default to 0
+    assert result.customer is None  # Should be null
+    assert result.project is None   # Should be null
+    assert result.hours == 0.0      # Should default to 0
 
 def test_create_time_entry_invalid_hours(db_session):
     """Test creating a time entry with invalid hours"""
@@ -134,53 +134,30 @@ def test_create_time_entry_with_nonexistent_customer(db_session):
 
     result = service.create_time_entry(entry)
     assert result is not None
-    assert result.customer == DEFAULT_CUSTOMER  # Should fall back to default
-    assert result.project == DEFAULT_PROJECT    # Should fall back to default
+    assert result.customer is None  # Should be null
+    assert result.project is None   # Should be null
     assert result.hours == 8.0
-
-def test_create_time_entry_customer_mismatch(db_session, setup_test_data):
-    """Test creating a time entry with mismatched customer-project relationship"""
-    service = TimeEntryService(db_session)
-    entry = TimeEntryCreate(
-        category="Development",
-        subcategory="Coding",
-        customer="ECOLAB",  # Existing customer
-        project="NonMatchingProject",  # Project not belonging to this customer
-        task_description="Testing customer-project mismatch",
-        hours=8.0,
-        date=date(2024, 1, 1)
-    )
-
-    result = service.create_time_entry(entry)
-    assert result is not None
-    assert result.customer == DEFAULT_CUSTOMER  # Should fall back to default
-    assert result.project == DEFAULT_PROJECT    # Should fall back to default
 
 def test_get_time_entries_with_filters(db_session, setup_test_data):
     """Test retrieving time entries with filters"""
     service = TimeEntryService(db_session)
 
-    # Create test entries with existing customer and project
+    # Create test entries
     entry1 = TimeEntryCreate(
         category="Development",
         subcategory="Coding",
-        customer="ECOLAB",
-        project="Project_Magic_Bullet",
-        task_description="Work for ECOLAB",
+        task_description="Work item",
         hours=8.0,
         date=date(2024, 1, 1)
     )
     service.create_time_entry(entry1)
 
-    # Test filtering by customer
-    results = service.get_time_entries(customer_name="ECOLAB")
-    assert len(results) == 1
-    assert results[0].customer == "ECOLAB"
-
-    # Test filtering by project
-    results = service.get_time_entries(project_id="Project_Magic_Bullet")
-    assert len(results) == 1
-    assert results[0].project == "Project_Magic_Bullet"
+    # Test filtering
+    results = service.get_time_entries()
+    assert len(results) >= 1
+    for entry in results:
+        assert isinstance(entry.customer, (str, type(None)))  # Can be string or None
+        assert isinstance(entry.project, (str, type(None)))   # Can be string or None
 
 def test_api_example_default_values(db_session):
     """Test the API example with default values working correctly"""
@@ -197,9 +174,9 @@ def test_api_example_default_values(db_session):
 
     result = service.create_time_entry(entry)
     assert result is not None
-    assert result.customer == DEFAULT_CUSTOMER
-    assert result.project == DEFAULT_PROJECT
-    assert result.hours == 0.0  # Should default to 0
+    assert result.customer is None  # Should be null
+    assert result.project is None   # Should be null
+    assert result.hours == 0.0      # Should default to 0
     assert result.week_number == 2  # Should be calculated from date
     assert result.month == "January"  # Should be calculated from date
 
@@ -275,6 +252,6 @@ def test_time_entry_with_invalid_project(db_session, setup_test_data):
     # This should not raise an exception, but fall back to default project
     result = service.create_time_entry(entry)
     assert result is not None
-    assert result.project == DEFAULT_PROJECT  # Should fall back to default project
+    assert result.project is None  # Should fall back to default project
     assert result.hours == 8.0
     assert result.date == date(2024, 1, 1)

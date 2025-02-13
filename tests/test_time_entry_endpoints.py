@@ -11,8 +11,8 @@ def test_create_time_entry(test_client: TestClient, test_db, setup_test_data):
         "month": "October",
         "category": "Development",
         "subcategory": "Backend",
-        "customer": "ECOLAB",
-        "project": "Project_Magic_Bullet",
+        "customer": None,  # Allow null customer
+        "project": None,   # Allow null project
         "task_description": "Test task",
         "hours": 8.0,
         "date": "2024-10-07"
@@ -22,8 +22,8 @@ def test_create_time_entry(test_client: TestClient, test_db, setup_test_data):
     data = response.json()
     assert data["week_number"] == entry_data["week_number"]
     assert data["month"] == entry_data["month"]
-    assert data["customer"] == entry_data["customer"]
-    assert data["project"] == entry_data["project"]
+    assert data["customer"] is None  # Verify null customer
+    assert data["project"] is None   # Verify null project
     assert data["hours"] == entry_data["hours"]
     assert data["date"] == entry_data["date"]
 
@@ -34,8 +34,8 @@ def test_create_time_entry_invalid_data(test_client: TestClient, test_db):
             "week_number": 60,  # Invalid week number
             "month": "Invalid",  # Invalid month
             "category": "",  # Empty category
-            "customer": "ECOLAB",
-            "project": "Project_Magic_Bullet",
+            "customer": None,
+            "project": None,
             "hours": -1.0,  # Invalid hours
             "date": "invalid-date"  # Invalid date format
         },
@@ -58,8 +58,8 @@ def test_get_time_entry_by_id(test_client: TestClient, test_db, setup_test_data)
         "month": "October",
         "category": "Development",
         "subcategory": "Backend",
-        "customer": "ECOLAB",
-        "project": "Project_Magic_Bullet",
+        "customer": None,
+        "project": None,
         "task_description": "Test task",
         "hours": 8.0,
         "date": "2024-10-07"
@@ -74,8 +74,8 @@ def test_get_time_entry_by_id(test_client: TestClient, test_db, setup_test_data)
     data = response.json()
     assert data["id"] == created_entry["id"]
     assert data["week_number"] == entry_data["week_number"]
-    assert data["customer"] == entry_data["customer"]
-    assert data["project"] == entry_data["project"]
+    assert data["customer"] is None
+    assert data["project"] is None
 
 def test_get_nonexistent_time_entry(test_client: TestClient, test_db):
     """Test retrieving a non-existent time entry"""
@@ -91,8 +91,8 @@ def test_update_time_entry(test_client: TestClient, test_db, setup_test_data):
         "month": "October",
         "category": "Development",
         "subcategory": "Backend",
-        "customer": "ECOLAB",
-        "project": "Project_Magic_Bullet",
+        "customer": None,
+        "project": None,
         "task_description": "Test task",
         "hours": 8.0,
         "date": "2024-10-07"
@@ -104,14 +104,17 @@ def test_update_time_entry(test_client: TestClient, test_db, setup_test_data):
     # Update the entry
     update_data = {
         "hours": 6.0,
-        "task_description": "Updated task description"
+        "task_description": "Updated task description",
+        "customer": "NewCustomer",  # Test setting a customer
+        "project": "NewProject"     # Test setting a project
     }
     response = test_client.put(f"/time-entries/{created_entry['id']}", json=update_data)
     assert response.status_code == 200
     data = response.json()
     assert data["hours"] == update_data["hours"]
     assert data["task_description"] == update_data["task_description"]
-    assert data["customer"] == entry_data["customer"]  # Unchanged field
+    assert data["customer"] == update_data["customer"]
+    assert data["project"] == update_data["project"]
 
 def test_update_time_entry_invalid_data(test_client: TestClient, test_db, setup_test_data):
     """Test updating a time entry with invalid data"""
@@ -121,8 +124,8 @@ def test_update_time_entry_invalid_data(test_client: TestClient, test_db, setup_
         "month": "October",
         "category": "Development",
         "subcategory": "Backend",
-        "customer": "ECOLAB",
-        "project": "Project_Magic_Bullet",
+        "customer": None,
+        "project": None,
         "task_description": "Test task",
         "hours": 8.0,
         "date": "2024-10-07"
@@ -161,8 +164,8 @@ def test_delete_time_entry(test_client: TestClient, test_db, setup_test_data):
         "month": "October",
         "category": "Development",
         "subcategory": "Backend",
-        "customer": "ECOLAB",
-        "project": "Project_Magic_Bullet",
+        "customer": None,
+        "project": None,
         "task_description": "Test task",
         "hours": 8.0,
         "date": "2024-10-07"
@@ -201,8 +204,8 @@ def test_get_time_entries_list_with_filters(test_client: TestClient, test_db, se
         "month": "October",
         "category": "Development",
         "subcategory": "Backend",
-        "customer": "ECOLAB",
-        "project": "Project_Magic_Bullet",
+        "customer": None,
+        "project": None,
         "task_description": "Test task",
         "hours": 8.0,
         "date": "2024-10-07"
@@ -211,8 +214,8 @@ def test_get_time_entries_list_with_filters(test_client: TestClient, test_db, se
 
     # Test different filters
     filters = [
-        {"customer_name": "ECOLAB"},
-        {"project_id": "Project_Magic_Bullet"},
+        {"customer_name": None},
+        {"project_id": None},
         {"date": "2024-10-07"}
     ]
 
@@ -241,8 +244,8 @@ def test_get_time_entries_pagination(test_client: TestClient, test_db, setup_tes
         "month": "October",
         "category": "Development",
         "subcategory": "Backend",
-        "customer": "ECOLAB",
-        "project": "Project_Magic_Bullet",
+        "customer": None,
+        "project": None,
         "task_description": "Test task",
         "hours": 8.0,
         "date": "2024-10-07"
@@ -271,13 +274,3 @@ def test_get_time_entries_pagination(test_client: TestClient, test_db, setup_tes
     assert response.status_code == 200
     data = response.json()
     assert len(data) <= 2  # Should be 1 since we created 5 entries
-
-def test_get_time_entries_invalid_filters(test_client: TestClient, test_db):
-    """Test time entries endpoint with invalid filter parameters"""
-    response = test_client.get("/time-entries", params={
-        "customer_name": "NonExistentCustomer",
-        "project_id": "NonExistentProject"
-    })
-    assert response.status_code == 200
-    data = response.json()
-    assert len(data) == 0

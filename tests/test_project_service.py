@@ -252,10 +252,10 @@ def test_create_project_with_invalid_customer(db_session):
         status="active"
     )
 
-    # Should succeed with DEFAULT_CUSTOMER
     result = service.create_project(project_data)
     assert result is not None
-    assert result.customer == "Default Customer"
+    assert result.project_id == "INVCUST-001"
+    assert result.customer is None
 
 def test_update_nonexistent_project(db_session):
     """Test attempting to update a non-existent project"""
@@ -325,28 +325,7 @@ def test_create_project_with_new_customer(db_session):
     assert customer is not None
     assert customer.name == "New Test Customer"
 
-DEFAULT_CUSTOMER = "Default Customer"
-
 def test_create_project_without_customer(db_session):
-    """Test creating a project without specifying a customer"""
-    create_test_project_manager(db_session)
-    service = ProjectService(db_session)
-    project_data = ProjectCreate(
-        project_id="DEFAULT-001",
-        name="Default Customer Project",
-        description="Test Description",
-        customer=DEFAULT_CUSTOMER,
-        project_manager="test_manager",
-        status="active"
-    )
-
-    result = service.create_project(project_data)
-    assert result is not None
-    assert result.project_id == "DEFAULT-001"
-    assert result.customer == DEFAULT_CUSTOMER
-    assert result.project_manager == "test_manager"
-
-def test_create_project_with_no_customer(db_session):
     """Test creating a project without a customer"""
     create_test_project_manager(db_session)
     service = ProjectService(db_session)

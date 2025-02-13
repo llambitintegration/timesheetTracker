@@ -6,7 +6,7 @@ from database import schemas
 from .base_repository import BaseRepository
 from utils.xls_analyzer import XLSAnalyzer
 from utils.logger import Logger
-from utils.validators import DEFAULT_CUSTOMER, DEFAULT_PROJECT, normalize_project_id, normalize_customer_name
+from utils.validators import normalize_project_id, normalize_customer_name
 import pandas as pd
 
 logger = Logger().get_logger()
@@ -97,14 +97,8 @@ class TimeEntryRepository(BaseRepository[TimeEntry]):
             for record in records:
                 if not pd.isna(record.get('Date')):  # Only process records with valid dates
                     # Normalize customer and project names
-                    customer = normalize_customer_name(record.get('Customer', DEFAULT_CUSTOMER)) or DEFAULT_CUSTOMER
-                    project = normalize_project_id(record.get('Project', DEFAULT_PROJECT)) or DEFAULT_PROJECT
-
-                    # Handle dash values
-                    if customer == '-':
-                        customer = DEFAULT_CUSTOMER
-                    if project == '-':
-                        project = DEFAULT_PROJECT
+                    customer = normalize_customer_name(record.get('Customer'))
+                    project = normalize_project_id(record.get('Project'))
 
                     entry_data = schemas.TimeEntryCreate(
                         date=record.get('Date'),

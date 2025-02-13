@@ -1,7 +1,7 @@
-"""Database validation utilities for CSV data"""
+"""Database validation utilities"""
 from typing import List, Dict, Optional, Tuple, Union
 from sqlalchemy.orm import Session
-from models import Customer, Project, ProjectManager
+from models import Customer, Project
 from utils.logger import Logger
 from database.schemas import TimeEntryCreate
 from sqlalchemy.exc import IntegrityError
@@ -96,77 +96,3 @@ def validate_database_references(
         logger.debug(f"Processed entry: customer={entry.customer}, project={entry.project}")
 
     return processed_entries, validation_errors
-
-def ensure_default_project_manager(db: Session):
-    """Ensure default project manager exists."""
-    pm_repo = ProjectManagerRepository()
-    if not pm_repo.get_by_name(db, DEFAULT_PROJECT_MANAGER):
-        pm = ProjectManagerCreate(
-            name=DEFAULT_PROJECT_MANAGER, 
-            email='unassigned@company.com'
-        )
-        pm_repo.create(db, pm.model_dump())
-
-def ensure_default_customer(db: Session) -> Optional[Customer]:
-    """Ensure default customer exists in database."""
-    try:
-        # Try to get either default customer or "-" customer
-        default_customer = db.query(Customer).filter(
-            Customer.name.in_([DEFAULT_CUSTOMER, "-"])
-        ).first()
-
-        if not default_customer:
-            # Create both default entries to handle both cases
-            default_customer = Customer(
-                name=DEFAULT_CUSTOMER,
-                contact_email="unassigned@company.com",
-                status="active"
-            )
-            db.add(default_customer)
-
-            dash_customer = Customer(
-                name="-",
-                contact_email="unassigned@company.com",
-                status="active"
-            )
-            db.add(dash_customer)
-
-            db.flush()
-            logger.info("Created default customers")
-
-        return default_customer
-    except IntegrityError as e:
-        logger.warning(f"Default customer exists: {str(e)}")
-        db.rollback()
-        return db.query(Customer).filter(
-            Customer.name.in_([DEFAULT_CUSTOMER, "-"])
-        ).first()
-    except Exception as e:
-        logger.error(f"Failed to create default customer: {str(e)}")
-        db.rollback()
-        return None
-
-def ensure_default_project(db: Session) -> Optional[Project]:
-    """Ensure default project exists in database."""
-    try:
-        default_project = db.query(Project).filter(Project.project_id == DEFAULT_PROJECT).first()
-        if not default_project:
-            default_project = Project(
-                project_id=DEFAULT_PROJECT,
-                name="Unassigned",
-                customer=DEFAULT_CUSTOMER,
-                description="Default project for unassigned entries",
-                status="active"
-            )
-            db.add(default_project)
-            db.flush()
-            logger.info(f"Created default project: {DEFAULT_PROJECT}")
-        return default_project
-    except IntegrityError as e:
-        logger.warning(f"Default project already exists: {str(e)}")
-        db.rollback()
-        return db.query(Project).filter(Project.project_id == DEFAULT_PROJECT).first()
-    except Exception as e:
-        logger.error(f"Failed to create default project: {str(e)}")
-        db.rollback()
-        return None

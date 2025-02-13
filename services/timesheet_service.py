@@ -1,4 +1,3 @@
-<replit_final_file>
 from fastapi import HTTPException, UploadFile
 from sqlalchemy.orm import Session
 from typing import List, Dict, Any, Union, BinaryIO, Tuple, Optional
@@ -15,6 +14,7 @@ from utils.validators import normalize_customer_name, normalize_project_id
 from datetime import datetime
 import json
 from decimal import Decimal
+import pandas as pd
 
 logger = Logger().get_logger()
 
@@ -191,19 +191,7 @@ class TimesheetService:
         crud.delete_time_entry(self.db, db_entry)
         return {"message": "Time entry deleted successfully"}
 
-    def _process_excel(self, contents: bytes) -> List[schemas.TimeEntryCreate]:
-        """Process Excel file contents - first worksheet only"""
-        try:
-            df = pd.read_excel(BytesIO(contents), sheet_name=0)  # Only read first worksheet
-            return self._process_dataframe(df)
-        except Exception as e:
-            logger.error(f"Error processing Excel file: {str(e)}")
-            raise HTTPException(
-                status_code=400,
-                detail=f"Error processing Excel file: {str(e)}"
-            )
-
-    def _process_dataframe(self, df: pd.DataFrame) -> List[schemas.TimeEntryCreate]:
+    def _process_dataframe(self, df: "pd.DataFrame") -> List[schemas.TimeEntryCreate]:
         """Process pandas DataFrame into time entries"""
         required_columns = {
             'Week Number', 'Month', 'Category', 'Subcategory',
