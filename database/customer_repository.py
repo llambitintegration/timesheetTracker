@@ -1,6 +1,9 @@
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, Union
+import sqlalchemy as sa
 from sqlalchemy.orm import Session
 from models.customerModel import Customer
+from models.projectModel import Project
+from models.timeEntry import TimeEntry
 from .base_repository import BaseRepository
 from utils.logger import Logger
 from database import schemas
@@ -23,11 +26,25 @@ class CustomerRepository(BaseRepository[Customer]):
         return db.query(self.model).filter(self.model.id == id).first()
 
     def delete_by_name(self, db: Session, name: str) -> bool:
-        """Delete a customer by name."""
+        """Delete customer with cascade handling."""
         logger.debug(f"Attempting to delete customer by name: {name}")
         try:
             customer = self.get_by_name(db, name)
             if customer:
+                # Update related projects and time entries to set customer to NULL
+                db.query(Project).filter(
+                    Project.customer == name
+                ).update(
+                    {Project.customer: None},
+                    synchronize_session=False
+                )
+                db.query(TimeEntry).filter(
+                    TimeEntry.customer == name
+                ).update(
+                    {TimeEntry.customer: None},
+                    synchronize_session=False
+                )
+
                 db.delete(customer)
                 db.commit()
                 logger.info(f"Successfully deleted customer: {name}")
@@ -35,12 +52,12 @@ class CustomerRepository(BaseRepository[Customer]):
             logger.warning(f"Customer not found for deletion: {name}")
             return False
         except Exception as e:
-            logger.error(f"Error deleting customer: {str(e)}")
+            logger.error(f"Error in cascade delete: {str(e)}")
             db.rollback()
             raise
 
-    def create(self, db: Session, data: Dict[str, Any] | schemas.CustomerCreate | Customer) -> Customer:
-        """Create a new customer with improved error handling."""
+    def create(self, db: Session, data: Union[Dict[str, Any], schemas.CustomerCreate, Customer]) -> Customer:
+        """Create with better error handling."""
         logger.debug(f"Creating customer with data: {data}")
         try:
             if isinstance(data, Customer):
@@ -53,11 +70,6 @@ class CustomerRepository(BaseRepository[Customer]):
             else:
                 raise ValueError(f"Invalid data type for customer creation: {type(data)}")
 
-            # Check for existing customer with same name
-            existing = self.get_by_name(db, db_customer.name)
-            if existing:
-                raise ValueError(f"Customer with name '{db_customer.name}' already exists")
-
             db.add(db_customer)
             db.commit()
             db.refresh(db_customer)
@@ -69,7 +81,7 @@ class CustomerRepository(BaseRepository[Customer]):
             raise
 
     def update(self, db: Session, item: Customer) -> Customer:
-        """Update an existing customer with cascade handling."""
+        """Update with cascade handling."""
         logger.debug(f"Updating customer: {item.name}")
         try:
             # Get the current customer to check for name changes
@@ -77,11 +89,20 @@ class CustomerRepository(BaseRepository[Customer]):
             if not current:
                 raise ValueError(f"Customer with ID {item.id} not found")
 
-            # If name is being changed, ensure new name doesn't exist
+            # Update related records with new customer name
             if current.name != item.name:
-                existing = self.get_by_name(db, item.name)
-                if existing and existing.id != item.id:
-                    raise ValueError(f"Customer with name '{item.name}' already exists")
+                db.query(Project).filter(
+                    Project.customer == current.name
+                ).update(
+                    {Project.customer: item.name},
+                    synchronize_session=False
+                )
+                db.query(TimeEntry).filter(
+                    TimeEntry.customer == current.name
+                ).update(
+                    {TimeEntry.customer: item.name},
+                    synchronize_session=False
+                )
 
             # Perform the update
             db.merge(item)

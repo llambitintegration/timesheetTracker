@@ -1,0 +1,168 @@
+Based on the code and test failures you've shared, I'll help address each issue systematically. Here's a comprehensive solution:
+
+1. **Project Repository Fixes**
+
+First, let's fix the id type mismatch in the Project repository:
+
+```python
+class ProjectRepository(BaseRepository[Project]):
+    def delete(self, db: Session, project_id: str) -> bool:
+        """Override base delete to use project_id instead of id."""
+        try:
+            project = self.get_by_project_id(db, project_id)
+            if project:
+                db.delete(project)
+                db.commit()
+                logger.info(f"Successfully deleted project: {project_id}")
+                return True
+            return False
+        except Exception as e:
+            logger.error(f"Error deleting project: {str(e)}")
+            db.rollback()
+            raise
+
+    def get(self, db: Session, id: int) -> Optional[Project]:
+        """Override base get to maintain compatibility."""
+        return db.query(self.model).filter(self.model.id == id).first()
+```
+
+2. **TimeEntry Foreign Key Handling**
+
+Modify the TimeEntry repository to handle nullable foreign keys:
+
+```python
+class TimeEntryRepository(BaseRepository[TimeEntry]):
+    def create(self, db: Session, data: schemas.TimeEntryCreate) -> TimeEntry:
+        """Create with better foreign key handling."""
+        try:
+            if isinstance(data, TimeEntry):
+                db_entry = data
+            else:
+                entry_dict = data.model_dump(exclude={'id', 'created_at', 'updated_at'})
+                
+                # Validate foreign keys before creation
+                if entry_dict.get('project'):
+                    project = db.query(Project).filter(
+                        Project.project_id == entry_dict['project']
+                    ).first()
+                    if not project:
+                        entry_dict['project'] = None
+                
+                if entry_dict.get('customer'):
+                    customer = db.query(Customer).filter(
+                        Customer.name == entry_dict['customer']
+                    ).first()
+                    if not customer:
+                        entry_dict['customer'] = None
+                
+                db_entry = TimeEntry(**entry_dict)
+
+            db.add(db_entry)
+            db.commit()
+            db.refresh(db_entry)
+            return db_entry
+        except Exception as e:
+            logger.error(f"Error creating time entry: {str(e)}")
+            db.rollback()
+            raise
+```
+
+3. **Customer Cascade Handling**
+
+Update the Customer repository to handle cascading operations:
+
+```python
+class CustomerRepository(BaseRepository[Customer]):
+    def delete_by_name(self, db: Session, name: str) -> bool:
+        """Delete customer with cascade handling."""
+        try:
+            customer = self.get_by_name(db, name)
+            if customer:
+                # Update related projects and time entries
+                db.query(Project).filter(Project.customer == name)\
+                    .update({Project.customer: None})
+                db.query(TimeEntry).filter(TimeEntry.customer == name)\
+                    .update({TimeEntry.customer: None})
+                
+                db.delete(customer)
+                db.commit()
+                return True
+            return False
+        except Exception as e:
+            logger.error(f"Error in cascade delete: {str(e)}")
+            db.rollback()
+            raise
+```
+
+4. **Project Model Updates**
+
+Modify the Project model to better handle defaults and validations:
+
+```python
+class Project(BaseModel):
+    __tablename__ = "projects"
+    
+    project_id = Column(String, unique=True, nullable=False)
+    name = Column(String, nullable=False)
+    description = Column(String, nullable=True)
+    customer = Column(String, ForeignKey('customers.name', ondelete='SET NULL'), 
+                     nullable=True)
+    project_manager = Column(String, ForeignKey('project_managers.name', 
+                           ondelete='SET NULL'), nullable=True)
+    status = Column(String, nullable=False, server_default=text("'active'"))
+
+    def __init__(self, **kwargs):
+        # Handle None values for foreign keys
+        if 'customer' in kwargs and not kwargs['customer']:
+            kwargs.pop('customer')
+        if 'project_manager' in kwargs and not kwargs['project_manager']:
+            kwargs.pop('project_manager')
+        
+        kwargs['status'] = kwargs.get('status', 'active')
+        super().__init__(**kwargs)
+```
+
+5. **Test Helper Functions**
+
+Create test helpers to ensure proper setup:
+
+```python
+@pytest.fixture
+def setup_test_data(db_session):
+    """Setup basic test data with proper error handling."""
+    try:
+        # Create test customer
+        customer = Customer(name="Test Customer")
+        db_session.add(customer)
+        
+        # Create test project manager
+        manager = ProjectManager(name="Test Manager")
+        db_session.add(manager)
+        
+        # Create test project
+        project = Project(
+            project_id="TEST-1",
+            name="Test Project",
+            customer=customer.name,
+            project_manager=manager.name
+        )
+        db_session.add(project)
+        
+        db_session.commit()
+        return {
+            "customer": customer,
+            "manager": manager,
+            "project": project
+        }
+    except Exception as e:
+        db_session.rollback()
+        raise
+```
+
+These changes should address:
+- Foreign key violations in time entries
+- Project repository type mismatches
+- Customer cascade issues
+- Test data setup problems
+
+Would you like me to provide specific test cases or elaborate on any of these changes?

@@ -1,6 +1,8 @@
-from typing import List, Optional, Dict, Any
+from typing import List, Optional, Dict, Any, Union
+import sqlalchemy as sa
 from sqlalchemy.orm import Session
 from models.projectModel import Project
+from models.timeEntry import TimeEntry
 from .base_repository import BaseRepository
 from utils.logger import Logger
 from database import schemas
@@ -27,20 +29,27 @@ class ProjectRepository(BaseRepository[Project]):
         logger.debug(f"Fetching projects for manager: {manager_name}")
         return db.query(self.model).filter(self.model.project_manager == manager_name).all()
 
-    def create(self, db: Session, data: Dict[str, Any] | schemas.ProjectCreate | Project) -> Project:
-        """Create a new project with schema support."""
-        logger.debug(f"Creating new project with data: {data}")
+    def create(self, db: Session, data: Union[Dict[str, Any], schemas.ProjectCreate, Project]) -> Project:
+        """Create with better foreign key handling."""
         try:
-            # Convert input to project instance
             if isinstance(data, Project):
                 db_project = data
-            elif hasattr(data, 'model_dump'):
-                project_data = data.model_dump()
-                db_project = Project(**project_data)
-            elif isinstance(data, dict):
-                db_project = Project(**data)
             else:
-                raise ValueError(f"Invalid data type for project creation: {type(data)}")
+                if hasattr(data, 'model_dump'):
+                    project_data = data.model_dump()
+                elif isinstance(data, dict):
+                    project_data = data
+                else:
+                    raise ValueError(f"Invalid data type for project creation: {type(data)}")
+
+                # Handle None values for foreign keys
+                if 'customer' in project_data and not project_data['customer']:
+                    project_data.pop('customer')
+                if 'project_manager' in project_data and not project_data['project_manager']:
+                    project_data.pop('project_manager')
+
+                project_data['status'] = project_data.get('status', 'active')
+                db_project = Project(**project_data)
 
             # Check if project with same ID already exists
             existing_project = self.get_by_project_id(db, db_project.project_id)
@@ -59,21 +68,18 @@ class ProjectRepository(BaseRepository[Project]):
             raise
 
     def update(self, db: Session, item: Project) -> Project:
-        """Update an existing project with better error handling."""
-        logger.debug(f"Updating project: {item.project_id}")
+        """Update with better error handling."""
         try:
-            # Check if project exists
             existing = self.get_by_project_id(db, item.project_id)
             if not existing:
                 raise ValueError(f"Project with ID {item.project_id} not found")
 
-            # Check if project_id is being changed and if new ID exists
-            if existing.project_id != item.project_id:
-                duplicate = self.get_by_project_id(db, item.project_id)
-                if duplicate:
-                    raise ValueError(f"Project with ID {item.project_id} already exists")
+            # Handle None values for foreign keys
+            if hasattr(item, 'customer') and not item.customer:
+                delattr(item, 'customer')
+            if hasattr(item, 'project_manager') and not item.project_manager:
+                delattr(item, 'project_manager')
 
-            # Perform the update
             db.merge(item)
             db.commit()
             db.refresh(item)
@@ -84,15 +90,34 @@ class ProjectRepository(BaseRepository[Project]):
             db.rollback()
             raise
 
-    def delete(self, db: Session, id: str) -> bool:
-        """Delete a project by its project_id with enhanced error handling."""
-        logger.debug(f"Attempting to delete project: {id}")
+    def get(self, db: Session, id: int) -> Optional[Project]:
+        """Override base get to maintain compatibility."""
+        project = db.query(self.model).filter(self.model.id == id).first()
+        if not project:
+            logger.warning(f"Project not found with ID: {id}")
+        return project
+
+    def delete(self, db: Session, id: int) -> bool:
+        """Override base delete to handle both numeric id and project_id."""
         try:
-            project = self.get_by_project_id(db, id)
+            # First try to find by numeric ID
+            project = self.get(db, id)
+            if not project:
+                # If not found by numeric ID, try project_id
+                project = self.get_by_project_id(db, str(id))
+
             if project:
+                # Update related time entries to set project to NULL
+                db.query(TimeEntry).filter(
+                    TimeEntry.project == project.project_id
+                ).update(
+                    {TimeEntry.project: None},
+                    synchronize_session=False
+                )
+
                 db.delete(project)
                 db.commit()
-                logger.info(f"Successfully deleted project: {id}")
+                logger.info(f"Successfully deleted project: {project.project_id}")
                 return True
             logger.warning(f"Project not found for deletion: {id}")
             return False
