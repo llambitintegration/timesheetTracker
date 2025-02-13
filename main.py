@@ -18,83 +18,31 @@ from utils.logger import Logger
 from utils.middleware import logging_middleware, error_logging_middleware
 from utils.structured_log import structured_log
 
-from models.timeEntry import TimeEntry
-from models.projectModel import Project
-from models.projectManagerModel import ProjectManager
-import uvicorn
-
-app = FastAPI()
+# Initialize logger
 logger = Logger().get_logger()
 
-# CORS configuration
+app = FastAPI(
+    title="Timesheet Management API",
+    description="A FastAPI-based timesheet management system",
+    version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc",
+)
+
+# Basic CORS middleware configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allow_methods=["*"],
     allow_headers=["*"],
-    expose_headers=["X-Total-Count", "X-Correlation-ID"],
-    max_age=3600
 )
 
-# Add logging middleware
-app.middleware("http")(logging_middleware)
-app.middleware("http")(error_logging_middleware)
-
-@app.middleware("http")
-async def cors_headers_middleware(request: Request, call_next):
-    """Ensure consistent CORS headers across all responses"""
-    correlation_id = Logger().get_correlation_id()
-
-    # Handle preflight requests specially
-    if request.method == "OPTIONS":
-        logger.info(structured_log(
-            "Processing CORS preflight request",
-            correlation_id=correlation_id,
-            method=request.method,
-            path=request.url.path,
-            origin=request.headers.get("origin"),
-            request_method=request.headers.get("access-control-request-method"),
-            request_headers=request.headers.get("access-control-request-headers")
-        ))
-
-        return JSONResponse(
-            content={},
-            headers={
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS,PATCH",
-                "Access-Control-Allow-Headers": "*",
-                "Access-Control-Max-Age": "3600",
-                "Access-Control-Allow-Credentials": "false",
-                "Access-Control-Expose-Headers": "X-Total-Count,X-Correlation-ID"
-            }
-        )
-
-    # Handle regular requests
-    response = await call_next(request)
-
-    logger.debug(structured_log(
-        "Adding CORS headers to response",
-        correlation_id=correlation_id,
-        method=request.method,
-        path=request.url.path,
-        status_code=response.status_code
-    ))
-
-    # Ensure CORS headers are present and consistent
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS,PATCH"
-    response.headers["Access-Control-Allow-Headers"] = "*"
-    response.headers["Access-Control-Allow-Credentials"] = "false"
-    response.headers["Access-Control-Expose-Headers"] = "X-Total-Count,X-Correlation-ID"
-
-    return response
-
-
+# Basic root endpoint for testing
 @app.get("/")
 async def root():
-    """Root endpoint"""
-    return {"message": "Welcome to the Timesheet Management API"}
+    """Root endpoint for testing API accessibility"""
+    return {"status": "ok", "message": "API is running"}
 
 @app.get("/health")
 async def health_check(request: Request):
@@ -487,6 +435,6 @@ def create_sample_data(db: Session = Depends(get_db)):
 
     return {"message": f"Created {len(created_entries)} sample entries"}
 
-
+import uvicorn
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
