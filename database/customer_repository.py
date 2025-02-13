@@ -1,8 +1,9 @@
-from typing import Optional
+from typing import Optional, Dict, Any
 from sqlalchemy.orm import Session
 from models.customerModel import Customer
 from .base_repository import BaseRepository
 from utils.logger import Logger
+from database import schemas
 
 logger = Logger().get_logger()
 
@@ -33,11 +34,19 @@ class CustomerRepository(BaseRepository[Customer]):
         logger.warning(f"Customer not found for deletion: {name}")
         return False
 
-    def create(self, db: Session, data: dict) -> Customer:
+    def create(self, db: Session, data: Dict[str, Any] | schemas.CustomerCreate) -> Customer:
         """Create a new customer with improved error handling."""
         logger.debug(f"Creating customer with data: {data}")
         try:
-            db_customer = Customer(**data)
+            # Convert to dict if it's a schema object
+            if hasattr(data, 'model_dump'):
+                customer_data = data.model_dump()
+            elif isinstance(data, dict):
+                customer_data = data
+            else:
+                raise ValueError("Invalid data type for customer creation")
+
+            db_customer = Customer(**customer_data)
             db.add(db_customer)
             db.commit()
             db.refresh(db_customer)

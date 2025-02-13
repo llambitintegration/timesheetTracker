@@ -22,8 +22,8 @@ def test_create_time_entry_auto_calculations(db_session):
     assert result.week_number == 3  # Should be week 3
     assert result.month == "January"
     assert result.hours == 8.0
-    assert result.customer is None  # Should be null
-    assert result.project is None   # Should be null
+    assert result.customer is None  # Should be null with new schema
+    assert result.project is None   # Should be null with new schema
 
 def test_create_time_entry_default_hours(db_session):
     """Test that hours default to 0 when not provided"""
@@ -88,6 +88,68 @@ def test_create_single_time_entry(db_session, setup_test_data):
     assert result.customer is None  # Should be null by default
     assert result.project is None   # Should be null by default
 
+def test_get_time_entries_with_filters(db_session, setup_test_data):
+    """Test retrieving time entries with filters"""
+    service = TimeEntryService(db_session)
+
+    # Create test entries
+    entry1 = TimeEntryCreate(
+        category="Development",
+        subcategory="Coding",
+        task_description="Work item",
+        hours=8.0,
+        date=date(2024, 1, 1)
+    )
+    service.create_time_entry(entry1)
+
+    # Test filtering
+    results = service.get_time_entries()
+    assert len(results) >= 1
+    for entry in results:
+        assert isinstance(entry.customer, (str, type(None)))  # Can be string or None
+        assert isinstance(entry.project, (str, type(None)))   # Can be string or None
+
+def test_create_time_entry_with_valid_references(db_session, setup_test_data):
+    """Test creating a time entry with valid customer and project references"""
+    service = TimeEntryService(db_session)
+
+    # Get existing customer and project from test data
+    customer = setup_test_data['customers'][0]
+    project = setup_test_data['projects'][0]
+
+    entry = TimeEntryCreate(
+        category="Development",
+        subcategory="Coding",
+        customer=customer.name,
+        project=project.project_id,
+        task_description="Work with valid references",
+        hours=8.0,
+        date=date(2024, 1, 1)
+    )
+
+    result = service.create_time_entry(entry)
+    assert result is not None
+    assert result.customer == customer.name
+    assert result.project == project.project_id
+
+def test_create_time_entry_with_nonexistent_references(db_session):
+    """Test creating a time entry with non-existent customer and project"""
+    service = TimeEntryService(db_session)
+    entry = TimeEntryCreate(
+        category="Development",
+        subcategory="Coding",
+        customer="NonExistentCustomer",
+        project="NonExistentProject",
+        task_description="Work with invalid references",
+        hours=8.0,
+        date=date(2024, 1, 1)
+    )
+
+    result = service.create_time_entry(entry)
+    assert result is not None
+    assert result.customer is None  # Should be null when customer doesn't exist
+    assert result.project is None   # Should be null when project doesn't exist
+
 def test_create_time_entry_with_defaults(db_session):
     """Test creating a time entry with default values"""
     service = TimeEntryService(db_session)
@@ -137,27 +199,6 @@ def test_create_time_entry_with_nonexistent_customer(db_session):
     assert result.customer is None  # Should be null
     assert result.project is None   # Should be null
     assert result.hours == 8.0
-
-def test_get_time_entries_with_filters(db_session, setup_test_data):
-    """Test retrieving time entries with filters"""
-    service = TimeEntryService(db_session)
-
-    # Create test entries
-    entry1 = TimeEntryCreate(
-        category="Development",
-        subcategory="Coding",
-        task_description="Work item",
-        hours=8.0,
-        date=date(2024, 1, 1)
-    )
-    service.create_time_entry(entry1)
-
-    # Test filtering
-    results = service.get_time_entries()
-    assert len(results) >= 1
-    for entry in results:
-        assert isinstance(entry.customer, (str, type(None)))  # Can be string or None
-        assert isinstance(entry.project, (str, type(None)))   # Can be string or None
 
 def test_api_example_default_values(db_session):
     """Test the API example with default values working correctly"""

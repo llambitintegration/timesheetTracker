@@ -61,6 +61,7 @@ def test_db():
     finally:
         session.close()
         # Clean up tables after test
+        session = Session()
         session.execute(text("SET CONSTRAINTS ALL DEFERRED"))
         session.execute(text("TRUNCATE TABLE time_entries RESTART IDENTITY CASCADE"))
         session.execute(text("TRUNCATE TABLE projects RESTART IDENTITY CASCADE"))
@@ -84,55 +85,41 @@ def test_client(test_db):
     app.dependency_overrides.clear()
 
 @pytest.fixture(scope="function")
+def db_session(test_db):
+    """Alias for test_db for backward compatibility"""
+    return test_db
+
+@pytest.fixture(scope="function")
 def setup_test_data(test_db):
-    """Set up test data in the database"""
+    """Set up test data in the database with nullable relationships"""
     try:
-        # First check if data already exists
-        existing_pm = test_db.query(ProjectManager).filter(ProjectManager.name == "Unassigned").first()
+        # Create test project managers
+        project_manager = ProjectManager(
+            name="Test Manager",
+            email="test.manager@example.com"
+        )
+        test_db.add(project_manager)
+        test_db.commit()
 
-        # Create test project managers if they don't exist
-        if not existing_pm:
-            project_managers = [
-                ProjectManager(name="Unassigned", email="unassigned@example.com"),
-                ProjectManager(name="Test Manager", email="test.manager@example.com")
-            ]
-            for manager in project_managers:
-                test_db.add(manager)
-            test_db.commit()  # Commit project managers first
+        # Create test customers
+        customer = Customer(
+            name="ECOLAB",
+            contact_email="ecolab@example.com",
+            status="active"
+        )
+        test_db.add(customer)
+        test_db.commit()
 
-        # Create test customers if they don't exist
-        existing_customer = test_db.query(Customer).filter(Customer.name == "Unassigned").first()
-        if not existing_customer:
-            customers = [
-                Customer(name="Unassigned", contact_email="unassigned@example.com", status="active"),
-                Customer(name="ECOLAB", contact_email="ecolab@example.com", status="active")
-            ]
-            for customer in customers:
-                test_db.add(customer)
-            test_db.commit()  # Commit customers before projects
-
-        # Create test projects if they don't exist
-        existing_project = test_db.query(Project).filter(Project.project_id == "Unassigned").first()
-        if not existing_project:
-            projects = [
-                Project(
-                    project_id="Unassigned",
-                    name="Unassigned",
-                    customer="Unassigned",
-                    project_manager="Unassigned",
-                    status="active"
-                ),
-                Project(
-                    project_id="Project_Magic_Bullet",
-                    name="Project Magic Bullet",
-                    customer="ECOLAB",
-                    project_manager="Test Manager",
-                    status="active"
-                )
-            ]
-            for project in projects:
-                test_db.add(project)
-            test_db.commit()
+        # Create test project with nullable relationships
+        project = Project(
+            project_id="Project_Magic_Bullet",
+            name="Project Magic Bullet",
+            customer="ECOLAB",  # Link to existing customer
+            project_manager="Test Manager",  # Link to existing manager
+            status="active"
+        )
+        test_db.add(project)
+        test_db.commit()
 
         # Query and return the created data
         return {

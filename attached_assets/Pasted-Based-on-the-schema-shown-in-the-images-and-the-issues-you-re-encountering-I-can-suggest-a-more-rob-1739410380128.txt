@@ -1,0 +1,118 @@
+Based on the schema shown in the images and the issues you're encountering, I can suggest a more robust approach to handle unassigned entities. Here are several recommendations:
+
+1. **Nullable Foreign Keys Instead of "Unassigned" Records**
+Instead of creating "Unassigned" records, consider making the foreign key relationships nullable where appropriate:
+
+```sql
+ALTER TABLE projects
+ALTER COLUMN project_manager DROP NOT NULL,
+ALTER COLUMN customer DROP NOT NULL;
+
+ALTER TABLE time_entries
+ALTER COLUMN customer DROP NOT NULL,
+ALTER COLUMN project DROP NOT NULL;
+```
+
+This approach:
+- Eliminates the need for dummy "Unassigned" records
+- More accurately represents the business logic
+- Avoids unique constraint violations
+- Simplifies testing
+
+2. **Enum for Project Status**
+I notice you already have a good constraint for project status. Keep this as is:
+```sql
+CHECK ((status)::text = ANY (ARRAY['active', 'inactive', 'pending', 'completed']::character varying[]))
+```
+
+3. **Database Structure Recommendations**
+
+```sql
+CREATE TABLE project_managers (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR UNIQUE NOT NULL,
+    email VARCHAR,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+    updated_at TIMESTAMP WITH TIME ZONE
+);
+
+CREATE TABLE projects (
+    id SERIAL PRIMARY KEY,
+    project_id VARCHAR UNIQUE NOT NULL,
+    name VARCHAR NOT NULL,
+    description VARCHAR,
+    customer VARCHAR REFERENCES customers(name) ON DELETE SET NULL,
+    project_manager VARCHAR REFERENCES project_managers(name) ON DELETE SET NULL,
+    status VARCHAR DEFAULT 'active',
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+    updated_at TIMESTAMP WITH TIME ZONE,
+    CONSTRAINT valid_status CHECK (status IN ('active', 'inactive', 'pending', 'completed'))
+);
+
+CREATE TABLE time_entries (
+    id SERIAL PRIMARY KEY,
+    date DATE NOT NULL,
+    customer VARCHAR REFERENCES customers(name) ON DELETE SET NULL,
+    project VARCHAR REFERENCES projects(project_id) ON DELETE SET NULL,
+    -- other fields remain the same
+);
+```
+
+4. **Testing Approach**
+For testing, I recommend:
+
+```python
+@pytest.fixture
+def setup_base_data(db_session):
+    # No need to create "Unassigned" records
+    manager = ProjectManager(name="Test Manager", email="test@example.com")
+    customer = Customer(name="Test Customer")
+    db_session.add_all([manager, customer])
+    db_session.commit()
+    return {"manager": manager, "customer": customer}
+
+def test_create_project(setup_base_data):
+    # Can create with or without manager/customer
+    project1 = Project(
+        project_id="TEST-1",
+        name="Test Project 1",
+        project_manager=None,  # Explicitly unassigned
+        customer=None
+    )
+    
+    project2 = Project(
+        project_id="TEST-2",
+        name="Test Project 2",
+        project_manager=setup_base_data["manager"].name,
+        customer=setup_base_data["customer"].name
+    )
+```
+
+5. **Benefits of This Approach**
+- More accurate representation of unassigned states
+- Eliminates need for dummy records
+- Simplifies testing scenarios
+- Better data integrity
+- More flexible for future changes
+- Easier to maintain
+
+6. **Migration Strategy**
+If you need to migrate existing data:
+
+```sql
+-- First make the columns nullable
+ALTER TABLE projects 
+    ALTER COLUMN project_manager DROP NOT NULL,
+    ALTER COLUMN customer DROP NOT NULL;
+
+-- Then update existing "Unassigned" records
+UPDATE projects 
+SET project_manager = NULL 
+WHERE project_manager = 'Unassigned';
+
+-- Remove the dummy records
+DELETE FROM project_managers 
+WHERE name = 'Unassigned';
+```
+
+Would you like me to elaborate on any of these points or provide more specific testing examples?

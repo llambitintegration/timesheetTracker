@@ -1,8 +1,9 @@
-from typing import List, Optional
+from typing import List, Optional, Dict, Any
 from sqlalchemy.orm import Session
 from models.projectModel import Project
 from .base_repository import BaseRepository
 from utils.logger import Logger
+from database import schemas
 
 logger = Logger().get_logger()
 
@@ -26,17 +27,25 @@ class ProjectRepository(BaseRepository[Project]):
         logger.debug(f"Fetching projects for manager: {manager_name}")
         return db.query(self.model).filter(self.model.project_manager == manager_name).all()
 
-    def create(self, db: Session, data: dict) -> Project:
-        """Create a new project."""
+    def create(self, db: Session, data: Dict[str, Any] | schemas.ProjectCreate) -> Project:
+        """Create a new project with schema support."""
         logger.debug(f"Creating new project with data: {data}")
         try:
-            # Check if project with same ID already exists
-            existing_project = self.get_by_project_id(db, data['project_id'])
-            if existing_project:
-                logger.warning(f"Project with ID {data['project_id']} already exists")
-                raise ValueError(f"Project with ID {data['project_id']} already exists")
+            # Convert to dict if it's a schema object
+            if hasattr(data, 'model_dump'):
+                project_data = data.model_dump()
+            elif isinstance(data, dict):
+                project_data = data
+            else:
+                raise ValueError("Invalid data type for project creation")
 
-            db_project = Project(**data)
+            # Check if project with same ID already exists
+            existing_project = self.get_by_project_id(db, project_data['project_id'])
+            if existing_project:
+                logger.warning(f"Project with ID {project_data['project_id']} already exists")
+                raise ValueError(f"Project with ID {project_data['project_id']} already exists")
+
+            db_project = Project(**project_data)
             db.add(db_project)
             db.commit()
             db.refresh(db_project)

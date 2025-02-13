@@ -5,6 +5,9 @@ from database.timesheet_repository import TimeEntryRepository
 from models.customerModel import Customer
 from models.timeEntry import TimeEntry
 from datetime import date
+from database.project_repository import ProjectRepository # Assuming this exists
+from models.projectModel import Project # Assuming this exists
+
 
 def test_customer_repository_create(db_session):
     """Test creating a customer through repository"""
@@ -309,3 +312,97 @@ def test_time_entry_repository_pagination(db_session):
     # Test last page (1 item)
     page3 = repo.get_all(db_session, skip=4, limit=2)
     assert len(page3) == 1
+
+def test_customer_cascade_delete_behavior(db_session):
+    """Test that deleting a customer properly handles related records."""
+    # Create repositories
+    customer_repo = CustomerRepository()
+    project_repo = ProjectRepository()
+    time_entry_repo = TimeEntryRepository()
+
+    # Create a test customer
+    customer = Customer(
+        name="Cascade Test Customer",
+        contact_email="cascade@test.com"
+    )
+    created_customer = customer_repo.create(db_session, customer)
+
+    # Create a project for this customer
+    project = Project(
+        project_id="CASCADE_TEST_001",
+        name="Cascade Test Project",
+        customer=created_customer.name,
+        status="active"
+    )
+    created_project = project_repo.create(db_session, project)
+
+    # Create a time entry for this project
+    entry = TimeEntry(
+        date=date(2024, 1, 1),
+        customer=created_customer.name,
+        project=created_project.project_id,
+        hours=8.0,
+        category="Test",
+        subcategory="Cascade",
+        task_description="Testing cascade delete"
+    )
+    created_entry = time_entry_repo.create(db_session, entry)
+
+    # Delete the customer
+    customer_repo.delete(db_session, created_customer.id)
+
+    # Verify project's customer is set to NULL
+    updated_project = project_repo.get_by_project_id(db_session, created_project.project_id)
+    assert updated_project is not None
+    assert updated_project.customer is None
+
+    # Verify time entry's customer is set to NULL
+    updated_entry = time_entry_repo.get_by_id(db_session, created_entry.id)
+    assert updated_entry is not None
+    assert updated_entry.customer is None
+
+def test_customer_name_update_cascade(db_session):
+    """Test that updating a customer name cascades to related records."""
+    # Create repositories
+    customer_repo = CustomerRepository()
+    project_repo = ProjectRepository()
+    time_entry_repo = TimeEntryRepository()
+
+    # Create a test customer
+    customer = Customer(
+        name="Update Cascade Test",
+        contact_email="updatecascade@test.com"
+    )
+    created_customer = customer_repo.create(db_session, customer)
+
+    # Create a project for this customer
+    project = Project(
+        project_id="CASCADE_UPDATE_001",
+        name="Update Cascade Test Project",
+        customer=created_customer.name,
+        status="active"
+    )
+    created_project = project_repo.create(db_session, project)
+
+    # Create a time entry
+    entry = TimeEntry(
+        date=date(2024, 1, 1),
+        customer=created_customer.name,
+        project=created_project.project_id,
+        hours=8.0,
+        category="Test",
+        subcategory="Cascade",
+        task_description="Testing cascade update"
+    )
+    created_entry = time_entry_repo.create(db_session, entry)
+
+    # Update customer name
+    created_customer.name = "Updated Customer Name"
+    updated_customer = customer_repo.update(db_session, created_customer)
+
+    # Verify cascade updates
+    updated_project = project_repo.get_by_project_id(db_session, created_project.project_id)
+    assert updated_project.customer == "Updated Customer Name"
+
+    updated_entry = time_entry_repo.get_by_id(db_session, created_entry.id)
+    assert updated_entry.customer == "Updated Customer Name"
