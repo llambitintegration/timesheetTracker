@@ -15,80 +15,73 @@ from models.projectModel import Project
 from models.projectManagerModel import ProjectManager
 
 # Use environment variables for test database
-PGHOST = os.environ.get('PGHOST')
-PGDATABASE = os.environ.get('PGDATABASE')
-PGUSER = os.environ.get('PGUSER')
-PGPASSWORD = os.environ.get('PGPASSWORD')
+DATABASE_URL = os.getenv('DATABASE_URL')
+if not DATABASE_URL:
+    PGHOST = os.environ.get('PGHOST')
+    PGDATABASE = os.environ.get('PGDATABASE')
+    PGUSER = os.environ.get('PGUSER')
+    PGPASSWORD = os.environ.get('PGPASSWORD')
+    DATABASE_URL = f"postgresql://{PGUSER}:{PGPASSWORD}@{PGHOST}/{PGDATABASE}"
 
-# Construct test database URL
-TEST_DATABASE_URL = f"postgresql://{PGUSER}:{PGPASSWORD}@{PGHOST}/{PGDATABASE}"
+engine = create_engine(
+    DATABASE_URL,
+    pool_pre_ping=True,
+    connect_args={
+        "sslmode": "require",
+        "keepalives": 1,
+        "keepalives_idle": 30,
+        "keepalives_interval": 10,
+        "keepalives_count": 5
+    }
+)
 
-@pytest.fixture(scope="session")
-def test_engine():
-    """Create test database engine"""
-    engine = create_engine(
-        TEST_DATABASE_URL,
-        pool_pre_ping=True,
-        connect_args={
-            "sslmode": "require",
-            "keepalives": 1,
-            "keepalives_idle": 30,
-            "keepalives_interval": 10,
-            "keepalives_count": 5
-        }
-    )
-
-    # Drop all tables first (if they exist)
-    Base.metadata.drop_all(bind=engine)
-
-    # Create all tables in correct order
-    Base.metadata.create_all(bind=engine)
-
-    yield engine
-
-    # Clean up - drop all tables at the end of session
-    Base.metadata.drop_all(bind=engine)
+TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 @pytest.fixture(scope="function")
-def db_session(test_engine):
+def test_db():
     """Create a fresh database session for each test"""
-    connection = test_engine.connect()
-    transaction = connection.begin()
-
-    Session = sessionmaker(bind=connection)
+    Base.metadata.create_all(bind=engine)
+    Session = sessionmaker(bind=engine)
     session = Session()
 
-    # Clear all tables in correct order
-    session.execute(text("SET CONSTRAINTS ALL DEFERRED"))
-    session.execute(text("TRUNCATE TABLE time_entries RESTART IDENTITY CASCADE"))
-    session.execute(text("TRUNCATE TABLE projects RESTART IDENTITY CASCADE"))
-    session.execute(text("TRUNCATE TABLE customers RESTART IDENTITY CASCADE"))
-    session.execute(text("TRUNCATE TABLE project_managers RESTART IDENTITY CASCADE"))
-    session.commit()
+    # Clear tables before each test in correct order
+    try:
+        session.execute(text("SET CONSTRAINTS ALL DEFERRED"))
+        session.execute(text("TRUNCATE TABLE time_entries RESTART IDENTITY CASCADE"))
+        session.execute(text("TRUNCATE TABLE projects RESTART IDENTITY CASCADE"))
+        session.execute(text("TRUNCATE TABLE customers RESTART IDENTITY CASCADE"))
+        session.execute(text("TRUNCATE TABLE project_managers RESTART IDENTITY CASCADE"))
+        session.commit()
+    except Exception as e:
+        session.rollback()
+        raise e
 
     try:
         yield session
     finally:
         session.close()
-        transaction.rollback()
-        connection.close()
+        # Clean up tables after test
+        for table in reversed(Base.metadata.sorted_tables):
+            session.execute(table.delete())
+        session.commit()
+        session.close()
 
 @pytest.fixture(scope="function")
-def client(db_session):
+def test_client(test_db):
     """Create a test client using the test database"""
     def override_get_db():
         try:
-            yield db_session
+            yield test_db
         finally:
-            pass  # Session cleanup is handled by db_session fixture
+            pass  # Session cleanup is handled by test_db fixture
 
     app.dependency_overrides[get_db] = override_get_db
-    with TestClient(app) as test_client:
-        yield test_client
+    with TestClient(app) as client:
+        yield client
     app.dependency_overrides.clear()
 
 @pytest.fixture(scope="function")
-def setup_test_data(db_session):
+def setup_test_data(test_db):
     """Set up test data in the database"""
     try:
         # Create test project managers first
@@ -97,8 +90,8 @@ def setup_test_data(db_session):
             ProjectManager(name="Test Manager", email="test.manager@example.com")
         ]
         for manager in project_managers:
-            db_session.add(manager)
-        db_session.commit()  # Commit project managers first
+            test_db.add(manager)
+        test_db.commit()  # Commit project managers first
 
         # Create test customers
         customers = [
@@ -106,8 +99,8 @@ def setup_test_data(db_session):
             Customer(name="ECOLAB", contact_email="ecolab@example.com", status="active")
         ]
         for customer in customers:
-            db_session.add(customer)
-        db_session.commit()  # Commit customers before projects
+            test_db.add(customer)
+        test_db.commit()  # Commit customers before projects
 
         # Create test projects
         projects = [
@@ -127,19 +120,14 @@ def setup_test_data(db_session):
             )
         ]
         for project in projects:
-            db_session.add(project)
-        db_session.commit()
+            test_db.add(project)
+        test_db.commit()
 
-        yield {
+        return {
             "customers": customers,
             "project_managers": project_managers,
             "projects": projects
         }
     except Exception as e:
-        db_session.rollback()
+        test_db.rollback()
         raise e
-    finally:
-        # Clear test data after the test
-        for table in reversed(Base.metadata.sorted_tables):
-            db_session.execute(table.delete())
-        db_session.commit()
